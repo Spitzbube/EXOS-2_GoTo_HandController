@@ -2,6 +2,7 @@
 extern void uart0_init(int);
 extern void uart1_write_byte(char);
 extern void uart1_init(int);
+extern void func_7e8(int, int, int, unsigned char, const unsigned char*);
 extern void func_2254(unsigned int);
 extern void func_2328(void);
 extern void func_243c(int, int, int, char*);
@@ -111,9 +112,10 @@ long double func_6ab74(int a)
 }
 
 /* 6c804 */
-void func_6c804()
+void func_6c804(void)
 {
-	//TODO
+	func_7e8(0, 3, 1, 22, " BRESSER GOTO SYSTEM  ");
+	func_7e8(0, 5, 1, 22, "     EXOS EQ v2.3     ");
 }
 
 /* 6d054 - todo */
@@ -185,6 +187,8 @@ double float_test(double a)
 
 	f1 = sqrt(f1);
 	f1 = f1 * f2;
+
+	if (f1 != 0)
 	f1 = f1 / f2;
 
     d1 = d1 + f1;
@@ -199,6 +203,11 @@ double float_test(double a)
 //	d1 = d1 % d2;
 
     d1 = sqrt(d1);
+
+	d1 = sin(d1);
+	d1 = cos(d1);
+
+	d1 = tan(d1);
 
 	return d1;
 }
