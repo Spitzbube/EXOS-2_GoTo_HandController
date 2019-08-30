@@ -28,16 +28,28 @@ unsigned char bData_40002c06; //40002c06
 unsigned char bData_40002c07; //40002c07
 unsigned char bData_40002c08; //40002c08
 unsigned char bData_40002c09; //40002c09
-char bData_40002c0a; //40002c0a
+unsigned char bData_40002c0a; //40002c0a
 char bData_40002c0b; //40002c0b
-char bData_40002c0c; //40002c0c
-char bData_40002c0d[4]; //40002c0d
-char bData_40002c12; //40002c12
+unsigned char bData_40002c0c; //40002c0c
+unsigned char bData_40002c0d[4]; //40002c0d
+unsigned char uart0_bRxData; //40002c11
+unsigned char bData_40002c12; //40002c12
 char bData_40002c13; //40002c13
-char bData_40002c14; //40002c14
-char bData_40002c15[4]; //40002c15
+unsigned char bData_40002c14; //40002c14
+unsigned char bData_40002c15[4]; //40002c15
 int Data_40003214; //40003214
+unsigned char uart1_bRxData; //40002c19
+char bData_40002c1a; //40002c1a
+int Data_40002c1c; //40002c1c
+int Data_40002c20; //40002c20
+union
+{
+	unsigned short w;
+	unsigned char b[2];
+} Data_40002c24; //40002c24
 unsigned char bData_40003265; //40003265
+extern unsigned char Data_40003588[3]; //40003588 size???
+extern unsigned char Data_40003592[3]; //40003592 size????
 
 int unknown_prologue(void)
 {
@@ -939,14 +951,198 @@ void func_19cc(void) __irq
 	VICVectAddr = 0;
 }
 
-/* 19f0 - todo */
+/* 19f0 - complete */
 void uart1_isr(void) __irq
 {
+	uart1_bRxData = U1RBR;
+	
+	if (bData_40002c1a == 0)
+	{
+		bData_40002c1a = 3;
+	}
+	
+	if (bData_40002c13 == 0)
+	{
+		switch (bData_40002c14)
+		{
+			case 0:
+				if (bData_40002c15[0] == uart1_bRxData)
+				{
+					bData_40002c14++;
+				}
+				break;
+			
+			case 1:
+				if (bData_40002c15[1] == uart1_bRxData)
+				{
+					bData_40002c14++;
+				}
+				else
+				{
+					bData_40002c14 = 0;
+				}
+				break;
+			
+			case 2:
+				if (bData_40002c15[2] == uart1_bRxData)
+				{
+					bData_40002c14++;
+				}
+				else
+				{
+					bData_40002c14 = 0;
+				}
+				break;
+			
+			case 3:
+				if (uart1_bRxData < 10)
+				{
+					bData_40002c15[3] = uart1_bRxData;
+					bData_40002c14++;
+				}
+				else
+				{
+					bData_40002c14 = 0;
+				}
+				break;
+			
+			case 4:
+				if (bData_40002c15[3] > bData_40002c12)
+				{
+					Data_40003592[bData_40002c12] = uart1_bRxData;
+					bData_40002c12++;
+					if (bData_40002c12 == bData_40002c15[3])
+					{
+						bData_40002c13 = 1;
+						bData_40002c14 = 0;
+						bData_40002c12 = 0;
+						
+						if (!((bData_40002c1a == 1) && (bData_40002c1a == 2)))
+						{
+							switch (Data_40003592[0])
+							{
+								case 0x04:
+								case 0x24:
+									bData_40002c1a = 1;
+									break;
+								
+								case 0x44:
+								case 0x64:
+									bData_40002c1a = 2;
+									break;
+								
+								default:
+									break;
+							}
+						}
+					}
+				}
+				break;
+
+			default:
+				break;
+		}
+	}
+	
+	VICVectAddr = 0;
 }
 
-/* 1c84 - todo */
+/* 1c88 - complete */
 void uart0_isr(void) __irq
 {
+	uart0_bRxData = U0RBR;
+	
+	if (bData_40002c0b == 0)
+	{
+		switch (bData_40002c0c)
+		{
+			case 0:
+				if (bData_40002c0d[0] == uart0_bRxData)
+				{
+					bData_40002c0c++;
+				}
+				break;
+			
+			case 1:
+				if (bData_40002c0d[1] == uart0_bRxData)
+				{
+					bData_40002c0c++;
+				}
+				else
+				{
+					bData_40002c0c = 0;
+				}
+				break;
+			
+			case 2:
+				if (bData_40002c0d[2] == uart0_bRxData)
+				{
+					bData_40002c0c++;
+				}
+				else
+				{
+					bData_40002c0c = 0;
+				}
+				break;
+			
+			case 3:
+				if (uart0_bRxData < 10)
+				{
+					bData_40002c0d[3] = uart0_bRxData;
+					bData_40002c0c++;
+				}
+				else
+				{
+					bData_40002c0c = 0;
+				}
+				break;
+			
+			case 4:
+				if (bData_40002c0d[3] > bData_40002c0a)
+				{
+					Data_40003588[bData_40002c0a] = uart0_bRxData;
+					bData_40002c0a++;
+					if (bData_40002c0d[3] == bData_40002c0a)
+					{
+						bData_40002c0b = 1;
+						bData_40002c0c = 0;
+						bData_40002c0a = 0;
+						
+						switch (Data_40003588[0])
+						{
+							case 1:
+								Data_40002c1c = -1;
+								bData_40002c0b = 0;
+								break;
+							
+							case 2:
+								Data_40002c1c = 1;
+								bData_40002c0b = 0;
+								break;
+							
+							case 4:
+								Data_40002c20 = -1;
+								bData_40002c0b = 0;
+								break;
+							
+							case 8:
+								Data_40002c20 = 1;
+								bData_40002c0b = 0;
+								break;
+							
+							default:
+								break;
+						}
+					}
+				}
+				break;
+		
+			default:
+				break;
+		}
+	}
+	
+	VICVectAddr = 0;
 }
 
 /* 1f30 - complete */
@@ -970,16 +1166,16 @@ void uart0_init(int a)
 }
 
 /* 1fb0 - complete */
-char uart0_read_byte(void)
+unsigned char uart0_read_byte(void)
 {
-	char b;
+	unsigned char b;
 	while (!(U0LSR & 0x01)) {}
   b = U0RBR;
 	return b;
 }
 
 /* 2054 - complete */
-void uart0_receive(char* a, int b)
+void uart0_receive(unsigned char* a, int b)
 {
 	while (b)
 	{
@@ -989,14 +1185,14 @@ void uart0_receive(char* a, int b)
 }
 
 /* 2080 - complete */
-void uart0_write_byte(char a)
+void uart0_write_byte(unsigned char a)
 {
 	U0THR = a;
 	while (!(U0LSR & 0x40)) {}
 }
 
-/* 20a0 - nearly complete */
-void uart0_send(char* a, char b)
+/* 20a0 - complete */
+void uart0_send(unsigned char* a, unsigned char b)
 {
 	while (b--)
 	{
@@ -1005,9 +1201,9 @@ void uart0_send(char* a, char b)
 }
 
 /* 20d0 - complete */
-void uart0_send_packets(char* a)
+void uart0_send_packets(unsigned char* a)
 {
-	char i;
+	unsigned char i;
 	
 	while (1)
 	{
@@ -1041,16 +1237,16 @@ void uart1_init(int a)
 }
 
 /* 219c - complete */
-char uart1_read_byte(void)
+unsigned char uart1_read_byte(void)
 {
-	char b;
+	unsigned char b;
 	while (!(U1LSR & 0x01)) {}
 	b = U1RBR;
 	return b;
 }
 
 /* 21bc - complete */
-void uart1_receive(char* a, int b)
+void uart1_receive(unsigned char* a, int b)
 {
 	while (b)
 	{
@@ -1060,16 +1256,16 @@ void uart1_receive(char* a, int b)
 }
 
 /* 21e8 - complete */
-void uart1_write_byte(char a)
+void uart1_write_byte(unsigned char a)
 {
 	U1THR = a;
 	while (!(U1LSR & 0x40)) {}
 }
 
 /* 2208 - complete */
-void uart1_send_packets(char* a)
+void uart1_send_packets(unsigned char* a)
 {
-	char i;
+	unsigned char i;
 	
 	while (1)
 	{
@@ -1085,9 +1281,10 @@ void uart1_send_packets(char* a)
 /* 2254 - complete */
 void func_2254(unsigned int a)
 {
+	unsigned int b;
 	for ( ; a > 1; a--)
-	{	unsigned int b;	
-		for (/*unsigned int*/ b = 0x0000ffff; b > 1; b--)
+	{	
+		for (b = 0x0000ffff; b > 1; b--)
 		{
 		}
 	}
@@ -1118,7 +1315,7 @@ void func_227c(void)
 	VICIntEnable = 0x40;
 }
 
-/* 2328 - todo */
+/* 2328 - complete */
 void func_2328(void)
 {
 	PLL0CON = 0x01;
@@ -1223,7 +1420,7 @@ void func_2328(void)
 	func_227c();
 }
 
-/* 243c - todo */
+/* 243c - complete */
 void func_243c(unsigned int PageAdr, int b, int Count, unsigned char* Data)
 {
 	unsigned short i = 0;
@@ -1251,7 +1448,7 @@ void func_243c(unsigned int PageAdr, int b, int Count, unsigned char* Data)
 	IOSET1 = 0x1000000;
 }
 
-/* 24d4 - todo */
+/* 24d4 - complete */
 void func_24d4(unsigned int PageAdr, unsigned short BufAdr, int Count, unsigned char* Data)
 {
 	unsigned short i;
@@ -1283,7 +1480,7 @@ void func_24d4(unsigned int PageAdr, unsigned short BufAdr, int Count, unsigned 
 	func_2254(5);
 }
 
-/* 258c - todo */
+/* 258c - complete */
 void func_258c(int a, unsigned char* b)
 {
 	unsigned char sp[FLASH_PAGE_SIZE];
@@ -1294,13 +1491,13 @@ void func_258c(int a, unsigned char* b)
 
 	for (i = 0; i < 24; i++)
 	{
-		sp[24*(a - 1) + i] = b[i];
+		sp[(a - 1)*24 + i] = b[i];
 	}
 
 	func_24d4((0x37 << 6) | 5, 0, sizeof(sp), sp);
 }
 
-/* 260c - todo */
+/* 260c - complete */
 void func_260c(int a, unsigned char* b)
 {
 	unsigned char sp[FLASH_PAGE_SIZE];
@@ -1317,22 +1514,22 @@ void func_260c(int a, unsigned char* b)
 	func_24d4((0x37 << 6) | 6, 0, sizeof(sp), sp);
 }
 
-/* 268c - todo */
+/* 268c - complete */
 void func_268c(unsigned char a, unsigned int b)
 {
 	unsigned char r6;
 	unsigned int r7;
-	unsigned char sp[57];
+	unsigned char buf[57];
 
-	func_243c((0x37 << 6) | 7, 0, sizeof(sp), sp);
+	func_243c((0x37 << 6) | 7, 0, sizeof(buf), buf);
 
-	r6 = sp[1];
-	r7 = ((sp[2] - '0') * 100000) + 
-		(((sp[3] - '0') * 10000)) + 
-		(((sp[4] - '0') * 1000)) +
-		(((sp[5] - '0') * 100)) +
-		(((sp[6] - '0') * 10)) +
-		(sp[7] - '0');
+	r6 = buf[1];
+	r7 = ((buf[2] - '0') * 100000) + 
+		(((buf[3] - '0') * 10000)) + 
+		(((buf[4] - '0') * 1000)) +
+		(((buf[5] - '0') * 100)) +
+		(((buf[6] - '0') * 10)) +
+		(buf[7] - '0');
 
 	if ((a == r6) && (r7 == b))
 	{
@@ -1340,22 +1537,22 @@ void func_268c(unsigned char a, unsigned int b)
 	}
 	else
 	{
-		sp[0]++;
-		if (sp[0] > 8) 
+		buf[0]++;
+		if (buf[0] > 8) 
 		{
-			sp[0] = 8;
+			buf[0] = 8;
 		}
 
-		func_24d4((0x37 << 6) | 7, 0, sizeof(sp[0]), sp);
-		func_24d4((0x37 << 6) | 7, 8, sizeof(sp) - sizeof(sp[0]), &sp[1]);
-		sp[1] = a;
-		func_24d4((0x37 << 6) | 7, 1, sizeof(sp[1]), &sp[1]);
-		sprintf(sp, "%06d", b);
-		func_24d4((0x37 << 6) | 7, 2, 6, &sp[0]);
+		func_24d4((0x37 << 6) | 7, 0, sizeof(buf[0]), buf);
+		func_24d4((0x37 << 6) | 7, 8, sizeof(buf) - sizeof(buf[0]), &buf[1]);
+		buf[1] = a;
+		func_24d4((0x37 << 6) | 7, 1, sizeof(buf[1]), &buf[1]);
+		sprintf(buf, "%06d", b);
+		func_24d4((0x37 << 6) | 7, 2, 6, &buf[0]);
 	}
 }
 
-/* 27c4 - todo */
+/* 27c4 - complete */
 void func_27c4(float* a, float* b)
 {
 	unsigned char buf[5];
@@ -1369,9 +1566,91 @@ void func_27c4(float* a, float* b)
 /* 2910 - complete */
 void func_2910(int a, int b)
 {
-	unsigned char sp[5];
-	sprintf(sp, "%03d%02d", a, b);
-	func_24d4((0x37 << 6) | 9, 0, sizeof(sp), sp);
+	unsigned char buf[5];
+	sprintf(buf, "%03d%02d", a, b);
+	func_24d4((0x37 << 6) | 9, 0, sizeof(buf), buf);
+}
+
+/* 29b0 - complete */
+void func_29b0(unsigned char* a, unsigned char* b, unsigned char* c, unsigned char* d)
+{
+	func_24d4(0xdca, 10, 8, a);
+	func_24d4(0xdca, 18, 6, b);
+	func_24d4(0xdca, 24, 5, c);
+	func_24d4(0xdca, 29, 3, d);
+}
+
+/* 2a1c - complete */
+void func_2a1c(unsigned char* a, float* b, float* c, int* d)
+{
+	unsigned char buf[22];
+	unsigned char i = 0;
+	
+	func_243c(0xdca, 10, sizeof(buf), buf);
+	
+	for (i = 0; i < 8; i++)
+	{
+		a[i] = buf[i];
+	}
+	
+	*b = (buf[9] - '0') * 100.0 + (buf[10] - '0') * 10.0 + buf[11] - '0' + 
+		((buf[12] - '0') * 10.0 + buf[13] - '0') / 60.0;
+	
+	if (buf[8] == 'W')
+	{
+		*b *= -1.0;
+	}
+	
+	*c = (buf[15] - '0') * 10.0 + buf[16] - '0' +
+		((buf[17] - '0') * 10.0 + buf[18] - '0') / 60.0;
+	
+	if (buf[14] == 'S')
+	{
+		*c *= -1.0;
+	}
+		
+	*d = (buf[20] - '0') * 10.0 + buf[21] - '0';
+	
+	if (buf[19] == 'W')
+	{
+		*d *= -1.0;
+	}
+}
+
+/* 2df8 - complete */
+void func_2df8(int a, int b, int c, int d, unsigned char* e)
+{
+	unsigned char buf[528];
+	unsigned char i = 0;
+	
+	func_243c(b, 0, sizeof(buf), buf);
+	
+	for (i = 0; i < d; i++)
+	{
+		buf[d * (a % (528 / d)) + c + i] = e[i];
+	}
+	
+	func_24d4(b, 0, sizeof(buf), buf);
+}
+
+/* 2e94 - complete */
+void func_2e94(unsigned short a)
+{
+	unsigned char buf[528];
+	
+	if (a > 500)
+	{
+		return;
+	}
+
+	Data_40002c24.w = a;
+	
+	func_243c(0xFFF, 0, sizeof(buf), buf);
+	
+	buf[4] = Data_40002c24.b[0];
+	buf[5] = Data_40002c24.b[1];
+	
+	func_24d4(0xFFF, 0, sizeof(buf), buf);
 }
 
 /* 7590 - complete */
