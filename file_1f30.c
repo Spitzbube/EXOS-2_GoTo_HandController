@@ -59,7 +59,7 @@ int unknown_prologue(void)
 	int d;
 	int e;
 	int f;
-	return a+b * b / b - b % b + b << 21 - c * d << 13 + e / f - e * f;
+	return a+b * b / b - b % b + b << 21 - c * d;
 }
 
 /* 224 - complete */
@@ -1652,6 +1652,13 @@ void func_2e94(unsigned short a)
 	
 	func_24d4(0xFFF, 0, sizeof(buf), buf);
 }
+
+#if 0
+/* 5f40 - todo */
+void func_5f40(void)
+{
+}
+#endif
 
 /* 7590 - complete */
 void func_7590(void)

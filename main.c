@@ -18,12 +18,144 @@ extern void func_51368(void);
 
 extern char bData_40002c13; //40002c13
 extern char bData_40002c1a; //40002c1a
+char bData_40002c58; //40002c58
+char bData_40002c5a; //40002c5a
+char bData_40002c68; //40002c68
+char bData_40002c6a; //40002c6a
+double dData_40002c88; //40002c88
+double dData_40002c90; //40002c90
+double dData_40002c98; //40002c98
+double dData_40002ca0; //40002ca0
+double dData_40002ca8; //40002ca8
+double dData_40002cb0; //40002cb0
+int Data_40002cb8; //40002cb8
+int Data_40002cbc; //40002cbc
+float fData_40002cc0; //40002cc0
+int Data_40002cf4; //40002cf4
+int Data_40002cf8; //40002cf8
+float fData_40002cfc; //40002cfc
+int Data_40002d20; //40002d20
+int Data_40002d24; //40002d24
+float fData_40002d28; //40002d28
+int Data_40002d40; //40002d40
+int Data_40002d48; //40002d48
+int Data_40002d4c; //40002d4c
+float fData_40002d50; //40002d50
+int Data_40002d68; //40002d68
+int Data_40002d6c; //40002d6c
+float fData_40002d70; //40002d70
+char bData_40002d88; //40002d88
+int Data_40002d8c; //40002d8c
+int Data_40002d90; //40002d90
+float fData_40002d94; //40002d94
+char bData_40002da8; //40002da8
+int Data_40002dac; //40002dac
+int Data_40002db0; //40002db0
+float fData_40002db4; //40002db4
+int Data_40002de0; //40002de0
+int Data_40002de4; //40002de4
+float fData_40002de8; //40002de8
+int Data_40002e18; //40002e18
+int Data_40002e1c; //40002e1c
+float fData_40002e20; //40002e20
+int Data_40002e34; //40002e34
+int Data_40002e38; //40002e38
+int Data_40002e3c; //40002e3c
+float fData_40002e40; //40002e40
+int Data_40002e44; //40002e44
+int Data_40002e54; //40002e54
+int Data_40002e5c; //40002e5c
+char bData_40002e60; //40002e60
+char bData_40002e61; //40002e61
+char bData_40002e62; //40002e62
+char bData_40002e63; //40002e63
+char bData_40002e64; //40002e64
+char bData_40002e79; //40002e79
 char bData_40002e7a; //40002e7a
-float Data_40002e98; //40002e98
-float Data_40002ea8; //40002ea8
+char bData_40002e7b; //40002e7b
+char bData_40002e7c; //40002e7c
+char bData_40002e7d; //40002e7d
+char bData_40002e7e; //40002e7e
+int Data_40002e80; //40002e80
+int Data_40002e84; //40002e84
+char bData_40002e88; //40002e88
+char bData_40002e89; //40002e89
+char bData_40002e8b; //40002e8b
+char bData_40002e8c; //40002e8c
+int Data_40002e90; //40002e90
+int Data_40002e94; //40002e94
+float fData_40002e98; //40002e98
+int Data_40002e9c; //40002e9c
+int Data_40002ea0; //40002ea0
+int Data_40002ea4; //40002ea4
+float fData_40002ea8; //40002ea8
+int Data_40002eac; //40002eac
+int Data_40002eb0; //40002eb0
+char bData_40002eb4; //40002eb4
+char bData_40002eb5; //40002eb5
+unsigned short wData_40002eb6; //40002eb6
+unsigned short wData_40002eb8; //40002eb8
+unsigned short wData_40002eba; //40002eba
+unsigned short wData_40002ebc; //40002ebc
+unsigned short wData_40002ebe; //40002ebe
+unsigned short wData_40002ec0; //40002ec0
+int Data_40002ec4; //40002ec4
+unsigned short wData_40002ecc; //40002ecc
+char bData_40002ece; //40002ece
+unsigned short wData_40002ed0; //40002ed0
+unsigned short wData_40002ed2; //40002ed2
+unsigned short wData_40002ed4; //40002ed4
+unsigned short wData_40002ed6; //40002ed6
+unsigned short wData_40002ed8; //40002ed8
+unsigned short wData_40002eda; //40002eda
+char bData_40002ede; //40002ede
+char bData_40002edf; //40002edf
+char bData_40002ef7; //40002ef7
+int Data_40002f04; //40002f04
+int Data_40002f08; //40002f08
+char bData_40002f0c; //40002f0c
+char bData_40002f0d; //40002f0d
+int Data_40002f10; //40002f10
+char bData_40002f1e; //40002f1e
+char bData_4000316e; //4000316e
+char bData_40003188; //40003188
+char bData_40003189; //40003189
+int Data_4000318c; //4000318c
+int Data_40003190; //40003190
+char bData_40003194; //40003194
+char bData_40003195; //40003195
 char Data_40003196; //40003196
+char bData_40003198; //40003198
+char bData_40003199; //40003199
+char bData_4000319b; //4000319b
+char bData_4000319c; //4000319c
+char bData_4000319d; //4000319d
+char bData_400031b8; //400031b8
+char bData_400031b9; //400031b9
+char bData_400031be; //400031be
+char bData_400031bf; //400031bf
+float fData_400031c0; //400031c0
+float fData_400031c4; //400031c4
+char bData_400031e0; //400031e0
+char bData_400031e1; //400031e1
+char bData_400031e9; //400031e9
+char bData_400031ea; //400031ea
+char bData_400031eb; //400031eb
+char bData_400031ec; //400031ec
+char bData_400031ed; //400031ed
+double dData_400031f0; //400031f0
+double dData_400031f8; //400031f8
+char bData_40003200; //40003200
+char bData_40003201; //40003201
+int Data_40003204; //40003204
+int Data_40003208; //40003208
+char bData_40003210; //40003210
+char bData_40003211; //40003211
+char bData_4000322d; //4000322d
 float Data_4000329c; //4000329c
 float Data_400032a0; //400032a0
+char bData_400032a4; //400032a4
+char bData_40003431; //40003431
 char bData_40003432; //40003432
 double Data_400034d0; //400034d0
 double Data_400034d8; //400034d8
@@ -188,11 +320,11 @@ int main(void)
 	
 	func_659c(10);
 	
-	Data_40002e98 = func_6ab74(1);
+	fData_40002e98 = func_6ab74(1);
 
 	func_659c(50);
 	
-	Data_40002ea8 = func_6ab74(2);
+	fData_40002ea8 = func_6ab74(2);
 
 	func_659c(50);
 
