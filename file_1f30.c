@@ -42,11 +42,16 @@ unsigned char uart1_bRxData; //40002c19
 char bData_40002c1a; //40002c1a
 int Data_40002c1c; //40002c1c
 int Data_40002c20; //40002c20
-union
+extern union
 {
-	unsigned short w;
-	unsigned char b[2];
+	unsigned char bData[2]; 
+	unsigned short wData;
 } Data_40002c24; //40002c24
+extern union
+{
+	unsigned char bData[4]; 
+	int Data;
+} Data_40002c28; //40002c28
 unsigned char bData_40003265; //40003265
 extern unsigned char Data_40003588[3]; //40003588 size???
 extern unsigned char Data_40003592[3]; //40003592 size????
@@ -57,8 +62,6 @@ int unknown_prologue(void)
 	int b;
 	int c;
 	int d;
-	int e;
-	int f;
 	return a+b * b / b - b % b + b << 21 - c * d;
 }
 
@@ -1633,7 +1636,7 @@ void func_2df8(int a, int b, int c, int d, unsigned char* e)
 	func_24d4(b, 0, sizeof(buf), buf);
 }
 
-/* 2e94 - complete */
+/* 2e94 - todo */
 void func_2e94(unsigned short a)
 {
 	unsigned char buf[528];
@@ -1643,14 +1646,149 @@ void func_2e94(unsigned short a)
 		return;
 	}
 
-	Data_40002c24.w = a;
+	Data_40002c24.wData = a;
 	
 	func_243c(0xFFF, 0, sizeof(buf), buf);
 	
-	buf[4] = Data_40002c24.b[0];
-	buf[5] = Data_40002c24.b[1];
+	buf[4] = Data_40002c24.bData[0];
+	buf[5] = Data_40002c24.bData[1];
 	
 	func_24d4(0xFFF, 0, sizeof(buf), buf);
+}
+
+/* 2f00 - todo */
+unsigned short func_2f00(void)
+{
+	func_243c(0xFFF, 0x04, 2, Data_40002c24.bData);
+	
+	if (Data_40002c24.wData > 500)
+	{
+		func_2e94(0);
+		return 0;
+	}
+	
+	return Data_40002c24.wData;
+}
+
+/* 2f48 - todo */
+void func_2f48(int a, unsigned char* b)
+{
+	func_2df8(a, 0xfde, 0, 16, b);
+}
+
+/* 2f74 - todo */
+int func_2f74(int a, int* b, int* c, int* d, int* e)
+{
+	unsigned char buf[16];
+	unsigned char i;
+	unsigned short sl;
+	unsigned short fp;
+	
+	sl = func_2f00();
+	
+	if ((sl == 0) || ((sl-1) < a))
+	{
+		return 0;
+	}
+	
+	fp = 16 * (a % 33);
+	
+	func_243c((unsigned short)(0xfde + (a / 33)), fp, sizeof(buf), buf);
+	
+	for (i = 0; i < 4; i++)
+	{
+		Data_40002c28.bData[i] = buf[i];
+	}
+	
+	*b = Data_40002c28.Data;
+
+	for (i = 0; i < 4; i++)
+	{
+		Data_40002c28.bData[i] = buf[i + 4];
+	}
+	
+	*c = Data_40002c28.Data;
+
+	for (i = 0; i < 4; i++)
+	{
+		Data_40002c28.bData[i] = buf[i + 8];
+	}
+	
+	*d = Data_40002c28.Data;
+
+	for (i = 0; i < 4; i++)
+	{
+		Data_40002c28.bData[i] = buf[i + 12];
+	}
+	
+	*e = Data_40002c28.Data;
+	
+	return 1;
+}
+
+/* 30e4 - todo */
+int func_30e4(unsigned char* a, int b, int c, int d, int e)
+{
+	unsigned char buf[16];
+	unsigned char i;
+	unsigned short sl;
+	
+	sl = func_2f00();
+
+	if (a[0] == 0)
+	{
+		if (sl != 0)
+		{
+			func_2e94(0);
+			sl = 0;
+		}
+		a[0] = 1;
+	}
+
+	if (sl >= 500)
+	{
+		return 0;
+	}
+	
+	Data_40002c28.Data = b;
+	
+	for (i = 0; i < 4; i++)
+	{
+		buf[i] = Data_40002c28.bData[i];
+	}
+
+	Data_40002c28.Data = c;
+	
+	for (i = 0; i < 4; i++)
+	{
+		buf[i + 4] = Data_40002c28.bData[i];
+	}
+
+	Data_40002c28.Data = d;
+	
+	for (i = 0; i < 4; i++)
+	{
+		buf[i + 8] = Data_40002c28.bData[i];
+	}
+
+	Data_40002c28.Data = e;
+	
+	for (i = 0; i < 4; i++)
+	{
+		buf[i + 12] = Data_40002c28.bData[i];
+	}
+	
+	func_2f48(sl, buf);
+	
+	func_2e94(sl + 1);
+		
+	return 1;
+}
+
+/* 3230 - complete */
+void func_3230(int a, int b, int c, int d)
+{
+	d = a;
 }
 
 #if 0

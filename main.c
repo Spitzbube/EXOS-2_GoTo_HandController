@@ -18,6 +18,16 @@ extern void func_51368(void);
 
 extern char bData_40002c13; //40002c13
 extern char bData_40002c1a; //40002c1a
+union
+{
+	unsigned char bData[2]; 
+	unsigned short wData;
+} Data_40002c24; //40002c24
+union
+{
+	unsigned char bData[4]; 
+	int Data;
+} Data_40002c28; //40002c28
 char bData_40002c58; //40002c58
 char bData_40002c5a; //40002c5a
 char bData_40002c68; //40002c68
