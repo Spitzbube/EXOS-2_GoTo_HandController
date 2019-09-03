@@ -1,10 +1,23 @@
 
+#include "my_types.h"
+#include "data.h"
+
 extern void func_243c(unsigned int PageAdr, int b, int Count, unsigned char* Data);
+extern void func_24d4(unsigned int PageAdr, unsigned short BufAdr, int Count, unsigned char* Data);
+extern void func_2df8(int a, int b, int c, int d, unsigned char* e);
 extern void func_5f40(void);
 
-unsigned char Data_40000000[28][10]; //40000000
-unsigned char Data_40000118[28][22]; //40000118, size??
 extern char bData_40002c1a; //40002c1a
+extern union
+{
+	unsigned char bData[2]; 
+	unsigned short wData;
+} Data_40002c24; //40002c24
+extern union
+{
+	unsigned char bData[4]; 
+	int Data;
+} Data_40002c28; //40002c28
 extern char bData_40002c58; //40002c58
 extern char bData_40002c5a; //40002c5a
 extern char bData_40002c68; //40002c68
@@ -142,13 +155,659 @@ extern char bData_4000322d; //4000322d
 extern char bData_400032a4; //400032a4
 extern char bData_40003431; //40003431
 
-typedef struct
+/* 3238 - todo */
+void func_3238(int a)
 {
-	unsigned char bData_0; //0
-	unsigned char bData_1[9]; //1
-	float fData_12; //12
-	float fData_16; //16
-} Struct_5218;
+	unsigned char buf[528];
+	
+	if (a > 66)
+	{
+		return;
+	}
+	
+	Data_40002c24.wData = a;
+	
+	func_243c(0xfff, 0, sizeof(buf), buf);
+	
+	buf[8] = Data_40002c24.bData[0];
+	buf[9] = Data_40002c24.bData[1];
+	
+	func_24d4(0xfff, 0, sizeof(buf), buf);
+}
+
+/* 32a4 - todo */
+int func_32a4(void)
+{
+	func_243c(0xfff, 0x08, 2, Data_40002c24.bData);
+	
+	if (Data_40002c24.wData > 66)
+	{
+		func_3238(0);
+		return 0;
+	}
+	
+	return Data_40002c24.wData;
+}
+
+/* 32ec - todo */
+void func_32ec(int a)
+{
+	unsigned char buf[528];
+	
+	if (a > 65)
+	{
+		return;
+	}
+	
+	Data_40002c24.wData = a;
+	
+	func_243c(0xfff, 0, sizeof(buf), buf);
+	
+	buf[10] = Data_40002c24.bData[0];
+	buf[11] = Data_40002c24.bData[1];
+	
+	func_24d4(0xfff, 0, sizeof(buf), buf);
+}
+
+/* 3358 - todo */
+int func_3358(void)
+{
+	func_243c(0xfff, 0x0a, 2, Data_40002c24.bData);
+	
+	if (Data_40002c24.wData > 65)
+	{
+		func_32ec(0);
+		return 0;
+	}
+	
+	return Data_40002c24.wData;
+}
+
+/* 33a0 - todo */
+void func_33a0(int a, unsigned char* b, int c)
+{
+	func_2df8(a, c, 0, 8, b);
+}
+
+/* 33cc - todo */
+int func_33cc(unsigned short a, int* b, int* c)
+{
+	unsigned char buf[8];
+	unsigned char i;
+	int r8, r9;
+	unsigned short sl;
+	unsigned short fp;
+	
+	r8 = func_32a4();
+	r9 = func_3358();
+	
+	if ((r8 == 0) || ((r8-1) < a))
+	{
+		return 0;
+	}
+	
+	if (r9 < a)
+	{
+		a = r9 + 66 - a;
+	}
+	else
+	{
+		a = r9 - a;
+	}
+	
+	sl = 8 * (a % 66);
+	fp = a / 66;
+	
+	func_243c(fp, sl, sizeof(buf), buf);
+	
+	for (i = 0; i < 4; i++)
+	{
+		Data_40002c28.bData[i] = buf[i];
+	}
+	
+	*b = Data_40002c28.Data;
+
+	for (i = 0; i < 4; i++)
+	{
+		Data_40002c28.bData[i] = buf[i+4];
+	}
+	
+	*c = Data_40002c28.Data;
+	
+	return 1;
+}
+
+/* 34e4 - todo */
+int func_34e4(int a, Struct_34e4* b)
+{
+	unsigned char buf[51];
+	unsigned short r6;
+	unsigned short r7;
+	unsigned char i;
+	
+	if ((a == 0) && (a > 33))
+	{
+		return 0;
+	}
+	
+	r6 = (a - 1) / 10;
+	r7 = ((a - 1) % 10) * 51;
+
+	func_243c((unsigned short)(0x00 + r6), r7, sizeof(buf), buf);
+	
+	for (i = 0; i < 10; i++)
+	{
+		b->bData_0[i] = buf[i];
+	}
+	b->bData_0[10] = 0;
+	b->bData_0[11] = 0;
+
+	for (i = 10; i < 20; i++)
+	{
+		b->bData_12[i-10] = buf[i];
+	}
+	b->bData_12[10] = 0;
+	b->bData_12[11] = 0;
+	
+	b->Data_24 = buf[20] * 10000 + buf[21] * 100 + buf[22];
+
+	for (i = 23; i < 35; i++)
+	{
+		b->bData_28[i-22] = buf[i];
+	}
+	b->bData_28[0] = ' ';
+	b->bData_28[13] = 0;
+
+	for (i = 35; i < 43; i++)
+	{
+		b->bData_42[i-35] = buf[i];
+	}
+	b->bData_42[8] = 0;
+	b->bData_42[9] = 0;
+	
+	if (buf[43] >= 0x80)
+	{
+		b->fData_52 = 0x80 - buf[43] - buf[44] / 10.0;
+	}
+	else
+	{
+		b->fData_52 = buf[43] + buf[44] / 10.0;
+	}
+	
+	b->fData_56 = buf[45] + buf[46] / 60.0 + buf[47] / 3600.00;
+	
+	if (buf[48] >= 0x80)
+	{
+		b->fData_60 = 0x80 - buf[48] - buf[49] / 60.0 - buf[50] / 3600.0;
+	}
+	else
+	{
+		b->fData_60 = buf[48] + buf[49] / 60.0 + buf[50] / 3600.0;
+	}
+	
+	return 1;
+}
+
+/* 38dc - todo */
+int func_38dc(int a, Struct_38dc* b)
+{
+	unsigned char buf[38];
+	unsigned short r6;
+	unsigned short r7;
+	unsigned char i;
+
+	if ((a == 0) && (a > 33))
+	{
+		return 0;
+	}
+	
+	r6 = (a - 1) / 13;
+	r7 = ((a - 1) % 13) * 38;
+
+	func_243c((unsigned short)(0x04 + r6), r7, sizeof(buf), buf);
+	
+	for (i = 0; i < 3; i++)
+	{
+		b->bData_0[i] = buf[i];
+	}
+	
+	b->bData_0[3] = ' ';
+	b->bData_0[4] = 0;
+
+	for (i = 3; i < 22; i++)
+	{
+		b->bData_5[i-3] = buf[i];
+	}
+	
+	b->bData_5[19] = ' ';
+	b->bData_5[20] = 0;
+	
+	for (i = 22; i < 30; i++)
+	{
+		b->bData_26[i-22] = buf[i];
+	}
+	
+	b->bData_26[8] = 0;
+	b->bData_26[9] = 0;
+	
+	b->fData_36 = buf[30] + buf[31] / 60.0;
+	
+	if (buf[32] >= 0x80)
+	{
+		b->fData_40 = 0x80 - buf[32] - buf[33] / 100.0;
+	}
+	else
+	{
+		b->fData_40 = buf[32] + buf[33] / 100.0;
+	}
+	
+	b->wData_44 = buf[34] * 100 + buf[35];
+	
+	b->bData_46 = buf[36];
+	b->bData_47 = buf[37];
+	
+	return 1;
+}
+
+/* 3b58 - todo */
+int func_3b58(int a, Struct_3b58* b)
+{
+	unsigned char buf[124];
+	unsigned short r6;
+	unsigned short r7;
+	unsigned char i;
+
+	if ((a == 0) && (a > 110))
+	{
+		return 0;
+	}
+	
+	r6 = (a - 1) / 4;
+	r7 = ((a - 1) % 4) * 124;
+	
+	func_243c((unsigned short)(0x0b + r6), r7, sizeof(buf), buf);
+
+	b->wData_0 = buf[0] * 100 + buf[1];
+	b->fData_4 = buf[2] + buf[3] / 60.0 + buf[4] / 3600.0;
+	
+	if (buf[5] >= 0x80)
+	{
+		b->fData_8 = 0x80 - buf[5] - buf[6] / 60.0 - buf[7] / 3600.0; 
+	}
+	else
+	{
+		b->fData_8 = buf[5] + buf[6] / 60.0 + buf[7] / 3600.0; 
+	}
+	
+	b->fData_12 = buf[8] + buf[9] / 10.0;
+	
+	b->dData_16 = buf[10] * 10000.0 + buf[11] * 100.0 + buf[12] + buf[13] / 10.0;
+	
+	for (i = 14; i < 20; i++)
+	{
+		b->bData_24[i-14] = buf[i];
+	}
+	
+	b->bData_24[6] = 0;
+	b->bData_24[7] = 0;
+
+	for (i = 20; i < 34; i++)
+	{
+		b->bData_32[i-20] = buf[i];
+	}
+	
+	b->bData_32[14] = ' ';
+	b->bData_32[15] = 0;
+
+	for (i = 34; i < 44; i++)
+	{
+		b->bData_48[i-34] = buf[i];
+	}
+	
+	b->bData_48[10] = 0;
+	b->bData_48[11] = 0;
+
+	for (i = 44; i < 68; i++)
+	{
+		b->bData_60[i-44] = buf[i];
+	}
+	
+	b->bData_60[24] = ' ';
+	b->bData_60[25] = 0;
+	
+	for (i = 68; i < 90; i++)
+	{
+		b->bData_86[i-68] = buf[i];
+	}
+	
+	b->bData_86[22] = 0; //Bug
+	b->bData_86[23] = 0; //Bug
+	
+	for (i = 90; i < 124; i++)
+	{
+		b->bData_108[i-90] = buf[i];
+	}
+	
+	b->bData_108[34] = ' ';
+	b->bData_108[35] = 0;
+	
+	return 1;
+}
+
+/* 4028 - todo */
+int func_4028(int a, Struct_4028* b)
+{
+	unsigned char buf[24];
+	unsigned short r6;
+	unsigned short r7;
+	unsigned char i;
+
+	if ((a == 0) && (a > 167))
+	{
+		return 0;
+	}
+	
+	r6 = (a - 1) / 22;
+	r7 = ((a - 1) % 22) * 24;
+	
+	func_243c((unsigned short)(0x27 + r6), r7, sizeof(buf), buf);
+	
+	for (i = 0; i < 16; i++)
+	{
+		b->bData_0[i] = buf[i];
+	}
+	
+	b->bData_0[16] = ' ';
+	b->bData_0[17] = 0;
+	
+	b->fData_20 = buf[16] + buf[17] / 60.0 + buf[18] / 3600.0;
+	
+	if (buf[19] >= 0x80)
+	{
+		b->fData_24 = 0x80 - buf[19] - buf[20] / 60.0 - buf[21] / 3600.0;
+	}
+	else
+	{
+		b->fData_24 = buf[19] + buf[20] / 60.0 + buf[21] / 3600.0;
+	}
+
+	if (buf[22] >= 0x80)
+	{
+		b->fData_28 = 0x80 - buf[22] - buf[23] / 100.0;
+	}
+	else
+	{
+		b->fData_28 = buf[22] + buf[23] / 100.0;
+	}
+		
+	return 1;
+}
+
+/* 435c - todo */
+int func_435c(int a, float* b)
+{
+	unsigned char buf[6];
+	unsigned short r6;
+	unsigned short r7;
+
+	if ((a == 0) && (a > 313))
+	{
+		return 0;
+	}
+	
+	r6 = (a - 1) / 88;
+	r7 = ((a - 1) % 88) * 6;
+	
+	func_243c((unsigned short)(0x2f + r6), r7, sizeof(buf), buf);
+	
+	b[0] = buf[0] + buf[1] / 60.0 + buf[2] / 3600.0;
+	
+	if (buf[3] >= 0x80)
+	{
+		b[1] = 0x80 - buf[3] - buf[4] / 60.0 - buf[5] / 3600.0;
+	}
+	else
+	{
+		b[1] = buf[3] + buf[4] / 60.0 + buf[5] / 3600.0;
+	}
+
+	return 1;
+}
+
+/* 4594 - todo */
+int func_4594(int a, Struct_4594* b)
+{
+	unsigned char buf[19];
+	unsigned short r6;
+	unsigned short r7;
+	unsigned char i;
+	
+	if ((a == 0) && (a > 5386))
+	{
+		return 0;
+	}
+	
+	r6 = (a - 1) / 27;
+	r7 = ((a - 1) % 27) * 19;
+	
+	func_243c((unsigned short)(0x33 + r6), r7, sizeof(buf), buf);
+	
+	for (i = 0; i < 3; i++)
+	{
+		b->bData_0[i] = buf[i];
+	}
+	
+	b->bData_0[3] = ' ';
+	b->bData_0[4] = 0;
+	
+	b->fData_8 = buf[3] + buf[4] / 60.0 + buf[5] / 3600.0;
+	
+	if (buf[6] >= 0x80)
+	{
+		b->fData_12 = 0x80 - buf[6] - buf[7] / 60.0 - buf[8] / 3600.0;
+	}
+	else
+	{
+		b->fData_12 = buf[6] + buf[7] / 60.0 + buf[8] / 3600.0;
+	}
+	
+	b->fData_16 = buf[9] + buf[10] / 10.0;
+	
+	for (i = 11; i < 19; i++)
+	{
+		b->bData_20[i-11] = buf[i];
+	}
+
+	b->bData_0[8] = ' '; //bug!
+	b->bData_0[9] = 0; //bug!
+
+	return 1;
+}
+
+/* 4894 - todo */
+int func_4894(int a, Struct_4894* b)
+{
+	unsigned char buf[19];
+	unsigned short r6;
+	unsigned short r7;
+	unsigned char i;
+	
+	if ((a == 0) && (a > 7840))
+	{
+		return 0;
+	}
+	
+	r6 = (a - 1) / 27;
+	r7 = ((a - 1) % 27) * 19;
+	
+	func_243c((unsigned short)(0xfb + r6), r7, sizeof(buf), buf);
+	
+	for (i = 0; i < 3; i++)
+	{
+		b->bData_0[i] = buf[i];
+	}
+	
+	b->bData_0[3] = ' ';
+	b->bData_0[4] = 0;
+	
+	b->fData_8 = buf[3] + buf[4] / 60.0 + buf[5] / 3600.0;
+	
+	if (buf[6] >= 0x80)
+	{
+		b->fData_12 = 0x80 - buf[6] - buf[7] / 60.0 - buf[8] / 3600.0;
+	}
+	else
+	{
+		b->fData_12 = buf[6] + buf[7] / 60.0 + buf[8] / 3600.0;
+	}
+	
+	b->fData_16 = buf[9] + buf[10] / 10.0;
+	
+	for (i = 11; i < 19; i++)
+	{
+		b->bData_20[i-11] = buf[i];
+	}
+
+	b->bData_0[8] = ' '; //bug!
+	b->bData_0[9] = 0; //bug!
+
+	return 1;
+}
+
+/* 4b94 - todo */
+int func_4b94(unsigned int a, float* b)
+{
+	unsigned char buf[6];
+	unsigned short r6;
+	unsigned short r7;
+
+	if ((a == 0) && (a > 258997))
+	{
+		return 0;
+	}
+	
+	r6 = (a - 1) / 88;
+	r7 = ((a - 1) % 88) * 6;
+	
+	func_243c((unsigned short)(0x21e + r6), r7, sizeof(buf), buf);
+	
+	b[0] = buf[0] + buf[1] / 60.0 + buf[2] / 3600.0;
+	
+	if (buf[3] >= 0x80)
+	{
+		b[1] = 0x80 - buf[3] - buf[4] / 60.0 - buf[5] / 3600.0;
+	}
+	else
+	{
+		b[1] = buf[3] + buf[4] / 60.0 + buf[5] / 3600.0;
+	}
+	
+	return 1;
+}
+
+/* 4dd0 - todo */
+int func_4dd0(int a, Struct_4dd0* b)
+{
+	unsigned char buf[20];
+	unsigned short r6;
+	unsigned short r7;
+	unsigned char i;
+
+	if ((a == 0) && (a > 640))
+	{
+		return 0;
+	}
+	
+	r6 = (a - 1) / 26;
+	r7 = ((a - 1) % 26) * 20;
+
+	func_243c((unsigned short)(0xd9e + r6), r7, sizeof(buf), buf);
+
+	for (i = 0; i < 8; i++)
+	{
+		b->bData_0[i-0] = buf[i];
+	}
+	
+	b->bData_0[8] = 0;
+	b->bData_0[9] = 0;
+
+		for (i = 8; i < 16; i++)
+	{
+		b->bData_10[i-8] = buf[i];
+	}
+	
+	b->bData_10[8] = 0;
+	b->bData_10[9] = 0;
+	
+	b->fData_20 = buf[16] + buf[17] / 100.0;
+	b->fData_24 = buf[18] + buf[19] / 100.0;
+
+	return 1;
+}
+
+/* 4f5c - todo */
+int func_4f5c(int a, Struct_4f5c* b)
+{
+	unsigned char buf[40];
+	unsigned short r6;
+	unsigned short r7;
+	unsigned char i;
+	
+	if ((a == 0) && (a > 170))
+	{
+		return 0;
+	}
+	
+	r6 = (a - 1) / 13;
+	r7 = ((a - 1) % 13) * 40;
+	
+	func_243c((unsigned short)(0xdb7 + r6), r7, sizeof(buf), buf);
+	
+	for (i = 0; i < 18; i++)
+	{
+		b->bData_0[i-0] = buf[i];
+	}
+	
+	b->bData_0[18] = ' ';
+	b->bData_0[19] = 0;
+	
+	for (i = 18; i < 34; i++)
+	{
+		b->bData_20[i-18] = buf[i];
+	}
+	
+	b->bData_20[16] = ' ';
+	b->bData_20[17] = 0;
+	
+	if (buf[34] >= 0x80)
+	{
+		b->fData_40 = ((0x80 - buf[34]) * 100) - buf[35] - buf[36] / 60.0;
+	}
+	else
+	{
+		b->fData_40 = (buf[34] * 100) + buf[35] + buf[36] / 60.0;
+	}
+	
+	if (buf[37] >= 0x80)
+	{
+		b->fData_44 = (0x80 - buf[37]) - buf[38] / 60.0;
+	}
+	else
+	{
+		b->fData_44 = buf[37] + buf[38] / 60.0;
+	}
+	
+	if (buf[39] > 0x80)
+	{
+		b->Data_48 = 0x80 - buf[39];
+	}
+	else
+	{
+		b->Data_48 = buf[39];
+	}
+	
+	return 1;
+}
 
 /* 5218 - todo */
 int func_5218(int a, Struct_5218* b)
