@@ -1,4 +1,5 @@
 
+#include "data.h"
 
 /* 659c - complete */
 void func_659c(unsigned short a)
@@ -45,3 +46,36 @@ void func_d2cc(void)
 	Data_40004128.Data_68 = 1;
 }
 
+
+
+/* 7950 - todo */
+void func_7950(int a)
+{
+	bData_40002c08 = a << 5;
+	bData_40002c09 = bData_40002c08 - 1;
+}
+
+/* 75c4 - todo */
+void func_75c4(void)
+{
+}
+
+/* acdc - todo */
+void func_acdc(double a, double b, double* c, double* d)
+{
+}
+
+/* b4f0 - todo */
+void func_b4f0(void)
+{
+}
+
+/* b64c - todo */
+void func_b64c(double a, double b)
+{
+}
+
+/* 1e17c - todo */
+void func_1e17c(void)
+{
+}

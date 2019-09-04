@@ -44,6 +44,7 @@ unsigned char uart1_bRxData; //40002c19
 char bData_40002c1a; //40002c1a
 int Data_40002c1c; //40002c1c
 int Data_40002c20; //40002c20
+unsigned short wData_40002e66; //40002e66
 unsigned char bData_40003265; //40003265
 extern unsigned char Data_40003588[3]; //40003588 size???
 extern unsigned char Data_40003592[3]; //40003592 size????
@@ -815,7 +816,7 @@ void func_1268(void)
 						break;
 					
 					case 6:
-						if ((lr == 21) || (lr == 2))
+						if ((lr == 21) || (lr == 23))
 						{
 							bData_40002c05 = lr;
 						}
@@ -2749,6 +2750,20 @@ void func_5f40(void)
 	Data_40002f10 = 0;
 }
 
+/* 6518 - todo */
+void func_6518(void)
+{
+	int r0 = CTIME0;
+	int r1 = CTIME1;
+	
+	Data_40002e5c = (r1 >> 16) & 0x0fff; //Year
+	bData_40002e60 = (r1 >> 8) & 0x0f; //Month
+	bData_40002e61 = r1 & 0x1f; //Day
+	bData_40002e62 = (r0 >> 16) & 0x1f; //Hours
+	bData_40002e63 = (r0 >> 8) & 0x3f; //Minutes
+	bData_40002e64 = r0 & 0x3f; //Seconds
+	wData_40002e66 = bData_40002c06 * 10;
+}
 
 /* 7590 - complete */
 void func_7590(void)

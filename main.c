@@ -1,7 +1,12 @@
 
+#include <LPC214x.h>
+#include "data.h"
+
 extern void uart0_init(int);
 extern void uart1_write_byte(char);
 extern void uart1_init(int);
+extern void uart0_send(unsigned char* a, unsigned char b);
+extern void func_394(void);
 extern void func_7e8(int, int, int, unsigned char, const unsigned char*);
 extern void func_2254(unsigned int);
 extern void func_2328(void);
@@ -11,23 +16,21 @@ extern void func_27c4(float*, float*);
 
 extern void func_659c(int);
 extern void func_7590(void);
+extern void func_75c4(void);
+extern void func_7950(int);
 extern void func_d2cc(void);
+extern void func_acdc(double, double, double*, double*); 
+extern void func_b4f0(void);
+extern void func_b64c(double, double);
 
 extern void func_5099c(void);
 extern void func_51368(void);
 
+extern void func_1e17c(void);
+
+extern char bData_40002c0b; //40002c0b
 extern char bData_40002c13; //40002c13
 extern char bData_40002c1a; //40002c1a
-union
-{
-	unsigned char bData[2]; 
-	unsigned short wData;
-} Data_40002c24; //40002c24
-union
-{
-	unsigned char bData[4]; 
-	int Data;
-} Data_40002c28; //40002c28
 char bData_40002c58; //40002c58
 char bData_40002c5a; //40002c5a
 char bData_40002c68; //40002c68
@@ -68,11 +71,13 @@ float fData_40002de8; //40002de8
 int Data_40002e18; //40002e18
 int Data_40002e1c; //40002e1c
 float fData_40002e20; //40002e20
+double dData_40002e28; //40002e28
 int Data_40002e34; //40002e34
 int Data_40002e38; //40002e38
 int Data_40002e3c; //40002e3c
 float fData_40002e40; //40002e40
 int Data_40002e44; //40002e44
+double dData_40002e48; //40002e48
 int Data_40002e54; //40002e54
 int Data_40002e5c; //40002e5c
 char bData_40002e60; //40002e60
@@ -165,15 +170,43 @@ char bData_4000322d; //4000322d
 float Data_4000329c; //4000329c
 float Data_400032a0; //400032a0
 char bData_400032a4; //400032a4
+double dData_400033d8; //400033d8
+double dData_400033e0; //400033e0
+double dData_40003410; //40003410
+double dData_40003418; //40003418
+double dData_40003420; //40003420
+double dData_40003428; //40003428
 char bData_40003431; //40003431
 char bData_40003432; //40003432
+double dData_40003448; //40003448
+double dData_40003450; //40003450
 double Data_400034d0; //400034d0
 double Data_400034d8; //400034d8
-unsigned char Data_40003588[3 /*???*/]; //40003588
-unsigned char Data_40003592[3 /*???*/]; //40003592
+float fData_40003508; //40003508
+float fData_4000350c; //4000350c
+float fData_40003510; //40003510
+float fData_40003514; //40003514
+float fData_40003518; //40003518
+float fData_4000351c; //4000351c
+float fData_40003520; //40003520
+int Data_40003524; //40003524
+char bData_40003528; //40003528
+char bData_40003529; //40003529
+char bData_4000352a; //4000352a
+char bData_4000352b; //4000352b
+char bData_4000352c; //4000352c
+unsigned char bData_4000352d; //4000352d
+unsigned char bData_4000352e; //4000352e
+float fData_40003540; //40003540
+unsigned char Data_40003588[4]; //40003588
+unsigned char Data_40003592[4]; //40003592
 extern struct
 {
-	int fill_0[48]; //0
+	int fill_0[12]; //0
+	double dData_48; //48
+	double dData_56; //56
+	int Data_64; //64
+	int fill_68[31]; //68
 	double Data_192; //192
 	double Data_200; //200
 } Data_40004128; //40004128
@@ -186,6 +219,11 @@ void func_50b40(void)
 	//50c98
 	Data_400034d0 = 0.05;
 	Data_400034d8 = 0.045;
+}
+
+/* 6a2cc - todo */
+void func_6a2cc(void)
+{
 }
 
 /* 6ab74 - todo */
@@ -284,6 +322,239 @@ void func_6c804(void)
 	func_7e8(0, 5, 1, 22, "     EXOS EQ v2.3     ");
 }
 
+/* 6c848 - todo */
+int func_6c848(void)
+{
+	if (bData_40002c0b == 1)
+	{
+		bData_4000352d = Data_40003588[0];
+		
+		switch (bData_4000352d)
+		{
+			case 35:
+				//6c898
+			case 36:
+				//6c8a0
+				Data_40002c28.bData[0] = Data_40003588[1];
+				Data_40002c28.bData[1] = Data_40003588[2];
+				Data_40002c28.bData[2] = Data_40003588[3];
+				Data_40002c28.bData[3] = Data_40003588[4];
+				fData_40003510 = *((float*)&Data_40002c28);
+			
+				Data_40002c28.bData[0] = Data_40003588[5];
+				Data_40002c28.bData[1] = Data_40003588[6];
+				Data_40002c28.bData[2] = Data_40003588[7];
+				Data_40002c28.bData[3] = Data_40003588[8];
+				fData_40003514 = *((float*)&Data_40002c28);
+				//->6ca60
+				break;
+			
+			case 37:
+				//6c92c
+				break;
+			
+			case 38:
+				//6c9bc
+				break;
+			
+			default:
+				//6ca58
+				break;
+		}
+	}
+	//6ca70
+}
+
+/* 6cb38 - todo */
+void func_6cb38(void)
+{
+	union 
+	{
+		unsigned char bData[4];
+		float fData;
+	} sp60, sp56;
+	unsigned char sp40[13];
+	
+	sp40[0] = 0x55;
+	sp40[1] = 0xaa;
+	sp40[2] = 0x01;
+	sp40[3] = 0x09;
+	
+	bData_4000352d = func_6c848();
+	
+	switch (bData_4000352d)
+	{
+		case 29:
+			//6cbd8
+			func_b4f0();
+		
+			bData_4000352d = 1;
+			//->6d044
+			break;
+		
+		case 30:
+			//6cbf0
+			func_75c4();
+		
+			bData_40003431 = 1;
+			bData_4000352d = 1;
+			//->6d044
+			break;
+		
+		case 31:
+			//6cc10
+			sp60.fData = dData_40002e28;
+			sp56.fData = dData_40002e48;
+		
+			sp40[4] = 0xfe;
+			sp40[5] = sp60.bData[0];
+			sp40[6] = sp60.bData[1];
+			sp40[7] = sp60.bData[2];
+			sp40[8] = sp60.bData[3];
+			sp40[9] = sp56.bData[0];
+			sp40[10] = sp56.bData[1];
+			sp40[11] = sp56.bData[2];
+			sp40[12] = sp56.bData[3];
+			
+			uart0_send(sp40, 13);
+		
+			bData_4000352d = 1;
+			//->6d044
+			break;
+		
+		case 32:
+			//6cc98
+			bData_4000352d = 1;
+			//->6d044
+			break;
+		
+		case 33:
+			//6ccac
+			if (bData_40002c1a == 1)
+			{
+				sp40[4] = 0x50;
+			}
+			else if (bData_40002c1a == 2)
+			{
+				sp40[4] = 0x41;
+			}
+			
+			uart0_send(sp40, 13);
+			
+			bData_4000352d = 1;
+			//->6d044
+			break;
+		
+		case 34:
+			//6cd00
+			bData_4000352d = 1;
+			//->6d044
+			break;
+		
+		case 35:
+			//6cd14
+			func_b64c(fData_40003510, fData_40003514);
+		
+			dData_400031f0 = 0;
+			dData_400031f8 = 0;
+			bData_4000352d = 1;
+			//->6d044
+			break;
+		
+		case 36:
+			//6cd7c
+			dData_40003410 = dData_400033d8;
+			dData_40003418 = -dData_400033e0;
+			dData_40003420 = dData_400033d8;
+			dData_40003428 = dData_400033e0;
+			bData_4000352d = 1;
+			//->6d044
+			break;
+		
+		case 37:
+			//6cdd4
+			bData_40002e89 = 1;
+		
+			func_b4f0();
+		
+			dData_40002e28 = fData_40003518;
+			dData_40002e48 = fData_4000351c;
+			Data_40004128.dData_48 = fData_40003518;
+			Data_40004128.dData_56 = fData_4000351c;
+			bData_4000352d = 1;
+			//->6d044
+			break;
+		
+		case 38:
+			//6ce50
+			bData_40002e89 = 1;
+		
+			func_b4f0();
+		
+			Data_40002e54 = fData_40003520;
+			Data_40004128.Data_64 = fData_40003520;
+		
+			CCR = (1 << 4); //clock from the 32 kHz oscillator that’s connected to the RTCX1 and RTCX2 pins
+			YEAR = Data_40003524;
+			MONTH = bData_40003528; 
+			DOM = bData_40003529;
+			HOUR = bData_4000352a;
+			MIN = bData_4000352b;
+			SEC = bData_4000352c;
+			CCR = (1 << 4) | (1 << 0); //CLKEN = 1
+		
+			bData_4000352d = 1;
+			//->6d044
+			break;
+		
+		case 1:
+			//6cef8
+			if (bData_4000352e > 2)
+			{
+				//6cf0c
+				if (bData_40002c1a == 2)
+				{
+					//6cf1c
+					double sp32, sp24;
+					func_acdc(fData_4000350c, fData_40003508, &sp32, &sp24);					
+					fData_40003508 = sp32;
+					fData_4000350c = sp24;
+					dData_40003448 = sp32;
+					dData_40003450 = sp24;
+				}
+				//6cfa8
+				sp60.fData = fData_40003508;
+				sp56.fData = fData_4000350c;
+				
+				sp40[4] = 0xff;
+				sp40[5] = sp60.bData[0];
+				sp40[6] = sp60.bData[1];
+				sp40[7] = sp60.bData[2];
+				sp40[8] = sp60.bData[3];
+				sp40[9] = sp56.bData[0];
+				sp40[10] = sp56.bData[1];
+				sp40[11] = sp56.bData[2];
+				sp40[12] = sp56.bData[3];
+				
+				uart0_send(sp40, 13);
+				
+				bData_4000352e = 0;
+				//->6d038
+			}
+			else
+			{
+				//6d024
+				bData_4000352e++;
+			}
+			//6d038 -> 6d044
+			break;
+		
+		default:
+			//6d03c
+			break;
+	}
+}
+
 /* 6d054 - todo */
 int main(void)
 {
@@ -361,6 +632,45 @@ int main(void)
 	Data_40004128.Data_200 = Data_400032a0;
 	
 	//TODO
+	
+	
+	//6d364
+	if (fData_40003540 > 0)
+	{
+		//6d378
+		int r4;
+		int r5;
+		
+		r4 = (fData_40003540 - (int)fData_40003540) * 60;
+		r5 = fData_40003540;
+		sprintf(&bData_40002837, "  Lon:E%03dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
+		//->6d494
+	}
+	else
+	{
+		//6d408
+	}
+	//6d494
+	
+	//TODO
+	
+	//6f8d0
+	if (bData_400031ed == 0)
+	{
+		//6f8e0
+		func_394();
+		func_7e8(0, 4, 1, 22, "System Initializing...");
+		func_1e17c();
+		func_659c(1000);
+		func_7950(1);
+		func_394();
+		func_7e8(0, 4, 1, 22, "System Initialized    ");
+		func_659c(1000);
+		func_394();
+		
+		bData_400031ed = 1;
+	}	
+	func_6a2cc();
 }
 
 

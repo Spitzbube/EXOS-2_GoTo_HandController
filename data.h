@@ -1,6 +1,9 @@
 
 extern unsigned char Data_40000000[28][10]; //40000000
 extern unsigned char Data_40000118[28][22]; //40000118, size??
+extern char bData_40002837; //40002837
+extern unsigned char bData_40002c08; //40002c08
+extern unsigned char bData_40002c09; //40002c09
 extern char bData_40002c1a; //40002c1a
 extern union
 {
@@ -64,6 +67,7 @@ extern char bData_40002e61; //40002e61
 extern char bData_40002e62; //40002e62
 extern char bData_40002e63; //40002e63
 extern char bData_40002e64; //40002e64
+extern unsigned short wData_40002e66; //40002e66
 extern char bData_40002e79; //40002e79
 extern char bData_40002e7a; //40002e7a
 extern char bData_40002e7b; //40002e7b
