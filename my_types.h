@@ -89,3 +89,11 @@ typedef struct
 	float fData_16; //16
 } Struct_5218;
 
+typedef struct
+{
+	unsigned char bData_0;
+	unsigned char bData_1[8]; //1
+	float fData_12; //12
+	float fData_16; //16
+} Struct_54e0;
+
