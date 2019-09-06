@@ -89,7 +89,7 @@ char bData_40002e79; //40002e79
 char bData_40002e7a; //40002e7a
 char bData_40002e7b; //40002e7b
 char bData_40002e7c; //40002e7c
-char bData_40002e7d; //40002e7d
+unsigned char bData_40002e7d; //40002e7d
 char bData_40002e7e; //40002e7e
 int Data_40002e80; //40002e80
 int Data_40002e84; //40002e84
@@ -118,7 +118,7 @@ int Data_40002ec4; //40002ec4
 unsigned short wData_40002ecc; //40002ecc
 char bData_40002ece; //40002ece
 unsigned short wData_40002ed0; //40002ed0
-unsigned short wData_40002ed2; //40002ed2
+unsigned char bData_40002ed2; //40002ed2
 unsigned short wData_40002ed4; //40002ed4
 unsigned short wData_40002ed6; //40002ed6
 unsigned short wData_40002ed8; //40002ed8
@@ -190,26 +190,17 @@ float fData_40003518; //40003518
 float fData_4000351c; //4000351c
 float fData_40003520; //40003520
 int Data_40003524; //40003524
-char bData_40003528; //40003528
-char bData_40003529; //40003529
-char bData_4000352a; //4000352a
-char bData_4000352b; //4000352b
-char bData_4000352c; //4000352c
+unsigned char bData_40003528; //40003528
+unsigned char bData_40003529; //40003529
+unsigned char bData_4000352a; //4000352a
+unsigned char bData_4000352b; //4000352b
+unsigned char bData_4000352c; //4000352c
 unsigned char bData_4000352d; //4000352d
 unsigned char bData_4000352e; //4000352e
 float fData_40003540; //40003540
 unsigned char Data_40003588[4]; //40003588
 unsigned char Data_40003592[4]; //40003592
-extern struct
-{
-	int fill_0[12]; //0
-	double dData_48; //48
-	double dData_56; //56
-	int Data_64; //64
-	int fill_68[31]; //68
-	double Data_192; //192
-	double Data_200; //200
-} Data_40004128; //40004128
+Struct_40004128 Data_40004128; //40004128
 char Data_40004c58[2 /*???*/]; //40004c58
 
 /* 50b40 - todo */
@@ -229,16 +220,13 @@ void func_6a2cc(void)
 /* 6ab74 - todo */
 double func_6ab74(int a)
 {
-	char r5;
+	unsigned char r5;
 	union
 	{
-		char b[4];
+		unsigned char b[4];
 		int i;
 	} sp8;
-	struct
-	{
-		double d;
-	} ret;
+	double d;
 
 	bData_40002c13 = 0;
 	
@@ -287,32 +275,32 @@ double func_6ab74(int a)
 			case 1:
 				sp8.b[1] = Data_40003592[1];
 				sp8.b[0] = Data_40003592[2];
-			  ret.d = sp8.i;
+			  d = sp8.i;
 				break;
 			
 			case 2:
 				sp8.b[1] = Data_40003592[1];
 				sp8.b[0] = Data_40003592[2];
-			  ret.d = sp8.i;
+			  d = sp8.i;
 				break;
 			
 			case 3:
 				sp8.b[1] = Data_40003592[1];
 				sp8.b[0] = Data_40003592[2];
-			  ret.d = sp8.i;
+			  d = sp8.i;
 				break;
 			
 			case 4:
 				sp8.b[1] = Data_40003592[1];
 				sp8.b[0] = Data_40003592[2];
-			  ret.d = sp8.i;
+			  d = sp8.i;
 				break;
 		}
 		
 		bData_40002c13 = 0;
 	}
 
-	return ret.d;
+	return d;
 }
 
 /* 6c804 */
@@ -351,18 +339,41 @@ int func_6c848(void)
 			
 			case 37:
 				//6c92c
+				Data_40002c28.bData[0] = Data_40003588[1];
+				Data_40002c28.bData[1] = Data_40003588[2];
+				Data_40002c28.bData[2] = Data_40003588[3];
+				Data_40002c28.bData[3] = Data_40003588[4];
+				fData_40003518 = *((float*)&Data_40002c28);
+			
+				Data_40002c28.bData[0] = Data_40003588[5];
+				Data_40002c28.bData[1] = Data_40003588[6];
+				Data_40002c28.bData[2] = Data_40003588[7];
+				Data_40002c28.bData[3] = Data_40003588[8];
+				fData_4000351c = *((float*)&Data_40002c28);
+				//->6ca60
 				break;
 			
 			case 38:
 				//6c9bc
+				Data_40003524 = Data_40003588[1] * 100 + Data_40003588[2]; //year
+				bData_40003528 = Data_40003588[3]; //month
+				bData_40003529 = Data_40003588[4]; //day
+				bData_4000352a = Data_40003588[5]; //hour
+				bData_4000352b = Data_40003588[6]; //min
+				bData_4000352c = Data_40003588[7]; //sec
+				fData_40003520 = (float)Data_40003588[8] - 12;
+				//->6ca60
 				break;
 			
 			default:
 				//6ca58
 				break;
 		}
+		
+		bData_40002c0b = 0;
 	}
 	//6ca70
+	return bData_4000352d;
 }
 
 /* 6cb38 - todo */
@@ -623,13 +634,13 @@ int main(void)
 	Data_400034d0 = 0.05; //?
 	Data_400034d8 = 0.045; //?
 	
-	Data_40004128.Data_192 = 100.0; //?
-	Data_40004128.Data_200 = 60.0; //?
+	Data_40004128.dData_192 = 100.0; //?
+	Data_40004128.dData_200 = 60.0; //?
 	
 	func_27c4(&Data_4000329c, &Data_400032a0);
 	
-	Data_40004128.Data_192 = Data_4000329c;
-	Data_40004128.Data_200 = Data_400032a0;
+	Data_40004128.dData_192 = Data_4000329c;
+	Data_40004128.dData_200 = Data_400032a0;
 	
 	//TODO
 	
