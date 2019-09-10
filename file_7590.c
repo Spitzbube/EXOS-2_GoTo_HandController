@@ -1,6 +1,23 @@
 
 #include "data.h"
 
+
+/* acdc - todo */
+void func_acdc(double a, double b, double* c, double* d)
+{
+}
+
+/* b4f0 - todo */
+void func_b4f0(void)
+{
+}
+
+/* b64c - todo */
+void func_b64c(double a, double b)
+{
+}
+
+
 /* d2cc - todo */
 void func_d2cc(void)
 {
@@ -21,19 +38,8 @@ void func_d2cc(void)
 }
 
 
-
-/* acdc - todo */
-void func_acdc(double a, double b, double* c, double* d)
-{
-}
-
-/* b4f0 - todo */
-void func_b4f0(void)
-{
-}
-
-/* b64c - todo */
-void func_b64c(double a, double b)
+/* d784 - todo */
+void func_d784(int a)
 {
 }
 
@@ -41,3 +47,9 @@ void func_b64c(double a, double b)
 void func_1e17c(void)
 {
 }
+
+/* 1e228 - todo */
+void func_1e228(void)
+{
+}
+
