@@ -20,48 +20,6 @@ extern void func_3ec(void);
 extern void func_49c(int);
 extern void spi0_init(void);
 
-unsigned char Data_40002bf8[8]; //40002bf8, size??
-unsigned char bData_40002c00; //40002c00
-unsigned char bData_40002c01; //40002c01
-unsigned char bData_40002c02; //40002c02
-unsigned char bData_40002c03; //40002c03
-unsigned char bData_40002c04; //40002c04
-unsigned char bData_40002c05; //40002c05
-unsigned char bData_40002c06; //40002c06
-unsigned char bData_40002c07; //40002c07
-unsigned char bData_40002c08; //40002c08
-unsigned char bData_40002c09; //40002c09
-unsigned char bData_40002c0a; //40002c0a
-char bData_40002c0b; //40002c0b
-unsigned char bData_40002c0c; //40002c0c
-unsigned char bData_40002c0d[4]; //40002c0d
-unsigned char uart0_bRxData; //40002c11
-unsigned char bData_40002c12; //40002c12
-char bData_40002c13; //40002c13
-unsigned char bData_40002c14; //40002c14
-unsigned char bData_40002c15[4]; //40002c15
-int Data_40003214; //40003214
-unsigned char uart1_bRxData; //40002c19
-char bData_40002c1a; //40002c1a
-int Data_40002c1c; //40002c1c
-int Data_40002c20; //40002c20
-unsigned short wData_40002e66; //40002e66
-unsigned char bData_40003265; //40003265
-union
-{
-	unsigned char bData[4];
-	int dwData; 
-} Data_400033c8; //400033c8
-union
-{
-	unsigned char bData[4];
-	int dwData; 
-} Data_400033cc; //400033cc
-extern char bData_40003431; //40003431
-int Data_40003488; //40003488
-int Data_4000348c; //4000348c
-extern unsigned char Data_40003588[3]; //40003588 size???
-extern unsigned char Data_40003592[3]; //40003592 size????
 
 int unknown_prologue(void)
 {
