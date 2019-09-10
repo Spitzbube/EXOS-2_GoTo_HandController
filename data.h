@@ -18,6 +18,7 @@ extern union
 extern char bData_40002c58; //40002c58
 extern char bData_40002c5a; //40002c5a
 extern char bData_40002c68; //40002c68
+extern char bData_40002c69; //40002c69
 extern char bData_40002c6a; //40002c6a
 extern double dData_40002c88; //40002c88
 extern double dData_40002c90; //40002c90
@@ -62,11 +63,11 @@ extern float fData_40002e40; //40002e40
 extern int Data_40002e44; //40002e44
 extern int Data_40002e54; //40002e54
 extern int Data_40002e5c; //40002e5c
-extern char bData_40002e60; //40002e60
-extern char bData_40002e61; //40002e61
-extern char bData_40002e62; //40002e62
-extern char bData_40002e63; //40002e63
-extern char bData_40002e64; //40002e64
+extern unsigned char bData_40002e60; //40002e60
+extern unsigned char bData_40002e61; //40002e61
+extern unsigned char bData_40002e62; //40002e62
+extern unsigned char bData_40002e63; //40002e63
+extern unsigned char bData_40002e64; //40002e64
 extern unsigned short wData_40002e66; //40002e66
 extern char bData_40002e79; //40002e79
 extern char bData_40002e7a; //40002e7a
@@ -149,8 +150,11 @@ extern int Data_40003204; //40003204
 extern int Data_40003208; //40003208
 extern char bData_40003210; //40003210
 extern char bData_40003211; //40003211
+extern char bData_4000322c; //4000322c
 extern char bData_4000322d; //4000322d
 extern char bData_400032a4; //400032a4
+extern int Data_40003408; //40003408
+extern int Data_4000340c; //4000340c
 extern char bData_40003431; //40003431
 typedef struct
 {

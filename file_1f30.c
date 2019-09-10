@@ -57,8 +57,6 @@ union
 	unsigned char bData[4];
 	int dwData; 
 } Data_400033cc; //400033cc
-int Data_40003408; //40003408
-int Data_4000340c; //4000340c
 extern char bData_40003431; //40003431
 int Data_40003488; //40003488
 int Data_4000348c; //4000348c
@@ -3519,8 +3517,18 @@ void func_7950(int a)
 	bData_40002c09 = bData_40002c08 - 1;
 }
 
+typedef struct
+{
+	double sp224; 
+	double sp232; 
+	double sp240;
+	double sp248;
+	double sp256;
+	double sp264;
+} Struct_7978;
+
 /* 7978 - todo */
-void func_7978(double sp224, double sp232, double sp240, double sp248, double sp256, double sp264, double* sp272, double* sp276)
+void func_7978(Struct_7978 sp, double* sp272, double* sp276)
 {
 	double sp200;
 	double sp192;
@@ -3533,21 +3541,6 @@ void func_7978(double sp224, double sp232, double sp240, double sp248, double sp
 	double sp136;
 	double sp128;
 	double sp120;
-	double sp112;
-	double sp104;
-	double sp96;
-	double sp88;
-	double sp80;
-	double sp72;
-	double sp64;
-	double sp56;
-	double sp48;
-	double sp40;
-	double sp32;
-	double sp24;
-	double sp16;
-	double sp8;
-	double sp;
 	
 	sp200 = 15.0 * *sp272 + 180.0;
 	if (sp200 > 360.0)
@@ -3557,45 +3550,47 @@ void func_7978(double sp224, double sp232, double sp240, double sp248, double sp
 	
 	sp200 *= sp184;
 	sp192 = *sp276 * sp184;
-	sp160 = sp256;
-	sp152 = sp264;
-	sp144 = sp232;
-	sp136 = sp224;
-	sp128 = sp248;
-	sp120 = sp240;
+	sp160 = sp.sp256;
+	sp152 = sp.sp264;
+	sp144 = sp.sp232;
+	sp136 = sp.sp224;
+	sp128 = sp.sp248;
+	sp120 = sp.sp240;
 	
-	sp112 = cos(sp200);
-	sp104 = tan(sp192);
-	sp96 = sp104 * sp128;
-	sp88 = sp96 * sp112;
-	sp80 = sin(sp200);
-	sp72 = tan(sp192);
-	sp64 = sp72 * sp120;
-	sp56 = sp64 * sp80;
-	sp48 = tan(sp192);
-	sp40 = sp48 * sp136;
-	sp32 = cos(sp192);
-	sp24 = sp144 / sp32;
-	sp16 = sp24 - sp160;
-	sp8 = sp16 + sp40;
-	sp = sp8 + sp56;
-	sp176 = sp + sp88;
-	
-	sp112 = sin(sp200);
-	sp104 = sp112 * sp128;
-	sp96 = cos(sp200);
-	sp88 = sp96 * sp120;
-	sp80 = sp88 + sp152;
-	sp168 = sp80 - sp104;
+	sp176 = sp160 - sp144 / cos(sp192) + 
+		tan(sp192) * sp136 + 
+		tan(sp192) * sp120 * sin(sp200) + 
+		tan(sp192) * sp128 * cos(sp200);
+	sp168 = cos(sp200) * sp120 + sp152 - sin(sp200) * sp128;
 	
 	*sp272 += (sp176 / 15.0);
 	while (*sp272 > 24)
 	{
 		*sp272 -= 24;
 	}
-	//7ccc
-	
-	//TODO
+
+	while (*sp272 < 0)
+	{
+		*sp272 += 24;
+	}
+
+	*sp276 += sp168;
+}
+
+/* 7d1c - todo */
+void func_7d1c()
+{
+	#if 0
+	double sp224;
+	double sp232;
+	double sp240; 
+	double sp248;
+	double sp256;
+	double sp264;
+	double sp272;
+	double sp276;
+	func_7978( sp224,  sp232,  sp240,  sp248,  sp256,  sp264, &sp272, &sp276);
+	#endif
 }
 
 
