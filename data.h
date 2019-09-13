@@ -31,12 +31,21 @@ typedef struct
 	double dData_24; //24
 	double dData_32; //32
 	int Data_40; //40
-	char bData_44; //44
+	unsigned char bData_44; //44
 	double dData_48; //48
 	double dData_56; //56
 	int Data_64; //64
 	int Data_68; //68
-	int fill_72[22]; //72
+	double dData_72; //72
+	double dData_80; //80
+	double dData_88; //88
+	double dData_96; //96
+	double dData_104; //104
+	double dData_112; //112
+	double dData_120; //120
+	int fill_128[4]; //128
+	double dData_144; //144
+	double dData_152; //152
 	double dData_160; //160
 	double dData_168; //168
 	double dData_176; //176
@@ -54,9 +63,20 @@ typedef struct
 	double dData_312; //312
 	int fill_320[8]; //320
 	int Data_352; //352
-	char fill_356; //356
+	char bData_356; //356
 	char bData_357; //357
 } Struct_40004128;
+
+typedef struct
+{
+	double dData_0; //0
+	double dData_8; //8
+	double dData_16; //16
+	double dData_24; //24
+	double dData_32; //32
+	double dData_40; //40
+	
+} Struct_40004380;
 
 extern unsigned char Data_40000000[28][10]; //40000000
 extern unsigned char Data_40000118[28][22]; //40000118, size??
@@ -205,6 +225,7 @@ extern int Data_40003190; //40003190
 extern char bData_40003194; //40003194
 extern char bData_40003195; //40003195
 extern char Data_40003196; //40003196
+extern char bData_40003197; //40003197
 extern char bData_40003198; //40003198
 extern char bData_40003199; //40003199
 extern char bData_4000319b; //4000319b
@@ -272,8 +293,15 @@ extern char bData_40003431; //40003431
 extern char bData_40003432; //40003432
 extern double dData_40003448; //40003448
 extern double dData_40003450; //40003450
+extern double dData_40003458; //40003458
+extern double dData_40003460; //40003460
 extern int Data_40003488; //40003488
 extern int Data_4000348c; //4000348c
+extern double dData_400034a0; //400034a0
+extern float fData_400034c0; //400034c0
+extern float fData_400034c4; //400034c4
+extern float fData_400034c8; //400034c8
+extern char bData_400034cc; //400034cc
 extern double Data_400034d0; //400034d0
 extern double Data_400034d8; //400034d8
 extern char bData_40003505;  //40003505
@@ -297,5 +325,6 @@ extern unsigned char Data_40003588[]; //40003588 size???
 extern unsigned char Data_40003592[]; //40003592 size????
 extern char Data_400037ec[]; //400037ec, size???
 extern Struct_40004128 Data_40004128; //40004128
+extern Struct_40004380 Data_40004380; //40004380
 extern char Data_40004c58[]; //40004c58, size???
 

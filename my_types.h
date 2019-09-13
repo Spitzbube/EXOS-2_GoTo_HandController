@@ -97,3 +97,14 @@ typedef struct
 	float fData_16; //16
 } Struct_54e0;
 
+typedef struct
+{
+	unsigned short wYear; //0
+	unsigned char bMonth; //2
+	unsigned char bDay; //3
+	unsigned char bHours; //4
+	unsigned char bMinutes; //5
+	unsigned char bSeconds; //6
+	unsigned short wData_8; //8
+} Struct_7d1c;
+

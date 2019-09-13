@@ -150,6 +150,7 @@ int Data_40003190; //40003190
 char bData_40003194; //40003194
 char bData_40003195; //40003195
 char Data_40003196; //40003196
+char bData_40003197; //40003197
 char bData_40003198; //40003198
 char bData_40003199; //40003199
 char bData_4000319b; //4000319b
@@ -216,8 +217,15 @@ char bData_40003431; //40003431
 char bData_40003432; //40003432
 double dData_40003448; //40003448
 double dData_40003450; //40003450
+double dData_40003458; //40003458
+double dData_40003460; //40003460
 int Data_40003488; //40003488
 int Data_4000348c; //4000348c
+double dData_400034a0; //400034a0
+float fData_400034c0; //400034c0
+float fData_400034c4; //400034c4
+float fData_400034c8; //400034c8
+char bData_400034cc; //400034cc
 double Data_400034d0; //400034d0
 double Data_400034d8; //400034d8
 char bData_40003505;  //40003505
@@ -241,5 +249,6 @@ unsigned char Data_40003588[4]; //40003588
 unsigned char Data_40003592[4]; //40003592
 char Data_400037ec[100]; //400037ec, size???
 Struct_40004128 Data_40004128; //40004128
+Struct_40004380 Data_40004380; //40004380
 char Data_40004c58[2 /*???*/]; //40004c58
 

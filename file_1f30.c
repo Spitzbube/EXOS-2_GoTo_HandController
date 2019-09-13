@@ -3477,12 +3477,12 @@ void func_7950(int a)
 
 typedef struct
 {
-	double sp224; 
-	double sp232; 
-	double sp240;
-	double sp248;
-	double sp256;
-	double sp264;
+	double dData_0; //0
+	double dData_8; //8 
+	double dData_16; //16
+	double dData_24; //24
+	double dData_32; //32
+	double dData_40; //40
 } Struct_7978;
 
 /* 7978 - todo */
@@ -3508,12 +3508,12 @@ void func_7978(Struct_7978 sp, double* sp272, double* sp276)
 	
 	sp200 *= sp184;
 	sp192 = *sp276 * sp184;
-	sp160 = sp.sp256;
-	sp152 = sp.sp264;
-	sp144 = sp.sp232;
-	sp136 = sp.sp224;
-	sp128 = sp.sp248;
-	sp120 = sp.sp240;
+	sp160 = sp.dData_32; //sp256;
+	sp152 = sp.dData_40; //sp264;
+	sp144 = sp.dData_8; //sp232;
+	sp136 = sp.dData_0; //sp224;
+	sp128 = sp.dData_24; //sp248;
+	sp120 = sp.dData_16; //sp240;
 	
 	sp176 = sp160 - sp144 / cos(sp192) + 
 		tan(sp192) * sp136 + 
@@ -3536,19 +3536,573 @@ void func_7978(Struct_7978 sp, double* sp272, double* sp276)
 }
 
 /* 7d1c - todo */
-void func_7d1c()
+void func_7d1c(Struct_7d1c* a)
 {
-	#if 0
-	double sp224;
-	double sp232;
-	double sp240; 
-	double sp248;
-	double sp256;
-	double sp264;
-	double sp272;
-	double sp276;
-	func_7978( sp224,  sp232,  sp240,  sp248,  sp256,  sp264, &sp272, &sp276);
-	#endif
+	unsigned int r1 = CTIME0;
+	unsigned int r2 = CTIME1;
+	
+	a->wYear = (r2 >> 16) & 0xFFF;
+	a->bMonth = (r2 >> 8) & 0x0F;
+	a->bDay = r2 & 0x1F;
+	a->bHours = (r1 >> 16) & 0x1F;
+	a->bMinutes = (r1 >> 8) & 0x3F;
+	a->bSeconds = r1 & 0x3F;
+	a->wData_8 = bData_40002c06 * 10;
+	
+	if (bData_40002c6a != 0)
+	{
+		if (a->bHours >= 1)
+		{
+			a->bHours--;
+		}
+		else
+		{
+			a->bHours = 23;
+			a->bDay--;
+			if (a->bDay == 0)
+			{
+				switch (a->bMonth)
+				{
+					case 1: a->bDay = 31; break;
+					case 2: a->bDay = 31; break;
+					case 3: a->bDay = 28; break;
+					case 4: a->bDay = 31; break;
+					case 5: a->bDay = 30; break;
+					case 6: a->bDay = 31; break;
+					case 7: a->bDay = 30; break;
+					case 8: a->bDay = 31; break;
+					case 9: a->bDay = 31; break;
+					case 10: a->bDay = 30; break;
+					case 11: a->bDay = 31; break;
+					case 12: a->bDay = 30; break;
+					default: break;
+				}
+				
+				a->bMonth--;
+				if (a->bMonth == 0)
+				{
+					a->bMonth += 12;
+					a->wYear--;
+				}
+			}
+		}
+	}
 }
+
+/* 7f30 - todo */
+double func_7f30(int a, int b, double sp192)
+{
+	double sp176;
+	double sp168;
+	double sp160;
+	double sp152;
+	Struct_7d1c sp140;
+	Struct_7d1c sp128;
+	Struct_7d1c sp116;
+	double sp104;
+	double sp96;
+	double sp88;
+	double sp80 = 3.1415927;
+	
+	func_7d1c(&sp140);
+	
+	switch (a)
+	{
+		case 1:
+			//0x7f6c
+			sp128 = sp140;
+			sp116 = sp128;
+			if ((sp128.bHours - Data_40004128.Data_64) < 0)
+			{
+				sp116.bHours = sp116.bHours - Data_40004128.Data_64 + 24;
+				sp116.bDay--;
+				if (sp116.bDay < 1)
+				{
+					//7fd4
+					switch (sp116.bMonth)
+					{
+						case 1: 
+							sp116.bDay = 31;
+							sp116.bMonth = 12;
+							sp116.wYear--;
+							break;
+						case 2: 
+							sp116.bDay = 31; 
+							sp116.bMonth = 1;
+							break;
+						case 3: 
+							sp116.bDay = 28; 
+							sp116.bMonth = 2;
+							break;
+						case 4: 
+							sp116.bDay = 31; 
+							sp116.bMonth = 3;
+							break;
+						case 5: 
+							sp116.bDay = 30; 
+							sp116.bMonth = 4;
+							break;
+						case 6: 
+							sp116.bDay = 31; 
+							sp116.bMonth = 5;
+							break;
+						case 7: 
+							sp116.bDay = 30; 
+							sp116.bMonth = 6;
+							break;
+						case 8: 
+							sp116.bDay = 31; 
+							sp116.bMonth = 7;
+							break;
+						case 9: 
+							sp116.bDay = 31; 
+							sp116.bMonth = 8;
+							//break; //Bug: Missing break!
+						
+						case 10: 
+							sp116.bDay = 30; 
+							sp116.bMonth = 9;
+							break;
+						case 11: 
+							sp116.bDay = 31; 
+							sp116.bMonth = 10;
+							break;
+						case 12: 
+							sp116.bDay = 30; 
+							sp116.bMonth = 11;
+							break;
+						default: /*->8148*/ break;
+					}
+					//8150 -> 83b0
+				}
+				//83b0
+			}
+			else
+			{
+				//8154
+				if ((sp128.bHours - Data_40004128.Data_64) > 24)
+				{
+					sp116.bHours = sp116.bHours - Data_40004128.Data_64 - 24;
+					sp116.bDay++;
+					switch (sp116.bMonth)
+					{
+						case 1:
+							if (sp116.bDay > 31)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 2;
+							}
+							break;
+						case 2:
+							if (sp116.bDay > 28)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 3;
+							}
+							//break; //Bug: missing break!
+							
+						case 3:
+							if (sp116.bDay > 31)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 4;
+							}
+							//break; //Bug: missing break!
+							
+						case 4:
+							if (sp116.bDay > 30)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 5;
+							}
+							break;
+						case 5:
+							if (sp116.bDay > 31)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 6;
+							}
+							break;
+						case 6:
+							if (sp116.bDay > 30)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 7;
+							}
+							break;
+						case 7:
+							if (sp116.bDay > 31)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 8;
+							}
+							break;
+						case 8:
+							if (sp116.bDay > 31)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 9;
+							}
+							break;
+						case 9:
+							if (sp116.bDay > 30)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 10;
+							}
+							//break; //Bug: Missing break!
+							
+						case 10:
+							if (sp116.bDay > 31)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 11;
+							}
+							break;
+						case 11:
+							if (sp116.bDay > 30)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 12;
+							}
+							break;
+						case 12:
+							if (sp116.bDay > 31)
+							{
+								sp116.bDay = 1;
+								sp116.bMonth = 1;
+								sp116.wYear++;
+							}
+							break;
+						default: /*->8390*/ break;
+					}
+					//8398 -> 83b0
+				}
+				else
+				{
+					//839c
+					sp116.bHours = sp128.bHours - Data_40004128.Data_64;
+				}
+			}
+			//83b0 -> 83d4
+			break;
+		
+		case 2:
+			//0x83b4
+			sp116 = sp140;
+			break;
+		
+		default:
+			//0x83cc
+			break;
+	}
+	//83d4
+	if (sp116.bMonth < 3)
+	{
+		sp116.wYear--;
+		sp116.bMonth += 12;
+	}
+	//8404
+	sp104 = (int)(sp116.wYear * 1.0 / 100.0);
+	sp96 = 2.0 - sp104 + (int)(sp104 * 1.0 / 4.0);
+	
+	sp88 = (sp116.bHours + sp116.bMinutes / 60.0 + sp116.bSeconds / 3600.0 + sp116.wData_8 / 3600000.0) / 24.0;
+	Data_40004128.dData_104 = sp88;
+	
+	sp176 = (int)((sp116.wYear + 4716) * 365.25) + (int)((sp116.bMonth + 1) * 30.6001) + sp116.bDay + sp88 + sp96 - 1524.5;
+		
+	Data_40004128.dData_96 = sp176;
+	
+	sp168 = (sp176 - 2451545.0) / 36525.0;
+	sp160 = (sp176 - 2451545.0) * 360.985647366289981619047466666 + 280.460618370000020149745978415 + 0.000387993 * sp168 * sp168 - sp168 * sp168 * sp168 / 38710000.0;	
+	//883c
+	while (sp160 > 360.0)
+	{
+		sp160 -= 360.0;
+	}
+	
+	while (sp160 < 0.0)
+	{
+		sp160 += 360.0;
+	}
+	//888c
+	sp176 = (int)((sp116.wYear + 4716) * 365.25) + (int)((sp116.bMonth + 1) * 30.6001) + sp116.bDay + sp96 - 1524.5;
+	sp168 = (sp176 - 2451545.0) / 36525.0;
+	
+	dData_400034a0 = (sp176 - 2451545.0) * 360.985647366289981619047466666 + 280.460618370000020149745978415 + 0.000387993 * sp168 * sp168 - sp168 * sp168 * sp168 / 38710000.0;
+	
+	while (dData_400034a0 > 360.0)
+	{
+		dData_400034a0 -= 360.0;
+	}
+
+	while (dData_400034a0 < 0.0)
+	{
+		dData_400034a0 += 360.0;
+	}
+	//8acc
+	dData_400034a0 /= 15;
+	
+	sp152 = sp192 + sp160;
+	
+	while (sp152 > 360.0)
+	{
+		sp152 -= 360.0;
+	}
+	
+	while (sp152 < 0.0)
+	{
+		sp152 += 360.0;
+	}
+	
+	sp152 /= 15.0;
+	
+	return sp152;
+}
+
+/* 8ba4 - todo */
+void func_8ba4(double sp176, double sp184, double sp208, double sp216, double fill1, double fill2, 
+	int r4, int r5, double* r6)
+{
+	double sp168 = 3.14159265359;
+	double sp160 = sp176; 
+	double sp152 = sp184; 
+	double sp144 = sp208; 
+	double sp136 = sp216; 
+	double sp128;
+	double sp120;
+	double sp112;
+	double sp104;
+	double sp96;
+	double sp88;
+	
+	sp120 = func_7f30(r4, r5, sp160);
+	
+	sp128 = sp120 - sp144;
+	while (sp128 >= 24)
+	{
+		sp128 -= 24;
+	}
+	
+	while (sp128 < 0)
+	{
+		sp128 += 24;
+	}
+	//8cac
+	sp128 = sp128 * sp168 * 15.0 / 180.0;	
+	sp152 = sp152 * sp168 / 180.0;
+	sp136 = sp136 * sp168 / 180.0;
+	
+	sp112 = acos(sin(sp152) * sin(sp136) + cos(sp152) * cos(sp136) * cos(sp128));
+	sp104 = acos((sin(sp152) * cos(sp136) * cos(sp128) - cos(sp152) * sin(sp136)) / sin(sp112));
+	
+	if (sp128 > sp168)
+	{
+		sp104 = -1 * sp104;
+	}
+	//8f38
+	sp96 = (sin(sp152) * sin(sp112) + cos(sp112) * cos(sp104) * cos(sp152)) / sin(sp112) * 15.04;
+	sp88 = cos(sp152) * 15.04 * sin(sp104);
+	
+	r6[0] = sp104 * 57.2957795130823228646477218717;
+	r6[1] = sp104 * 57.2957795130823228646477218717 + 180.0;
+	r6[4] = sp96;
+	r6[2] = sp112 * 57.2957795130823228646477218717;
+	r6[3] = 90.0 - sp112 * 57.2957795130823228646477218717;
+	r6[5] = sp88;
+	r6[6] = -sp88;
+}
+
+/* 9178 - todo */
+void func_9178(void)
+{
+	double sp264;
+	double sp256;
+	#if 0
+	struct
+	{
+		double sp224;
+		double sp232;
+		double sp240;
+		double sp248;
+	} sp224;
+	#else
+	double sp248;
+	double sp240;
+	double sp232;
+	double sp224;
+	#endif
+	double sp152[7];
+	#if 0
+	double sp144;
+	double sp136;
+	double sp128;
+	double sp120;
+	double sp112;
+	double sp104;
+	#else
+	Struct_7978 sp104_;
+	#endif
+	double sp80;
+	double sp72;
+	double sp64;
+	double sp56;
+	
+	if (Data_40004128.bData_357 != 0)
+	{
+		if (bData_40003431 == 0)
+		{
+			//91a0
+			sp256 = Data_40004128.dData_48;
+			sp264 = Data_40004128.dData_56;
+			Data_40004128.bData_356 = 1;
+			
+			switch (Data_40004128.Data_68)
+			{
+				case 1:
+					//91e4
+					Data_40004128.dData_72 += dData_40002c98;
+					if (Data_40004128.dData_72 >= 24)
+					{
+						Data_40004128.dData_72 -= 24;
+					}
+					//924c
+					if (Data_40004128.dData_72 < 0)
+					{
+						Data_40004128.dData_72 += 24;
+					}
+					//928c
+					sp224 = Data_40004128.dData_72;
+					sp232 = Data_40004128.dData_80;					
+					break;
+					
+				default:
+					break;
+			}
+			//92c0
+			sp80 = func_7f30(Data_40004128.Data_40, Data_40004128.bData_44, Data_40004128.dData_48);
+			
+			fData_400034c8 = sp80;
+
+			func_8ba4(sp256, sp264, sp224, sp232, sp240, sp248,
+				Data_40004128.Data_40, Data_40004128.bData_44, sp152);
+
+			sp72 = sp80 - sp224;
+			
+			while (sp72 > 24)
+			{
+				sp72 -= 24;
+			}
+
+			while (sp72 < 0)
+			{
+				sp72 += 24;
+			}
+			
+			sp64 = sp72;
+			sp56 = Data_40004128.dData_80;
+			/*sp136*/sp104_.dData_32 = Data_40004380.dData_32;
+			/*sp144*/sp104_.dData_40 = Data_40004380.dData_40;
+			/*sp112*/sp104_.dData_8 = Data_40004380.dData_8;
+			/*sp104*/sp104_.dData_0 = Data_40004380.dData_0;
+			/*sp128*/sp104_.dData_24 = Data_40004380.dData_24;
+			/*sp120*/sp104_.dData_16 = Data_40004380.dData_16;
+			
+			dData_40003458 = sp72;
+			dData_40003460 = Data_40004128.dData_80;
+			
+			func_7978(sp104_, &dData_40003458, &dData_40003460);
+			
+			sp64 = dData_40003458;
+			sp56 = dData_40003460;
+			
+			fData_400034c0 = sp64 - sp72;
+			fData_400034c4 = sp56 - Data_40004128.dData_80;
+			
+			if (bData_400034cc == 1)
+			{
+				//9548
+				sp64 = dData_40003458 - fData_400034c0;
+				sp56 = dData_40003460 - fData_400034c4;
+			}
+			//95a0
+			Data_40004128.dData_112 = sp64 * 15.0;
+			Data_40004128.dData_88 = sp64;
+			Data_40004128.dData_144 = sp72;
+			Data_40004128.dData_152 = Data_40004128.dData_80;
+			
+			if (bData_40002c1a == 1)
+			{
+				//9608
+				if (sp264 >= 0)
+				{
+					//9620
+					if (sp64 >= 12)
+					{
+						//9638
+						Data_40004128.dData_112 -= 180; 
+					}
+					//965c
+					Data_40004128.dData_112 -= 90; 
+					Data_40004128.dData_120 = 90 - sp56;
+					
+					if (sp64 < 12)
+					{
+						//96b8
+						Data_40004128.dData_120 = -1 * Data_40004128.dData_120;
+					}
+					//97b4
+				}
+				else
+				{
+					//96e0
+					if (sp64 >= 12)
+					{
+						//9638
+						Data_40004128.dData_112 -= 180; 
+					}
+					//971c
+					Data_40004128.dData_112 = 90 - 1.0 * Data_40004128.dData_112;
+					Data_40004128.dData_120 = -90.0 - sp56;
+					
+					if (sp64 < 12)
+					{
+						//9790
+						Data_40004128.dData_120 = -1 * Data_40004128.dData_120;
+					}
+					//97b4
+				}
+				//97b4
+				Data_40004128.dData_176 = 3.6;
+				Data_40004128.dData_184 = 2.1;
+			}
+			//97dc
+			if (bData_40002c1a == 2)
+			{
+				//97ec
+			}
+			//9958
+			
+			//->9b78?
+		}
+		else
+		{
+			//9af0
+		}
+	}
+	else
+	{
+		//ac9c
+		if (Data_40004128.bData_356 != 0)
+		{
+			func_65d4(0.0, 0.0);
+			
+			Data_40004128.bData_356 = 0;
+		}
+	}
+	//accc
+}
+
+
 
 
