@@ -34,12 +34,195 @@ extern void func_1e17c(void);
 extern void func_1e228(void);
 extern void func_3d72c(void);
 
+/* 20b94 - todo */
+void func_20b94(void)
+{
+}
 
-
+/* 27844 - todo */
+void func_27844(void)
+{
+}
 
 /* 3d72c - todo */
 void func_3d72c(void)
 {
+	func_27844();
+	
+	switch (bData_40003197)
+	{
+		case 1:
+			//0x3d750
+			Data_4000318c = Data_40002c64;
+			if (Data_4000318c != Data_40003190)
+			{
+				//3d77c
+				func_394();				
+				Data_40003190 = Data_4000318c;
+			}
+			//3d790
+			switch (Data_40002c64)
+			{
+				case 0:
+					//0x3da9c
+					if (bData_400031ed == 1)
+					{
+						func_20b94();
+					}
+					//->4684c
+					break;
+				
+				case 1:
+					//0x3dab8
+					break;
+				
+				case 2:
+					//0x3f8d0
+					break;
+				
+				case 0x64:
+					//0x446e8
+					break;
+				
+				case 0x65:
+					//0x41c8c
+					break;
+				
+				case 0x66:
+					//0x3f230
+					break;
+				
+				case 0xc9:
+					//0x41c80
+					break;
+				
+				case 0xca:
+					//0x41c88
+					break;
+				
+				case 0xcb:
+					//0x42788
+					break;
+				
+				case 0xcc:
+					//0x4298c
+					break;
+				
+				case 0xcd:
+					//0x42b90
+					break;
+				
+				case 0xce:
+					//0x42d94
+					break;
+				
+				case 0xcf:
+					//0x43048
+					break;
+				
+				case 0xd0:
+					//0x43328
+					break;
+				
+				case 0x2b5d:
+					//0x40488
+					break;
+				
+				case 0x2b5e:
+					//0x40480
+					break;
+
+				case 0x80E9:
+					//0x44760
+					break;
+				
+				case 0x59de:
+					//0x40e44
+					break;
+				
+				case 0x59DF:
+					//0x40e48
+					break;
+				
+				case 0x59E4:
+					//0x41af8
+					break;
+				
+				case 0x59E5:
+					//0x4161c
+					break;
+				
+				case 0x59E6:
+					//0x41624
+					break;
+				
+				case 0x59E7:
+					//0x4130c
+					break;
+				
+				case 0x59E8:
+					//0x41310
+					break;
+				
+				case 0x59E9:
+					//0x41314
+					break;
+				
+				case 0x59EE:
+					//0x41308
+					break;
+				
+				case 0x61AA:
+					//0x41304
+					break;
+				
+				case 0x5DC1:
+					//0x40e38
+					break;
+				
+				case 0x5DC2:
+					//0x41300
+					break;
+				
+				case 0x5DC3:
+					//0x418fc
+					break;
+				
+				case 0x6D61:
+					//0x4575c
+					break;
+				
+				case 0xBB81:
+					//0x43a04
+					break;
+				
+				case 0x5A565:
+					//0x44ee8
+					break;
+				
+				case 0x5A566:
+					//0x450e0
+					break;
+				
+				case 0x5A567:
+					//0x452d8
+					break;
+				
+				default:
+					//->459f8
+					break;
+			}
+			//46850 -> 4edd8
+			
+			break;
+		
+		case 2:
+			//0x46854
+			break;
+	}
+	//0x4edd0
+	
+#if 0
 	//3dab8
 	if (bData_40002f14 != 0)
 	{
@@ -106,6 +289,7 @@ void func_3d72c(void)
 		}
 	}
 	//3efac
+#endif
 }
 
 
