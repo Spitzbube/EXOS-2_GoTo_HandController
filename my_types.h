@@ -108,3 +108,11 @@ typedef struct
 	unsigned short wData_8; //8
 } Struct_7d1c;
 
+typedef struct
+{
+	double dData_0; //0
+	double dData_8; //8
+	double fill1; //16
+	double fill2;	//24
+} Struct_8ba4;
+
