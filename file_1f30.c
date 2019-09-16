@@ -3861,14 +3861,13 @@ double func_7f30(int a, int b, double sp192)
 }
 
 /* 8ba4 - todo */
-void func_8ba4(double sp176, double sp184, double sp208, double sp216, double fill1, double fill2, 
-	int r4, int r5, double* r6)
+void func_8ba4(double sp176, double sp184, Struct_8ba4 b, int r4, int r5, double* r6)
 {
 	double sp168 = 3.14159265359;
 	double sp160 = sp176; 
 	double sp152 = sp184; 
-	double sp144 = sp208; 
-	double sp136 = sp216; 
+	double sp144 = b.dData_0; 
+	double sp136 = b.dData_8; 
 	double sp128;
 	double sp120;
 	double sp112;
@@ -3918,35 +3917,15 @@ void func_9178(void)
 {
 	double sp264;
 	double sp256;
-	#if 0
-	struct
-	{
-		double sp224;
-		double sp232;
-		double sp240;
-		double sp248;
-	} sp224;
-	#else
-	double sp248;
-	double sp240;
-	double sp232;
-	double sp224;
-	#endif
-	double sp152[7];
-	#if 0
-	double sp144;
-	double sp136;
-	double sp128;
-	double sp120;
-	double sp112;
-	double sp104;
-	#else
-	Struct_7978 sp104_;
-	#endif
+	Struct_8ba4 sp224;
+	double sp152[9]; //size??
+	Struct_7978 sp104;
+	double sp88[2];
 	double sp80;
 	double sp72;
 	double sp64;
 	double sp56;
+	double sp48; 
 	
 	if (Data_40004128.bData_357 != 0)
 	{
@@ -3972,8 +3951,8 @@ void func_9178(void)
 						Data_40004128.dData_72 += 24;
 					}
 					//928c
-					sp224 = Data_40004128.dData_72;
-					sp232 = Data_40004128.dData_80;					
+					sp224.dData_0 = Data_40004128.dData_72;
+					sp224.dData_8 = Data_40004128.dData_80;					
 					break;
 					
 				default:
@@ -3984,10 +3963,9 @@ void func_9178(void)
 			
 			fData_400034c8 = sp80;
 
-			func_8ba4(sp256, sp264, sp224, sp232, sp240, sp248,
-				Data_40004128.Data_40, Data_40004128.bData_44, sp152);
-
-			sp72 = sp80 - sp224;
+			func_8ba4(sp256, sp264, sp224, Data_40004128.Data_40, Data_40004128.bData_44, sp152);
+			
+			sp72 = sp80 - sp224.dData_0;
 			
 			while (sp72 > 24)
 			{
@@ -4001,17 +3979,17 @@ void func_9178(void)
 			
 			sp64 = sp72;
 			sp56 = Data_40004128.dData_80;
-			/*sp136*/sp104_.dData_32 = Data_40004380.dData_32;
-			/*sp144*/sp104_.dData_40 = Data_40004380.dData_40;
-			/*sp112*/sp104_.dData_8 = Data_40004380.dData_8;
-			/*sp104*/sp104_.dData_0 = Data_40004380.dData_0;
-			/*sp128*/sp104_.dData_24 = Data_40004380.dData_24;
-			/*sp120*/sp104_.dData_16 = Data_40004380.dData_16;
+			sp104.dData_32 = Data_40004380.dData_32;
+			sp104.dData_40 = Data_40004380.dData_40;
+			sp104.dData_8 = Data_40004380.dData_8;
+			sp104.dData_0 = Data_40004380.dData_0;
+			sp104.dData_24 = Data_40004380.dData_24;
+			sp104.dData_16 = Data_40004380.dData_16;
 			
 			dData_40003458 = sp72;
 			dData_40003460 = Data_40004128.dData_80;
 			
-			func_7978(sp104_, &dData_40003458, &dData_40003460);
+			func_7978(sp104, &dData_40003458, &dData_40003460);
 			
 			sp64 = dData_40003458;
 			sp56 = dData_40003460;
@@ -4080,14 +4058,63 @@ void func_9178(void)
 			if (bData_40002c1a == 2)
 			{
 				//97ec
+				if (sp264 >= 0)
+				{
+					//9804
+					Data_40004128.dData_112 += 180;
+					
+					if (Data_40004128.dData_112 > 360)
+					{
+						Data_40004128.dData_112 -= 360;
+					}
+					//9868
+					Data_40004128.dData_120 = 90 - sp56;
+					//->9934
+				}
+				else
+				{
+					//988c
+					Data_40004128.dData_112 += 180;
+					
+					if (Data_40004128.dData_112 > 360)
+					{
+						Data_40004128.dData_112 -= 360;
+					}
+					//98f0
+					Data_40004128.dData_112 = -1 * Data_40004128.dData_112;
+					Data_40004128.dData_120 = 90 + sp56;
+				}
+				//9934
+				Data_40004128.dData_176 = 3.6;
+				Data_40004128.dData_184 = 3.0;
 			}
 			//9958
-			
-			//->9b78?
+			Data_40004128.dData_128 = Data_40004128.dData_112;
+			Data_40004128.dData_136 = Data_40004128.dData_120;
+			Data_40004128.dData_328 = dData_400033d8;
+			Data_40004128.dData_336 = -1 * dData_400033e0;
+			Data_40004128.dData_160 = Data_40004128.dData_128 + Data_40004128.dData_328 + Data_40004128.dData_584;
+		
+			if (Data_40004128.dData_216 >= 0)
+			{
+				//9a68
+				Data_40004128.dData_168 = Data_40004128.dData_136 + Data_40004128.dData_336 + Data_40004128.dData_592;
+				//->9b78
+			}
+			else
+			{
+				//9aac
+				Data_40004128.dData_168 = Data_40004128.dData_136 - Data_40004128.dData_336 - Data_40004128.dData_592;
+			}
+			//->9b78
 		}
 		else
 		{
 			//9af0
+			#if 0
+			sp48 = 0; //test
+			sp88[0] = 0;
+			#endif
 		}
 	}
 	else

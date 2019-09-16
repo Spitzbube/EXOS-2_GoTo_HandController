@@ -43,7 +43,8 @@ typedef struct
 	double dData_104; //104
 	double dData_112; //112
 	double dData_120; //120
-	int fill_128[4]; //128
+	double dData_128; //128
+	double dData_136; //136
 	double dData_144; //144
 	double dData_152; //152
 	double dData_160; //160
@@ -53,7 +54,8 @@ typedef struct
 	double dData_192; //192
 	double dData_200; //200
 	double dData_208; //208
-	int fill_216[6]; //216
+	double dData_216; //216
+	int fill_224[4]; //224
 	double dData_240; //240
 	double dData_248; //248
 	double dData_256; //256
@@ -61,10 +63,17 @@ typedef struct
 	int fill_272[8]; //272
 	double dData_304; //304
 	double dData_312; //312
-	int fill_320[8]; //320
+	int fill_320[2]; //320
+	double dData_328; //328
+	double dData_336; //336
+	int fill_344[2]; //344
 	int Data_352; //352
 	char bData_356; //356
 	char bData_357; //357
+	int fill_360[56]; //360
+	double dData_584; //584
+	double dData_592; //592
+	
 } Struct_40004128;
 
 typedef struct
