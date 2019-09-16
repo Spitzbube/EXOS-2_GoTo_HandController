@@ -3490,7 +3490,7 @@ void func_7978(Struct_7978 sp, double* sp272, double* sp276)
 {
 	double sp200;
 	double sp192;
-	double sp184 = 0.0174532922222222219854614877477;
+	double RAD = 0.0174532922222222219854614877477; //sp184
 	double sp176;
 	double sp168;
 	double sp160;
@@ -3500,14 +3500,14 @@ void func_7978(Struct_7978 sp, double* sp272, double* sp276)
 	double sp128;
 	double sp120;
 	
-	sp200 = 15.0 * *sp272 + 180.0;
+	sp200 = /*360/24*/15.0 * *sp272 + 180.0;
 	if (sp200 > 360.0)
 	{
 		sp200 -= 360.0;
 	}
 	
-	sp200 *= sp184;
-	sp192 = *sp276 * sp184;
+	sp200 *= RAD;
+	sp192 = *sp276 * RAD;
 	sp160 = sp.dData_32; //sp256;
 	sp152 = sp.dData_40; //sp264;
 	sp144 = sp.dData_8; //sp232;
@@ -3592,8 +3592,8 @@ void func_7d1c(Struct_7d1c* a)
 /* 7f30 - todo */
 double func_7f30(int a, int b, double sp192)
 {
-	double sp176;
-	double sp168;
+	double JD; //sp176;
+	double T; //sp168;
 	double sp160;
 	double sp152;
 	Struct_7d1c sp140;
@@ -3601,7 +3601,7 @@ double func_7f30(int a, int b, double sp192)
 	Struct_7d1c sp116;
 	double sp104;
 	double sp96;
-	double sp88;
+	double hours; //sp88;
 	double sp80 = 3.1415927;
 	
 	func_7d1c(&sp140);
@@ -3806,15 +3806,18 @@ double func_7f30(int a, int b, double sp192)
 	sp104 = (int)(sp116.wYear * 1.0 / 100.0);
 	sp96 = 2.0 - sp104 + (int)(sp104 * 1.0 / 4.0);
 	
-	sp88 = (sp116.bHours + sp116.bMinutes / 60.0 + sp116.bSeconds / 3600.0 + sp116.wData_8 / 3600000.0) / 24.0;
-	Data_40004128.dData_104 = sp88;
+	hours/*sp88*/ = (sp116.bHours + sp116.bMinutes / 60.0 + sp116.bSeconds / 3600.0 + sp116.wData_8 / 3600000.0) / 24.0;
+	Data_40004128.dData_104 = hours/*sp88*/;
 	
-	sp176 = (int)((sp116.wYear + 4716) * 365.25) + (int)((sp116.bMonth + 1) * 30.6001) + sp116.bDay + sp88 + sp96 - 1524.5;
+	JD/*sp176*/ = (int)((sp116.wYear + 4716) * 365.25) + (int)((sp116.bMonth + 1) * 30.6001) + sp116.bDay + hours/*sp88*/ + sp96 - 1524.5;
 		
-	Data_40004128.dData_96 = sp176;
+	Data_40004128.dData_96 = JD/*sp176*/;
 	
-	sp168 = (sp176 - 2451545.0) / 36525.0;
-	sp160 = (sp176 - 2451545.0) * 360.985647366289981619047466666 + 280.460618370000020149745978415 + 0.000387993 * sp168 * sp168 - sp168 * sp168 * sp168 / 38710000.0;	
+	//http://www.geoastro.de/elevaz/basics/meeus.htm
+	//-> compute sidereal time at Greenwich (according to: Jean Meeus: Astronomical Algorithms)
+	T/*sp168*/ = (JD/*sp176*/ - 2451545.0) / 36525.0;
+	sp160 = (JD/*sp176*/ - 2451545.0) * 360.985647366289981619047466666 + 280.460618370000020149745978415 + 
+		0.000387993 * T*T/*sp168 * sp168*/ - T*T*T/*sp168 * sp168 * sp168*/ / 38710000.0;	
 	//883c
 	while (sp160 > 360.0)
 	{
@@ -3826,10 +3829,11 @@ double func_7f30(int a, int b, double sp192)
 		sp160 += 360.0;
 	}
 	//888c
-	sp176 = (int)((sp116.wYear + 4716) * 365.25) + (int)((sp116.bMonth + 1) * 30.6001) + sp116.bDay + sp96 - 1524.5;
-	sp168 = (sp176 - 2451545.0) / 36525.0;
+	JD/*sp176*/ = (int)((sp116.wYear + 4716) * 365.25) + (int)((sp116.bMonth + 1) * 30.6001) + sp116.bDay + sp96 - 1524.5;
+	T/*sp168*/ = (JD/*sp176*/ - 2451545.0) / 36525.0;
 	
-	dData_400034a0 = (sp176 - 2451545.0) * 360.985647366289981619047466666 + 280.460618370000020149745978415 + 0.000387993 * sp168 * sp168 - sp168 * sp168 * sp168 / 38710000.0;
+	dData_400034a0 = (JD/*sp176*/ - 2451545.0) * 360.985647366289981619047466666 + 280.460618370000020149745978415 + 
+		0.000387993 * T*T/*sp168 * sp168*/ - T*T*T/*sp168 * sp168 * sp168*/ / 38710000.0;
 	
 	while (dData_400034a0 > 360.0)
 	{
