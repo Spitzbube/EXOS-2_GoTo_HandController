@@ -4111,12 +4111,265 @@ void func_9178(void)
 		else
 		{
 			//9af0
-			#if 0
-			sp48 = 0; //test
-			sp88[0] = 0;
-			#endif
+			Data_40004128.dData_112 = -180.0;
+			Data_40004128.dData_120 = 90.0;
+			Data_40004128.dData_128 = 0.0;
+			Data_40004128.dData_136 = 0.0;
+			Data_40004128.dData_160 = 0.0;
+			Data_40004128.dData_168 = 0.0;
+			Data_40004128.dData_176 = 3.6;
+			Data_40004128.dData_184 = 3.0;
 		}
+		//9b78
+		Data_40004128.dData_224 = Data_40004128.dData_160 - Data_40004128.dData_208;
+		Data_40004128.dData_232 = Data_40004128.dData_168 - Data_40004128.dData_216;
+		
+		if (Data_40004128.dData_304 == 0)
+		{
+			if (Data_40004128.dData_256 > 400.0)
+			{
+				//9bf8
+				Data_40004128.dData_256 = fabs(Data_40004128.dData_176) + 400;
+			}
+			else
+			{
+				//9c30
+				Data_40004128.dData_256 += 10;
+			}
+		}
+		//9c54
+		if (Data_40004128.dData_312 == 0)
+		{
+			if (Data_40004128.dData_264 > 400.0)
+			{
+				//9c8c
+				Data_40004128.dData_264 = fabs(Data_40004128.dData_184) + 400;
+			}
+			else
+			{
+				//9cc4
+				Data_40004128.dData_264 += 10;
+			}
+		}
+		//9ce8
+		if (fabs(Data_40004128.dData_224) > 0.11)
+		{
+			//9d14
+			if (Data_40004128.dData_304 == 2)
+			{
+				Data_40004128.dData_304 = 0;
+				
+				if (bData_40002e7d > 6)
+				{
+					bData_40003498 = 1;
+				}
+			}
+		}
+		//9d60
+		if (fabs(Data_40004128.dData_232) > 0.11)
+		{
+			if (Data_40004128.dData_312 == 2)
+			{
+				Data_40004128.dData_312 = 0;
+				
+				if (bData_40002e7d > 6)
+				{
+					bData_40003498 = 1;
+				}
+			}
+		}
+		//9dd8
+		if ((fabs(Data_40004128.dData_224) > 10.0) ||
+			(fabs(Data_40004128.dData_232) > 5.0))
+		{
+			//9e30
+			bData_40003498 = 1;
+		}
+		//9e3c
+		if (fabs(Data_40004128.dData_224) <= 15)
+		{
+			if ((Data_40004128.dData_304 == 0) || 
+				(Data_40004128.dData_304 == 1))
+			{
+				//9ed8
+				Data_40004128.dData_304 = 1;
+				
+				if (Data_40004128.dData_256 > 180.0)
+				{
+					//9f08
+					Data_40004128.dData_256 -= 10.0;
+					//->9f88
+				}
+				else
+				{
+					//9f30
+					if (Data_40004128.dData_256 < 180.0)
+					{
+						//9f08
+						Data_40004128.dData_256 += 10.0;
+						//->9f88
+					}
+					else
+					{
+						//9f74
+						Data_40004128.dData_256 = 180.0;
+					}
+				}
+				//9f88
+				if (fabs(Data_40004128.dData_224) <= 10.0)
+				{
+					//9fb4
+					if (Data_40004128.dData_256 < 150.0)
+					{
+						//9fd0
+						Data_40004128.dData_256 += 10;
+						//->a02c
+					}
+					else
+					{
+						//9ff8
+						Data_40004128.dData_256 = fabs(Data_40004128.dData_176) + 150.0;
+					}
+				}
+				//a02c
+				if (fabs(Data_40004128.dData_224) <= 5.0)
+				{
+					//a058
+					if (Data_40004128.dData_256 < 120.0)
+					{
+						//a074
+						Data_40004128.dData_256 += 10.0;
+					}
+					else
+					{
+						//a09c
+						Data_40004128.dData_256 = fabs(Data_40004128.dData_176) + 120.0;
+					}
+				}
+				//a0d0
+				if (fabs(Data_40004128.dData_224) <= 3.0)
+				{
+					//a0fc
+					if (Data_40004128.dData_256 < 80.0)
+					{
+						//a118
+						Data_40004128.dData_256 += 10.0;
+					}
+					else
+					{
+						//a140
+						Data_40004128.dData_256 = fabs(Data_40004128.dData_176) + 80.0;
+					}					
+				}
+				//a174
+				if (fabs(Data_40004128.dData_224) <= 1.0)
+				{
+					//a1a0
+					Data_40004128.dData_256 = fabs(Data_40004128.dData_176) + 50.0;
+				}
+				//a1d4
+				if (fabs(Data_40004128.dData_224) <= 0.1)
+				{
+					//a200
+					Data_40004128.dData_256 = fabs(Data_40004128.dData_176) + 10.0;
+				}
+				//a234
+				if (fabs(Data_40004128.dData_224) <= 0.01)
+				{
+					//a260
+					Data_40004128.dData_304 = 2.0;
+				}
+				//a274
+			}
+			//a274
+		}
+		//a274
+		if (fabs(Data_40004128.dData_232) <= 15.0)
+		{
+			//a2a0
+			if ((Data_40004128.dData_312 == 0.0) ||
+				(Data_40004128.dData_312 == 1.0))
+			{
+				//a2d8
+				Data_40004128.dData_312 = 1.0;
+				
+				if (Data_40004128.dData_264 > 180.0)
+				{
+					//a308
+					Data_40004128.dData_264 -= 10.0;
+					//->a3c0
+				}
+				else
+				{
+					//a368
+					if (Data_40004128.dData_264 < 180.0)
+					{
+						Data_40004128.dData_264 += 10.0;
+					}
+					else
+					{
+						//a3ac
+						Data_40004128.dData_264 = 180.0;
+					}
+				}
+				//a3c0
+				if (fabs(Data_40004128.dData_232) <= 10.0)
+				{
+					//a3ec
+					if (Data_40004128.dData_264 < 150.0)
+					{
+						//a408
+						Data_40004128.dData_264 += 10.0;
+					}
+					else
+					{
+						//a430
+						Data_40004128.dData_264 = fabs(Data_40004128.dData_184) + 150.0;
+					}
+				}
+				//a464
+				if (fabs(Data_40004128.dData_232) <= 5.0)
+				{
+					//a490
+					if (Data_40004128.dData_264 < 120.0)
+					{
+						//a4ac
+						Data_40004128.dData_264 += 10.0;
+					}
+					else
+					{
+						//a4d4
+						Data_40004128.dData_264 = fabs(Data_40004128.dData_184) + 120.0;
+					}
+				}
+				//a508
+				if (fabs(Data_40004128.dData_232) <= 3.0)
+				{
+					//a534
+					if (Data_40004128.dData_264 < 80.0)
+					{
+						//a550
+						Data_40004128.dData_264 += 10.0;
+					}
+					else
+					{
+						//a578
+						Data_40004128.dData_264 = fabs(Data_40004128.dData_184) + 80.0;
+					}
+				}
+				//a5ac
+				if (fabs(Data_40004128.dData_232) <= 1.0)
+				{
+					//a5d8
+					Data_40004128.dData_264 = fabs(Data_40004128.dData_184) + 50.0;
+				}
+				//a60c
+			}
+			//a6ac
+		}				
+		//a6ac
 	}
+	#if 0
 	else
 	{
 		//ac9c
@@ -4127,6 +4380,7 @@ void func_9178(void)
 			Data_40004128.bData_356 = 0;
 		}
 	}
+	#endif
 	//accc
 }
 

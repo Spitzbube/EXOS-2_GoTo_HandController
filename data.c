@@ -221,6 +221,7 @@ double dData_40003458; //40003458
 double dData_40003460; //40003460
 int Data_40003488; //40003488
 int Data_4000348c; //4000348c
+char bData_40003498; //40003498
 double dData_400034a0; //400034a0
 float fData_400034c0; //400034c0
 float fData_400034c4; //400034c4
