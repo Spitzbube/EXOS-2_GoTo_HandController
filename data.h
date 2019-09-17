@@ -55,7 +55,8 @@ typedef struct
 	double dData_200; //200
 	double dData_208; //208
 	double dData_216; //216
-	int fill_224[4]; //224
+	double dData_224; //224
+	double dData_232; //232
 	double dData_240; //240
 	double dData_248; //248
 	double dData_256; //256
@@ -306,6 +307,7 @@ extern double dData_40003458; //40003458
 extern double dData_40003460; //40003460
 extern int Data_40003488; //40003488
 extern int Data_4000348c; //4000348c
+extern char bData_40003498; //40003498
 extern double dData_400034a0; //400034a0
 extern float fData_400034c0; //400034c0
 extern float fData_400034c4; //400034c4
