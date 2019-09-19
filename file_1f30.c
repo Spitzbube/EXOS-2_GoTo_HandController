@@ -3475,16 +3475,6 @@ void func_7950(int a)
 	bData_40002c09 = bData_40002c08 - 1;
 }
 
-typedef struct
-{
-	double dData_0; //0
-	double dData_8; //8 
-	double dData_16; //16
-	double dData_24; //24
-	double dData_32; //32
-	double dData_40; //40
-} Struct_7978;
-
 /* 7978 - todo */
 void func_7978(Struct_7978 sp, double* sp272, double* sp276)
 {
@@ -3865,13 +3855,13 @@ double func_7f30(int a, int b, double sp192)
 }
 
 /* 8ba4 - todo */
-void func_8ba4(double sp176, double sp184, Struct_8ba4 b, int r4, int r5, double* r6)
+void func_8ba4(double sp176, double sp184, Struct_8ba4 b/*sp208*/, int r4, int r5, double* r6)
 {
 	double sp168 = 3.14159265359;
 	double sp160 = sp176; 
 	double sp152 = sp184; 
-	double sp144 = b.dData_0; 
-	double sp136 = b.dData_8; 
+	double sp144 = b.dData_0; //sp208
+	double sp136 = b.dData_8; //sp216
 	double sp128;
 	double sp120;
 	double sp112;
@@ -3924,7 +3914,8 @@ void func_9178(void)
 	Struct_8ba4 sp224;
 	double sp152[9]; //size??
 	Struct_7978 sp104;
-	double sp88[2];
+	double sp96;
+	double sp88;
 	double sp80;
 	double sp72;
 	double sp64;
@@ -3971,7 +3962,7 @@ void func_9178(void)
 			
 			sp72 = sp80 - sp224.dData_0;
 			
-			while (sp72 > 24)
+			while (sp72 >= 24)
 			{
 				sp72 -= 24;
 			}
@@ -4368,12 +4359,153 @@ void func_9178(void)
 					Data_40004128.dData_264 = fabs(Data_40004128.dData_184) + 50.0;
 				}
 				//a60c
+				if (fabs(Data_40004128.dData_232) <= 0.1)
+				{
+					//a638
+					Data_40004128.dData_264 = fabs(Data_40004128.dData_184) + 20.0;
+				}
+				//a66c
+				if (fabs(Data_40004128.dData_232) <= 0.05)
+				{
+					//a698
+					Data_40004128.dData_312 = 2.0;
+				}
 			}
 			//a6ac
 		}				
 		//a6ac
+		if ((Data_40004128.dData_304 == 2.0) && 
+			(Data_40004128.dData_312 == 2.0))
+		{
+			//a6e4
+			bData_40002e8c = 1;
+			
+			if (bData_40003498 != 0)
+			{
+				func_7950(1);
+			}
+			
+			bData_40003498 = 0;
+			bData_40002e88 = 2;
+			//->a730
+		}
+		else
+		{
+			//a724
+			bData_40002e88 = 1;
+		}
+		//a730
+		if ((Data_40004128.dData_304 == 2.0) && 
+			(Data_40004128.dData_312 == 2.0) &&
+			(bData_40003431 != 0))
+		{
+			Data_40004128.bData_356 = Data_40004128.bData_357 = 0;
+			bData_40002e8c = 0;
+			
+			func_7950(1);
+			
+			bData_40002e88 = 100;
+		}
+		//a7a4
+		if (Data_40004128.dData_304 == 2.0)
+		{
+			//a7c0
+			sp96 = func_7654(2, 1, 
+				Data_40004128.dData_240, Data_40004128.dData_224, Data_40004128.dData_176);
+		}
+		//a804
+		if (Data_40004128.dData_312 == 2.0)
+		{
+			//a820
+			sp88 = func_7654(Data_40004128.Data_0, 2, 
+				Data_40004128.dData_248, Data_40004128.dData_232, Data_40004128.dData_184);
+		}
+		//a864
+		if (Data_40004128.dData_304 == 2.0)
+		{
+			if (Data_40003408 == 0)
+			{
+				//a890
+				sp48 = 100000.0 * sp96 * sp96 * sp96 * sp96 * sp96 * sp96 - 0.05;
+				
+				Data_40004128.dData_256 = fabs(Data_40004128.dData_176) / 9.5 + sp48;
+				//->aa9c
+			}
+			else
+			{
+				//a9ac
+				sp48 = 100000.0 * sp96 * sp96 * sp96 * sp96 * sp96 * sp96 - 0.05;
+				
+				Data_40004128.dData_256 = fabs(Data_40004128.dData_176) / 9.5 + fabs(sp48);
+			}
+			//aa9c
+			if (Data_40004128.dData_256 < 0)
+			{
+				Data_40004128.dData_256 = 0;
+			}
+		}
+		//aacc
+		if (Data_40004128.dData_312 == 2.0)
+		{
+			//aae8
+			if (Data_4000340c == 0)
+			{
+				//aaf8
+				Data_40004128.dData_264 = fabs(Data_40004128.dData_184) + sp88;
+				//->ab70
+			}
+			else
+			{
+				//ab2c
+				Data_40004128.dData_264 = fabs(Data_40004128.dData_184) + fabs(sp88);
+			}
+			//ab70
+			if (Data_40004128.dData_264 < 0)
+			{
+				Data_40004128.dData_264 = 0;
+			}
+		}
+		//aba0
+		if (/*sp176*/sp152[3] >= 0)
+		{
+			//abb8
+			if (bData_40003431 == 0)
+			{
+				//abc8
+				func_65d4(Data_40004128.dData_256, Data_40004128.dData_264);
+				//->ac38
+			}
+			else
+			{
+				//abe4
+				func_65d4(Data_40004128.dData_256, Data_40004128.dData_264);
+				//->ac38
+			}
+		}
+		else
+		{
+			//ac00
+			func_65d4(0.0, 0.0);
+			
+			Data_40004128.bData_356 = Data_40004128.bData_357 = 0;
+			Data_40004128.bData_358 = 1;
+			bData_40002e88 = 3;			
+		}
+		//ac38
+		if (bData_40003431 == 0)
+		{
+			//ac48
+			if ((dData_40003490 == Data_40004128.dData_216) &&
+				(Data_40004128.dData_312 != 2.0))
+			{
+				//ac80
+				func_75c4();
+			}
+			//ac84
+			dData_40003490 = Data_40004128.dData_216;
+		}
+		//accc
 	}
-	#if 0
 	else
 	{
 		//ac9c
@@ -4384,8 +4516,495 @@ void func_9178(void)
 			Data_40004128.bData_356 = 0;
 		}
 	}
-	#endif
 	//accc
+}
+
+/* acd8 - complete */
+void func_acd8(void)
+{
+	/* empty */
+}
+
+/* acdc - todo */
+void func_acdc(double sp144, double sp152, /*sp176*/double* r4, double* r5)
+{
+	double sp136 = 0.0174532925199444438613127772442;
+	double sp128;
+	double sp120;
+	double sp112;
+	
+	if (sp144 < 0.0003)
+	{
+		sp144 = 0.0003;
+	}
+	//ad24
+	if (sp152 < 0.0003)
+	{
+		sp152 = 0.0003;
+	}
+	//ad4c
+	sp120 = func_7f30(1, 0, Data_40004128.dData_48);
+	
+	sp112 = Data_40004128.dData_56;
+	sp144 -= 180.0;
+	
+	sp128 = atan(sin(sp144 * sp136) / 
+		(cos(sp144 * sp136) * sin(sp112 * sp136) + tan(sp152 * sp136) * cos(sp112 * sp136)));
+
+	sp128 = sp128 / sp136 / 15.0;
+	
+	if (sp152 > sp112)
+	{
+		if (sp128 < 0)
+		{
+			sp128 = 24.0 + sp128;
+			//af34 -> b00c
+		}
+		//af38 -> b00c
+	}
+	else
+	{
+		//af3c
+		if (sp128 < 0)
+		{
+			if (sp144 < 0)
+			{
+				//af6c
+				sp128 += 24.0;
+				//->b00c
+			}
+			else
+			{
+				//af8c
+				sp128 += 12.0;
+				//->b00c
+			}
+		}
+		else
+		{
+			//afac
+			if (sp144 < 0)
+			{
+				sp128 += 12.0;
+				//->b00c
+			}
+			//b008
+		}
+	}
+	//b00c
+	*r4 = sp120 - sp128;
+	
+	if (*r4 > 24.0)
+	{
+		*r4 -= 24.0;
+	}
+	//b044
+	if (*r4 < 0.0)
+	{
+		*r4 += 24.0;
+	}
+	//b06c
+	*r5 = asin(sin(sp112 * sp136) * sin(sp152 * sp136) - cos(sp112 * sp136) * cos(sp152 * sp136) * cos(sp144 * sp136));
+	*r5 /= sp136;
+}
+
+/* b1a8 - todo */
+void func_b1a8(Struct_b1a8 a/*sp216*/, double *r4/*sp264*/)
+{
+	double sp200;
+	double sp192;
+	double sp184 = 0.0174532922222222219854614877477;
+	double sp176;
+	double sp168;
+	double sp160;
+	double sp152;
+	double sp144;
+	double sp136;
+	double sp128;
+	double sp120;
+	
+	sp200 = (r4[0] + 180.0) * sp184;
+	sp192 = (90.0 - r4[1]) * sp184;
+	sp160 = a.dData_32; //sp248;
+	sp152 = a.dData_40; //sp256;
+	sp144 = a.dData_8; //sp224;
+	sp136 = a.dData_0; //sp216
+	sp128 = a.dData_24; //sp240;
+	sp120 = a.dData_16; //sp232;
+
+	sp176 = sp160 - sp144 / cos(sp192) + 
+		tan(sp192) * sp136 + 
+		tan(sp192) * sp120 * sin(sp200) + 
+		tan(sp192) * sp128 * cos(sp200);
+	sp168 = cos(sp200) * sp120 + sp152 - sin(sp200) * sp128;
+	
+	r4[2] = r4[0] + sp176;
+	r4[3] = r4[1] - sp168;
+}
+
+/* b484 - todo */
+void func_b484(double* a, double* b)
+{
+	*a = Data_40004128.dData_128 - 0.0028; 
+	*b = Data_40004128.dData_136 - 0.0028; 
+}
+
+/* b4d0 - todo */
+void func_b4d0(void)
+{
+	Data_40004128.bData_357 = 0;
+	dData_40003490 = 10000.0;
+}
+
+/* b4f0 - todo */
+void func_b4f0(void)
+{
+	Data_40004128.bData_357 = 0;
+	Data_40004128.dData_312 = 0.0;
+	Data_40004128.dData_304 = 0.0;
+	bData_40002e88 = 0;
+	
+	uart1_write_byte(0x55);
+	uart1_write_byte(0xaa);
+	uart1_write_byte(0x01);
+	uart1_write_byte(0x01);
+	uart1_write_byte(0x00);
+	
+	Data_40004128.Data_352 = 1;
+	Data_40004128.dData_264 = 0.0;
+	Data_40004128.dData_256 = 0.0;
+}
+
+/* b594 - todo */
+void func_b594(void)
+{
+	Data_40004128.bData_357 = 1;
+	
+	uart1_write_byte(0x55);
+	uart1_write_byte(0xaa);
+	uart1_write_byte(0x01);
+	uart1_write_byte(0x01);
+	uart1_write_byte(0xFF);
+	
+	Data_40004128.Data_352 = 0;
+	Data_40004128.dData_264 = 0.0;
+	Data_40004128.dData_256 = 0.0;
+	
+	bData_40002e7d = 3;
+	bData_40003200 = 1;
+	bData_40003201 = 1;
+	
+	Data_40004128.dData_584 = 0.0;
+	Data_40004128.dData_592 = 0.0;
+}
+
+/* b64c - todo */
+void func_b64c(double a, double b)
+{
+	Data_40004128.dData_72 = a;
+	Data_40004128.dData_80 = b;
+	
+	bData_400034b5 = 1;
+	fData_400034b8 = a;
+	fData_400034bc = b;
+	bData_400034b4 = 1;
+	bData_40003430 = 1;
+	
+	Data_40004128.bData_344 = 0;
+	Data_40004128.bData_345 = 0;
+	Data_40004128.Data_348 = 0;
+	
+	dData_400033d8 = dData_40003420;
+	dData_400033e0 = dData_40003428;
+	bData_40003498 = 1;
+	bData_400034aa = 0;
+	
+	func_75c4();
+	
+	bData_400034cc = 0;
+	bData_40002e7d = 3;
+	bData_40003200 = 1;
+	bData_40003201 = 1;
+	
+	Data_40004128.dData_584 = 0.0;
+	Data_40004128.dData_592 = 0.0;
+
+	bData_40003210 = 0;
+	bData_40003211 = 0;
+}
+
+/* b7c8 - todo */
+void func_b7c8(double a, double b)
+{
+	Data_40004128.dData_48 = a;
+	Data_40004128.dData_56 = b;
+}
+
+typedef struct
+{
+	double dData_0; //0
+	double dData_8; //8
+	double dData_16; //16
+	double dData_24; //24
+	double dData_32; //32 sp336;
+	double dData_40; //40 sp344;
+	double dData_48; //48 sp352;
+	double dData_56; //56 sp360;
+	double dData_64; //64 sp368;
+	double dData_72; //72 sp376;
+	double dData_80; //80 sp384;
+	double dData_88; //88 sp392;
+} Struct_b7f4_1;
+
+/* b7f4 - todo */
+void func_b7f4(Struct_b7f4_1 a/*sp336*/, Struct_b7f4* r4/*sp400*/)
+{
+	double sp288 = 0.0174532925200000001153544104682;
+	double sp280;
+	double sp272;
+	double sp264;
+	double sp256;
+	double sp248;
+	double sp240;
+	double sp232;
+	double sp224;
+	double sp216;
+	double sp208;
+	double sp200;
+	double sp192;
+	double sp184;
+	double sp176;
+	double sp168;
+	double sp160;
+	double sp152;
+	double sp144;
+	double sp136;
+	double sp128;
+	double sp120;
+	double sp112;
+	double sp104;
+	double sp96;
+	double sp88;
+	double sp80;
+	double sp72;
+	double sp64;
+	double sp56;
+	double sp48;
+	
+	sp280 = a.dData_32/*sp336*/ * sp288;
+	sp272 = a.dData_40/*sp344*/ * sp288;
+	sp264 = a.dData_64/*sp368*/ * sp288;
+	sp256 = a.dData_72/*sp376*/ * sp288;
+	sp248 = a.dData_48; //sp352;
+	sp232 = a.dData_80; //sp384;
+	sp240 = a.dData_56; //sp360;
+	sp224 = a.dData_88; //sp392;
+	sp216 = 1.0;	
+	sp208 = sin(sp280) * sin(sp272) / cos(sp272);
+	sp200 = cos(sp280) * sin(sp272) / cos(sp272);
+	sp192 = 1.0;
+	sp184 = sin(sp264) * sin(sp256) / cos(sp256);
+	sp176 = cos(sp264) * sin(sp256) / cos(sp256);
+	sp168 = 1.0;
+	sp160 = cos(sp280);
+	sp152 = sin(sp280) * -1.0;
+	sp144 = 1.0;
+	sp136 = cos(sp264);
+	sp128 = sin(sp264) * -1.0;
+	sp120 = sp232 - sp248;
+	sp112 = sp184 - sp208;
+	sp104 = sp176 - sp200;
+	sp96 = sp224 - sp240;
+	sp88 = sp136 - sp160;
+	sp80 = sp128 - sp152;
+	
+	sp56 = (sp120 * sp88 - sp112 * sp96) / (sp88 * sp104 - sp80 * sp112);
+	sp48 = (sp120 * sp80 - sp104 * sp96) / (sp80 * sp112 - sp88 * sp104);
+	sp72 = sp248 - sp208 * sp48 - sp200 * sp56;	
+	sp64 = sp240 - sp160 * sp48 - sp152 * sp56;
+	
+	sp56 = 0.0;
+	sp48 = 0.0;
+	sp72 = a.dData_80; //sp384;
+	sp64 = a.dData_88; //sp392;
+	r4->dData_32 = sp72;
+	r4->dData_40 = sp64;
+	r4->dData_24 = sp56;
+	r4->dData_16 = sp48;
+	r4->dData_8 = 0.0;
+	r4->dData_0 = 0.0;
+}
+
+/* be8c - todo */
+void func_be8c(Struct_b7f4_1 a/*sp304*/, Struct_b7f4* r4/*sp400*/)
+{
+	double sp288 = 0.0174532925200000001153544104682;
+	double sp280;
+	double sp272;
+	double sp264;
+	double sp256;
+	double sp248;
+	double sp240;
+	double sp232;
+	double sp224;
+	double sp216;
+	double sp208;
+	double sp200;
+	double sp192;
+	double sp184;
+	double sp176;
+	double sp168;
+	double sp160;
+	double sp152;
+	double sp144;
+	double sp136;
+	double sp128;
+	double sp120;
+	double sp112;
+	double sp104;
+	double sp96;
+	double sp88;
+	double sp80;
+	double sp72;
+	double sp64;
+	double sp56;
+	double sp48;
+	
+	sp280 = a.dData_32/*sp304*/ * sp288;
+	sp272 = a.dData_40/*sp312*/ * sp288;
+	sp264 = a.dData_64/*sp336*/ * sp288;
+	sp256 = a.dData_72/*sp344*/ * sp288;
+	sp248 = a.dData_48; //sp320;
+	sp232 = a.dData_80; //sp352;
+	sp240 = a.dData_56; //sp328;
+	sp224 = a.dData_88; //sp360;
+	sp216 = 1.0;	
+
+}
+
+/* c510 - todo */
+void func_c510(Struct_b7f4_1 a/*sp336*/, Struct_b7f4* ip/*sp96*/)
+{
+	ip->dData_32 = a.dData_16; //sp16
+	ip->dData_40 = a.dData_24; //sp24;
+	ip->dData_24 = 0.0;
+	ip->dData_16 = 0.0;
+	ip->dData_8 = 0.0;
+	ip->dData_0 = 0.0;
+}
+
+/* c57c - todo */
+void func_c57c(void)
+{
+	#if 0
+	double sp136;
+	double sp144;
+	double sp152;
+	double sp160;
+	double sp168;
+	double sp176;
+	double sp184;
+	double sp192;
+	double sp200;
+	double sp208;
+	double sp216;
+	double sp224;
+	#else
+	Struct_b7f4_1 sp136;
+	#endif
+	Struct_b7f4 sp88;
+	
+	int r4 = 0;
+	
+	if (Data_40004128.Data_372 < Data_40004128.Data_360)
+	{
+		Data_40004128.bData_344 = 0;
+		Data_40004128.bData_345 = 0;
+		Data_40004128.Data_348 = 0;
+		
+		switch (Data_40004128.Data_372)
+		{
+			case 0:
+				//c5d8
+				Data_40004128.dData_72 = Data_40004128.dData_376;
+				Data_40004128.dData_80 = Data_40004128.dData_384;
+				break;
+			
+			case 1:
+				//c60c
+				Data_40004128.dData_72 = Data_40004128.dData_392;
+				Data_40004128.dData_80 = Data_40004128.dData_400;
+				break;
+			
+			case 2:
+				//c640
+				Data_40004128.dData_72 = Data_40004128.dData_408;
+				Data_40004128.dData_80 = Data_40004128.dData_416;
+				break;
+			
+			default:
+				break;
+		}
+		//c678
+		//c680 -> c8e8
+	}
+	else
+	{
+		//c684
+		r4 = Data_40004128.Data_360;
+		
+		sp136.dData_0 /*sp136*/ = Data_40004128.dData_424;
+		sp136.dData_8 /*sp144*/ = Data_40004128.dData_432;
+		sp136.dData_16 /*sp152*/ = Data_40004128.dData_440;
+		sp136.dData_24 /*sp160*/ = Data_40004128.dData_448;
+		sp136.dData_32 /*sp168*/ = Data_40004128.dData_456;
+		sp136.dData_40 /*sp176*/ = Data_40004128.dData_464;
+		sp136.dData_48 /*sp184*/ = Data_40004128.dData_472;
+		sp136.dData_56 /*sp192*/ = Data_40004128.dData_480;
+		sp136.dData_64 /*sp200*/ = Data_40004128.dData_488;
+		sp136.dData_72 /*sp208*/ = Data_40004128.dData_496;
+		sp136.dData_80 /*sp216*/ = Data_40004128.dData_504;
+		sp136.dData_88 /*sp224*/ = Data_40004128.dData_512;
+		
+		switch (r4)
+		{
+			case 1:
+				//c798
+				func_c510(sp136, &sp88);
+				break;
+			
+			case 2:
+				//c7c4
+				func_be8c(sp136, &sp88);
+				break;
+			
+			case 3:
+				//c7f0
+				func_b7f4(sp136, &sp88);
+				break;
+			
+			default:
+				break;
+		}
+		//c81c
+		//c828
+		Data_40004380.dData_32 = sp88.dData_32; //sp120
+		Data_40004380.dData_40 = sp88.dData_40; //sp128
+		Data_40004380.dData_8 = sp88.dData_8; //sp96
+		Data_40004380.dData_0 = sp88.dData_0; //sp88
+		Data_40004380.dData_24 = sp88.dData_24; //sp112
+		Data_40004380.dData_16 = sp88.dData_16; //sp104
+		
+		Data_40004128.bData_364 = 1;
+		
+		dData_400033d8 = 0.0;
+		dData_400033e0 = 0.0;
+		dData_40003420 = 0.0;
+		dData_40003428 = 0.0;
+		
+		bData_40003200 = 1;
+		bData_40003201 = 1;
+	}
 }
 
 
