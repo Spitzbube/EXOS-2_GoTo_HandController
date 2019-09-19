@@ -67,11 +67,36 @@ typedef struct
 	int fill_320[2]; //320
 	double dData_328; //328
 	double dData_336; //336
-	int fill_344[2]; //344
+	char bData_344; //344
+	char bData_345; //345
+	int Data_348; //348
 	int Data_352; //352
 	char bData_356; //356
 	char bData_357; //357
-	int fill_360[56]; //360
+	char bData_358; //358
+	int Data_360; //360
+	char bData_364; //364
+	int fill_368; //368
+	int Data_372; //372
+	double dData_376; //376
+	double dData_384; //384
+	double dData_392; //392
+	double dData_400; //400
+	double dData_408; //408
+	double dData_416; //416
+	double dData_424; //424
+	double dData_432; //432
+	double dData_440; //440
+	double dData_448; //448
+	double dData_456; //456
+	double dData_464; //464
+	double dData_472; //472
+	double dData_480; //480
+	double dData_488; //488
+	double dData_496; //496
+	double dData_504; //504
+	double dData_512; //512
+	int fill_520[16]; //520
 	double dData_584; //584
 	double dData_592; //592
 	
@@ -114,7 +139,7 @@ extern char bData_40002c13; //40002c13
 extern unsigned char bData_40002c14; //40002c14
 extern unsigned char bData_40002c15[4]; //40002c15
 extern unsigned char uart1_bRxData; //40002c19
-extern char bData_40002c1a; //40002c1a
+extern char bData_40002c1a; //40002c1a // V2.2: 40002c1e
 extern int Data_40002c1c; //40002c1c
 extern int Data_40002c20; //40002c20
 extern Union_40002c24 Data_40002c24; //40002c24
@@ -299,6 +324,7 @@ extern double dData_40003410; //40003410
 extern double dData_40003418; //40003418
 extern double dData_40003420; //40003420
 extern double dData_40003428; //40003428
+extern char bData_40003430; //40003430
 extern char bData_40003431; //40003431
 extern char bData_40003432; //40003432
 extern double dData_40003448; //40003448
@@ -307,8 +333,14 @@ extern double dData_40003458; //40003458
 extern double dData_40003460; //40003460
 extern int Data_40003488; //40003488
 extern int Data_4000348c; //4000348c
+extern double dData_40003490; //40003490
 extern char bData_40003498; //40003498
 extern double dData_400034a0; //400034a0
+extern char bData_400034aa; //400034aa
+extern char bData_400034b4; //400034b4
+extern char bData_400034b5; //400034b5
+extern float fData_400034b8; //400034b8
+extern float fData_400034bc; //400034bc
 extern float fData_400034c0; //400034c0
 extern float fData_400034c4; //400034c4
 extern float fData_400034c8; //400034c8

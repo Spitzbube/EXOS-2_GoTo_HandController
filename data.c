@@ -29,7 +29,7 @@ unsigned char bData_40002c14; //40002c14
 unsigned char bData_40002c15[4]; //40002c15
 int Data_40003214; //40003214
 unsigned char uart1_bRxData; //40002c19
-char bData_40002c1a; //40002c1a
+char bData_40002c1a; //40002c1a // V2.2: 40002c1e
 int Data_40002c1c; //40002c1c
 int Data_40002c20; //40002c20
 Union_40002c24 Data_40002c24; //40002c24
@@ -213,6 +213,7 @@ double dData_40003410; //40003410
 double dData_40003418; //40003418
 double dData_40003420; //40003420
 double dData_40003428; //40003428
+char bData_40003430; //40003430
 char bData_40003431; //40003431
 char bData_40003432; //40003432
 double dData_40003448; //40003448
@@ -221,8 +222,14 @@ double dData_40003458; //40003458
 double dData_40003460; //40003460
 int Data_40003488; //40003488
 int Data_4000348c; //4000348c
+double dData_40003490; //40003490
 char bData_40003498; //40003498
 double dData_400034a0; //400034a0
+char bData_400034aa; //400034aa
+char bData_400034b4; //400034b4
+char bData_400034b5; //400034b5
+float fData_400034b8; //400034b8
+float fData_400034bc; //400034bc
 float fData_400034c0; //400034c0
 float fData_400034c4; //400034c4
 float fData_400034c8; //400034c8

@@ -111,8 +111,38 @@ typedef struct
 typedef struct
 {
 	double dData_0; //0
+	double dData_8; //8 
+	double dData_16; //16
+	double dData_24; //24
+	double dData_32; //32
+	double dData_40; //40
+} Struct_7978;
+
+typedef struct
+{
+	double dData_0; //0
 	double dData_8; //8
 	double fill1; //16
 	double fill2;	//24
 } Struct_8ba4;
+
+typedef struct
+{
+	double dData_0; 
+	double dData_8; 
+	double dData_16; 
+	double dData_24; 
+	double dData_32; 
+	double dData_40; 
+} Struct_b1a8;
+
+typedef struct
+{
+	double dData_0; 
+	double dData_8; 
+	double dData_16; 
+	double dData_24; 
+	double dData_32; 
+	double dData_40; 
+} Struct_b7f4;
 
