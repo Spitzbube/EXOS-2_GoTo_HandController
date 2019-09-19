@@ -4870,16 +4870,47 @@ void func_be8c(Struct_b7f4_1 a/*sp304*/, Struct_b7f4* r4/*sp400*/)
 	double sp56;
 	double sp48;
 	
-	sp280 = a.dData_32/*sp304*/ * sp288;
-	sp272 = a.dData_40/*sp312*/ * sp288;
-	sp264 = a.dData_64/*sp336*/ * sp288;
-	sp256 = a.dData_72/*sp344*/ * sp288;
-	sp248 = a.dData_48; //sp320;
-	sp232 = a.dData_80; //sp352;
-	sp240 = a.dData_56; //sp328;
-	sp224 = a.dData_88; //sp360;
-	sp216 = 1.0;	
-
+	sp280 = a.dData_0/*sp304*/ * sp288;
+	sp272 = a.dData_8/*sp312*/ * sp288;
+	sp264 = a.dData_32/*sp336*/ * sp288;
+	sp256 = a.dData_40/*sp344*/ * sp288;
+	sp248 = a.dData_16; //sp320;
+	sp232 = a.dData_48; //sp352;
+	sp240 = a.dData_24; //sp328;
+	sp224 = a.dData_56; //sp360;
+	sp216 = 1.0;		
+	sp208 = sin(sp280) * sin(sp272) / cos(sp272);
+	sp200 = cos(sp280) * sin(sp272) / cos(sp272);
+	sp192 = 1.0;
+	sp184 = sin(sp264) * sin(sp256) / cos(sp256);
+	sp176 = cos(sp264) * sin(sp256) / cos(sp256);
+	sp168 = 1.0;
+	sp160 = cos(sp280);
+	sp152 = sin(sp280) * -1.0;
+	sp144 = 1.0;
+	sp136 = cos(sp264);
+	sp128 = sin(sp264) * -1.0;
+	sp120 = sp232 - sp248;
+	sp112 = sp184 - sp208;
+	sp104 = sp176 - sp200;
+	sp96 = sp224 - sp240;
+	sp88 = sp136 - sp160;
+	sp80 = sp128 - sp152;
+	
+	sp56 = (sp120 * sp88 - sp112 * sp96) / (sp88 * sp104 - sp80 * sp112);
+	sp48 = (sp120 * sp80 - sp104 * sp96) / (sp80 * sp112 - sp88 * sp104);
+	sp72 = sp248 - sp208 * sp48 - sp200 * sp56;	
+	sp64 = sp240 - sp160 * sp48 - sp152 * sp56;
+	sp56 = 0.0;
+	sp48 = 0.0;
+	sp72 = a.dData_80; //sp384;
+	sp64 = a.dData_88; //sp392;
+	r4->dData_32 = sp72;
+	r4->dData_40 = sp64;
+	r4->dData_24 = sp56;
+	r4->dData_16 = sp48;
+	r4->dData_8 = 0.0;
+	r4->dData_0 = 0.0;
 }
 
 /* c510 - todo */
