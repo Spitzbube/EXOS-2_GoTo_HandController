@@ -1,5 +1,7 @@
 
 #include <LPC214x.h>
+#include <stdio.h>
+#include <math.h>
 #include "data.h"
 
 extern void uart0_init(int);
@@ -20,9 +22,12 @@ extern void func_6518(void);
 extern void func_659c(int);
 extern void func_7590(void);
 extern void func_75c4(void);
+extern void func_c57c(void);
 extern void func_7950(int);
 extern void func_d2cc(void);
+extern void func_9178(void);
 extern void func_acdc(double, double, double*, double*); 
+extern void func_acd8(void);
 extern void func_b4f0(void);
 extern void func_b64c(double, double);
 extern void func_d784(int a);
@@ -1004,6 +1009,16 @@ double func_6ab74(int a)
 	return d;
 }
 
+/* 6ae24 - todo */
+double func_6ae24(int a)
+{
+}
+
+/* 6b17c - todo */
+void func_6b17c(void)
+{
+}
+
 /* 6c804 */
 void func_6c804(void)
 {
@@ -1270,6 +1285,9 @@ void func_6cb38(void)
 /* 6d054 - todo */
 int main(void)
 {
+	int r4;
+	int r5;
+		
 	func_2328();
 	uart0_init(360);
 	uart1_init(360);
@@ -1350,39 +1368,296 @@ int main(void)
 	if (fData_40003540 > 0)
 	{
 		//6d378
-		int r4;
-		int r5;
-		
 		r4 = (fData_40003540 - (int)fData_40003540) * 60;
 		r5 = fData_40003540;
-		sprintf(&bData_40002837, "  Lon:E%03dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
+		sprintf(Data_40002837, "  Lon:E%03dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
 		//->6d494
 	}
 	else
 	{
 		//6d408
+		r4 = (fData_40003540 - (int)fData_40003540) * 60;
+		r5 = fData_40003540;
+		sprintf(Data_40002837, "  Lon:W%03dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
 	}
 	//6d494
-	
-	//TODO
-	
-	//6f8d0
-	if (bData_400031ed == 0)
+	if (fData_40003544 > 0)
 	{
-		//6f8e0
-		func_394();
-		func_7e8(0, 4, 1, 22, "System Initializing...");
-		func_1e17c();
-		func_659c(1000);
-		func_7950(1);
-		func_394();
-		func_7e8(0, 4, 1, 22, "System Initialized    ");
-		func_659c(1000);
-		func_394();
+		//6d4a8
+		r4 = (fData_40003544 - (int)fData_40003544) * 60;
+		r5 = fData_40003544;
+		sprintf(Data_40002847, "  Lat:N%02dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
+		//->6d5c4
+	}
+	else
+	{
+		//6d538
+		r4 = (fData_40003544 - (int)fData_40003544) * 60;
+		r5 = fData_40003544;
+		sprintf(Data_40002847, "  Lat:S%02dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
+	}
+	//6d5c4
+	if (Data_40003548 > 0)
+	{
+		//6d5d4
+		r4 = Data_40003548;
+		sprintf(Data_40002856, " Zone:E%02d", (r4 >= 0)? r4: -r4);
+	}
+	else
+	{
+		//6d604
+		r4 = Data_40003548;
+		sprintf(Data_40002856, " Zone:W%02d", (r4 >= 0)? r4: -r4);
+	}
+	//6d630
+	func_659c(2000);
+	func_394();
+	
+	if (bData_40002f1e == 1)
+	{
+		//6d64c
+		func_6518(); //-> get time from RTC
 		
-		bData_400031ed = 1;
-	}	
-	func_6a2cc();
+		if (Data_40002e5c > 2000)
+		{
+			//6d660
+			Data_40002e5c = 2000;
+			bData_40002e60 = 1;
+			bData_40002e61 = 1;
+			bData_40002e62 = 0;
+			bData_40002e63 = 0;
+			bData_40002e64 = 0;			
+		}
+		//6d69c
+		sprintf(Data_400037ec, "%04d-%02d-%02d", Data_40002e5c, bData_40002e60, bData_40002e61);
+		sprintf(Data_40003150, "%02d:%02d:%02d", bData_40002e62, bData_40002e63, bData_40002e64);
+		sprintf(Data_40002655, "%04d-%02d-%02d", Data_40002e5c, bData_40002e60, bData_40002e61);
+		sprintf(Data_40002660, "%02d:%02d:%02d", bData_40002e62, bData_40002e63, bData_40002e64);
+		
+		bData_4000318a = 1;
+		bData_40002e78 = 0;
+		Data_40002c64 = 0x0000a029;
+		//->6d880
+	}
+	else
+	{
+		//6d874
+		Data_40002c64 = 0;
+	}
+	//6d880
+	Data_40002c1c = 0;
+	Data_40002c20 = 0;
+	//6d894 -> 729ec
+	while (1) //Main Loop
+	{
+		//6d898
+		fData_40002efc = dData_40002dc0;
+		fData_40002f00 = dData_40002df8;
+		
+		func_6cb38();
+		
+		if (bData_40002c1a == 1)
+		{
+			//6d8d4
+			bData_40002e7a = 1;
+			//6d8e0
+			
+			//TODO
+			
+			//6e554 ->6f8d0??
+		}
+		//6e558
+		else if (bData_40002c1a == 2)
+		{
+			//6e568
+			if (bData_40002e7a == 0)
+			{
+				//6e578
+				
+				//TODO
+				
+				//6ee74 -> 6f8d0???
+			}
+			else
+			{
+				//6ee78
+				
+				//TODO
+			}
+			
+			//TODO
+		}
+		//6f8d0
+		if (bData_400031ed == 0)
+		{
+			//6f8e0
+			func_394();
+			func_7e8(0, 4, 1, 22, "System Initializing...");
+			func_1e17c();
+			func_659c(1000);
+			func_7950(1);
+			func_394();
+			func_7e8(0, 4, 1, 22, "System Initialized    ");
+			func_659c(1000);
+			func_394();
+			
+			bData_400031ed = 1;
+		}
+		//6f94c
+		func_6a2cc();
+		//6f950
+		if (Data_40004128.bData_364 == 0)
+		{
+			//6f960
+			func_c57c();
+			
+			bData_400034cc = 0;
+		}
+		//6f970
+		if ((bData_400031b8 != 0) && (Data_400031a4 <= 4800))
+		{
+			//6f990
+			
+			//TODO
+		}
+		//6fb24
+		if (bData_40002e88 == 2)
+		{
+			//6fb34
+			func_6b17c();
+			
+			//TODO
+		}
+		//6fd3c
+		if (bData_40003211 == 0)
+		{
+			//6fd4c
+			
+			//TODO
+		}
+		//6fd80
+		if (bData_40003211 != 0)
+		{
+			//6fd90
+			
+			//TODO
+		}
+		//6fdf8
+		if (bData_40003210 != 0)
+		{
+			//6fe08
+			
+			//TODO
+		}
+		//6fe64
+		if (bData_40002c1a == 1)
+		{
+			//6fe74
+			
+			//TODO
+		}
+		//70f38
+		if (Data_40004128.bData_356 != 0)
+		{
+			//70f48
+			
+			//TODO
+		}
+		//72040
+		if ((Data_4000340c != 0) || (Data_40003408 != 0))
+		{
+			//72060
+			bData_400034b4 = 0;
+		}
+		//7206c
+		if (Data_40004128.bData_357 != 0)
+		{
+			//7207c
+			if (bData_40002c1a == 0)
+			{
+				//7208c
+				Data_40002c64 = 2;
+				Data_40004128.bData_357 = 0;
+				Data_40004128.bData_364 = 1;
+			}
+			else
+			{
+				//720b0
+				if (bData_40002e7a == 0)
+				{
+					//720c0
+					func_acd8();
+				}
+				else
+				{
+					//720c8
+					func_9178();
+				}
+			}
+		}
+		//720cc
+		if (Data_40002eb0 == 1)
+		{
+			//720dc
+			func_659c(3000);
+			
+			switch (bData_40002edd)
+			{
+				case 0:
+					//0x72110
+					func_6ae24(3);
+				
+					Data_40004128.dData_208 = dData_40002db8;
+				  dData_40002dc0 = Data_40004128.dData_208;
+					//->7221c
+					break;
+				
+				case 1:
+					//0x72150
+					func_6ae24(4);
+				
+					Data_40004128.dData_216 = dData_40002da0;
+					dData_40002df8 = fabs(Data_40004128.dData_216);
+					//->7221c
+					break;
+				
+				case 2:
+					//0x72194
+					break;
+				
+				case 3:
+					//0x721d4
+					break;
+				
+				default:
+					//0x72214
+					break;
+			}
+			
+			//TODO
+			
+			//72968
+			func_5f0c0();			
+			func_659c(100);
+			func_7950(2);		
+			//72980
+			Data_40002eb0 = 0;
+		}
+		//7298c
+		dData_40002ca8 = Data_40004380.dData_24;
+		dData_40002cb0 = Data_40004380.dData_16;
+		
+		func_659c(2);
+		//729bc
+		if (bData_40002c1a == 0)
+		{
+			func_659c(50);
+		}
+		//729d4
+		if (Data_40004128.bData_357 == 0)
+		{
+			func_659c(100);
+		}
+		//729ec -> 6d898
+	} //while (1)
 }
-
-

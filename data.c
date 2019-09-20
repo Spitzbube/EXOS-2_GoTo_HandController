@@ -4,9 +4,12 @@
 
 unsigned char Data_40000000[28][10]; //40000000
 unsigned char Data_40000118[28][22]; //40000118, size??
-char Data_40002655[100]; //40002655, size???
+char Data_40002655[11]; //40002655, size???
 char Data_40002660[100]; //40002660, size???
-char bData_40002837; //40002837
+char fill_40002836; //40002836
+char Data_40002837[16]; //40002837 size??
+char Data_40002847[15]; //40002847 size??
+char Data_40002856[20]; //40002856 size???
 unsigned char Data_40002bf8[8]; //40002bf8, size??
 unsigned char bData_40002c00; //40002c00
 unsigned char bData_40002c01; //40002c01
@@ -66,13 +69,17 @@ char bData_40002d88; //40002d88
 int Data_40002d8c; //40002d8c
 int Data_40002d90; //40002d90
 float fData_40002d94; //40002d94
+double dData_40002da0; //40002da0
 char bData_40002da8; //40002da8
 int Data_40002dac; //40002dac
 int Data_40002db0; //40002db0
 float fData_40002db4; //40002db4
+double dData_40002db8; //40002db8
+double dData_40002dc0; //40002dc0
 int Data_40002de0; //40002de0
 int Data_40002de4; //40002de4
 float fData_40002de8; //40002de8
+double dData_40002df8; //40002df8
 int Data_40002e18; //40002e18
 int Data_40002e1c; //40002e1c
 float fData_40002e20; //40002e20
@@ -91,6 +98,7 @@ unsigned char bData_40002e62; //40002e62
 unsigned char bData_40002e63; //40002e63
 unsigned char bData_40002e64; //40002e64
 unsigned short wData_40002e66; //40002e66
+char bData_40002e78; //40002e78
 char bData_40002e79; //40002e79
 char bData_40002e7a; //40002e7a
 char bData_40002e7b; //40002e7b
@@ -129,11 +137,14 @@ unsigned short wData_40002ed4; //40002ed4
 unsigned short wData_40002ed6; //40002ed6
 unsigned short wData_40002ed8; //40002ed8
 unsigned short wData_40002eda; //40002eda
+char bData_40002edd; //40002edd
 char bData_40002ede; //40002ede
 char bData_40002edf; //40002edf
 char bData_40002ef6; //40002ef6
 char bData_40002ef7; //40002ef7
 int Data_40002ef8; //40002ef8
+float fData_40002efc; //40002efc
+float fData_40002f00; //40002f00
 int Data_40002f04; //40002f04
 int Data_40002f08; //40002f08
 char bData_40002f0c; //40002f0c
@@ -141,10 +152,11 @@ char bData_40002f0d; //40002f0d
 int Data_40002f10; //40002f10
 char bData_40002f14; //40002f14
 char bData_40002f1e; //40002f1e
-char Data_40003150[100]; //40003150, size??
+char Data_40003150[30]; //40003150, size??
 char bData_4000316e; //4000316e
 char bData_40003188; //40003188
 char bData_40003189; //40003189
+char bData_4000318a; //4000318a
 int Data_4000318c; //4000318c
 int Data_40003190; //40003190
 char bData_40003194; //40003194
@@ -156,6 +168,7 @@ char bData_40003199; //40003199
 char bData_4000319b; //4000319b
 char bData_4000319c; //4000319c
 char bData_4000319d; //4000319d
+int Data_400031a4; //400031a4
 char bData_400031b8; //400031b8
 char bData_400031b9; //400031b9
 char bData_400031be; //400031be
@@ -253,6 +266,8 @@ unsigned char bData_4000352c; //4000352c
 unsigned char bData_4000352d; //4000352d
 unsigned char bData_4000352e; //4000352e
 float fData_40003540; //40003540
+float fData_40003544; //40003544
+int Data_40003548; //40003548
 unsigned char Data_40003588[4]; //40003588
 unsigned char Data_40003592[4]; //40003592
 char Data_400037ec[100]; //400037ec, size???
