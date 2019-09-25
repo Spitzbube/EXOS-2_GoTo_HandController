@@ -117,6 +117,7 @@ extern unsigned char Data_40000000[28][10]; //40000000
 extern unsigned char Data_40000118[28][22]; //40000118, size??
 extern char Data_40002655[]; //40002655, size???
 extern char Data_40002660[]; //40002660, size???
+extern unsigned char Data_40002827[]; //40002827
 extern char Data_40002837[]; //40002837
 extern char Data_40002847[]; //40002847
 extern char Data_40002856[]; //40002856
@@ -161,9 +162,11 @@ extern double dData_40002cb0; //40002cb0
 extern int Data_40002cb8; //40002cb8
 extern int Data_40002cbc; //40002cbc
 extern float fData_40002cc0; //40002cc0
+extern float fData_40002cd0; //40002cd0
 extern int Data_40002cf4; //40002cf4
 extern int Data_40002cf8; //40002cf8
 extern float fData_40002cfc; //40002cfc
+extern float fData_40002d18; //40002d18
 extern int Data_40002d20; //40002d20
 extern int Data_40002d24; //40002d24
 extern float fData_40002d28; //40002d28
@@ -174,6 +177,7 @@ extern float fData_40002d50; //40002d50
 extern int Data_40002d68; //40002d68
 extern int Data_40002d6c; //40002d6c
 extern float fData_40002d70; //40002d70
+extern double dData_40002d80; //40002d80
 extern char bData_40002d88; //40002d88
 extern int Data_40002d8c; //40002d8c
 extern int Data_40002d90; //40002d90
@@ -185,10 +189,13 @@ extern int Data_40002db0; //40002db0
 extern float fData_40002db4; //40002db4
 extern double dData_40002db8; //40002db8
 extern double dData_40002dc0; //40002dc0
+extern double dData_40002dc8; //40002dc8
 extern int Data_40002de0; //40002de0
 extern int Data_40002de4; //40002de4
 extern float fData_40002de8; //40002de8
+extern double dData_40002df0; //40002df0
 extern double dData_40002df8; //40002df8
+extern double dData_40002e00; //40002e00
 extern int Data_40002e18; //40002e18
 extern int Data_40002e1c; //40002e1c
 extern float fData_40002e20; //40002e20
@@ -208,7 +215,7 @@ extern unsigned char bData_40002e63; //40002e63
 extern unsigned char bData_40002e64; //40002e64
 extern unsigned short wData_40002e66; //40002e66
 extern char bData_40002e78; //40002e78
-extern char bData_40002e79; //40002e79
+extern unsigned char bData_40002e79; //40002e79
 extern char bData_40002e7a; //40002e7a
 extern char bData_40002e7b; //40002e7b
 extern char bData_40002e7c; //40002e7c
@@ -261,6 +268,9 @@ extern char bData_40002f0d; //40002f0d
 extern int Data_40002f10; //40002f10
 extern char bData_40002f14; //40002f14
 extern char bData_40002f1e; //40002f1e
+extern char* Data_400030c0; //400030c0
+extern char* Data_400030c4; //400030c4
+extern char* Data_400030c8; //400030c8
 extern char Data_40003150[]; //40003150, size??
 extern char bData_4000316e; //4000316e
 extern char bData_40003188; //40003188
@@ -269,11 +279,12 @@ extern char bData_4000318a; //4000318a
 extern int Data_4000318c; //4000318c
 extern int Data_40003190; //40003190
 extern char bData_40003194; //40003194
-extern char bData_40003195; //40003195
+extern unsigned char bData_40003195; //40003195
 extern char Data_40003196; //40003196
 extern char bData_40003197; //40003197
 extern char bData_40003198; //40003198
 extern char bData_40003199; //40003199
+extern unsigned char bData_4000319a; //4000319a
 extern char bData_4000319b; //4000319b
 extern char bData_4000319c; //4000319c
 extern char bData_4000319d; //4000319d
@@ -348,6 +359,7 @@ extern int Data_4000348c; //4000348c
 extern double dData_40003490; //40003490
 extern char bData_40003498; //40003498
 extern double dData_400034a0; //400034a0
+extern char bData_400034a9; //400034a9
 extern char bData_400034aa; //400034aa
 extern char bData_400034b4; //400034b4
 extern char bData_400034b5; //400034b5
@@ -381,7 +393,19 @@ extern int Data_40003548; //40003548
 extern unsigned char Data_40003588[]; //40003588 size???
 extern unsigned char Data_40003592[]; //40003592 size????
 extern char Data_400037ec[]; //400037ec, size???
+extern Struct_5218 Data_40003f50; //40003f50
+extern Struct_54e0 Data_40003f64; //40003f64
+extern char Data_40003fa9[]; //40003fa9
+extern char Data_40003fe8[]; //40003fe8
+extern char Data_40003ffd[]; //40003ffd
+extern char Data_40004012[]; //40004012
+extern char Data_40004027[]; //40004027
+extern char Data_4000403c[]; //4000403c
 extern Struct_40004128 Data_40004128; //40004128
 extern Struct_40004380 Data_40004380; //40004380
+extern Struct_8ba4_0 Data_40004ad8; //40004ad8
+extern Struct_8ba4 Data_40004ae8; //40004ae8
+extern double Data_40004b08[]; //40004b08, array?
+extern unsigned char Data_40004bb8[]; //40004bb8
 extern char Data_40004c58[]; //40004c58, size???
 

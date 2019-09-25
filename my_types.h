@@ -122,6 +122,12 @@ typedef struct
 {
 	double dData_0; //0
 	double dData_8; //8
+} Struct_8ba4_0;
+
+typedef struct
+{
+	double dData_0; //0
+	double dData_8; //8
 	double fill1; //16
 	double fill2;	//24
 } Struct_8ba4;
