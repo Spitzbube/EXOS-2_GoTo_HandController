@@ -1,8 +1,8 @@
 
 #include <stdlib.h>
 #include <math.h>
-#include "data.h"
 #include "my_types.h"
+#include "data.h"
 
 extern void func_65d4(double sp40, double sp48);
 extern void func_75c4(void);

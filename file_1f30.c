@@ -3855,11 +3855,11 @@ double func_7f30(int a, int b, double sp192)
 }
 
 /* 8ba4 - todo */
-void func_8ba4(double sp176, double sp184, Struct_8ba4 b/*sp208*/, int r4, int r5, double* r6)
+void func_8ba4(Struct_8ba4_0 a/*sp176*/, Struct_8ba4 b/*sp208*/, int r4, int r5, double* r6)
 {
 	double sp168 = 3.14159265359;
-	double sp160 = sp176; 
-	double sp152 = sp184; 
+	double sp160 = a.dData_0; //sp176; 
+	double sp152 = a.dData_8; //sp184; 
 	double sp144 = b.dData_0; //sp208
 	double sp136 = b.dData_8; //sp216
 	double sp128;
@@ -3909,8 +3909,12 @@ void func_8ba4(double sp176, double sp184, Struct_8ba4 b/*sp208*/, int r4, int r
 /* 9178 - todo */
 void func_9178(void)
 {
+	#if 0
 	double sp264;
 	double sp256;
+	#else
+	Struct_8ba4_0 sp256;
+	#endif
 	Struct_8ba4 sp224;
 	double sp152[9]; //size??
 	Struct_7978 sp104;
@@ -3927,8 +3931,8 @@ void func_9178(void)
 		if (bData_40003431 == 0)
 		{
 			//91a0
-			sp256 = Data_40004128.dData_48;
-			sp264 = Data_40004128.dData_56;
+			/*sp256*/sp256.dData_0 = Data_40004128.dData_48;
+			/*sp264*/sp256.dData_8 = Data_40004128.dData_56;
 			Data_40004128.bData_356 = 1;
 			
 			switch (Data_40004128.Data_68)
@@ -3958,7 +3962,11 @@ void func_9178(void)
 			
 			fData_400034c8 = sp80;
 
+			#if 0
 			func_8ba4(sp256, sp264, sp224, Data_40004128.Data_40, Data_40004128.bData_44, sp152);
+			#else
+			func_8ba4(sp256, sp224, Data_40004128.Data_40, Data_40004128.bData_44, sp152);
+			#endif
 			
 			sp72 = sp80 - sp224.dData_0;
 			
@@ -4007,7 +4015,7 @@ void func_9178(void)
 			if (bData_40002c1a == 1)
 			{
 				//9608
-				if (sp264 >= 0)
+				if (/*sp264*/sp256.dData_8 >= 0)
 				{
 					//9620
 					if (sp64 >= 12)
@@ -4053,7 +4061,7 @@ void func_9178(void)
 			if (bData_40002c1a == 2)
 			{
 				//97ec
-				if (sp264 >= 0)
+				if (/*sp264*/sp256.dData_8 >= 0)
 				{
 					//9804
 					Data_40004128.dData_112 += 180;
