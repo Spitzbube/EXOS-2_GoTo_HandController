@@ -17,7 +17,7 @@ void func_5099c(void)
 	Data_4000318c = 0;
 	Data_40003190 = 1;
 	bData_40003194 = 0;
-	Data_40003196 = 1;
+	bData_40003196 = 1;
 	bData_4000319c = 0;
 	bData_4000319d = 0;
 	bData_40003198 = 0;
