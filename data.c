@@ -53,10 +53,12 @@ double dData_40002cb0; //40002cb0
 int Data_40002cb8; //40002cb8
 int Data_40002cbc; //40002cbc
 float fData_40002cc0; //40002cc0
+double dData_40002cc8; //40002cc8
 float fData_40002cd0; //40002cd0
 int Data_40002cf4; //40002cf4
 int Data_40002cf8; //40002cf8
 float fData_40002cfc; //40002cfc
+double dData_40002d10; //40002d10
 float fData_40002d18; //40002d18
 int Data_40002d20; //40002d20
 int Data_40002d24; //40002d24
@@ -81,12 +83,14 @@ float fData_40002db4; //40002db4
 double dData_40002db8; //40002db8
 double dData_40002dc0; //40002dc0
 double dData_40002dc8; //40002dc8
+double dData_40002dd0; //40002dd0
 int Data_40002de0; //40002de0
 int Data_40002de4; //40002de4
 float fData_40002de8; //40002de8
 double dData_40002df0; //40002df0
 double dData_40002df8; //40002df8
 double dData_40002e00; //40002e00
+double dData_40002e08; //40002e08
 int Data_40002e18; //40002e18
 int Data_40002e1c; //40002e1c
 float fData_40002e20; //40002e20
@@ -106,7 +110,7 @@ unsigned char bData_40002e63; //40002e63
 unsigned char bData_40002e64; //40002e64
 unsigned short wData_40002e66; //40002e66
 char bData_40002e78; //40002e78
-unsigned char bData_40002e79; //40002e79
+unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79
 char bData_40002e7a; //40002e7a
 char bData_40002e7b; //40002e7b
 char bData_40002e7c; //40002e7c
@@ -116,6 +120,7 @@ int Data_40002e80; //40002e80
 int Data_40002e84; //40002e84
 char bData_40002e88; //40002e88
 char bData_40002e89; //40002e89
+char bData_40002e8a; //40002e8a
 char bData_40002e8b; //40002e8b
 char bData_40002e8c; //40002e8c
 int Data_40002e90; //40002e90
@@ -128,16 +133,16 @@ float fData_40002ea8; //40002ea8
 int Data_40002eac; //40002eac
 int Data_40002eb0; //40002eb0
 char bData_40002eb4; //40002eb4
-char bData_40002eb5; //40002eb5
+unsigned char bData_40002eb5; //40002eb5
 unsigned short wData_40002eb6; //40002eb6
-unsigned short wData_40002eb8; //40002eb8
-unsigned short wData_40002eba; //40002eba
-unsigned short wData_40002ebc; //40002ebc
-unsigned short wData_40002ebe; //40002ebe
+unsigned short wData_40002eb8_MessierNr; //40002eb8
+unsigned short wData_40002eba_NGCNr; //40002eba
+unsigned short wData_40002ebc_ICNr; //40002ebc
+unsigned short wData_40002ebe_ShNr; //40002ebe
 unsigned short wData_40002ec0; //40002ec0
-int Data_40002ec4; //40002ec4
+int Data_40002ec4_SAONr; //40002ec4
 unsigned short wData_40002ecc; //40002ecc
-char bData_40002ece; //40002ece
+unsigned char bData_40002ece; //40002ece
 unsigned short wData_40002ed0; //40002ed0
 unsigned char bData_40002ed2; //40002ed2
 unsigned short wData_40002ed4; //40002ed4
@@ -155,13 +160,16 @@ float fData_40002f00; //40002f00
 int Data_40002f04; //40002f04
 int Data_40002f08; //40002f08
 char bData_40002f0c; //40002f0c
-char bData_40002f0d; //40002f0d
+unsigned char bData_40002f0d; //40002f0d
 int Data_40002f10; //40002f10
-char bData_40002f14; //40002f14
+unsigned char bData_40002f14_RecentTargetCount; //40002f14
+unsigned char Data_40002f15[8]; //40002f15, size???
+unsigned char bData_40002f1d; //40002f1d
 char bData_40002f1e; //40002f1e
 char* Data_400030c0; //400030c0
 char* Data_400030c4; //400030c4
 char* Data_400030c8; //400030c8
+char* Data_4000314c; //4000314c
 char Data_40003150[30]; //40003150, size??
 char bData_4000316e; //4000316e
 char bData_40003188; //40003188
@@ -171,11 +179,11 @@ int Data_4000318c; //4000318c
 int Data_40003190; //40003190
 char bData_40003194; //40003194
 unsigned char bData_40003195; //40003195
-char Data_40003196; //40003196
+unsigned char bData_40003196; //40003196
 char bData_40003197; //40003197
 char bData_40003198; //40003198
 char bData_40003199; //40003199
-unsigned char bData_4000319a; //4000319a
+unsigned char bData_4000319a_SkyLandTargetId; //4000319a
 char bData_4000319b; //4000319b
 char bData_4000319c; //4000319c
 char bData_4000319d; //4000319d
@@ -211,6 +219,8 @@ unsigned char bData_40003265; //40003265
 float Data_4000329c; //4000329c
 float Data_400032a0; //400032a0
 char bData_400032a4; //400032a4
+Struct_435c Data_40003350; //40003350
+Struct_4b94 Data_40003358_SAORecord; //40003358
 char* Data_40003360; //40003360
 char* Data_40003364; //40003364
 char* Data_40003368; //40003368
@@ -227,6 +237,8 @@ char* Data_40003390; //40003390
 char* Data_40003394; //40003394
 char* Data_40003398; //40003398
 char* Data_4000339c; //4000339c
+char* Data_400033a0; //400033a0
+char* Data_400033a4; //400033a4
 Union_400033c8 Data_400033c8; //400033c8
 Union_400033cc Data_400033cc; //400033cc
 double dData_400033d8; //400033d8
@@ -282,15 +294,27 @@ float fData_40003544; //40003544
 int Data_40003548; //40003548
 unsigned char Data_40003588[4]; //40003588
 unsigned char Data_40003592[4]; //40003592
+int Data_4000359c[8]; //4000359c, size??
+int Data_400035bc; //400035bc
 char Data_400037ec[100]; //400037ec, size???
+Struct_34e4 Data_40003d94; //40003d94
+char Data_40003db0[36]; //40003db0, size???
+Struct_38dc Data_40003dd4; //40003dd4
+Struct_3b58 Data_40003e08; //40003e08
+Struct_4028 Data_40003ea0; //40003ea0
+Struct_4594 Data_40003ec0; //40003ec0
+Struct_4894 Data_40003ee0; //40003ee0
 Struct_5218 Data_40003f50; //40003f50
 Struct_54e0 Data_40003f64; //40003f64
-char Data_40003fa9[63]; //40003fa9, size???
+char Data_40003fa9[21]; //40003fa9, size???
+char Data_40003fbe[21]; //40003fbe, size???
+char Data_40003fd3[21]; //40003fd3, size???
 char Data_40003fe8[21]; //40003fe8, size???
 char Data_40003ffd[21]; //40003ffd, size???
 char Data_40004012[21]; //40004012, size???
 char Data_40004027[21]; //40004027, size???
 char Data_4000403c[80]; //4000403c, size???
+char Data_4000410e[21]; //4000410e, size???
 Struct_40004128 Data_40004128; //40004128
 Struct_40004380 Data_40004380; //40004380
 Struct_8ba4_0 Data_40004ad8; //40004ad8

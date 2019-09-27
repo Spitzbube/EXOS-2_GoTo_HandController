@@ -1,5 +1,6 @@
 
 #include <stdio.h>
+#include <stdlib.h>
 #include <math.h>
 #include <LPC214x.h>
 #include "my_types.h"
@@ -2145,7 +2146,7 @@ int func_4028(int a, Struct_4028* b)
 }
 
 /* 435c - todo */
-int func_435c(int a, float* b)
+int func_435c(int a, Struct_435c* b)
 {
 	unsigned char buf[6];
 	unsigned short r6;
@@ -2161,15 +2162,15 @@ int func_435c(int a, float* b)
 	
 	func_243c((unsigned short)(0x2f + r6), r7, sizeof(buf), buf);
 	
-	b[0] = buf[0] + buf[1] / 60.0 + buf[2] / 3600.0;
+	b->fData_0 = buf[0] + buf[1] / 60.0 + buf[2] / 3600.0;
 	
 	if (buf[3] >= 0x80)
 	{
-		b[1] = 0x80 - buf[3] - buf[4] / 60.0 - buf[5] / 3600.0;
+		b->fData_4 = 0x80 - buf[3] - buf[4] / 60.0 - buf[5] / 3600.0;
 	}
 	else
 	{
-		b[1] = buf[3] + buf[4] / 60.0 + buf[5] / 3600.0;
+		b->fData_4 = buf[3] + buf[4] / 60.0 + buf[5] / 3600.0;
 	}
 
 	return 1;
@@ -2275,8 +2276,8 @@ int func_4894(int a, Struct_4894* b)
 	return 1;
 }
 
-/* 4b94 - todo */
-int func_4b94(unsigned int a, float* b)
+/* 4b94 - complete */
+int flash_get_sao_data(unsigned int a, Struct_4b94* b)
 {
 	unsigned char buf[6];
 	unsigned short r6;
@@ -2292,15 +2293,15 @@ int func_4b94(unsigned int a, float* b)
 	
 	func_243c((unsigned short)(0x21e + r6), r7, sizeof(buf), buf);
 	
-	b[0] = buf[0] + buf[1] / 60.0 + buf[2] / 3600.0;
+	b->fData_0 = buf[0] + buf[1] / 60.0 + buf[2] / 3600.0;
 	
 	if (buf[3] >= 0x80)
 	{
-		b[1] = 0x80 - buf[3] - buf[4] / 60.0 - buf[5] / 3600.0;
+		b->fData_4 = 0x80 - buf[3] - buf[4] / 60.0 - buf[5] / 3600.0;
 	}
 	else
 	{
-		b[1] = buf[3] + buf[4] / 60.0 + buf[5] / 3600.0;
+		b->fData_4 = buf[3] + buf[4] / 60.0 + buf[5] / 3600.0;
 	}
 	
 	return 1;
@@ -2410,7 +2411,7 @@ int func_4f5c(int a, Struct_4f5c* b)
 	return 1;
 }
 
-/* 5218 - todo */
+/* 5218 - complete */
 int func_5218(int a, Struct_5218* b)
 {
 	unsigned char sp104[22 * 24];
@@ -2439,6 +2440,7 @@ int func_5218(int a, Struct_5218* b)
 	b->fData_12 = sp80[9] * 10 + sp80[10] +
 		(sp80[11] * 10 + sp80[12]) / 60.0 +
 		(sp80[13] * 10 + sp80[14] + sp80[15] / 10.0) / 3600.0;
+	
 	b->fData_16 = sp80[17] * 10 + sp80[18] +
 		(sp80[19] * 10 + sp80[20]) / 60.0 +
 		(sp80[21] * 10 + sp80[22] + sp80[23] / 10.0) / 3600.0;
@@ -2451,7 +2453,7 @@ int func_5218(int a, Struct_5218* b)
 	return 1;
 }
 
-/* 54e0 - todo */
+/* 54e0 - complete */
 int func_54e0(int a, Struct_54e0* b)
 {
 	unsigned char sp108[528];
@@ -2494,7 +2496,7 @@ int func_54e0(int a, Struct_54e0* b)
 }
 
 /* 57b8 - complete */
-int func_57b8(unsigned char* a, int* b, void* c)
+unsigned char func_57b8(unsigned char* a, int* b, void* c)
 {
 	unsigned char buf[57];
 	unsigned char i;
@@ -2752,7 +2754,7 @@ void func_5f40(void)
 	bData_40002e62 = 18;
 	bData_40002e63 = 18;
 	bData_40002e64 = 18;
-	bData_40002e79 = 0;
+	bData_40002e79_SkyLandTargetSeletion = 0;
 	bData_40002e7a = 0;
 	bData_40002e7b = 0;
 	bData_40002e7d = 5;
@@ -2773,12 +2775,12 @@ void func_5f40(void)
 	bData_40002eb4 = 0;
 	bData_40002eb5 = 0;
 	wData_40002eb6 = 0;
-	wData_40002eb8 = 0;
-	wData_40002eba = 0;
-	wData_40002ebc = 0;
-	wData_40002ebe = 0;
+	wData_40002eb8_MessierNr = 0;
+	wData_40002eba_NGCNr = 0;
+	wData_40002ebc_ICNr = 0;
+	wData_40002ebe_ShNr = 0;
 	wData_40002ec0 = 0;
-	Data_40002ec4 = 0;
+	Data_40002ec4_SAONr = 0;
 	wData_40002ecc = 0;
 	bData_40002ece = 1;
 	wData_40002ed0 = 0;
@@ -5047,5 +5049,7 @@ void func_c57c(void)
 }
 
 
+#include "func_23130.c"
+#include "func_27844.c"
 
-
+#include "func_52898.c"

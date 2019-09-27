@@ -48,6 +48,13 @@ typedef struct
 
 typedef struct
 {
+	float fData_0; //0
+	float fData_4; //4
+	
+} Struct_435c;
+
+typedef struct
+{
 	unsigned char bData_0[5]; //0
 	float fData_8; //8
 	float fData_12; //12
@@ -63,6 +70,13 @@ typedef struct
 	float fData_16; //16
 	unsigned char bData_20[10]; //20 size??
 } Struct_4894;
+
+typedef struct
+{
+	float fData_0; //0
+	float fData_4; //4
+	
+} Struct_4b94;
 
 typedef struct
 {
