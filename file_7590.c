@@ -38,11 +38,6 @@ void func_d784(int a)
 {
 }
 
-/* 1e17c - todo */
-void func_1e17c(void)
-{
-}
-
 /* 1e228 - todo */
 void func_1e228(void)
 {

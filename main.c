@@ -58,6 +58,45 @@ void func_24574(void)
 /* 2575c - todo */
 void func_2575c(void)
 {
+	switch (bData_40003196)
+	{
+		case 1:
+			//0x25788
+			Data_40002f20 = Data_400008ad;
+			Data_40002f24 = Data_400008bd;
+			Data_40002f28 = Data_400008c8;
+			Data_40002f2c = Data_400008d2;
+			Data_40002f30 = Data_400008d8;
+			Data_40002f34 = Data_400008e7;
+			Data_40002f38 = Data_400008f6;
+			Data_40002f3c = Data_40000907;
+			Data_40002f40 = Data_40000913;
+			Data_40002f44 = Data_40000923;
+		
+			//TODO
+		
+			break;
+
+		case 2:
+			//0x26010
+			break;
+		
+		case 3:
+			//0x264d4
+			break;
+		
+		case 4:
+			//0x26ae0
+			break;
+		
+		case 5:
+			//0x270d0
+			break;
+		
+		default:
+			//0x27834
+			break;
+	}
 }
 
 /* 3d72c - todo */

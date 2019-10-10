@@ -5048,6 +5048,669 @@ void func_c57c(void)
 	}
 }
 
+/* e11c - todo */
+double func_e11c(double a)
+{
+}
+
+/* e8fc - todo */
+double func_e8fc(double a)
+{
+}
+
+/* ecf8 - todo */
+double func_ecf8(double a)
+{
+}
+
+/* f22c - todo */
+double func_f22c(double a)
+{
+}
+
+/* fc20 - todo */
+double func_fc20(double a)
+{
+}
+
+/* 103dc - todo */
+double func_103dc(double a)
+{
+}
+
+/* 10b2c - todo */
+double func_10b2c(double a)
+{
+}
+
+/* 1127c - todo */
+double func_1127c(double a)
+{
+}
+
+/* 1173c - todo */
+double func_1173c(double a)
+{
+}
+
+double func_11af4(double a)
+{
+}
+	
+double func_12450(double a)
+{
+}
+
+double func_12a8c(double a)
+{
+}
+
+double func_131ac(double a)
+{
+}
+
+double func_13d10(double a)
+{
+}
+
+double func_145e4(double a)
+{
+}
+
+double func_15340(double a)
+{
+}
+
+double func_16114(double a)
+{
+}
+
+double func_16a5c(double a)
+{
+}
+
+double func_17630(double a)
+{
+}
+
+double func_18160(double a)
+{
+}
+
+double func_18748(double a)
+{
+}
+
+double func_19118(double a)
+{
+}
+
+double func_196cc(double a)
+{
+}
+
+double func_19c18(double a)
+{
+}
+
+double func_1a2d0(double a)
+{
+}
+
+double func_1a680(double a)
+{
+}
+
+double func_1aac4(double a)
+{
+}
+
+/* 1afc0 - todo */
+void func_1afc0(double a, double b, double c, double* d, double* e)
+{
+}
+
+/* 1b528 - todo */
+void func_1b528(int a, double* b, double* c)
+{
+	double sp536;
+	double sp528;
+	double sp520 = 0.0;
+	double sp512 = 0.0;
+	double sp504 = 0.0;
+	double sp496;
+	double sp488;
+	double sp480;
+	double sp472;
+	double sp464;
+	double sp456;
+	double sp448;
+	double sp440;
+	double sp432;
+	double sp424;
+	double sp416;
+	double sp408 = 0.0;
+	double sp400;
+	double sp392;
+	double sp384;
+	double sp376;
+	double sp368;
+	double sp360;
+	double sp352;
+	double sp344;
+	double sp336;
+	double sp328;
+	double sp320;
+	double sp312;
+	double sp304;
+	double sp296;
+	double sp288;
+	double sp280 = 0.0;
+	double sp272 = 0.0;
+	double sp264 = 0.0;
+	double sp256 = 0.0;
+	double sp248 = 0.0;
+	double sp240 = 0.0;
+	double sp232 = 0.0;
+	double sp224 = 0.0;
+	double sp216 = 0.0;
+	double sp208 = 0.0;
+	double sp200 = 0.0;
+//	double sp192;
+	
+	/*sp192 =*/ func_7f30(1, 0, Data_40004128.dData_48);
+	
+	sp376 = Data_40004128.dData_96;
+	sp536 = (sp376 - 2451545.0) / 365250.0;
+	sp528 = 10.0 * sp536;
+	
+	switch (a - 2)
+	{
+		case 0:
+			//0x1b6dc
+			sp520 = func_f22c(sp536);
+			sp512 = func_fc20(sp536);
+			sp504 = func_103dc(sp536);
+			//->0x1b8c0
+			break;
+		
+		case 1:
+			//0x1b720
+			sp520 = func_10b2c(sp536);
+			sp512 = func_1127c(sp536);
+			sp504 = func_1173c(sp536);
+			//->0x1b8c0
+			break;
+		
+		case 2:
+			//0x1b764
+			sp520 = func_11af4(sp536);
+			sp512 = func_12450(sp536);
+			sp504 = func_12a8c(sp536);
+			//->0x1b8c0
+			break;
+		
+		case 3:
+			//0x1b7a8
+			sp520 = func_131ac(sp536);
+			sp512 = func_13d10(sp536);
+			sp504 = func_145e4(sp536);
+			//->0x1b8c0
+			break;
+		
+		case 4:
+			//0x1b7ec
+			sp520 = func_15340(sp536);
+			sp512 = func_16114(sp536);
+			sp504 = func_16a5c(sp536);
+			//->0x1b8c0
+			break;
+		
+		case 5:
+			//0x1b830
+			sp520 = func_17630(sp536);
+			sp512 = func_18160(sp536);
+			sp504 = func_18748(sp536);
+			//->0x1b8c0
+			break;
+		
+		case 6:
+			//0x1b874
+			sp520 = func_19118(sp536);
+			sp512 = func_196cc(sp536);
+			sp504 = func_19c18(sp536);
+			//->0x1b8c0
+			break;
+		
+		default:
+			//0x1b8b8
+			break;
+	}
+	//1b8c4
+	sp496 = sp520 / 3.1415927 * 180.0;
+	sp488 = sp512 / 3.1415927 * 180.0;
+	sp480 = func_e11c(sp536);
+	sp472 = func_e8fc(sp536);
+	sp464 = func_ecf8(sp536);
+	sp456 = sp480 * 57.295779513;
+	sp448 = sp472 * 57.295779513;
+	//->0x1ba40
+	while (1)
+	{
+		//0x1b9cc
+		if (sp496 < 0.0)
+		{
+			sp496 += 360.0;
+			//->0x1ba40
+		}
+		//0x1ba04
+		else if (sp496 > 360.0)
+		{
+			sp496 -= 360.0;
+			//->0x1ba40
+		}
+		else
+		{
+			//0x1ba3c -> 0x1ba44
+			break;
+		}
+	}
+	//0x1ba48 -> 0x1bac0
+	while (1)
+	{
+		//0x1ba4c
+		if (sp456 < 0.0)
+		{
+			sp456 += 360.0;
+			//->0x1bac0
+		}
+		//0x1ba84
+		else if (sp456 > 360.0)
+		{
+			sp456 -= 360.0;
+			//->0x1bac0
+		}
+		else
+		{
+			//0x1babc -> 0x1bac4
+			break;
+		}
+	}
+	//1bac8
+	#if 0
+	sp176 = cos(sp456 / 180.0 * 3.1415927);
+	sp152 = cos(sp448 / 180.0 * 3.1415927);
+	sp144 = sp152 * sp464;
+	sp136 = sp144 * sp176;
+	sp112 = cos(sp496 / 180.0 * 3.1415927);
+	sp88 = cos(sp488 / 180.0 * 3.1415927);
+	sp80 = sp88 * sp504;
+	sp72 = sp80 * sp112;
+	sp440 = sp72 - sp136;
+	#else
+	sp440 = cos(sp488 / 180.0 * 3.1415927) * 
+					sp504 * cos(sp496 / 180.0 * 3.1415927) - 
+		cos(sp448 / 180.0 * 3.1415927) * 
+			sp464 * cos(sp456 / 180.0 * 3.1415927);
+	#endif
+	//1bc2c
+	#if 0
+	sp176 = sin(sp456 / 180.0 * 3.1415927);
+	sp152 = cos(sp448 / 180.0 * 3.1415927);
+	sp144 = sp152 * sp464;
+	sp136 = sp144 * sp176;
+	sp112 = sin(sp496 / 180.0 * 3.1415927);
+	sp88 = cos(sp488 / 180.0 * 3.1415927);
+	sp80 = sp88 * sp504;
+	sp72 = sp80 * sp112;
+	sp432 = sp72 - sp136;
+	#else
+	sp432 = cos(sp488 / 180.0 * 3.1415927) * 
+					sp504 * sin(sp496 / 180.0 * 3.1415927) - 
+					cos(sp448 / 180.0 * 3.1415927) * 
+					sp464 * sin(sp456 / 180.0 * 3.1415927);
+	#endif
+	//1bd90
+	#if 0
+	sp176 = sin(sp448 / 180.0 * 3.1415927);
+	sp168 = sp176 * sp464;
+	sp144 = sin(sp488 / 180.0 * 3.1415927);
+	sp136 = sp144 * sp504;
+	sp424 = sp136 - sp168;
+	#else
+	sp424 = sin(sp488 / 180.0 * 3.1415927) * sp504 - 
+					sin(sp448 / 180.0 * 3.1415927) * sp464;
+	#endif
+	//1be4c
+	sp408 = atan(sp432 / sp440); //???
+	
+	if (sp440 < 0)
+	{
+		//1be84
+		sp408 += 3.1415927;
+	}
+	//0x1bea0
+	#if 0
+	sp192 = sp432 * sp432;
+	sp184 = sp440 * sp440;
+	sp176 = sp184 + sp192;
+	sp168 = sqrt(sp176);
+	sp160 = sp424 / sp168;
+	sp400 = atan(sp160);
+	#else
+	sp400 = atan(sp424 / sqrt(sp440 * sp440 + sp432 * sp432));
+	#endif
+	//1bf20
+	sp408 = sp408 / 3.1415927 * 180.0;
+	//1bf54 -> 0x1bfcc
+	while (1)
+	{
+		//0x1bf58
+		if (sp408 < 0.0)
+		{
+			sp408 += 360.0;
+			//->0x1bfcc
+		}
+		//0x1bf90
+		else if (sp408 > 360.0)
+		{
+			sp408 -= 360.0;
+			//->0x1bfcc
+		}
+		else
+		{
+			//0x1bfc8 -> 0x1bfd0
+			break;
+		}
+	}
+	//1bfd4
+	sp400 = sp400 / 3.1415927 * 180.0;
+	//1c008
+	#if 0
+	sp192 = 0x3f5db445ed4a1ad6 * sp528;
+	sp184 = sp192 * sp528;
+	sp176 = sp184 * sp528;
+	sp168 = sp176 / 3600.0;
+	sp160 = 0x3f4355475a31a4be * sp528;
+	sp152 = sp160 * sp528;
+	sp144 = sp152 / 3600.0;
+	sp136 = 0x40476851eb851eb8 * sp528;
+	sp128 = sp136 / 3600.0;
+	sp120 = 0x4037707561dba54e - sp128;
+	sp112 = sp120 - sp144;
+	sp416 = sp112 + sp168;
+	#else
+	sp416 = /*0x4037707561dba54e*/23.4392911111111104105475533288 - 
+		/*0x40476851eb851eb8*/46.8149999999999977262632455677 * sp528 / 3600.0 - 
+		/*0x3f4355475a31a4be*/0.00059 * sp528 * sp528 / 3600.0 + 
+		/*0x3f5db445ed4a1ad6*/0.001813 * sp528 * sp528 * sp528 / 3600.0;
+	#endif
+	//1c120
+	if (a == 1)
+	{
+		//1c128
+		sp408 = sp456 + 180.0;
+		//->0x1c164
+		while (sp408 > 360.0)
+		{
+			//0x1c148
+			sp408 -= 360.0;
+		}
+		//1c17c
+		if (sp408 < 0)
+		{
+			//1c194
+			sp408 += 360.0;
+		}
+		//0x1c1b0
+		sp400 = 1.0 * sp448;
+	}
+	//0x1c1cc
+	if (a == 9)
+	{
+		//1c1d4
+		sp368 = func_1a2d0(sp528);
+		sp360 = func_1a680(sp528);
+		sp352 = func_1aac4(sp528);
+		
+		sp408 = sp456;
+		//->0x1c240
+		while (sp408 > 360.0)
+		{
+			//0x1c224
+			sp408 -= 360.0;
+		}
+		//1c258
+		if (sp408 < 0.0)
+		{
+			sp408 += 360.0;
+		}
+		//0x1c28c
+		sp400 = -1.0 * sp448;
+		
+		#if 0
+		sp192 = sp408 / 180.0;
+		sp184 = sp192 * 3.1415927;
+		sp176 = cos(sp184);
+		sp168 = sp400 / 180.0;
+		sp160 = sp168 * 3.1415927;
+		sp152 = cos(sp160);
+		sp144 = -1.0 * sp464;
+		sp136 = sp144 * sp152;
+		sp344 = sp136 * sp176;
+		#else
+		sp344 = -1.0 * sp464 * cos(sp400 / 180.0 * 3.1415927) * 
+			cos(sp408 / 180.0 * 3.1415927);
+		#endif
+		
+		#if 0
+		sp192 = sp408 / 180.0;
+		sp184 = sp192 * 3.1415927;
+		sp176 = sin(sp184);
+		sp168 = sp400 / 180.0;
+		sp160 = sp168 * 3.1415927;
+		sp152 = cos(sp160);
+		sp144 = -1.0 * sp464;
+		sp136 = sp144 * sp152;
+		sp336 = sp136 * sp176;
+		#else
+		sp336 = -1.0 * sp464 * cos(sp400 / 180.0 * 3.1415927) * 
+			sin(sp408 / 180.0 * 3.1415927);
+		#endif
+		
+		#if 0
+		sp192 = sp400 / 180.0;
+		sp184 = sp192 * 3.1415927;
+		sp176 = sin(sp184);
+		sp168 = -1.0 * sp464;
+		sp328 = sp168 * sp176;
+		#else
+		sp328 = -1.0 * sp464 * sin(sp400 / 180.0 * 3.1415927);
+		#endif
+		
+		//See: https://github.com/hvanruys/WhereIsTheMoon/blob/master/AAFK5.cpp
+		
+		#if 0
+		sp192 = /*0x3e899fed48a1046e*/0.000000190919 * sp328/*z*/;
+		sp184 = /*0x3e9d8d53c2fa2af4*/0.00000044036 * sp336/*y*/;
+		sp176 = sp184 + sp344/*x*/;
+		sp344 = sp176 - sp192;		
+		#else
+		sp344 = 0.00000044036 * sp336/*y*/ + sp344/*x*/ - 0.000000190919 * sp328/*z*/;		
+		#endif
+		
+		#if 0 
+		sp192 = /*0x3fd97530974f0319 */0.397777698290199988040427570013 * sp328;
+		sp184 = /*0x3fed5c037fae7dc7*/0.917482137086999993691449617472 * sp336;
+		sp176 = /*0xbea01ae065580428*/-0.000000479965999999999971489545586012 * sp344;
+		sp168 = sp176 + sp184;
+		sp336 = sp168 - sp192;
+		#else
+		sp336 = -0.000000479965999999999971489545586012 * sp344 + 
+			0.917482137086999993691449617472 * sp336 - 
+			0.397777698290199988040427570013 * sp328;
+		#endif
+		
+		#if 0
+		sp192 = 0.917482137086999993691449617472 * sp328;
+		sp184 = /*0x3fd9752d972a99dd*/0.397776982901999975883455817893 * sp336;
+		sp328 = sp184 + sp192;
+		#else
+		sp328 = 0.397776982901999975883455817893 * sp336 + 0.917482137086999993691449617472 * sp328;
+		#endif
+		
+		#if 0
+		sp192 = sp360 / 180.0;
+		sp184 = sp192 * 3.1415927;
+		sp176 = cos(sp184);
+		sp168 = sp368 / 180.0;
+		sp160 = sp168 * 3.1415927;
+		sp152 = cos(sp160);
+		sp144 = sp152 * sp352;
+		sp440 = sp144 * sp176;
+		#else
+		sp440 = cos(sp368 / 180.0 * 3.1415927) * sp352 * 
+			cos(sp360 / 180.0 * 3.1415927);
+		#endif
+		
+		#if 0
+		sp192 = sp360 / 180.0;
+		sp184 = sp192 * 3.1415927;
+		sp176 = sin(sp184);
+		sp168 = sp176 * /*0x3fd9752e51076abf*/0.397777156000000020608098338926;
+		sp160 = sp360 / 180.0;
+		sp152 = sp160 * 3.1415927;
+		sp144 = cos(sp152);
+		sp136 = sp368 / 180.0;
+		sp128 = sp136 * 3.1415927;
+		sp120 = sin(sp128);
+		sp112 = sp120 * sp144;
+		sp104 = sp112 * /*0x3fed5c03575e9cd5*/0.917482062000000042623071294656;
+		sp96 = sp104 - sp168;
+		sp432 = sp96 * sp352;
+		#else
+		sp432 = (sin(sp368 / 180.0 * 3.1415927) * 
+			cos(sp360 / 180.0 * 3.1415927) * 0.917482062000000042623071294656 - 
+			sin(sp360 / 180.0 * 3.1415927) * 0.397777156000000020608098338926) * sp352;
+		#endif
+		
+		#if 0
+		sp192 = sp360 / 180.0;
+		sp184 = sp192 * 3.1415927;
+		sp176 = sin(sp184);
+		sp168 = sp176 * 0.917482062000000042623071294656;
+		sp160 = sp360 / 180.0;
+		sp152 = sp160 * 3.1415927;
+		sp144 = cos(sp152);
+		sp136 = sp368 / 180.0;
+		sp128 = sp136 * 3.1415927;
+		sp120 = sin(sp128);
+		sp112 = sp120 * sp144;
+		sp104 = sp112 * 0.397777156000000020608098338926;
+		sp96 = sp104 + sp168;
+		sp424 = sp96 * sp352;
+		#else
+		sp424 = (sin(sp368 / 180.0 * 3.1415927) * 
+			cos(sp360 / 180.0 * 3.1415927) * 0.397777156000000020608098338926 + 
+			sin(sp360 / 180.0 * 3.1415927) * 0.917482062000000042623071294656) * sp352;
+		#endif
+		
+		#if 0
+		sp192 = sp328 + sp424;
+		sp184 = sp328 + sp424;
+		sp176 = sp184 * sp192;
+		sp168 = sp336 + sp432;
+		sp160 = sp336 + sp432;
+		sp152 = sp160 * sp168;
+		sp144 = sp344 + sp440;
+		sp136 = sp344 + sp440;
+		sp128 = sp136 * sp144;
+		sp120 = sp128 + sp152;
+		sp112 = sp120 + sp176;
+		sp320 = sqrt(sp112);		
+		#else
+		sp320 = sqrt((sp344 + sp440) * (sp344 + sp440) + 
+			(sp336 + sp432) * (sp336 + sp432) + 
+			(sp328 + sp424) * (sp328 + sp424));
+		#endif
+		
+		#if 0
+		sp192 = sp344 + sp440;
+		sp184 = sp336 + sp432;
+		sp176 = sp184 / sp192;
+		sp312 = atan(sp176);
+		#else
+		sp312 = atan((sp336 + sp432) / (sp344 + sp440));
+		#endif
+		
+		if ((sp344 + sp440) < 0)
+		{
+			//1cadc
+			sp312 += 3.1415927;
+		}
+		//0x1caf8
+		#if 0
+		sp192 = sp328 + sp424;
+		sp184 = sp192 / sp320;
+		sp304 = asin(sp184);
+		#else
+		sp304 = asin((sp328 + sp424) / sp320);
+		#endif
+		
+		#if 0
+		sp192 = sp312 / 3.1415927;
+		sp296 = sp192 * 180.0;
+		#else
+		sp296 = sp312 / 3.1415927 * 180.0;
+		#endif
+		
+		sp288 = sp304 / 3.1415927 * 180.0;
+		sp296 += 180.0;
+		
+		if (sp296 > 360.0)
+		{
+			//1cbd0
+			sp296 -= 360.0;
+		}
+		//0x1cbec
+	}
+	//0x1cbec
+	if (a == 10)
+	{
+		//1cbf4
+		
+		//TODO
+	}
+	//0x1e0bc
+	func_1afc0(sp408, sp400, sp416, &sp392, &sp384);
+	
+	*b = sp392;
+	*c = sp384;
+	
+	if (a == 9)
+	{
+		//1e14c
+		*b = sp296 / 15.0;
+		*c = sp288;
+	}
+	//0x1e170
+}
+
+/* 1e17c - todo */
+void func_1e17c(void)
+{
+	func_1b528(1, &dData_400032b0, &dData_400032b8);
+	func_1b528(2, &dData_400032d0, &dData_400032d8);
+	func_1b528(3, &dData_400032e0, &dData_400032e8);
+	func_1b528(4, &dData_400032f0, &dData_400032f8);
+	func_1b528(5, &dData_40003300, &dData_40003308);
+	func_1b528(6, &dData_40003310, &dData_40003318);
+	func_1b528(7, &dData_40003320, &dData_40003328);
+	func_1b528(8, &dData_40003330, &dData_40003338);
+	func_1b528(9, &dData_40003340, &dData_40003348);
+	func_1b528(10, &dData_400032c0, &dData_400032c8);
+}
+
 
 #include "func_23130.c"
 #include "func_27844.c"
