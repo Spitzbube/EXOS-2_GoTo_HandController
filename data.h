@@ -114,7 +114,27 @@ typedef struct
 } Struct_40004380;
 
 extern unsigned char Data_40000000[28][10]; //40000000
-extern unsigned char Data_40000118[28][22]; //40000118, size??
+extern unsigned char Data_40000118[28][22]; //40000118, size?? -> 40000380???
+extern char Data_40000380[]; //40000380
+extern char Data_4000038a[]; //4000038a
+extern char Data_40000394[]; //40000394
+extern char Data_4000039e[]; //4000039e
+extern char Data_400003a8[]; //400003a8
+extern char Data_400003b2[]; //400003b2
+extern char Data_400003ba[]; //400003ba
+extern char Data_400003c2[]; //400003c2
+extern char Data_400003ca[]; //400003ca
+extern char Data_400003d4[]; //400003d4
+extern char Data_400008ad[]; //400008ad, size??
+extern char Data_400008bd[]; //400008bd, size???
+extern char Data_400008c8[]; //400008c8, size???
+extern char Data_400008d2[]; //400008d2, size???
+extern char Data_400008d8[]; //400008d8, size???
+extern char Data_400008e7[]; //400008e7, size???
+extern char Data_400008f6[]; //400008f6, size???
+extern char Data_40000907[]; //40000907, size???
+extern char Data_40000913[]; //40000913, size???
+extern char Data_40000923[]; //40000923, size???
 extern char Data_40002655[]; //40002655, size???
 extern char Data_40002660[]; //40002660, size???
 extern unsigned char Data_40002827[]; //40002827
@@ -275,9 +295,20 @@ extern unsigned char bData_40002f14_RecentTargetCount; //40002f14
 extern unsigned char Data_40002f15[]; //40002f15, size???
 extern unsigned char bData_40002f1d; //40002f1d
 extern char bData_40002f1e; //40002f1e
+extern char* Data_40002f20; //40002f20
+extern char* Data_40002f24; //40002f24
+extern char* Data_40002f28; //40002f28
+extern char* Data_40002f2c; //40002f2c
+extern char* Data_40002f30; //40002f30
+extern char* Data_40002f34; //40002f34
+extern char* Data_40002f38; //40002f38
+extern char* Data_40002f3c; //40002f3c
+extern char* Data_40002f40; //40002f40
+extern char* Data_40002f44; //40002f44
 extern char* Data_400030c0; //400030c0
 extern char* Data_400030c4; //400030c4
 extern char* Data_400030c8; //400030c8
+extern char* Data_40003140; //40003140
 extern char* Data_4000314c; //4000314c
 extern char Data_40003150[]; //40003150, size??
 extern char bData_4000316e; //4000316e
@@ -329,6 +360,26 @@ extern unsigned char bData_40003265; //40003265
 extern float Data_4000329c; //4000329c
 extern float Data_400032a0; //400032a0
 extern char bData_400032a4; //400032a4
+extern double dData_400032b0; //400032b0
+extern double dData_400032b8; //400032b8
+extern double dData_400032c0; //400032c0
+extern double dData_400032c8; //400032c8
+extern double dData_400032d0; //400032d0
+extern double dData_400032d8; //400032d8
+extern double dData_400032e0; //400032e0
+extern double dData_400032e8; //400032e8
+extern double dData_400032f0; //400032f0
+extern double dData_400032f8; //400032f8
+extern double dData_40003300; //40003300
+extern double dData_40003308; //40003308
+extern double dData_40003310; //40003310
+extern double dData_40003318; //40003318
+extern double dData_40003320; //40003320
+extern double dData_40003328; //40003328
+extern double dData_40003330; //40003330
+extern double dData_40003338; //40003338
+extern double dData_40003340; //40003340
+extern double dData_40003348; //40003348
 extern Struct_435c Data_40003350; //40003350
 extern Struct_4b94 Data_40003358_SAORecord; //40003358
 extern char* Data_40003360; //40003360

@@ -3,6 +3,102 @@
 /* 22060 - todo */
 void func_22060(int a, float* b, float* c)
 {
+	switch (a)
+	{
+		case 0:
+			//0x220a4
+			*b = dData_400032d0;
+			*c = dData_400032d8;
+			Data_4000314c = "Mercury                ";
+			Data_40003140 = Data_40000380;
+			//->0x22450
+			break;
+		
+		case 1:
+			//0x220e4
+			*b = dData_400032e0;
+			*c = dData_400032e8;
+			Data_4000314c = "Venus                    ";
+			Data_40003140 = Data_4000038a;
+			//->0x22450
+			break;
+		
+		case 2:
+			//0x22124
+			*b = dData_400032f0;
+			*c = dData_400032f8;
+			Data_4000314c = "Mars                      ";
+			Data_40003140 = Data_40000394;
+			//->0x22450
+			break;
+		
+		case 3:
+			//0x22164
+			*b = dData_40003300;
+			*c = dData_40003308;
+			Data_4000314c = "Jupiter                  ";
+			Data_40003140 = Data_4000039e;
+			//->0x22450
+			break;
+		
+		case 4:
+			//0x221a4
+			*b = dData_40003310;
+			*c = dData_40003318;
+			Data_4000314c = "Saturn                     ";
+			Data_40003140 = Data_400003a8;
+			//->0x22450
+			break;
+		
+		case 5:
+			//0x221e4
+			*b = dData_40003320;
+			*c = dData_40003328;
+			Data_4000314c = "Uranus                      ";
+			Data_40003140 = Data_400003b2;
+			//->0x22450
+			break;
+		
+		case 6:
+			//0x22224
+			*b = dData_40003330;
+			*c = dData_40003338;
+			Data_4000314c = "Neptune                       ";
+			Data_40003140 = Data_400003ba;
+			//->0x22450
+			break;
+		
+		case 7:
+			//0x22388
+			*b = dData_40003340;
+			*c = dData_40003348;
+			Data_4000314c = "Pluto                      ";
+			Data_40003140 = Data_400003c2;
+			//->0x22450
+			break;
+		
+		case 8:
+			//0x223c8
+			*b = dData_400032b0;
+			*c = dData_400032b8;
+			Data_4000314c = "Sun                     ";
+			Data_40003140 = Data_400003ca;
+			//->0x22450
+			break;
+		
+		case 9:
+			//0x22408
+			*b = dData_400032c0;
+			*c = dData_400032c8;
+			Data_4000314c = "Moon                       ";
+			Data_40003140 = Data_400003d4;
+			//->0x22450
+			break;
+		
+		default:
+			//0x22448
+			break;
+	}
 }
 
 /* 23130 - todo */

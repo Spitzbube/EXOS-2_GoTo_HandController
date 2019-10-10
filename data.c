@@ -4,6 +4,26 @@
 
 unsigned char Data_40000000[28][10]; //40000000
 unsigned char Data_40000118[28][22]; //40000118, size??
+char Data_40000380[10]; //40000380, size???
+char Data_4000038a[10]; //4000038a, size???
+char Data_40000394[10]; //40000394, size???
+char Data_4000039e[10]; //4000039e, size???
+char Data_400003a8[10]; //400003a8, size???
+char Data_400003b2[8]; //400003b2, size???
+char Data_400003ba[8]; //400003ba, size???
+char Data_400003c2[8]; //400003c2, size???
+char Data_400003ca[10]; //400003ca, size???
+char Data_400003d4[10]; //400003d4, size???
+char Data_400008ad[16]; //400008ad, size???
+char Data_400008bd[11]; //400008bd, size???
+char Data_400008c8[10]; //400008c8, size???
+char Data_400008d2[16]; //400008d2, size???
+char Data_400008d8[15]; //400008d8, size???
+char Data_400008e7[15]; //400008e7, size???
+char Data_400008f6[15]; //400008f6, size???
+char Data_40000907[12]; //40000907, size???
+char Data_40000913[16]; //40000913, size???
+char Data_40000923[16]; //40000923, size???
 char Data_40002655[11]; //40002655, size???
 char Data_40002660[100]; //40002660, size???
 char fill_40002836; //40002836
@@ -166,9 +186,20 @@ unsigned char bData_40002f14_RecentTargetCount; //40002f14
 unsigned char Data_40002f15[8]; //40002f15, size???
 unsigned char bData_40002f1d; //40002f1d
 char bData_40002f1e; //40002f1e
+char* Data_40002f20; //40002f20
+char* Data_40002f24; //40002f24
+char* Data_40002f28; //40002f28
+char* Data_40002f2c; //40002f2c
+char* Data_40002f30; //40002f30
+char* Data_40002f34; //40002f34
+char* Data_40002f38; //40002f38
+char* Data_40002f3c; //40002f3c
+char* Data_40002f40; //40002f40
+char* Data_40002f44; //40002f44
 char* Data_400030c0; //400030c0
 char* Data_400030c4; //400030c4
 char* Data_400030c8; //400030c8
+char* Data_40003140; //40003140
 char* Data_4000314c; //4000314c
 char Data_40003150[30]; //40003150, size??
 char bData_4000316e; //4000316e
@@ -219,6 +250,26 @@ unsigned char bData_40003265; //40003265
 float Data_4000329c; //4000329c
 float Data_400032a0; //400032a0
 char bData_400032a4; //400032a4
+double dData_400032b0; //400032b0
+double dData_400032b8; //400032b8
+double dData_400032c0; //400032c0
+double dData_400032c8; //400032c8
+double dData_400032d0; //400032d0
+double dData_400032d8; //400032d8
+double dData_400032e0; //400032e0
+double dData_400032e8; //400032e8
+double dData_400032f0; //400032f0
+double dData_400032f8; //400032f8
+double dData_40003300; //40003300
+double dData_40003308; //40003308
+double dData_40003310; //40003310
+double dData_40003318; //40003318
+double dData_40003320; //40003320
+double dData_40003328; //40003328
+double dData_40003330; //40003330
+double dData_40003338; //40003338
+double dData_40003340; //40003340
+double dData_40003348; //40003348
 Struct_435c Data_40003350; //40003350
 Struct_4b94 Data_40003358_SAORecord; //40003358
 char* Data_40003360; //40003360
