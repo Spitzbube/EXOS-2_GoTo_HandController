@@ -5161,13 +5161,204 @@ double func_1a680(double a)
 {
 }
 
-double func_1aac4(double a)
+/* 1aac4 - todo */
+double func_1aac4(double sp128)
 {
+	//See: https://github.com/engerim42/wmsolar/blob/master/Pluto.cpp
+	//See: home.mnet-online.de/reimay/Projects/pc/Astronomie/libaa/AAPluto.cpp
+	
+	double sp120 = 0.0;
+	double sp112;
+	double sp104;
+	double sp96;
+	
+	sp112 = sp128 * /*0x40a7b5cfb7e90ff9*/3034.9057 + /*0x40412ccccccccccd*/34.35;
+	sp104 = sp128 * /*0x4093187487fcb924*/1222.1138 + /*0x40490a3d70a3d70a*/50.08;
+	sp96 = sp128 * /*0x40621eb851eb851f*/144.96 + /*0x406ddeb851eb851f*/238.96;
+	
+	#if 0
+	sp80 = 1.0 * sp96;
+	sp72 = sp80 / 180.0;
+	sp64 = sp72 * 3.1415927;
+	sp56 = cos(sp64);
+	sp48 = sp56 * 0x419070bb90000000;
+	sp40 = 1.0 * sp96;
+	sp32 = sp40 / 180.0;
+	sp24 = sp32 * 3.1415927;
+	sp16 = sin(sp24);
+	sp8 = sp16 * 0x418fe28430000000;
+	sp = sp8 + sp48;
+	sp120 = sp + sp120;
+	#else
+	sp120 = sin((1.0 * sp96) / 180.0 * 3.1415927) * 66867334.0 + 
+		cos((1.0 * sp96) / 180.0 * 3.1415927) * 68955876.0 + sp120;
+	#endif
+	//1ac7c
+	
+	//TODO
+}
+
+/* 1af1c - todo */
+double func_1af1c(double a)
+{
+	//->0x1af80
+	while (1)
+	{
+		//0x1af24
+		if (a > 360.0)
+		{
+			//1af38
+			a -= 360.0;
+		}
+		else if (a < 0.0)
+		{
+			//1af64
+			a += 360.0;
+		}
+		else
+		{
+			//0x1af7c -> 0x1af84
+			break;
+		}
+	}
+	//1af88
+	return a;
 }
 
 /* 1afc0 - todo */
-void func_1afc0(double a, double b, double c, double* d, double* e)
+void func_1afc0(double sp96/*?*/, double sp104/*?*/, double sp128/*?*/, /*sp136*/double* d/*r4*/, double* e/*r5*/)
 {
+	double sp88 = 3.1415927;
+	double sp80;
+	double sp72;
+	int r6;
+	
+	sp96 = sp96 * sp88 / 180.0;
+	sp104 = sp104 * sp88 / 180.0;
+	sp128 = sp128 * sp88 / 180.0;
+	
+	#if 0
+	sp64 = cos(sp96);
+	sp56 = sin(sp128);
+	sp48 = tan(sp104);
+	sp40 = sp48 * sp56;
+	sp32 = cos(sp128);
+	sp24 = sin(sp96);
+	sp16 = sp24 * sp32;
+	sp8 = sp16 - sp40;
+	sp = sp8 / sp64;
+	sp80 = atan(sp);
+	#else
+	sp80 = atan((sin(sp96) * cos(sp128) - (tan(sp104) * sin(sp128))) / cos(sp96));
+	#endif
+	
+	sp80 = sp80 * 180.0 / sp88;
+
+	#if 0
+	sp64 = sin(sp96);
+	sp56 = sin(sp128);
+	sp48 = cos(sp104);
+	sp40 = sp48 * sp56;
+	sp32 = sp40 * sp64;
+	sp24 = cos(sp128);
+	sp16 = sin(sp104);
+	sp8 = sp16 * sp24;
+	sp = sp8 + sp32;
+	sp72 = asin(sp);
+	#else
+	sp72 = asin(sin(sp104) * cos(sp128) + cos(sp104) * sin(sp128) * sin(sp96));
+	#endif
+	
+	sp72 = sp72 * 180.0 / sp88;
+	sp96 = sp96 * 180.0 / sp88;
+	
+	if ((sp96 > 0.0) && (sp96 <= 90.0))
+	{
+		//1b2b4
+		r6 = 1;
+	}
+	//0x1b2b8
+	if ((sp96 > 90.0) && (sp96 <= 180.0))
+	{
+		//1b2e8
+		r6 = 2;
+	}
+	//0x1b2ec
+	if ((sp96 > 180.0) && (sp96 <= 270.0))
+	{
+		//1b31c
+		r6 = 3;
+	}
+	//0x1b320
+	if ((sp96 > 270.0) && (sp96 <= 360.0))
+	{
+		//1b350
+		r6 = 4;
+	}
+	//0x1b354
+	switch (r6)
+	{
+		case 1:
+			//0x1b378
+			if (sp80 < 0)
+			{
+				sp80 = -1.0 * sp80;
+			}
+			//->0x1b4d0
+			break;
+		
+		case 2:
+			//0x1b3b4
+			if (sp80 >= 0)
+			{
+				//1b3d0
+				sp80 = 180.0 - sp80;
+			}
+			else
+			{
+				//0x1b3f0
+				sp80 = 180.0 + sp80;
+			}
+			//0x1b40c -> 0x1b4d0
+			break;
+		
+		case 3:
+			//0x1b410
+			if (sp80 >= 0)
+			{
+				//1b42c
+				sp80 = 180.0 + sp80;
+			}
+			else
+			{
+				//0x1b44c
+				sp80 = 180.0 - sp80;
+			}
+			//1b468 -> 0x1b4d0
+			break;
+		
+		case 4:
+			//0x1b46c
+			if (sp80 >= 0)
+			{
+				//1b488
+				sp80 = 360.0 - sp80;
+			}
+			else
+			{
+				//0x1b4a8
+				sp80 = 360.0 + sp80;
+			}
+			break;
+		
+		default:
+			//0x1b4c8
+			break;
+	}
+	//1b4d4
+	sp80 /= 15.0;
+	*d = sp80;
+	*e = sp72;
 }
 
 /* 1b528 - todo */
@@ -5216,7 +5407,6 @@ void func_1b528(int a, double* b, double* c)
 	double sp216 = 0.0;
 	double sp208 = 0.0;
 	double sp200 = 0.0;
-//	double sp192;
 	
 	/*sp192 =*/ func_7f30(1, 0, Data_40004128.dData_48);
 	
@@ -5226,7 +5416,7 @@ void func_1b528(int a, double* b, double* c)
 	
 	switch (a - 2)
 	{
-		case 0:
+		case 0: //Mercury
 			//0x1b6dc
 			sp520 = func_f22c(sp536);
 			sp512 = func_fc20(sp536);
@@ -5234,7 +5424,7 @@ void func_1b528(int a, double* b, double* c)
 			//->0x1b8c0
 			break;
 		
-		case 1:
+		case 1: //Venus
 			//0x1b720
 			sp520 = func_10b2c(sp536);
 			sp512 = func_1127c(sp536);
@@ -5242,7 +5432,7 @@ void func_1b528(int a, double* b, double* c)
 			//->0x1b8c0
 			break;
 		
-		case 2:
+		case 2: //Mars
 			//0x1b764
 			sp520 = func_11af4(sp536);
 			sp512 = func_12450(sp536);
@@ -5250,7 +5440,7 @@ void func_1b528(int a, double* b, double* c)
 			//->0x1b8c0
 			break;
 		
-		case 3:
+		case 3: //Jupiter
 			//0x1b7a8
 			sp520 = func_131ac(sp536);
 			sp512 = func_13d10(sp536);
@@ -5258,7 +5448,7 @@ void func_1b528(int a, double* b, double* c)
 			//->0x1b8c0
 			break;
 		
-		case 4:
+		case 4: //Saturn
 			//0x1b7ec
 			sp520 = func_15340(sp536);
 			sp512 = func_16114(sp536);
@@ -5266,7 +5456,7 @@ void func_1b528(int a, double* b, double* c)
 			//->0x1b8c0
 			break;
 		
-		case 5:
+		case 5: //Uranus
 			//0x1b830
 			sp520 = func_17630(sp536);
 			sp512 = func_18160(sp536);
@@ -5274,7 +5464,7 @@ void func_1b528(int a, double* b, double* c)
 			//->0x1b8c0
 			break;
 		
-		case 6:
+		case 6: //Neptune
 			//0x1b874
 			sp520 = func_19118(sp536);
 			sp512 = func_196cc(sp536);
@@ -5446,7 +5636,7 @@ void func_1b528(int a, double* b, double* c)
 		/*0x3f5db445ed4a1ad6*/0.001813 * sp528 * sp528 * sp528 / 3600.0;
 	#endif
 	//1c120
-	if (a == 1)
+	if (a == 1) //Sun
 	{
 		//1c128
 		sp408 = sp456 + 180.0;
@@ -5466,7 +5656,7 @@ void func_1b528(int a, double* b, double* c)
 		sp400 = 1.0 * sp448;
 	}
 	//0x1c1cc
-	if (a == 9)
+	if (a == 9) //Pluto
 	{
 		//1c1d4
 		sp368 = func_1a2d0(sp528);
@@ -5675,9 +5865,101 @@ void func_1b528(int a, double* b, double* c)
 		//0x1cbec
 	}
 	//0x1cbec
-	if (a == 10)
+	if (a == 10) //Moon
 	{
+		//See: https://github.com/openhab/openhab1-addons/blob/master/bundles/binding/org.openhab.binding.astro/src/main/java/org/openhab/binding/astro/internal/calc/MoonCalc.java
+		
 		//1cbf4
+		#if 0
+		sp192 = sp528 * sp528;
+		sp184 = sp192 * sp528;
+		sp176 = sp184 * sp528;
+		sp168 = sp176 / 0x418f164080000000;
+		sp160 = sp528 * sp528;
+		sp152 = sp160 * sp528;
+		sp144 = sp152 / 0x412071b200000000;
+		sp136 = 0x3f55bd00a6eeecb2 * sp528;
+		sp128 = sp136 * sp528;
+		sp120 = 0x411d5fcf867e9c93 * sp528;
+		sp112 = sp120 + 0x406b4a206ed5a0b1;
+		sp104 = sp112 - sp128;
+		sp96 = sp104 + sp144;
+		sp280 = sp96 - sp168;
+		#else
+		sp280 = 481267.881342359993141144514084 * sp528 + 218.31645910000000299078237731 - 
+			0.00132679999999999994123034419147 * sp528 * sp528 + 
+			sp528 * sp528 * sp528 / 538841.0 - 
+			sp528 * sp528 * sp528 * sp528 / 65194000.0;
+		#endif
+		
+		sp280 = func_1af1c(sp280);
+		
+		#if 0
+		sp192 = sp528 * sp528;
+		sp184 = sp192 * sp528;
+		sp176 = sp184 * sp528;
+		sp168 = sp176 / 0x419af4f0a0000000;
+		sp160 = sp528 * sp528;
+		sp152 = sp160 * sp528;
+		sp144 = sp152 / 0x4120a89800000000;
+		sp136 = 0x3f5ab4b72c5197a2 * sp528;
+		sp128 = sp136 * sp528;
+		sp120 = 0x411b2d4c723175c4 * sp528;
+		sp112 = sp120 + 0x40729d9a6fb81ec0;
+		sp104 = sp112 - sp128;
+		sp96 = sp104 + sp144;
+		sp272 = sp96 - sp168;
+		#else
+		sp272 = 445267.111516800010576844215393 * sp528 + 297.8502042 - 
+			0.00163 * sp528 * sp528 + 
+			sp528 * sp528 * sp528 / 545868.0 - 
+			sp528 * sp528 * sp528 * sp528 / 113065000.0;
+		#endif
+		
+		sp272 = func_1af1c(sp272);
+		
+		#if 0
+		sp192 = sp528 * sp528;
+		sp184 = sp192 * sp528;
+		sp176 = sp184 / 0x41775b0100000000;
+		sp168 = 0x3f2421f5f40d8376 * sp528;
+		sp160 = sp168 * sp528;
+		sp152 = 0x40e193e19bfba959 * sp528;
+		sp144 = sp152 + 0x407658773b356034;
+		sp136 = sp144 - sp160;
+		sp264 = sp136 + sp176;
+		#else
+		sp264 = 35999.0502908999987994320690632 * sp528 + 357.529109199999993506935425103 - 
+			0.0001536 * sp528 * sp528 + 
+			sp528 * sp528 * sp528 / 24490000.0;
+		#endif
+		
+		sp264 = func_1af1c(sp264);
+		
+		#if 0
+		sp192 = sp528 * sp528;
+		sp184 = sp192 * sp528;
+		sp176 = sp184 * sp528;
+		sp168 = sp176 / 0x416c0f9800000000;
+		sp160 = sp528 * sp528;
+		sp152 = sp160 * sp528;
+		sp144 = sp152 / 0x40f1043000000000;
+		sp136 = 0x3f826d04e618ce2d * sp528;
+		sp128 = sp136 * sp528;
+		sp120 = 0x411d203b787456ea * sp528;
+		sp112 = sp120 + 0x4060ded44424f2ff;
+		sp104 = sp112 - sp128;
+		sp96 = sp104 + sp144;
+		sp256 = sp96 - sp168;
+		#else
+		sp256 = 477198.867631300003267824649811 * sp528 + 134.963411400000012463351595215 - 
+			0.008997 * sp528 * sp528 + 
+			sp528 * sp528 * sp528 / 69699.0 - 
+			sp528 * sp528 * sp528 * sp528 / 14712000.0;
+		#endif
+		
+		sp256 = func_1af1c(sp256);
+		//1d164
 		
 		//TODO
 	}
@@ -5687,7 +5969,7 @@ void func_1b528(int a, double* b, double* c)
 	*b = sp392;
 	*c = sp384;
 	
-	if (a == 9)
+	if (a == 9) //Pluto
 	{
 		//1e14c
 		*b = sp296 / 15.0;
@@ -5699,16 +5981,16 @@ void func_1b528(int a, double* b, double* c)
 /* 1e17c - todo */
 void func_1e17c(void)
 {
-	func_1b528(1, &dData_400032b0, &dData_400032b8);
-	func_1b528(2, &dData_400032d0, &dData_400032d8);
-	func_1b528(3, &dData_400032e0, &dData_400032e8);
-	func_1b528(4, &dData_400032f0, &dData_400032f8);
-	func_1b528(5, &dData_40003300, &dData_40003308);
-	func_1b528(6, &dData_40003310, &dData_40003318);
-	func_1b528(7, &dData_40003320, &dData_40003328);
-	func_1b528(8, &dData_40003330, &dData_40003338);
-	func_1b528(9, &dData_40003340, &dData_40003348);
-	func_1b528(10, &dData_400032c0, &dData_400032c8);
+	func_1b528(1, &dData_400032b0, &dData_400032b8); //Sun
+	func_1b528(2, &dData_400032d0, &dData_400032d8); //Mercury
+	func_1b528(3, &dData_400032e0, &dData_400032e8); //Venus
+	func_1b528(4, &dData_400032f0, &dData_400032f8); //Mars
+	func_1b528(5, &dData_40003300, &dData_40003308); //Jupiter
+	func_1b528(6, &dData_40003310, &dData_40003318); //Saturn
+	func_1b528(7, &dData_40003320, &dData_40003328); //Uranus
+	func_1b528(8, &dData_40003330, &dData_40003338); //Neptune
+	func_1b528(9, &dData_40003340, &dData_40003348); //Pluto
+	func_1b528(10, &dData_400032c0, &dData_400032c8); //Moon
 }
 
 

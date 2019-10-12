@@ -184,26 +184,36 @@ extern int Data_40002cbc; //40002cbc
 extern float fData_40002cc0; //40002cc0
 extern double dData_40002cc8; //40002cc8
 extern float fData_40002cd0; //40002cd0
+extern int Data_40002cd8; //40002cd8
+extern int Data_40002cdc; //40002cdc
+extern float fData_40002ce0; //40002ce0
+extern double dData_40002ce8; //40002ce8
 extern int Data_40002cf4; //40002cf4
 extern int Data_40002cf8; //40002cf8
 extern float fData_40002cfc; //40002cfc
+extern int Data_40002d00; //40002d00
+extern int Data_40002d04; //40002d04
+extern float fData_40002d08; //40002d08
 extern double dData_40002d10; //40002d10
 extern float fData_40002d18; //40002d18
 extern int Data_40002d20; //40002d20
 extern int Data_40002d24; //40002d24
 extern float fData_40002d28; //40002d28
 extern int Data_40002d40; //40002d40
+extern int Data_40002d44; //40002d44
 extern int Data_40002d48; //40002d48
 extern int Data_40002d4c; //40002d4c
 extern float fData_40002d50; //40002d50
 extern int Data_40002d68; //40002d68
 extern int Data_40002d6c; //40002d6c
 extern float fData_40002d70; //40002d70
+extern double dData_40002d78; //40002d78
 extern double dData_40002d80; //40002d80
 extern char bData_40002d88; //40002d88
 extern int Data_40002d8c; //40002d8c
 extern int Data_40002d90; //40002d90
 extern float fData_40002d94; //40002d94
+extern double dData_40002d98; //40002d98
 extern double dData_40002da0; //40002da0
 extern char bData_40002da8; //40002da8
 extern int Data_40002dac; //40002dac
@@ -231,7 +241,7 @@ extern float fData_40002e40; //40002e40
 extern int Data_40002e44; //40002e44
 extern double dData_40002e48; //40002e48
 extern int Data_40002e54; //40002e54
-extern int Data_40002e5c; //40002e5c
+extern unsigned Data_40002e5c; //40002e5c
 extern unsigned char bData_40002e60; //40002e60
 extern unsigned char bData_40002e61; //40002e61
 extern unsigned char bData_40002e62; //40002e62
@@ -434,6 +444,8 @@ extern float fData_400034c8; //400034c8
 extern char bData_400034cc; //400034cc
 extern double Data_400034d0; //400034d0
 extern double Data_400034d8; //400034d8
+extern double dData_400034e8; //400034e8
+extern double dData_400034f8; //400034f8
 extern char bData_40003505;  //40003505
 extern float fData_40003508; //40003508
 extern float fData_4000350c; //4000350c

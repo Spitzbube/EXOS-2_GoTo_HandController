@@ -142,7 +142,7 @@ void func_240e8(unsigned char a, int b)
 {
 	switch (a)
 	{
-		case 1:
+		case 1: //Solar System
 			//0x24134
 			bData_40002eb5 = b;
 			
@@ -180,7 +180,7 @@ void func_240e8(unsigned char a, int b)
 			//->0x24568
 			break;
 		
-		case 4:
+		case 4: //Messier
 			//0x2425c
 			wData_40002eb8_MessierNr = b; 
 		
@@ -190,7 +190,7 @@ void func_240e8(unsigned char a, int b)
 			//->0x24568
 			break;
 		
-		case 5:
+		case 5: //NGC
 			//0x24290	
 			wData_40002eba_NGCNr = b; 
 		
@@ -200,7 +200,7 @@ void func_240e8(unsigned char a, int b)
 			//->0x24568
 			break;
 		
-		case 6:
+		case 6: //IC
 			//0x242c4
 			wData_40002ebc_ICNr = b; 
 		
@@ -210,7 +210,7 @@ void func_240e8(unsigned char a, int b)
 			//->0x24568
 			break;
 		
-		case 7:
+		case 7: //Sh
 			//0x242f8
 			wData_40002ebe_ShNr = b; 
 		
@@ -230,7 +230,7 @@ void func_240e8(unsigned char a, int b)
 			//->0x24568
 			break;
 		
-		case 9:
+		case 9: //SAO
 			//0x24478
 			Data_40002ec4_SAONr = b; 
 		

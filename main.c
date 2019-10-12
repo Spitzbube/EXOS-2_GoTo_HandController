@@ -1456,8 +1456,10 @@ void func_6cb38(void)
 /* 6d054 - todo */
 int main(void)
 {
+	#if 0
 	int r4;
 	int r5;
+	#endif
 		
 	func_2328();
 	uart0_init(360);
@@ -1553,46 +1555,78 @@ int main(void)
 	if (fData_40003540 > 0)
 	{
 		//6d378
+		#if 0
 		r4 = (fData_40003540 - (int)fData_40003540) * 60;
 		r5 = fData_40003540;
 		sprintf(Data_40002837, "  Lon:E%03dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
+		#else
+		sprintf(Data_40002837, "  Lon:E%03dd%02df ", 
+			abs(fData_40003540), 
+			abs((fData_40003540 - (int)fData_40003540) * 60));
+		#endif
 		//->6d494
 	}
 	else
 	{
 		//6d408
+		#if 0
 		r4 = (fData_40003540 - (int)fData_40003540) * 60;
 		r5 = fData_40003540;
 		sprintf(Data_40002837, "  Lon:W%03dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
+		#else
+		sprintf(Data_40002837, "  Lon:W%03dd%02df ", 
+			abs(fData_40003540), 
+			abs((fData_40003540 - (int)fData_40003540) * 60));
+		#endif
 	}
 	//6d494
 	if (fData_40003544 > 0)
 	{
 		//6d4a8
+		#if 0
 		r4 = (fData_40003544 - (int)fData_40003544) * 60;
 		r5 = fData_40003544;
 		sprintf(Data_40002847, "  Lat:N%02dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
+		#else
+		sprintf(Data_40002847, "  Lat:N%02dd%02df ", 
+			abs(fData_40003544), 
+			abs((fData_40003544 - (int)fData_40003544) * 60));
+		#endif
 		//->6d5c4
 	}
 	else
 	{
 		//6d538
+		#if 0
 		r4 = (fData_40003544 - (int)fData_40003544) * 60;
 		r5 = fData_40003544;
 		sprintf(Data_40002847, "  Lat:S%02dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
+		#else
+		sprintf(Data_40002847, "  Lat:S%02dd%02df ", 
+			abs(fData_40003544), 
+			abs((fData_40003544 - (int)fData_40003544) * 60));
+		#endif
 	}
 	//6d5c4
 	if (Data_40003548 > 0)
 	{
 		//6d5d4
+		#if 0
 		r4 = Data_40003548;
 		sprintf(Data_40002856, " Zone:E%02d", (r4 >= 0)? r4: -r4);
+		#else
+		sprintf(Data_40002856, " Zone:E%02d", abs(Data_40003548));
+		#endif
 	}
 	else
 	{
 		//6d604
+		#if 0
 		r4 = Data_40003548;
 		sprintf(Data_40002856, " Zone:W%02d", (r4 >= 0)? r4: -r4);
+		#else
+		sprintf(Data_40002856, " Zone:W%02d", abs(Data_40003548));
+		#endif
 	}
 	//6d630
 	func_659c(2000);
@@ -1603,7 +1637,7 @@ int main(void)
 		//6d64c
 		func_6518(); //-> get time from RTC
 		
-		if (Data_40002e5c > 2000)
+		if (Data_40002e5c < 2000)
 		{
 			//6d660
 			Data_40002e5c = 2000;
@@ -1646,6 +1680,90 @@ int main(void)
 			//6d8d4
 			bData_40002e7a = 1;
 			//6d8e0
+			dData_40002ce8 = Data_40004128.dData_144 - 0.00083333333333/* 1/1200 */;
+			Data_40002cd8 = dData_40002ce8;
+			
+			#if 0
+			sp64 = Data_40002cd8;
+			sp56 = dData_40002ce8 - sp64;
+			sp48 = sp56 * 60.0;
+			Data_40002cdc = sp48;
+			#else
+			Data_40002cdc = (dData_40002ce8 - Data_40002cd8) * 60.0;
+			#endif
+			
+			#if 0
+			sp64 = Data_40002cdc;
+			sp56 = sp64 / 60.0;
+			sp48 = Data_40002cd8;
+			sp40 = dData_40002ce8 - sp48;
+			sp32 = sp40 - sp56;
+			sp24 = sp32 * 3600.0;
+			fData_40002ce0 = sp24;
+			#else
+			fData_40002ce0 = (dData_40002ce8 - Data_40002cd8 - Data_40002cdc / 60.0) * 3600.0;
+			#endif
+			
+			fData_40002d18 = fabs(Data_40004128.dData_152);
+			Data_40002d00 = fData_40002d18;
+			
+			#if 0
+			float r5 = Data_40002d00;
+			float r4 = fData_40002d18 - r5;
+			sp64 = r4;
+			sp56 = sp64 * 60.0;
+			Data_40002d04 = sp56;
+			#else
+			Data_40002d04 = (fData_40002d18 - (float)Data_40002d00) * 60.0;
+			#endif
+			
+			#if 0
+			sp64 = Data_40002d04;
+			sp56 = sp64 / 60.0;
+			r5 = Data_40002d00;
+			r4 = fData_40002d18 - r5;
+			sp48 = r4;
+			sp40 = sp48 - sp56;
+			sp32 = sp40 * 3600.0;
+			fData_40002d08 = sp32;
+			#else
+			fData_40002d08 = (fData_40002d18 - (float)Data_40002d00 - Data_40002d04 / 60.0) * 3600.0;
+			#endif
+			
+			//6db14
+			if (Data_40004128.dData_80 >= 0.0)
+			{
+				//6db30
+				Data_40002d44 = 1;
+			}
+			else
+			{
+				//0x6db40
+				Data_40002d44 = -1;
+			}
+			//6db4c
+			func_6ae24(1);
+			
+			Data_40004128.dData_208 = dData_40002d80;
+			dData_400034e8 = dData_40002d80;
+			dData_40002dc0 = Data_40004128.dData_208;
+			dData_40002d78 = dData_40002d80;
+			
+			func_659c(5);
+			func_6ae24(2);
+			//6dbbc
+			Data_40004128.dData_216 = dData_40002da0;
+			dData_400034f8 = dData_40002da0;
+			dData_40002df8 = fabs(Data_40004128.dData_216);
+			dData_40002d98 = dData_40002df8;
+			dData_40002d98 = fabs(dData_40002d98);
+			//->0x6dc9c
+			while (dData_40002d98 > 360.0)
+			{
+				//0x6dc80
+				dData_40002d98 -= 360.0;
+			}
+			//6dcb4
 			
 			//TODO
 			
