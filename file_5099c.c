@@ -3,7 +3,6 @@
 #include "data.h"
 
 extern void func_243c(unsigned int PageAdr, int b, int Count, unsigned char* Data);
-extern void func_24d4(unsigned int PageAdr, unsigned short BufAdr, int Count, unsigned char* Data);
 extern void func_2df8(int a, int b, int c, int d, unsigned char* e);
 extern void func_5f40(void);
 

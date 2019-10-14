@@ -1418,7 +1418,7 @@ void func_243c(unsigned int PageAdr, int b, int Count, unsigned char* Data)
 }
 
 /* 24d4 - complete */
-void func_24d4(unsigned int PageAdr, unsigned short BufAdr, int Count, unsigned char* Data)
+void func_24d4(int PageAdr, unsigned short BufAdr, int Count, unsigned char* Data)
 {
 	unsigned short i;
 	IO1CLR = 0x1000000;
@@ -1757,8 +1757,8 @@ void func_3230(int a, int b, int c, int d)
 	d = a;
 }
 
-/* 3238 - todo */
-void func_3238(int a)
+/* 3238 - complete */
+void func_3238(unsigned short a)
 {
 	unsigned char buf[528];
 	
@@ -1791,8 +1791,8 @@ int func_32a4(void)
 	return Data_40002c24.wData;
 }
 
-/* 32ec - todo */
-void func_32ec(int a)
+/* 32ec - complete */
+void func_32ec(unsigned short a)
 {
 	unsigned char buf[528];
 	
@@ -2799,11 +2799,11 @@ void func_5f40(void)
 	Data_40002f10 = 0;
 }
 
-/* 6518 - todo */
+/* 6518 - complete */
 void func_6518(void)
 {
-	int r0 = CTIME0;
-	int r1 = CTIME1;
+	unsigned int r0 = CTIME0;
+	unsigned int r1 = CTIME1;
 	
 	Data_40002e5c = (r1 >> 16) & 0x0fff; //Year
 	bData_40002e60 = (r1 >> 8) & 0x0f; //Month
@@ -2856,14 +2856,14 @@ void func_65d4(double sp40, double sp48)
 			if (bData_40002c1a == 1)
 			{
 				//66f4
-				Data_400033c8.dwData = (0.0 * Data_40004128.dData_176 / 3600.0 - Data_40004128.dData_160) *
+				Data_400033c8.dwData = (Data_40004128.dData_160 - 0.0 * Data_40004128.dData_176 / 3600.0) *
 					256 / Data_40004128.dData_24;
 				//->6818
 			}
 			else
 			{
 				//6788
-				Data_400033c8.dwData = (0.6 * Data_40004128.dData_176 / 3600.0 - Data_40004128.dData_160) *
+				Data_400033c8.dwData = (Data_40004128.dData_160 - 0.6 * Data_40004128.dData_176 / 3600.0) *
 					256 / Data_40004128.dData_24;
 			}
 			//6818
@@ -3423,7 +3423,7 @@ double func_7654(int a, int b, double sp64, double sp88, double sp96)
 				sp40 *= -1;
 			}
 			//7784
-			if (sp40 < 10.0)
+			if (sp40 > 10.0)
 			{
 				sp40 = 10.0;
 			}
@@ -3446,7 +3446,7 @@ double func_7654(int a, int b, double sp64, double sp88, double sp96)
 				sp40 *= -1;
 			}
 			//0x7850
-			if (sp40 < 10.0)
+			if (sp40 > 10.0)
 			{
 				sp40 = 10.0;
 			}
