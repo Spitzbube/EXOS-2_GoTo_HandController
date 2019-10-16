@@ -31,6 +31,7 @@ unsigned char Data_40002827[16]; //40002827 size???
 char Data_40002837[16]; //40002837 size??
 char Data_40002847[15]; //40002847 size??
 char Data_40002856[20]; //40002856 size???
+int Data_40002bc4[13]; //40002bc4
 unsigned char Data_40002bf8[8]; //40002bf8, size??
 unsigned char bData_40002c00; //40002c00
 unsigned char bData_40002c01; //40002c01
@@ -304,6 +305,8 @@ Union_400033c8 Data_400033c8; //400033c8
 Union_400033cc Data_400033cc; //400033cc
 double dData_400033d8; //400033d8
 double dData_400033e0; //400033e0
+double dData_400033e8; //400033e8
+double dData_400033f0; //400033f0
 int Data_40003408; //40003408
 int Data_4000340c; //4000340c
 double dData_40003410; //40003410
@@ -322,6 +325,7 @@ int Data_4000348c; //4000348c
 double dData_40003490; //40003490
 char bData_40003498; //40003498
 double dData_400034a0; //400034a0
+unsigned char bData_400034a8; //400034a8
 char bData_400034a9; //400034a9
 char bData_400034aa; //400034aa
 char bData_400034b4; //400034b4
@@ -332,9 +336,12 @@ float fData_400034c0; //400034c0
 float fData_400034c4; //400034c4
 float fData_400034c8; //400034c8
 char bData_400034cc; //400034cc
+char bData_400034cd; //400034cd
 double Data_400034d0; //400034d0
 double Data_400034d8; //400034d8
+double dData_400034e0; //400034e0
 double dData_400034e8; //400034e8
+double dData_400034f0; //400034f0
 double dData_400034f8; //400034f8
 char bData_40003505;  //40003505
 float fData_40003508; //40003508
@@ -380,6 +387,11 @@ char Data_4000403c[80]; //4000403c, size???
 char Data_4000410e[21]; //4000410e, size???
 Struct_40004128 Data_40004128; //40004128
 Struct_40004380 Data_40004380; //40004380
+#if 0
+float Data_40004a68[2][2]; //40004a68, array, size???
+#else
+float Data_40004a68[4]; //40004a68, array, size???
+#endif
 Struct_8ba4_0 Data_40004ad8; //40004ad8
 Struct_8ba4 Data_40004ae8; //40004ae8
 double Data_40004b08[7]; //40004b08, array, size???
