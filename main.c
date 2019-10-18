@@ -11,7 +11,7 @@ extern void uart1_write_byte(char);
 extern void uart1_init(int);
 extern void uart0_send(unsigned char* a, unsigned char b);
 extern void func_394(void);
-extern void func_7e8(int, int, int, unsigned char, const unsigned char*);
+extern void func_7e8(int, unsigned char, unsigned char, unsigned char, const unsigned char*);
 extern int func_11d8(void);
 extern void func_1210(void);
 extern void func_2254(unsigned int);
@@ -300,14 +300,14 @@ void func_3d72c(void)
 				func_7e8(0, 6, 1, 2, Data_40003394);
 				func_7e8(0, 7, 1, 2, Data_40003398);
 				func_7e8(0, 8, 1, 2, Data_4000339c);	
-				func_7e8(1, 1, 3, strlen(Data_40003360) & 0xFF, Data_40003360);
-				func_7e8(0, 2, 3, strlen(Data_40003364) & 0xFF, Data_40003364);
-				func_7e8(0, 3, 3, strlen(Data_40003368) & 0xFF, Data_40003368);
-				func_7e8(0, 4, 3, strlen(Data_4000336c) & 0xFF, Data_4000336c);
-				func_7e8(0, 5, 3, strlen(Data_40003370) & 0xFF, Data_40003370);
-				func_7e8(0, 6, 3, strlen(Data_40003374) & 0xFF, Data_40003374);
-				func_7e8(0, 7, 3, strlen(Data_40003378) & 0xFF, Data_40003378);
-				func_7e8(0, 8, 3, strlen(Data_4000337c) & 0xFF, Data_4000337c);
+				func_7e8(1, 1, 3, strlen(Data_40003360), Data_40003360);
+				func_7e8(0, 2, 3, strlen(Data_40003364), Data_40003364);
+				func_7e8(0, 3, 3, strlen(Data_40003368), Data_40003368);
+				func_7e8(0, 4, 3, strlen(Data_4000336c), Data_4000336c);
+				func_7e8(0, 5, 3, strlen(Data_40003370), Data_40003370);
+				func_7e8(0, 6, 3, strlen(Data_40003374), Data_40003374);
+				func_7e8(0, 7, 3, strlen(Data_40003378), Data_40003378);
+				func_7e8(0, 8, 3, strlen(Data_4000337c), Data_4000337c);
 				//->3efa8
 			
 			case 2:
