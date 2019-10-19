@@ -5909,42 +5909,283 @@ double mercury_radius_vector(double a)
 }
 
 /* 10b2c - todo */
-double func_10b2c(double a)
+double venus_ecliptic_longitude(double a)
 {
+	double L0 = 0.0;
+	double L1 = 0.0;
+	double L2 = 0.0;
+	double L3 = 0.0;
+	double L4 = 0.0;
+	double L5 = 0.0;
+	double res = 0.0;
+	
+	L0 += 317614667 * cos(0.0 + a * 0.0);
+	L0 += 1353968 * cos(5.5931332 + a * 10213.2855462);
+	L0 += 89892 * cos(5.30650 + a * 20426.57109);
+	L0 += 5477 * cos(4.4163 + a * 7860.4194);
+	
+	L1 += 1021352943053 * cos(0.0 + a * 0.0);
+	L1 += 95708 * cos(2.46424 + a * 10213.28555);
+	L1 += 14445 * cos(0.51625 + a * 20426.57109);
+	
+	L2 += 54127 * cos(0.0 + a * 0.0);
+	L2 += 3891 * cos(0.3451 + a * 10213.2855);
+	L2 += 1338 * cos(2.0201 + a * 20426.5711);
+	
+	res = (L0 +
+		L1 * a +
+		L2 * a*a + 
+		L3 * a*a*a +
+		L4 * a*a*a*a +
+		L5 * a*a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
 /* 1127c - todo */
-double func_1127c(double a)
+double venus_ecliptic_latitude(double a)
 {
+	double B0 = 0.0;
+	double B1 = 0.0;
+	double B2 = 0.0;
+	double B3 = 0.0;
+	double B4 = 0.0;
+	double res = 0.0;
+	
+	B0 += 5923638 * cos(0.2670278 + a * 10213.2855462);
+	B0 += 40108 * cos(1.14737 + a * 20426.57109);
+	B0 += 32815 * cos(3.14159 + a * 0.0);
+	
+	B1 += 513348 * cos(1.803643 + a * 10213.285546);
+	B1 += 4380 * cos(3.3862 + a * 20426.5711);
+	
+	B2 += 22378 * cos(3.38509 + a * 10213.28555);
+	
+	res = (B0 + B1 * a + B2 * a*a + B3 * a*a*a + B4 * a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
 /* 1173c - todo */
-double func_1173c(double a)
+double venus_radius_vector(double a)
 {
+	double R0 = 0.0;
+	double R1 = 0.0;
+	double R2 = 0.0;
+	double R3 = 0.0;
+	double R4 = 0.0;
+	double res = 0.0;
+	
+	R0 += 72334821 * cos(0.0 + a * 0.0);
+	R0 += 489824 * cos(4.021518 + a * 10213.285546);
+
+	R1 += 34551 * cos(0.89199 + a * 10213.28555);
+
+	R2 += 1407 * cos(5.0637 + a * 10213.2855);
+	
+	res = (R0 + R1 * a + R2 * a*a + R3 * a*a*a + R4 * a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
-double func_11af4(double a)
+/* 11af4 - todo */
+double mars_ecliptic_longitude(double a)
 {
+	double L0 = 0.0;
+	double L1 = 0.0;
+	double L2 = 0.0;
+	double L3 = 0.0;
+	double L4 = 0.0;
+	double L5 = 0.0;
+	double res = 0.0;
+	
+	L0 += 620347712 * cos(0.0 + a * 0.0);
+	L0 += 18656368 * cos(5.05037100 + a * 3340.61242670);
+	L0 += 1108217 * cos(5.4009984 + a * 6681.2248534);
+	L0 += 91798 * cos(5.75479 + a * 10021.83728);
+	L0 += 27745 * cos(5.97050 + a * 3.52312);
+	L0 += 12316 * cos(0.84956 + a * 2810.92146);
+	L0 += 10610 * cos(2.93959 + a * 2281.23050);
+
+	L1 += 334085627474 * cos(0.0 + a * 0.0);
+	L1 += 1458227 * cos(3.6042605 + a * 3340.6124267);
+	L1 += 164901 * cos(3.926313 + a * 6681.224853);
+	L1 += 19963 * cos(4.26594 + a * 10021.83728);
+
+	L2 += 58016 * cos(2.04979 + a * 3340.61243);
+	L2 += 54188 * cos(0.0 + a * 0.0);
+	L2 += 13908 * cos(2.45742 + a * 6681.22485);
+	
+	res = (L0 + L1 * a + L2 * a*a + L3 * a*a*a + L4 * a*a*a*a + L5 * a*a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 	
-double func_12450(double a)
+/* 12450 - todo */
+double mars_ecliptic_latitude(double a)
 {
+	double B0 = 0.0;
+	double B1 = 0.0;
+	double B2 = 0.0;
+	double B3 = 0.0;
+	double B4 = 0.0;
+	double res = 0.0;
+	
+	B0 += 3197135 * cos(3.7683204 + a * 3340.6124267);
+	B0 += 298033 * cos(4.106170 + a * 6681.224853);
+	B0 += 289105 * cos(0.0 + a * 0.0);
+	B0 += 31366 * cos(4.44651 + a * 10021.83728);
+	
+	B1 += 350069 * cos(5.368478 + a * 3340.612427);
+	B1 += 14116 * cos(3.14159 + a * 0.0);
+	B1 += 9671 * cos(5.4788 + a * 6681.2249);
+
+	B2 += 16727 * cos(0.60221 + a * 3340.61243);
+	B2 += 4987 * cos(3.1416 + a * 0.0);
+
+	res = (B0 + B1 * a + B2 * a*a + B3 * a*a*a + B4 * a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
-double func_12a8c(double a)
+/* 12a8c - todo */
+double mars_radius_vector(double a)
 {
+	double R0 = 0.0;
+	double R1 = 0.0;
+	double R2 = 0.0;
+	double R3 = 0.0;
+	double R4 = 0.0;
+	double res = 0.0;
+	
+	R0 += 153033488 * cos(0.0 + a * 0.0);
+	R0 += 14184953 * cos(3.47971284 + a * 3340.61242670);
+	R0 += 660776 * cos(3.817834 + a * 6681.224853);
+	R0 += 46179 * cos(4.15595 + a * 10021.83728);
+	R0 += 8110 * cos(5.5596 + a * 2810.9215);
+	
+	R1 += 1107433 * cos(2.0325052 + a * 3340.6124267);
+	R1 += 103176 * cos(2.370718 + a * 6681.224853);
+	R1 += 12877 * cos(0.0 + a * 0.0);
+	R1 += 10816 * cos(2.70888 + a * 10021.83728);
+	
+	R2 += 44242 * cos(0.47931 + a * 3340.61243);
+	R2 += 8138 * cos(0.8700 + a * 6681.2249);
+
+	res = (R0 + R1 * a + R2 * a*a + R3 * a*a*a + R4 * a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
-double func_131ac(double a)
+/* 131ac - todo */
+double jupiter_ecliptic_longitude(double a)
 {
+	double L0 = 0.0;
+	double L1 = 0.0;
+	double L2 = 0.0;
+	double L3 = 0.0;
+	double L4 = 0.0;
+	double L5 = 0.0;
+	double res = 0.0;
+	
+	L0 += 59954691 * cos(0.0 + a * 0.0);
+	L0 += 9695899 * cos(5.0619179 + a * 529.6909651);
+	L0 += 573610 * cos(1.444062 + a * 7.113547);
+	L0 += 306389 * cos(5.41734/*5.417347*/ + a * 1059.381930); //BUG?
+	L0 += 97178 * cos(4.14265 + a * 632.78374);
+	L0 += 72903 * cos(3.64043 + a * 522.57742);
+	L0 += 64264 * cos(3.41145 + a * 103.09277);
+
+	L1 += 52993480757 * cos(0.0 + a * 0.0);
+	L1 += 489741 * cos(4.220667 + a * 529.690965);
+	L1 += 228919 * cos(6.026475 + a * 7.113547);
+	L1 += 27655 * cos(4.57266 + a * 1059.38193);
+	L1 += 20721 * cos(5.45939 + a * 522.57742);
+	L1 += 12106 * cos(0.16986 + a * 536.80451);
+
+	L2 += 47234 * cos(4.32148 + a * 7.11355);
+	L2 += 38966 * cos(0.0 + a * 0.0);
+	L2 += 30629 * cos(2.93021 + a * 529.69097);
+
+	L3 += 6502 * cos(2.5986 + a * 7.1135);
+	L3 += 1357 * cos(1.3464 + a * 529.6910);
+
+	res = (L0 + L1 * a + L2 * a*a + L3 * a*a*a + L4 * a*a*a*a + L5 * a*a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
-double func_13d10(double a)
+/* 13d10 - todo */
+double jupiter_ecliptic_latitude(double a)
 {
+	double B0 = 0.0;
+	double B1 = 0.0;
+	double B2 = 0.0;
+	double B3 = 0.0;
+	double B4 = 0.0;
+	double B5 = 0.0;
+	double res = 0.0;
+	
+	B0 += 2268616 * cos(3.5585261 + a * 529.6909651);
+	B0 += 110090 * cos(0.0 + a * 0.0);
+	B0 += 109972 * cos(3.908093 + a * 1059.381930);
+
+	B1 += 177352 * cos(5.701665 + a * 529.690965);
+	B1 += 3230 * cos(5.7794 + a * 1059.3819);
+	B1 += 3081 * cos(5.4746 + a * 522.5774);
+	B1 += 2212 * cos(4.7346/*4.7348*/ + a * 536.8045); //BUG?
+	B1 += 1694 * cos(3.1416 + a * 0.0);
+
+	B2 += 8094 * cos(1.4632 + a * 529.6910);
+	B2 += 813 * cos(3.1416 + a * 0.0);
+	B2 += 742 * cos(0.957 + a * 522.577);
+	B2 += 399 * cos(2.899 + a * 536.8); //536.805); //BUG?
+	B2 += 342 * cos(1.447 + a * 1059.382);
+	
+	res = (B0 + B1 * a + B2 * a*a + B3 * a*a*a + B4 * a*a*a*a + B5 * a*a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
-double func_145e4(double a)
+/* 145e4 - todo */
+double jupiter_radius_vector(double a)
 {
+	double R0 = 0.0;
+	double R1 = 0.0;
+	double R2 = 0.0;
+	double R3 = 0.0;
+	double R4 = 0.0;
+	double R5 = 0.0;
+	double res = 0.0;
+	
+	R0 += 520887429 * cos(0.0 + a * 0.0);
+	R0 += 25209327 * cos(3.49108640 + a * 529.69096509);
+	R0 += 610600 * cos(3.841154 + a * 1059.381930);
+	R0 += 282029 * cos(2.574199 + a * 632.783739);
+	R0 += 187647 * cos(2.075904 + a * 522.577418);
+	R0 += 86793 * cos(0.71001 + a * 419.48464);
+	R0 += 72063 * cos(0.21466 + a * 536.80451);
+	R0 += 65517 * cos(5.97996 + a * 316.39187);
+	R0 += 30135 * cos(2.16132 + a * 949.17561);
+	R0 += 29135 * cos(1.67759 + a * 103.02977); //103.09277); //BUG?
+	R0 += 23947 * cos(0.27458 + a * 7.11355);
+
+	R1 += 1271802 * cos(2.6493751 + a * 529.6909651);
+	R1 += 61662 * cos(3.00076 + a * 1059.38193);
+	R1 += 53444 * cos(3.89718 + a * 522.57742);
+	R1 += 41390 * cos(0.0 + a * 0.0);
+	R1 += 31185 * cos(4.88277 + a * 536.80451);
+	R1 += 11847 * cos(2.41330 + a * 419.48464);
+	R1 += 9166 * cos(4.7598 + a * 7.1135);
+
+	R2 += 79645 * cos(1.35866 + a * 529.69097);
+	R2 += 8252 * cos(5.7777 + a * 522.5774);
+	R2 += 7030 * cos(3.2748 + a * 536.8045);
+	R2 += 5314 * cos(1.8384 + a * 1059.3819);
+
+	res = (R0 + R1 * a + R2 * a*a + R3 * a*a*a + R4 * a*a*a*a + R5 * a*a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
 double func_15340(double a)
@@ -6256,25 +6497,25 @@ void func_1b528(int a, double* b, double* c)
 		
 		case 1: //Venus
 			//0x1b720
-			Lrad/*sp520*/ = func_10b2c(Tau/*sp536*/);
-			Brad/*sp512*/ = func_1127c(Tau/*sp536*/);
-			R/*sp504*/ = func_1173c(Tau/*sp536*/);
+			Lrad/*sp520*/ = venus_ecliptic_longitude(Tau/*sp536*/);
+			Brad/*sp512*/ = venus_ecliptic_latitude(Tau/*sp536*/);
+			R/*sp504*/ = venus_radius_vector(Tau/*sp536*/);
 			//->0x1b8c0
 			break;
 		
 		case 2: //Mars
 			//0x1b764
-			Lrad/*sp520*/ = func_11af4(Tau/*sp536*/);
-			Brad/*sp512*/ = func_12450(Tau/*sp536*/);
-			R/*sp504*/ = func_12a8c(Tau/*sp536*/);
+			Lrad/*sp520*/ = mars_ecliptic_longitude(Tau/*sp536*/);
+			Brad/*sp512*/ = mars_ecliptic_latitude(Tau/*sp536*/);
+			R/*sp504*/ = mars_radius_vector(Tau/*sp536*/);
 			//->0x1b8c0
 			break;
 		
 		case 3: //Jupiter
 			//0x1b7a8
-			Lrad/*sp520*/ = func_131ac(Tau/*sp536*/);
-			Brad/*sp512*/ = func_13d10(Tau/*sp536*/);
-			R/*sp504*/ = func_145e4(Tau/*sp536*/);
+			Lrad/*sp520*/ = jupiter_ecliptic_longitude(Tau/*sp536*/);
+			Brad/*sp512*/ = jupiter_ecliptic_latitude(Tau/*sp536*/);
+			R/*sp504*/ = jupiter_radius_vector(Tau/*sp536*/);
 			//->0x1b8c0
 			break;
 		
