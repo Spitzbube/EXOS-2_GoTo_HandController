@@ -6301,16 +6301,101 @@ double saturn_radius_vector(double a)
 	return res;
 }
 
-double func_17630(double a)
+/* 17630 - todo */
+double uranus_ecliptic_longitude(double a)
 {
+	double L0 = 0.0;
+	double L1 = 0.0;
+	double L2 = 0.0;
+	double L3 = 0.0;
+	double L4 = 0.0;
+	double res = 0.0;
+	
+	L0 += 548129294 * cos(0.0 + a * 0.0);
+	L0 += 9260408 * cos(0.8910642 + a * 74.7815986);
+	L0 += 1504248 * cos(3.6271926 + a * 1.4844727);
+	L0 += 365982 * cos(1.899622 + a * 73.297126);
+	L0 += 272328 * cos(3.358237 + a * 149.563197);
+	L0 += 70328 * cos(5.39254 + a * 63.73590);
+	L0 += 68893 * cos(6.09292 + a * 76.26607);
+	L0 += 61999 * cos(2.26952 + a * 2.96895);
+	L0 += 61951 * cos(2.85099 + a * 11.04570);
+	L0 += 26469 * cos(3.14152 + a * 71.81265 );
+	L0 += 25711 * cos(6.11380 + a * 454.90937 );
+
+	L1 += 7502543122 * cos(0.0 + a * 0.0);
+	L1 += 154458 * cos(5.242017 + a * 74.7815986); //74.781599); //BUG?
+	L1 += 24456 * cos(1.71256 + a * 1.4844727); //1.48447); //BUG?
+	L1 += 9258 * cos(0.4284 + a * 73.297126); //11.0457); //BUG?
+	L1 += 8266 * cos(1.5022 + a * 149.563197); //63.7359); //BUG?
+	L1 += 7842 * cos(1.3198 + a * 63.7359); //149.5632); //BUG?
+
+	L2 += 53033 * cos(0.0 + a * 0.0);
+	L2 += 2358 * cos(2.2601 + a * 74.7816);
+
+	res = (L0 + L1 * a + L2 * a*a + L3 * a*a*a + L4 * a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
-double func_18160(double a)
+/* 18160 - todo */
+double uranus_ecliptic_latitude(double a)
 {
+	double B0 = 0.0;
+	double B1 = 0.0;
+	double B2 = 0.0;
+	double B3 = 0.0;
+	double B4 = 0.0;
+	double res = 0.0;
+	
+	B0 += 1346278 * cos(2.6187781 + a * 74.7815986);
+	B0 += 62341 * cos(5.08111 + a * 149.56320);
+	B0 += 61601 * cos(3.14159 + a * 0.0);
+	B0 += 9964 * cos(1.6160 + a * 76.2661);
+	B0 += 9926 * cos(0.5763 + a * 73.2971);
+
+	B1 += 206366 * cos(4.123943 + a * 74.781599);
+	B1 += 8563 * cos(0.3382 + a * 149.5632);
+
+	B2 += 9212 * cos(5.8004 + a * 74.7816);
+	
+	res = (B0 + B1 * a + B2 * a*a + B3 * a*a*a + B4 * a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
-double func_18748(double a)
+/* 18748 - todo */
+double uranus_radius_vector(double a)
 {
+	double R0 = 0.0;
+	double R1 = 0.0;
+	double R2 = 0.0;
+	double R3 = 0.0;
+	double R4 = 0.0;
+	double res = 0.0;
+	
+	R0 += 1921264848 * cos(0 + a * 0);
+	R0 += 88784984 * cos(5.60377527 + a * 74.78159857);
+	R0 += 3440836 * cos(0.3283610 + a * 73.2971259);
+	R0 += 2055653 * cos(1.7829517 + a * 149.5631971);
+	R0 += 649322 * cos(4.522473 + a * 76.266071);
+	R0 += 602248 * cos(3.860038 + a * 63.735898);
+	R0 += 496404 * cos(1.401399 + a * 454.909367);
+	R0 += 338526 * cos(1.580027 + a * 138.517497);
+
+	R1 += 1479896 * cos(3.6720571 + a * 74.7815986);
+	R1 += 71212 * cos(6.22601 + a * 63.73590);
+	R1 += 68627 * cos(6.13411 + a * 149.56320);
+	R1 += 24060 * cos(3.14159 + a * 0);
+	R1 += 21468 * cos(2.60177 + a * 76.26607);
+	R1 += 20857 * cos(5.24625 + a * 11.04570);
+
+	R2 += 22440 * cos(0.69953 + a * 74.78160);
+	R2 += 4727 * cos(1.6990 + a * 63.7359);
+
+	res = (R0 + R1 * a + R2 * a*a + R3 * a*a*a + R4 * a*a*a*a) / 100000000.0;
+		
+	return res;
 }
 
 double func_19118(double a)
@@ -6630,9 +6715,9 @@ void func_1b528(int a, double* b, double* c)
 		
 		case 5: //Uranus
 			//0x1b830
-			Lrad/*sp520*/ = func_17630(Tau/*sp536*/);
-			Brad/*sp512*/ = func_18160(Tau/*sp536*/);
-			R/*sp504*/ = func_18748(Tau/*sp536*/);
+			Lrad/*sp520*/ = uranus_ecliptic_longitude(Tau/*sp536*/);
+			Brad/*sp512*/ = uranus_ecliptic_latitude(Tau/*sp536*/);
+			R/*sp504*/ = uranus_radius_vector(Tau/*sp536*/);
 			//->0x1b8c0
 			break;
 		
