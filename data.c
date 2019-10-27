@@ -60,6 +60,7 @@ int Data_40002c20; //40002c20
 Union_40002c24 Data_40002c24; //40002c24
 Union_40002c28 Data_40002c28; //40002c28
 char bData_40002c58; //40002c58
+char bData_40002c59; //40002c59
 char bData_40002c5a; //40002c5a
 int Data_40002c64; //40002c64
 char bData_40002c68; //40002c68
@@ -75,7 +76,7 @@ int Data_40002cb8; //40002cb8
 int Data_40002cbc; //40002cbc
 float fData_40002cc0; //40002cc0
 double dData_40002cc8; //40002cc8
-float fData_40002cd0; //40002cd0
+float fData_40002cd0_ObjectRightAscension; //40002cd0
 int Data_40002cd8; //40002cd8
 int Data_40002cdc; //40002cdc
 float fData_40002ce0; //40002ce0
@@ -83,11 +84,11 @@ double dData_40002ce8; //40002ce8
 int Data_40002cf4; //40002cf4
 int Data_40002cf8; //40002cf8
 float fData_40002cfc; //40002cfc
-int Data_40002d00; //40002d00
-int Data_40002d04; //40002d04
-float fData_40002d08; //40002d08
+int Data_40002d00_ObjectDeclinationDegrees; //40002d00
+int Data_40002d04_ObjectDeclinationMinutes; //40002d04
+float fData_40002d08_ObjectDeclinationSeconds; //40002d08
 double dData_40002d10; //40002d10
-float fData_40002d18; //40002d18
+float fData_40002d18_ObjectDeclination; //40002d18
 int Data_40002d20; //40002d20
 int Data_40002d24; //40002d24
 float fData_40002d28; //40002d28
@@ -164,7 +165,7 @@ float fData_40002ea8; //40002ea8
 int Data_40002eac; //40002eac
 int Data_40002eb0; //40002eb0
 char bData_40002eb4; //40002eb4
-unsigned char bData_40002eb5; //40002eb5
+unsigned char bData_40002eb5_SolarSystemObjectNr; //40002eb5
 unsigned short wData_40002eb6; //40002eb6
 unsigned short wData_40002eb8_MessierNr; //40002eb8
 unsigned short wData_40002eba_NGCNr; //40002eba
@@ -261,8 +262,8 @@ unsigned char bData_40003265; //40003265
 float Data_4000329c; //4000329c
 float Data_400032a0; //400032a0
 char bData_400032a4; //400032a4
-double dData_400032b0; //400032b0
-double dData_400032b8; //400032b8
+double dData_400032b0_SunRightAscension; //400032b0
+double dData_400032b8_SunDeclination; //400032b8
 double dData_400032c0; //400032c0
 double dData_400032c8; //400032c8
 double dData_400032d0; //400032d0

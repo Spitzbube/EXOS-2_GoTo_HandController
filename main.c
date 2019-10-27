@@ -41,14 +41,11 @@ extern void func_d784(int a);
 extern void func_5099c(void);
 extern void func_51368(void);
 
-extern void func_1e17c(void);
+extern void get_all_solar_system_object_equatorial_coordinates(void);
 extern void func_1e228(void);
 extern void func_3d72c(void);
+extern void func_20b94(void);
 
-/* 20b94 - todo */
-void func_20b94(void)
-{
-}
 
 /* 24574 - todo */
 void func_24574(void)
@@ -1704,30 +1701,32 @@ int main(void)
 			fData_40002ce0 = (dData_40002ce8 - Data_40002cd8 - Data_40002cdc / 60.0) * 3600.0;
 			#endif
 			
-			fData_40002d18 = fabs(Data_40004128.dData_152);
-			Data_40002d00 = fData_40002d18;
+			fData_40002d18_ObjectDeclination = fabs(Data_40004128.dData_152);
+			Data_40002d00_ObjectDeclinationDegrees = fData_40002d18_ObjectDeclination;
 			
 			#if 0
 			float r5 = Data_40002d00;
-			float r4 = fData_40002d18 - r5;
+			float r4 = fData_40002d18_ObjectDeclination - r5;
 			sp64 = r4;
 			sp56 = sp64 * 60.0;
-			Data_40002d04 = sp56;
+			Data_40002d04_ObjectDeclinationMinutes = sp56;
 			#else
-			Data_40002d04 = (fData_40002d18 - (float)Data_40002d00) * 60.0;
+			Data_40002d04_ObjectDeclinationMinutes = (fData_40002d18_ObjectDeclination - 
+				(float)Data_40002d00_ObjectDeclinationDegrees) * 60.0;
 			#endif
 			
 			#if 0
-			sp64 = Data_40002d04;
+			sp64 = Data_40002d04_ObjectDeclinationMinutes;
 			sp56 = sp64 / 60.0;
 			r5 = Data_40002d00;
-			r4 = fData_40002d18 - r5;
+			r4 = fData_40002d18_ObjectDeclination - r5;
 			sp48 = r4;
 			sp40 = sp48 - sp56;
 			sp32 = sp40 * 3600.0;
-			fData_40002d08 = sp32;
+			fData_40002d08_ObjectDeclinationSeconds = sp32;
 			#else
-			fData_40002d08 = (fData_40002d18 - (float)Data_40002d00 - Data_40002d04 / 60.0) * 3600.0;
+			fData_40002d08_ObjectDeclinationSeconds = (fData_40002d18_ObjectDeclination - 
+				(float)Data_40002d00_ObjectDeclinationDegrees - Data_40002d04_ObjectDeclinationMinutes / 60.0) * 3600.0;
 			#endif
 			
 			//6db14
@@ -1796,7 +1795,7 @@ int main(void)
 			//6f8e0
 			func_394();
 			func_7e8(0, 4, 1, 22, "System Initializing...");
-			func_1e17c();
+			get_all_solar_system_object_equatorial_coordinates();
 			func_659c(1000);
 			func_7950(1);
 			func_394();

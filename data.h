@@ -180,6 +180,7 @@ extern int Data_40002c20; //40002c20
 extern Union_40002c24 Data_40002c24; //40002c24
 extern Union_40002c28 Data_40002c28; //40002c28
 extern char bData_40002c58; //40002c58
+extern char bData_40002c59; //40002c59
 extern char bData_40002c5a; //40002c5a
 extern int Data_40002c64; //40002c64
 extern char bData_40002c68; //40002c68
@@ -195,7 +196,7 @@ extern int Data_40002cb8; //40002cb8
 extern int Data_40002cbc; //40002cbc
 extern float fData_40002cc0; //40002cc0
 extern double dData_40002cc8; //40002cc8
-extern float fData_40002cd0; //40002cd0
+extern float fData_40002cd0_ObjectRightAscension; //40002cd0
 extern int Data_40002cd8; //40002cd8
 extern int Data_40002cdc; //40002cdc
 extern float fData_40002ce0; //40002ce0
@@ -203,11 +204,11 @@ extern double dData_40002ce8; //40002ce8
 extern int Data_40002cf4; //40002cf4
 extern int Data_40002cf8; //40002cf8
 extern float fData_40002cfc; //40002cfc
-extern int Data_40002d00; //40002d00
-extern int Data_40002d04; //40002d04
-extern float fData_40002d08; //40002d08
+extern int Data_40002d00_ObjectDeclinationDegrees; //40002d00
+extern int Data_40002d04_ObjectDeclinationMinutes; //40002d04
+extern float fData_40002d08_ObjectDeclinationSeconds; //40002d08
 extern double dData_40002d10; //40002d10
-extern float fData_40002d18; //40002d18
+extern float fData_40002d18_ObjectDeclination; //40002d18
 extern int Data_40002d20; //40002d20
 extern int Data_40002d24; //40002d24
 extern float fData_40002d28; //40002d28
@@ -284,7 +285,7 @@ extern float fData_40002ea8; //40002ea8
 extern int Data_40002eac; //40002eac
 extern int Data_40002eb0; //40002eb0
 extern char bData_40002eb4; //40002eb4
-extern unsigned char bData_40002eb5; //40002eb5
+extern unsigned char bData_40002eb5_SolarSystemObjectNr; //40002eb5
 extern unsigned short wData_40002eb6; //40002eb6
 extern unsigned short wData_40002eb8_MessierNr; //40002eb8
 extern unsigned short wData_40002eba_NGCNr; //40002eba
@@ -382,8 +383,8 @@ extern unsigned char bData_40003265; //40003265
 extern float Data_4000329c; //4000329c
 extern float Data_400032a0; //400032a0
 extern char bData_400032a4; //400032a4
-extern double dData_400032b0; //400032b0
-extern double dData_400032b8; //400032b8
+extern double dData_400032b0_SunRightAscension; //400032b0
+extern double dData_400032b8_SunDeclination; //400032b8
 extern double dData_400032c0; //400032c0
 extern double dData_400032c8; //400032c8
 extern double dData_400032d0; //400032d0

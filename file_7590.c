@@ -12,9 +12,3 @@ extern void func_7978(Struct_7978 sp, double* sp272, double* sp276);
 extern double func_7f30(int a, int b, double sp192);
 extern void func_8ba4(double sp176, double sp184, Struct_8ba4 b, int r4, int r5, double* r6);
 
-
-/* 1e228 - todo */
-void func_1e228(void)
-{
-}
-
