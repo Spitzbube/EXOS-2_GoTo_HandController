@@ -2773,7 +2773,7 @@ void func_5f40(void)
 	Data_40002ea4 = 0;
 	Data_40002eb0 = 0;
 	bData_40002eb4 = 0;
-	bData_40002eb5 = 0;
+	bData_40002eb5_SolarSystemObjectNr = 0;
 	wData_40002eb6 = 0;
 	wData_40002eb8_MessierNr = 0;
 	wData_40002eba_NGCNr = 0;
@@ -6713,72 +6713,46 @@ double func_1af1c(double a)
 	return a;
 }
 
-/* 1afc0 - todo */
-void func_1afc0(double Lambda/*sp96*/, double Beta/*sp104*/, double Epsilon/*sp128*/, /*sp136*/double* pAlpha/*r4*/, double* pDelta/*r5*/)
+/* 1afc0 - complete */
+void transform_ecliptical_to_equatorial_coordinates(double Lambda, double Beta, double Epsilon, double* pAlpha, double* pDelta)
 {
-	double Pi/*sp88*/ = 3.1415927;
-	double Alpha/*sp80*/;
-	double Delta/*sp72*/;
+	double Pi = 3.1415927;
+	double Alpha;
+	double Delta;
 	int r6;
 	
-	Lambda/*sp96*/ = Lambda/*sp96*/ * Pi/*sp88*/ / 180.0;
-	Beta/*sp104*/ = Beta/*sp104*/ * Pi/*sp88*/ / 180.0;
-	Epsilon/*sp128*/ = Epsilon/*sp128*/ * Pi/*sp88*/ / 180.0;
+	Lambda = Lambda * Pi / 180.0;
+	Beta = Beta * Pi / 180.0;
+	Epsilon = Epsilon * Pi / 180.0;
 	
-	#if 0
-	sp64 = cos(sp96);
-	sp56 = sin(sp128);
-	sp48 = tan(sp104);
-	sp40 = sp48 * sp56;
-	sp32 = cos(sp128);
-	sp24 = sin(sp96);
-	sp16 = sp24 * sp32;
-	sp8 = sp16 - sp40;
-	sp = sp8 / sp64;
-	sp80 = atan(sp);
-	#else
-	Alpha/*sp80*/ = atan((sin(Lambda/*sp96*/) * cos(Epsilon/*sp128*/) - (tan(Beta/*sp104*/) * sin(Epsilon/*sp128*/))) / cos(Lambda/*sp96*/));
-	#endif
+	Alpha = atan((sin(Lambda) * cos(Epsilon) - (tan(Beta) * sin(Epsilon))) / cos(Lambda));
 	
-	Alpha/*sp80*/ = Alpha/*sp80*/ * 180.0 / Pi/*sp88*/;
+	Alpha = Alpha * 180.0 / Pi;
 
-	#if 0
-	sp64 = sin(sp96);
-	sp56 = sin(sp128);
-	sp48 = cos(sp104);
-	sp40 = sp48 * sp56;
-	sp32 = sp40 * sp64;
-	sp24 = cos(sp128);
-	sp16 = sin(sp104);
-	sp8 = sp16 * sp24;
-	sp = sp8 + sp32;
-	sp72 = asin(sp);
-	#else
-	Delta/*sp72*/ = asin(sin(Beta/*sp104*/) * cos(Epsilon/*sp128*/) + cos(Beta/*sp104*/) * sin(Epsilon/*sp128*/) * sin(Lambda/*sp96*/));
-	#endif
+	Delta = asin(sin(Beta) * cos(Epsilon) + cos(Beta) * sin(Epsilon) * sin(Lambda));
 	
-	Delta/*sp72*/ = Delta/*sp72*/ * 180.0 / Pi/*sp88*/;
-	Lambda/*sp96*/ = Lambda/*sp96*/ * 180.0 / Pi/*sp88*/;
+	Delta = Delta * 180.0 / Pi;
+	Lambda = Lambda * 180.0 / Pi;
 	
-	if ((Lambda/*sp96*/ > 0.0) && (Lambda/*sp96*/ <= 90.0))
+	if ((Lambda > 0.0) && (Lambda <= 90.0))
 	{
 		//1b2b4
 		r6 = 1;
 	}
 	//0x1b2b8
-	if ((Lambda/*sp96*/ > 90.0) && (Lambda/*sp96*/ <= 180.0))
+	if ((Lambda > 90.0) && (Lambda <= 180.0))
 	{
 		//1b2e8
 		r6 = 2;
 	}
 	//0x1b2ec
-	if ((Lambda/*sp96*/ > 180.0) && (Lambda/*sp96*/ <= 270.0))
+	if ((Lambda > 180.0) && (Lambda <= 270.0))
 	{
 		//1b31c
 		r6 = 3;
 	}
 	//0x1b320
-	if ((Lambda/*sp96*/ > 270.0) && (Lambda/*sp96*/ <= 360.0))
+	if ((Lambda > 270.0) && (Lambda <= 360.0))
 	{
 		//1b350
 		r6 = 4;
@@ -6788,54 +6762,54 @@ void func_1afc0(double Lambda/*sp96*/, double Beta/*sp104*/, double Epsilon/*sp1
 	{
 		case 1:
 			//0x1b378
-			if (Alpha/*sp80*/ < 0)
+			if (Alpha < 0)
 			{
-				Alpha/*sp80*/ = -1.0 * Alpha/*sp80*/;
+				Alpha = -1.0 * Alpha;
 			}
 			//->0x1b4d0
 			break;
 		
 		case 2:
 			//0x1b3b4
-			if (Alpha/*sp80*/ >= 0)
+			if (Alpha >= 0)
 			{
 				//1b3d0
-				Alpha/*sp80*/ = 180.0 - Alpha/*sp80*/;
+				Alpha = 180.0 - Alpha;
 			}
 			else
 			{
 				//0x1b3f0
-				Alpha/*sp80*/ = 180.0 + Alpha/*sp80*/;
+				Alpha = 180.0 + Alpha;
 			}
 			//0x1b40c -> 0x1b4d0
 			break;
 		
 		case 3:
 			//0x1b410
-			if (Alpha/*sp80*/ >= 0)
+			if (Alpha >= 0)
 			{
 				//1b42c
-				Alpha/*sp80*/ = 180.0 + Alpha/*sp80*/;
+				Alpha = 180.0 + Alpha;
 			}
 			else
 			{
 				//0x1b44c
-				Alpha/*sp80*/ = 180.0 - Alpha/*sp80*/;
+				Alpha = 180.0 - Alpha;
 			}
 			//1b468 -> 0x1b4d0
 			break;
 		
 		case 4:
 			//0x1b46c
-			if (Alpha/*sp80*/ >= 0)
+			if (Alpha >= 0)
 			{
 				//1b488
-				Alpha/*sp80*/ = 360.0 - Alpha/*sp80*/;
+				Alpha = 360.0 - Alpha;
 			}
 			else
 			{
 				//0x1b4a8
-				Alpha/*sp80*/ = 360.0 + Alpha/*sp80*/;
+				Alpha = 360.0 + Alpha;
 			}
 			break;
 		
@@ -6844,13 +6818,13 @@ void func_1afc0(double Lambda/*sp96*/, double Beta/*sp104*/, double Epsilon/*sp1
 			break;
 	}
 	//1b4d4
-	Alpha/*sp80*/ /= 15.0;
-	*pAlpha = Alpha/*sp80*/;
-	*pDelta = Delta/*sp72*/;
+	Alpha /= 15.0;
+	*pAlpha = Alpha;
+	*pDelta = Delta;
 }
 
 /* 1b528 - todo */
-void func_1b528(int a, double* b, double* c)
+void get_solar_system_object_equatorial_coordinates(int a, double* pAlpha, double* pDelta)
 {
 	double Tau/*sp536*/;
 	double T/*sp528*/;
@@ -6870,8 +6844,8 @@ void func_1b528(int a, double* b, double* c)
 	double Epsilon/*sp416*/; //Obliquity of the Ecliptic
 	double Lambda/*sp408*/ = 0.0;
 	double Beta/*sp400*/;
-	double sp392;
-	double sp384;
+	double Alpha; //sp392; //Right Ascension
+	double Delta; //sp384; //Declination
 	double sp376;
 	double sp368;
 	double sp360;
@@ -6880,10 +6854,10 @@ void func_1b528(int a, double* b, double* c)
 	double sp336;
 	double sp328;
 	double sp320;
-	double sp312;
-	double sp304;
-	double sp296;
-	double sp288;
+	double AlphaPlutoRadians; //sp312;
+	double DeltaPlutoRadians; //sp304;
+	double AlphaPluto; //sp296;
+	double DeltaPluto; //sp288;
 	double sp280 = 0.0;
 	double sp272 = 0.0;
 	double sp264 = 0.0;
@@ -7018,46 +6992,14 @@ void func_1b528(int a, double* b, double* c)
 		}
 	}
 	//1bac8: get rectangular coords of planets
-	#if 0
-	sp176 = cos(sp456 / 180.0 * 3.1415927);
-	sp152 = cos(sp448 / 180.0 * 3.1415927);
-	sp144 = sp152 * sp464;
-	sp136 = sp144 * sp176;
-	sp112 = cos(sp496 / 180.0 * 3.1415927);
-	sp88 = cos(sp488 / 180.0 * 3.1415927);
-	sp80 = sp88 * sp504;
-	sp72 = sp80 * sp112;
-	sp440 = sp72 - sp136;
-	#else
 	x/*sp440*/ = R/*sp504*/ * cos(B/*sp488*/ / 180.0 * 3.1415927) * cos(L/*sp496*/ / 180.0 * 3.1415927) - 
 		R0/*sp464*/ * cos(B0/*sp448*/ / 180.0 * 3.1415927) * cos(L0/*sp456*/ / 180.0 * 3.1415927);
-	#endif
 	//1bc2c
-	#if 0
-	sp176 = sin(sp456 / 180.0 * 3.1415927);
-	sp152 = cos(sp448 / 180.0 * 3.1415927);
-	sp144 = sp152 * sp464;
-	sp136 = sp144 * sp176;
-	sp112 = sin(sp496 / 180.0 * 3.1415927);
-	sp88 = cos(sp488 / 180.0 * 3.1415927);
-	sp80 = sp88 * sp504;
-	sp72 = sp80 * sp112;
-	sp432 = sp72 - sp136;
-	#else
 	y/*sp432*/ = R/*sp504*/ * cos(B/*sp488*/ / 180.0 * 3.1415927) * sin(L/*sp496*/ / 180.0 * 3.1415927) - 
 		R0/*sp464*/ * cos(B0/*sp448*/ / 180.0 * 3.1415927) * sin(L0/*sp456*/ / 180.0 * 3.1415927);
-	#endif
 	//1bd90: get geocentric longitude lambda
-	#if 0
-	sp176 = sin(sp448 / 180.0 * 3.1415927);
-	sp168 = sp176 * sp464;
-	sp144 = sin(sp488 / 180.0 * 3.1415927);
-	sp136 = sp144 * sp504;
-	sp424 = sp136 - sp168;
-	#else
 	z/*sp424*/ = R/*sp504*/ * sin(B/*sp488*/ / 180.0 * 3.1415927) - 
 		R0/*sp464*/ * sin(B0/*sp448*/ / 180.0 * 3.1415927);
-	#endif
 	//1be4c
 	Lambda/*sp408*/ = atan(y/*sp432*/ / x/*sp440*/); //???
 	
@@ -7067,16 +7009,7 @@ void func_1b528(int a, double* b, double* c)
 		Lambda/*sp408*/ += 3.1415927;
 	}
 	//0x1bea0: get geocentric latitude, beta
-	#if 0
-	sp192 = sp432 * sp432;
-	sp184 = sp440 * sp440;
-	sp176 = sp184 + sp192;
-	sp168 = sqrt(sp176);
-	sp160 = sp424 / sp168;
-	sp400 = atan(sp160);
-	#else
 	Beta/*sp400*/ = atan(z/*sp424*/ / sqrt(x/*sp440*/ * x/*sp440*/ + y/*sp432*/ * y/*sp432*/));
-	#endif
 	//1bf20
 	Lambda/*sp408*/ = Lambda/*sp408*/ / 3.1415927 * 180.0;
 	//1bf54 -> 0x1bfcc
@@ -7103,25 +7036,10 @@ void func_1b528(int a, double* b, double* c)
 	//1bfd4
 	Beta/*sp400*/ = Beta/*sp400*/ / 3.1415927 * 180.0;
 	//1c008
-	#if 0
-	sp192 = 0x3f5db445ed4a1ad6 * sp528;
-	sp184 = sp192 * sp528;
-	sp176 = sp184 * sp528;
-	sp168 = sp176 / 3600.0;
-	sp160 = 0x3f4355475a31a4be * sp528;
-	sp152 = sp160 * sp528;
-	sp144 = sp152 / 3600.0;
-	sp136 = 0x40476851eb851eb8 * sp528;
-	sp128 = sp136 / 3600.0;
-	sp120 = 0x4037707561dba54e - sp128;
-	sp112 = sp120 - sp144;
-	sp416 = sp112 + sp168;
-	#else
 	Epsilon/*sp416*/ = 23.4392911111111104105475533288 - 
-		46.8150 * T/*sp528*/ / 3600.0 - 
-		0.00059 * T/*sp528*/ * T/*sp528*/ / 3600.0 + 
-		0.001813 * T/*sp528*/ * T/*sp528*/ * T/*sp528*/ / 3600.0;
-	#endif
+		46.8150 * T / 3600.0 - 
+		0.00059 * T * T / 3600.0 + 
+		0.001813 * T * T * T / 3600.0;
 	//1c120
 	if (a == 1) //Sun
 	{
@@ -7146,9 +7064,9 @@ void func_1b528(int a, double* b, double* c)
 	if (a == 9) //Pluto
 	{
 		//1c1d4
-		sp368 = func_1a2d0(T/*sp528*/);
-		sp360 = func_1a680(T/*sp528*/);
-		sp352 = func_1aac4(T/*sp528*/);
+		sp368 = func_1a2d0(T);
+		sp360 = func_1a680(T);
+		sp352 = func_1aac4(T);
 		
 		Lambda/*sp408*/ = L0/*sp456*/;
 		//->0x1c240
@@ -7165,189 +7083,57 @@ void func_1b528(int a, double* b, double* c)
 		//0x1c28c
 		Beta/*sp400*/ = -1.0 * B0/*sp448*/;
 		
-		#if 0
-		sp192 = sp408 / 180.0;
-		sp184 = sp192 * 3.1415927;
-		sp176 = cos(sp184);
-		sp168 = sp400 / 180.0;
-		sp160 = sp168 * 3.1415927;
-		sp152 = cos(sp160);
-		sp144 = -1.0 * sp464;
-		sp136 = sp144 * sp152;
-		sp344 = sp136 * sp176;
-		#else
 		sp344 = -1.0 * R0/*sp464*/ * cos(Beta/*sp400*/ / 180.0 * 3.1415927) * 
 			cos(Lambda/*sp408*/ / 180.0 * 3.1415927);
-		#endif
 		
-		#if 0
-		sp192 = sp408 / 180.0;
-		sp184 = sp192 * 3.1415927;
-		sp176 = sin(sp184);
-		sp168 = sp400 / 180.0;
-		sp160 = sp168 * 3.1415927;
-		sp152 = cos(sp160);
-		sp144 = -1.0 * sp464;
-		sp136 = sp144 * sp152;
-		sp336 = sp136 * sp176;
-		#else
 		sp336 = -1.0 * R0/*sp464*/ * cos(Beta/*sp400*/ / 180.0 * 3.1415927) * 
 			sin(Lambda/*sp408*/ / 180.0 * 3.1415927);
-		#endif
-		
-		#if 0
-		sp192 = sp400 / 180.0;
-		sp184 = sp192 * 3.1415927;
-		sp176 = sin(sp184);
-		sp168 = -1.0 * sp464;
-		sp328 = sp168 * sp176;
-		#else
+
 		sp328 = -1.0 * R0/*sp464*/ * sin(Beta/*sp400*/ / 180.0 * 3.1415927);
-		#endif
 		
-		//See: https://github.com/hvanruys/WhereIsTheMoon/blob/master/AAFK5.cpp
-		
-		#if 0
-		sp192 = /*0x3e899fed48a1046e*/0.000000190919 * sp328/*z*/;
-		sp184 = /*0x3e9d8d53c2fa2af4*/0.00000044036 * sp336/*y*/;
-		sp176 = sp184 + sp344/*x*/;
-		sp344 = sp176 - sp192;		
-		#else
 		sp344 = 0.00000044036 * sp336/*y*/ + sp344/*x*/ - 0.000000190919 * sp328/*z*/;		
-		#endif
-		
-		#if 0 
-		sp192 = /*0x3fd97530974f0319 */0.397777698290199988040427570013 * sp328;
-		sp184 = /*0x3fed5c037fae7dc7*/0.917482137086999993691449617472 * sp336;
-		sp176 = /*0xbea01ae065580428*/-0.000000479965999999999971489545586012 * sp344;
-		sp168 = sp176 + sp184;
-		sp336 = sp168 - sp192;
-		#else
+
 		sp336 = -0.000000479965999999999971489545586012 * sp344 + 
 			0.917482137086999993691449617472 * sp336 - 
 			0.397777698290199988040427570013 * sp328;
-		#endif
 		
-		#if 0
-		sp192 = 0.917482137086999993691449617472 * sp328;
-		sp184 = /*0x3fd9752d972a99dd*/0.397776982901999975883455817893 * sp336;
-		sp328 = sp184 + sp192;
-		#else
 		sp328 = 0.397776982901999975883455817893 * sp336 + 0.917482137086999993691449617472 * sp328;
-		#endif
-		
-		#if 0
-		sp192 = sp360 / 180.0;
-		sp184 = sp192 * 3.1415927;
-		sp176 = cos(sp184);
-		sp168 = sp368 / 180.0;
-		sp160 = sp168 * 3.1415927;
-		sp152 = cos(sp160);
-		sp144 = sp152 * sp352;
-		sp440 = sp144 * sp176;
-		#else
+
 		x/*sp440*/ = cos(sp368 / 180.0 * 3.1415927) * sp352 * 
 			cos(sp360 / 180.0 * 3.1415927);
-		#endif
-		
-		#if 0
-		sp192 = sp360 / 180.0;
-		sp184 = sp192 * 3.1415927;
-		sp176 = sin(sp184);
-		sp168 = sp176 * /*0x3fd9752e51076abf*/0.397777156000000020608098338926;
-		sp160 = sp360 / 180.0;
-		sp152 = sp160 * 3.1415927;
-		sp144 = cos(sp152);
-		sp136 = sp368 / 180.0;
-		sp128 = sp136 * 3.1415927;
-		sp120 = sin(sp128);
-		sp112 = sp120 * sp144;
-		sp104 = sp112 * /*0x3fed5c03575e9cd5*/0.917482062000000042623071294656;
-		sp96 = sp104 - sp168;
-		sp432 = sp96 * sp352;
-		#else
+
 		y/*sp432*/ = (sin(sp368 / 180.0 * 3.1415927) * 
 			cos(sp360 / 180.0 * 3.1415927) * 0.917482062000000042623071294656 - 
 			sin(sp360 / 180.0 * 3.1415927) * 0.397777156000000020608098338926) * sp352;
-		#endif
-		
-		#if 0
-		sp192 = sp360 / 180.0;
-		sp184 = sp192 * 3.1415927;
-		sp176 = sin(sp184);
-		sp168 = sp176 * 0.917482062000000042623071294656;
-		sp160 = sp360 / 180.0;
-		sp152 = sp160 * 3.1415927;
-		sp144 = cos(sp152);
-		sp136 = sp368 / 180.0;
-		sp128 = sp136 * 3.1415927;
-		sp120 = sin(sp128);
-		sp112 = sp120 * sp144;
-		sp104 = sp112 * 0.397777156000000020608098338926;
-		sp96 = sp104 + sp168;
-		sp424 = sp96 * sp352;
-		#else
+
 		z/*sp424*/ = (sin(sp368 / 180.0 * 3.1415927) * 
 			cos(sp360 / 180.0 * 3.1415927) * 0.397777156000000020608098338926 + 
 			sin(sp360 / 180.0 * 3.1415927) * 0.917482062000000042623071294656) * sp352;
-		#endif
-		
-		#if 0
-		sp192 = sp328 + sp424;
-		sp184 = sp328 + sp424;
-		sp176 = sp184 * sp192;
-		sp168 = sp336 + sp432;
-		sp160 = sp336 + sp432;
-		sp152 = sp160 * sp168;
-		sp144 = sp344 + sp440;
-		sp136 = sp344 + sp440;
-		sp128 = sp136 * sp144;
-		sp120 = sp128 + sp152;
-		sp112 = sp120 + sp176;
-		sp320 = sqrt(sp112);		
-		#else
+
 		sp320 = sqrt((sp344 + x/*sp440*/) * (sp344 + x/*sp440*/) + 
 			(sp336 + y/*sp432*/) * (sp336 + y/*sp432*/) + 
 			(sp328 + z/*sp424*/) * (sp328 + z/*sp424*/));
-		#endif
-		
-		#if 0
-		sp192 = sp344 + sp440;
-		sp184 = sp336 + sp432;
-		sp176 = sp184 / sp192;
-		sp312 = atan(sp176);
-		#else
-		sp312 = atan((sp336 + y/*sp432*/) / (sp344 + x/*sp440*/));
-		#endif
-		
+
+		AlphaPlutoRadians = atan((sp336 + y/*sp432*/) / (sp344 + x/*sp440*/));
+
 		if ((sp344 + x/*sp440*/) > 0)
 		{
 			//1cadc
-			sp312 += 3.1415927;
+			AlphaPlutoRadians += 3.1415927;
 		}
 		//0x1caf8
-		#if 0
-		sp192 = sp328 + sp424;
-		sp184 = sp192 / sp320;
-		sp304 = asin(sp184);
-		#else
-		sp304 = asin((sp328 + z/*sp424*/) / sp320);
-		#endif
+
+		DeltaPlutoRadians = asin((sp328 + z/*sp424*/) / sp320);
+
+		AlphaPluto = AlphaPlutoRadians / 3.1415927 * 180.0;
+
+		DeltaPluto = DeltaPlutoRadians / 3.1415927 * 180.0;
+		AlphaPluto += 180.0;
 		
-		#if 0
-		sp192 = sp312 / 3.1415927;
-		sp296 = sp192 * 180.0;
-		#else
-		sp296 = sp312 / 3.1415927 * 180.0;
-		#endif
-		
-		sp288 = sp304 / 3.1415927 * 180.0;
-		sp296 += 180.0;
-		
-		if (sp296 > 360.0)
+		if (AlphaPluto > 360.0)
 		{
 			//1cbd0
-			sp296 -= 360.0;
+			AlphaPluto -= 360.0;
 		}
 		//0x1cbec
 	}
@@ -7357,38 +7143,24 @@ void func_1b528(int a, double* b, double* c)
 		//See: https://github.com/openhab/openhab1-addons/blob/master/bundles/binding/org.openhab.binding.astro/src/main/java/org/openhab/binding/astro/internal/calc/MoonCalc.java
 		
 		//1cbf4
-		sp280 = 218.3164591 + 481267.88134236 * T/*sp528*/ - 
-			0.0013268 * T/*sp528*/ * T/*sp528*/ + 
-			T/*sp528*/ * T/*sp528*/ * T/*sp528*/ / 538841.0 - 
-			T/*sp528*/ * T/*sp528*/ * T/*sp528*/ * T/*sp528*/ / 65194000.0;
-		
+		sp280 = 218.3164591 + 481267.88134236 * T - 
+			0.0013268 * T * T + T * T * T / 538841.0 - T * T * T * T / 65194000.0;
 		sp280 = func_1af1c(sp280);
 		
-		sp272 = 297.8502042 + 445267.1115168 * T/*sp528*/ - 
-			0.00163 * T/*sp528*/ * T/*sp528*/ + 
-			T/*sp528*/ * T/*sp528*/ * T/*sp528*/ / 545868.0 - 
-			T/*sp528*/ * T/*sp528*/ * T/*sp528*/ * T/*sp528*/ / 113065000.0;
-		
+		sp272 = 297.8502042 + 445267.1115168 * T - 
+			0.00163 * T * T + T * T * T / 545868.0 - T * T * T * T / 113065000.0;
 		sp272 = func_1af1c(sp272);
 		
-		sp264 = 357.5291092 + 35999.0502909 * T/*sp528*/ - 
-			0.0001536 * T/*sp528*/ * T/*sp528*/ + 
-			T/*sp528*/ * T/*sp528*/ * T/*sp528*/ / 24490000.0;
-		
+		sp264 = 357.5291092 + 35999.0502909 * T - 
+			0.0001536 * T * T + T * T * T / 24490000.0;
 		sp264 = func_1af1c(sp264);
 		
-		sp256 = 134.9634114 + 477198.8676313 * T/*sp528*/ - 
-			0.008997 * T/*sp528*/ * T/*sp528*/ + 
-			T/*sp528*/ * T/*sp528*/ * T/*sp528*/ / 69699.0 - 
-			T/*sp528*/ * T/*sp528*/ * T/*sp528*/ * T/*sp528*/ / 14712000.0;
-		
+		sp256 = 134.9634114 + 477198.8676313 * T - 
+			0.008997 * T * T + T * T * T / 69699.0 - T * T * T * T / 14712000.0;
 		sp256 = func_1af1c(sp256);
 		//1d164		
 		sp248 = 93.2720993 + 483202.0175273 * T - 
-			0.0034029 * T * T - 
-			T * T * T / 3526000 +
-			T * T * T * T / 863310000;
-		
+			0.0034029 * T * T - T * T * T / 3526000 + T * T * T * T / 863310000;
 		sp248 = func_1af1c(sp248);
 		//1d2bc
 		sp240 = 119.75 + 131.849 * T;
@@ -7402,184 +7174,35 @@ void func_1b528(int a, double* b, double* c)
 		//1d394
 		sp216 = 1.0 - 0.002516 * T - 0.0000074 * T * T;
 		
-		#if 0
-		sp192 = 2 * sp256;
-		sp184 = sp192 * 0.01745329252;
-		sp176 = sin(sp184);
-		sp168 = sp176 * 213628.0;
-		sp160 = 2 * sp272;
-		sp152 = sp160 * 0.01745329252;
-		sp144 = sin(sp152);
-		sp136 = sp144 * 658314.0;
-		sp128 = 2 * sp272;
-		sp120 = sp128 - sp256;
-		sp112 = sp120 * 0.01745329252;
-		sp104 = sin(sp112);
-		sp96 = sp104 * 1274027.0;
-		sp88 = sp256 * 0.01745329252;
-		sp80 = sin(sp88);
-		sp72 = sp80 * 6288774.0;
-		sp64 = sp72 + sp96;
-		sp56 = sp64 + sp136;
-		sp208 = sp56 + sp168;
-		#else
 		sp208 = sin(/*0 * sp272*/ sp256 * 0.01745329252) * 6288774.0 + 
 			sin((2 * sp272 - sp256) * 0.01745329252) * 1274027.0 + 
 			sin(2 * sp272 * /*0 * sp256*/ 0.01745329252) * 658314.0 + 
 			sin(/*0 * sp272*/ 2 * sp256 * 0.01745329252) * 213628.0;
-		#endif
-		
-		#if 0
-		sp192 = 2 * sp272;
-		sp184 = sp192 - sp264;
-		sp176 = sp184 - sp256;
-		sp168 = sp176 * 0.01745329252;
-		sp160 = sin(sp168);
-		sp152 = sp160 * 57066.0;
-		sp144 = 2 * sp256;
-		sp136 = 2 * sp272;
-		sp128 = sp136 - sp144;
-		sp120 = sp128 * 0.01745329252;
-		sp112 = sin(sp120);
-		sp104 = sp112 * 58793.0;
-		sp96 = 2 * sp248;
-		sp88 = sp96 * 0.01745329252;
-		sp80 = sin(sp88);
-		sp72 = sp80 * 114332.0;
-		sp64 = sp264 * 0.01745329252;
-		sp56 = sin(sp64);
-		sp48 = sp56 * -185116.0;
-		sp40 = sp48 - sp72;
-		sp32 = sp40 + sp104;
-		sp24 = sp32 + sp152;
-		sp208 += sp24;
-		#else
+			
 		sp208 += sin(sp264 * 0.01745329252) * -185116.0 - 
 			sin(2 * sp248 * 0.01745329252) * 114332.0 + 
 			sin((2 * sp272 - 2 * sp256) * 0.01745329252) * 58793.0 + 
 			sin((2 * sp272 - sp264 - sp256) * 0.01745329252) * 57066.0;
-		#endif
-		
-		#if 0
-		sp192 = sp272 * 0.01745329252;
-		sp184 = sin(sp192);
-		sp176 = sp184 * 34720.0;
-		sp168 = sp264 - sp256;
-		sp160 = sp168 * 0.01745329252;
-		sp152 = sin(sp160);
-		sp144 = sp152 * 40923.0;
-		sp136 = 2 * sp272;
-		sp128 = sp136 - sp264;
-		sp120 = sp128 * 0.01745329252;
-		sp112 = sin(sp120);
-		sp104 = sp112 * 45758.0;
-		sp96 = 2 * sp272;
-		sp88 = sp96 + sp256;
-		sp80 = sp88 * 0.01745329252;
-		sp72 = sin(sp80);
-		sp64 = sp72 * 53322.0
-		sp56 = sp64 + sp104;
-		sp48 = sp56 - sp144;
-		sp40 = sp48 - sp176;
-		sp208 += sp40;
-		#else
+
 		sp208 += sin((2 * sp272 + sp256) * 0.01745329252) * 53322.0 + 
 			sin((2 * sp272 - sp264) * 0.01745329252) * 45758.0 - 
 			sin((sp264 - sp256) * 0.01745329252) * 40923.0 - 
 			sin(sp272 * 0.01745329252) * 34720.0;
-		#endif
 
-		#if 0
-		sp192 = 2 * sp248;
-		sp184 = sp192 - sp256;
-		sp176 = sp184 * 0.01745329252;
-		sp168 = sin(sp176);
-		sp160 = sp168 * 10980.0;
-		sp152 = 2 * sp248;
-		sp144 = sp152 + sp256;
-		sp136 = sp144 * 0.01745329252;
-		sp128 = sin(sp136);
-		sp120 = sp128 * 12528.0;
-		sp112 = 2 * sp248;
-		sp104 = 2 * sp272;
-		sp96 = sp104 - sp112;
-		sp88 = sp96 * 0.01745329252;
-		sp80 = sin(sp88);
-		sp72 = sp80 * 15327.0;
-		sp64 = sp264 + sp256;
-		sp56 = sp64 * 0.01745329252;
-		sp48 = sin(sp56);
-		sp40 = sp48 * -30383.0;
-		sp32 = sp40 + sp72;
-		sp24 = sp32 - sp120;
-		sp16 = sp24 + sp160;
-		#else
 		sp208 += sin((sp264 + sp256) * 0.01745329252) * -30383.0 + 
 			sin((2 * sp272 - 2 * sp248) * 0.01745329252) * 15327.0 - 
 			sin((2 * sp248 + sp256) * 0.01745329252) * 12528.0 + 
 			sin((2 * sp248 - sp256) * 0.01745329252) * 10980.0;
-		#endif
 
-		#if 0
-		sp192 = 2 * sp272;
-		sp184 = sp192 - sp248;
-		sp176 = sp184 * 0.01745329252;
-		sp168 = sin(sp176);
-		sp160 = sp168 * 173237.0;
-		sp152 = sp256 - sp248;
-		sp144 = sp152 * 0.01745329252;
-		sp136 = sin(sp144);
-		sp128 = sp136 * 277693.0;
-		sp120 = sp256 + sp248;
-		sp112 = sp120 * 0.01745329252;
-		sp104 = sin(sp112);
-		sp96 = sp104 * 280602.0;
-		sp88 = sp248 * 0.01745329252;
-		sp80 = sin(sp88);
-		sp72 = sp80 * 5128122.0;
-		sp64 = sp72 + sp96;
-		sp56 = sp64 + sp128;
-		sp200 = sp56 + sp160;		
-		#else
 		sp200 = sin(sp248 * 0.01745329252) * 5128122.0 + 
 			sin((sp256 + sp248) * 0.01745329252) * 280602.0 + 
 			sin((sp256 - sp248) * 0.01745329252) * 277693.0 + 
 			sin((2 * sp272 - sp248) * 0.01745329252) * 173237.0;
-		#endif
 
-		#if 0
-		sp192 = 2 * sp256;
-		sp184 = sp192 + sp248;
-		sp176 = sp184 * 0.01745329252;
-		sp168 = sin(sp176);
-		sp160 = sp168 * 17198.0;
-		sp152 = 2 * sp272;
-		sp144 = sp152 + sp248;
-		sp136 = sp144 * 0.01745329252;
-		sp128 = sin(sp136);
-		sp120 = sp128 * 32573.0;
-		sp112 = 2 * sp272;
-		sp104 = sp112 - sp256;
-		sp96 = sp104 - sp248;
-		sp88 = sp96 * 0.01745329252;
-		sp80 = sin(sp88);
-		sp72 = sp80 * 46271.0;
-		sp64 = 2 * sp272;
-		sp56 = sp64 - sp256;
-		sp48 = sp56 + sp248;
-		sp40 = sp48 * 0.01745329252;
-		sp32 = sin(sp40);
-		sp24 = sp32 * 55413.0;
-		sp16 = sp24 + sp72;
-		sp8 = sp16 + sp120;
-		sp = sp8 + sp160;
-		sp200 += sp;
-		#else
 		sp200 += sin((2 * sp272 - sp256 + sp248) * 0.01745329252) * 55413.0 + 
 			sin((2 * sp272 - sp256 - sp248) * 0.01745329252) * 46271.0 + 
 			sin((2 * sp272 + sp248) * 0.01745329252) * 32573.0 + 
 			sin((2 * sp256 + sp248) * 0.01745329252) * 17198.0;
-		#endif
 
 		Lambda/*sp408*/ = sp208 / 1000000 + sp280;
 		Lambda/*sp408*/ = func_1af1c(Lambda/*sp408*/);
@@ -7588,35 +7211,299 @@ void func_1b528(int a, double* b, double* c)
 		Beta/*sp400*/ = func_1af1c(Beta/*sp400*/);
 	}
 	//0x1e0bc
-	func_1afc0(Lambda/*sp408*/, Beta/*sp400*/, Epsilon/*sp416*/, &sp392, &sp384);
+	transform_ecliptical_to_equatorial_coordinates(Lambda/*sp408*/, Beta/*sp400*/, Epsilon/*sp416*/, &Alpha, &Delta);
 	
-	*b = sp392;
-	*c = sp384;
+	*pAlpha = Alpha;
+	*pDelta = Delta;
 	
 	if (a == 9) //Pluto
 	{
 		//1e14c
-		*b = sp296 / 15.0;
-		*c = sp288;
+		*pAlpha = AlphaPluto / 15.0;
+		*pDelta = DeltaPluto;
 	}
-	//0x1e170
 }
 
 /* 1e17c - todo */
-void func_1e17c(void)
+void get_all_solar_system_object_equatorial_coordinates(void)
 {
-	func_1b528(1, &dData_400032b0, &dData_400032b8); //Sun
-	func_1b528(2, &dData_400032d0, &dData_400032d8); //Mercury
-	func_1b528(3, &dData_400032e0, &dData_400032e8); //Venus
-	func_1b528(4, &dData_400032f0, &dData_400032f8); //Mars
-	func_1b528(5, &dData_40003300, &dData_40003308); //Jupiter
-	func_1b528(6, &dData_40003310, &dData_40003318); //Saturn
-	func_1b528(7, &dData_40003320, &dData_40003328); //Uranus
-	func_1b528(8, &dData_40003330, &dData_40003338); //Neptune
-	func_1b528(9, &dData_40003340, &dData_40003348); //Pluto
-	func_1b528(10, &dData_400032c0, &dData_400032c8); //Moon
+	get_solar_system_object_equatorial_coordinates(1, &dData_400032b0_SunRightAscension, &dData_400032b8_SunDeclination); //Sun
+	get_solar_system_object_equatorial_coordinates(2, &dData_400032d0, &dData_400032d8); //Mercury
+	get_solar_system_object_equatorial_coordinates(3, &dData_400032e0, &dData_400032e8); //Venus
+	get_solar_system_object_equatorial_coordinates(4, &dData_400032f0, &dData_400032f8); //Mars
+	get_solar_system_object_equatorial_coordinates(5, &dData_40003300, &dData_40003308); //Jupiter
+	get_solar_system_object_equatorial_coordinates(6, &dData_40003310, &dData_40003318); //Saturn
+	get_solar_system_object_equatorial_coordinates(7, &dData_40003320, &dData_40003328); //Uranus
+	get_solar_system_object_equatorial_coordinates(8, &dData_40003330, &dData_40003338); //Neptune
+	get_solar_system_object_equatorial_coordinates(9, &dData_40003340, &dData_40003348); //Pluto
+	get_solar_system_object_equatorial_coordinates(10, &dData_400032c0, &dData_400032c8); //Moon
 }
 
+/* 1e228 - todo */
+void func_1e228(void)
+{
+	if (Data_4000318c != Data_40003190)
+	{
+		Data_40003190 = Data_4000318c;
+	}
+	
+	switch (Data_40002c64 - 500)
+	{
+		case 0: 
+			//0x1e328
+			switch (bData_40002c59)
+			{
+				case 1:
+					//0x1e36c
+					func_7e8(0, 1, 1, 21, "*Key:                  ");
+					func_7e8(0, 3, 1, 21, "Press the key to cha- ");
+					func_7e8(0, 5, 1, 21, "-nge LED illuminance. ");
+					func_7e8(0, 7, 1, 21, "                      ");
+					//->0x1eb90
+					break;
+				
+				case 2:
+					//0x1e3e4
+					func_7e8(0, 1, 1, 21, "Green Key:             ");
+					func_7e8(0, 3, 1, 21, "Press the key to show ");
+					func_7e8(0, 5, 1, 21, "and select hitoric    ");
+					func_7e8(0, 7, 1, 21, "target quickly.       ");
+					//->0x1eb90
+					break;
+				
+				case 3:
+					//0x1e580
+					func_7e8(0, 1, 1, 21, "Red Key:               ");
+					func_7e8(0, 3, 1, 21, "Show function menu    ");
+					func_7e8(0, 5, 1, 21, "or Enter.             ");
+					func_7e8(0, 7, 1, 21, "                      ");
+					//->0x1eb90
+					break;
+				
+				case 4:
+					//0x1e5f8
+					func_7e8(0, 1, 1, 21, "Yellow Key:            ");
+					func_7e8(0, 3, 1, 21, "Press the key to stop ");
+					func_7e8(0, 5, 1, 21, "or abandon or quit.   ");
+					func_7e8(0, 7, 1, 21, "                      ");
+					//->0x1eb90
+					break;
+				
+				case 5:
+					//0x1e670
+					func_7e8(0, 1, 1, 21, "Arrow Keys:            ");
+					func_7e8(0, 3, 1, 21, "Slew the telescope    ");
+					func_7e8(0, 5, 1, 21, "or Scroll in menu.    ");
+					func_7e8(0, 7, 1, 21, "                      ");
+					//->0x1eb90
+					break;
+				
+				case 6:
+					//0x1e6e8
+					func_7e8(0, 1, 1, 21, "Number Keys:            ");
+					func_7e8(0, 3, 1, 21, "Press to input digits  ");
+					func_7e8(0, 5, 1, 21, "0 to 9, input letter   ");
+					func_7e8(0, 7, 1, 21, "or Change slew speed.  ");
+					//->0x1eb90
+					break;
+				
+				case 7:
+					//0x1e89c
+					break;
+				
+				case 8:
+					//0x1e914
+					break;
+				
+				case 9:
+					//0x1e98c
+					break;
+				
+				case 10:
+					//0x1eb18
+					break;
+				
+				default:
+					//0x1eb90
+					break;
+			}
+			//->0x20a50
+			break;
+		
+		case 1:
+			//0x1eb98
+			break;
+		
+		case 2:
+			//0x1ec10
+			break;
+		
+		case 3:
+			//0x1ed94
+			break;
+		
+		case 4:
+			//0x1ee0c
+			break;
+		
+		case 5:
+			//0x1ee84
+			break;
+		
+		case 6:
+			//0x1f004
+			break;
+		
+		case 7:
+			//0x1f07c
+			break;
+		
+		case 8:
+			//0x1f0f4
+			break;
+		
+		case 9:
+			//0x1f16c
+			break;
+		
+		case 10:
+			//0x1f344
+			break;
+		
+		case 11:
+			//0x1f3bc
+			break;
+		
+		case 16:
+			//0x1f434
+			break;
+		
+		case 17:
+			//0x1f5c4
+			break;
+		
+		case 18:
+			//0x1f63c
+			break;
+		
+		case 19:
+			//0x1f6b4
+			break;
+		
+		case 20:
+			//0x1f838
+			break;
+		
+		case 21:
+			//0x1f8b0
+			break;
+		
+		case 22:
+			//0x1f928
+			break;
+		
+		case 23:
+			//0x1f9a0
+			break;
+		
+		case 24:
+			//0x1fa18
+			break;
+		
+		case 25:
+			//0x1fbb4
+			break;
+		
+		case 26:
+			//0x1fc2c
+			break;
+		
+		case 27:
+			//0x1fca4
+			break;
+		
+		case 28:
+			//0x1fd1c
+			break;
+		
+		case 29:
+			//0x1feec
+			break;
+		
+		case 30:
+			//0x1ff64
+			break;
+		
+		case 31:
+			//0x1ffdc
+			break;
+		
+		case 32:
+			//0x20054
+			break;
+		
+		case 33:
+			//0x200cc
+			break;
+		
+		case 34:
+			//0x2025c
+			break;
+		
+		case 35:
+			//0x202d4
+			break;
+		
+		case 37:
+			//0x2034c
+			break;
+		
+		case 38:
+			//0x203c4
+			break;
+		
+		case 39:
+			//0x2055c
+			break;
+		
+		case 40:
+			//0x205d4
+			break;
+		
+		case 41:
+			//0x2064c
+			break;
+		
+		case 42:
+			//0x206c4
+			break;
+		
+		case 43:
+			//0x20870
+			break;
+		
+		case 44:
+			//0x208e8
+			break;
+		
+		case 45:
+			//0x20960
+			break;
+		
+		case 46:
+			//0x209d8
+			break;
+		
+		default:
+			//0x20a50
+			break;
+	}
+}
+
+/* 20b94 - todo */
+void func_20b94(void)
+{
+}
 
 #include "func_23130.c"
 #include "func_27844.c"
