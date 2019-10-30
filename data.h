@@ -180,7 +180,7 @@ extern int Data_40002c20; //40002c20
 extern Union_40002c24 Data_40002c24; //40002c24
 extern Union_40002c28 Data_40002c28; //40002c28
 extern char bData_40002c58; //40002c58
-extern char bData_40002c59; //40002c59
+extern unsigned char bData_40002c59; //40002c59
 extern char bData_40002c5a; //40002c5a
 extern int Data_40002c64; //40002c64
 extern char bData_40002c68; //40002c68

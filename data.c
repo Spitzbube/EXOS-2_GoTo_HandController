@@ -60,7 +60,7 @@ int Data_40002c20; //40002c20
 Union_40002c24 Data_40002c24; //40002c24
 Union_40002c28 Data_40002c28; //40002c28
 char bData_40002c58; //40002c58
-char bData_40002c59; //40002c59
+unsigned char bData_40002c59; //40002c59
 char bData_40002c5a; //40002c5a
 int Data_40002c64; //40002c64
 char bData_40002c68; //40002c68
