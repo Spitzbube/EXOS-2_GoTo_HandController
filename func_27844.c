@@ -706,6 +706,22 @@ void func_27844(void)
 			//0x2a500
 			break;
 		
+		case 0x898: //2200
+			//0x2a508
+			break;
+		
+		case 0x8FC: //2300
+			//0x2a50c
+			break;
+		
+		case 0x960: //2400
+			//0x2a510
+			break;
+		
+		case 0x9C4: //2500
+			//0x2a514
+			break;
+		
 		case 0x83E: //2110
 			//0x2a528
 			break;
@@ -716,10 +732,6 @@ void func_27844(void)
 		
 		case 0x852: //2130
 			//0x2a530
-			break;
-		
-		case 0x898: //2200
-			//0x2a508
 			break;
 		
 		case 0x899: //2201
@@ -758,10 +770,6 @@ void func_27844(void)
 			//0x2a674
 			break;
 		
-		case 0x8FC: //2300
-			//0x2a50c
-			break;
-		
 		case 0x8FD: //2301
 			//0x2a6a8
 			break;
@@ -792,14 +800,6 @@ void func_27844(void)
 		
 		case 2308:
 			//0x2a6c8
-			break;
-		
-		case 0x960: //2400
-			//0x2a510
-			break;
-		
-		case 0x9C4: //2500
-			//0x2a514
 			break;
 		
 		case 0x9c5: //2501

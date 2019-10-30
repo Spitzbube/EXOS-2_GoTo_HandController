@@ -7309,194 +7309,421 @@ void func_1e228(void)
 				
 				case 7:
 					//0x1e89c
+					func_7e8(0, 1, 1, 21, "Stop Key:               ");
+					func_7e8(0, 3, 1, 21, "Press to pause when    ");
+					func_7e8(0, 5, 1, 21, "telescope in tracking, ");
+					func_7e8(0, 7, 1, 21, "moving or slewing.     ");
+					//->0x1eb90
 					break;
 				
 				case 8:
 					//0x1e914
+					func_7e8(0, 1, 1, 21, "Help Key:               ");
+					func_7e8(0, 3, 1, 21, "Show help file         ");
+					func_7e8(0, 5, 1, 21, "can be used in all     ");
+					func_7e8(0, 7, 1, 21, "levels menu.           ");
+					//->0x1eb90
 					break;
 				
 				case 9:
 					//0x1e98c
+					func_7e8(0, 1, 1, 21, "F+(1 to 9):             ");
+					func_7e8(0, 3, 1, 21, "Show historic target   ");
+					func_7e8(0, 5, 1, 21, "                       ");
+					func_7e8(0, 7, 1, 21, "                       ");
+					//->0x1eb90
 					break;
 				
 				case 10:
 					//0x1eb18
+					func_7e8(0, 1, 1, 21, "F+0                     ");
+					func_7e8(0, 3, 1, 21, "Open or close key      ");
+					func_7e8(0, 5, 1, 21, "beep                   ");
+					func_7e8(0, 7, 1, 21, "                       ");
+					//->0x1eb90
 					break;
-				
+				#if 0
 				default:
 					//0x1eb90
 					break;
+				#endif
 			}
 			//->0x20a50
 			break;
 		
 		case 1:
 			//0x1eb98
+			func_7e8(0, 1, 1, 21, "Telescope align:      ");
+			func_7e8(0, 3, 1, 21, "Align Telescop point ");
+			func_7e8(0, 5, 1, 21, "Pole-axis aim and    ");
+			func_7e8(0, 7, 1, 21, "correct Backlash.    ");
+			//->0x20a50
 			break;
 		
 		case 2:
 			//0x1ec10
+			func_7e8(0, 1, 1, 21, "Target navigation:    ");
+			func_7e8(0, 3, 1, 21, "Select Target from   ");
+			func_7e8(0, 5, 1, 21, "database or input    ");
+			func_7e8(0, 7, 1, 21, "data.                ");
+			//->0x20a50
 			break;
 		
 		case 3:
 			//0x1ed94
+			func_7e8(0, 1, 1, 21, "Utilities Commands:   ");
+			func_7e8(0, 3, 1, 21, "Some tools in common ");
+			func_7e8(0, 5, 1, 21, "use.                 ");
+			func_7e8(0, 7, 1, 21, "                     ");
+			//->0x20a50
 			break;
 		
 		case 4:
 			//0x1ee0c
+			func_7e8(0, 1, 1, 21, "Parameter Setup:      ");
+			func_7e8(0, 3, 1, 21, "Setup some parameter ");
+			func_7e8(0, 5, 1, 21, "in system.           ");
+			func_7e8(0, 7, 1, 21, "                     ");
+			//->0x20a50
 			break;
 		
 		case 5:
 			//0x1ee84
+			func_7e8(0, 1, 1, 21, "One star align:       ");
+			func_7e8(0, 3, 1, 21, "Select one star align");
+			func_7e8(0, 5, 1, 21, "the telescope point  ");
+			func_7e8(0, 7, 1, 21, "by hand.             ");
+			//->0x20a50
 			break;
 		
 		case 6:
 			//0x1f004
+			func_7e8(0, 1, 1, 21, "Two stars align:      ");
+			func_7e8(0, 3, 1, 21, "Select two star align");
+			func_7e8(0, 5, 1, 21, "the telescope point  ");
+			func_7e8(0, 7, 1, 21, "by hand.             ");
+			//->0x20a50
 			break;
 		
 		case 7:
 			//0x1f07c
+			func_7e8(0, 1, 1, 21, "Three star align:      ");
+			func_7e8(0, 3, 1, 21, "Select three stars    ");
+			func_7e8(0, 5, 1, 21, "align the telescope   ");
+			func_7e8(0, 7, 1, 21, "point by hand.        ");
+			//->0x20a50
 			break;
 		
 		case 8:
 			//0x1f0f4
+			func_7e8(0, 1, 1, 21, "Target Sync:           ");
+			func_7e8(0, 3, 1, 21, "Synchronizing the     ");
+			func_7e8(0, 5, 1, 21, "target parameter with ");
+			func_7e8(0, 7, 1, 21, "thetelescope point.   ");
+			//->0x20a50
 			break;
 		
 		case 9:
 			//0x1f16c
+			func_7e8(0, 1, 1, 21, "Pole-Axis Deviation:     ");
+			func_7e8(0, 3, 1, 21, "Show the Pole-Axis      ");
+			func_7e8(0, 5, 1, 21, "practice Deviation      ");
+			func_7e8(0, 7, 1, 21, "through the align.      ");
+			//->0x20a50
 			break;
 		
 		case 10:
 			//0x1f344
+			func_7e8(0, 1, 1, 21, "RA Bklash Correction:     ");
+			func_7e8(0, 3, 1, 21, "Correct the backlash     ");
+			func_7e8(0, 5, 1, 21, "in RA motor gear.        ");
+			func_7e8(0, 7, 1, 21, "                         ");
+			//->0x20a50
 			break;
 		
 		case 11:
 			//0x1f3bc
+			func_7e8(0, 1, 1, 21, "DEC Bklash Correction:    ");
+			func_7e8(0, 3, 1, 21, "Correct the backlash     ");
+			func_7e8(0, 5, 1, 21, "in DED motor gear.       ");
+			func_7e8(0, 7, 1, 21, "                         ");
+			//->0x20a50
 			break;
 		
 		case 16:
 			//0x1f434
+			func_7e8(0, 1, 1, 21, "Solar System:            ");
+			func_7e8(0, 3, 1, 21, "Telescope can auto      ");
+			func_7e8(0, 5, 1, 21, "point at Planet, Sun,   ");
+			func_7e8(0, 7, 1, 21, "Moon.                   ");
+			//->0x20a50
 			break;
 		
 		case 17:
 			//0x1f5c4
+			func_7e8(0, 1, 1, 21, "Constellation:         ");
+			func_7e8(0, 3, 1, 21, "Telescope can auto     ");
+			func_7e8(0, 5, 1, 21, "point at Constell-     ");
+			func_7e8(0, 7, 1, 21, "ation.                  ");
+			//->0x20a50
 			break;
 		
 		case 18:
 			//0x1f63c
+			func_7e8(0, 1, 1, 21, "Famous Star:           ");
+			func_7e8(0, 3, 1, 21, "Telescope can auto    ");
+			func_7e8(0, 5, 1, 21, "point at all famous   ");
+			func_7e8(0, 7, 1, 21, "stars.                ");
+			//->0x20a50
 			break;
 		
 		case 19:
 			//0x1f6b4
+			func_7e8(0, 1, 1, 21, "Messier Catalogue:     ");
+			func_7e8(0, 3, 1, 21, "Telescope can auto    ");
+			func_7e8(0, 5, 1, 21, "point at all stars in ");
+			func_7e8(0, 7, 1, 21, "Messier Catalogue.    ");
+			//->0x20a50
 			break;
 		
 		case 20:
 			//0x1f838
+			func_7e8(0, 1, 1, 21, "NGC Deep Sky:           ");
+			func_7e8(0, 3, 1, 21, "Telescope can auto    ");
+			func_7e8(0, 5, 1, 21, "point at all stars    ");
+			func_7e8(0, 7, 1, 21, "in NGC deep sky.      ");
+			//->0x20a50
 			break;
 		
 		case 21:
 			//0x1f8b0
+			func_7e8(0, 1, 1, 21, "IC Deep Sky:           ");
+			func_7e8(0, 3, 1, 21, "Telescope can auto    ");
+			func_7e8(0, 5, 1, 21, "point at all stars    ");
+			func_7e8(0, 7, 1, 21, "in IC deep sky.       ");
+			//->0x20a50
 			break;
 		
 		case 22:
 			//0x1f928
+			func_7e8(0, 1, 1, 21, "Sh2 Deep Sky:          ");
+			func_7e8(0, 3, 1, 21, "Telescope can auto    ");
+			func_7e8(0, 5, 1, 21, "point at all stars    ");
+			func_7e8(0, 7, 1, 21, "in Sh2 Deep Sky.      ");
+			//->0x20a50
 			break;
 		
 		case 23:
 			//0x1f9a0
+			func_7e8(0, 1, 1, 21, "Bright Stars:         ");
+			func_7e8(0, 3, 1, 21, "Telescope can auto   ");
+			func_7e8(0, 5, 1, 21, "point at all stars    ");
+			func_7e8(0, 7, 1, 21, "in Bright Stars.      ");
+			//->0x20a50
 			break;
 		
 		case 24:
 			//0x1fa18
+			func_7e8(0, 1, 1, 21, "SAO Star:              ");
+			func_7e8(0, 3, 1, 21, "Telescope can auto   ");
+			func_7e8(0, 5, 1, 21, "point at all stars    ");
+			func_7e8(0, 7, 1, 21, "in SAO Star.         ");
+			//->0x20a50
 			break;
 		
 		case 25:
 			//0x1fbb4
+			func_7e8(0, 1, 1, 21, "User-def Object:        ");
+			func_7e8(0, 3, 1, 21, "Input sky target        ");
+			func_7e8(0, 5, 1, 21, "parameter and save it.  ");
+			func_7e8(0, 7, 1, 21, "                         ");
+			//->0x20a50
 			break;
 		
 		case 26:
 			//0x1fc2c
+			func_7e8(0, 1, 1, 21, "Specify Ra Dec:           ");
+			func_7e8(0, 3, 1, 21, "Input Target R.a and    ");
+			func_7e8(0, 5, 1, 21, "Des ,then point to it.   ");
+			func_7e8(0, 7, 1, 21, "                         ");
+			//->0x20a50
 			break;
 		
 		case 27:
 			//0x1fca4
+			func_7e8(0, 1, 1, 21, "Landmarks:             ");
+			func_7e8(0, 3, 1, 21, "Input land target     ");
+			func_7e8(0, 5, 1, 21, "parameter and save it. ");
+			func_7e8(0, 7, 1, 21, "                       ");
+			//->0x20a50
 			break;
 		
 		case 28:
 			//0x1fd1c
+			func_7e8(0, 1, 1, 21, "Current Objects:      ");
+			func_7e8(0, 3, 1, 21, "Give planet's,solar  ");
+			func_7e8(0, 5, 1, 21, "and lunar rise,      ");
+			func_7e8(0, 7, 1, 21, "transit and set time. ");
+			//->0x20a50
 			break;
 		
 		case 29:
 			//0x1feec
+			func_7e8(0, 1, 1, 21, "Object Rise/Set:       ");
+			func_7e8(0, 3, 1, 21, "calculate star rise,  ");
+			func_7e8(0, 5, 1, 21, "transit and set time. ");
+			func_7e8(0, 7, 1, 21, "                      ");
+			//->0x20a50
 			break;
 		
 		case 30:
 			//0x1ff64
+			func_7e8(0, 1, 1, 21, "Lunar Phase:         ");
+			func_7e8(0, 3, 1, 21, "Show the lunar phase ");
+			func_7e8(0, 5, 1, 21, "                     ");
+			func_7e8(0, 7, 1, 21, "                     ");
+			//->0x20a50
 			break;
 		
 		case 31:
 			//0x1ffdc
+			func_7e8(0, 1, 1, 21, "Timer:                 ");
+			func_7e8(0, 3, 1, 21, "Count down reminder  ");
+			func_7e8(0, 5, 1, 21, "                      ");
+			func_7e8(0, 7, 1, 21, "                       ");
+			//->0x20a50
 			break;
 		
 		case 32:
 			//0x20054
+			func_7e8(0, 1, 1, 21, "Alarm:                  ");
+			func_7e8(0, 3, 1, 21, "Timeing alarm.         ");
+			func_7e8(0, 5, 1, 21, "                       ");
+			func_7e8(0, 7, 1, 21, "                       ");
+			//->0x20a50
 			break;
 		
 		case 33:
 			//0x200cc
+			func_7e8(0, 1, 1, 21, "Field Angle Cal:        ");
+			func_7e8(0, 3, 1, 21, "Calculate the teles- ");
+			func_7e8(0, 5, 1, 21, "cope's field angel.  ");
+			func_7e8(0, 7, 1, 21, "                     ");
+			//->0x20a50
 			break;
 		
 		case 34:
 			//0x2025c
+			func_7e8(0, 1, 1, 21, "Magify Power Cal:      ");
+			func_7e8(0, 3, 1, 21, "Calculate the teles-  ");
+			func_7e8(0, 5, 1, 21, "cope's magify power.  ");
+			func_7e8(0, 7, 1, 21, "                      ");
+			//->0x20a50
 			break;
 		
 		case 35:
 			//0x202d4
+			func_7e8(0, 1, 1, 21, "Illumination:          ");
+			func_7e8(0, 3, 1, 21, "Set screen illumina-  ");
+			func_7e8(0, 5, 1, 21, "tion.                 ");
+			func_7e8(0, 7, 1, 21, "                      ");
+			//->0x20a50
 			break;
 		
 		case 37:
 			//0x2034c
+			func_7e8(0, 1, 1, 21, "Parkzen:               ");
+			func_7e8(0, 3, 1, 21, "Slew telescope to     ");
+			func_7e8(0, 5, 1, 21, "Original Position.    ");
+			func_7e8(0, 7, 1, 21, "                      ");
+			//->0x20a50
 			break;
 		
 		case 38:
 			//0x203c4
+			func_7e8(0, 1, 1, 21, "Time and Date:         ");
+			func_7e8(0, 3, 1, 21, "Set local time and   ");
+			func_7e8(0, 5, 1, 21, "data for system.      ");
+			func_7e8(0, 7, 1, 21, "                      ");
+			//->0x20a50
 			break;
 		
 		case 39:
 			//0x2055c
+			func_7e8(0, 1, 1, 21, "Daylight Saving:        ");
+			func_7e8(0, 3, 1, 21, "Set Daylight Saving.   ");
+			func_7e8(0, 5, 1, 21, "                       ");
+			func_7e8(0, 7, 1, 21, "                       ");
+			//->0x20a50
 			break;
 		
 		case 40:
 			//0x205d4
+			func_7e8(0, 1, 1, 21, "Site Setting:            ");
+			func_7e8(0, 3, 1, 21, "Select local site       ");
+			func_7e8(0, 5, 1, 21, "from database or        ");
+			func_7e8(0, 7, 1, 21, "input data.             ");
+			//->0x20a50
 			break;
 		
 		case 41:
 			//0x2064c
+			func_7e8(0, 1, 1, 21, "Sky/ Land:             ");
+			func_7e8(0, 3, 1, 21, "Select sky or land    ");
+			func_7e8(0, 5, 1, 21, "mode                  ");
+			func_7e8(0, 7, 1, 21, "                      ");
+			//->0x20a50
 			break;
 		
 		case 42:
 			//0x206c4
+			func_7e8(0, 1, 1, 21, "AZ/EQ:                 ");
+			func_7e8(0, 3, 1, 21, "Set mount mode to be  ");
+			func_7e8(0, 5, 1, 21, "AZ or EQ mode.        ");
+			func_7e8(0, 7, 1, 21, "                      ");
+			//->0x20a50
 			break;
 		
 		case 43:
 			//0x20870
+			func_7e8(0, 1, 1, 21, "Telescope Zero:        ");
+			func_7e8(0, 3, 1, 21, "Set telescope Origin- ");
+			func_7e8(0, 5, 1, 21, "al Position.          ");
+			func_7e8(0, 7, 1, 21, "                      ");
+			//->0x20a50
 			break;
 		
 		case 44:
 			//0x208e8
+			func_7e8(0, 1, 1, 21, "Tracking Rate:         ");
+			func_7e8(0, 3, 1, 21, "Set telescope track   ");
+			func_7e8(0, 5, 1, 21, "speed.                ");
+			func_7e8(0, 7, 1, 21, "                      ");
+			//->0x20a50
 			break;
 		
 		case 45:
 			//0x20960
+			func_7e8(0, 1, 1, 21, "Language:             ");
+			func_7e8(0, 3, 1, 21, "Select the menu      ");
+			func_7e8(0, 5, 1, 21, "language.            ");
+			func_7e8(0, 7, 1, 21, "                     ");
+			//->0x20a50
 			break;
 		
 		case 46:
 			//0x209d8
+			func_7e8(0, 1, 1, 21, "Reset:                ");
+			func_7e8(0, 3, 1, 21, "All parameter resume ");
+			func_7e8(0, 5, 1, 21, "to the leave factory ");
+			func_7e8(0, 7, 1, 21, "state.               ");
+			//->0x20a50
 			break;
-		
+		#if 0
 		default:
 			//0x20a50
 			break;
+		#endif
 	}
 }
 
