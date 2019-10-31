@@ -293,6 +293,7 @@ extern unsigned short wData_40002ebc_ICNr; //40002ebc
 extern unsigned short wData_40002ebe_ShNr; //40002ebe
 extern unsigned short wData_40002ec0; //40002ec0
 extern int Data_40002ec4_SAONr; //40002ec4
+extern int Data_40002ec8; //40002ec8
 extern unsigned short wData_40002ecc; //40002ecc
 extern unsigned char bData_40002ece; //40002ece
 extern unsigned short wData_40002ed0; //40002ed0
@@ -328,6 +329,20 @@ extern char* Data_40002f38; //40002f38
 extern char* Data_40002f3c; //40002f3c
 extern char* Data_40002f40; //40002f40
 extern char* Data_40002f44; //40002f44
+extern char* Data_40002f48; //40002f48
+extern char* Data_40002f4c; //40002f4c
+extern char* Data_40002f50; //40002f50
+extern char* Data_40002f54; //40002f54
+extern char* Data_40002f58; //40002f58
+extern char* Data_40002f5c; //40002f5c
+extern char* Data_40002f60; //40002f60
+extern char* Data_40002f64; //40002f64
+extern char* Data_40002f68; //40002f68
+extern char* Data_40002f6c; //40002f6c
+extern char* Data_40002f70; //40002f70
+extern char* Data_40002f74; //40002f74
+extern char* Data_40002f78; //40002f78
+extern char* Data_40002f7c; //40002f7c
 extern char* Data_400030c0; //400030c0
 extern char* Data_400030c4; //400030c4
 extern char* Data_400030c8; //400030c8

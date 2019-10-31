@@ -173,6 +173,7 @@ unsigned short wData_40002ebc_ICNr; //40002ebc
 unsigned short wData_40002ebe_ShNr; //40002ebe
 unsigned short wData_40002ec0; //40002ec0
 int Data_40002ec4_SAONr; //40002ec4
+int Data_40002ec8; //40002ec8
 unsigned short wData_40002ecc; //40002ecc
 unsigned char bData_40002ece; //40002ece
 unsigned short wData_40002ed0; //40002ed0
@@ -208,6 +209,20 @@ char* Data_40002f38; //40002f38
 char* Data_40002f3c; //40002f3c
 char* Data_40002f40; //40002f40
 char* Data_40002f44; //40002f44
+char* Data_40002f48; //40002f48
+char* Data_40002f4c; //40002f4c
+char* Data_40002f50; //40002f50
+char* Data_40002f54; //40002f54
+char* Data_40002f58; //40002f58
+char* Data_40002f5c; //40002f5c
+char* Data_40002f60; //40002f60
+char* Data_40002f64; //40002f64
+char* Data_40002f68; //40002f68
+char* Data_40002f6c; //40002f6c
+char* Data_40002f70; //40002f70
+char* Data_40002f74; //40002f74
+char* Data_40002f78; //40002f78
+char* Data_40002f7c; //40002f7c
 char* Data_400030c0; //400030c0
 char* Data_400030c4; //400030c4
 char* Data_400030c8; //400030c8

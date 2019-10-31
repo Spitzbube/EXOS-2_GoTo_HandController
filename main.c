@@ -545,6 +545,40 @@ void func_60d54(void)
 /* 60dfc - todo */
 void func_60dfc(void)
 {
+	switch (Data_40002c64)
+	{
+		case 0:
+			//0x60e60
+			Data_40002c64 = 0;
+			bData_4000319a_SkyLandTargetId = 1;
+			bData_4000319b = 1;
+		
+			func_394();
+			//->0x60ec4
+			break;
+		
+		case 23012:
+			//0x60e8c
+		case 23002:
+			//0x60e94
+		case 1:
+			//0x60e98
+		case 2:
+			//0x60e9c
+		case 23005:
+			//0x60ea0
+		case 23006:
+			//0x60ea4
+		case 23007:
+			//0x60ea8
+			func_394();
+		
+			Data_40002ec8 = 0;
+		
+			func_7950(1);
+			break;
+				
+	}
 }
 
 /* 60ed0 - todo */
