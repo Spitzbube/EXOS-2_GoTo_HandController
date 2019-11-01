@@ -8332,14 +8332,41 @@ void func_2245c(int a, int b)
 				
 				case 3:
 					//0x228ec
+					Data_40003360 = Data_40002f64;
+					Data_40003364 = Data_40002f68;
+					Data_40003368 = Data_40002f6c;
+					Data_4000336c = Data_40002f70;
+					Data_40003370 = Data_40002f74;
+					Data_40003374 = Data_40002f78;
+					Data_40003378 = Data_40002f7c;
+					Data_4000337c = Data_40002f80;
+					//->0x22a8c
 					break;
 				
 				case 4:
 					//0x22974
+					Data_40003360 = Data_40002f68;
+					Data_40003364 = Data_40002f6c;
+					Data_40003368 = Data_40002f70;
+					Data_4000336c = Data_40002f74;
+					Data_40003370 = Data_40002f78;
+					Data_40003374 = Data_40002f7c;
+					Data_40003378 = Data_40002f80;
+					Data_4000337c = Data_40002f84;
+					//->0x22a8c
 					break;
 				
 				case 5:
 					//0x229fc
+					Data_40003360 = Data_40002f6c;
+					Data_40003364 = Data_40002f70;
+					Data_40003368 = Data_40002f74;
+					Data_4000336c = Data_40002f78;
+					Data_40003370 = Data_40002f7c;
+					Data_40003374 = Data_40002f80;
+					Data_40003378 = Data_40002f84;
+					Data_4000337c = Data_40002f88;
+					//->0x22a8c
 					break;
 				
 				default:
@@ -8350,24 +8377,691 @@ void func_2245c(int a, int b)
 		
 		case 13:
 			//0x22a94
+			switch (b)
+			{
+				case 1:
+					//0x22ab4
+					Data_40003360 = Data_40002f8c;
+					Data_40003364 = Data_40002f90;
+					Data_40003368 = Data_40002f94;
+					Data_4000336c = Data_40002f98;
+					Data_40003370 = Data_40002f9c;
+					Data_40003374 = Data_40002fa0;
+					Data_40003378 = Data_40002fa4;
+					Data_4000337c = Data_40002fa8;
+					//->0x22c54
+					break;
+				
+				case 2:
+					//0x22b3c
+					Data_40003360 = Data_40002f90;
+					Data_40003364 = Data_40002f94;
+					Data_40003368 = Data_40002f98;
+					Data_4000336c = Data_40002f9c;
+					Data_40003370 = Data_40002fa0;
+					Data_40003374 = Data_40002fa4;
+					Data_40003378 = Data_40002fa8;
+					Data_4000337c = Data_40002fac;
+					//->0x22c54
+					break;
+				
+				case 3:
+					//0x22bc4
+					Data_40003360 = Data_40002f94;
+					Data_40003364 = Data_40002f98;
+					Data_40003368 = Data_40002f9c;
+					Data_4000336c = Data_40002fa0;
+					Data_40003370 = Data_40002fa4;
+					Data_40003374 = Data_40002fa8;
+					Data_40003378 = Data_40002fac;
+					Data_4000337c = Data_40002fb0;
+					//->0x22c54
+					break;
+				
+				default:
+					//0x22c4c
+					break;				
+			}
 			break;
 		
 		case 14:
 			//0x22c5c
+			switch (b)
+			{
+				case 1:
+					//0x22c7c
+					Data_40003360 = Data_40002fb4;
+					Data_40003364 = Data_40002fb8;
+					Data_40003368 = Data_40002fbc;
+					Data_4000336c = Data_40002fc0;
+					Data_40003370 = Data_40002fc4;
+					Data_40003374 = Data_40002fc8;
+					Data_40003378 = Data_40002fcc;
+					Data_4000337c = Data_40002fd0;
+					//->0x22e1c
+					break;
+				
+				case 2:
+					//0x22d04
+					Data_40003360 = Data_40002fb8;
+					Data_40003364 = Data_40002fbc;
+					Data_40003368 = Data_40002fc0;
+					Data_4000336c = Data_40002fc4;
+					Data_40003370 = Data_40002fc8;
+					Data_40003374 = Data_40002fcc;
+					Data_40003378 = Data_40002fd0;
+					Data_4000337c = Data_40002fd4;
+					//->0x22e1c
+					break;
+				
+				case 3:
+					//0x22d8c
+					Data_40003360 = Data_40002fbc;
+					Data_40003364 = Data_40002fc0;
+					Data_40003368 = Data_40002fc4;
+					Data_4000336c = Data_40002fc8;
+					Data_40003370 = Data_40002fcc;
+					Data_40003374 = Data_40002fd0;
+					Data_40003378 = Data_40002fd4;
+					Data_4000337c = Data_40002fd8;
+					//->0x22e1c
+					break;
+				
+				default:
+					//0x22e14
+					break;
+			}
 			break;
 		
 		case 22:
 			//0x22e24
+			switch (b)
+			{
+				case 1:
+					//0x22e4c
+					Data_40003360 = Data_40002fdc;
+					Data_40003364 = Data_40002fe0;
+					Data_40003368 = Data_40002fe4;
+					Data_4000336c = Data_40002fe8;
+					Data_40003370 = Data_40002fec;
+					Data_40003374 = Data_40002ff0;
+					Data_40003378 = Data_40002ff4;
+					Data_4000337c = Data_40002ff8;
+					//->0x23074
+					break;
+				
+				case 2:
+					//0x22ed4
+					Data_40003360 = Data_40002fe0;
+					Data_40003364 = Data_40002fe4;
+					Data_40003368 = Data_40002fe8;
+					Data_4000336c = Data_40002fec;
+					Data_40003370 = Data_40002ff0;
+					Data_40003374 = Data_40002ff4;
+					Data_40003378 = Data_40002ff8;
+					Data_4000337c = Data_40002ffc;
+					//->0x23074
+					break;
+				
+				case 3:
+					//0x22f5c
+					Data_40003360 = Data_40002fe4;
+					Data_40003364 = Data_40002fe8;
+					Data_40003368 = Data_40002fec;
+					Data_4000336c = Data_40002ff0;
+					Data_40003370 = Data_40002ff4;
+					Data_40003374 = Data_40002ff8;
+					Data_40003378 = Data_40002ffc;
+					Data_4000337c = Data_40003000;
+					//->0x23074
+					break;
+				
+				case 4:
+					//0x22fe4
+					Data_40003360 = Data_40002fe8;
+					Data_40003364 = Data_40002fec;
+					Data_40003368 = Data_40002ff0;
+					Data_4000336c = Data_40002ff4;
+					Data_40003370 = Data_40002ff8;
+					Data_40003374 = Data_40002ffc;
+					Data_40003378 = Data_40003000;
+					Data_4000337c = Data_40003004;
+					//->0x23074
+					break;
+				
+				default:
+					//0x2306c
+					break;
+			}
 			break;
 		
 		case 23:
 			//0x2307c
+			switch (b)
+			{
+				case 1:
+					//23088
+					Data_40003360 = Data_40003008;
+					Data_40003364 = Data_4000300c;
+					Data_40003368 = Data_40003010;
+					Data_4000336c = Data_40003014;
+					Data_40003370 = Data_40003018;
+					Data_40003374 = Data_4000301c;
+					Data_40003378 = Data_40003020;
+					Data_4000337c = Data_40003024;
+					//->0x23074
+					break;
+				
+				default:
+					//0x23110
+					break;
+			}
+			break;
+			
+		default:
 			break;
 	}
-	//0x23120
 }
 
 #include "func_23130.c"
+
+/* 24574 - todo */
+void func_24574(void)
+{
+	dData_40002e28 = Data_40004128.dData_48;
+	dData_40002e48 = Data_40004128.dData_56;
+	Data_40002e54 = Data_40004128.Data_64;
+	
+	Data_40002e18 = dData_40002e28;	
+	Data_40002e1c = (dData_40002e28 - Data_40002e18) * 60.0;
+	fData_40002e20 = (dData_40002e28 * 60.0 - Data_40002e18 * 60.0 - Data_40002e1c) * 60.0;
+	
+	Data_40002e38 = dData_40002e48;
+	Data_40002e3c = (dData_40002e48 - Data_40002e38) * 60.0;
+	fData_40002e40 = (dData_40002e48 * 60.0 - Data_40002e38 * 60.0 - Data_40002e3c) * 60.0;
+	
+	sprintf(Data_40003fa9, "%04d-%02d-%02d", Data_40002e5c, bData_40002e60, bData_40002e61);
+	Data_40003360 = Data_40003fa9;
+	
+	sprintf(Data_40003fbe, "%02d:%02d:%02d", bData_40002e62, bData_40002e63, bData_40002e64);
+	Data_40003364 = Data_40003fbe;
+	
+	switch (bData_40002e79_SkyLandTargetSeletion)
+	{
+		case 0:
+			//0x24950
+			Data_40003370 = "Sky ";
+			break;
+		
+		case 1:
+			//0x24964
+			Data_40003370 = "Land";
+			break;
+		
+		default:
+			//0x24978
+			break;
+	}
+	//24984
+	if (dData_40002e28 < 0)
+	{
+		//2499c
+		sprintf(Data_40004012, "Site:W%03d?%02d'%02d^", 
+			abs(Data_40002e18), abs(Data_40002e1c), abs(fData_40002e20) & 0xff);
+	}
+	else
+	{
+		//0x24a14
+		sprintf(Data_40004012, "Site:E%03d?%02d'%02d^", 
+			abs(Data_40002e18), abs(Data_40002e1c), abs(fData_40002e20) & 0xff);
+	}
+	//0x24a88
+	Data_40003374 = Data_40004012;
+	
+	switch (bData_40002e7a)
+	{
+		case 0:
+			//0x24ab0
+			Data_40003378 = "AZ";
+			break;
+		
+		case 1:
+			//0x24ac4
+			Data_40003378 = "EQ";
+			break;
+		
+		default:
+			//0x24ad8
+			break;
+	}
+	//0x24ae0
+	if (dData_40002e48 < 0)
+	{
+		//24afc
+		sprintf(Data_4000403c, "     S%03d?%02d'%02d^", 
+			abs(Data_40002e38), abs(Data_40002e3c), abs(fData_40002e40) & 0xff);
+	}
+	else
+	{
+		//0x24b74
+		sprintf(Data_4000403c, "     N%03d?%02d'%02d^", 
+			abs(Data_40002e38), abs(Data_40002e3c), abs(fData_40002e40) & 0xff);
+	}
+	//0x24be8
+	Data_4000337c = Data_4000403c;
+	
+	switch (bData_40002e7b)
+	{
+		case 0:
+			//0x24c10
+			Data_40003380 = "    ";
+			break;
+		
+		case 1:
+			//0x24c24
+			Data_40003380 = "GPS!";
+			break;
+		
+		default:
+			//0x24ce4
+			break;
+	}
+	
+	switch (bData_40002e7a)
+	{
+		case 0:
+			//0x24d0c
+			sprintf(Data_40004066, " OBJ: %03d?%02d'%02.0f^", 
+				abs(Data_40002d20), abs(Data_40002d24), fabs(fData_40002d28));
+			break;
+		
+		case 1:
+			//0x24d88
+			sprintf(Data_40004066, " OBJ: %03dh%02dm%02ds",
+				Data_40002cd8, Data_40002cdc, (unsigned int)fData_40002ce0 & 0xFF);
+			break;
+		
+		default:
+			//0x24dc0
+			break;
+	}
+	//24dcc
+	Data_40003384 = Data_40004066;
+	
+	switch (bData_40002e7c)
+	{
+		case 0:
+			//0x24e04
+			Data_40003388 = "Cel";
+			break;
+			
+		case 1:
+			//0x24e18
+			Data_40003388 = "Sun";
+			break;
+		
+		case 2:
+			//0x24e2c
+			Data_40003388 = "Lun";
+			break;
+		
+		case 3:
+			//0x24e40
+			Data_40003388 = "Def";
+			break;
+		
+		default:
+			//0x24e54
+			break;
+	}
+	//24e60
+	switch (bData_40002e7a)
+	{
+		case 0:
+			//0x24e7c
+			if (Data_40004128.dData_120 > 90)
+			{
+				//24e9c
+				sprintf(Data_40004090, "      -%02d?%02d'%02d^", 
+					abs(Data_40002d48), abs(Data_40002d4c), abs(fData_40002d50));
+			}
+			else
+			{
+				//0x24f10
+				sprintf(Data_40004090, "      +%02d?%02d'%02d^", 
+					abs(Data_40002d48), abs(Data_40002d4c), abs(fData_40002d50));
+			}
+			//->0x25048
+			break;
+		
+		case 1:
+			//0x24f84
+			if (Data_40002d44 == -1)
+			{
+				//24f98
+				sprintf(Data_40004090, "      -%02d?%02d'%02d^",
+					abs(Data_40002d00_ObjectDeclinationDegrees), 
+					abs(Data_40002d04_ObjectDeclinationMinutes), 
+					abs(fData_40002d08_ObjectDeclinationSeconds));
+			}
+			else
+			{
+				//0x2500c
+				sprintf(Data_40004090, "      +%02d?%02d'%02d^",
+					Data_40002d00_ObjectDeclinationDegrees,
+					Data_40002d04_ObjectDeclinationMinutes,
+					((unsigned int)fData_40002d08_ObjectDeclinationSeconds) & 0xff);
+			}
+			break;
+		
+		default:
+			//0x25040
+			break;
+	}
+	//2504c
+	Data_4000338c = Data_40004090;
+	//25058
+	switch (bData_40002e7d)
+	{
+		case 1:
+			//0x25158
+			Data_40003390 = "1X   ";
+			break;
+		
+		case 2:
+			//0x2516c
+			Data_40003390 = "2X   ";
+			break;
+		
+		case 3:
+			//0x25180
+			Data_40003390 = "8X   ";
+			break;
+		
+		case 4:
+			//0x25194
+			Data_40003390 = "16X  ";
+			break;
+		
+		case 5:
+			//0x251a8
+			Data_40003390 = "64X  ";
+			break;
+		
+		case 6:
+			//0x251bc
+			Data_40003390 = "128X";
+			break;
+		
+		case 7:
+			//0x251d0
+			Data_40003390 = "256X";
+			break;
+		
+		case 8:
+			//0x251e4
+			Data_40003390 = "512X";
+			break;
+		
+		case 9:
+			//0x251f8
+			Data_40003390 = "Max ";
+			break;
+		
+		default:
+			//0x2520c
+			break;
+	}
+	//25218
+	switch (bData_40002e7a)
+	{
+		case 0:
+			//0x25234
+			sprintf(Data_400040ba, " OTA: %03d?%02d'%02d^", 
+				abs(Data_40002dac), abs(Data_40002db0), abs(fData_40002db4) & 0xff);
+			break;
+		
+		case 1:
+			//0x252b0
+			sprintf(Data_400040ba, " OTA: %03dh%02dm%02ds", 
+				Data_40002d68, Data_40002d6c, abs(fData_40002d70) & 0xff);
+			break;
+		
+		default:
+			//0x252fc
+			break;
+	}
+	//0x25304
+	Data_40003394 = Data_400040ba;
+	
+	switch (bData_40002e7a)
+	{
+		case 0:
+			//0x25330
+			if ((fabs(Data_40004128.dData_216) > 90) ||
+				(dData_40002df8 < 0))
+			{
+				//0x25378
+				sprintf(Data_400040e4, "      -%02d?%02d'%02d^", 
+					abs(Data_40002de0), abs(Data_40002de4), abs(fData_40002de8) & 0xFF);
+			}
+			else
+			{
+				//0x253f0
+				sprintf(Data_400040e4, "      +%02d?%02d'%02d^", 
+					abs(Data_40002de0), abs(Data_40002de4), abs(fData_40002de8) & 0xFF);
+			}
+			break;
+		
+		case 1:
+			//0x25518
+			if (dData_40002d98 < 0)
+			{
+				//25534
+				sprintf(Data_400040e4, "      -%02d?%02d'%02d      ",
+					abs(Data_40002d8c), abs(Data_40002d90), abs(fData_40002d94) & 0xFF);
+			}
+			else
+			{
+				//0x255ac
+				sprintf(Data_400040e4, "      +%02d?%02d'%02d      ",
+					abs(Data_40002d8c), abs(Data_40002d90), abs(fData_40002d94) & 0xFF);
+			}
+			break;
+		
+		default:
+			//0x25624
+			break;
+	}
+	//0x2562c
+	Data_4000339c = Data_400040e4;
+	
+	switch (bData_40002e88)
+	{
+		case 0:
+			//0x25678
+		case 100:
+			//0x25680
+			Data_40003398 = "Stop";
+			break;
+		
+		case 1:
+			//0x25690
+			Data_40003398 = "Poin";
+			break;
+		
+		case 2:
+			//0x256a4
+			Data_40003398 = "Trac";
+			break;
+		
+		case 3:
+			//0x256b8
+			Data_40003398 = "UdHn";
+			break;
+		
+		default:
+			//0x256cc
+			Data_40003398 = "Slew";
+			break;
+	}
+	
+	if ((bData_400034b4 == 1) &&
+		(bData_40002e88 == 2))
+	{
+		Data_40003394 = Data_40004066;
+		Data_4000339c = Data_40004090;
+		Data_400040ba[1] = 'O';
+		Data_400040ba[2] = 'T';
+		Data_400040ba[3] = 'A';
+		Data_40003394 = Data_400040ba;
+		Data_4000339c = Data_400040e4;
+	}
+}
+
+/* 2575c - todo */
+void func_2575c(void)
+{
+	switch (bData_40003196)
+	{
+		case 1:
+			//0x25788
+			Data_40002f20 = Data_400008ad;
+			Data_40002f24 = Data_400008bd;
+			Data_40002f28 = Data_400008c8;
+			Data_40002f2c = Data_400008d2;
+			Data_40002f30 = Data_400008d8;
+			Data_40002f34 = Data_400008e7;
+			Data_40002f38 = Data_400008f6;
+			Data_40002f3c = Data_40000907;
+			Data_40002f40 = Data_40000913;
+			Data_40002f44 = Data_40000923;
+			Data_40002f48 = Data_40000933;
+			Data_40002f4c = "                     ";
+		
+			Data_40002f5c = Data_40000944;
+			Data_40002f60 = Data_40000951;
+			Data_40002f64 = Data_4000095f;
+			Data_40002f68 = Data_4000096b;
+			Data_40002f6c = Data_4000097a;
+			Data_40002f70 = Data_40000987;
+			Data_40002f74 = Data_40000994;
+			Data_40002f78 = Data_400009a1;
+			Data_40002f7c = Data_400009b2;
+			Data_40002f80 = Data_400009c2;
+			Data_40002f84 = Data_400009d3;
+			Data_40002f88 = Data_400009e4;
+			Data_40002f8c = Data_400009f5;
+			Data_40002f90 = Data_40000a05;
+			Data_40002f94 = Data_40000a15;
+			Data_40002f98 = Data_40000a27;
+			Data_40002f9c = Data_40000a2d;
+			Data_40002fa0 = Data_40000a33;
+			Data_40002fa4 = Data_40000a40;
+			Data_40002fa8 = Data_40000a4f;
+			Data_40002fac = Data_40000a60;
+			Data_40002fb4 = Data_40000a6d;
+			Data_40002fb8 = Data_40000a7c;
+			Data_40002fbc = Data_40000a8c;
+			Data_40002fc0 = Data_40000a99;
+			Data_40002fc4 = Data_40000aa2;
+			Data_40002fc8 = Data_40000aab;
+			Data_40002fcc = Data_40000abb;
+			Data_40002fd0 = Data_40000ac9;
+			Data_40002fd4 = Data_40000ad2;
+
+			Data_40003028 = Data_40000ad8;
+			Data_4000302c = Data_40000ae8;
+			Data_40003030 = Data_40000af4;
+			Data_40003034 = Data_40000aff;
+			Data_40003038 = Data_40000b06;
+			Data_4000303c = Data_40000b0a;
+			Data_40003040 = Data_40000b11;
+			Data_40003044 = Data_40000b18;
+			Data_40003048 = Data_40000b1f;
+			Data_4000304c = Data_40000b23;
+			Data_40003050 = Data_40000b4d;
+			Data_40003054 = Data_40000b55;
+			Data_40003058 = Data_40000b5b;
+			Data_4000305c = Data_40000b65;
+			Data_40003060 = Data_40000b6f;
+			Data_40003064 = Data_40000b7e;
+			Data_40003068 = Data_40000b8a;
+			Data_4000306c = Data_40000b91;
+			Data_40003070 = Data_40000b95;
+			Data_40003074 = Data_40000b9c;
+			Data_40003078 = Data_40000ba3;
+			Data_4000307c = Data_40000baa;
+			Data_40003080 = Data_40000bae;
+			Data_40003084 = Data_40000bb5;
+			Data_40003088 = Data_40000bbc;
+			Data_4000308c = Data_40000bc7;
+			Data_40003090 = Data_40000bd3;
+			Data_40003094 = Data_40000bde;
+			Data_40003098 = Data_40000bee;
+			Data_4000309c = Data_40000bfc;
+			Data_400030a0 = Data_40000c14;
+			Data_400030a4 = Data_40000c20;
+			Data_400030a8 = Data_40000c35;
+			Data_400030ac = Data_40000c4b;
+			Data_400030b0 = Data_40000c60;
+			Data_400030b4 = Data_40000c7a;
+			Data_400030b8 = Data_40000c92;
+			Data_400030bc = Data_40000ca6;
+
+			Data_400030cc = Data_40000cbe;			
+			Data_400030d0 = Data_40000cd3;
+			Data_400030d4 = Data_40000ce8;
+			Data_400030d8 = Data_40000cfb;
+			Data_400030dc = Data_40000d06;
+			Data_400030e0 = Data_40000d1a;
+			Data_400030e4 = Data_40000d2f;
+			Data_400030e8 = Data_40000d44;
+			Data_400030ec = Data_40000d59;
+			Data_400030f0 = Data_40000d66;
+			Data_400030f4 = Data_40000d7b;
+			Data_400030f8 = Data_40000d90;
+			Data_400030fc = Data_40000da2;
+			Data_40003100 = Data_40000db8;
+			Data_40003104 = Data_40000dcf;
+			Data_40003108 = Data_40000de3;
+			Data_4000310c = Data_40000df9;
+			Data_40003110 = Data_40000e0a;
+			Data_40003114 = Data_40000e20;
+
+			Data_400030c0 = Data_40000e21;
+			Data_400030c4 = Data_40000e38;
+			Data_400030c8 = Data_40000e4e;
+			//25df4 ->0x2783c
+			break;
+
+		case 2:
+			//0x26010
+			Data_40002f20 = Data_40000e62;
+		
+			//TODO
+		
+			break;
+		
+		case 3:
+			//0x264d4
+			break;
+		
+		case 4:
+			//0x26ae0
+			break;
+		
+		case 5:
+			//0x270d0
+			break;
+		
+		default:
+			//0x27834
+			break;
+	}
+}
+
+
 #include "func_27844.c"
 
 #include "func_52898.c"
