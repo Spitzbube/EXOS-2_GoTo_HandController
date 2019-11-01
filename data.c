@@ -24,6 +24,98 @@ char Data_400008f6[15]; //400008f6, size???
 char Data_40000907[12]; //40000907, size???
 char Data_40000913[16]; //40000913, size???
 char Data_40000923[16]; //40000923, size???
+char Data_40000933[17]; //40000933, size???
+char Data_40000944[42]; //40000944, size???
+char Data_40000951[42]; //40000951, size???
+char Data_4000095f[42]; //4000095f, size???
+char Data_4000096b[42]; //4000096b, size???
+char Data_4000097a[42]; //4000097a, size???
+char Data_40000987[42]; //40000987, size???
+char Data_40000994[42]; //40000994, size???
+char Data_400009a1[42]; //400009a1, size???
+char Data_400009b2[42]; //400009b2, size???
+char Data_400009c2[42]; //400009c2, size???
+char Data_400009d3[42]; //400009d3, size???
+char Data_400009e4[42]; //400009e4, size???
+char Data_400009f5[42]; //400009f5, size???
+char Data_40000a05[42]; //40000a05, size???
+char Data_40000a15[42]; //40000a15, size???
+char Data_40000a27[42]; //40000a27, size???
+char Data_40000a2d[42]; //40000a2d, size???
+char Data_40000a33[42]; //40000a33, size???
+char Data_40000a40[42]; //40000a40, size???
+char Data_40000a4f[42]; //40000a4f, size???
+char Data_40000a60[42]; //40000a60, size???
+char Data_40000a6d[42]; //40000a6d, size???
+char Data_40000a7c[42]; //40000a7c, size???
+char Data_40000a8c[42];
+char Data_40000a99[42];
+char Data_40000aa2[42];
+char Data_40000aab[42];
+char Data_40000abb[42];
+char Data_40000ac9[42];
+char Data_40000ad2[42];
+char Data_40000ad8[42];
+char Data_40000ae8[42];
+char Data_40000af4[42];
+char Data_40000aff[42];
+char Data_40000b06[42];
+char Data_40000b0a[42];
+char Data_40000b11[42];
+char Data_40000b18[42];
+char Data_40000b1f[42];
+char Data_40000b23[42];
+char Data_40000b4d[42];
+char Data_40000b55[42];
+char Data_40000b5b[42];
+char Data_40000b65[42];
+char Data_40000b6f[42];
+char Data_40000b7e[42];
+char Data_40000b8a[42];
+char Data_40000b91[42];
+char Data_40000b95[42];
+char Data_40000b9c[42];
+char Data_40000ba3[42];
+char Data_40000baa[42];
+char Data_40000bae[42];
+char Data_40000bb5[42];
+char Data_40000bbc[42];
+char Data_40000bc7[42];
+char Data_40000bd3[42];
+char Data_40000bde[42];
+char Data_40000bee[42];
+char Data_40000bfc[42];
+char Data_40000c14[42];
+char Data_40000c20[42];
+char Data_40000c35[42];
+char Data_40000c4b[42];
+char Data_40000c60[42];
+char Data_40000c7a[42];
+char Data_40000c92[42];
+char Data_40000ca6[42];
+char Data_40000cbe[42];
+char Data_40000cd3[42];
+char Data_40000ce8[42];
+char Data_40000cfb[42];
+char Data_40000d06[42];
+char Data_40000d1a[42];
+char Data_40000d2f[42];
+char Data_40000d44[42];
+char Data_40000d59[42];
+char Data_40000d66[42];
+char Data_40000d7b[42];
+char Data_40000d90[42];
+char Data_40000da2[42];
+char Data_40000db8[42];
+char Data_40000dcf[42];
+char Data_40000de3[42];
+char Data_40000df9[42];
+char Data_40000e0a[42];
+char Data_40000e20[42];
+char Data_40000e21[42];
+char Data_40000e38[42];
+char Data_40000e4e[42];
+char Data_40000e62[42]; //40000e62
 char Data_40002655[11]; //40002655, size???
 char Data_40002660[100]; //40002660, size???
 char fill_40002836; //40002836
@@ -143,14 +235,14 @@ unsigned char bData_40002e64; //40002e64
 unsigned short wData_40002e66; //40002e66
 char bData_40002e78; //40002e78
 unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79
-char bData_40002e7a; //40002e7a
-char bData_40002e7b; //40002e7b
-char bData_40002e7c; //40002e7c
+unsigned char bData_40002e7a; //40002e7a
+unsigned char bData_40002e7b; //40002e7b
+unsigned char bData_40002e7c; //40002e7c
 unsigned char bData_40002e7d; //40002e7d
 char bData_40002e7e; //40002e7e
 int Data_40002e80; //40002e80
 int Data_40002e84; //40002e84
-char bData_40002e88; //40002e88
+unsigned char bData_40002e88; //40002e88
 char bData_40002e89; //40002e89
 char bData_40002e8a; //40002e8a
 char bData_40002e8b; //40002e8b
@@ -223,9 +315,108 @@ char* Data_40002f70; //40002f70
 char* Data_40002f74; //40002f74
 char* Data_40002f78; //40002f78
 char* Data_40002f7c; //40002f7c
+char* Data_40002f80; //40002f80
+char* Data_40002f84; //40002f84
+char* Data_40002f88; //40002f88
+char* Data_40002f8c; //40002f8c
+char* Data_40002f90; //40002f90
+char* Data_40002f94; //40002f94
+char* Data_40002f98; //40002f98
+char* Data_40002f9c; //40002f9c
+char* Data_40002fa0; //40002fa0
+char* Data_40002fa4; //40002fa4
+char* Data_40002fa8; //40002fa8
+char* Data_40002fac; //40002fac
+char* Data_40002fb0; //40002fb0
+char* Data_40002fb4; //40002fb4
+char* Data_40002fb8; //40002fb8
+char* Data_40002fbc; //40002fbc
+char* Data_40002fc0; //40002fc0
+char* Data_40002fc4; //40002fc4
+char* Data_40002fc8; //40002fc8
+char* Data_40002fcc; //40002fcc
+char* Data_40002fd0; //40002fd0
+char* Data_40002fd4; //40002fd4
+char* Data_40002fd8; //40002fd8
+char* Data_40002fdc; //40002fdc
+char* Data_40002fe0; //40002fe0
+char* Data_40002fe4; //40002fe4
+char* Data_40002fe8; //40002fe8
+char* Data_40002fec; //40002fec
+char* Data_40002ff0; //40002ff0
+char* Data_40002ff4; //40002ff4
+char* Data_40002ff8; //40002ff8
+char* Data_40002ffc; //40002ffc
+char* Data_40003000; //40003000
+char* Data_40003004; //40003004
+char* Data_40003008; //40003008
+char* Data_4000300c; //4000300c
+char* Data_40003010; //40003010
+char* Data_40003014; //40003014
+char* Data_40003018; //40003018
+char* Data_4000301c; //4000301c
+char* Data_40003020; //40003020
+char* Data_40003024; //40003024
+char* Data_40003028;
+char* Data_4000302c;
+char* Data_40003030;
+char* Data_40003034;
+char* Data_40003038;
+char* Data_4000303c;
+char* Data_40003040;
+char* Data_40003044;
+char* Data_40003048;
+char* Data_4000304c;
+char* Data_40003050;
+char* Data_40003054;
+char* Data_40003058;
+char* Data_4000305c;
+char* Data_40003060;
+char* Data_40003064;
+char* Data_40003068;
+char* Data_4000306c;
+char* Data_40003070;
+char* Data_40003074;
+char* Data_40003078;
+char* Data_4000307c;
+char* Data_40003080;
+char* Data_40003084;
+char* Data_40003088;
+char* Data_4000308c;
+char* Data_40003090;
+char* Data_40003094;
+char* Data_40003098;
+char* Data_4000309c;
+char* Data_400030a0;
+char* Data_400030a4;
+char* Data_400030a8;
+char* Data_400030ac;
+char* Data_400030b0;
+char* Data_400030b4;
+char* Data_400030b8;
+char* Data_400030bc;
 char* Data_400030c0; //400030c0
 char* Data_400030c4; //400030c4
 char* Data_400030c8; //400030c8
+char* Data_400030cc; //400030cc
+char* Data_400030d0;
+char* Data_400030d4;
+char* Data_400030d8;
+char* Data_400030dc;
+char* Data_400030e0;
+char* Data_400030e4;
+char* Data_400030e8;
+char* Data_400030ec;
+char* Data_400030f0;
+char* Data_400030f4;
+char* Data_400030f8;
+char* Data_400030fc;
+char* Data_40003100;
+char* Data_40003104;
+char* Data_40003108;
+char* Data_4000310c;
+char* Data_40003110;
+char* Data_40003114;
 char* Data_40003140; //40003140
 char* Data_4000314c; //4000314c
 char Data_40003150[30]; //40003150, size??
@@ -317,6 +508,10 @@ char* Data_40003398; //40003398
 char* Data_4000339c; //4000339c
 char* Data_400033a0; //400033a0
 char* Data_400033a4; //400033a4
+char* Data_400033a8; //400033a8
+char* Data_400033ac; //400033ac
+char* Data_400033b0; //400033b0
+char* Data_400033b4; //400033b4
 Union_400033c8 Data_400033c8; //400033c8
 Union_400033cc Data_400033cc; //400033cc
 double dData_400033d8; //400033d8
@@ -399,7 +594,11 @@ char Data_40003fe8[21]; //40003fe8, size???
 char Data_40003ffd[21]; //40003ffd, size???
 char Data_40004012[21]; //40004012, size???
 char Data_40004027[21]; //40004027, size???
-char Data_4000403c[80]; //4000403c, size???
+char Data_4000403c[42]; //4000403c, size???
+char Data_40004066[42]; //40004066, size???
+char Data_40004090[42]; //40004090, size???
+char Data_400040ba[42]; //400040ba, size???
+char Data_400040e4[42]; //400040e4, size???
 char Data_4000410e[21]; //4000410e, size???
 Struct_40004128 Data_40004128; //40004128
 Struct_40004380 Data_40004380; //40004380
