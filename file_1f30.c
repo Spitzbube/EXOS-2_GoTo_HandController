@@ -2739,21 +2739,21 @@ void func_5f40(void)
 	Data_40002de0 = 3;
 	Data_40002de4 = 6;
 	fData_40002de8 = 2.5;
-	Data_40002e18 = 12;
-	Data_40002e1c = 7;
-	fData_40002e20 = 1.3;
+	Data_40002e18_SiteLongitudeDegrees = 12;
+	Data_40002e1c_SiteLongitudeMinutes = 7;
+	fData_40002e20_SiteLongitudeSeconds = 1.3;
 	Data_40002e34 = 1;
-	Data_40002e38 = 5;
-	Data_40002e3c = 1;
-	fData_40002e40 = 8.9;
+	Data_40002e38_SiteLatitudeDegrees = 5;
+	Data_40002e3c_SiteLatitudeMinutes = 1;
+	fData_40002e40_SiteLatitudeSeconds = 8.9;
 	Data_40002e44 = 1;
 	Data_40002e54 = 8;
-	Data_40002e5c = 2010;
-	bData_40002e60 = 8;
-	bData_40002e61 = 28;
-	bData_40002e62 = 18;
-	bData_40002e63 = 18;
-	bData_40002e64 = 18;
+	Data_40002e5c_Year = 2010;
+	bData_40002e60_Month = 8;
+	bData_40002e61_Day = 28;
+	bData_40002e62_Hours = 18;
+	bData_40002e63_Minutes = 18;
+	bData_40002e64_Seconds = 18;
 	bData_40002e79_SkyLandTargetSeletion = 0;
 	bData_40002e7a = 0;
 	bData_40002e7b = 0;
@@ -2805,12 +2805,12 @@ void func_6518(void)
 	unsigned int r0 = CTIME0;
 	unsigned int r1 = CTIME1;
 	
-	Data_40002e5c = (r1 >> 16) & 0x0fff; //Year
-	bData_40002e60 = (r1 >> 8) & 0x0f; //Month
-	bData_40002e61 = r1 & 0x1f; //Day
-	bData_40002e62 = (r0 >> 16) & 0x1f; //Hours
-	bData_40002e63 = (r0 >> 8) & 0x3f; //Minutes
-	bData_40002e64 = r0 & 0x3f; //Seconds
+	Data_40002e5c_Year = (r1 >> 16) & 0x0fff;
+	bData_40002e60_Month = (r1 >> 8) & 0x0f;
+	bData_40002e61_Day = r1 & 0x1f; //Day
+	bData_40002e62_Hours = (r0 >> 16) & 0x1f;
+	bData_40002e63_Minutes = (r0 >> 8) & 0x3f;
+	bData_40002e64_Seconds = r0 & 0x3f; //Seconds
 	wData_40002e66 = bData_40002c06 * 10;
 }
 
@@ -7765,22 +7765,22 @@ void func_20b94(void)
 	func_864(0, 3, 18, (unsigned char*)Data_79078);
 	func_864(0, 3, 21, (unsigned char*)Data_79072);
 	
-	if (abs(Data_40002e18) < 100)
+	if (abs(Data_40002e18_SiteLongitudeDegrees) < 100)
 	{
 		func_7e8(0, 3, 12, 1, " ");
 	}
 	
-	if (abs(Data_40002e18) < 10)
+	if (abs(Data_40002e18_SiteLongitudeDegrees) < 10)
 	{
 		func_7e8(0, 3, 13, 1, " ");
 	}
 	
-	if (abs(Data_40002e1c) < 10)
+	if (abs(Data_40002e1c_SiteLongitudeMinutes) < 10)
 	{
 		func_7e8(0, 3, 16, 1, " ");
 	}
 	
-	if (abs(fData_40002e20) < 10)
+	if (abs(fData_40002e20_SiteLongitudeSeconds) < 10)
 	{
 		func_7e8(0, 3, 19, 1, " ");
 	}
@@ -7794,22 +7794,22 @@ void func_20b94(void)
 	func_864(0, 4, 18, (unsigned char*)Data_79078);
 	func_864(0, 4, 21, (unsigned char*)Data_79072);
 	
-	if (abs(Data_40002e38) < 100)
+	if (abs(Data_40002e38_SiteLatitudeDegrees) < 100)
 	{
 		func_7e8(0, 4, 12, 1, " ");
 	}
 	
-	if (abs(Data_40002e38) < 10)
+	if (abs(Data_40002e38_SiteLatitudeDegrees) < 10)
 	{
 		func_7e8(0, 4, 13, 1, " ");
 	}
 	
-	if (abs(Data_40002e3c) < 10)
+	if (abs(Data_40002e3c_SiteLatitudeMinutes) < 10)
 	{
 		func_7e8(0, 4, 16, 1, " ");
 	}
 	
-	if (abs(fData_40002e40) < 10)
+	if (abs(fData_40002e40_SiteLatitudeSeconds) < 10)
 	{
 		func_7e8(0, 4, 19, 1, " ");
 	}
@@ -7853,22 +7853,22 @@ void func_20b94(void)
 		func_7e8(0, 5, 18, 1, "m");
 		func_7e8(0, 5, 21, 1, "s");
 
-		if (Data_40002cd8 < 100)
+		if (Data_40002cd8_ObjectRightAscensionHours < 100)
 		{
 			func_7e8(0, 5, 12, 1, " ");
 		}
 		
-		if (Data_40002cd8 < 10)
+		if (Data_40002cd8_ObjectRightAscensionHours < 10)
 		{
 			func_7e8(0, 5, 13, 1, " ");
 		}
 		
-		if (Data_40002cdc < 10)
+		if (Data_40002cdc_ObjectRightAscensionMinutes < 10)
 		{
 			func_7e8(0, 5, 16, 1, " ");
 		}
 		
-		if (fData_40002ce0 < 10)
+		if (fData_40002ce0_ObjectRightAscensionSeconds < 10)
 		{
 			func_7e8(0, 5, 19, 1, " ");
 		}
@@ -7962,22 +7962,22 @@ void func_20b94(void)
 			func_7e8(0, 7, 18, 1, "m");
 			func_7e8(0, 7, 21, 1, "s");
 			
-			if (Data_40002cd8 < 100)
+			if (Data_40002cd8_ObjectRightAscensionHours < 100)
 			{
 				func_7e8(0, 7, 12, 1, " ");
 			}
 			
-			if (Data_40002cd8 < 10)
+			if (Data_40002cd8_ObjectRightAscensionHours < 10)
 			{
 				func_7e8(0, 7, 13, 1, " ");
 			}
 			
-			if (Data_40002cdc < 10)
+			if (Data_40002cdc_ObjectRightAscensionMinutes < 10)
 			{
 				func_7e8(0, 7, 16, 1, " ");
 			}
 						
-			if (fData_40002ce0 < 10)
+			if (fData_40002ce0_ObjectRightAscensionSeconds < 10)
 			{
 				func_7e8(0, 7, 19, 1, " ");
 			}
@@ -8568,22 +8568,24 @@ void func_2245c(int a, int b)
 /* 24574 - todo */
 void func_24574(void)
 {
-	dData_40002e28 = Data_40004128.dData_48;
-	dData_40002e48 = Data_40004128.dData_56;
+	dData_40002e28_SiteLongitude = Data_40004128.dData_48;
+	dData_40002e48_SiteLatitude = Data_40004128.dData_56;
 	Data_40002e54 = Data_40004128.Data_64;
 	
-	Data_40002e18 = dData_40002e28;	
-	Data_40002e1c = (dData_40002e28 - Data_40002e18) * 60.0;
-	fData_40002e20 = (dData_40002e28 * 60.0 - Data_40002e18 * 60.0 - Data_40002e1c) * 60.0;
+	Data_40002e18_SiteLongitudeDegrees = dData_40002e28_SiteLongitude;	
+	Data_40002e1c_SiteLongitudeMinutes = (dData_40002e28_SiteLongitude - Data_40002e18_SiteLongitudeDegrees) * 60.0;
+	fData_40002e20_SiteLongitudeSeconds = (dData_40002e28_SiteLongitude * 60.0 - Data_40002e18_SiteLongitudeDegrees * 60.0 - Data_40002e1c_SiteLongitudeMinutes) * 60.0;
 	
-	Data_40002e38 = dData_40002e48;
-	Data_40002e3c = (dData_40002e48 - Data_40002e38) * 60.0;
-	fData_40002e40 = (dData_40002e48 * 60.0 - Data_40002e38 * 60.0 - Data_40002e3c) * 60.0;
+	Data_40002e38_SiteLatitudeDegrees = dData_40002e48_SiteLatitude;
+	Data_40002e3c_SiteLatitudeMinutes = (dData_40002e48_SiteLatitude - Data_40002e38_SiteLatitudeDegrees) * 60.0;
+	fData_40002e40_SiteLatitudeSeconds = (dData_40002e48_SiteLatitude * 60.0 - Data_40002e38_SiteLatitudeDegrees * 60.0 - Data_40002e3c_SiteLatitudeMinutes) * 60.0;
 	
-	sprintf(Data_40003fa9, "%04d-%02d-%02d", Data_40002e5c, bData_40002e60, bData_40002e61);
+	sprintf(Data_40003fa9, "%04d-%02d-%02d", 
+		Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
 	Data_40003360 = Data_40003fa9;
 	
-	sprintf(Data_40003fbe, "%02d:%02d:%02d", bData_40002e62, bData_40002e63, bData_40002e64);
+	sprintf(Data_40003fbe, "%02d:%02d:%02d", 
+		bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
 	Data_40003364 = Data_40003fbe;
 	
 	switch (bData_40002e79_SkyLandTargetSeletion)
@@ -8603,17 +8605,21 @@ void func_24574(void)
 			break;
 	}
 	//24984
-	if (dData_40002e28 < 0)
+	if (dData_40002e28_SiteLongitude < 0)
 	{
 		//2499c
 		sprintf(Data_40004012, "Site:W%03d?%02d'%02d^", 
-			abs(Data_40002e18), abs(Data_40002e1c), abs(fData_40002e20) & 0xff);
+			abs(Data_40002e18_SiteLongitudeDegrees), 
+			abs(Data_40002e1c_SiteLongitudeMinutes), 
+			abs(fData_40002e20_SiteLongitudeSeconds) & 0xff);
 	}
 	else
 	{
 		//0x24a14
 		sprintf(Data_40004012, "Site:E%03d?%02d'%02d^", 
-			abs(Data_40002e18), abs(Data_40002e1c), abs(fData_40002e20) & 0xff);
+			abs(Data_40002e18_SiteLongitudeDegrees), 
+			abs(Data_40002e1c_SiteLongitudeMinutes), 
+			abs(fData_40002e20_SiteLongitudeSeconds) & 0xff);
 	}
 	//0x24a88
 	Data_40003374 = Data_40004012;
@@ -8635,17 +8641,21 @@ void func_24574(void)
 			break;
 	}
 	//0x24ae0
-	if (dData_40002e48 < 0)
+	if (dData_40002e48_SiteLatitude < 0)
 	{
 		//24afc
 		sprintf(Data_4000403c, "     S%03d?%02d'%02d^", 
-			abs(Data_40002e38), abs(Data_40002e3c), abs(fData_40002e40) & 0xff);
+			abs(Data_40002e38_SiteLatitudeDegrees), 
+			abs(Data_40002e3c_SiteLatitudeMinutes), 
+			abs(fData_40002e40_SiteLatitudeSeconds) & 0xff);
 	}
 	else
 	{
 		//0x24b74
 		sprintf(Data_4000403c, "     N%03d?%02d'%02d^", 
-			abs(Data_40002e38), abs(Data_40002e3c), abs(fData_40002e40) & 0xff);
+			abs(Data_40002e38_SiteLatitudeDegrees), 
+			abs(Data_40002e3c_SiteLatitudeMinutes), 
+			abs(fData_40002e40_SiteLatitudeSeconds) & 0xff);
 	}
 	//0x24be8
 	Data_4000337c = Data_4000403c;
@@ -8678,7 +8688,9 @@ void func_24574(void)
 		case 1:
 			//0x24d88
 			sprintf(Data_40004066, " OBJ: %03dh%02dm%02ds",
-				Data_40002cd8, Data_40002cdc, (unsigned int)fData_40002ce0 & 0xFF);
+				Data_40002cd8_ObjectRightAscensionHours, 
+				Data_40002cdc_ObjectRightAscensionMinutes, 
+				(unsigned int)fData_40002ce0_ObjectRightAscensionSeconds & 0xFF);
 			break;
 		
 		default:
