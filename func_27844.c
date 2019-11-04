@@ -622,6 +622,34 @@ void func_27844(void)
 			//0x2a100
 			break;
 		
+		case 0x7D0: //2000
+			//0x2a220
+			break;
+		
+		case 0xBB8: //3000
+			//0x2a2f4
+			break;
+		
+		case 0xFA0: //4000
+			//0x2a3c8
+			break;
+		
+		case 0x44c: //1100
+			//0x2a49c
+		case 0x4b0: //1200
+			//0x2a4a4
+		case 0x514: //1300
+			//0x2a4a8
+		case 1400:
+			//0x2a4ac
+		case 0x5DC: //1500
+			//0x2a4b0
+		case 0x640: //1600
+			//0x2a4b4
+		case 0x6A4: //1700
+			//0x2a4b8
+			break;
+		
 		case 3:
 			//0x2c658
 			break;
@@ -658,22 +686,6 @@ void func_27844(void)
 			//0x3ba10
 			break;
 		
-		case 0x44c: //1100
-			//0x2a49c
-			break;
-		
-		case 0x4b0: //1200
-			//0x2a4a4
-			break;
-		
-		case 0x514: //1300
-			//0x2a4a8
-			break;
-		
-		case 1400:
-			//0x2a4ac
-			break;
-		
 		case 1401: 
 			//0x2c6e0
 			break;
@@ -684,22 +696,6 @@ void func_27844(void)
 		
 		case 0x57b: //1403
 			//0x2c7dc
-			break;
-		
-		case 0x5DC: //1500
-			//0x2a4b0
-			break;
-		
-		case 0x640: //1600
-			//0x2a4b4
-			break;
-		
-		case 0x6A4: //1700
-			//0x2a4b8
-			break;
-		
-		case 0x7D0: //2000
-			//0x2a220
 			break;
 		
 		case 0x834: //2100
@@ -846,10 +842,6 @@ void func_27844(void)
 			//0x2a524
 			break;
 		
-		case 0xBB8: //3000
-			//0x2a2f4
-			break;
-		
 		case 0xC1C: //3100
 			//0x2a578
 			break;
@@ -900,10 +892,6 @@ void func_27844(void)
 
 		case 0xF3C: //3900
 			//0x2a59c
-			break;
-		
-		case 0xFA0: //4000
-			//0x2a3c8
 			break;
 		
 		case 0x1004: //4100

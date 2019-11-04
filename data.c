@@ -169,9 +169,9 @@ int Data_40002cbc; //40002cbc
 float fData_40002cc0; //40002cc0
 double dData_40002cc8; //40002cc8
 float fData_40002cd0_ObjectRightAscension; //40002cd0
-int Data_40002cd8; //40002cd8
-int Data_40002cdc; //40002cdc
-float fData_40002ce0; //40002ce0
+int Data_40002cd8_ObjectRightAscensionHours; //40002cd8
+int Data_40002cdc_ObjectRightAscensionMinutes; //40002cdc
+float fData_40002ce0_ObjectRightAscensionSeconds; //40002ce0
 double dData_40002ce8; //40002ce8
 int Data_40002cf4; //40002cf4
 int Data_40002cf8; //40002cf8
@@ -215,23 +215,23 @@ double dData_40002df0; //40002df0
 double dData_40002df8; //40002df8
 double dData_40002e00; //40002e00
 double dData_40002e08; //40002e08
-int Data_40002e18; //40002e18
-int Data_40002e1c; //40002e1c
-float fData_40002e20; //40002e20
-double dData_40002e28; //40002e28
+int Data_40002e18_SiteLongitudeDegrees; //40002e18
+int Data_40002e1c_SiteLongitudeMinutes; //40002e1c
+float fData_40002e20_SiteLongitudeSeconds; //40002e20
+double dData_40002e28_SiteLongitude; //40002e28
 int Data_40002e34; //40002e34
-int Data_40002e38; //40002e38
-int Data_40002e3c; //40002e3c
-float fData_40002e40; //40002e40
+int Data_40002e38_SiteLatitudeDegrees; //40002e38
+int Data_40002e3c_SiteLatitudeMinutes; //40002e3c
+float fData_40002e40_SiteLatitudeSeconds; //40002e40
 int Data_40002e44; //40002e44
-double dData_40002e48; //40002e48
+double dData_40002e48_SiteLatitude; //40002e48
 int Data_40002e54; //40002e54
-unsigned Data_40002e5c; //40002e5c
-unsigned char bData_40002e60; //40002e60
-unsigned char bData_40002e61; //40002e61
-unsigned char bData_40002e62; //40002e62
-unsigned char bData_40002e63; //40002e63
-unsigned char bData_40002e64; //40002e64
+unsigned Data_40002e5c_Year; //40002e5c
+unsigned char bData_40002e60_Month; //40002e60
+unsigned char bData_40002e61_Day; //40002e61
+unsigned char bData_40002e62_Hours; //40002e62
+unsigned char bData_40002e63_Minutes; //40002e63
+unsigned char bData_40002e64_Seconds; //40002e64
 unsigned short wData_40002e66; //40002e66
 char bData_40002e78; //40002e78
 unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79

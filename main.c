@@ -1820,10 +1820,10 @@ void func_6a2cc(void)
 			//6aa24
 			func_6518(); //-> get time from RTC
 			
-			sprintf(Data_400037ec, "%04d-%02d-%02d", Data_40002e5c, bData_40002e60, bData_40002e61);
-			sprintf(Data_40003150, "%02d:%02d:%02d", bData_40002e62, bData_40002e63, bData_40002e64);
-			sprintf(Data_40002655, "%04d-%02d-%02d", Data_40002e5c, bData_40002e60, bData_40002e61);
-			sprintf(Data_40002660, "%02d:%02d:%02d", bData_40002e62, bData_40002e63, bData_40002e64);
+			sprintf(Data_400037ec, "%04d-%02d-%02d", Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
+			sprintf(Data_40003150, "%02d:%02d:%02d", bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
+			sprintf(Data_40002655, "%04d-%02d-%02d", Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
+			sprintf(Data_40002660, "%02d:%02d:%02d", bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
 			
 			bData_400031ec = 0;
 		}
@@ -1840,9 +1840,9 @@ void func_6a2cc(void)
 	}
 	//6aaf0
 	if ((bData_4000322c == 1) && 
-		(Data_40003220 == bData_40002e62) &&
-		(Data_40003224 == bData_40002e63) &&
-		(Data_40003228 == bData_40002e64))
+		(Data_40003220 == bData_40002e62_Hours) &&
+		(Data_40003224 == bData_40002e63_Minutes) &&
+		(Data_40003228 == bData_40002e64_Seconds))
 	{
 		bData_4000322d = 1;
 	}
@@ -2060,8 +2060,8 @@ void func_6cb38(void)
 		
 		case 31:
 			//6cc10
-			sp60.fData = dData_40002e28;
-			sp56.fData = dData_40002e48;
+			sp60.fData = dData_40002e28_SiteLongitude;
+			sp56.fData = dData_40002e48_SiteLatitude;
 		
 			sp40[4] = 0xfe;
 			sp40[5] = sp60.bData[0];
@@ -2134,8 +2134,8 @@ void func_6cb38(void)
 		
 			func_b4f0();
 		
-			dData_40002e28 = fData_40003518;
-			dData_40002e48 = fData_4000351c;
+			dData_40002e28_SiteLongitude = fData_40003518;
+			dData_40002e48_SiteLatitude = fData_4000351c;
 			Data_40004128.dData_48 = fData_40003518;
 			Data_40004128.dData_56 = fData_4000351c;
 			bData_4000352d = 1;
@@ -2396,21 +2396,21 @@ int main(void)
 		//6d64c
 		func_6518(); //-> get time from RTC
 		
-		if (Data_40002e5c < 2000)
+		if (Data_40002e5c_Year < 2000)
 		{
 			//6d660
-			Data_40002e5c = 2000;
-			bData_40002e60 = 1;
-			bData_40002e61 = 1;
-			bData_40002e62 = 0;
-			bData_40002e63 = 0;
-			bData_40002e64 = 0;			
+			Data_40002e5c_Year = 2000;
+			bData_40002e60_Month = 1;
+			bData_40002e61_Day = 1;
+			bData_40002e62_Hours = 0;
+			bData_40002e63_Minutes = 0;
+			bData_40002e64_Seconds = 0;			
 		}
 		//6d69c
-		sprintf(Data_400037ec, "%04d-%02d-%02d", Data_40002e5c, bData_40002e60, bData_40002e61);
-		sprintf(Data_40003150, "%02d:%02d:%02d", bData_40002e62, bData_40002e63, bData_40002e64);
-		sprintf(Data_40002655, "%04d-%02d-%02d", Data_40002e5c, bData_40002e60, bData_40002e61);
-		sprintf(Data_40002660, "%02d:%02d:%02d", bData_40002e62, bData_40002e63, bData_40002e64);
+		sprintf(Data_400037ec, "%04d-%02d-%02d", Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
+		sprintf(Data_40003150, "%02d:%02d:%02d", bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
+		sprintf(Data_40002655, "%04d-%02d-%02d", Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
+		sprintf(Data_40002660, "%02d:%02d:%02d", bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
 		
 		bData_4000318a = 1;
 		bData_40002e78 = 0;
@@ -2440,7 +2440,7 @@ int main(void)
 			bData_40002e7a = 1;
 			//6d8e0
 			dData_40002ce8 = Data_40004128.dData_144 - 0.00083333333333/* 1/1200 */;
-			Data_40002cd8 = dData_40002ce8;
+			Data_40002cd8_ObjectRightAscensionHours = dData_40002ce8;
 			
 			#if 0
 			sp64 = Data_40002cd8;
@@ -2448,7 +2448,7 @@ int main(void)
 			sp48 = sp56 * 60.0;
 			Data_40002cdc = sp48;
 			#else
-			Data_40002cdc = (dData_40002ce8 - Data_40002cd8) * 60.0;
+			Data_40002cdc_ObjectRightAscensionMinutes = (dData_40002ce8 - Data_40002cd8_ObjectRightAscensionHours) * 60.0;
 			#endif
 			
 			#if 0
@@ -2460,7 +2460,7 @@ int main(void)
 			sp24 = sp32 * 3600.0;
 			fData_40002ce0 = sp24;
 			#else
-			fData_40002ce0 = (dData_40002ce8 - Data_40002cd8 - Data_40002cdc / 60.0) * 3600.0;
+			fData_40002ce0_ObjectRightAscensionSeconds = (dData_40002ce8 - Data_40002cd8_ObjectRightAscensionHours - Data_40002cdc_ObjectRightAscensionMinutes / 60.0) * 3600.0;
 			#endif
 			
 			fData_40002d18_ObjectDeclination = fabs(Data_40004128.dData_152);
