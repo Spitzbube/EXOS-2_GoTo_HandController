@@ -703,7 +703,28 @@ extern char* Data_40003114;
 extern char* Data_40003140; //40003140
 extern char* Data_4000314c; //4000314c
 extern char Data_40003150[]; //40003150, size??
-extern char bData_4000316e; //4000316e
+extern unsigned char bData_4000316e; //4000316e
+extern unsigned char bData_4000316f; //4000316f
+extern unsigned char bData_40003170; //40003170
+extern unsigned char bData_40003171; //40003171
+extern unsigned char bData_40003172; //40003172
+extern unsigned char bData_40003173; //40003173
+extern unsigned char bData_40003174; //40003174
+extern unsigned char bData_40003175; //40003175
+extern unsigned char bData_40003176; //40003176
+extern unsigned char bData_40003177; //40003177
+extern unsigned char bData_40003178; //40003178
+extern unsigned char bData_40003179; //40003179
+extern unsigned char bData_4000317a; //4000317a
+extern unsigned char bData_4000317b; //4000317b
+extern unsigned char bData_4000317c; //4000317c
+extern unsigned char bData_4000317d; //4000317d
+extern unsigned char bData_4000317e; //4000317e
+extern unsigned char bData_4000317f; //4000317f
+extern unsigned char bData_40003180; //40003180
+extern unsigned char bData_40003182; //40003182
+extern unsigned char bData_40003184; //40003184
+extern unsigned char bData_40003186; //40003186
 extern char bData_40003188; //40003188
 extern char bData_40003189; //40003189
 extern char bData_4000318a; //4000318a
