@@ -145,7 +145,7 @@ void func_27844(void)
 						(int)(Data_40004b08[1] * 3600.0) % 60);
 					#endif
 						
-					if (Data_40004b08[3] > 0)
+					if (Data_40004b08[3] >= 0)
 					{
 						//285d0
 						#if 0
