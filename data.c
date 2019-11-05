@@ -583,7 +583,28 @@ char* Data_40003114;
 char* Data_40003140; //40003140
 char* Data_4000314c; //4000314c
 char Data_40003150[30]; //40003150, size??
-char bData_4000316e; //4000316e
+unsigned char bData_4000316e; //4000316e
+unsigned char bData_4000316f; //4000316f
+unsigned char bData_40003170; //40003170
+unsigned char bData_40003171; //40003171
+unsigned char bData_40003172; //40003172
+unsigned char bData_40003173; //40003173
+unsigned char bData_40003174; //40003174
+unsigned char bData_40003175; //40003175
+unsigned char bData_40003176; //40003176
+unsigned char bData_40003177; //40003177
+unsigned char bData_40003178; //40003178
+unsigned char bData_40003179; //40003179
+unsigned char bData_4000317a; //4000317a
+unsigned char bData_4000317b; //4000317b
+unsigned char bData_4000317c; //4000317c
+unsigned char bData_4000317d; //4000317d
+unsigned char bData_4000317e; //4000317e
+unsigned char bData_4000317f; //4000317f
+unsigned char bData_40003180; //40003180
+unsigned char bData_40003182; //40003182
+unsigned char bData_40003184; //40003184
+unsigned char bData_40003186; //40003186
 char bData_40003188; //40003188
 char bData_40003189; //40003189
 char bData_4000318a; //4000318a
