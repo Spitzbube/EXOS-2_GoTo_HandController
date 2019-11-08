@@ -131,54 +131,26 @@ void func_27844(void)
 					func_8ba4(Data_40004ad8, Data_40004ae8, 
 						Data_40004128.Data_40, Data_40004128.bData_44, Data_40004b08);
 					//284f8
-					#if 0
-					r4 = (int)(Data_40004b08[1] * 3600.0) % 60;
-					r6 = (int)((Data_40004b08[1] - (int)(Data_40004b08[1])) * 60.0);
-					r5 = (int)(Data_40004b08[1]);
-					
-					sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-						r5, r6, r4);
-					#else
 					sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
 						(int)(Data_40004b08[1]), 
 						(int)((Data_40004b08[1] - (int)(Data_40004b08[1])) * 60.0), 
 						(int)(Data_40004b08[1] * 3600.0) % 60);
-					#endif
 						
 					if (Data_40004b08[3] >= 0)
 					{
 						//285d0
-						#if 0
-						r4 = (int)(Data_40004b08[3] * 3600.0) % 60;
-						r5 = (int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0);
-						r6 = (int)Data_40004b08[3];
-						
-						sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-							(r6 >= 0)? r6: -r6, (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
-						#else
 						sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
 							abs((int)Data_40004b08[3]), 
 							abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
 							abs((int)(Data_40004b08[3] * 3600.0) % 60));
-						#endif
-						//->2885c
 					}
 					else
 					{
 						//286cc
-						#if 0
-						r4 = (int)(Data_40004b08[3] * 3600.0) % 60;
-						r5 = (int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0);
-						r6 = (int)Data_40004b08[3];
-						
-						sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-							(r6 >= 0)? r6: -r6, (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
-						#else
 						sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
 							abs((int)Data_40004b08[3]), 
 							abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
 							abs((int)(Data_40004b08[3] * 3600.0) % 60));
-						#endif
 					}
 					//2885c
 					if ((int)(Data_40004b08[1]) < 100)
@@ -219,16 +191,10 @@ void func_27844(void)
 					Data_40003370 = Data_40003ffd;
 					Data_40003374 = Data_40004012;
 					
-					#if 0
-					r4 = (int)(fData_40002cd0_ObjectRightAscension * 3600.0) % 60;
-					r5 = (int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60.0);
-					r9 = (int)fData_40002cd0_ObjectRightAscension;
-					#else
 					sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
 						(int)fData_40002cd0_ObjectRightAscension,
 						(int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60),
 						(int)(fData_40002cd0_ObjectRightAscension * 3600) % 60);
-					#endif
 						
 					if ((int)fData_40002cd0_ObjectRightAscension < 10)
 					{
@@ -250,16 +216,10 @@ void func_27844(void)
 					if (fData_40002d18_ObjectDeclination >= 0)
 					{
 						//28bd4
-						#if 0
-						r4 = ((int)(fData_40002d18_ObjectDeclination * 3600) % 60);
-						r6 = (int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60);
-						r5 = (int)fData_40002d18_ObjectDeclination;
-						#endif
 						sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
 							abs((int)fData_40002d18_ObjectDeclination),
 							abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 							abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
-						//->28dc4
 					}
 					else
 					{
@@ -2608,11 +2568,172 @@ void func_27844(void)
 					abs(((int)(Data_40004b08[3] * 3600) % 60)));
 			}
 			//0x30888
+			if ((int) Data_40004b08[1] < 100)
+			{
+				Data_40003ffd[11] = ' ';
+			}
+			if ((int) Data_40004b08[1] < 10)
+			{
+				Data_40003ffd[12] = ' ';
+			}
+			if ((int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60) < 10)
+			{
+				Data_40003ffd[15] = ' ';
+			}
+			if ((((int) (Data_40004b08[1] * 3600)) % 60) < 10)
+			{
+				Data_40003ffd[18] = ' ';
+			}
+			
+			if (abs((int) Data_40004b08[3]) < 10)
+			{
+				Data_40004012[5] = ' ';
+			}
+			if (abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)) < 10)
+			{
+				Data_40004012[8] = ' ';
+			}
+			if (abs(((int) (Data_40004b08[3] * 3600)) % 60) < 10)
+			{
+				Data_40004012[11] = ' ';
+			}
+			//0x30a90
+			Data_40003370 = Data_40003ffd;
+			Data_40003374 = Data_40004012;
+			
+			sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+				(int) fData_40002cd0_ObjectRightAscension,
+				(int) ((fData_40002cd0_ObjectRightAscension - (int) fData_40002cd0_ObjectRightAscension) * 60),
+				(int) (fData_40002cd0_ObjectRightAscension * 3600) % 60);
+
+			if ((int) fData_40002cd0_ObjectRightAscension < 10)
+			{
+				Data_40004027[5] = ' ';
+			}
+			if ((int) ((fData_40002cd0_ObjectRightAscension - (int) fData_40002cd0_ObjectRightAscension) * 60) < 10)
+			{
+				Data_40004027[8] = ' ';
+			}
+			if (((int) (fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
+			{
+				Data_40004027[11] = ' ';
+			}
+			//0x30be0
+			Data_40003378 = Data_40004027;
+			
+			if (fData_40002d18_ObjectDeclination >= 0)
+			{
+				//30c00
+				sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+					abs((int) fData_40002d18_ObjectDeclination),
+					abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)),
+					abs((int) (fData_40002d18_ObjectDeclination * 3600) % 60));
+			}
+			else
+			{
+				//0x30cd0
+				sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+					abs((int) fData_40002d18_ObjectDeclination),
+					abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)),
+					abs((int) (fData_40002d18_ObjectDeclination * 3600) % 60));
+			}
+			//0x30d9c
+			if (abs((int) fData_40002d18_ObjectDeclination) < 10)
+			{
+				Data_4000403c[5] = ' ';
+			}
+			if (abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)) < 10)
+			{
+				Data_4000403c[8] = ' ';
+			}
+			if (abs(((int) (fData_40002d18_ObjectDeclination * 3600) % 60)) < 10)
+			{
+				Data_4000403c[11] = ' ';
+			}
+			//0x30e80
+			Data_4000337c = Data_4000403c;
 				
+			bData_4000316e = 0;
+			bData_40003197 = 1;
+			//->0x3d71c
 			break;
 		
 		case 0x61AA: //25002
 			//0x30ea8
+			func_34e4(bData_40002ed2, &Data_40003d94);
+		
+			fData_40002cd0_ObjectRightAscension = Data_40003d94.fData_56;
+			fData_40002d18_ObjectDeclination = Data_40003d94.fData_60;
+		
+			Data_40004ad8.dData_0 = Data_40004128.dData_48;
+			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+		
+			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
+			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
+		
+			func_8ba4(Data_40004ad8, Data_40004ae8, 
+				Data_40004128.Data_40, Data_40004128.bData_44, Data_40004b08);
+		
+			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+				(int)Data_40004b08[1],
+				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
+				(int)(Data_40004b08[1] * 3600.0) % 60);
+				
+			if (Data_40004b08[3] >= 0)
+			{
+				//31040
+				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+					abs((int)Data_40004b08[3]),
+					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60)),
+					abs(((int)(Data_40004b08[3] * 3600) % 60)));
+			}
+			else
+			{
+				//0x3113c
+				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+					abs((int)Data_40004b08[3]),
+					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60)),
+					abs(((int)(Data_40004b08[3] * 3600) % 60)));
+					
+				bData_40002e8a = 3;
+			}
+			//0x31240
+			if ((int) Data_40004b08[1] < 100)
+			{
+				Data_40003ffd[11] = ' ';
+			}
+			if ((int) Data_40004b08[1] < 10)
+			{
+				Data_40003ffd[12] = ' ';
+			}
+			if ((int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60) < 10)
+			{
+				Data_40003ffd[15] = ' ';
+			}
+			if ((((int) (Data_40004b08[1] * 3600)) % 60) < 10)
+			{
+				Data_40003ffd[18] = ' ';
+			}
+			
+			if (abs((int) Data_40004b08[3]) < 10)
+			{
+				Data_40004012[5] = ' ';
+			}
+			if (abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)) < 10)
+			{
+				Data_40004012[8] = ' ';
+			}
+			if (abs(((int) (Data_40004b08[3] * 3600)) % 60) < 10)
+			{
+				Data_40004012[11] = ' ';
+			}
+			//0x31448
+			Data_40003370 = Data_40003ffd;
+			Data_40003374 = Data_40004012;
+			//31460
+			
+			//TODO
+		
 			break;
 		
 		case 0x59E4: //23012
