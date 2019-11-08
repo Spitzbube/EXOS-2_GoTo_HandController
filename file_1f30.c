@@ -2763,11 +2763,11 @@ void func_5f40(void)
 	bData_40002e89 = 1;
 	bData_40002e8b = 0;
 	bData_40002e8c = 0;
-	Data_40002e90 = 0;
+	fData_40002e90 = 0;
 	fData_40002e98 = 23.8;
 	Data_40002e9c = 0;
 	Data_40002e94 = 0;
-	Data_40002ea0 = 0;
+	fData_40002ea0 = 0;
 	fData_40002ea8 = 23.8;
 	Data_40002eac = 0;
 	Data_40002ea4 = 0;
@@ -8140,7 +8140,7 @@ void func_22060(int a, float* pRightAscension, float* pDeclination)
 			//0x220a4
 			*pRightAscension = dData_400032d0;
 			*pDeclination = dData_400032d8;
-			Data_4000314c = "Mercury                ";
+			Data_4000314c_SolarSystemObjectName = "Mercury                ";
 			Data_40003140 = Data_40000380;
 			//->0x22450
 			break;
@@ -8149,7 +8149,7 @@ void func_22060(int a, float* pRightAscension, float* pDeclination)
 			//0x220e4
 			*pRightAscension = dData_400032e0;
 			*pDeclination = dData_400032e8;
-			Data_4000314c = "Venus                    ";
+			Data_4000314c_SolarSystemObjectName = "Venus                    ";
 			Data_40003140 = Data_4000038a;
 			//->0x22450
 			break;
@@ -8158,7 +8158,7 @@ void func_22060(int a, float* pRightAscension, float* pDeclination)
 			//0x22124
 			*pRightAscension = dData_400032f0;
 			*pDeclination = dData_400032f8;
-			Data_4000314c = "Mars                      ";
+			Data_4000314c_SolarSystemObjectName = "Mars                      ";
 			Data_40003140 = Data_40000394;
 			//->0x22450
 			break;
@@ -8167,7 +8167,7 @@ void func_22060(int a, float* pRightAscension, float* pDeclination)
 			//0x22164
 			*pRightAscension = dData_40003300;
 			*pDeclination = dData_40003308;
-			Data_4000314c = "Jupiter                  ";
+			Data_4000314c_SolarSystemObjectName = "Jupiter                  ";
 			Data_40003140 = Data_4000039e;
 			//->0x22450
 			break;
@@ -8176,7 +8176,7 @@ void func_22060(int a, float* pRightAscension, float* pDeclination)
 			//0x221a4
 			*pRightAscension = dData_40003310;
 			*pDeclination = dData_40003318;
-			Data_4000314c = "Saturn                     ";
+			Data_4000314c_SolarSystemObjectName = "Saturn                     ";
 			Data_40003140 = Data_400003a8;
 			//->0x22450
 			break;
@@ -8185,7 +8185,7 @@ void func_22060(int a, float* pRightAscension, float* pDeclination)
 			//0x221e4
 			*pRightAscension = dData_40003320;
 			*pDeclination = dData_40003328;
-			Data_4000314c = "Uranus                      ";
+			Data_4000314c_SolarSystemObjectName = "Uranus                      ";
 			Data_40003140 = Data_400003b2;
 			//->0x22450
 			break;
@@ -8194,7 +8194,7 @@ void func_22060(int a, float* pRightAscension, float* pDeclination)
 			//0x22224
 			*pRightAscension = dData_40003330;
 			*pDeclination = dData_40003338;
-			Data_4000314c = "Neptune                       ";
+			Data_4000314c_SolarSystemObjectName = "Neptune                       ";
 			Data_40003140 = Data_400003ba;
 			//->0x22450
 			break;
@@ -8203,7 +8203,7 @@ void func_22060(int a, float* pRightAscension, float* pDeclination)
 			//0x22388
 			*pRightAscension = dData_40003340;
 			*pDeclination = dData_40003348;
-			Data_4000314c = "Pluto                      ";
+			Data_4000314c_SolarSystemObjectName = "Pluto                      ";
 			Data_40003140 = Data_400003c2;
 			//->0x22450
 			break;
@@ -8212,7 +8212,7 @@ void func_22060(int a, float* pRightAscension, float* pDeclination)
 			//0x223c8
 			*pRightAscension = dData_400032b0_SunRightAscension;
 			*pDeclination = dData_400032b8_SunDeclination;
-			Data_4000314c = "Sun                     ";
+			Data_4000314c_SolarSystemObjectName = "Sun                     ";
 			Data_40003140 = Data_400003ca;
 			//->0x22450
 			break;
@@ -8221,7 +8221,7 @@ void func_22060(int a, float* pRightAscension, float* pDeclination)
 			//0x22408
 			*pRightAscension = dData_400032c0;
 			*pDeclination = dData_400032c8;
-			Data_4000314c = "Moon                       ";
+			Data_4000314c_SolarSystemObjectName = "Moon                       ";
 			Data_40003140 = Data_400003d4;
 			//->0x22450
 			break;

@@ -437,6 +437,8 @@ extern Union_40002c28 Data_40002c28; //40002c28
 extern char bData_40002c58; //40002c58
 extern unsigned char bData_40002c59; //40002c59
 extern char bData_40002c5a; //40002c5a
+extern unsigned char bData_40002c60; //40002c60
+extern char bData_40002c62; //40002c62
 extern int Data_40002c64; //40002c64
 extern char bData_40002c68; //40002c68
 extern char bData_40002c69; //40002c69
@@ -527,14 +529,14 @@ extern int Data_40002e80; //40002e80
 extern int Data_40002e84; //40002e84
 extern unsigned char bData_40002e88; //40002e88
 extern char bData_40002e89; //40002e89
-extern char bData_40002e8a; //40002e8a
+extern unsigned char bData_40002e8a; //40002e8a
 extern char bData_40002e8b; //40002e8b
 extern char bData_40002e8c; //40002e8c
-extern int Data_40002e90; //40002e90
+extern float fData_40002e90; //40002e90
 extern int Data_40002e94; //40002e94
 extern float fData_40002e98; //40002e98
 extern int Data_40002e9c; //40002e9c
-extern int Data_40002ea0; //40002ea0
+extern float fData_40002ea0; //40002ea0
 extern int Data_40002ea4; //40002ea4
 extern float fData_40002ea8; //40002ea8
 extern int Data_40002eac; //40002eac
@@ -701,7 +703,7 @@ extern char* Data_4000310c;
 extern char* Data_40003110;
 extern char* Data_40003114;
 extern char* Data_40003140; //40003140
-extern char* Data_4000314c; //4000314c
+extern char* Data_4000314c_SolarSystemObjectName; //4000314c
 extern char Data_40003150[]; //40003150, size??
 extern unsigned char bData_4000316e; //4000316e
 extern unsigned char bData_4000316f; //4000316f
@@ -797,7 +799,7 @@ extern Struct_435c Data_40003350; //40003350
 extern Struct_4b94 Data_40003358_SAORecord; //40003358
 extern char* Data_40003360; //40003360
 extern char* Data_40003364; //40003364
-extern char* Data_40003368; //40003368
+extern unsigned char* Data_40003368; //40003368
 extern char* Data_4000336c; //4000336c
 extern char* Data_40003370; //40003370
 extern char* Data_40003374; //40003374
@@ -883,6 +885,8 @@ extern unsigned char Data_40003592[]; //40003592 size????
 extern int Data_4000359c[]; //4000359c, size??
 extern int Data_400035bc; //400035bc
 extern char Data_400037ec[]; //400037ec, size???
+extern unsigned char Data_40003a14[][10]; //40003a14, size??
+extern unsigned char Data_40003b2c[][22]; //40003b2c, size??
 extern Struct_34e4 Data_40003d94; //40003d94
 extern char Data_40003db0[]; //40003db0
 extern Struct_38dc Data_40003dd4; //40003dd4
@@ -915,6 +919,9 @@ extern float Data_40004a68[]; //40004a68, array, size???
 #endif
 extern Struct_8ba4 Data_40004ae8; //40004ae8
 extern double Data_40004b08[]; //40004b08, array?
+extern Struct_8ba4 Data_40004b50; //40004b50
+extern double Data_40004b70[]; //40004b70
+extern Struct_40004b70 Data_40004b70_; //40004b70
 extern unsigned char Data_40004bb8[]; //40004bb8
 extern char Data_40004c58[]; //40004c58, size???
 

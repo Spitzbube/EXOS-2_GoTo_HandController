@@ -475,7 +475,7 @@ void func_240e8(unsigned char a, int b)
 			for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 			{
 				//0x24164
-				Data_4000410e[bData_40002f1d] = Data_4000314c[bData_40002f1d];
+				Data_4000410e[bData_40002f1d] = Data_4000314c_SolarSystemObjectName[bData_40002f1d];
 			}
 			//->0x24568
 			break;

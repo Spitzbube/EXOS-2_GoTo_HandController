@@ -166,3 +166,15 @@ typedef struct
 	double dData_40; 
 } Struct_b7f4;
 
+
+typedef struct
+{
+	double dData_0; 
+	double dData_8; 
+	double dData_16; 
+	double dData_24; 
+	//
+} Struct_40004b70;
+
+
+

@@ -317,6 +317,8 @@ Union_40002c28 Data_40002c28; //40002c28
 char bData_40002c58; //40002c58
 unsigned char bData_40002c59; //40002c59
 char bData_40002c5a; //40002c5a
+unsigned char bData_40002c60; //40002c60
+char bData_40002c62; //40002c62
 int Data_40002c64; //40002c64
 char bData_40002c68; //40002c68
 char bData_40002c69; //40002c69
@@ -407,14 +409,14 @@ int Data_40002e80; //40002e80
 int Data_40002e84; //40002e84
 unsigned char bData_40002e88; //40002e88
 char bData_40002e89; //40002e89
-char bData_40002e8a; //40002e8a
+unsigned char bData_40002e8a; //40002e8a
 char bData_40002e8b; //40002e8b
 char bData_40002e8c; //40002e8c
-int Data_40002e90; //40002e90
+float fData_40002e90; //40002e90
 int Data_40002e94; //40002e94
 float fData_40002e98; //40002e98
 int Data_40002e9c; //40002e9c
-int Data_40002ea0; //40002ea0
+float fData_40002ea0; //40002ea0
 int Data_40002ea4; //40002ea4
 float fData_40002ea8; //40002ea8
 int Data_40002eac; //40002eac
@@ -581,7 +583,7 @@ char* Data_4000310c;
 char* Data_40003110;
 char* Data_40003114;
 char* Data_40003140; //40003140
-char* Data_4000314c; //4000314c
+char* Data_4000314c_SolarSystemObjectName; //4000314c
 char Data_40003150[30]; //40003150, size??
 unsigned char bData_4000316e; //4000316e
 unsigned char bData_4000316f; //4000316f
@@ -676,7 +678,7 @@ Struct_435c Data_40003350; //40003350
 Struct_4b94 Data_40003358_SAORecord; //40003358
 char* Data_40003360; //40003360
 char* Data_40003364; //40003364
-char* Data_40003368; //40003368
+unsigned char* Data_40003368; //40003368
 char* Data_4000336c; //4000336c
 char* Data_40003370; //40003370
 char* Data_40003374; //40003374
@@ -762,6 +764,8 @@ unsigned char Data_40003592[4]; //40003592
 int Data_4000359c[8]; //4000359c, size??
 int Data_400035bc; //400035bc
 char Data_400037ec[100]; //400037ec, size???
+unsigned char Data_40003a14[100][10]; //40003a14, size??
+unsigned char Data_40003b2c[100][22]; //40003b2c, size??
 Struct_34e4 Data_40003d94; //40003d94
 char Data_40003db0[36]; //40003db0, size???
 Struct_38dc Data_40003dd4; //40003dd4
@@ -794,6 +798,9 @@ float Data_40004a68[4]; //40004a68, array, size???
 Struct_8ba4_0 Data_40004ad8; //40004ad8
 Struct_8ba4 Data_40004ae8; //40004ae8
 double Data_40004b08[7]; //40004b08, array, size???
+Struct_8ba4 Data_40004b50; //40004b50
+double Data_40004b70[9]; //40004b70, size???
+Struct_40004b70 Data_40004b70_; //40004b70
 unsigned char Data_40004bb8[8]; //40004bb8 size???
 char Data_40004c58[2 /*???*/]; //40004c58
 
