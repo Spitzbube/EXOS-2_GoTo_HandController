@@ -419,10 +419,10 @@ extern unsigned char bData_40002c06; //40002c06
 extern unsigned char bData_40002c07; //40002c07
 extern unsigned char bData_40002c08; //40002c08
 extern unsigned char bData_40002c09; //40002c09
-extern unsigned char bData_40002c0a; //40002c0a
-extern char bData_40002c0b; //40002c0b
-extern unsigned char bData_40002c0c; //40002c0c
-extern unsigned char bData_40002c0d[4]; //40002c0d
+extern unsigned char bData_40002c0a_uart0ReceiveDataCount; //40002c0a
+extern char bData_40002c0b_uart0ReceiveComplete; //40002c0b
+extern unsigned char bData_40002c0c_uart0ReceiveStep; //40002c0c
+extern unsigned char Data_40002c0d_uart0ReceiveHeader[4]; //40002c0d
 extern unsigned char uart0_bRxData; //40002c11
 extern unsigned char bData_40002c12; //40002c12
 extern char bData_40002c13; //40002c13
@@ -880,7 +880,7 @@ extern unsigned char bData_4000352e; //4000352e
 extern float fData_40003540; //40003540
 extern float fData_40003544; //40003544
 extern int Data_40003548; //40003548
-extern unsigned char Data_40003588[]; //40003588 size???
+extern unsigned char Data_40003588_uart0ReceiveDataBuffer[]; //40003588
 extern unsigned char Data_40003592[]; //40003592 size????
 extern int Data_4000359c[]; //4000359c, size??
 extern int Data_400035bc; //400035bc
