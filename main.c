@@ -1959,9 +1959,9 @@ void func_6c804(void)
 /* 6c848 - todo */
 int func_6c848(void)
 {
-	if (bData_40002c0b == 1)
+	if (bData_40002c0b_uart0ReceiveComplete == 1)
 	{
-		bData_4000352d = Data_40003588[0];
+		bData_4000352d = Data_40003588_uart0ReceiveDataBuffer[0];
 		
 		switch (bData_4000352d)
 		{
@@ -1969,45 +1969,46 @@ int func_6c848(void)
 				//6c898
 			case 36:
 				//6c8a0
-				Data_40002c28.bData[0] = Data_40003588[1];
-				Data_40002c28.bData[1] = Data_40003588[2];
-				Data_40002c28.bData[2] = Data_40003588[3];
-				Data_40002c28.bData[3] = Data_40003588[4];
+				Data_40002c28.bData[0] = Data_40003588_uart0ReceiveDataBuffer[1];
+				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[2];
+				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[3];
+				Data_40002c28.bData[3] = Data_40003588_uart0ReceiveDataBuffer[4];
 				fData_40003510 = *((float*)&Data_40002c28);
 			
-				Data_40002c28.bData[0] = Data_40003588[5];
-				Data_40002c28.bData[1] = Data_40003588[6];
-				Data_40002c28.bData[2] = Data_40003588[7];
-				Data_40002c28.bData[3] = Data_40003588[8];
+				Data_40002c28.bData[0] = Data_40003588_uart0ReceiveDataBuffer[5];
+				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[6];
+				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[7];
+				Data_40002c28.bData[3] = Data_40003588_uart0ReceiveDataBuffer[8];
 				fData_40003514 = *((float*)&Data_40002c28);
 				//->6ca60
 				break;
 			
 			case 37:
 				//6c92c
-				Data_40002c28.bData[0] = Data_40003588[1];
-				Data_40002c28.bData[1] = Data_40003588[2];
-				Data_40002c28.bData[2] = Data_40003588[3];
-				Data_40002c28.bData[3] = Data_40003588[4];
+				Data_40002c28.bData[0] = Data_40003588_uart0ReceiveDataBuffer[1];
+				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[2];
+				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[3];
+				Data_40002c28.bData[3] = Data_40003588_uart0ReceiveDataBuffer[4];
 				fData_40003518 = *((float*)&Data_40002c28);
 			
-				Data_40002c28.bData[0] = Data_40003588[5];
-				Data_40002c28.bData[1] = Data_40003588[6];
-				Data_40002c28.bData[2] = Data_40003588[7];
-				Data_40002c28.bData[3] = Data_40003588[8];
+				Data_40002c28.bData[0] = Data_40003588_uart0ReceiveDataBuffer[5];
+				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[6];
+				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[7];
+				Data_40002c28.bData[3] = Data_40003588_uart0ReceiveDataBuffer[8];
 				fData_4000351c = *((float*)&Data_40002c28);
 				//->6ca60
 				break;
 			
 			case 38:
 				//6c9bc
-				Data_40003524 = Data_40003588[1] * 100 + Data_40003588[2]; //year
-				bData_40003528 = Data_40003588[3]; //month
-				bData_40003529 = Data_40003588[4]; //day
-				bData_4000352a = Data_40003588[5]; //hour
-				bData_4000352b = Data_40003588[6]; //min
-				bData_4000352c = Data_40003588[7]; //sec
-				fData_40003520 = (float)Data_40003588[8] - 12;
+				Data_40003524 = Data_40003588_uart0ReceiveDataBuffer[1] * 100 + 
+												Data_40003588_uart0ReceiveDataBuffer[2]; //year
+				bData_40003528 = Data_40003588_uart0ReceiveDataBuffer[3]; //month
+				bData_40003529 = Data_40003588_uart0ReceiveDataBuffer[4]; //day
+				bData_4000352a = Data_40003588_uart0ReceiveDataBuffer[5]; //hour
+				bData_4000352b = Data_40003588_uart0ReceiveDataBuffer[6]; //min
+				bData_4000352c = Data_40003588_uart0ReceiveDataBuffer[7]; //sec
+				fData_40003520 = (float)Data_40003588_uart0ReceiveDataBuffer[8] - 12;
 				//->6ca60
 				break;
 			
@@ -2016,7 +2017,7 @@ int func_6c848(void)
 				break;
 		}
 		
-		bData_40002c0b = 0;
+		bData_40002c0b_uart0ReceiveComplete = 0;
 	}
 	//6ca70
 	return bData_4000352d;

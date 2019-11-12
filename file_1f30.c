@@ -1021,82 +1021,87 @@ void uart0_isr(void) __irq
 {
 	uart0_bRxData = U0RBR;
 	
-	if (bData_40002c0b == 0)
+	if (bData_40002c0b_uart0ReceiveComplete == 0)
 	{
-		switch (bData_40002c0c)
+		switch (bData_40002c0c_uart0ReceiveStep)
 		{
 			case 0:
-				if (bData_40002c0d[0] == uart0_bRxData)
+				//Check first byte of header signature
+				if (Data_40002c0d_uart0ReceiveHeader[0] == uart0_bRxData)
 				{
-					bData_40002c0c++;
+					bData_40002c0c_uart0ReceiveStep++;
 				}
 				break;
 			
 			case 1:
-				if (bData_40002c0d[1] == uart0_bRxData)
+				//Check second byte of header signature
+				if (Data_40002c0d_uart0ReceiveHeader[1] == uart0_bRxData)
 				{
-					bData_40002c0c++;
+					bData_40002c0c_uart0ReceiveStep++;
 				}
 				else
 				{
-					bData_40002c0c = 0;
+					bData_40002c0c_uart0ReceiveStep = 0;
 				}
 				break;
 			
 			case 2:
-				if (bData_40002c0d[2] == uart0_bRxData)
+				//Check third byte of header signature
+				if (Data_40002c0d_uart0ReceiveHeader[2] == uart0_bRxData)
 				{
-					bData_40002c0c++;
+					bData_40002c0c_uart0ReceiveStep++;
 				}
 				else
 				{
-					bData_40002c0c = 0;
+					bData_40002c0c_uart0ReceiveStep = 0;
 				}
 				break;
 			
 			case 3:
+				//Store payload length information
 				if (uart0_bRxData < 10)
 				{
-					bData_40002c0d[3] = uart0_bRxData;
-					bData_40002c0c++;
+					Data_40002c0d_uart0ReceiveHeader[3] = uart0_bRxData;
+					bData_40002c0c_uart0ReceiveStep++;
 				}
 				else
 				{
-					bData_40002c0c = 0;
+					bData_40002c0c_uart0ReceiveStep = 0;
 				}
 				break;
 			
 			case 4:
-				if (bData_40002c0d[3] > bData_40002c0a)
+				//Store payload data
+				if (Data_40002c0d_uart0ReceiveHeader[3] > bData_40002c0a_uart0ReceiveDataCount)
 				{
-					Data_40003588[bData_40002c0a] = uart0_bRxData;
-					bData_40002c0a++;
-					if (bData_40002c0d[3] == bData_40002c0a)
+					Data_40003588_uart0ReceiveDataBuffer[bData_40002c0a_uart0ReceiveDataCount] = uart0_bRxData;
+					bData_40002c0a_uart0ReceiveDataCount++;
+					if (Data_40002c0d_uart0ReceiveHeader[3] == bData_40002c0a_uart0ReceiveDataCount)
 					{
-						bData_40002c0b = 1;
-						bData_40002c0c = 0;
-						bData_40002c0a = 0;
+						bData_40002c0b_uart0ReceiveComplete = 1;
+						bData_40002c0c_uart0ReceiveStep = 0;
+						bData_40002c0a_uart0ReceiveDataCount = 0;
 						
-						switch (Data_40003588[0])
+						switch (Data_40003588_uart0ReceiveDataBuffer[0])
 						{
 							case 1:
 								Data_40002c1c = -1;
-								bData_40002c0b = 0;
+								bData_40002c0b_uart0ReceiveComplete = 0;
 								break;
 							
 							case 2:
 								Data_40002c1c = 1;
-								bData_40002c0b = 0;
+								bData_40002c0b_uart0ReceiveComplete = 0;
 								break;
 							
 							case 4:
 								Data_40002c20 = -1;
-								bData_40002c0b = 0;
+								bData_40002c0b_uart0ReceiveComplete = 0;
 								break;
 							
 							case 8:
 								Data_40002c20 = 1;
-								bData_40002c0b = 0;
+								bData_40002c0b_uart0ReceiveComplete = 0;
 								break;
 							
 							default:
@@ -1125,13 +1130,13 @@ void uart0_init(int a)
 	U0IER = 0x01;
 	VICVectAddr1 = (unsigned int) uart0_isr;
 	
-	bData_40002c0a = 0;
-	bData_40002c0b = 0;
-	bData_40002c0c = 0;
-	bData_40002c0d[0] = 0x55;
-	bData_40002c0d[1] = 0xaa;
-	bData_40002c0d[2] = 0x01;
-	bData_40002c0d[3] = 0x00;
+	bData_40002c0a_uart0ReceiveDataCount = 0;
+	bData_40002c0b_uart0ReceiveComplete = 0;
+	bData_40002c0c_uart0ReceiveStep = 0;
+	Data_40002c0d_uart0ReceiveHeader[0] = 0x55;
+	Data_40002c0d_uart0ReceiveHeader[1] = 0xaa;
+	Data_40002c0d_uart0ReceiveHeader[2] = 0x01;
+	Data_40002c0d_uart0ReceiveHeader[3] = 0x00; //payload length information
 }
 
 /* 1fb0 - complete */
