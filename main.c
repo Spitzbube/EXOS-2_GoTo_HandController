@@ -1864,7 +1864,7 @@ double func_6ab74(int a)
 	} sp8;
 	double d;
 
-	bData_40002c13 = 0;
+	bData_40002c13_uart1ReceiveComplete = 0;
 	
 	uart1_write_byte(0x55);
 	uart1_write_byte(0xaa);
@@ -1893,47 +1893,47 @@ double func_6ab74(int a)
 			break;
 	}
 
-	bData_40002c13 = 0;
+	bData_40002c13_uart1ReceiveComplete = 0;
 	
 	func_2254(10);
 	
-	for (r5 = 50; (bData_40002c13 == 0) && (r5 > 2); r5--)
+	for (r5 = 50; (bData_40002c13_uart1ReceiveComplete == 0) && (r5 > 2); r5--)
 	{
 		func_659c(5);
 	}
 	
 	sp8.i = 0;
 		
-	if (bData_40002c13 == 1)
+	if (bData_40002c13_uart1ReceiveComplete == 1)
 	{
 		switch (a)
 		{
 			case 1:
-				sp8.b[1] = Data_40003592[1];
-				sp8.b[0] = Data_40003592[2];
+				sp8.b[1] = Data_40003592_uart1ReceiveDataBuffer[1];
+				sp8.b[0] = Data_40003592_uart1ReceiveDataBuffer[2];
 			  d = sp8.i;
 				break;
 			
 			case 2:
-				sp8.b[1] = Data_40003592[1];
-				sp8.b[0] = Data_40003592[2];
+				sp8.b[1] = Data_40003592_uart1ReceiveDataBuffer[1];
+				sp8.b[0] = Data_40003592_uart1ReceiveDataBuffer[2];
 			  d = sp8.i;
 				break;
 			
 			case 3:
-				sp8.b[1] = Data_40003592[1];
-				sp8.b[0] = Data_40003592[2];
+				sp8.b[1] = Data_40003592_uart1ReceiveDataBuffer[1];
+				sp8.b[0] = Data_40003592_uart1ReceiveDataBuffer[2];
 			  d = sp8.i;
 				break;
 			
 			case 4:
-				sp8.b[1] = Data_40003592[1];
-				sp8.b[0] = Data_40003592[2];
+				sp8.b[1] = Data_40003592_uart1ReceiveDataBuffer[1];
+				sp8.b[0] = Data_40003592_uart1ReceiveDataBuffer[2];
 			  d = sp8.i;
 				break;
 		}
 		
-		bData_40002c13 = 0;
+		bData_40002c13_uart1ReceiveComplete = 0;
 	}
 
 	return d;
@@ -1989,25 +1989,25 @@ int func_6c848(void)
 				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[2];
 				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[3];
 				Data_40002c28.bData[3] = Data_40003588_uart0ReceiveDataBuffer[4];
-				fData_40003518 = *((float*)&Data_40002c28);
+				fData_40003518_ReceiveExternalSiteLongitude = *((float*)&Data_40002c28);
 			
 				Data_40002c28.bData[0] = Data_40003588_uart0ReceiveDataBuffer[5];
 				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[6];
 				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[7];
 				Data_40002c28.bData[3] = Data_40003588_uart0ReceiveDataBuffer[8];
-				fData_4000351c = *((float*)&Data_40002c28);
+				fData_4000351c_ReceiveExternalSiteLatitude = *((float*)&Data_40002c28);
 				//->6ca60
 				break;
 			
 			case 38:
 				//6c9bc
-				Data_40003524 = Data_40003588_uart0ReceiveDataBuffer[1] * 100 + 
-												Data_40003588_uart0ReceiveDataBuffer[2]; //year
-				bData_40003528 = Data_40003588_uart0ReceiveDataBuffer[3]; //month
-				bData_40003529 = Data_40003588_uart0ReceiveDataBuffer[4]; //day
-				bData_4000352a = Data_40003588_uart0ReceiveDataBuffer[5]; //hour
-				bData_4000352b = Data_40003588_uart0ReceiveDataBuffer[6]; //min
-				bData_4000352c = Data_40003588_uart0ReceiveDataBuffer[7]; //sec
+				Data_40003524_ReceiveExternalYear = Data_40003588_uart0ReceiveDataBuffer[1] * 100 + 
+												Data_40003588_uart0ReceiveDataBuffer[2];
+				bData_40003528_ReceiveExternalMonth = Data_40003588_uart0ReceiveDataBuffer[3];
+				bData_40003529_ReceiveExternalDay = Data_40003588_uart0ReceiveDataBuffer[4];
+				bData_4000352a_ReceiveExternalHours = Data_40003588_uart0ReceiveDataBuffer[5];
+				bData_4000352b_ReceiveExternalMinutes = Data_40003588_uart0ReceiveDataBuffer[6];
+				bData_4000352c_ReceiveExternalSeconds = Data_40003588_uart0ReceiveDataBuffer[7];
 				fData_40003520 = (float)Data_40003588_uart0ReceiveDataBuffer[8] - 12;
 				//->6ca60
 				break;
@@ -2135,16 +2135,16 @@ void func_6cb38(void)
 		
 			func_b4f0();
 		
-			dData_40002e28_SiteLongitude = fData_40003518;
-			dData_40002e48_SiteLatitude = fData_4000351c;
-			Data_40004128.dData_48 = fData_40003518;
-			Data_40004128.dData_56 = fData_4000351c;
+			dData_40002e28_SiteLongitude = fData_40003518_ReceiveExternalSiteLongitude;
+			dData_40002e48_SiteLatitude = fData_4000351c_ReceiveExternalSiteLatitude;
+			Data_40004128.dData_48 = fData_40003518_ReceiveExternalSiteLongitude;
+			Data_40004128.dData_56 = fData_4000351c_ReceiveExternalSiteLatitude;
 			bData_4000352d = 1;
 			//->6d044
 			break;
 		
 		case 38:
-			//6ce50
+			//6ce50 - Set Clock
 			bData_40002e89 = 1;
 		
 			func_b4f0();
@@ -2153,12 +2153,12 @@ void func_6cb38(void)
 			Data_40004128.Data_64 = fData_40003520;
 		
 			CCR = (1 << 4); //clock from the 32 kHz oscillator that’s connected to the RTCX1 and RTCX2 pins
-			YEAR = Data_40003524;
-			MONTH = bData_40003528; 
-			DOM = bData_40003529;
-			HOUR = bData_4000352a;
-			MIN = bData_4000352b;
-			SEC = bData_4000352c;
+			YEAR = Data_40003524_ReceiveExternalYear;
+			MONTH = bData_40003528_ReceiveExternalMonth; 
+			DOM = bData_40003529_ReceiveExternalDay;
+			HOUR = bData_4000352a_ReceiveExternalHours;
+			MIN = bData_4000352b_ReceiveExternalMinutes;
+			SEC = bData_4000352c_ReceiveExternalSeconds;
 			CCR = (1 << 4) | (1 << 0); //CLKEN = 1
 		
 			bData_4000352d = 1;

@@ -303,10 +303,10 @@ char bData_40002c0b_uart0ReceiveComplete; //40002c0b
 unsigned char bData_40002c0c_uart0ReceiveStep; //40002c0c
 unsigned char Data_40002c0d_uart0ReceiveHeader[4]; //40002c0d
 unsigned char uart0_bRxData; //40002c11
-unsigned char bData_40002c12; //40002c12
-char bData_40002c13; //40002c13
-unsigned char bData_40002c14; //40002c14
-unsigned char bData_40002c15[4]; //40002c15
+unsigned char bData_40002c12_uart1ReceiveDataCount; //40002c12
+char bData_40002c13_uart1ReceiveComplete; //40002c13
+unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
+unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
 int Data_40003214; //40003214
 unsigned char uart1_bRxData; //40002c19
 char bData_40002c1a; //40002c1a // V2.2: 40002c1e
@@ -745,22 +745,22 @@ float fData_40003508; //40003508
 float fData_4000350c; //4000350c
 float fData_40003510; //40003510
 float fData_40003514; //40003514
-float fData_40003518; //40003518
-float fData_4000351c; //4000351c
+float fData_40003518_ReceiveExternalSiteLongitude; //40003518
+float fData_4000351c_ReceiveExternalSiteLatitude; //4000351c
 float fData_40003520; //40003520
-int Data_40003524; //40003524
-unsigned char bData_40003528; //40003528
-unsigned char bData_40003529; //40003529
-unsigned char bData_4000352a; //4000352a
-unsigned char bData_4000352b; //4000352b
-unsigned char bData_4000352c; //4000352c
+int Data_40003524_ReceiveExternalYear; //40003524
+unsigned char bData_40003528_ReceiveExternalMonth; //40003528
+unsigned char bData_40003529_ReceiveExternalDay; //40003529
+unsigned char bData_4000352a_ReceiveExternalHours; //4000352a
+unsigned char bData_4000352b_ReceiveExternalMinutes; //4000352b
+unsigned char bData_4000352c_ReceiveExternalSeconds; //4000352c
 unsigned char bData_4000352d; //4000352d
 unsigned char bData_4000352e; //4000352e
 float fData_40003540; //40003540
 float fData_40003544; //40003544
 int Data_40003548; //40003548
 unsigned char Data_40003588_uart0ReceiveDataBuffer[10]; //40003588
-unsigned char Data_40003592[10]; //40003592
+unsigned char Data_40003592_uart1ReceiveDataBuffer[10]; //40003592
 int Data_4000359c[8]; //4000359c, size??
 int Data_400035bc; //400035bc
 char Data_400037ec[100]; //400037ec, size???
