@@ -424,10 +424,10 @@ extern char bData_40002c0b_uart0ReceiveComplete; //40002c0b
 extern unsigned char bData_40002c0c_uart0ReceiveStep; //40002c0c
 extern unsigned char Data_40002c0d_uart0ReceiveHeader[4]; //40002c0d
 extern unsigned char uart0_bRxData; //40002c11
-extern unsigned char bData_40002c12; //40002c12
-extern char bData_40002c13; //40002c13
-extern unsigned char bData_40002c14; //40002c14
-extern unsigned char bData_40002c15[4]; //40002c15
+extern unsigned char bData_40002c12_uart1ReceiveDataCount; //40002c12
+extern char bData_40002c13_uart1ReceiveComplete; //40002c13
+extern unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
+extern unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
 extern unsigned char uart1_bRxData; //40002c19
 extern char bData_40002c1a; //40002c1a // V2.2: 40002c1e
 extern int Data_40002c1c; //40002c1c
@@ -866,22 +866,22 @@ extern float fData_40003508; //40003508
 extern float fData_4000350c; //4000350c
 extern float fData_40003510; //40003510
 extern float fData_40003514; //40003514
-extern float fData_40003518; //40003518
-extern float fData_4000351c; //4000351c
+extern float fData_40003518_ReceiveExternalSiteLongitude; //40003518
+extern float fData_4000351c_ReceiveExternalSiteLatitude; //4000351c
 extern float fData_40003520; //40003520
-extern int Data_40003524; //40003524
-extern unsigned char bData_40003528; //40003528
-extern unsigned char bData_40003529; //40003529
-extern unsigned char bData_4000352a; //4000352a
-extern unsigned char bData_4000352b; //4000352b
-extern unsigned char bData_4000352c; //4000352c
+extern int Data_40003524_ReceiveExternalYear; //40003524
+extern unsigned char bData_40003528_ReceiveExternalMonth; //40003528
+extern unsigned char bData_40003529_ReceiveExternalDay; //40003529
+extern unsigned char bData_4000352a_ReceiveExternalHours; //4000352a
+extern unsigned char bData_4000352b_ReceiveExternalMinutes; //4000352b
+extern unsigned char bData_4000352c_ReceiveExternalSeconds; //4000352c
 extern unsigned char bData_4000352d; //4000352d
 extern unsigned char bData_4000352e; //4000352e
 extern float fData_40003540; //40003540
 extern float fData_40003544; //40003544
 extern int Data_40003548; //40003548
 extern unsigned char Data_40003588_uart0ReceiveDataBuffer[]; //40003588
-extern unsigned char Data_40003592[]; //40003592 size????
+extern unsigned char Data_40003592_uart1ReceiveDataBuffer[]; //40003592
 extern int Data_4000359c[]; //4000359c, size??
 extern int Data_400035bc; //400035bc
 extern char Data_400037ec[]; //400037ec, size???
