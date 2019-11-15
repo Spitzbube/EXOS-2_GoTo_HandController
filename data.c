@@ -279,13 +279,56 @@ char Data_40002262[32];
 char Data_40002282[32];
 char Data_400022a2[32];
 char Data_400022c2[32];
+char Data_40002387[19]; //40002387
+char Data_4000239a[20]; //4000239a, size???
+char Data_4000248c[21]; //4000248c
+char Data_400024a1[20]; //400024a1, size??
+char Data_400024b5[20]; //400024b5
+char Data_400024c9[13]; //400024c9, size??
+char Data_400024d6[11]; //400024d6, size??
+char Data_400024e1[14]; //400024e1
+char Data_400024ef[21]; //400024ef, size??
+char Data_40002504[100]; //40002504, size???
 char Data_40002655[11]; //40002655, size???
 char Data_40002660[100]; //40002660, size???
+char Data_400027cf[16]; //400027cf
+char Data_400027df[16]; //400027df
+char Data_400027ef[16]; //400027ef
+char Data_400027ff[16]; //400027ff
 char fill_40002836; //40002836
 unsigned char Data_40002827[16]; //40002827 size???
 char Data_40002837[16]; //40002837 size??
 char Data_40002847[15]; //40002847 size??
 char Data_40002856[20]; //40002856 size???
+char Data_4000288e[11]; //4000288e
+char Data_40002899[12]; //40002899, size???
+char Data_400028a5[14]; //400028a5
+char Data_400028b3[20]; //400028b3, size???
+char Data_400029a1[11]; //400029a1
+char Data_400029ac[7]; //400029ac
+char Data_400029b3[1]; //400029b3
+char Data_400029b4[16]; //400029b4, size???
+char Data_400029ca[16]; //400029ca
+char Data_400029da[13]; //400029da
+char Data_400029e7[7]; //400029e7
+char Data_400029ee[16]; //400029ee, size???
+char Data_40002a62[15]; //40002a62
+char Data_40002a71[16]; //40002a71, size???
+char Data_40002a87[13]; //40002a87
+char Data_40002a94[10]; //40002a94
+char Data_40002a9e[16]; //40002a9e, size???
+char Data_40002acb[17]; //40002acb
+char Data_40002adc[18]; //40002adc
+char Data_40002aee[1]; //40002aee
+char Data_40002aef[22]; //40002aef, size???
+char Data_40002b70[16]; //40002b70
+char Data_40002b80[10]; //40002b80
+char Data_40002b8a[16]; //40002b8a
+char Data_40002b8b[22]; //40002b8b, size???
+char Data_40002ba5[16]; //40002ba5
+char Data_40002bb5[11]; //40002bb5
+char Data_40002bc0[1]; //40002bc0
+char Data_40002bc1[3]; //40002bc1
 int Data_40002bc4[13]; //40002bc4
 unsigned char Data_40002bf8[8]; //40002bf8, size??
 unsigned char bData_40002c00; //40002c00
@@ -323,6 +366,9 @@ int Data_40002c64; //40002c64
 char bData_40002c68; //40002c68
 char bData_40002c69; //40002c69
 char bData_40002c6a; //40002c6a
+double dData_40002c70; //40002c70
+double dData_40002c78; //40002c78
+double dData_40002c80; //40002c80
 double dData_40002c88; //40002c88
 double dData_40002c90; //40002c90
 double dData_40002c98; //40002c98
@@ -650,6 +696,9 @@ int Data_40003224; //40003224
 int Data_40003228; //40003228
 char bData_4000322c; //4000322c
 char bData_4000322d; //4000322d
+float fData_40003238; //40003238
+unsigned short wData_40003250; //40003250
+unsigned short wData_40003252; //40003252
 unsigned char bData_40003265; //40003265
 float Data_4000329c; //4000329c
 float Data_400032a0; //400032a0
@@ -773,6 +822,7 @@ Struct_3b58 Data_40003e08; //40003e08
 Struct_4028 Data_40003ea0; //40003ea0
 Struct_4594 Data_40003ec0; //40003ec0
 Struct_4894 Data_40003ee0; //40003ee0
+Struct_4f5c Data_40003f1c; //40003f1c
 Struct_5218 Data_40003f50; //40003f50
 Struct_54e0 Data_40003f64; //40003f64
 char Data_40003fa9[21]; //40003fa9, size???

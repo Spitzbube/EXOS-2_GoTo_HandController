@@ -401,12 +401,55 @@ extern char Data_40002262[];
 extern char Data_40002282[];
 extern char Data_400022a2[];
 extern char Data_400022c2[];
+extern char Data_40002387[]; //40002387
+extern char Data_4000239a[]; //4000239a
+extern char Data_4000248c[]; //4000248c
+extern char Data_400024a1[]; //400024a1
+extern char Data_400024b5[]; //400024b5
+extern char Data_400024c9[]; //400024c9
+extern char Data_400024d6[]; //400024d6
+extern char Data_400024e1[]; //400024e1
+extern char Data_400024ef[]; //400024ef
+extern char Data_40002504[]; //40002504
 extern char Data_40002655[]; //40002655, size???
 extern char Data_40002660[]; //40002660, size???
+extern char Data_400027cf[]; //400027cf
+extern char Data_400027df[]; //400027df
+extern char Data_400027ef[]; //400027ef
+extern char Data_400027ff[]; //400027ff
 extern unsigned char Data_40002827[]; //40002827
 extern char Data_40002837[]; //40002837
 extern char Data_40002847[]; //40002847
 extern char Data_40002856[]; //40002856
+extern char Data_4000288e[]; //4000288e
+extern char Data_40002899[]; //40002899
+extern char Data_400028a5[]; //400028a5
+extern char Data_400028b3[]; //400028b3
+extern char Data_400029a1[]; //400029a1
+extern char Data_400029ac[]; //400029ac
+extern char Data_400029b3[]; //400029b3
+extern char Data_400029b4[]; //400029b4
+extern char Data_400029ca[]; //400029ca
+extern char Data_400029da[]; //400029da
+extern char Data_400029e7[]; //400029e7
+extern char Data_400029ee[]; //400029ee
+extern char Data_40002a62[]; //40002a62
+extern char Data_40002a71[]; //40002a71
+extern char Data_40002a87[]; //40002a87
+extern char Data_40002a94[]; //40002a94
+extern char Data_40002a9e[]; //40002a9e
+extern char Data_40002acb[]; //40002acb
+extern char Data_40002adc[]; //40002adc
+extern char Data_40002aee[]; //40002aee
+extern char Data_40002aef[]; //40002aef
+extern char Data_40002b70[]; //40002b70
+extern char Data_40002b80[]; //40002b80
+extern char Data_40002b8a[]; //40002b8a
+extern char Data_40002b8b[]; //40002b8b
+extern char Data_40002ba5[]; //40002ba5
+extern char Data_40002bb5[]; //40002bb5
+extern char Data_40002bc0[]; //40002bc0
+extern char Data_40002bc1[]; //40002bc1
 extern int Data_40002bc4[]; //40002bc4
 extern unsigned char Data_40002bf8[8]; //40002bf8, size??
 extern unsigned char bData_40002c00; //40002c00
@@ -443,6 +486,9 @@ extern int Data_40002c64; //40002c64
 extern char bData_40002c68; //40002c68
 extern char bData_40002c69; //40002c69
 extern char bData_40002c6a; //40002c6a
+extern double dData_40002c70; //40002c70
+extern double dData_40002c78; //40002c78
+extern double dData_40002c80; //40002c80
 extern double dData_40002c88; //40002c88
 extern double dData_40002c90; //40002c90
 extern double dData_40002c98; //40002c98
@@ -771,6 +817,9 @@ extern int Data_40003224; //40003224
 extern int Data_40003228; //40003228
 extern char bData_4000322c; //4000322c
 extern char bData_4000322d; //4000322d
+extern float fData_40003238; //40003238
+extern unsigned short wData_40003250; //40003250
+extern unsigned short wData_40003252; //40003252
 extern unsigned char bData_40003265; //40003265
 extern float Data_4000329c; //4000329c
 extern float Data_400032a0; //400032a0
@@ -894,6 +943,7 @@ extern Struct_3b58 Data_40003e08; //40003e08
 extern Struct_4028 Data_40003ea0; //40003ea0
 extern Struct_4594 Data_40003ec0; //40003ec0
 extern Struct_4894 Data_40003ee0; //40003ee0
+extern Struct_4f5c Data_40003f1c; //40003f1c
 extern Struct_5218 Data_40003f50; //40003f50
 extern Struct_54e0 Data_40003f64; //40003f64
 extern char Data_40003fa9[]; //40003fa9
