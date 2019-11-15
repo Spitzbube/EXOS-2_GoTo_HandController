@@ -848,7 +848,12 @@ void func_17d0(void)
 }
 
 /* 17f8 - complete */
-void func_17f8(void) __irq
+#ifdef OLIMEX_LPC2148
+void timer_isr(void) __attribute__ ((interrupt ("IRQ")));
+void timer_isr(void)
+#else
+void timer_isr(void) __irq
+#endif
 {
 	func_1268();
 	
@@ -911,7 +916,12 @@ void func_17f8(void) __irq
 }
 
 /* 19cc - complete */
-void func_19cc(void) __irq
+#ifdef OLIMEX_LPC2148
+void rtc_isr(void) __attribute__ ((interrupt ("IRQ")));
+void rtc_isr(void)
+#else
+void rtc_isr(void) __irq
+#endif
 {
 	ILR = 3;
 	
@@ -921,7 +931,12 @@ void func_19cc(void) __irq
 }
 
 /* 19f0 - complete */
+#ifdef OLIMEX_LPC2148
+void uart1_isr(void) __attribute__ ((interrupt ("IRQ")));
+void uart1_isr(void)
+#else
 void uart1_isr(void) __irq
+#endif
 {
 	uart1_bRxData = U1RBR;
 	
@@ -1022,7 +1037,12 @@ void uart1_isr(void) __irq
 }
 
 /* 1c88 - complete */
+#ifdef OLIMEX_LPC2148
+void uart0_isr(void) __attribute__ ((interrupt ("IRQ")));
+void uart0_isr(void)
+#else
 void uart0_isr(void) __irq
+#endif
 {
 	uart0_bRxData = U0RBR;
 	
@@ -1128,8 +1148,17 @@ void uart0_isr(void) __irq
 void uart0_init(int a)
 {
 	U0LCR = 0x83;
-	U0DLM = 0x00;
-	U0DLL = 0x48;
+
+#ifdef OLIMEX_LPC2148
+	// 12000000 * 2/2 / (16 * 78) = 9615.38 => 9600
+	U0DLM = 0;
+	U0DLL = 78;
+#else
+	// 12000000 * 2/2 / (16 * 72) = 10416.67 => 10000?
+	U0DLM = 0;
+	U0DLL = 72;
+#endif
+
 	U0LCR = 0x03;
 	U0FCR = 0x01; //U0IIR = 0x01;?
 	U0IER = 0x01;
@@ -1199,8 +1228,17 @@ void uart0_send_packets(unsigned char* a)
 void uart1_init(int a)
 {
 	U1LCR = 0x83;
-	U1DLM = 0x00;
-	U1DLL = 0x48;
+
+#ifdef OLIMEX_LPC2148
+	// 12000000 * 2/2 / (16 * 78) = 9615.38 => 9600
+	U1DLM = 0;
+	U1DLL = 78;
+#else
+	// 12000000 * 2/2 / (16 * 72) = 10416.67 => 10000?
+	U1DLM = 0;
+	U1DLL = 72;
+#endif
+
 	U1LCR = 0x03;
 	U1FCR = 0x01; //
 	U1IER = 0x01;
@@ -1241,6 +1279,16 @@ void uart1_write_byte(unsigned char a)
 	while (!(U1LSR & 0x40)) {}
 }
 
+#ifdef OLIMEX_LPC2148
+void uart1_send(unsigned char* a, unsigned char b)
+{
+	while (b--)
+	{
+		uart1_write_byte(*a++);
+	}
+}
+#endif
+
 /* 2208 - complete */
 void uart1_send_packets(unsigned char* a)
 {
@@ -1280,10 +1328,10 @@ void func_227c(void)
 	
 	VICIntSelect = 0;
 	VICVectCntl0 = 0x24;
-	VICVectAddr0 = (unsigned int) func_17f8;
+	VICVectAddr0 = (unsigned int) timer_isr;
 	VICIntEnable = 0x10;
 	VICVectCntl3 = 0x2d;
-	VICVectAddr3 = (unsigned int) func_19cc;
+	VICVectAddr3 = (unsigned int) rtc_isr;
 	VICIntEnable = 0x2000;
 	CIIR = 0x01;
 	ILR = 0x03;
@@ -1355,8 +1403,13 @@ void func_2328(void)
 		(0 << 2) | // P0.2 = In
 		(0 << 3) | // P0.3 = In
 		(1 << 7) | // P0.7 = Out
+#ifdef OLIMEX_LPC2148
+		(1 <<10) | // P0.10 = Out -> LED1
+		(1 <<11) | // P0.11 = Out -> LED2
+#else
 		(1 <<10) | // P0.10 = Out
 		(0 <<11) | // P0.11 = In
+#endif
 		(1 <<12) | // P0.12 = Out
 		(1 <<13) | // P0.13 = Out
 		(0 <<14) | // P0.14 = In
@@ -1385,6 +1438,8 @@ void func_2328(void)
 	IO1SET = 1 << 25; //0x02000000; P1.25 = High
 	
 	spi0_init();
+
+#ifndef OLIMEX_LPC2148
 	func_3ec();
 	func_394();
 	func_53c(0x80);
@@ -1395,6 +1450,7 @@ void func_2328(void)
 	bData_40002c08 = 0x10;
 	bData_40002c09 = 0x10;
 	bData_40002c07 = 0x00;
+#endif
 
 	func_227c();
 }
@@ -3487,6 +3543,8 @@ void func_7950(int a)
 	bData_40002c09 = bData_40002c08 - 1;
 }
 
+#ifndef OLIMEX_LPC2148
+
 /* 7978 - todo */
 void func_7978(Struct_7978 sp, double* sp272, double* sp276)
 {
@@ -4690,6 +4748,8 @@ void func_b4d0(void)
 	dData_40003490 = 10000.0;
 }
 
+#endif //OLIMEX_LPC2148
+
 /* b4f0 - todo */
 void func_b4f0(void)
 {
@@ -4766,6 +4826,8 @@ void func_b64c(double a, double b)
 	bData_40003210 = 0;
 	bData_40003211 = 0;
 }
+
+#ifndef OLIMEX_LPC2148
 
 /* b7c8 - todo */
 void func_b7c8(double a, double b)
@@ -9508,3 +9570,5 @@ void func_2575c(void)
 #include "func_27844.c"
 
 #include "func_52898.c"
+
+#endif //OLIMEX_LPC2148

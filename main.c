@@ -46,6 +46,7 @@ extern void func_1e228(void);
 extern void func_3d72c(void);
 extern void func_20b94(void);
 
+#ifndef OLIMEX_LPC2148
 
 /* 3d72c - todo */
 void func_3d72c(void)
@@ -1956,6 +1957,8 @@ void func_6c804(void)
 	func_7e8(0, 5, 1, 22, "     EXOS EQ v2.3     ");
 }
 
+#endif //OLIMEX_LPC2148
+
 /* 6c848 - todo */
 int func_6c848(void)
 {
@@ -1963,6 +1966,15 @@ int func_6c848(void)
 	{
 		bData_4000352d = Data_40003588_uart0ReceiveDataBuffer[0];
 		
+#ifdef OLIMEX_LPC2148
+		{
+			static char buf[105];
+
+			snprintf(buf, 100, "func_6c848: bData_4000352d: 0x%x\n\r", bData_4000352d);
+			uart1_send((unsigned char*)buf, strlen(buf));
+		}
+#endif
+
 		switch (bData_4000352d)
 		{
 			case 35:
@@ -1984,7 +1996,7 @@ int func_6c848(void)
 				break;
 			
 			case 37:
-				//6c92c
+				//6c92c: "Standort einstellen"
 				Data_40002c28.bData[0] = Data_40003588_uart0ReceiveDataBuffer[1];
 				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[2];
 				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[3];
@@ -2000,7 +2012,7 @@ int func_6c848(void)
 				break;
 			
 			case 38:
-				//6c9bc
+				//6c9bc: "Zeit einstellen"
 				Data_40003524_ReceiveExternalYear = Data_40003588_uart0ReceiveDataBuffer[1] * 100 + 
 												Data_40003588_uart0ReceiveDataBuffer[2];
 				bData_40003528_ReceiveExternalMonth = Data_40003588_uart0ReceiveDataBuffer[3];
@@ -2009,6 +2021,28 @@ int func_6c848(void)
 				bData_4000352b_ReceiveExternalMinutes = Data_40003588_uart0ReceiveDataBuffer[6];
 				bData_4000352c_ReceiveExternalSeconds = Data_40003588_uart0ReceiveDataBuffer[7];
 				fData_40003520 = (float)Data_40003588_uart0ReceiveDataBuffer[8] - 12;
+#ifdef OLIMEX_LPC2148
+				{
+					static char buf[105];
+
+					snprintf(buf, 100, "Date: %u-%u-%u\n\r",
+							Data_40003524_ReceiveExternalYear,
+							bData_40003528_ReceiveExternalMonth,
+							bData_40003529_ReceiveExternalDay);
+					uart1_send((unsigned char*)buf, strlen(buf));
+
+					snprintf(buf, 100, "Time: %u:%u:%u\n\r",
+							bData_4000352a_ReceiveExternalHours,
+							bData_4000352b_ReceiveExternalMinutes,
+							bData_4000352c_ReceiveExternalSeconds);
+					uart1_send((unsigned char*)buf, strlen(buf));
+
+					snprintf(buf, 100, "%d.%d\n\r",
+							(int)fData_40003520,
+							(fData_40003520 - (int)fData_40003520) * 1000);
+					uart1_send((unsigned char*)buf, strlen(buf));
+				}
+#endif
 				//->6ca60
 				break;
 			
@@ -2043,7 +2077,7 @@ void func_6cb38(void)
 	switch (bData_4000352d)
 	{
 		case 29:
-			//6cbd8
+			//6cbd8: "Schwenk abbrechen"
 			func_b4f0();
 		
 			bData_4000352d = 1;
@@ -2051,7 +2085,7 @@ void func_6cb38(void)
 			break;
 		
 		case 30:
-			//6cbf0
+			//6cbf0: "Park Scope"?
 			func_75c4();
 		
 			bData_40003431 = 1;
@@ -2060,7 +2094,7 @@ void func_6cb38(void)
 			break;
 		
 		case 31:
-			//6cc10
+			//6cc10: "Teleskop verbinden"?
 			sp60.fData = dData_40002e28_SiteLongitude;
 			sp56.fData = dData_40002e48_SiteLatitude;
 		
@@ -2130,7 +2164,7 @@ void func_6cb38(void)
 			break;
 		
 		case 37:
-			//6cdd4
+			//6cdd4: "Standort einstellen"
 			bData_40002e89 = 1;
 		
 			func_b4f0();
@@ -2170,6 +2204,7 @@ void func_6cb38(void)
 			if (bData_4000352e > 2)
 			{
 				//6cf0c
+#ifndef OLIMEX_LPC2148
 				if (bData_40002c1a == 2)
 				{
 					//6cf1c
@@ -2180,6 +2215,7 @@ void func_6cb38(void)
 					dData_40003448 = sp32;
 					dData_40003450 = sp24;
 				}
+#endif
 				//6cfa8
 				sp60.fData = fData_40003508;
 				sp56.fData = fData_4000350c;
@@ -2216,14 +2252,11 @@ void func_6cb38(void)
 /* 6d054 - todo */
 int main(void)
 {
-	#if 0
-	int r4;
-	int r5;
-	#endif
-		
 	func_2328();
 	uart0_init(360);
 	uart1_init(360);
+
+#ifndef OLIMEX_LPC2148
 	func_7590();
 	func_d2cc();
 	func_5099c();
@@ -2426,6 +2459,7 @@ int main(void)
 	//6d880
 	Data_40002c1c = 0;
 	Data_40002c20 = 0;
+#endif //OLIMEX_LPC2148
 	//6d894 -> 729ec
 	while (1) //Main Loop
 	{
@@ -2435,6 +2469,17 @@ int main(void)
 		
 		func_6cb38();
 		
+#ifdef OLIMEX_LPC2148
+		int j;
+		for (j = 0; j < 500000; j++ );		// wait 500 msec
+//		IOSET0 = 0x00000800;
+		IOCLR0 = 0x00000400;
+		for (j = 0; j < 500000; j++ );		// wait 500 msec
+		IOSET0 = 0x00000400;
+//		IOCLR0 = 0x00000800;
+#endif
+
+#ifndef OLIMEX_LPC2148
 		if (bData_40002c1a == 1)
 		{
 			//6d8d4
@@ -2935,5 +2980,7 @@ int main(void)
 			func_659c(100);
 		}
 		//729ec -> 6d898
+#endif //OLIMEX_LPC2148
 	} //while (1)
 }
+
