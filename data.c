@@ -14,18 +14,18 @@ char Data_400003ba[8]; //400003ba, size???
 char Data_400003c2[8]; //400003c2, size???
 char Data_400003ca[10]; //400003ca, size???
 char Data_400003d4[10]; //400003d4, size???
-char Data_400008ad[16]; //400008ad, size???
-char Data_400008bd[11]; //400008bd, size???
-char Data_400008c8[10]; //400008c8, size???
-char Data_400008d2[16]; //400008d2, size???
-char Data_400008d8[15]; //400008d8, size???
+char strEngTelescopeAlign[] = "Telescope Align"; //400008ad
+char Data_400008bd[] = "Navigation"; //400008bd
+char Data_400008c8[] = "Utilities"; //400008c8
+char Data_400008d2[] = "Setup"; //400008d2
+char strEngOneStarAlign[] = "One Star Align"; //400008d8
 char Data_400008e7[15]; //400008e7, size???
 char Data_400008f6[15]; //400008f6, size???
 char Data_40000907[12]; //40000907, size???
 char Data_40000913[16]; //40000913, size???
 char Data_40000923[16]; //40000923, size???
 char Data_40000933[17]; //40000933, size???
-char Data_40000944[42]; //40000944, size???
+char strEngSolarSystem[] = "Solar System"; //40000944
 char Data_40000951[42]; //40000951, size???
 char Data_4000095f[42]; //4000095f, size???
 char Data_4000096b[42]; //4000096b, size???
@@ -37,7 +37,7 @@ char Data_400009b2[42]; //400009b2, size???
 char Data_400009c2[42]; //400009c2, size???
 char Data_400009d3[42]; //400009d3, size???
 char Data_400009e4[42]; //400009e4, size???
-char Data_400009f5[42]; //400009f5, size???
+char strEngCurrentObjects[] = "Current Objects"; //400009f5
 char Data_40000a05[42]; //40000a05, size???
 char Data_40000a15[42]; //40000a15, size???
 char Data_40000a27[42]; //40000a27, size???
@@ -46,7 +46,7 @@ char Data_40000a33[42]; //40000a33, size???
 char Data_40000a40[42]; //40000a40, size???
 char Data_40000a4f[42]; //40000a4f, size???
 char Data_40000a60[42]; //40000a60, size???
-char Data_40000a6d[42]; //40000a6d, size???
+char strEngTimeAndDate[] = "Time and Date "; //40000a6d
 char Data_40000a7c[42]; //40000a7c, size???
 char Data_40000a8c[42];
 char Data_40000a99[42];
@@ -84,7 +84,7 @@ char Data_40000bc7[42];
 char Data_40000bd3[42];
 char Data_40000bde[42];
 char Data_40000bee[42];
-char Data_40000bfc[42];
+char Data_40000bfc[] = "List align stars:"; //40000bfc, content???
 char Data_40000c14[42];
 char Data_40000c20[42];
 char Data_40000c35[42];
@@ -115,7 +115,7 @@ char Data_40000e20[42];
 char Data_40000e21[42];
 char Data_40000e38[42];
 char Data_40000e4e[42];
-char Data_40000e62[32]; //40000e62
+char Data_40000e62[32] = "Ausrichtung"; //40000e62
 char Data_40000e82[32];
 char Data_40000ea2[32];
 char Data_40000ec2[32];
@@ -304,24 +304,24 @@ char Data_4000288e[11]; //4000288e
 char Data_40002899[12]; //40002899, size???
 char Data_400028a5[14]; //400028a5
 char Data_400028b3[20]; //400028b3, size???
-char Data_400029a1[11]; //400029a1
-char Data_400029ac[7]; //400029ac
-char Data_400029b3[1]; //400029b3
-char Data_400029b4[16]; //400029b4, size???
-char Data_400029ca[16]; //400029ca
-char Data_400029da[13]; //400029da
+char Data_400029a1[] = "Set timer:"; //400029a1
+char Data_400029ac[] = "      "; //400029ac
+char Data_400029b3[] = ""; //400029b3
+char Data_400029b4[] = "      Start      Back"; //400029b4
+char Data_400029ca[16] = "Counting down"; //400029ca
+char Data_400029da[] = "Time remain:"; //400029da
 char Data_400029e7[7]; //400029e7
-char Data_400029ee[16]; //400029ee, size???
+char Data_400029ee[] = "      Start      Back"; //400029ee, size???
 char Data_40002a62[15]; //40002a62
 char Data_40002a71[16]; //40002a71, size???
 char Data_40002a87[13]; //40002a87
 char Data_40002a94[10]; //40002a94
 char Data_40002a9e[16]; //40002a9e, size???
-char Data_40002acb[17]; //40002acb
-char Data_40002adc[18]; //40002adc
-char Data_40002aee[1]; //40002aee
+char Data_40002acb[] = "Background light"; //40002acb, content?
+char Data_40002adc[] = "Press up/down key"; //40002adc, content?
+char Data_40002aee[] = ""; //40002aee, content?
 char Data_40002aef[22]; //40002aef, size???
-char Data_40002b70[16]; //40002b70
+char Data_40002b70[16] = "daylight saving"; //40002b70, content?
 char Data_40002b80[10]; //40002b80
 char Data_40002b8a[16]; //40002b8a
 char Data_40002b8b[22]; //40002b8b, size???
@@ -358,9 +358,11 @@ int Data_40002c20; //40002c20
 Union_40002c24 Data_40002c24; //40002c24
 Union_40002c28 Data_40002c28; //40002c28
 char bData_40002c58; //40002c58
-unsigned char bData_40002c59; //40002c59
+unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
 char bData_40002c5a; //40002c5a
+int Data_40002c5c; //40002c5c
 unsigned char bData_40002c60; //40002c60
+char bData_40002c61; //40002c61
 char bData_40002c62; //40002c62
 int Data_40002c64; //40002c64
 char bData_40002c68; //40002c68
@@ -660,7 +662,7 @@ int Data_4000318c; //4000318c
 int Data_40003190; //40003190
 char bData_40003194; //40003194
 unsigned char bData_40003195; //40003195
-unsigned char bData_40003196; //40003196
+unsigned char bData_40003196_CurrentLanguage; //40003196
 char bData_40003197; //40003197
 char bData_40003198; //40003198
 char bData_40003199; //40003199
@@ -697,6 +699,7 @@ int Data_40003228; //40003228
 char bData_4000322c; //4000322c
 char bData_4000322d; //4000322d
 float fData_40003238; //40003238
+int Data_40003248; //40003248
 unsigned short wData_40003250; //40003250
 unsigned short wData_40003252; //40003252
 unsigned char bData_40003265; //40003265

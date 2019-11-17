@@ -136,18 +136,18 @@ extern char Data_400003ba[]; //400003ba
 extern char Data_400003c2[]; //400003c2
 extern char Data_400003ca[]; //400003ca
 extern char Data_400003d4[]; //400003d4
-extern char Data_400008ad[]; //400008ad, size??
+extern char strEngTelescopeAlign[]; //400008ad
 extern char Data_400008bd[]; //400008bd, size???
 extern char Data_400008c8[]; //400008c8, size???
 extern char Data_400008d2[]; //400008d2, size???
-extern char Data_400008d8[]; //400008d8, size???
+extern char strEngOneStarAlign[]; //400008d8
 extern char Data_400008e7[]; //400008e7, size???
 extern char Data_400008f6[]; //400008f6, size???
 extern char Data_40000907[]; //40000907, size???
 extern char Data_40000913[]; //40000913, size???
 extern char Data_40000923[]; //40000923, size???
 extern char Data_40000933[]; //40000933, size???
-extern char Data_40000944[]; //40000944, size???
+extern char strEngSolarSystem[]; //40000944
 extern char Data_40000951[]; //40000951, size???
 extern char Data_4000095f[]; //4000095f, size???
 extern char Data_4000096b[]; //4000096b, size???
@@ -159,7 +159,7 @@ extern char Data_400009b2[]; //400009b2, size???
 extern char Data_400009c2[]; //400009c2, size???
 extern char Data_400009d3[]; //400009d3, size???
 extern char Data_400009e4[]; //400009e4, size???
-extern char Data_400009f5[]; //400009f5, size???
+extern char strEngCurrentObjects[]; //400009f5
 extern char Data_40000a05[]; //40000a05, size???
 extern char Data_40000a15[]; //40000a15, size???
 extern char Data_40000a27[]; //40000a27, size???
@@ -168,7 +168,7 @@ extern char Data_40000a33[]; //40000a33, size???
 extern char Data_40000a40[]; //40000a40, size???
 extern char Data_40000a4f[]; //40000a4f, size???
 extern char Data_40000a60[]; //40000a60, size???
-extern char Data_40000a6d[]; //40000a6d, size???
+extern char strEngTimeAndDate[]; //40000a6d
 extern char Data_40000a7c[]; //40000a7c, size???
 extern char Data_40000a8c[];
 extern char Data_40000a99[];
@@ -478,9 +478,11 @@ extern int Data_40002c20; //40002c20
 extern Union_40002c24 Data_40002c24; //40002c24
 extern Union_40002c28 Data_40002c28; //40002c28
 extern char bData_40002c58; //40002c58
-extern unsigned char bData_40002c59; //40002c59
+extern unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
 extern char bData_40002c5a; //40002c5a
+extern int Data_40002c5c; //40002c5c
 extern unsigned char bData_40002c60; //40002c60
+extern char bData_40002c61; //40002c61
 extern char bData_40002c62; //40002c62
 extern int Data_40002c64; //40002c64
 extern char bData_40002c68; //40002c68
@@ -780,7 +782,7 @@ extern int Data_4000318c; //4000318c
 extern int Data_40003190; //40003190
 extern char bData_40003194; //40003194
 extern unsigned char bData_40003195; //40003195
-extern unsigned char bData_40003196; //40003196
+extern unsigned char bData_40003196_CurrentLanguage; //40003196
 extern char bData_40003197; //40003197
 extern char bData_40003198; //40003198
 extern char bData_40003199; //40003199
@@ -818,6 +820,7 @@ extern int Data_40003228; //40003228
 extern char bData_4000322c; //4000322c
 extern char bData_4000322d; //4000322d
 extern float fData_40003238; //40003238
+extern int Data_40003248; //40003248
 extern unsigned short wData_40003250; //40003250
 extern unsigned short wData_40003252; //40003252
 extern unsigned char bData_40003265; //40003265
