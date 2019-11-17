@@ -2,13 +2,12 @@
 extern unsigned char func_57b8(unsigned char* a, int* b, void* c);
 extern void func_240e8(unsigned char a, int b);
 extern void func_24574(void);
-extern void func_2575c(void);
 
 
 /* 27844 - todo */
 void func_27844(void)
 {
-	func_2575c();
+	SwapLanguageStrings();
 	
 	switch (Data_40002c64)
 	{
@@ -578,8 +577,8 @@ void func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0x3e8: //1000
-			//0x2a100
+		case 1000: //0x3e8:
+			//0x2a100 - Telescope Align
 			Data_40003360 = Data_40002f20;
 			Data_40003364 = "";
 			Data_40003368 = Data_40002f24;
@@ -602,8 +601,8 @@ void func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0x7D0: //2000
-			//0x2a220
+		case 2000: //0x7D0:
+			//0x2a220 - Navigation
 			Data_40003360 = Data_40002f20;
 			Data_40003364 = "";
 			Data_40003368 = Data_40002f24;
@@ -626,8 +625,8 @@ void func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0xBB8: //3000
-			//0x2a2f4
+		case 3000: //0xBB8:
+			//0x2a2f4 - Utilities
 			Data_40003360 = Data_40002f20;
 			Data_40003364 = "";
 			Data_40003368 = Data_40002f24;
@@ -650,8 +649,8 @@ void func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0xFA0: //4000
-			//0x2a3c8
+		case 4000: //0xFA0:
+			//0x2a3c8 - Setup
 			Data_40003360 = Data_40002f20;
 			Data_40003364 = "";
 			Data_40003368 = Data_40002f24;
@@ -674,7 +673,7 @@ void func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0x44c: //1100
+		case 0x44c: //1100: One Star Align
 			//0x2a49c
 		case 0x4b0: //1200
 			//0x2a4a4
@@ -700,7 +699,7 @@ void func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0x834: //2100
+		case 0x834: //2100: Solar System
 			//0x2a500		
 		case 0x898: //2200
 			//0x2a508
@@ -736,13 +735,13 @@ void func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0xC1C: //3100
+		case 0xC1C: //3100: Current Objects
 			//0x2a578
 		case 0xC80: //3200
 			//0x2a580
 		case 0xCE4: //3300
 			//0x2a584
-		case 0xD48: //3400
+		case 0xD48: //3400: Timer
 			//0x2a588
 		case 0xDAC: //3500
 			//0x2a58c
@@ -750,9 +749,9 @@ void func_27844(void)
 			//0x2a590
 		case 0xE74: //3700
 			//0x2a594
-		case 0xED8: //3800
+		case 0xED8: //3800: Display Illumination
 			//0x2a598
-		case 0xF3C: //3900
+		case 0xF3C: //3900: Parkposition
 			//0x2a59c
 			func_2245c(13, bData_40003178);
 		
@@ -778,7 +777,7 @@ void func_27844(void)
 			//0x2a5f8
 		case 0x11F8: //4600
 			//0x2a5fc
-		case 0x125C: //4700
+		case 0x125C: //4700: Tracking Rate
 			//0x2a600
 		case 0x12C0: //4800
 			//0x2a604
@@ -1247,7 +1246,7 @@ void func_27844(void)
 			break;
 
 		case 0xBBB3: //48051
-			//0x2b584
+			//0x2b584: Setup -> Tracking Rate -> Guiding Speed
 			Data_40003360 = "speed1:   x 0.125";
 			Data_40003364 = "speed2:   x 0.250";
 			Data_40003368 = "speed3:   x 0.375";
@@ -5336,7 +5335,7 @@ void func_27844(void)
 			break;
 		
 		case 0x84D2: //34002
-			//0x3c0a8
+			//0x3c0a8: Set Timer
 			sprintf(Data_400029e7, "%5lds", Data_40003214);
 		
 			Data_40003360 = Data_400029ca;
@@ -5353,7 +5352,7 @@ void func_27844(void)
 			break;
 				
 		case 0x84D1: //34001
-			//0x3c13c
+			//0x3c13c: Set Timer
 			Data_40003360 = Data_400029a1;
 			Data_40003364 = "";
 			Data_40003368 = Data_400029ac;
@@ -5493,7 +5492,7 @@ void func_27844(void)
 			bData_40003197 = 1;
 			break;
 				
-		case 0xA029: //41001
+		case 41001: //0xA029:
 			//0x3c64c
 			Data_40003360 = "Date and Time Set: ";
 			Data_40003364 = "";

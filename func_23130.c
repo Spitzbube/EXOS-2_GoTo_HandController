@@ -3,7 +3,8 @@
 /* 23130 - todo */
 void func_23130(void)
 {
-	switch (bData_40003196)
+	//Set Number of Menu Lines depending on Language?
+	switch (bData_40003196_CurrentLanguage)
 	{
 		case 1:
 			//0x2315c

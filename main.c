@@ -469,14 +469,110 @@ void func_5969c(void)
 {
 }
 
-/* 5ab50 - todo */
-void func_5ab50(void)
+/* 5a57c - todo */
+void func_5a57c(int a, int b)
 {
 }
 
-/* 5d1ac - todo */
-void func_5d1ac(void)
+/* 5ab50 - todo */
+void HandleDownKey(void)
 {
+	switch (Data_40002c64)
+	{
+		//TODO
+		
+		case 500:
+			//0x5b2c0: Main Screen Help Pages
+			func_394();
+		
+			if (bData_40002c59_MainScreenHelpPage == 10)
+			{
+				bData_40002c59_MainScreenHelpPage = 1;
+			}
+			else
+			{
+				bData_40002c59_MainScreenHelpPage++;
+			}
+			//->0x5ca8c
+			break;
+			
+		case 1000:
+			//0x5b300: Telescope Align
+			Data_40002c64 = 2000; //Navigation
+			//->0x5ca8c
+			break;
+		
+		case 1700:
+			//0x5b410: DEC Bklash Correction
+			bData_40003173 = 1;
+			bData_40003171 = 1;
+			bData_40003172 = 1;
+			bData_40003170 = 1;
+			Data_40002c64 = 1100; //One star align
+			break;
+		
+		//TODO
+	}
+}
+
+/* 5d1ac - todo */
+void HandleUpKey(void)
+{
+	switch (Data_40002c64)
+	{
+		//TODO
+		
+		case 500:
+			//0x5d914: Main Screen Help Pages
+			if (bData_40002c59_MainScreenHelpPage == 1)
+			{
+				bData_40002c59_MainScreenHelpPage = 10;
+			}
+			else
+			{
+				bData_40002c59_MainScreenHelpPage--;
+			}
+			//->0x5f0b4
+			break;
+			
+		case 1200:
+			//0x5d9e4
+			func_5a57c(0, 11);
+			Data_40002c64 = 1100;
+			//->0x5f0b4
+			break;
+		
+		//TODO
+		
+		case 380011:
+			//0x5edfc: Background light
+			if (Data_40003248 == 0)
+			{
+				//5ee10
+				func_49c(63);
+				Data_40003248 = 63;
+			}
+			else if (Data_40003248 == 63)
+			{
+				//5ee38
+				func_49c(127);
+				Data_40003248 = 127;
+			}
+			else if (Data_40003248 == 127)
+			{
+				//5ee38
+				func_49c(191);
+				Data_40003248 = 191;
+			}
+			else
+			{
+				//0x5ee78
+				func_49c(255);
+				Data_40003248 = 255;
+			}
+			//->0x5f0b4
+			break;
+	}
 }
 
 /* 5f0c0 - todo */
@@ -485,8 +581,25 @@ void func_5f0c0(void)
 }
 
 /* 5f230 - todo */
-void func_5f230(void)
+void HandleMinusKey(void)
 {
+	switch (Data_40002c64)
+	{
+		//TODO
+		
+		case 1000:
+			//0x5fbfc
+			Data_40002c64 = 0;
+			//->0x60d48
+			break;
+		
+		case 1100:
+			//0x5fc4c
+			Data_40002c64 = 1000;
+			break;
+		
+		//TODO
+	}
 }
 
 /* 60d54 - todo */
@@ -534,18 +647,18 @@ void func_60dfc(void)
 }
 
 /* 60ed0 - todo */
-void func_60ed0(void)
+void HandleHelpKey(void)
 {
 	switch (Data_40002c64)
 	{
 		case 0:
 			//0x611f8
-			Data_40002c64 = 500;
+			Data_40002c64 = 500; //Main Screen Help Pages
 			bData_40002c58 = 1;
 		
 			func_394();
 		
-			bData_40002c59 = 1;
+			bData_40002c59_MainScreenHelpPage = 1;
 			//->0x61ec0
 			break;
 
@@ -1646,8 +1759,8 @@ void func_6a2cc(void)
 				break;
 			
 			case 10:
-				//0x6a630
-				func_60ed0();
+				//0x6a630: Help Key?
+				HandleHelpKey();
 				bData_40003505 = 1;
 				break;
 			
@@ -1665,28 +1778,28 @@ void func_6a2cc(void)
 			
 			case 13:
 				//0x6a678
-				func_5f230();
+				HandleMinusKey();
 				bData_40003505 = 1;
 				break;
 			
 			case 14:
-				//0x6a690
+				//0x6a690:
 				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a6c4
-					func_5d1ac();
+					HandleUpKey();
 				}
 				bData_40003505 = 1;
 				break;
 			
 			case 15:
-				//0x6a6d8
+				//0x6a6d8:
 				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a70c
-					func_5ab50();
+					HandleDownKey();
 				}
 				bData_40003505 = 1;
 				break;
@@ -1720,7 +1833,7 @@ void func_6a2cc(void)
 			
 			case 19:
 				//0x6a7b0
-				func_52898();
+				HandleEnterKey();
 				bData_40003505 = 1;
 				break;
 			
@@ -1837,6 +1950,7 @@ void func_6a2cc(void)
 	}
 	else
 	{
+		//0x6aaec
 		func_1e228();
 	}
 	//6aaf0
@@ -2261,7 +2375,7 @@ int main(void)
 	func_d2cc();
 	func_5099c();
 	func_243c(0xdcb, 0, 10, Data_40004c58);
-	bData_40003196 = Data_40004c58[0];
+	bData_40003196_CurrentLanguage = Data_40004c58[0];
 	if (Data_40004c58[1] == 1)
 	{
 		func_51368();
@@ -2448,7 +2562,7 @@ int main(void)
 		
 		bData_4000318a = 1;
 		bData_40002e78 = 0;
-		Data_40002c64 = 41001; //0xa029;
+		Data_40002c64 = 41001;
 		//->6d880
 	}
 	else

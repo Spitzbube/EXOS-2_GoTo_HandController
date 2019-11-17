@@ -18,7 +18,6 @@
 
 extern void func_394(void);
 extern void func_3ec(void);
-extern void func_49c(int);
 extern void spi0_init(void);
 
 
@@ -28,7 +27,7 @@ int unknown_prologue(void)
 	int b;
 	int c;
 	int d;
-	return a+b * b / b - b % b + b << 21 - c * d;
+	return a+b * b / b - b-1;
 }
 
 /* 224 - complete */
@@ -7322,8 +7321,8 @@ void func_1e228(void)
 	switch (Data_40002c64 - 500)
 	{
 		case 0: 
-			//0x1e328
-			switch (bData_40002c59)
+			//0x1e328: 500 = Main Screen Help Pages
+			switch (bData_40002c59_MainScreenHelpPage)
 			{
 				case 1:
 					//0x1e36c
@@ -7424,7 +7423,7 @@ void func_1e228(void)
 			break;
 		
 		case 1:
-			//0x1eb98
+			//0x1eb98: 501 = Telescope Align
 			func_7e8(0, 1, 1, 21, "Telescope align:      ");
 			func_7e8(0, 3, 1, 21, "Align Telescop point ");
 			func_7e8(0, 5, 1, 21, "Pole-axis aim and    ");
@@ -8310,7 +8309,7 @@ void func_2245c(int a, int b)
 	switch (a)
 	{
 		case 11:
-			//0x22498
+			//0x22498: Telescope Align
 			switch (b)
 			{
 				case 1:
@@ -8373,7 +8372,7 @@ void func_2245c(int a, int b)
 			break;
 		
 		case 12:
-			//0x227b4
+			//0x227b4: Navigation
 			switch (b)
 			{
 				case 1:
@@ -8448,7 +8447,7 @@ void func_2245c(int a, int b)
 			break;
 		
 		case 13:
-			//0x22a94
+			//0x22a94: Utilities
 			switch (b)
 			{
 				case 1:
@@ -8497,7 +8496,7 @@ void func_2245c(int a, int b)
 			break;
 		
 		case 14:
-			//0x22c5c
+			//0x22c5c: Setup
 			switch (b)
 			{
 				case 1:
@@ -9004,17 +9003,17 @@ void func_24574(void)
 }
 
 /* 2575c - todo */
-void func_2575c(void)
+void SwapLanguageStrings(void)
 {
-	switch (bData_40003196)
+	switch (bData_40003196_CurrentLanguage)
 	{
 		case 1:
 			//0x25788
-			Data_40002f20 = Data_400008ad;
+			Data_40002f20 = strEngTelescopeAlign;
 			Data_40002f24 = Data_400008bd;
 			Data_40002f28 = Data_400008c8;
 			Data_40002f2c = Data_400008d2;
-			Data_40002f30 = Data_400008d8;
+			Data_40002f30 = strEngOneStarAlign;
 			Data_40002f34 = Data_400008e7;
 			Data_40002f38 = Data_400008f6;
 			Data_40002f3c = Data_40000907;
@@ -9023,7 +9022,7 @@ void func_2575c(void)
 			Data_40002f48 = Data_40000933;
 			Data_40002f4c = "                     ";
 		
-			Data_40002f5c = Data_40000944;
+			Data_40002f5c = strEngSolarSystem;
 			Data_40002f60 = Data_40000951;
 			Data_40002f64 = Data_4000095f;
 			Data_40002f68 = Data_4000096b;
@@ -9035,7 +9034,8 @@ void func_2575c(void)
 			Data_40002f80 = Data_400009c2;
 			Data_40002f84 = Data_400009d3;
 			Data_40002f88 = Data_400009e4;
-			Data_40002f8c = Data_400009f5;
+			
+			Data_40002f8c = strEngCurrentObjects;
 			Data_40002f90 = Data_40000a05;
 			Data_40002f94 = Data_40000a15;
 			Data_40002f98 = Data_40000a27;
@@ -9044,7 +9044,8 @@ void func_2575c(void)
 			Data_40002fa4 = Data_40000a40;
 			Data_40002fa8 = Data_40000a4f;
 			Data_40002fac = Data_40000a60;
-			Data_40002fb4 = Data_40000a6d;
+			
+			Data_40002fb4 = strEngTimeAndDate;
 			Data_40002fb8 = Data_40000a7c;
 			Data_40002fbc = Data_40000a8c;
 			Data_40002fc0 = Data_40000a99;
