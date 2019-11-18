@@ -425,6 +425,16 @@ extern char Data_4000288e[]; //4000288e
 extern char Data_40002899[]; //40002899
 extern char Data_400028a5[]; //400028a5
 extern char Data_400028b3[]; //400028b3
+extern char Data_400028c1[]; //400028c1
+extern char Data_400028d7[]; //400028d7
+extern char Data_400028e1[]; //400028e1
+extern char Data_400028eb[]; //400028eb
+extern char Data_40002901[]; //40002901
+extern char Data_40002916[]; //40002916
+extern char Data_4000291e[]; //4000291e
+extern char Data_40002925[]; //40002925
+extern char Data_4000292c[]; //4000292c
+extern char Data_40002934[]; //40002934
 extern char Data_400029a1[]; //400029a1
 extern char Data_400029ac[]; //400029ac
 extern char Data_400029b3[]; //400029b3
@@ -486,7 +496,7 @@ extern char bData_40002c61; //40002c61
 extern char bData_40002c62; //40002c62
 extern int Data_40002c64; //40002c64
 extern char bData_40002c68; //40002c68
-extern char bData_40002c69; //40002c69
+extern char bData_40002c69_KeyCode; //40002c69
 extern char bData_40002c6a; //40002c6a
 extern double dData_40002c70; //40002c70
 extern double dData_40002c78; //40002c78
@@ -826,7 +836,7 @@ extern unsigned short wData_40003252; //40003252
 extern unsigned char bData_40003265; //40003265
 extern float Data_4000329c; //4000329c
 extern float Data_400032a0; //400032a0
-extern char bData_400032a4; //400032a4
+extern unsigned char bData_400032a4; //400032a4
 extern double dData_400032b0_SunRightAscension; //400032b0
 extern double dData_400032b8_SunDeclination; //400032b8
 extern double dData_400032c0; //400032c0
@@ -936,6 +946,7 @@ extern unsigned char Data_40003588_uart0ReceiveDataBuffer[]; //40003588
 extern unsigned char Data_40003592_uart1ReceiveDataBuffer[]; //40003592
 extern int Data_4000359c[]; //4000359c, size??
 extern int Data_400035bc; //400035bc
+extern char Data_400037dc[]; //400037dc
 extern char Data_400037ec[]; //400037ec, size???
 extern unsigned char Data_40003a14[][10]; //40003a14, size??
 extern unsigned char Data_40003b2c[][22]; //40003b2c, size??

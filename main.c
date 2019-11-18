@@ -300,7 +300,7 @@ void func_3d72c(void)
 
 
 /* 4ede4 - todo */
-void func_4ede4(void)
+void HandleStarKey(void)
 {
 	switch (bData_40003195)
 	{
@@ -460,12 +460,12 @@ void func_57414(int a, int b, int c)
 }
 
 /* 57c1c - todo */
-void func_57c1c(void)
+void HandleRightKey(void)
 {
 }
 
 /* 5969c - todo */
-void func_5969c(void)
+void HandleLeftKey(void)
 {
 }
 
@@ -603,12 +603,12 @@ void HandleMinusKey(void)
 }
 
 /* 60d54 - todo */
-void func_60d54(void)
+void HandlePlusKey(void)
 {
 }
 
 /* 60dfc - todo */
-void func_60dfc(void)
+void HandleFKey(void)
 {
 	switch (Data_40002c64)
 	{
@@ -1429,57 +1429,57 @@ void func_61ecc(void)
 }
 
 /* 62ce0 - todo */
-void func_62ce0(void)
+void Handle9Key(void)
 {
 }
 
 /* 637e8 - todo */
-void func_637e8(void)
+void Handle8Key(void)
 {
 }
 
 /* 64324 - todo */
-void func_64324(void)
+void Handle7Key(void)
 {
 }
 
 /* 64e18 - todo */
-void func_64e18(void)
+void Handle6Key(void)
 {
 }
 
 /* 65894 - todo */
-void func_65894(void)
+void Handle5Key(void)
 {
 }
 
 /* 66378 - todo */
-void func_66378(void)
+void Handle4Key(void)
 {
 }
 
 /* 66e3c - todo */
-void func_66e3c(void)
+void Handle3Key(void)
 {
 }
 
 /* 678b8 - todo */
-void func_678b8(void)
+void Handle2Key(void)
 {
 }
 
 /* 68934 - todo */
-void func_68934(void)
+void Handle1Key(void)
 {
 }
 
 /* 69348 - todo */
-void func_69348(void)
+void Handle0Key(void)
 {
 }
 
 /* 6a0e4 - todo */
-char func_6a0e4(void)
+char ConvertKeyCode(void)
 {
 	char r4;
 	int r3 = func_11d8();
@@ -1500,102 +1500,102 @@ char func_6a0e4(void)
 	switch (r3)
 	{
 		case 1:
-			//0x6a18c
+			//0x6a18c: 10100001 / 11100001
 			r4 = 16;
 			break;
 		
 		case 2:
-			//0x6a198
+			//0x6a198: 10100010 / 11100010
 			r4 = 1;
 			break;
 		
 		case 3:
-			//0x6a1a4
+			//0x6a1a4: 10100011 / 11100011
 			r4 = 4;
 			break;
 		
 		case 4:
-			//0x6a1b0
+			//0x6a1b0: 10100100 / 11100100
 			r4 = 7;
 			break;
 		
 		case 5:
-			//0x6a1bc
+			//0x6a1bc: 10100101 / 11100101
 			r4 = 10;
 			break;
 		
 		case 6:
-			//0x6a1c8
+			//0x6a1c8: 10100110 / 11100110
 			r4 = 15;
 			break;
 		
 		case 7:
-			//0x6a1d4
+			//0x6a1d4: 10100111 / 11100111
 			r4 = 2;
 			break;
 		
 		case 8:
-			//0x6a1e0
+			//0x6a1e0: 10101000 / 11101000
 			r4 = 5;
 			break;
 		
 		case 9:
-			//0x6a1ec
+			//0x6a1ec: 10101001 / 11101001
 			r4 = 8;
 			break;
 		
 		case 10:
-			//0x6a1f8
+			//0x6a1f8: 10101010 / 11101010
 			r4 = 0;
 			break;
 		
 		case 11:
-			//0x6a204
+			//0x6a204: 10101011 / 11101011
 			r4 = 17;
 			break;
 		
 		case 12:
-			//0x6a210
+			//0x6a210: 10101100 / 11101100
 			r4 = 3;
 			break;
 		
 		case 13:
-			//0x6a21c
+			//0x6a21c: 10101101 / 11101101
 			r4 = 6;
 			break;
 		
 		case 14:
-			//0x6a228
+			//0x6a228: 10101110 / 11101110
 			r4 = 9;
 			break;
 		
 		case 15:
-			//0x6a234
+			//0x6a234: 10101111 / 11101111
 			r4 = 11;
 			break;
 		
 		case 16:
-			//0x6a240
+			//0x6a240: 10110000 / 11110000
 			r4 = 14;
 			break;
 		
 		case 17:
-			//0x6a24c
+			//0x6a24c: 10110001 / 11110001
 			r4 = 19;
 			break;
 		
 		case 18:
-			//0x6a258
+			//0x6a258: 10110010 / 11110010
 			r4 = 12;
 			break;
 		
 		case 19:
-			//0x6a264
+			//0x6a264: 10110011 / 11110011
 			r4 = 20;
 			break;
 		
 		case 20:
-			//0x6a270
+			//0x6a270: 10110100 / 11110100
 			r4 = 13;
 			break;
 		
@@ -1646,7 +1646,7 @@ void func_6a2cc(void)
 		}
 	}
 	//6a314
-	bData_40002c69 = func_6a0e4();
+	bData_40002c69_KeyCode = ConvertKeyCode();
 	
 	if (bData_40002c68 == 0)
 	{
@@ -1656,21 +1656,21 @@ void func_6a2cc(void)
 			func_d784(1);
 		}
 		//6a348
-		switch (bData_40002c69)
+		switch (bData_40002c69_KeyCode)
 		{
 			case 0:
-				//0x6a3c0
-				func_69348();
+				//0x6a3c0: "0 / Stop"
+				Handle0Key();
 				bData_40003505 = 1;
 				break;
 			
 			case 1:
-				//0x6a3d8
+				//0x6a3d8: "1"
 				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a40c
-					func_68934();
+					Handle1Key();
 				}
 				bData_40003505 = 1;
 				break;
@@ -1681,7 +1681,7 @@ void func_6a2cc(void)
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a454
-					func_678b8();
+					Handle2Key();
 				}
 				bData_40003505 = 1;
 				break;
@@ -1692,7 +1692,7 @@ void func_6a2cc(void)
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a49c
-					func_66e3c();
+					Handle3Key();
 				}
 				bData_40003505 = 1;
 				break;
@@ -1703,7 +1703,7 @@ void func_6a2cc(void)
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a4e4
-					func_66378();
+					Handle4Key();
 				}
 				bData_40003505 = 1;
 				break;
@@ -1714,7 +1714,7 @@ void func_6a2cc(void)
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a52c
-					func_65894();
+					Handle5Key();
 				}
 				bData_40003505 = 1;
 				break;
@@ -1725,14 +1725,14 @@ void func_6a2cc(void)
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a574
-					func_64e18();
+					Handle6Key();
 				}
 				bData_40003505 = 1;
 				break;
 			
 			case 7:
 				//0x6a588
-				func_64324();
+				Handle7Key();
 				bData_40003505 = 1;
 				break;
 			
@@ -1742,7 +1742,7 @@ void func_6a2cc(void)
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a5d4
-					func_637e8();
+					Handle8Key();
 				}
 				bData_40003505 = 1;
 				break;
@@ -1753,37 +1753,37 @@ void func_6a2cc(void)
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a61c
-					func_62ce0();
+					Handle9Key();
 				}
 				bData_40003505 = 1;
 				break;
 			
 			case 10:
-				//0x6a630: Help Key?
+				//0x6a630: "Help"
 				HandleHelpKey();
 				bData_40003505 = 1;
 				break;
 			
 			case 11:
-				//0x6a648
-				func_60dfc();
+				//0x6a648: "F"
+				HandleFKey();
 				bData_40003505 = 1;
 				break;
 			
 			case 12:
-				//0x6a660
-				func_60d54();
+				//0x6a660: "+"
+				HandlePlusKey();
 				bData_40003505 = 1;
 				break;
 			
 			case 13:
-				//0x6a678
+				//0x6a678: "-"
 				HandleMinusKey();
 				bData_40003505 = 1;
 				break;
 			
 			case 14:
-				//0x6a690:
+				//0x6a690: "Up"
 				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
 					(Data_40004128.bData_357 == 0))
 				{
@@ -1794,7 +1794,7 @@ void func_6a2cc(void)
 				break;
 			
 			case 15:
-				//0x6a6d8:
+				//0x6a6d8: "Down"
 				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
 					(Data_40004128.bData_357 == 0))
 				{
@@ -1805,23 +1805,23 @@ void func_6a2cc(void)
 				break;
 			
 			case 16:
-				//0x6a720
+				//0x6a720: "Left"
 				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a754
-					func_5969c();
+					HandleLeftKey();
 				}
 				bData_40003505 = 1;
 				break;
 			
 			case 17:
-				//0x6a768
+				//0x6a768: "Right"
 				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a79c
-					func_57c1c();
+					HandleRightKey();
 				}
 				bData_40003505 = 1;
 				break;
@@ -1832,7 +1832,7 @@ void func_6a2cc(void)
 			#endif
 			
 			case 19:
-				//0x6a7b0
+				//0x6a7b0: "Enter"
 				HandleEnterKey();
 				bData_40003505 = 1;
 				break;
@@ -1882,8 +1882,8 @@ void func_6a2cc(void)
 				break;
 
 			case 20:
-				//0x6a8e8
-				func_4ede4();
+				//0x6a8e8: "*"
+				HandleStarKey();
 				bData_40003505 = 1;
 				break;
 			
