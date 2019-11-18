@@ -132,7 +132,7 @@ void func_3ec(void)
 }
 
 /* 49c - complete */
-void func_49c(int a)
+void setDisplayPWM(int a)
 {
 	if (a == 0)
 	{
@@ -1442,7 +1442,7 @@ void func_2328(void)
 	func_3ec();
 	func_394();
 	func_53c(0x80);
-	func_49c(0xff);
+	setDisplayPWM(0xff);
 	
 	func_17d0();
 	
@@ -9569,6 +9569,8 @@ void SwapLanguageStrings(void)
 
 
 #include "func_27844.c"
+
+#include "func_3d72c.c"
 
 #include "func_52898.c"
 

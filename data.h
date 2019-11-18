@@ -763,8 +763,8 @@ extern char* Data_40003114;
 extern char* Data_40003140; //40003140
 extern char* Data_4000314c_SolarSystemObjectName; //4000314c
 extern char Data_40003150[]; //40003150, size??
-extern unsigned char bData_4000316e; //4000316e
-extern unsigned char bData_4000316f; //4000316f
+extern unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
+extern unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
 extern unsigned char bData_40003170; //40003170
 extern unsigned char bData_40003171; //40003171
 extern unsigned char bData_40003172; //40003172
@@ -793,7 +793,7 @@ extern int Data_40003190; //40003190
 extern char bData_40003194; //40003194
 extern unsigned char bData_40003195; //40003195
 extern unsigned char bData_40003196_CurrentLanguage; //40003196
-extern char bData_40003197; //40003197
+extern unsigned char bData_40003197; //40003197
 extern char bData_40003198; //40003198
 extern char bData_40003199; //40003199
 extern unsigned char bData_4000319a_SkyLandTargetId; //4000319a
@@ -830,7 +830,7 @@ extern int Data_40003228; //40003228
 extern char bData_4000322c; //4000322c
 extern char bData_4000322d; //4000322d
 extern float fData_40003238; //40003238
-extern int Data_40003248; //40003248
+extern int Data_40003248_CurrentDisplayPWM; //40003248
 extern unsigned short wData_40003250; //40003250
 extern unsigned short wData_40003252; //40003252
 extern unsigned char bData_40003265; //40003265

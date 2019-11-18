@@ -12,7 +12,7 @@ void func_5099c(void)
 {
 	func_5f40();
 	
-	bData_4000316e = 0;
+	bData_4000316e_FocusLineOn8LineDisplay = 0;
 	Data_4000318c = 0;
 	Data_40003190 = 1;
 	bData_40003194 = 0;
