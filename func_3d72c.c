@@ -4,7 +4,7 @@ void func_3d72c(void)
 {
 	func_27844();
 	
-	switch (bData_40003197)
+	switch (bData_40003197_DisplayLinesPerMenuLine)
 	{
 		case 1:
 			//0x3d750
@@ -377,7 +377,7 @@ void func_3d72c(void)
 			} //switch (Data_40002c64)
 		
 			break;
-	} //switch (bData_40003197)
+	} //switch (bData_40003197_DisplayLinesPerMenuLine)
 	//0x4edd0
 	
 #if 0

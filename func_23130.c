@@ -8,27 +8,27 @@ void AdaptDisplayLinesPerMenuLine(void)
 	{
 		case 1:
 			//0x2315c
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 2:
 			//0x23170
-			bData_40003197 = 2;
+			bData_40003197_DisplayLinesPerMenuLine = 2;
 			break;
 		
 		case 3:
 			//0x23184
-			bData_40003197 = 2;
+			bData_40003197_DisplayLinesPerMenuLine = 2;
 			break;
 		
 		case 4:
 			//0x23198
-			bData_40003197 = 2;
+			bData_40003197_DisplayLinesPerMenuLine = 2;
 			break;
 		
 		case 5:
 			//0x231ac
-			bData_40003197 = 2;
+			bData_40003197_DisplayLinesPerMenuLine = 2;
 			break;
 		
 		default:

@@ -260,6 +260,31 @@ void HandleDownKey(void)
 			Data_40002c64 = 1100; //One star align
 			break;
 		
+		case 2600:
+			//0x5b4e8
+			func_5a57c(1, 12);
+			Data_40002c64 = 2700;
+			break;
+		
+		case 2501:
+			//0x5b9a8
+			Data_40002c64 = 2502;
+			break;
+		
+		case 2502:
+			//0x5b9bc
+			Data_40002c64 = 2503;
+			break;
+		
+		case 2503:
+			//0x5b9d0
+			Data_40002c64 = 2501;
+			break;
+		
+		case 3601:
+			//0x5ba70
+			break;
+		
 		//TODO
 	}
 }
@@ -342,9 +367,139 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 		
+		case 2000:
+			//0x5fc10
+			Data_40002c64 = 0;
+			break;
+		
 		case 1100:
 			//0x5fc4c
 			Data_40002c64 = 1000;
+			break;
+		
+		case 1200:
+			//0x5fc60
+			Data_40002c64 = 1000;
+			break;
+		
+		case 1300:
+			//0x5fc74
+			Data_40002c64 = 1000;
+			break;
+		
+		case 1400:
+			//0x5fc88
+			Data_40002c64 = 1000;
+			break;
+		
+		case 1500:
+			//0x5fc9c
+			Data_40002c64 = 1000;
+			break;
+		
+		case 1600:
+			//0x5fcb0
+			Data_40002c64 = 1000;
+			break;
+		
+		case 1700:
+			//0x5fcc4
+			Data_40002c64 = 1000;
+			break;
+		
+		case 2100:
+			//0x5fcd8
+			Data_40002c64 = 2000;
+			break;
+		
+		case 2200:
+			//0x5fcec
+			Data_40002c64 = 2000;
+			break;
+		
+		case 2300:
+			//0x5fd00
+			Data_40002c64 = 2000;
+			break;
+		
+		case 2400:
+			//0x5fd14
+			Data_40002c64 = 2000;
+			break;
+		
+		case 2500:
+			//0x5fd28
+			Data_40002c64 = 2000;
+			break;
+		
+		case 2600:
+			//0x5fd3c
+			Data_40002c64 = 2000;
+			break;
+		
+		case 2700:
+			//0x5fd50
+			Data_40002c64 = 2000;
+			break;
+		
+		case 2800:
+			//0x5fd64
+			Data_40002c64 = 2000;
+			break;
+		
+		case 2110:
+			//0x5fdd8
+			Data_40002c64 = 2000;
+			break;
+		
+		case 2120:
+			//0x5fdec
+			Data_40002c64 = 2000;
+			break;
+		
+		case 2130:
+			//0x5fe00
+			Data_40002c64 = 2000;
+			break;
+		
+		case 3100:
+			//0x5fe14
+			Data_40002c64 = 3000;
+			break;
+		
+		case 3600:
+			//0x5fe78
+			Data_40002c64 = 3000;
+			break;
+		
+		case 4200:
+			//0x5fedc: Daylight Saving
+			Data_40002c64 = 4000;
+			break;
+		
+		case 1401:
+			//0x5ff7c
+			bData_400031ea = 0;
+		case 1402:
+			//0x5ff90
+		case 1403:
+			//0x5ff94
+			Data_40002c64 = 1400; //->Target Sync
+			break;
+		
+		case 2801:
+			//0x5ffa4
+			Data_40002c64 = 2110; //->User-def Object
+			break;
+		
+		case 2802:
+			//0x5ffb8
+			Data_40002c64 = 2110;
+			break;
+		
+		case 4801:
+			//0x60128
+			Data_40002c64 = 4700; //->Tracking Rate
 			break;
 		
 		//TODO
