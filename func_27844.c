@@ -12,7 +12,7 @@ int func_27844(void)
 			func_24574();
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -383,7 +383,7 @@ int func_27844(void)
 			}
 			//29978
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -814,7 +814,7 @@ int func_27844(void)
 			func_2245c(22, bData_40003180);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_40003182;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -837,7 +837,7 @@ int func_27844(void)
 			func_2245c(23, bData_40003184);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_40003186;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -853,7 +853,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 
@@ -869,7 +869,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -885,7 +885,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 
@@ -901,7 +901,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -917,7 +917,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -933,7 +933,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -949,7 +949,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -965,7 +965,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 
@@ -981,7 +981,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 
@@ -997,7 +997,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 
@@ -1013,7 +1013,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 
@@ -1029,7 +1029,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 2;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1045,7 +1045,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1061,7 +1061,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 2;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 
@@ -1077,7 +1077,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1093,7 +1093,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 
@@ -1109,7 +1109,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1125,7 +1125,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1141,7 +1141,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1157,7 +1157,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 
@@ -1173,7 +1173,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1189,7 +1189,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 2;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1205,7 +1205,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1221,7 +1221,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 4;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1237,7 +1237,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 
@@ -1253,7 +1253,7 @@ int func_27844(void)
 			Data_4000337c = "speed8:   x 1.000";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->3d71c
 			break;
 		
@@ -1486,7 +1486,7 @@ int func_27844(void)
 			Data_4000337c = Data_40004012;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1504,7 +1504,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1520,7 +1520,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1536,7 +1536,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1552,7 +1552,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 
@@ -1592,7 +1592,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 
@@ -1608,7 +1608,7 @@ int func_27844(void)
 			Data_4000337c = Data_400030d8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1624,7 +1624,7 @@ int func_27844(void)
 			Data_4000337c = Data_400030e8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1640,7 +1640,7 @@ int func_27844(void)
 			Data_4000337c = Data_400030f8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1668,7 +1668,7 @@ int func_27844(void)
 			Data_4000337c = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1686,7 +1686,7 @@ int func_27844(void)
 			Data_4000337c = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 
@@ -1702,7 +1702,7 @@ int func_27844(void)
 			Data_4000337c = Data_400030d8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1718,7 +1718,7 @@ int func_27844(void)
 			Data_4000337c = Data_400030e8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1734,7 +1734,7 @@ int func_27844(void)
 			Data_4000337c = Data_400030f8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1762,7 +1762,7 @@ int func_27844(void)
 			Data_4000337c = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 
@@ -1780,7 +1780,7 @@ int func_27844(void)
 			Data_4000337c = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -1911,7 +1911,7 @@ int func_27844(void)
 			Data_4000337c = Data_4000403c;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 
@@ -1927,7 +1927,7 @@ int func_27844(void)
 			Data_4000337c = "    -:return         ";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 
@@ -2151,7 +2151,7 @@ int func_27844(void)
 			Data_4000336c = "                              ";
 
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 
@@ -2295,7 +2295,7 @@ int func_27844(void)
 			Data_4000337c = Data_4000403c;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 
@@ -2512,7 +2512,7 @@ int func_27844(void)
 			Data_4000336c = "                              ";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -2649,7 +2649,7 @@ int func_27844(void)
 			Data_4000337c = Data_4000403c;
 				
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -2865,7 +2865,7 @@ int func_27844(void)
 			Data_4000336c = Data_40003db0;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -2894,7 +2894,7 @@ int func_27844(void)
 			Data_4000337c = "         K Light-Years";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -3029,7 +3029,7 @@ int func_27844(void)
 			Data_4000337c = Data_4000403c;
 					
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 
@@ -3246,7 +3246,7 @@ int func_27844(void)
 			Data_4000336c = Data_40003e08.bData_60;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -3394,7 +3394,7 @@ int func_27844(void)
 			Data_4000337c = Data_4000403c;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -3623,7 +3623,7 @@ int func_27844(void)
 			}
 			//0x350a4			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c			
 			break;
 		
@@ -3771,7 +3771,7 @@ int func_27844(void)
 			Data_4000337c = Data_4000403c;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -4000,7 +4000,7 @@ int func_27844(void)
 			}
 			//0x350a4			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c					
 			break;
 		
@@ -4135,7 +4135,7 @@ int func_27844(void)
 			Data_4000337c = Data_4000403c;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c		
 			break;
 		
@@ -4352,7 +4352,7 @@ int func_27844(void)
 			Data_4000336c = "                                        ";
 
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c					
 			break;
 		
@@ -4500,7 +4500,7 @@ int func_27844(void)
 			Data_4000337c = Data_4000403c;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c		
 			break;
 		
@@ -4717,7 +4717,7 @@ int func_27844(void)
 			Data_4000336c = "                              ";
 
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c					
 			break;
 		
@@ -4852,7 +4852,7 @@ int func_27844(void)
 			Data_4000337c = Data_4000403c;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c		
 			break;
 		
@@ -5074,7 +5074,7 @@ int func_27844(void)
 			Data_4000336c = "                              ";
 
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break; //case 23017:
 		
@@ -5092,7 +5092,7 @@ int func_27844(void)
 			Data_40003384 = "Select F? For Target ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
@@ -5110,7 +5110,7 @@ int func_27844(void)
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 204: //0xcc:
@@ -5127,7 +5127,7 @@ int func_27844(void)
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 205: //0xcd:
@@ -5144,7 +5144,7 @@ int func_27844(void)
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 
 		case 29001: //0x7149:
@@ -5159,7 +5159,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x714A: //29002
@@ -5174,7 +5174,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 				
 		case 202: //0xca:
@@ -5191,7 +5191,7 @@ int func_27844(void)
 			Data_40003384 = "Select F? For Target ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 206: //0xce:
@@ -5208,7 +5208,7 @@ int func_27844(void)
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 207: //0xcf:
@@ -5225,7 +5225,7 @@ int func_27844(void)
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 208: //0xd0:
@@ -5242,7 +5242,7 @@ int func_27844(void)
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x7919: //31001
@@ -5294,7 +5294,7 @@ int func_27844(void)
 			Data_4000337c = "                    ";
 				
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x7D01: //32001
@@ -5321,13 +5321,13 @@ int func_27844(void)
 			Data_4000337c = "";
 				
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x80E9: //33001
 			//0x3c088
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x84D2: //34002
@@ -5344,7 +5344,7 @@ int func_27844(void)
 			Data_40003378 = Data_400029ee;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 				
 		case 0x84D1: //34001
@@ -5359,7 +5359,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x88B9: //35001
@@ -5374,7 +5374,7 @@ int func_27844(void)
 			Data_40003378 = Data_40002a9e;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x88BA: //35002
@@ -5389,7 +5389,7 @@ int func_27844(void)
 			Data_40003378 = Data_40002a71;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x57E4B: //360011
@@ -5404,7 +5404,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x57E55: //360021
@@ -5419,7 +5419,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x57E56: //360022
@@ -5434,7 +5434,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x5A565: //370021
@@ -5453,7 +5453,7 @@ int func_27844(void)
 			Data_4000337c = Data_40002504;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x57E57: //360023
@@ -5470,7 +5470,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0x5CC6B: //380011
@@ -5485,7 +5485,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 				
 		case 41001: //0xA029:
@@ -5500,7 +5500,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xA411: //42001
@@ -5523,7 +5523,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 42002: //43001: //????????
@@ -5546,7 +5546,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xA803: //43011
@@ -5634,7 +5634,7 @@ int func_27844(void)
 			Data_4000337c = "left&right key: city!";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 43002: //44001: //??????
@@ -5649,7 +5649,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xAFC9: //45001
@@ -5664,7 +5664,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xAFCA: //45002
@@ -5679,7 +5679,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xB3B1: //46001
@@ -5694,7 +5694,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xB3B2: //46002
@@ -5709,7 +5709,7 @@ int func_27844(void)
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xB7A3: //47011
@@ -5739,7 +5739,7 @@ int func_27844(void)
 			Data_40003374 = "          Range:0-90";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 47041: //0xB7C1: 
@@ -5754,7 +5754,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xBF69: //49001
@@ -5769,7 +5769,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xBF6A: //49002
@@ -5784,7 +5784,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 2;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xBF6B: //49003
@@ -5799,7 +5799,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xBF6C: //49004
@@ -5814,7 +5814,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 4;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xBF6D: //49005
@@ -5829,7 +5829,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		case 0xBB81: //48001
@@ -5844,7 +5844,7 @@ int func_27844(void)
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
-			bData_40003197 = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
 		default:

@@ -673,7 +673,7 @@ int Data_40003190; //40003190
 char bData_40003194; //40003194
 unsigned char bData_40003195; //40003195
 unsigned char bData_40003196_CurrentLanguage; //40003196
-unsigned char bData_40003197; //40003197
+unsigned char bData_40003197_DisplayLinesPerMenuLine; //40003197
 char bData_40003198; //40003198
 char bData_40003199; //40003199
 unsigned char bData_4000319a_SkyLandTargetId; //4000319a

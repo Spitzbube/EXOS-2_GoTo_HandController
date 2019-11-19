@@ -325,7 +325,7 @@ void func_864(int a, int b, int c, unsigned char* d)
 }
 
 /* 91c - todo */
-unsigned char func_91c(int r4, int r5, int r6, int r7, unsigned short* sp76)
+unsigned char func_91c(int r4, int r5, int r6, int r7, char* sp76)
 {
 	unsigned char sp24[16];
 	union
@@ -343,7 +343,7 @@ unsigned char func_91c(int r4, int r5, int r6, int r7, unsigned short* sp76)
 	char sp4 = 0;
 	unsigned short sp;
 
-	while ((sp = sp76[sp4]) != 0)
+	while ((sp = ((unsigned short*)sp76)[sp4]) != 0)
 	{		
 		sp16 = 2;
 		sl = 8;
