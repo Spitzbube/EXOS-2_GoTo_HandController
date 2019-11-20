@@ -643,6 +643,7 @@ char* Data_40003114;
 char* Data_40003140; //40003140
 char* Data_4000314c_SolarSystemObjectName; //4000314c
 char Data_40003150[30]; //40003150, size??
+char bData_40003162; //40003162
 unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
 unsigned char bData_40003170; //40003170

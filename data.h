@@ -763,6 +763,7 @@ extern char* Data_40003114;
 extern char* Data_40003140; //40003140
 extern char* Data_4000314c_SolarSystemObjectName; //4000314c
 extern char Data_40003150[]; //40003150, size??
+extern char bData_40003162; //40003162
 extern unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 extern unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
 extern unsigned char bData_40003170; //40003170
