@@ -761,9 +761,9 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0x1004: //4100
+		case 0x1004: //4100: Time and Date?
 			//0x2a5e4
-		case 0x1068: //4200
+		case 0x1068: //4200: Daylight Saving?
 			//0x2a5ec
 		case 0x10CC: //4300
 			//0x2a5f0

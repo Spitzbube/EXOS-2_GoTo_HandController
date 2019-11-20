@@ -194,6 +194,16 @@ void func_4fda8(void)
 {
 }
 
+/* 50018 - todo */
+void func_50018(void)
+{
+}
+
+/* 50048 - todo */
+void func_50048(void)
+{
+}
+
 /* 50b40 - todo */
 void func_50b40(void)
 {
@@ -201,6 +211,11 @@ void func_50b40(void)
 	//50c98
 	Data_400034d0 = 0.05;
 	Data_400034d8 = 0.045;
+}
+
+/* 5104c - todo */
+void func_5104c(void)
+{
 }
 
 /* 57414 - todo */
