@@ -218,6 +218,26 @@ void func_5104c(void)
 {
 }
 
+/* 514f8 - todo */
+void func_514f8(void)
+{
+}
+
+/* 517f4 - todo */
+void func_517f4(void)
+{
+}
+
+/* 51c7c - todo */
+void func_51c7c(void)
+{
+}
+
+/* 52478 - todo */
+void func_52478(void)
+{
+}
+
 /* 57414 - todo */
 void func_57414(int a, int b, int c)
 {

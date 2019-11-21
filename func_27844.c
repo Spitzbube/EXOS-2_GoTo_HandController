@@ -389,7 +389,7 @@ int func_27844(void)
 		
 		case 1:
 			//0x29994
-			bData_40002f14_RecentTargetCount = func_57b8(Data_40002f15, Data_4000359c, &Data_400035bc);
+			bData_40002f14_RecentTargetCount = func_57b8(Data_40002f15, Data_4000359c, Data_400035bc);
 			
 			Data_40003360 = "                      ";
 			Data_40003364 = "                      ";
