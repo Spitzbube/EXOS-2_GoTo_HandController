@@ -9572,6 +9572,6 @@ void SwapLanguageStrings(void)
 
 #include "func_3d72c.c"
 
-#include "func_52898.c"
+#include "HandleEnterKey.c"
 
 #endif //OLIMEX_LPC2148

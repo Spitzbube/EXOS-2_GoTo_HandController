@@ -909,6 +909,8 @@ extern double dData_400034a0; //400034a0
 extern unsigned char bData_400034a8; //400034a8
 extern char bData_400034a9; //400034a9
 extern char bData_400034aa; //400034aa
+extern float fData_400034ac; //400034ac
+extern float fData_400034b0; //400034b0
 extern char bData_400034b4; //400034b4
 extern char bData_400034b5; //400034b5
 extern float fData_400034b8; //400034b8
@@ -946,7 +948,8 @@ extern int Data_40003548; //40003548
 extern unsigned char Data_40003588_uart0ReceiveDataBuffer[]; //40003588
 extern unsigned char Data_40003592_uart1ReceiveDataBuffer[]; //40003592
 extern int Data_4000359c[]; //4000359c, size??
-extern int Data_400035bc; //400035bc
+extern unsigned char Data_400035bc[]; //400035bc
+extern char Data_400037cc[]; //400037cc
 extern char Data_400037dc[]; //400037dc
 extern char Data_400037ec[]; //400037ec, size???
 extern unsigned char Data_40003a14[][10]; //40003a14, size??

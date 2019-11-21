@@ -788,6 +788,8 @@ double dData_400034a0; //400034a0
 unsigned char bData_400034a8; //400034a8
 char bData_400034a9; //400034a9
 char bData_400034aa; //400034aa
+float fData_400034ac; //400034ac
+float fData_400034b0; //400034b0
 char bData_400034b4; //400034b4
 char bData_400034b5; //400034b5
 float fData_400034b8; //400034b8
@@ -825,7 +827,8 @@ int Data_40003548; //40003548
 unsigned char Data_40003588_uart0ReceiveDataBuffer[10]; //40003588
 unsigned char Data_40003592_uart1ReceiveDataBuffer[10]; //40003592
 int Data_4000359c[8]; //4000359c, size??
-int Data_400035bc; //400035bc
+unsigned char Data_400035bc[100]; //400035bc, size???
+char Data_400037cc[16]; //400037cc
 char Data_400037dc[16]; //400037dc
 char Data_400037ec[100]; //400037ec, size???
 unsigned char Data_40003a14[100][10]; //40003a14, size??
