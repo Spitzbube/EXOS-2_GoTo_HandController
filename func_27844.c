@@ -575,13 +575,13 @@ int func_27844(void)
 		
 		case 1000: //0x3e8:
 			//0x2a100 - Telescope Align
-			Data_40003360 = Data_40002f20;
+			Data_40003360 = Data_40002f20; //Telescope Align
 			Data_40003364 = "";
-			Data_40003368 = Data_40002f24;
+			Data_40003368 = Data_40002f24; //Navigation
 			Data_4000336c = "";
-			Data_40003370 = Data_40002f28;
+			Data_40003370 = Data_40002f28; //Utilities
 			Data_40003374 = "";
-			Data_40003378 = Data_40002f2c;
+			Data_40003378 = Data_40002f2c; //Setup
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
@@ -669,19 +669,19 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0x44c: //1100: One Star Align
+		case 1100: // One Star Align
 			//0x2a49c
-		case 0x4b0: //1200
+		case 1200: // Two Star Align
 			//0x2a4a4
-		case 0x514: //1300
+		case 1300: // Three Star Align
 			//0x2a4a8
-		case 1400:
+		case 1400: // Target Sync
 			//0x2a4ac
-		case 0x5DC: //1500
+		case 1500: // Pole-Axis Dev.
 			//0x2a4b0
-		case 0x640: //1600
+		case 1600: // RA Bklash Corr.
 			//0x2a4b4
-		case 0x6A4: //1700
+		case 1700: // DEC Bklash Corr.
 			//0x2a4b8
 			func_2245c(11, bData_40003170);
 		
@@ -695,29 +695,29 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0x834: //2100: Solar System
+		case 2100: // Solar System
 			//0x2a500		
-		case 0x898: //2200
+		case 2200: // Constellation
 			//0x2a508
-		case 0x8FC: //2300
+		case 2300: // Famous Star
 			//0x2a50c
-		case 0x960: //2400
+		case 2400: // Messier Catal.
 			//0x2a510
-		case 0x9C4: //2500
+		case 2500: // NGC Catalog.
 			//0x2a514
-		case 0xA28: //2600
+		case 2600: // IC Catalogue
 			//0x2a518
-		case 0xA8C: //2700
+		case 2700: // Sh2 Catalog.
 			//0x2a51c
-		case 0xAF0: //2800
+		case 2800: // Bright Star Cat.
 			//0x2a520
-		case 0xB54: //2900
+		case 2900: // SAO Star Catal.
 			//0x2a524
-		case 0x83E: //2110
+		case 2110: // Customer Objects
 			//0x2a528
-		case 0x848: //2120
+		case 2120: // Input RA and DEC
 			//0x2a52c
-		case 0x852: //2130
+		case 2130: // Custom Land Goal
 			//0x2a530
 			func_2245c(12, bData_40003174);
 		
@@ -731,23 +731,23 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0xC1C: //3100: Current Objects
+		case 3100: // Current Objects
 			//0x2a578
-		case 0xC80: //3200
+		case 3200: // Object Rise/Set
 			//0x2a580
-		case 0xCE4: //3300
+		case 3300: // Curr. Lunar Phase
 			//0x2a584
-		case 0xD48: //3400: Timer
+		case 3400: // Timer
 			//0x2a588
-		case 0xDAC: //3500
+		case 3500: // Alarm
 			//0x2a58c
-		case 0xE10: //3600
+		case 3600: // Eyepiece FOV
 			//0x2a590
-		case 0xE74: //3700
+		case 3700: // Eyepiece Magn.
 			//0x2a594
-		case 0xED8: //3800: Display Illumination
+		case 3800: // Display Illumin.
 			//0x2a598
-		case 0xF3C: //3900: Parkposition
+		case 3900: // Parkposition
 			//0x2a59c
 			func_2245c(13, bData_40003178);
 		
@@ -761,23 +761,23 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0x1004: //4100: Time and Date?
+		case 4100: // Time and Date
 			//0x2a5e4
-		case 0x1068: //4200: Daylight Saving?
+		case 4200: // Daylight Saving
 			//0x2a5ec
-		case 0x10CC: //4300
+		case 4300: // Site Setting
 			//0x2a5f0
-		case 0x1130: //4400
+		case 4400: // Sky/Land
 			//0x2a5f4
-		case 0x1194: //4500
+		case 4500: // AZ / EQ
 			//0x2a5f8
-		case 0x11F8: //4600
+		case 4600: // Telescope Mount
 			//0x2a5fc
-		case 0x125C: //4700: Tracking Rate
+		case 4700: // Tracking Rate
 			//0x2a600
-		case 0x12C0: //4800
+		case 4800: // Language
 			//0x2a604
-		case 0x1324: //4900
+		case 4900: // Reset
 			//0x2a608
 			func_2245c(14, bData_4000317c);
 		
@@ -1065,11 +1065,11 @@ int func_27844(void)
 			//->3d71c
 			break;
 
-		case 0x10CD: //4301
+		case 4301:
 			//0x2af04
-			Data_40003360 = Data_40003060;
-			Data_40003364 = Data_40003064;
-			Data_40003368 = "";
+			Data_40003360 = Data_40003060; // "Country & City"?
+			Data_40003368 = Data_40003064; // "Custom Site"
+			Data_40003364 = "";
 			Data_4000336c = "";
 			Data_40003370 = "";
 			Data_40003374 = "";
@@ -1161,15 +1161,15 @@ int func_27844(void)
 			//->3d71c
 			break;
 
-		case 0x12c1: //4801
+		case 4801: // "Tracking Rate"->
 			//0x2b2a4
-			Data_40003360 = Data_40003088;
-			Data_40003364 = Data_4000308c;
-			Data_40003368 = Data_40003090;
-			Data_4000336c = Data_40003094;
+			Data_40003360 = Data_40003088; // "Star Speed"
+			Data_40003364 = Data_4000308c; // "Solar Speed"
+			Data_40003368 = Data_40003090; // "Moon Speed"
+			Data_4000336c = Data_40003094; // "Customize Speed"
 			Data_40003370 = "";
 			Data_40003374 = "";
-			Data_40003378 = Data_40003098;
+			Data_40003378 = Data_40003098; // "Guiding Speed"
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
@@ -1556,7 +1556,7 @@ int func_27844(void)
 			//->0x3d71c
 			break;
 
-		case 0x4651: //18001
+		case 18001:
 			//0x2c85c
 			Data_40003360 = "Pole Axis Dev: ";
 			Data_40003364 = "";
@@ -1596,32 +1596,32 @@ int func_27844(void)
 			//->0x3d71c
 			break;
 
-		case 0x2B5E: //11102
+		case 11102: // RA Bklash Corr. - 1st page
 			//0x2cad0
 			Data_40003360 = "                      ";
-			Data_40003364 = Data_400030cc;
+			Data_40003364 = Data_400030cc; // "   Please aim at the"
 			Data_40003368 = "                      ";
-			Data_4000336c = Data_400030d0;
+			Data_4000336c = Data_400030d0; // "telescope to distant"
 			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030d4;
+			Data_40003374 = Data_400030d4; // "target,then press"
 			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030d8;
+			Data_4000337c = Data_400030d8; // "ENTER key!"
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
-		case 0x2B5D: //11101
+		case 11101: // RA Bklash Corr. - 2nd page
 			//0x2cb60
 			Data_40003360 = "                      ";
-			Data_40003364 = Data_400030dc;
+			Data_40003364 = Data_400030dc; // "Press RIGHT or LEFT"
 			Data_40003368 = "                      ";
-			Data_4000336c = Data_400030e0;
+			Data_4000336c = Data_400030e0; // "key to start Ra(Azi)"
 			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030e4;
+			Data_40003374 = Data_400030e4; // "backlash align,press"
 			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030e8;
+			Data_4000337c = Data_400030e8; // "ENTER key to finish!"
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1690,32 +1690,32 @@ int func_27844(void)
 			//->0x3d71c
 			break;
 
-		case 0x2BC2: //11202
+		case 11202: // DEC Bklash Corr. - 1st page
 			//0x2ce70
 			Data_40003360 = "                      ";
-			Data_40003364 = Data_400030cc;
+			Data_40003364 = Data_400030cc; // "   Please aim at the"
 			Data_40003368 = "                      ";
-			Data_4000336c = Data_400030d0;
+			Data_4000336c = Data_400030d0; // "telescope to distant"
 			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030d4;
+			Data_40003374 = Data_400030d4; // "target,then press"
 			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030d8;
+			Data_4000337c = Data_400030d8; // "ENTER key!"
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
-		case 0x2BC1: //11201
+		case 11201: // DEC Bklash Corr. - 2nd page
 			//0x2cf00
 			Data_40003360 = "                      ";
-			Data_40003364 = Data_4000310c;
+			Data_40003364 = Data_4000310c; // "press UP or DOWN"
 			Data_40003368 = "                      ";
-			Data_4000336c = Data_40003110;
+			Data_4000336c = Data_40003110; // "key to start Dec(Alt)"
 			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030e4;
+			Data_40003374 = Data_400030e4; // "backlash align,press"
 			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030e8;
+			Data_4000337c = Data_400030e8; // "ENTER key to finish!"
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5147,13 +5147,13 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 
-		case 29001: //0x7149:
+		case 29001: // "Object Rise/Set" -> "Input Ra Dec:"
 			//0x3b668
-			Data_40003360 = Data_400027cf;
+			Data_40003360 = Data_400027cf; // "Input Ra Dec:"?
 			Data_40003364 = "";
-			Data_40003368 = Data_400027df;
+			Data_40003368 = Data_400027df; // "R.a: 19h52m12.0s"?
 			Data_4000336c = "";
-			Data_40003370 = Data_400027ef;
+			Data_40003370 = Data_400027ef; // "Dec:+90 00 00.0 "?
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";
@@ -5245,7 +5245,7 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x7919: //31001
+		case 31001: // "Current Objects" -> Rise/Transit/Set
 			//0x3baa4
 			func_22060(bData_40002eb5_SolarSystemObjectNr, 
 				&fData_40002cd0_ObjectRightAscension, &fData_40002d18_ObjectDeclination);
@@ -5324,38 +5324,38 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x80E9: //33001
+		case 33001: // "Curr. Lunar Phase" -> "2019-11"
 			//0x3c088
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x84D2: //34002
-			//0x3c0a8: Set Timer
+		case 34002: // "Set Timer"
+			//0x3c0a8
 			sprintf(Data_400029e7, "%5lds", Data_40003214);
 		
-			Data_40003360 = Data_400029ca;
+			Data_40003360 = Data_400029ca; // "Counting down:"?
 			Data_40003364 = "";
-			Data_40003368 = Data_400029da;
+			Data_40003368 = Data_400029da; // "Time remain:"
 			Data_4000336c = "";
-			Data_40003370 = Data_400029e7;
+			Data_40003370 = Data_400029e7; // "00000s"
 			Data_40003374 = "";
 			Data_4000337c = "";
-			Data_40003378 = Data_400029ee;
+			Data_40003378 = Data_400029ee; // "       Stop      Back"?
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 				
-		case 0x84D1: //34001
-			//0x3c13c: Set Timer
-			Data_40003360 = Data_400029a1;
+		case 34001: // "Set Timer"
+			//0x3c13c
+			Data_40003360 = Data_400029a1; // "Set timer:"?
 			Data_40003364 = "";
-			Data_40003368 = Data_400029ac;
+			Data_40003368 = Data_400029ac; // "00000s"?
 			Data_4000336c = "";
 			Data_40003370 = Data_400029b3;
 			Data_40003374 = "";
-			Data_40003378 = Data_400029b4;
+			Data_40003378 = Data_400029b4; // "      Start      Back"?
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
@@ -5409,7 +5409,7 @@ int func_27844(void)
 		
 		case 0x57E55: //360021
 			//0x3c33c		
-			Data_40003360 = Data_400024a1;
+			Data_40003360 = Data_400024a1; //->"Eyep. focal length:"?
 			Data_40003364 = "";
 			Data_40003368 = Data_400024c9;
 			Data_4000336c = "";
@@ -5443,14 +5443,14 @@ int func_27844(void)
 			//0x3c4a4
 		case 0x5A567: //370023
 			//0x3c4a8
-			Data_40003360 = Data_400024b5;
+			Data_40003360 = Data_400024b5; // "Eyep. focal length:"?
 			Data_40003364 = "";
-			Data_40003368 = Data_400024c9;
+			Data_40003368 = Data_400024c9; // "MF:1893mm"
 			Data_4000336c = "";
-			Data_40003370 = Data_400024d6;
+			Data_40003370 = Data_400024d6; // "SF:43mm"
 			Data_40003374 = "";
-			Data_40003378 = Data_400024e1;
-			Data_4000337c = Data_40002504;
+			Data_40003378 = Data_400024e1; // "E-FOV:001°00'"
+			Data_4000337c = Data_40002504; // "         FOV:0.02272°"
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5473,11 +5473,11 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x5CC6B: //380011
+		case 380011: // "Background light"
 			//0x3c5cc
-			Data_40003360 = Data_40002acb;
+			Data_40003360 = Data_40002acb; //"Background light"?
 			Data_40003364 = "";
-			Data_40003368 = Data_40002adc;
+			Data_40003368 = Data_40002adc; //"Press up/down key"?
 			Data_4000336c = "";
 			Data_40003370 = Data_40002aee;
 			Data_40003374 = "";
@@ -5712,11 +5712,11 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0xB7A3: //47011
+		case 47011: // "Telescope Mount" -> "Please setup OTA zero"
 			//0x3d1d4
-			Data_40003360 = Data_400028c1;
-			Data_40003368 = Data_400028d7;
-			Data_40003370 = Data_400028e1;
+			Data_40003360 = Data_400028c1; // "Please setup OTA zero"
+			Data_40003368 = Data_400028d7; // "Azi:000°"
+			Data_40003370 = Data_400028e1; // "Alt: 00°"
 			Data_4000336c = "        Range:0-360";
 			Data_40003374 = "        Range:0-90";
 			Data_40003378 = "";
@@ -5757,13 +5757,13 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0xBF69: //49001
+		case 49001: //Language
 			//0x3d344
-			Data_40003360 = Data_40002916;
-			Data_40003364 = Data_4000291e;
-			Data_40003368 = Data_40002925;
-			Data_4000336c = Data_4000292c;
-			Data_40003370 = Data_40002934;
+			Data_40003360 = Data_40002916; //"English"
+			Data_40003364 = Data_4000291e; //"German"
+			Data_40003368 = Data_40002925; //"French"
+			Data_4000336c = Data_4000292c; //"Italian"
+			Data_40003370 = Data_40002934; //"Spanish"
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";

@@ -204,6 +204,12 @@ void func_50048(void)
 {
 }
 
+/* 50778 - todo */
+void func_50778(void)
+{
+
+}
+
 /* 50b40 - todo */
 void func_50b40(void)
 {
@@ -2501,7 +2507,7 @@ int main(void)
 		
 		bData_4000318a = 1;
 		bData_40002e78 = 0;
-		Data_40002c64 = 41001;
+		Data_40002c64 = 41001; //"Date and Time Set: "
 		//->6d880
 	}
 	else

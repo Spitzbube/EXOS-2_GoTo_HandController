@@ -146,16 +146,16 @@ void HandleEnterKey(void)
 			Data_40002c64 = 4100;
 			break;
 		
-		case 3600:
+		case 3600: // Eyepiece FOV
 			//0x53778
 			bData_4000318a = 7;
-			Data_40002c64 = 370021;
+			Data_40002c64 = 370021; //->"Eyep. focal length:"
 			break;
 		
-		case 3700:
+		case 3700: // Eyepiece Magn.
 			//0x53798
 			bData_4000318a = 7;
-			Data_40002c64 = 360021;
+			Data_40002c64 = 360021; //->"Eyep. focal length:"
 			break;
 		
 		case 3800: //Display Illumination
@@ -164,18 +164,18 @@ void HandleEnterKey(void)
 			//->0x563b8
 			break;
 		
-		case 4300:
+		case 4300: // Site Setting
 			//537cc
 			Data_40002c64 = 4301;
 			break;
 		
-		case 4600:
+		case 4600: // Telescope Mount
 			//0x537e0
-			Data_40002c64 = 47011;
+			Data_40002c64 = 47011; //->"Please setup OTA zero"
 			//TODO
 			break;
 		
-		case 4700:
+		case 4700: // Tracking Rate
 			//0x538b4
 			Data_40002c64 = 4801;
 			break;
@@ -230,7 +230,7 @@ void HandleEnterKey(void)
 			//TODO
 			break;
 		
-		case 1400:
+		case 1400: // Target Sync
 			//0x53f94
 			bData_400031eb = 0;
 			if (bData_400031ea == 0)
@@ -262,12 +262,12 @@ void HandleEnterKey(void)
 			Data_40002c64 = 0;
 			break;
 		
-		case 1500:
+		case 1500: // Pole-Axis Dev.
 			//0x54080
-			Data_40002c64 = 18001;
+			Data_40002c64 = 18001; //->"Pole Axis Dev: "
 			break;
 		
-		case 1600:
+		case 1600: // RA Bklash Corr.
 			//0x54094
 			Data_40002c64 = 11102;
 			break;
@@ -287,7 +287,7 @@ void HandleEnterKey(void)
 			//TODO
 			break;
 		
-		case 1700:
+		case 1700: // DEC Bklash Corr.
 			//0x54270
 			Data_40002c64 = 11202;
 			break;
@@ -455,7 +455,7 @@ void HandleEnterKey(void)
 			Data_40002c64 = 23017;
 			//->0x563b8
 		
-		case 2110:
+		case 2110: // Customer Objects
 			//0x54d20
 			Data_40002c64 = 201;
 			bData_4000319a_SkyLandTargetId = 1;
@@ -518,7 +518,7 @@ void HandleEnterKey(void)
 			Data_40002c64 = 2130;
 			break;
 		
-		case 4400:
+		case 4400: // Sky/Land
 			//0x54e24
 			Data_40002c64 = 4400;
 			break;
@@ -536,7 +536,7 @@ void HandleEnterKey(void)
 			Data_40002c64 = 4400;
 			break;
 		
-		case 4500:
+		case 4500: // AZ / EQ
 			//0x54fc4
 			Data_40002c64 = 4500;
 			break;
@@ -553,7 +553,7 @@ void HandleEnterKey(void)
 			Data_40002c64 = 4500;
 			break;
 		
-		case 4800:
+		case 4800: // Language
 			//0x55018
 			Data_40002c64 = 49001;
 			break;
@@ -699,30 +699,30 @@ void HandleEnterKey(void)
 			Data_40002c64 = 0;
 			break;
 		
-		case 3900:
+		case 3900: // Parkposition
 			//0x555c4
 			func_75c4();
 			bData_40003431 = 1;
 			Data_40002c64 = 0;
 			break;
 		
-		case 3100:
+		case 3100: // Current Objects
 			//0x555e8
 			bData_40002eb5_SolarSystemObjectNr = 0;
 			Data_40002c64 = 31001;
 			break;
 		
-		case 4100:
+		case 4100: // Time and Date
 			//55608
 			//TODO
 			break;
 		
-		case 41001:
+		case 41001: //"Date and Time Set: "
 			//0x556d8
 			//TODO
 			break;
 		
-		case 4200:
+		case 4200: // Daylight Saving
 			//0x55868	
 			if (bData_40002c6a == 0)
 			{
@@ -766,20 +766,22 @@ void HandleEnterKey(void)
 			func_5104c();
 			break;
 		
-		case 4900:
+		case 4900: // Reset
 			//0x55d90
 			Data_40002c64 = 100;
 			break;
 		
 		case 100:
 			//0x55da4
+			func_50b40();
 			break;
 		
 		case 47011: //????
 			//0x55db0
+			func_50778();
 			break;
 		
-		case 3200:
+		case 3200: // Object Rise/Set
 			//0x55dbc
 			Data_40002c64 = 29001;
 			bData_4000318a = 6;
@@ -791,22 +793,22 @@ void HandleEnterKey(void)
 			//0x55dec
 			break;
 		
-		case 3300:
+		case 3300: // Curr. Lunar Phase
 			//0x55e00
 			Data_40002c64 = 33001;
 			func_50018();
 			break;
 		
-		case 3400: //Timer
+		case 3400: // Timer
 			//0x55e18
 			if (Data_40003214 != 0)
 			{
-				Data_40002c64 = 34002;
+				Data_40002c64 = 34002; //->"Counting down:"
 			}
 			else
 			{
 				//0x55e3c
-				Data_40002c64 = 34001;
+				Data_40002c64 = 34001; //->"Set timer:"
 				bData_4000318a = 1;
 			}
 			break;
@@ -819,8 +821,9 @@ void HandleEnterKey(void)
 			//0x55ec0
 			break;
 			
-		case 3500:
+		case 3500: // Alarm
 			//0x55ee0
+			//-> "Input time:"
 			break;
 		
 		case 35001:
