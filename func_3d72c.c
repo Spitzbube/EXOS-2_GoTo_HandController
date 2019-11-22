@@ -29,86 +29,391 @@ void func_3d72c(void)
 				
 				case 1:
 					//0x3dab8
+					if (bData_40002f14_RecentTargetCount != 0)
+					{
+						//3dacc
+						switch (bData_4000316e_FocusLineOn8LineDisplay)
+						{
+							case 1:
+								//0x3db04
+								func_7e8(1, 1, 1, 2, Data_40003380);
+								func_7e8(0, 2, 1, 2, Data_40003384);
+								func_7e8(0, 3, 1, 2, Data_40003388);
+								func_7e8(0, 4, 1, 2, Data_4000338c);
+								func_7e8(0, 5, 1, 2, Data_40003390);
+								func_7e8(0, 6, 1, 2, Data_40003394);
+								func_7e8(0, 7, 1, 2, Data_40003398);
+								func_7e8(0, 8, 1, 2, Data_4000339c);
+							
+								func_7e8(1, 1, 3, (char)strlen(Data_40003360), Data_40003360);
+								func_7e8(0, 2, 3, (char)strlen(Data_40003364), Data_40003364);
+								func_7e8(0, 3, 3, (char)strlen(Data_40003368), Data_40003368);
+								func_7e8(0, 4, 3, (char)strlen(Data_4000336c), Data_4000336c);
+								func_7e8(0, 5, 3, (char)strlen(Data_40003370), Data_40003370);
+								func_7e8(0, 6, 3, (char)strlen(Data_40003374), Data_40003374);
+								func_7e8(0, 7, 3, (char)strlen(Data_40003378), Data_40003378);
+								func_7e8(0, 8, 3, (char)strlen(Data_4000337c), Data_4000337c);
+								//->0x3efa8
+								break;
+							
+							case 2:
+								//0x3dd8c
+								func_7e8(0, 1, 1, 2, Data_40003380);
+								func_7e8(1, 2, 1, 2, Data_40003384);
+								func_7e8(0, 3, 1, 2, Data_40003388);
+								func_7e8(0, 4, 1, 2, Data_4000338c);
+								func_7e8(0, 5, 1, 2, Data_40003390);
+								func_7e8(0, 6, 1, 2, Data_40003394);
+								func_7e8(0, 7, 1, 2, Data_40003398);
+								func_7e8(0, 8, 1, 2, Data_4000339c);
+							
+								func_7e8(0, 1, 3, (char)strlen(Data_40003360), Data_40003360);
+								func_7e8(2, 2, 3, (char)strlen(Data_40003364), Data_40003364);
+								func_7e8(0, 3, 3, (char)strlen(Data_40003368), Data_40003368);
+								func_7e8(0, 4, 3, (char)strlen(Data_4000336c), Data_4000336c);
+								func_7e8(0, 5, 3, (char)strlen(Data_40003370), Data_40003370);
+								func_7e8(0, 6, 3, (char)strlen(Data_40003374), Data_40003374);
+								func_7e8(0, 7, 3, (char)strlen(Data_40003378), Data_40003378);
+								func_7e8(0, 8, 3, (char)strlen(Data_4000337c), Data_4000337c);
+								//->0x3efa8
+								break;
+							
+							case 3:
+								//0x3e014
+								func_7e8(0, 1, 1, 2, Data_40003380);
+								func_7e8(0, 2, 1, 2, Data_40003384);
+								func_7e8(1, 3, 1, 2, Data_40003388);
+								func_7e8(0, 4, 1, 2, Data_4000338c);
+								func_7e8(0, 5, 1, 2, Data_40003390);
+								func_7e8(0, 6, 1, 2, Data_40003394);
+								func_7e8(0, 7, 1, 2, Data_40003398);
+								func_7e8(0, 8, 1, 2, Data_4000339c);
+							
+								func_7e8(0, 1, 3, (char)strlen(Data_40003360), Data_40003360);
+								func_7e8(0, 2, 3, (char)strlen(Data_40003364), Data_40003364);
+								func_7e8(1, 3, 3, (char)strlen(Data_40003368), Data_40003368);
+								func_7e8(0, 4, 3, (char)strlen(Data_4000336c), Data_4000336c);
+								func_7e8(0, 5, 3, (char)strlen(Data_40003370), Data_40003370);
+								func_7e8(0, 6, 3, (char)strlen(Data_40003374), Data_40003374);
+								func_7e8(0, 7, 3, (char)strlen(Data_40003378), Data_40003378);
+								func_7e8(0, 8, 3, (char)strlen(Data_4000337c), Data_4000337c);
+								//->0x3efa8
+								break;
+							
+							case 4:
+								//0x3e29c
+								func_7e8(0, 1, 1, 2, Data_40003380);
+								func_7e8(0, 2, 1, 2, Data_40003384);
+								func_7e8(0, 3, 1, 2, Data_40003388);
+								func_7e8(1, 4, 1, 2, Data_4000338c);
+								func_7e8(0, 5, 1, 2, Data_40003390);
+								func_7e8(0, 6, 1, 2, Data_40003394);
+								func_7e8(0, 7, 1, 2, Data_40003398);
+								func_7e8(0, 8, 1, 2, Data_4000339c);
+							
+								func_7e8(0, 1, 3, (char)strlen(Data_40003360), Data_40003360);
+								func_7e8(0, 2, 3, (char)strlen(Data_40003364), Data_40003364);
+								func_7e8(0, 3, 3, (char)strlen(Data_40003368), Data_40003368);
+								func_7e8(1, 4, 3, (char)strlen(Data_4000336c), Data_4000336c);
+								func_7e8(0, 5, 3, (char)strlen(Data_40003370), Data_40003370);
+								func_7e8(0, 6, 3, (char)strlen(Data_40003374), Data_40003374);
+								func_7e8(0, 7, 3, (char)strlen(Data_40003378), Data_40003378);
+								func_7e8(0, 8, 3, (char)strlen(Data_4000337c), Data_4000337c);
+								//->0x3efa8
+								break;
+							
+							case 5:
+								//0x3e524
+								func_7e8(0, 1, 1, 2, Data_40003380);
+								func_7e8(0, 2, 1, 2, Data_40003384);
+								func_7e8(0, 3, 1, 2, Data_40003388);
+								func_7e8(0, 4, 1, 2, Data_4000338c);
+								func_7e8(1, 5, 1, 2, Data_40003390);
+								func_7e8(0, 6, 1, 2, Data_40003394);
+								func_7e8(0, 7, 1, 2, Data_40003398);
+								func_7e8(0, 8, 1, 2, Data_4000339c);
+							
+								func_7e8(0, 1, 3, (char)strlen(Data_40003360), Data_40003360);
+								func_7e8(0, 2, 3, (char)strlen(Data_40003364), Data_40003364);
+								func_7e8(0, 3, 3, (char)strlen(Data_40003368), Data_40003368);
+								func_7e8(0, 4, 3, (char)strlen(Data_4000336c), Data_4000336c);
+								func_7e8(1, 5, 3, (char)strlen(Data_40003370), Data_40003370);
+								func_7e8(0, 6, 3, (char)strlen(Data_40003374), Data_40003374);
+								func_7e8(0, 7, 3, (char)strlen(Data_40003378), Data_40003378);
+								func_7e8(0, 8, 3, (char)strlen(Data_4000337c), Data_4000337c);
+								//->0x3efa8
+								break;
+							
+							case 6:
+								//0x3e7ac
+								func_7e8(0, 1, 1, 2, Data_40003380);
+								func_7e8(0, 2, 1, 2, Data_40003384);
+								func_7e8(0, 3, 1, 2, Data_40003388);
+								func_7e8(0, 4, 1, 2, Data_4000338c);
+								func_7e8(0, 5, 1, 2, Data_40003390);
+								func_7e8(1, 6, 1, 2, Data_40003394);
+								func_7e8(0, 7, 1, 2, Data_40003398);
+								func_7e8(0, 8, 1, 2, Data_4000339c);
+							
+								func_7e8(0, 1, 3, (char)strlen(Data_40003360), Data_40003360);
+								func_7e8(0, 2, 3, (char)strlen(Data_40003364), Data_40003364);
+								func_7e8(0, 3, 3, (char)strlen(Data_40003368), Data_40003368);
+								func_7e8(0, 4, 3, (char)strlen(Data_4000336c), Data_4000336c);
+								func_7e8(0, 5, 3, (char)strlen(Data_40003370), Data_40003370);
+								func_7e8(1, 6, 3, (char)strlen(Data_40003374), Data_40003374);
+								func_7e8(0, 7, 3, (char)strlen(Data_40003378), Data_40003378);
+								func_7e8(0, 8, 3, (char)strlen(Data_4000337c), Data_4000337c);
+								//->0x3efa8
+								break;
+							
+							case 7:
+								//0x3ea90
+								func_7e8(0, 1, 1, 2, Data_40003380);
+								func_7e8(0, 2, 1, 2, Data_40003384);
+								func_7e8(0, 3, 1, 2, Data_40003388);
+								func_7e8(0, 4, 1, 2, Data_4000338c);
+								func_7e8(0, 5, 1, 2, Data_40003390);
+								func_7e8(0, 6, 1, 2, Data_40003394);
+								func_7e8(1, 7, 1, 2, Data_40003398);
+								func_7e8(0, 8, 1, 2, Data_4000339c);
+							
+								func_7e8(0, 1, 3, (char)strlen(Data_40003360), Data_40003360);
+								func_7e8(0, 2, 3, (char)strlen(Data_40003364), Data_40003364);
+								func_7e8(0, 3, 3, (char)strlen(Data_40003368), Data_40003368);
+								func_7e8(0, 4, 3, (char)strlen(Data_4000336c), Data_4000336c);
+								func_7e8(0, 5, 3, (char)strlen(Data_40003370), Data_40003370);
+								func_7e8(0, 6, 3, (char)strlen(Data_40003374), Data_40003374);
+								func_7e8(1, 7, 3, (char)strlen(Data_40003378), Data_40003378);
+								func_7e8(0, 8, 3, (char)strlen(Data_4000337c), Data_4000337c);
+								//->0x3efa8
+								break;
+							
+							case 8:
+								//0x3ed18
+								func_7e8(0, 1, 1, 2, Data_40003380);
+								func_7e8(0, 2, 1, 2, Data_40003384);
+								func_7e8(0, 3, 1, 2, Data_40003388);
+								func_7e8(0, 4, 1, 2, Data_4000338c);
+								func_7e8(0, 5, 1, 2, Data_40003390);
+								func_7e8(0, 6, 1, 2, Data_40003394);
+								func_7e8(0, 7, 1, 2, Data_40003398);
+								func_7e8(1, 8, 1, 2, Data_4000339c);
+							
+								func_7e8(0, 1, 3, (char)strlen(Data_40003360), Data_40003360);
+								func_7e8(0, 2, 3, (char)strlen(Data_40003364), Data_40003364);
+								func_7e8(0, 3, 3, (char)strlen(Data_40003368), Data_40003368);
+								func_7e8(0, 4, 3, (char)strlen(Data_4000336c), Data_4000336c);
+								func_7e8(0, 5, 3, (char)strlen(Data_40003370), Data_40003370);
+								func_7e8(0, 6, 3, (char)strlen(Data_40003374), Data_40003374);
+								func_7e8(0, 7, 3, (char)strlen(Data_40003378), Data_40003378);
+								func_7e8(1, 8, 3, (char)strlen(Data_4000337c), Data_4000337c);
+								//->0x3efa8
+								break;
+
+							default:
+								//0x3efa0
+								break;
+						}
+					}
+					else
+					{
+						//0x3efac
+						func_7e8(0, 1, 1, 2, Data_40003380);
+						func_7e8(0, 2, 1, 2, Data_40003384);
+						func_7e8(0, 3, 1, 2, Data_40003388);
+						func_7e8(0, 4, 1, 2, Data_4000338c);
+						func_7e8(0, 5, 1, 2, Data_40003390);
+						func_7e8(0, 6, 1, 2, Data_40003394);
+						func_7e8(0, 7, 1, 2, Data_40003398);
+						func_7e8(0, 8, 1, 2, Data_4000339c);
+						
+						func_7e8(0, 1, 1, (char)strlen(Data_40003360), Data_40003360);
+						func_7e8(0, 2, 1, (char)strlen(Data_40003364), Data_40003364);
+						func_7e8(0, 3, 1, (char)strlen(Data_40003368), Data_40003368);
+						func_7e8(0, 4, 1, (char)strlen(Data_4000336c), Data_4000336c);
+						func_7e8(0, 5, 1, (char)strlen(Data_40003370), Data_40003370);
+						func_7e8(0, 6, 1, (char)strlen(Data_40003374), Data_40003374);
+						func_7e8(0, 7, 1, (char)strlen(Data_40003378), Data_40003378);
+						func_7e8(0, 8, 1, (char)strlen(Data_4000337c), Data_4000337c);
+					}
+					//->0x4684c
+					break;
+				
+				case 102:
+					//0x3f230
+					if (((Data_40003f64.bData_0 != 1) && (bData_40002e79_SkyLandTargetSeletion == 1)) ||
+						((Data_40003f50.bData_0 != 1) && (bData_40002e79_SkyLandTargetSeletion == 0)))
+					{
+						//0x3f274
+						func_7e8(0, 1, 1, (char)strlen(Data_40003360), Data_40003360);
+						func_7e8(0, 2, 1, (char)strlen(Data_40003364), Data_40003364);
+						func_7e8(0, 3, 1, (char)strlen(Data_40003368), Data_40003368);
+						func_7e8(0, 4, 1, (char)strlen(Data_4000336c), Data_4000336c);
+						func_7e8(0, 5, 1, (char)strlen(Data_40003370), Data_40003370);
+						func_7e8(0, 6, 1, (char)strlen(Data_40003374), Data_40003374);
+						func_7e8(0, 7, 1, (char)strlen(Data_40003378), Data_40003378);
+						func_7e8(0, 8, 1, (char)strlen(Data_4000337c), Data_4000337c);						
+						//->0x3f8cc
+					}
+					else
+					{
+						//0x3f3f8
+						switch (bData_40002e79_SkyLandTargetSeletion)
+						{
+							case 0:
+								//0x3f414
+								func_7e8(0, 1, 1, (char)strlen(Data_40003360), Data_40003360);
+								func_7e8(0, 2, 1, (char)strlen(Data_40003364), Data_40003364);
+								func_7e8(0, 3, 1, (char)strlen(Data_40003368), Data_40003368);
+								func_7e8(0, 4, 1, (char)strlen(Data_4000336c), Data_4000336c);
+								func_7e8(0, 5, 1, (char)strlen(Data_40003370), Data_40003370);
+								func_7e8(0, 6, 8, (char)strlen(Data_40003374), Data_40003374);
+								func_7e8(0, 7, 8, (char)strlen(Data_40003378), Data_40003378);
+								func_7e8(0, 8, 8, (char)strlen(Data_4000337c), Data_4000337c);
+							
+								func_864(0, 5, 15, (unsigned char*)Data_7906c);
+								func_864(0, 5, 18, (unsigned char*)Data_79078);
+								func_864(0, 5, 21, (unsigned char*)Data_79072);
+								func_864(0, 6, 15, (unsigned char*)Data_7906c);
+								func_864(0, 6, 18, (unsigned char*)Data_79078);
+								func_864(0, 6, 21, (unsigned char*)Data_79072);
+								func_864(0, 8, 15, (unsigned char*)Data_7906c);
+								func_864(0, 8, 18, (unsigned char*)Data_79078);
+								func_864(0, 8, 21, (unsigned char*)Data_79072);
+								//->0x3f8c8
+								break;
+							
+							case 1:
+								//0x3f650
+								func_7e8(0, 1, 1, (char)strlen(Data_40003360), Data_40003360);
+								func_7e8(0, 2, 1, (char)strlen(Data_40003364), Data_40003364);
+								func_7e8(0, 3, 1, (char)strlen(Data_40003368), Data_40003368);
+								func_7e8(0, 4, 1, (char)strlen(Data_4000336c), Data_4000336c);
+								func_7e8(0, 5, 1, (char)strlen(Data_40003370), Data_40003370);
+								func_7e8(0, 6, 8, (char)strlen(Data_40003374), Data_40003374);
+								func_7e8(0, 7, 1, (char)strlen(Data_40003378), Data_40003378);
+								func_7e8(0, 8, 8, (char)strlen(Data_4000337c), Data_4000337c);
+							
+								func_864(0, 5, 15, (unsigned char*)Data_7906c);
+								func_864(0, 5, 18, (unsigned char*)Data_79078);
+								func_864(0, 5, 21, (unsigned char*)Data_79072);
+								func_864(0, 6, 15, (unsigned char*)Data_7906c);
+								func_864(0, 6, 18, (unsigned char*)Data_79078);
+								func_864(0, 6, 21, (unsigned char*)Data_79072);
+								func_864(0, 7, 15, (unsigned char*)Data_7906c);
+								func_864(0, 7, 18, (unsigned char*)Data_79078);
+								func_864(0, 7, 21, (unsigned char*)Data_79072);
+								func_864(0, 8, 15, (unsigned char*)Data_7906c);
+								func_864(0, 8, 18, (unsigned char*)Data_79078);
+								func_864(0, 8, 21, (unsigned char*)Data_79072);
+								break;
+						}
+					}
+					//->0x4684c
 					break;
 				
 				case 2:
 					//0x3f8d0
+					func_7e8(0, 2, 1, (char)strlen(Data_40003364), Data_40003364);
+					func_7e8(0, 4, 1, (char)strlen(Data_4000336c), Data_4000336c);
+					func_7e8(0, 6, 1, (char)strlen(Data_40003374), Data_40003374);
+				
+					func_7950(1);
+					func_2254(200);
+					func_7950(1);
+					func_2254(200);
+					func_7950(1);
+					func_2254(200);
+					Data_40002c64 = 0;
+					//->0x4684c
 					break;
 				
-				case 100: //0x64:
-					//0x446e8
-					break;
-				
-				case 0x65:
-					//0x41c8c
-					break;
-				
-				case 0x66:
-					//0x3f230
-					break;
-				
-				case 0xc9:
-					//0x41c80
-					break;
-				
-				case 202: //0xca:
-					//0x41c88
-					break;
-				
-				case 0xcb:
-					//0x42788
-					break;
-				
-				case 0xcc:
-					//0x4298c
-					break;
-				
-				case 0xcd:
-					//0x42b90
-					break;
-				
-				case 0xce:
-					//0x42d94
-					break;
-				
-				case 0xcf:
-					//0x43048
-					break;
-				
-				case 0xd0:
-					//0x43328
-					break;
-				
-				case 0x2b5d:
-					//0x40488
+				case 12001:
+					//3f9a4
 					break;
 				
 				case 11102: //0x2b5e:
 					//0x40480
+				case 11101: //0x2b5d:
+					//0x40488
+				case 11103:
+					//0x4048c
 					break;
-
-				case 0x80E9:
-					//0x44760
+				
+				case 11104:
+					//0x40610
+					break;
+				
+				case 11105:
+					//0x407b4
+					break;
+				
+				case 11202:
+					//0x40958
+					break;
+				
+				case 11201:
+					//0x40960
+					break;
+				
+				case 11203:
+					//0x40964
+					break;
+				
+				case 11204:
+					//0x40ae8
+					break;
+				
+				case 11205:
+					//0x40c8c
+					break;
+				
+				case 22001:
+					//0x40e30
+					break;
+				
+				case 24001: //0x5DC1:
+					//0x40e38
+					break;
+				
+				case 23002:
+					//0x40e3c
+					break;
+				
+				case 23005:
+					//0x40e40
 					break;
 				
 				case 23006: //0x59de:
 					//0x40e44
 					break;
 				
-				case 0x59DF:
+				case 23007: //0x59DF:
 					//0x40e48
 					break;
 				
-				case 0x59E4:
-					//0x41af8
+				case 23003:
+					//0x41080
 					break;
 				
-				case 0x59E5:
-					//0x4161c
+				case 23004:
+					//0x41088
 					break;
 				
-				case 0x59E6:
-					//0x41624
+				case 22111:
+					//0x412f8
+					break;
+				
+				case 0x5DC2:
+					//0x41300
+					break;
+				
+				case 0x61AA:
+					//0x41304
+					break;
+				
+				case 0x59EE:
+					//0x41308
 					break;
 				
 				case 0x59E7:
@@ -123,24 +428,64 @@ void func_3d72c(void)
 					//0x41314
 					break;
 				
-				case 0x59EE:
-					//0x41308
+				case 0x59E5:
+					//0x4161c
 					break;
 				
-				case 0x61AA:
-					//0x41304
-					break;
-				
-				case 0x5DC1:
-					//0x40e38
-					break;
-				
-				case 0x5DC2:
-					//0x41300
+				case 0x59E6:
+					//0x41624
 					break;
 				
 				case 0x5DC3:
 					//0x418fc
+					break;
+				
+				case 0x59E4:
+					//0x41af8
+					break;
+				
+				case 101:
+					//0x41c8c
+					break;
+				
+				case 201:
+					//0x41c80
+					break;
+				
+				case 202: //0xca:
+					//0x41c88
+					break;
+				
+				case 203:
+					//0x42788
+					break;
+				
+				case 204:
+					//0x4298c
+					break;
+				
+				case 205:
+					//0x42b90
+					break;
+				
+				case 206:
+					//0x42d94
+					break;
+				
+				case 207:
+					//0x43048
+					break;
+				
+				case 208:
+					//0x43328
+					break;
+				
+				case 100:
+					//0x446e8
+					break;
+				
+				case 0x80E9:
+					//0x44760
 					break;
 				
 				case 0x6D61:
