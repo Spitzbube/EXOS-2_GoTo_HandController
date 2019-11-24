@@ -5,6 +5,14 @@ int func_27844(void)
 {
 	SwapLanguageStrings();
 	
+	#ifdef UART0_DEBUG
+	{
+		char buf[100];
+		snprintf(buf, sizeof(buf)-1, "func_27844: Data_40002c64=%d\n\r", Data_40002c64);
+		uart0_send(buf, strlen(buf));
+	}
+	#endif
+	
 	switch (Data_40002c64)
 	{
 		case 0:
@@ -1065,9 +1073,9 @@ int func_27844(void)
 			//->3d71c
 			break;
 
-		case 4301:
+		case 4301: //Country & City
 			//0x2af04
-			Data_40003360 = Data_40003060; // "Country & City"?
+			Data_40003360 = Data_40003060; // "Country & City"
 			Data_40003368 = Data_40003064; // "Custom Site"
 			Data_40003364 = "";
 			Data_4000336c = "";
@@ -1081,7 +1089,7 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 0x10CE: //4302
+		case 4302: //Custom Site
 			//0x2af88
 			Data_40003360 = Data_40003060;
 			Data_40003364 = Data_40003064;
@@ -5503,15 +5511,15 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0xA411: //42001
+		case 42001: //Daylight saving on
 			//0x3c6cc
-			Data_40003360 = Data_40002b70;
+			Data_40003360 = Data_40002b70; //"daylight saving"
 			Data_40003364 = "";
-			Data_40003368 = Data_40002b80;
+			Data_40003368 = Data_40002b80; //"status:on"
 			Data_4000336c = "";
 			Data_40003370 = Data_40002b8a;
 		
-			if (bData_40002f1e == 1)
+			if (bData_40002f1e_SetupLocalData == 1)
 			{
 				Data_40003374 = "hit direction key!";
 			}
@@ -5526,15 +5534,15 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 42002: //43001: //????????
+		case 42002: //Daylight saving off
 			//3c76c
-			Data_40003360 = Data_40002ba5;
+			Data_40003360 = Data_40002ba5; //"Daylight saving"
 			Data_40003364 = "";
-			Data_40003368 = Data_40002bb5;
+			Data_40003368 = Data_40002bb5; //"status:off"
 			Data_4000336c = "";
 			Data_40003370 = Data_40002bc0;
 		
-			if (bData_40002f1e == 1)
+			if (bData_40002f1e_SetupLocalData == 1)
 			{
 				Data_40003374 = "hit direction key!";
 			}
@@ -5549,83 +5557,83 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0xA803: //43011
+		case 43011: //Country & City
 			//0x3c8f4
-			func_4f5c((unsigned short)(wData_40003250 + wData_40003252), &Data_40003f1c);
+			flash_get_site_data((unsigned short)(wData_40003250 + wData_40003252), &Data_40003f1c_FlashSiteData);
 
-			if (Data_40003f1c.fData_40 >= 0)
+			if (Data_40003f1c_FlashSiteData.fLongitude >= 0)
 			{
 				//3c92c
 				sprintf(Data_40003ffd, "     Lon:E%03d %02d          ",
-					abs((int)Data_40003f1c.fData_40),
-					abs((int)((Data_40003f1c.fData_40 - (int)Data_40003f1c.fData_40) * 60)));
+					abs((int)Data_40003f1c_FlashSiteData.fLongitude),
+					abs((int)((Data_40003f1c_FlashSiteData.fLongitude - (int)Data_40003f1c_FlashSiteData.fLongitude) * 60)));
 			}
 			else
 			{
 				//0x3c9bc
 				sprintf(Data_40003ffd, "     Lon:W%03d %02d         ",
-					abs((int)Data_40003f1c.fData_40),
-					abs((int)((Data_40003f1c.fData_40 - (int)Data_40003f1c.fData_40) * 60)));
+					abs((int)Data_40003f1c_FlashSiteData.fLongitude),
+					abs((int)((Data_40003f1c_FlashSiteData.fLongitude - (int)Data_40003f1c_FlashSiteData.fLongitude) * 60)));
 			}
 			//0x3ca48
-			if (abs((int)Data_40003f1c.fData_40) < 100)
+			if (abs((int)Data_40003f1c_FlashSiteData.fLongitude) < 100)
 			{
 				Data_40003ffd[10] = ' ';
 			}
-			if (abs((int)Data_40003f1c.fData_40) < 10)
+			if (abs((int)Data_40003f1c_FlashSiteData.fLongitude) < 10)
 			{
 				Data_40003ffd[11] = ' ';
 			}
-			if (abs((int)((Data_40003f1c.fData_40 - (int)Data_40003f1c.fData_40) * 60)) < 10)
+			if (abs((int)((Data_40003f1c_FlashSiteData.fLongitude - (int)Data_40003f1c_FlashSiteData.fLongitude) * 60)) < 10)
 			{
 				Data_40003ffd[14] = ' ';
 			}
 			//0x3cb14
-			if (Data_40003f1c.fData_44 >= 0)
+			if (Data_40003f1c_FlashSiteData.fLatitude >= 0)
 			{
 				//3cb28
 				sprintf(Data_40004027, "     Lat:N %02d %02d          ",
-					abs((int)Data_40003f1c.fData_44),
-					abs((int)((Data_40003f1c.fData_44 - (int)Data_40003f1c.fData_44) * 60)));
+					abs((int)Data_40003f1c_FlashSiteData.fLatitude),
+					abs((int)((Data_40003f1c_FlashSiteData.fLatitude - (int)Data_40003f1c_FlashSiteData.fLatitude) * 60)));
 			}
 			else
 			{
 				//0x3cbb8
 				sprintf(Data_40004027, "     Lat:S %02d %02d         ",
-					abs((int)Data_40003f1c.fData_44),
-					abs((int)((Data_40003f1c.fData_44 - (int)Data_40003f1c.fData_44) * 60)));
+					abs((int)Data_40003f1c_FlashSiteData.fLatitude),
+					abs((int)((Data_40003f1c_FlashSiteData.fLatitude - (int)Data_40003f1c_FlashSiteData.fLatitude) * 60)));
 			}
 			//0x3cc44
-			if (abs((int)Data_40003f1c.fData_44) < 10)
+			if (abs((int)Data_40003f1c_FlashSiteData.fLatitude) < 10)
 			{
 				Data_40004027[11] = ' ';
 			}
-			if (abs((int)((Data_40003f1c.fData_44 - (int)Data_40003f1c.fData_44) * 60)) < 10)
+			if (abs((int)((Data_40003f1c_FlashSiteData.fLatitude - (int)Data_40003f1c_FlashSiteData.fLatitude) * 60)) < 10)
 			{
 				Data_40004027[14] = ' ';
 			}
 			//0x3cd74
-			if (Data_40003f1c.Data_48 > 0)
+			if (Data_40003f1c_FlashSiteData.Zone > 0)
 			{
 				//3cd84
 				sprintf(Data_4000403c, "    Zone:E%d   ",
-					abs(Data_40003f1c.Data_48));
+					abs(Data_40003f1c_FlashSiteData.Zone));
 			}
-			else if (Data_40003f1c.Data_48 < 0)
+			else if (Data_40003f1c_FlashSiteData.Zone < 0)
 			{
 				//0x3cdb4
 				sprintf(Data_4000403c, "    Zone:W%d    ",
-					abs(Data_40003f1c.Data_48));
+					abs(Data_40003f1c_FlashSiteData.Zone));
 			}
 			else
 			{
 				//0x3cdf4
 				sprintf(Data_4000403c, "    Zone:%d    ",
-					abs(Data_40003f1c.Data_48));
+					abs(Data_40003f1c_FlashSiteData.Zone));
 			}
 			//0x3ce20
-			Data_40003360 = Data_40003f1c.bData_0;
-			Data_40003364 = Data_40003f1c.bData_20;
+			Data_40003360 = Data_40003f1c_FlashSiteData.cCountry;
+			Data_40003364 = Data_40003f1c_FlashSiteData.cCity;
 			Data_40003368 = Data_40003ffd;
 			Data_4000336c = Data_40004027;
 			Data_40003370 = Data_4000403c;
@@ -5638,13 +5646,13 @@ int func_27844(void)
 			break;
 		
 		case 43002: //44001: //??????
-			//0x3ce9c
+			//0x3ce9c: "Custom Site"
 			Data_40003360 = "Please Input Data: ";
 			//Data_40003364 = ""; //?????
-			Data_40003368 = Data_40002827;
-			Data_4000336c = Data_40002837;
-			Data_40003370 = Data_40002847;
-			Data_40003374 = Data_40002856;
+			Data_40003368 = Data_40002827; //" Name:"
+			Data_4000336c = Data_40002837; //"  Lon:"
+			Data_40003370 = Data_40002847; //"  Lat:"
+			Data_40003374 = Data_40002856; //" Zone:"
 			Data_40003378 = "";
 			Data_4000337c = "";
 			

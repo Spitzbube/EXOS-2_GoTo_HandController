@@ -1,4 +1,5 @@
 
+#include <LPC214x.h>
 #include "my_types.h"
 #include "data.h"
 
@@ -57,8 +58,78 @@ void func_5099c(void)
 }
 
 
-void func_51368(void)
+/* 51368 - todo */
+int ValidateDateTimeSetRTC(void)
+{
+	int valid = 1;
+	unsigned short y;
+	unsigned char m;
+	unsigned char d;
+	unsigned char h;
+	unsigned char min;
+	unsigned char s;
+	y = atoi(Data_40002655);
+	m = atoi(&Data_40002655[5]);
+	
+	if ((m > 12) || (m == 0))
 	{
-	//TODO
+		return 0;
+	}
+	
+	d = atoi(&Data_40002655[8]);
+	
+	switch (m)
+	{
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			if (d > 31) valid = 0;
+			break;
+		
+		case 2:
+			if (d > 29) valid = 0;
+			break;
+		
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			if (d > 30) valid = 0;
+			break;
+		
+		default:
+			break;
+	}
+	
+	if (d < 1) valid = 0;
+	
+	if (valid == 0) 
+	{
+		return 0;
+	}
+	
+	h = atoi(Data_40002660);
+	min = atoi(&Data_40002660[3]);
+	s = atoi(&Data_40002660[6]);
+	
+	if ((h > 23) || (min > 59) || (s > 59))
+	{
+		return 0;
+	}
+	
+	CCR = (1 << 4);
+	YEAR = y;
+	MONTH = m;
+	DOM = d;
+	HOUR = h;
+	MIN = min;
+	SEC = s;
+	CCR = (1 << 4) | (1 << 0); //CLKEN = 1
+	
+	return 1;
 }
 

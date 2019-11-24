@@ -88,12 +88,12 @@ typedef struct
 
 typedef struct
 {	
-	unsigned char bData_0[20]; //0
-	unsigned char bData_20[20]; //20
-	float fData_40; //40
-	float fData_44; //44
-	int Data_48; //48
-} Struct_4f5c;
+	unsigned char cCountry[20]; //0
+	unsigned char cCity[20]; //20
+	float fLongitude; //40
+	float fLatitude; //44
+	int Zone; //48
+} Struct_SiteData;
 
 typedef struct
 {

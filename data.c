@@ -69,8 +69,8 @@ char Data_40000b4d[42];
 char Data_40000b55[42];
 char Data_40000b5b[42];
 char Data_40000b65[42];
-char Data_40000b6f[42];
-char Data_40000b7e[42];
+char strEngCountryAndCity[] = "Country & City"; //40000b6f
+char strEngCustomSite[] = "Custom Site"; //40000b7e
 char Data_40000b8a[42];
 char Data_40000b91[42];
 char Data_40000b95[42];
@@ -296,10 +296,10 @@ char Data_400027df[16]; //400027df
 char Data_400027ef[16]; //400027ef
 char Data_400027ff[16]; //400027ff
 char fill_40002836; //40002836
-unsigned char Data_40002827[16]; //40002827 size???
-char Data_40002837[16]; //40002837 size??
-char Data_40002847[15]; //40002847 size??
-char Data_40002856[20]; //40002856 size???
+unsigned char Data_40002827[16] = " Name:"; //40002827 size???
+char Data_40002837[16] = "  Lon:"; //40002837 size??
+char Data_40002847[15] = "  Lat:"; //40002847 size??
+char Data_40002856[20] = " Zone:"; //40002856 size???
 char Data_4000288e[11]; //4000288e
 char Data_40002899[12]; //40002899, size???
 char Data_400028a5[14]; //400028a5
@@ -331,14 +331,14 @@ char Data_40002acb[] = "Background light"; //40002acb, content?
 char Data_40002adc[] = "Press up/down key"; //40002adc, content?
 char Data_40002aee[] = ""; //40002aee, content?
 char Data_40002aef[22]; //40002aef, size???
-char Data_40002b70[16] = "daylight saving"; //40002b70, content?
-char Data_40002b80[10]; //40002b80
+char Data_40002b70[] = "daylight saving"; //40002b70
+char Data_40002b80[] = "status:on"; //40002b80
 char Data_40002b8a[16]; //40002b8a
 char Data_40002b8b[22]; //40002b8b, size???
-char Data_40002ba5[16]; //40002ba5
-char Data_40002bb5[11]; //40002bb5
-char Data_40002bc0[1]; //40002bc0
-char Data_40002bc1[3]; //40002bc1
+char Data_40002ba5[] = "Daylight saving"; //40002ba5
+char Data_40002bb5[] = "status:off"; //40002bb5
+char Data_40002bc0[] = ""; //40002bc0
+char Data_40002bc1[] = ""; //40002bc1
 int Data_40002bc4[13]; //40002bc4
 unsigned char Data_40002bf8[8]; //40002bf8, size??
 unsigned char bData_40002c00; //40002c00
@@ -448,7 +448,7 @@ int Data_40002e3c_SiteLatitudeMinutes; //40002e3c
 float fData_40002e40_SiteLatitudeSeconds; //40002e40
 int Data_40002e44; //40002e44
 double dData_40002e48_SiteLatitude; //40002e48
-int Data_40002e54; //40002e54
+int Data_40002e54_Zone; //40002e54
 unsigned Data_40002e5c_Year; //40002e5c
 unsigned char bData_40002e60_Month; //40002e60
 unsigned char bData_40002e61_Day; //40002e61
@@ -513,7 +513,7 @@ int Data_40002f10; //40002f10
 unsigned char bData_40002f14_RecentTargetCount; //40002f14
 unsigned char Data_40002f15[8]; //40002f15, size???
 unsigned char bData_40002f1d; //40002f1d
-char bData_40002f1e; //40002f1e
+char bData_40002f1e_SetupLocalData; //40002f1e
 char* Data_40002f20; //40002f20
 char* Data_40002f24; //40002f24
 char* Data_40002f28; //40002f28
@@ -840,7 +840,7 @@ Struct_3b58 Data_40003e08; //40003e08
 Struct_4028 Data_40003ea0; //40003ea0
 Struct_4594 Data_40003ec0; //40003ec0
 Struct_4894 Data_40003ee0; //40003ee0
-Struct_4f5c Data_40003f1c; //40003f1c
+Struct_SiteData Data_40003f1c_FlashSiteData; //40003f1c
 Struct_5218 Data_40003f50; //40003f50
 Struct_54e0 Data_40003f64; //40003f64
 char Data_40003fa9[21]; //40003fa9, size???
