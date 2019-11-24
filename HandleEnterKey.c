@@ -719,28 +719,58 @@ void HandleEnterKey(void)
 		
 		case 41001: //"Date and Time Set: "
 			//0x556d8
-			//TODO
+			if (ValidateDateTimeSetRTC() == 1)
+			{
+				//556e8
+				if (bData_40002f1e_SetupLocalData == 1)
+				{
+					Data_40002c64 = 42002; //->"Daylight saving off"
+				}
+				else
+				{
+					Data_40002c64 = 4100;
+				}
+				func_7950(1);
+			}
+			else
+			{
+				//0x55720
+				func_6518();
+				sprintf(Data_400037ec, "%04d-%02d-%02d",
+					Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
+				sprintf(Data_40003150, "%02d:%02d:%02d",
+					bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
+				sprintf(Data_40002655, "%04d-%02d-%02d", 
+					Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
+				sprintf(Data_40002660, "%02d:%02d:%02d", 
+					bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
+				
+				bData_4000318a = 1;
+				bData_40002e78 = 0;
+				Data_40002c64 = 41001;
+			}
+			//0x557e8 -> 0x563b8
 			break;
 		
 		case 4200: // Daylight Saving
 			//0x55868	
 			if (bData_40002c6a == 0)
 			{
-				Data_40002c64 = 42002;
+				Data_40002c64 = 42002; //Daylight saving off
 			}
 			else
 			{
-				Data_40002c64 = 42001;
+				Data_40002c64 = 42001; //Daylight saving on
 			}
 			break;
 		
 		case 42001:
 			//0x5589c		
-		case 42002: //????
+		case 42002: // "Daylight saving"
 			//0x558a4
-			if (bData_40002f1e == 1)
+			if (bData_40002f1e_SetupLocalData == 1)
 			{
-				Data_40002c64 = 4301;
+				Data_40002c64 = 4301; //->"Country & City"
 			}
 			else
 			{
@@ -749,19 +779,56 @@ void HandleEnterKey(void)
 			}
 			break;
 		
-		case 4301:
+		case 4301: //Country & City
 			//0x558dc
+			wData_40003250 = 1;
+			wData_40003252 = 0;
+			func_394();
+			Data_40002c64 = 43011;
 			break;
 		
 		case 43011:
 			//0x5590c
+			flash_get_site_data((unsigned short)(wData_40003250 + wData_40003252), &Data_40003f1c_FlashSiteData);
+		
+			dData_40002e28_SiteLongitude = Data_40003f1c_FlashSiteData.fLongitude;
+			dData_40002e48_SiteLatitude = Data_40003f1c_FlashSiteData.fLatitude;
+			Data_40002e54_Zone = Data_40003f1c_FlashSiteData.Zone;
+			Data_40004128.dData_48 = dData_40002e28_SiteLongitude;
+			Data_40004128.dData_56 = dData_40002e48_SiteLatitude;
+			Data_40004128.Data_64 = Data_40002e54_Zone;
+			
+			func_7950(2);
+		
+			if (bData_40002f1e_SetupLocalData == 1)
+			{
+				//559b8
+				if (bData_40002c1a == 1)
+				{
+					bData_400031ed = 0;
+					Data_40002c64 = 0;
+					bData_40002f1e_SetupLocalData = 0;
+				}
+				else
+				{
+					//0x559e8
+					Data_40002c64 = 47011;
+				}
+			}
+			else
+			{
+				//0x559f8
+				Data_40002c64 = 0;
+			}
+			//->0x563b8
 			break;
 		
-		case 4302:
+		case 4302: //Custom Site
 			//0x55a08
+			//TODO
 			break;
 		
-		case 43002: //????
+		case 43002: //Custom Site
 			//0x55d84
 			func_5104c();
 			break;

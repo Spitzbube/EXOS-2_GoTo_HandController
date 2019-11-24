@@ -191,8 +191,8 @@ extern char Data_40000b4d[];
 extern char Data_40000b55[];
 extern char Data_40000b5b[];
 extern char Data_40000b65[];
-extern char Data_40000b6f[];
-extern char Data_40000b7e[];
+extern char strEngCountryAndCity[];
+extern char strEngCustomSite[];
 extern char Data_40000b8a[];
 extern char Data_40000b91[];
 extern char Data_40000b95[];
@@ -568,7 +568,7 @@ extern int Data_40002e3c_SiteLatitudeMinutes; //40002e3c
 extern float fData_40002e40_SiteLatitudeSeconds; //40002e40
 extern int Data_40002e44; //40002e44
 extern double dData_40002e48_SiteLatitude; //40002e48
-extern int Data_40002e54; //40002e54
+extern int Data_40002e54_Zone; //40002e54
 extern unsigned Data_40002e5c_Year; //40002e5c
 extern unsigned char bData_40002e60_Month; //40002e60
 extern unsigned char bData_40002e61_Day; //40002e61
@@ -633,7 +633,7 @@ extern int Data_40002f10; //40002f10
 extern unsigned char bData_40002f14_RecentTargetCount; //40002f14
 extern unsigned char Data_40002f15[]; //40002f15, size???
 extern unsigned char bData_40002f1d; //40002f1d
-extern char bData_40002f1e; //40002f1e
+extern char bData_40002f1e_SetupLocalData; //40002f1e
 extern char* Data_40002f20; //40002f20
 extern char* Data_40002f24; //40002f24
 extern char* Data_40002f28; //40002f28
@@ -961,7 +961,7 @@ extern Struct_3b58 Data_40003e08; //40003e08
 extern Struct_4028 Data_40003ea0; //40003ea0
 extern Struct_4594 Data_40003ec0; //40003ec0
 extern Struct_4894 Data_40003ee0; //40003ee0
-extern Struct_4f5c Data_40003f1c; //40003f1c
+extern Struct_SiteData Data_40003f1c_FlashSiteData; //40003f1c
 extern Struct_5218 Data_40003f50; //40003f50
 extern Struct_54e0 Data_40003f64; //40003f64
 extern char Data_40003fa9[]; //40003fa9

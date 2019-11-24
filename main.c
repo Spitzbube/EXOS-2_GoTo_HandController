@@ -39,7 +39,7 @@ extern void func_b64c(double, double);
 extern void func_d784(int a);
 
 extern void func_5099c(void);
-extern void func_51368(void);
+extern void ValidateDateTimeSetRTC(void);
 
 extern void get_all_solar_system_object_equatorial_coordinates(void);
 extern void func_1e228(void);
@@ -264,131 +264,9 @@ void func_5a57c(int a, int b)
 {
 }
 
-/* 5ab50 - todo */
-void HandleDownKey(void)
-{
-	switch (Data_40002c64)
-	{
-		//TODO
-		
-		case 500:
-			//0x5b2c0: Main Screen Help Pages
-			func_394();
-		
-			if (bData_40002c59_MainScreenHelpPage == 10)
-			{
-				bData_40002c59_MainScreenHelpPage = 1;
-			}
-			else
-			{
-				bData_40002c59_MainScreenHelpPage++;
-			}
-			//->0x5ca8c
-			break;
-			
-		case 1000:
-			//0x5b300: Telescope Align
-			Data_40002c64 = 2000; //Navigation
-			//->0x5ca8c
-			break;
-		
-		case 1700:
-			//0x5b410: DEC Bklash Correction
-			bData_40003173 = 1;
-			bData_40003171 = 1;
-			bData_40003172 = 1;
-			bData_40003170 = 1;
-			Data_40002c64 = 1100; //One star align
-			break;
-		
-		case 2600:
-			//0x5b4e8
-			func_5a57c(1, 12);
-			Data_40002c64 = 2700;
-			break;
-		
-		case 2501:
-			//0x5b9a8
-			Data_40002c64 = 2502;
-			break;
-		
-		case 2502:
-			//0x5b9bc
-			Data_40002c64 = 2503;
-			break;
-		
-		case 2503:
-			//0x5b9d0
-			Data_40002c64 = 2501;
-			break;
-		
-		case 3601:
-			//0x5ba70
-			break;
-		
-		//TODO
-	}
-}
+#include "HandleDownKey.c"
 
-/* 5d1ac - todo */
-void HandleUpKey(void)
-{
-	switch (Data_40002c64)
-	{
-		//TODO
-		
-		case 500:
-			//0x5d914: Main Screen Help Pages
-			if (bData_40002c59_MainScreenHelpPage == 1)
-			{
-				bData_40002c59_MainScreenHelpPage = 10;
-			}
-			else
-			{
-				bData_40002c59_MainScreenHelpPage--;
-			}
-			//->0x5f0b4
-			break;
-			
-		case 1200:
-			//0x5d9e4
-			func_5a57c(0, 11);
-			Data_40002c64 = 1100;
-			//->0x5f0b4
-			break;
-		
-		//TODO
-		
-		case 380011:
-			//0x5edfc: Background light
-			if (Data_40003248_CurrentDisplayPWM == 0)
-			{
-				//5ee10
-				setDisplayPWM(63);
-				Data_40003248_CurrentDisplayPWM = 63;
-			}
-			else if (Data_40003248_CurrentDisplayPWM == 63)
-			{
-				//5ee38
-				setDisplayPWM(127);
-				Data_40003248_CurrentDisplayPWM = 127;
-			}
-			else if (Data_40003248_CurrentDisplayPWM == 127)
-			{
-				//5ee38
-				setDisplayPWM(191);
-				Data_40003248_CurrentDisplayPWM = 191;
-			}
-			else
-			{
-				//0x5ee78
-				setDisplayPWM(255);
-				Data_40003248_CurrentDisplayPWM = 255;
-			}
-			//->0x5f0b4
-			break;
-	}
-}
+#include "HandleUpKey.c"
 
 /* 5f0c0 - todo */
 void func_5f0c0(void)
@@ -1835,7 +1713,7 @@ void func_6a2cc(void)
 			default:
 				//6a900
 				break;
-		}
+		} //switch (bData_40002c69_KeyCode)
 		
 		bData_40002c68 = 1;
 		//->6a948
@@ -1871,7 +1749,7 @@ void func_6a2cc(void)
 		bData_40002ef6 = 0;		
 	}
 	//6aa04
-	if (bData_40002f1e == 1)
+	if (bData_40002f1e_SetupLocalData == 1)
 	{
 		//6aa14
 		if (bData_400031ec != 0)
@@ -2009,8 +1887,8 @@ void func_6b17c(void)
 {
 }
 
-/* 6c804 */
-void func_6c804(void)
+/* 6c804 - complete */
+void ShowStartupScreen(void)
 {
 	func_7e8(0, 3, 1, 22, " BRESSER GOTO SYSTEM  ");
 	func_7e8(0, 5, 1, 22, "     EXOS EQ v2.3     ");
@@ -2242,7 +2120,7 @@ void func_6cb38(void)
 		
 			func_b4f0();
 		
-			Data_40002e54 = fData_40003520;
+			Data_40002e54_Zone = fData_40003520;
 			Data_40004128.Data_64 = fData_40003520;
 		
 			CCR = (1 << 4); //clock from the 32 kHz oscillator that’s connected to the RTCX1 and RTCX2 pins
@@ -2323,12 +2201,12 @@ int main(void)
 	bData_40003196_CurrentLanguage = Data_40004c58[0];
 	if (Data_40004c58[1] == 1)
 	{
-		func_51368();
+		ValidateDateTimeSetRTC();
 		Data_40004c58[1] = 0;
 		func_24d4(0xdcb, 0, 2, Data_40004c58);
 	}
 
-	func_6c804();
+	ShowStartupScreen();
 	
 	uart1_write_byte(0x55);
 	uart1_write_byte(0xaa);
@@ -2393,7 +2271,7 @@ int main(void)
 	
 	Data_40004128.dData_48 = fData_40003540;
 	Data_40004128.dData_56 = fData_40003544;
-	Data_40002e54 = Data_40003548;
+	Data_40002e54_Zone = Data_40003548;
 	
 	Data_40002827[6] = Data_40004bb8[0];
 	Data_40002827[7] = Data_40004bb8[1];
@@ -2484,7 +2362,7 @@ int main(void)
 	func_659c(2000);
 	func_394();
 	
-	if (bData_40002f1e == 1)
+	if (bData_40002f1e_SetupLocalData == 1)
 	{
 		//6d64c
 		func_6518(); //-> get time from RTC
@@ -2634,7 +2512,7 @@ int main(void)
 			//TODO
 			
 			//6e554 ->6f8d0??
-		}
+		} //if (bData_40002c1a == 1)
 		//6e558
 		else if (bData_40002c1a == 2)
 		{
@@ -2655,7 +2533,7 @@ int main(void)
 			}
 			
 			//TODO
-		}
+		} //else if (bData_40002c1a == 2)
 		//6f8d0
 		if (bData_400031ed == 0)
 		{
@@ -2673,7 +2551,7 @@ int main(void)
 			bData_400031ed = 1;
 		}
 		//6f94c
-		func_6a2cc();
+		func_6a2cc(); //->KeyHandling
 		//6f950
 		if (Data_40004128.bData_364 == 0)
 		{

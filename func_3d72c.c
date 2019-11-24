@@ -329,7 +329,7 @@ void func_3d72c(void)
 					break;
 				
 				case 12001:
-					//3f9a4
+					//0x3f9a4
 					break;
 				
 				case 11102: //0x2b5e:
@@ -404,15 +404,15 @@ void func_3d72c(void)
 					//0x412f8
 					break;
 				
-				case 0x5DC2:
+				case 24002: //0x5DC2:
 					//0x41300
 					break;
 				
-				case 0x61AA:
+				case 25002: //0x61AA:
 					//0x41304
 					break;
 				
-				case 0x59EE:
+				case 23022: //0x59EE:
 					//0x41308
 					break;
 				
@@ -436,7 +436,7 @@ void func_3d72c(void)
 					//0x41624
 					break;
 				
-				case 0x5DC3:
+				case 25001:
 					//0x418fc
 					break;
 				
@@ -480,32 +480,130 @@ void func_3d72c(void)
 					//0x43328
 					break;
 				
+				case 29001:
+					//0x435dc
+					break;
+				
+				case 29002: //???
+					//0x437f0
+					break;
+				
+				case 41001: //"Date and Time Set: "
+					//0x43bc0
+					switch (bData_40002e78)
+					{
+						case 0:
+							//0x43be0
+							func_7e8(0, 1, 1, (char)strlen(Data_40003360), Data_40003360);
+							func_7e8(0, 2, 1, (char)strlen(Data_40003364), Data_40003364);
+							func_7e8(0, 3, 1, (char)strlen(Data_40003368), Data_40003368);
+							func_7e8(0, 4, 1, (char)strlen(Data_4000336c), Data_4000336c);
+							func_7e8(0, 5, 1, (char)strlen(Data_40003370), Data_40003370);
+							func_7e8(0, 6, 1, (char)strlen(Data_40003374), Data_40003374);
+							func_7e8(0, 7, 1, (char)strlen(Data_40003378), Data_40003378);
+							func_7e8(0, 8, 1, (char)strlen(Data_4000337c), Data_4000337c);
+
+							func_7e8(1, 3, bData_4000318a, 1, &Data_40003368[bData_4000318a - 1]);
+							//->0x43f60
+							break;
+						
+						case 1:
+							//0x43d9c
+							func_7e8(0, 1, 1, (char)strlen(Data_40003360), Data_40003360);
+							func_7e8(0, 2, 1, (char)strlen(Data_40003364), Data_40003364);
+							func_7e8(0, 3, 1, (char)strlen(Data_40003368), Data_40003368);
+							func_7e8(0, 4, 1, (char)strlen(Data_4000336c), Data_4000336c);
+							func_7e8(0, 5, 1, (char)strlen(Data_40003370), Data_40003370);
+							func_7e8(0, 6, 1, (char)strlen(Data_40003374), Data_40003374);
+							func_7e8(0, 7, 1, (char)strlen(Data_40003378), Data_40003378);
+							func_7e8(0, 8, 1, (char)strlen(Data_4000337c), Data_4000337c);
+						
+							func_7e8(1, 5, bData_4000318a, 1, &Data_40003370[bData_4000318a - 1]);
+							//->0x43f60
+							break;
+						
+						default:
+							//0x43f58
+							break;
+					}
+					break;
+				
+				case 43011: //Country & City
+					//0x43f68
+					func_7e8(0, 1, 1, (char)strlen(Data_40003360), Data_40003360);
+					func_7e8(0, 2, 1, (char)strlen(Data_40003364), Data_40003364);
+					func_7e8(0, 3, 1, (char)strlen(Data_40003368), Data_40003368);
+					func_7e8(0, 4, 1, (char)strlen(Data_4000336c), Data_4000336c);
+					func_7e8(0, 5, 1, (char)strlen(Data_40003370), Data_40003370);
+					func_7e8(0, 6, 1, (char)strlen(Data_40003374), Data_40003374);
+					func_7e8(0, 7, 1, (char)strlen(Data_40003378), Data_40003378);
+					func_7e8(0, 8, 1, (char)strlen(Data_4000337c), Data_4000337c);
+				
+					func_864(0, 3, 14, (unsigned char*)Data_7906c);
+					func_864(0, 3, 17, (unsigned char*)Data_79078);
+					func_864(0, 4, 14, (unsigned char*)Data_7906c);
+					func_864(0, 4, 17, (unsigned char*)Data_79078);
+					//->0x4684c
+					break;
+				
+				case 43002:
+					//0x44140
+					break;
+				
+				case 47041:
+					//0x444b4
+					break;
+				
+				case 47011:
+					//0x444bc
+					break;
+				
 				case 100:
 					//0x446e8
 					break;
 				
-				case 0x80E9:
+				case 33001: //0x80E9:
 					//0x44760
 					break;
 				
-				case 0x6D61:
+				case 34001:
+					//0x4477c
+					break;
+				
+				case 35001:
+					//0x44938
+					break;
+				
+				case 28001: //0x6D61:
 					//0x4575c
 					break;
 				
-				case 0xBB81:
+				case 48001: //0xBB81:
 					//0x43a04
 					break;
 				
-				case 0x5A565:
+				case 360021:
+					//0x44b70
+					break;
+				
+				case 360022:
+					//0x44d2c
+					break;
+				
+				case 370021: //0x5A565:
 					//0x44ee8
 					break;
 				
-				case 0x5A566:
+				case 370022: //0x5A566:
 					//0x450e0
 					break;
 				
-				case 0x5A567:
+				case 370023: //0x5A567:
 					//0x452d8
+					break;
+				
+				case 211001:
+					//0x454d0
 					break;
 				
 				default:

@@ -2413,7 +2413,7 @@ int func_4dd0(int a, Struct_4dd0* b)
 }
 
 /* 4f5c - todo */
-int func_4f5c(int a, Struct_4f5c* b)
+int flash_get_site_data(int a, Struct_SiteData* b)
 {
 	unsigned char buf[40];
 	unsigned short r6;
@@ -2432,45 +2432,45 @@ int func_4f5c(int a, Struct_4f5c* b)
 	
 	for (i = 0; i < 18; i++)
 	{
-		b->bData_0[i-0] = buf[i];
+		b->cCountry[i-0] = buf[i];
 	}
 	
-	b->bData_0[18] = ' ';
-	b->bData_0[19] = 0;
+	b->cCountry[18] = ' ';
+	b->cCountry[19] = 0;
 	
 	for (i = 18; i < 34; i++)
 	{
-		b->bData_20[i-18] = buf[i];
+		b->cCity[i-18] = buf[i];
 	}
 	
-	b->bData_20[16] = ' ';
-	b->bData_20[17] = 0;
+	b->cCity[16] = ' ';
+	b->cCity[17] = 0;
 	
 	if (buf[34] >= 0x80)
 	{
-		b->fData_40 = ((0x80 - buf[34]) * 100) - buf[35] - buf[36] / 60.0;
+		b->fLongitude = ((0x80 - buf[34]) * 100) - buf[35] - buf[36] / 60.0;
 	}
 	else
 	{
-		b->fData_40 = (buf[34] * 100) + buf[35] + buf[36] / 60.0;
+		b->fLongitude = (buf[34] * 100) + buf[35] + buf[36] / 60.0;
 	}
 	
 	if (buf[37] >= 0x80)
 	{
-		b->fData_44 = (0x80 - buf[37]) - buf[38] / 60.0;
+		b->fLatitude = (0x80 - buf[37]) - buf[38] / 60.0;
 	}
 	else
 	{
-		b->fData_44 = buf[37] + buf[38] / 60.0;
+		b->fLatitude = buf[37] + buf[38] / 60.0;
 	}
 	
 	if (buf[39] > 0x80)
 	{
-		b->Data_48 = 0x80 - buf[39];
+		b->Zone = 0x80 - buf[39];
 	}
 	else
 	{
-		b->Data_48 = buf[39];
+		b->Zone = buf[39];
 	}
 	
 	return 1;
@@ -2767,7 +2767,7 @@ unsigned char func_58ec(float r4, float r5, float r6[][2], unsigned char r7[][10
 /* 5f40 - todo */
 void func_5f40(void)
 {
-	bData_40002f1e = 1;
+	bData_40002f1e_SetupLocalData = 1;
 	bData_40002c58 = 0;
 	bData_40002c5a = 0;
 	bData_40002c68 = 0;
@@ -2812,7 +2812,7 @@ void func_5f40(void)
 	Data_40002e3c_SiteLatitudeMinutes = 1;
 	fData_40002e40_SiteLatitudeSeconds = 8.9;
 	Data_40002e44 = 1;
-	Data_40002e54 = 8;
+	Data_40002e54_Zone = 8;
 	Data_40002e5c_Year = 2010;
 	bData_40002e60_Month = 8;
 	bData_40002e61_Day = 28;
@@ -8641,7 +8641,7 @@ void func_24574(void)
 {
 	dData_40002e28_SiteLongitude = Data_40004128.dData_48;
 	dData_40002e48_SiteLatitude = Data_40004128.dData_56;
-	Data_40002e54 = Data_40004128.Data_64;
+	Data_40002e54_Zone = Data_40004128.Data_64;
 	
 	Data_40002e18_SiteLongitudeDegrees = dData_40002e28_SiteLongitude;	
 	Data_40002e1c_SiteLongitudeMinutes = (dData_40002e28_SiteLongitude - Data_40002e18_SiteLongitudeDegrees) * 60.0;
@@ -9069,8 +9069,8 @@ void SwapLanguageStrings(void)
 			Data_40003054 = Data_40000b55;
 			Data_40003058 = Data_40000b5b;
 			Data_4000305c = Data_40000b65;
-			Data_40003060 = Data_40000b6f;
-			Data_40003064 = Data_40000b7e;
+			Data_40003060 = strEngCountryAndCity;
+			Data_40003064 = strEngCustomSite;
 			Data_40003068 = Data_40000b8a;
 			Data_4000306c = Data_40000b91;
 			Data_40003070 = Data_40000b95;
@@ -9180,8 +9180,8 @@ void SwapLanguageStrings(void)
 			Data_40003054 = Data_40000b55;
 			Data_40003058 = Data_40000b5b;
 			Data_4000305c = Data_40000b65;
-			Data_40003060 = Data_40000b6f;
-			Data_40003064 = Data_40000b7e;
+			Data_40003060 = strEngCountryAndCity;
+			Data_40003064 = strEngCustomSite;
 			Data_40003068 = Data_40000b8a;
 			Data_4000306c = Data_40000b91;
 			Data_40003070 = Data_40000b95;
@@ -9290,8 +9290,8 @@ void SwapLanguageStrings(void)
 			Data_40003054 = Data_40000b55;
 			Data_40003058 = Data_40000b5b;
 			Data_4000305c = Data_40000b65;
-			Data_40003060 = Data_40000b6f;
-			Data_40003064 = Data_40000b7e;
+			Data_40003060 = strEngCountryAndCity;
+			Data_40003064 = strEngCustomSite;
 			Data_40003068 = Data_40000b8a;
 			Data_4000306c = Data_40000b91;
 			Data_40003070 = Data_40000b95;
@@ -9400,8 +9400,8 @@ void SwapLanguageStrings(void)
 			Data_40003054 = Data_40000b55;
 			Data_40003058 = Data_40000b5b;
 			Data_4000305c = Data_40000b65;
-			Data_40003060 = Data_40000b6f;
-			Data_40003064 = Data_40000b7e;
+			Data_40003060 = strEngCountryAndCity;
+			Data_40003064 = strEngCustomSite;
 			Data_40003068 = Data_40000b8a;
 			Data_4000306c = Data_40000b91;
 			Data_40003070 = Data_40000b95;
@@ -9510,8 +9510,8 @@ void SwapLanguageStrings(void)
 			Data_40003054 = Data_40000b55;
 			Data_40003058 = Data_40000b5b;
 			Data_4000305c = Data_40000b65;
-			Data_40003060 = Data_40000b6f;
-			Data_40003064 = Data_40000b7e;
+			Data_40003060 = strEngCountryAndCity;
+			Data_40003064 = strEngCustomSite;
 			Data_40003068 = Data_40000b8a;
 			Data_4000306c = Data_40000b91;
 			Data_40003070 = Data_40000b95;
