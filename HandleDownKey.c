@@ -520,236 +520,620 @@ void HandleDownKey(void)
 			//0x5bd18
 		case 23017:
 			//0x5bd1c
-		
-			//TODO
-		
+			if (bData_400034a9 == 0)
+			{
+				//5bd2c
+				if ((Data_40004128.bData_356 != 0) &&
+					(bData_40002e89 != 1))
+				{
+					//5bd4c
+					Data_4000340c = -1;
+					bData_40003201 = 0;
+				}
+				else
+				{
+					//0x5bd68
+					if (bData_40002c1a == 1)
+					{
+						//5bd78
+						func_57414(2, 2, bData_40002e7d);
+					}
+					else
+					{
+						//0x5bd90
+						func_57414(4, 2, bData_40002e7d);
+					}
+				}
+			}
+			else
+			{
+				//0x5bda8
+				if (bData_40002c1a == 1)
+				{
+					//5bdb8
+					func_57414(2, 2, bData_40002e7d);
+				}
+				else
+				{
+					//0x5bdd0
+					func_57414(4, 2, bData_40002e7d);
+				}
+			}
+			//->0x5ca8c
 			break;
 		
 		case 11201:
 			//0x5bde8
+			dData_40002e00 = dData_40002df8;
+			if (bData_40002c1a == 1)
+			{
+				//5be0c
+				func_57414(2, 2, 3);
+				bData_40002edd = 3;
+			}
+			else
+			{
+				//0x5be2c
+				func_57414(4, 2, 3);
+				bData_40002edd = 1;
+			}
+			Data_40002eb0 = 1;
+			bData_40003189 = 1;
+			Data_40002c64 = 11203;
 			break;
 		
 		case 11203:
 			//0x5be6c
+			if (bData_40003189 == 2)
+			{
+				if (bData_40002c1a == 1)
+				{
+					//5be90
+					func_57414(2, 2, 3);
+				}
+				else
+				{
+					//0x5bea4
+					func_57414(4, 2, 3);
+				}
+			}
+			//5beb4 -> 0x5ca8c
 			break;
 		
 		case 45001:
 			//0x5beb8
+			Data_40002c64 = 45002;
 			break;
 		
 		case 45002:
 			//0x5becc
+			Data_40002c64 = 45001;
 			break;
 		
 		case 46001:
 			//0x5bee0
+			Data_40002c64 = 46002;
 			break;
 		
 		case 46002:
 			//0x5bef4
+			Data_40002c64 = 46001;
 			break;
 		
 		case 49001:
 			//0x5bf08
+			Data_40002c64 = 49002;
 			break;
 		
 		case 49002:
 			//0x5bf1c
+			Data_40002c64 = 49003;
 			break;
 		
 		case 49003:
 			//0x5bf30
+			Data_40002c64 = 49004;
 			break;
 		
 		case 49004:
 			//0x5bf44
+			Data_40002c64 = 49005;
 			break;
 		
 		case 49005:
 			//0x5bf58
+			Data_40002c64 = 49001;
 			break;
 		
 		case 21001:
 			//0x5bf6c
+			if ((bData_40003161 - 1) == bData_40002eb4)
+			{
+				bData_40002eb4 = 0;
+			}
+			else
+			{
+				bData_40002eb4++;
+			}
 			break;
 		
 		case 22001:
 			//0x5bfb4
-			break;
-		
+			func_394();
 		case 31001:
 			//0x5bfc0
+			bData_40002eb5_SolarSystemObjectNr++;
+			if (bData_40002eb5_SolarSystemObjectNr > 9)
+			{
+				bData_40002eb5_SolarSystemObjectNr = 0;
+			}
 			break;
 		
 		case 24001:
 			//0x5bff4
+			func_394();
+		
+			bData_40002ece++;
+			if (bData_40002ece > 88)
+			{
+				bData_40002ece = 1;
+			}
 			break;
 		
 		case 25001:
 			//0x5c030
+			func_394();
+		
+			bData_40002ed2++;
+			if (bData_40002ed2 > 33)
+			{
+				bData_40002ed2 = 1;
+			}
 			break;
 		
 		case 23012:
 			//0x5c06c
-			break;
-		
 		case 23002:
 			//0x5c074
+			func_394();
+		
+			wData_40002eb8_MessierNr++;
+			if (wData_40002eb8_MessierNr > 110)
+			{
+				wData_40002eb8_MessierNr = 1;
+			}
 			break;
 		
 		case 23003:
 			//0x5c0b0
+			func_394();
+		
+			wData_40002eba_NGCNr++;
+			if (wData_40002eba_NGCNr > 7840)
+			{
+				wData_40002eba_NGCNr = 1;
+			}
 			break;
 		
 		case 23004:
 			//0x5c0f4
+			func_394();
+		
+			wData_40002ebc_ICNr++;
+			if (wData_40002ebc_ICNr > 5386)
+			{
+				wData_40002ebc_ICNr = 1;
+			}
 			break;
 		
 		case 23005:
 			//0x5c138
+			func_394();
+		
+			wData_40002ebe_ShNr++;
+			if (wData_40002ebe_ShNr > 313)
+			{
+				wData_40002ebe_ShNr = 1;
+			}
 			break;
 		
 		case 23006:
 			//0x5c17c
+			func_394();
+		
+			wData_40002ec0++;
+			if (wData_40002ec0 > 167)
+			{
+				wData_40002ec0 = 1;
+			}
 			break;
 		
 		case 23007:
 			//0x5c1bc
+			func_394();
+		
+			Data_40002ec4_SAONr++;
+			if (Data_40002ec4_SAONr > 258997)
+			{
+				Data_40002ec4_SAONr = 1;
+			}
 			break;
 		
 		case 203:
 			//0x5c1fc
+			bData_4000318a = 6;
+			Data_40002c64 = 204;
 			break;
 		
 		case 204:
 			//0x5c21c
+			bData_4000318a = 5;
+			Data_40002c64 = 205;
 			break;
 		
 		case 205:
 			//0x5c23c
+			bData_4000318a = 6;
+			Data_40002c64 = 203;
 			break;
 		
 		case 201:
 			//0x5c25c
-			break;
-		
 		case 202:
 			//0x5c264
-			break;
-		
 		case 101:
 			//0x5c268
+			switch (bData_4000319a_SkyLandTargetId)
+			{
+				case 1:
+					//0x5c2a4
+					bData_4000319a_SkyLandTargetId = 4;
+					break;
+
+				case 4:
+					//0x5c2b8
+					bData_4000319a_SkyLandTargetId = 7;
+					break;
+
+				case 7:
+					//0x5c2cc
+					bData_4000319a_SkyLandTargetId = 1;
+					break;
+				
+				case 2:
+					//0x5c2e0
+					bData_4000319a_SkyLandTargetId = 5;
+					break;
+
+				case 5:
+					//0x5c2f4
+					bData_4000319a_SkyLandTargetId = 8;
+					break;
+
+				case 8:
+					//0x5c308
+					bData_4000319a_SkyLandTargetId = 2;
+					break;
+				
+				case 3:
+					//0x5c31c
+					bData_4000319a_SkyLandTargetId = 6;
+					break;
+				
+				case 6:
+					//0x5c330
+					bData_4000319a_SkyLandTargetId = 9;
+					break;
+				
+				case 9:
+					//0x5c344
+					bData_4000319a_SkyLandTargetId = 3;
+					break;
+				#if 0
+				default:
+					//0x5c358
+					break;
+				#endif
+			}
 			break;
-		
+			
 		case 29001:
 			//0x5c360
+			Data_40002c64 = 29002;
+			bData_4000318a = 5;
+			break;
 		
 		case 29002:
 			//0x5c380
+			Data_40002c64 = 29001;
+			bData_4000318a = 6;
 			break;
 		
 		case 206:
 			//0x5c3a0
+			bData_4000318a = 6;
+			Data_40002c64 = 207;
 			break;
 		
 		case 207:
 			//0x5c3c0
+			bData_4000318a = 5;
+			Data_40002c64 = 208;
 			break;
 		
 		case 208:
 			//0x5c3e0
+			bData_4000318a = 6;
+			Data_40002c64 = 206;
 			break;
 		
 		case 41001:
 			//0x5c400
+			if (bData_40002e78 == 0)
+			{
+				bData_40002e78 = 1;
+			}
+			else
+			{
+				bData_40002e78 = 0;
+			}			
+			bData_4000318a = 1;
 			break;
 		
 		case 43021:
 			//0x5c440
+			Data_40002c64 = 43022;
 			break;
 		
 		case 43022:
 			//0x5c454
+			Data_40002c64 = 43023;
 			break;
 		
 		case 43023:
 			//0x5c468
+			Data_40002c64 = 43024;
 			break;
 		
 		case 43024:
 			//0x5c47c
+			Data_40002c64 = 43021;
 			break;
 		
 		case 43002:
 			//0x5c490
+			if (bData_40003144 == 3)
+			{
+				bData_40003144 = 0;
+				bData_4000318a = 7;
+			}
+			else
+			{
+				bData_40003144++;
+				bData_4000318a = 7;
+			}			
 			break;
 		
 		case 47011:
 			//0x5c4e4
+			Data_40002c64 = 47011;
+			if (bData_4000316d < 1)
+			{
+				bData_4000316d++;
+			}
+			else
+			{
+				bData_4000316d = 0;
+			}
+			if (bData_4000316d == 0)
+			{
+				bData_4000318a = 5;
+			}
+			else
+			{
+				bData_4000318a = 6;
+			}
 			break;
 		
 		case 33001:
 			//0x5c558
+			Data_40003164++;
 			break;
 		
 		case 12001:
 			//0x5c674
+			if (bData_40002c62 != 0)
+			{
+				Data_4000340c = -1;
+				bData_40003201 = 0;
+			}
+			else
+			{
+				//0x5c6a4
+				if (bData_40002c60 == bData_400034a8)
+				{
+					bData_40002c60 = 1;
+				}
+				else
+				{
+					bData_40002c60++;
+				}
+			}
+			
 			break;
 		
 		case 360021:
 			//0x5c6e4
+			Data_40002c64 = 360022;
+			bData_4000318a = 7;
 			break;
 		
 		case 360022:
 			//0x5c704
+			Data_40002c64 = 360021;
+			bData_4000318a = 7;
 			break;
 		
 		case 370021:
 			//0x5c724
+			Data_40002c64 = 370022;
+			bData_4000318a = 7;
 			break;
 		
 		case 370022:
+			Data_40002c64 = 370023;
+			bData_4000318a = 7;
 			//0x5c744
 			break;
 		
 		case 370023:
+			Data_40002c64 = 370021;
+			bData_4000318a = 7;
 			//0x5c764
 			break;
 		
 		case 360111:
 			//0x5c784
+			Data_40002c64 = 360112;
 			break;
 		
 		case 360112:
 			//0x5c798
+			Data_40002c64 = 360113;
 			break;
 		
 		case 360113:
 			//0x5c7ac
+			Data_40002c64 = 360111;
 			break;
 		
 		case 380011:
 			//0x5c7c0
+			if (Data_40003248_CurrentDisplayPWM == 255)
+			{
+				setDisplayPWM(191);
+				Data_40003248_CurrentDisplayPWM = 191;
+			}
+			else if (Data_40003248_CurrentDisplayPWM == 191)
+			{
+				setDisplayPWM(127);
+				Data_40003248_CurrentDisplayPWM = 127;
+			}
+			else if (Data_40003248_CurrentDisplayPWM == 127)
+			{
+				setDisplayPWM(63);
+				Data_40003248_CurrentDisplayPWM = 63;
+			}
+			else
+			{
+				setDisplayPWM(0);
+				Data_40003248_CurrentDisplayPWM = 0;
+			}
 			break;
 		
 		case 43011:
 			//0x5c854
+			func_394();
+			func_59dd0();
 			break;
 		
 		case 211001:
 			//0x5c864
+			switch (bData_40003262)
+			{
+				case 0:
+					//0x5c88c
+				case 2:
+					//0x5c894
+					if ((bData_40003258-1) == bData_4000325c)
+					{
+						bData_4000325c = 0;
+					}
+					else
+					{
+						bData_4000325c++;
+					}
+					//->0x5c934
+					break;
+
+				case 1:
+					//0x5c8d8
+					if (bData_40003261 == 2)
+					{
+						bData_40003261 = 0;
+						bData_4000318a = 7;
+					}
+					else
+					{
+						//0x5c908
+						bData_40003261++;
+						bData_4000318a = 7;
+					}
+					break;
+
+				default:
+					break;
+			}
 			break;
 		
 		case 28001:
 			//0x5c93c
+			switch (bData_40003263)
+			{
+				case 0:
+					//0x5c96c
+				case 2:
+					//0x5c974
+					if ((bData_40003256 - 1) == wData_4000325a)
+					{
+						wData_4000325a = 0;
+					}
+					else
+					{
+						wData_4000325a++;
+					}
+					break;
+								
+				case 1:
+					//0x5c9bc
+				case 3:
+					//0x5c9c4
+					if (bData_40003260 == 2)
+					{
+						bData_40003260 = 0;
+						bData_4000318a = 7;
+					}
+					else
+					{
+						bData_40003260++;
+						bData_4000318a = 7;
+					}
+					break;
+
+				default:
+					break;
+			}
 			break;
 		
 		case 42001:
 			//0x5ca24
+			if (bData_40002f1e_SetupLocalData == 1)
+			{
+				Data_40002c64 = 42002;
+				bData_40002c6a = 0;
+			}
 			break;
 		
 		case 42002:
 			//0x5ca54
+			if (bData_40002f1e_SetupLocalData == 1)
+			{
+				Data_40002c64 = 42001;
+				bData_40002c6a = 1;
+			}
+			break;
+			
+		default:
 			break;
 	}
 }

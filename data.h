@@ -413,6 +413,8 @@ extern char Data_400024ef[]; //400024ef
 extern char Data_40002504[]; //40002504
 extern char Data_40002655[]; //40002655, size???
 extern char Data_40002660[]; //40002660, size???
+extern char Data_40002789[]; //40002789
+extern char Data_40002792[]; //40002792
 extern char Data_400027cf[]; //400027cf
 extern char Data_400027df[]; //400027df
 extern char Data_400027ef[]; //400027ef
@@ -599,7 +601,7 @@ extern int Data_40002ea4; //40002ea4
 extern float fData_40002ea8; //40002ea8
 extern int Data_40002eac; //40002eac
 extern int Data_40002eb0; //40002eb0
-extern char bData_40002eb4; //40002eb4
+extern unsigned char bData_40002eb4; //40002eb4
 extern unsigned char bData_40002eb5_SolarSystemObjectNr; //40002eb5
 extern unsigned short wData_40002eb6; //40002eb6
 extern unsigned short wData_40002eb8_MessierNr; //40002eb8
@@ -607,7 +609,7 @@ extern unsigned short wData_40002eba_NGCNr; //40002eba
 extern unsigned short wData_40002ebc_ICNr; //40002ebc
 extern unsigned short wData_40002ebe_ShNr; //40002ebe
 extern unsigned short wData_40002ec0; //40002ec0
-extern int Data_40002ec4_SAONr; //40002ec4
+extern unsigned int Data_40002ec4_SAONr; //40002ec4
 extern int Data_40002ec8; //40002ec8
 extern unsigned short wData_40002ecc; //40002ecc
 extern unsigned char bData_40002ece; //40002ece
@@ -761,9 +763,13 @@ extern char* Data_4000310c;
 extern char* Data_40003110;
 extern char* Data_40003114;
 extern char* Data_40003140; //40003140
+extern unsigned char bData_40003144; //40003144
 extern char* Data_4000314c_SolarSystemObjectName; //4000314c
 extern char Data_40003150[]; //40003150, size??
+extern unsigned char bData_40003161; //40003161
 extern char bData_40003162; //40003162
+extern int Data_40003164; //40003164
+extern unsigned char bData_4000316d; //4000316d
 extern unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 extern unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
 extern unsigned char bData_40003170; //40003170
@@ -834,6 +840,14 @@ extern float fData_40003238; //40003238
 extern int Data_40003248_CurrentDisplayPWM; //40003248
 extern unsigned short wData_40003250; //40003250
 extern unsigned short wData_40003252; //40003252
+extern unsigned char bData_40003256; //40003256
+extern unsigned char bData_40003258; //40003258
+extern unsigned short wData_4000325a; //4000325a
+extern unsigned char bData_4000325c; //4000325c
+extern unsigned char bData_40003260; //40003260
+extern unsigned char bData_40003261; //40003261
+extern unsigned char bData_40003262; //40003262
+extern unsigned char bData_40003263; //40003263
 extern unsigned char bData_40003265; //40003265
 extern float Data_4000329c; //4000329c
 extern float Data_400032a0; //400032a0

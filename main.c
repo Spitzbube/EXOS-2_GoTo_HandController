@@ -259,6 +259,11 @@ void HandleLeftKey(void)
 {
 }
 
+/* 59dd0 - todo */
+void func_59dd0(void)
+{
+}
+
 /* 5a57c - todo */
 void func_5a57c(int a, int b)
 {
