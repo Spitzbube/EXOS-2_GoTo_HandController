@@ -1,4 +1,6 @@
 
+extern double func_52720(int a);
+
 
 /* 52898 - todo */
 void HandleEnterKey(void)
@@ -236,7 +238,115 @@ void HandleEnterKey(void)
 		
 		case 12001:
 			//0x53b68
-			//TODO
+			bData_400034cd = 0;
+			bData_40003430 = 1;
+		
+			if (bData_40002c62 == 0)
+			{
+				//53b94
+				switch (bData_40002c61)
+				{
+					case 1:
+						//0x53bb8
+						bData_400034a8 = func_58ec(func_7f30(1, 0, Data_40004128.dData_48), 
+							Data_40004128.dData_56,
+							(void*)Data_40004a68, Data_40003a14, Data_40003b2c);
+					
+						Data_40004128.dData_376 = Data_40004a68[(bData_40002c60 - 1)*2];
+						Data_40004128.dData_384 = Data_40004a68[(bData_40002c60 - 1)*2 + 1];
+						
+						switch (Data_40002c5c)
+						{
+							case 1:
+								//0x53c90
+								func_cf8c();
+								break;
+							
+							case 2:
+								//0x53c9c
+								func_d07c();
+								break;
+							
+							case 3:
+								//0x53ca8
+								func_d16c();
+								break;
+						}
+						//0x53cbc
+						bData_40002c61++;
+						Data_40002c5c--;
+						bData_40002c62 = 1;
+						bData_40002e88 = 0;
+						//->0x53f44
+						break;
+					
+					case 2:
+						//0x53d04
+						if (bData_40002e88 == 2)
+						{
+							//53d18
+							bData_400034a8 = func_58ec(func_7f30(1, 0, Data_40004128.dData_48), 
+								Data_40004128.dData_56,
+								(void*)Data_40004a68, Data_40003a14, Data_40003b2c);
+							
+							Data_40004128.dData_392 = Data_40004a68[(bData_40002c60 - 1)*2];
+							Data_40004128.dData_400 = Data_40004a68[(bData_40002c60 - 1)*2 + 1];
+							
+							if (Data_40004128.bData_364 == 0)
+							{
+								func_c8f4();
+							}
+							//0x53ddc
+							bData_40002c61++;
+							Data_40002c5c--;
+							bData_40002c62 = 1;
+							bData_40002e88 = 0;
+						}
+						//0x53e1c -> 0x53f44
+						break;
+					
+					case 3:
+						//0x53e20
+						if (bData_40002e88 == 2)
+						{
+							bData_400034a8 = func_58ec(func_7f30(1, 0, Data_40004128.dData_48), 
+								Data_40004128.dData_56,
+								(void*)Data_40004a68, Data_40003a14, Data_40003b2c);
+							
+							Data_40004128.dData_408 = Data_40004a68[(bData_40002c60 - 1)*2];
+							Data_40004128.dData_416 = Data_40004a68[(bData_40002c60 - 1)*2 + 1];
+							
+							if (Data_40004128.bData_364 == 0)
+							{
+								func_c8f4();
+							}
+							//0x53ef8
+							bData_40002c61++;
+							Data_40002c5c--;
+							bData_40002c62 = 1;
+							bData_40002e88 = 0;
+						}
+						//0x53f38 -> 0x53f44
+						break;
+				}
+				//53f44 -> 0x53f74
+			} //if (bData_40002c62 == 0)
+			else
+			{
+				//0x53f48
+				if ((bData_400031e9 == 4) || (bData_400031e9 == 8))
+				{
+					//0x53f68
+					bData_40002c62 = 0;
+				}
+			}
+			//0x53f74
+			if (Data_40002c5c != -1)
+			{
+				//53f84
+				Data_40002c64 = 12001;
+			}
+			//0x53f90 -> 0x563b8
 			break;
 		
 		case 1400: // Target Sync
@@ -296,11 +406,36 @@ void HandleEnterKey(void)
 		
 		case 11103:
 			//0x540bc
-			//TODO
+			if (fabs(dData_40002dc0 - dData_40002dc8) > 5.0)
+			{
+				//540fc
+				fData_40002e90 = fabs((dData_40002dc0 - dData_40002dc8 - 360.0) * 3600.0);
+				//->0x541b0
+			}
+			else
+			{
+				//0x54164
+				fData_40002e90 = fabs((dData_40002dc0 - dData_40002dc8) * 3600.0);
+			}
+			//0x541b0
+			Data_40002e94 += fData_40002e90;
+			Data_40002e9c += 1;
+			Data_40002eb0 = 0;
+			Data_40002c64 = 11104;
+			//->0x563b8
 			break;
 		
 		case 11101:
 			//0x54200
+			if (Data_40002e9c != 0)
+			{
+				//54218
+				fData_40002e98 = Data_40002e94 / Data_40002e9c;
+				
+				func_52720(1);
+			}
+			//0x54244
+			
 			//TODO
 			break;
 		

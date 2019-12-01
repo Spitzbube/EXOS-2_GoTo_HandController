@@ -244,6 +244,11 @@ void func_52478(void)
 {
 }
 
+/* 52720 - todo */
+double func_52720(int a)
+{
+}
+
 /* 57414 - todo */
 void func_57414(int a, int b, int c)
 {
