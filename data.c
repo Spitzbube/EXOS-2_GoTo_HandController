@@ -291,6 +291,8 @@ char Data_400024ef[21]; //400024ef, size??
 char Data_40002504[100]; //40002504, size???
 char Data_40002655[11]; //40002655, size???
 char Data_40002660[100]; //40002660, size???
+char Data_40002789[9]; //40002789
+char Data_40002792[50]; //40002792, size??
 char Data_400027cf[16]; //400027cf
 char Data_400027df[16]; //400027df
 char Data_400027ef[16]; //400027ef
@@ -479,7 +481,7 @@ int Data_40002ea4; //40002ea4
 float fData_40002ea8; //40002ea8
 int Data_40002eac; //40002eac
 int Data_40002eb0; //40002eb0
-char bData_40002eb4; //40002eb4
+unsigned char bData_40002eb4; //40002eb4
 unsigned char bData_40002eb5_SolarSystemObjectNr; //40002eb5
 unsigned short wData_40002eb6; //40002eb6
 unsigned short wData_40002eb8_MessierNr; //40002eb8
@@ -487,7 +489,7 @@ unsigned short wData_40002eba_NGCNr; //40002eba
 unsigned short wData_40002ebc_ICNr; //40002ebc
 unsigned short wData_40002ebe_ShNr; //40002ebe
 unsigned short wData_40002ec0; //40002ec0
-int Data_40002ec4_SAONr; //40002ec4
+unsigned int Data_40002ec4_SAONr; //40002ec4
 int Data_40002ec8; //40002ec8
 unsigned short wData_40002ecc; //40002ecc
 unsigned char bData_40002ece; //40002ece
@@ -641,9 +643,13 @@ char* Data_4000310c;
 char* Data_40003110;
 char* Data_40003114;
 char* Data_40003140; //40003140
+unsigned char bData_40003144; //40003144
 char* Data_4000314c_SolarSystemObjectName; //4000314c
 char Data_40003150[30]; //40003150, size??
+unsigned char bData_40003161; //40003161
 char bData_40003162; //40003162
+int Data_40003164; //40003164
+unsigned char bData_4000316d; //4000316d
 unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
 unsigned char bData_40003170; //40003170
@@ -713,6 +719,14 @@ float fData_40003238; //40003238
 int Data_40003248_CurrentDisplayPWM; //40003248
 unsigned short wData_40003250; //40003250
 unsigned short wData_40003252; //40003252
+unsigned char bData_40003256; //40003256
+unsigned char bData_40003258; //40003258
+unsigned short wData_4000325a; //4000325a
+unsigned char bData_4000325c; //4000325c
+unsigned char bData_40003260; //40003260
+unsigned char bData_40003261; //40003261
+unsigned char bData_40003262; //40003262
+unsigned char bData_40003263; //40003263
 unsigned char bData_40003265; //40003265
 float Data_4000329c; //4000329c
 float Data_400032a0; //400032a0

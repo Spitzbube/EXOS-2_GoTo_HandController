@@ -172,7 +172,16 @@ void HandleEnterKey(void)
 		case 4600: // Telescope Mount
 			//0x537e0
 			Data_40002c64 = 47011; //->"Please setup OTA zero"
-			//TODO
+			bData_4000316d = 0;
+			bData_4000318a = 5;
+			bData_400032a4 = 0;
+		
+			func_27c4(&Data_4000329c, &Data_400032a0);
+		
+			sprintf(Data_400028d7, "Azi:%03d", (unsigned short)Data_4000329c);
+			sprintf(Data_400028e1, "Alt: %02d", (unsigned short)Data_400032a0);
+			sprintf(Data_40002789, "Azi:%03d", (unsigned short)Data_4000329c);
+			sprintf(Data_40002792, "Alt: %02d", (unsigned short)Data_400032a0);
 			break;
 		
 		case 4700: // Tracking Rate
@@ -253,7 +262,15 @@ void HandleEnterKey(void)
 		
 		case 1402:
 			//0x53ffc
-			//TODO
+			dData_40003410 = dData_400033d8;
+			dData_40003418 = -dData_400033e0;
+			dData_40003420 = dData_400033d8;
+			dData_40003428 = dData_400033e0;
+		
+			Data_40002c64 = 0;
+			bData_400031ea = 0;
+			
+			func_7950(2);
 			break;
 		
 		case 1403:
