@@ -593,9 +593,9 @@ extern unsigned char bData_40002e8a; //40002e8a
 extern char bData_40002e8b; //40002e8b
 extern char bData_40002e8c; //40002e8c
 extern float fData_40002e90; //40002e90
-extern int Data_40002e94; //40002e94
+extern float Data_40002e94; //40002e94
 extern float fData_40002e98; //40002e98
-extern int Data_40002e9c; //40002e9c
+extern float Data_40002e9c; //40002e9c
 extern float fData_40002ea0; //40002ea0
 extern int Data_40002ea4; //40002ea4
 extern float fData_40002ea8; //40002ea8

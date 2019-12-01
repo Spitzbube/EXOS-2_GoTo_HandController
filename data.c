@@ -473,9 +473,9 @@ unsigned char bData_40002e8a; //40002e8a
 char bData_40002e8b; //40002e8b
 char bData_40002e8c; //40002e8c
 float fData_40002e90; //40002e90
-int Data_40002e94; //40002e94
+float Data_40002e94; //40002e94
 float fData_40002e98; //40002e98
-int Data_40002e9c; //40002e9c
+float Data_40002e9c; //40002e9c
 float fData_40002ea0; //40002ea0
 int Data_40002ea4; //40002ea4
 float fData_40002ea8; //40002ea8
