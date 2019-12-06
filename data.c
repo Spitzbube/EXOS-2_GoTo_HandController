@@ -458,7 +458,7 @@ unsigned char bData_40002e62_Hours; //40002e62
 unsigned char bData_40002e63_Minutes; //40002e63
 unsigned char bData_40002e64_Seconds; //40002e64
 unsigned short wData_40002e66; //40002e66
-char bData_40002e78; //40002e78
+unsigned char bData_40002e78; //40002e78
 unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79
 unsigned char bData_40002e7a; //40002e7a
 unsigned char bData_40002e7b; //40002e7b
@@ -649,6 +649,7 @@ char Data_40003150[30]; //40003150, size??
 unsigned char bData_40003161; //40003161
 char bData_40003162; //40003162
 int Data_40003164; //40003164
+int Data_40003168; //40003168
 unsigned char bData_4000316d; //4000316d
 unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
@@ -674,7 +675,7 @@ unsigned char bData_40003184; //40003184
 unsigned char bData_40003186; //40003186
 char bData_40003188; //40003188
 char bData_40003189; //40003189
-char bData_4000318a; //4000318a
+unsigned char bData_4000318a; //4000318a
 int Data_4000318c; //4000318c
 int Data_40003190; //40003190
 char bData_40003194; //40003194
