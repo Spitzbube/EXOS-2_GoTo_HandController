@@ -578,7 +578,7 @@ extern unsigned char bData_40002e62_Hours; //40002e62
 extern unsigned char bData_40002e63_Minutes; //40002e63
 extern unsigned char bData_40002e64_Seconds; //40002e64
 extern unsigned short wData_40002e66; //40002e66
-extern char bData_40002e78; //40002e78
+extern unsigned char bData_40002e78; //40002e78
 extern unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79
 extern unsigned char bData_40002e7a; //40002e7a
 extern unsigned char bData_40002e7b; //40002e7b
@@ -769,6 +769,7 @@ extern char Data_40003150[]; //40003150, size??
 extern unsigned char bData_40003161; //40003161
 extern char bData_40003162; //40003162
 extern int Data_40003164; //40003164
+extern int Data_40003168; //40003168
 extern unsigned char bData_4000316d; //4000316d
 extern unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 extern unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
@@ -794,7 +795,7 @@ extern unsigned char bData_40003184; //40003184
 extern unsigned char bData_40003186; //40003186
 extern char bData_40003188; //40003188
 extern char bData_40003189; //40003189
-extern char bData_4000318a; //4000318a
+extern unsigned char bData_4000318a; //4000318a
 extern int Data_4000318c; //4000318c
 extern int Data_40003190; //40003190
 extern char bData_40003194; //40003194

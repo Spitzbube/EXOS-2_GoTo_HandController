@@ -1,6 +1,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include <math.h>
 #include <LPC214x.h>
 #include "my_types.h"
@@ -7801,8 +7802,8 @@ void func_1e228(void)
 /* 20b94 - todo */
 void func_20b94(void)
 {
-	func_7e8(0, 1, 1, strlen(Data_40003360), Data_40003360);
-	func_7e8(0, 1, 14, strlen(Data_40003364), Data_40003364);
+	func_7e8(0, 1, 1, strlen(Data_40003360), (unsigned char*)Data_40003360);
+	func_7e8(0, 1, 14, strlen(Data_40003364), (unsigned char*)Data_40003364);
 	
 	if (bData_400031ea == 1)
 	{
