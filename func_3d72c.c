@@ -8,7 +8,7 @@ void func_3d72c(void)
 	{
 		case 1:
 			//0x3d750
-			Data_4000318c = Data_40002c64;
+			Data_4000318c = Data_40002c64_MenuContextId;
 			if (Data_4000318c != Data_40003190)
 			{
 				//3d77c
@@ -16,7 +16,7 @@ void func_3d72c(void)
 				Data_40003190 = Data_4000318c;
 			}
 			//3d790
-			switch (Data_40002c64)
+			switch (Data_40002c64_MenuContextId)
 			{
 				case 0:
 					//0x3da9c
@@ -324,15 +324,15 @@ void func_3d72c(void)
 					func_2254(200);
 					func_7950(1);
 					func_2254(200);
-					Data_40002c64 = 0;
+					Data_40002c64_MenuContextId = 0;
 					//->0x4684c
 					break;
 				
 				case 12001:
-					//0x3f9a4
+					//0x3f9a4: One / Two / Three Star Align
 					if (bData_40002c62 == 0)
 					{
-						//3f9b8
+						//3f9b8: Alignment Star Selection
 						if (Data_40002c5c == 0)
 						{
 							//3f9c8
@@ -360,9 +360,9 @@ void func_3d72c(void)
 							
 							func_2254(300);
 							
-							Data_40002c64 = 0;
+							Data_40002c64_MenuContextId = 0;
 							//->0x4047c
-						}
+						} //if (Data_40002c5c == 0)
 						else
 						{
 							//0x3fb58
@@ -396,7 +396,7 @@ void func_3d72c(void)
 					} //if (bData_40002c62 == 0)
 					else
 					{
-						//0x3fdac
+						//0x3fdac: "Slewing to Target" / "Please center this star to the field of view"
 						if ((bData_40002e88 == 1) && (bData_400034cd == 0))
 						{
 							//3fdcc
@@ -444,7 +444,7 @@ void func_3d72c(void)
 							
 							func_7e8(0, 6, 1, 4, "    ");
 							//->0x402d8
-						}
+						} //if ((bData_40002e88 == 1) && (bData_400034cd == 0))
 						else
 						{
 							//0x4015c
@@ -457,9 +457,9 @@ void func_3d72c(void)
 								}
 								bData_400031e9 = 8;
 								
-								Data_40003364 = Data_400030a8;
-								Data_4000336c = Data_400030ac;
-								Data_40003374 = Data_400030b0;
+								Data_40003364 = Data_400030a8; //"  Please center this "
+								Data_4000336c = Data_400030ac; //"star to the field of"
+								Data_40003374 = Data_400030b0; //"view"
 								
 								func_7e8(0, 1, 1, 22, "                       ");
 								func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -531,7 +531,7 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					func_2254(800);
-					Data_40002c64 = 11102;
+					Data_40002c64_MenuContextId = 11102;
 					//->0x4684c
 					break;
 				
@@ -549,7 +549,7 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					func_2254(800);
-					Data_40002c64 = 0;
+					Data_40002c64_MenuContextId = 0;
 					break;
 				
 				case 11202:
@@ -582,7 +582,7 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					func_2254(800);
-					Data_40002c64 = 11202;
+					Data_40002c64_MenuContextId = 11202;
 					break;
 				
 				case 11205:
@@ -599,7 +599,7 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					func_2254(800);
-					Data_40002c64 = 0;
+					Data_40002c64_MenuContextId = 0;
 					break;
 				
 				case 22001:
@@ -705,7 +705,7 @@ void func_3d72c(void)
 						func_7950(1);
 						func_659c(1000);
 						
-						Data_40002c64 = 0;
+						Data_40002c64_MenuContextId = 0;
 					}
 					//0x41618 -> 0x4684c
 					break;
@@ -748,7 +748,7 @@ void func_3d72c(void)
 						func_7950(1);
 						func_659c(1000);
 						
-						Data_40002c64 = 0;
+						Data_40002c64_MenuContextId = 0;
 					}
 					//0x418f8 -> 0x4684c
 					break;
@@ -1273,7 +1273,7 @@ void func_3d72c(void)
 					break;
 				
 				case 100:
-					//0x446e8
+					//0x446e8: Reset
 					func_7e8(0, 1, 1, 21, "Are you sure reset   ");
 					func_7e8(0, 3, 1, 21, "System.                ");
 					func_7e8(0, 5, 1, 21, "Back: Cancel          ");
@@ -1447,20 +1447,20 @@ void func_3d72c(void)
 							break;
 					} //switch (bData_4000316e_FocusLineOn8LineDisplay)
 					break;
-			} //switch (Data_40002c64)
+			} //switch (Data_40002c64_MenuContextId)
 			//46850 -> 4edd8			
 			break;
 		
 		case 2:
 			//0x46854
-			Data_4000318c = Data_40002c64;
+			Data_4000318c = Data_40002c64_MenuContextId;
 		
 			if (Data_4000318c != Data_40003190)
 			{
 				Data_40003190 = Data_4000318c;
 			}
 			
-			switch (Data_40002c64)
+			switch (Data_40002c64_MenuContextId)
 			{
 				case 202:
 					//0x4ad30
@@ -1532,7 +1532,7 @@ void func_3d72c(void)
 					}
 					break;
 				
-			} //switch (Data_40002c64)
+			} //switch (Data_40002c64_MenuContextId)
 		
 			break;
 	} //switch (bData_40003197_DisplayLinesPerMenuLine)

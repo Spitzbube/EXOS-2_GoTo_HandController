@@ -2,7 +2,7 @@
 /* 5ab50 - todo */
 void HandleDownKey(void)
 {
-	switch (Data_40002c64)
+	switch (Data_40002c64_MenuContextId)
 	{
 		case 1:
 			//0x5b27c
@@ -34,59 +34,59 @@ void HandleDownKey(void)
 			
 		case 1000:
 			//0x5b300: Telescope Align
-			Data_40002c64 = 2000; //Navigation
+			Data_40002c64_MenuContextId = 2000; //Navigation
 			//->0x5ca8c
 			break;
 		
 		case 2000:
 			//0x5b314
-			Data_40002c64 = 3000;
+			Data_40002c64_MenuContextId = 3000;
 			break;
 		
 		case 3000:
 			//0x5b328
-			Data_40002c64 = 4000;
+			Data_40002c64_MenuContextId = 4000;
 			break;
 		
 		case 4000:
 			//0x5b33c
-			Data_40002c64 = 1000;
+			Data_40002c64_MenuContextId = 1000;
 			break;
 		
 		case 1100:
-			//0x5b350
+			//0x5b350: One Star Align
 			func_5a57c(1, 11);
-			Data_40002c64 = 1200;
+			Data_40002c64_MenuContextId = 1200;
 			break;
 		
 		case 1200:
-			//0x5b370
+			//0x5b370: Two Star Align
 			func_5a57c(1, 11);
-			Data_40002c64 = 1300;
+			Data_40002c64_MenuContextId = 1300;
 			break;
 		
 		case 1300:
-			//0x5b390
+			//0x5b390: Three Star Align
 			func_5a57c(1, 11);
-			Data_40002c64 = 1400;
+			Data_40002c64_MenuContextId = 1400;
 			break;
 		
 		case 1400:
-			//0x5b3b0
+			//0x5b3b0: Target Sync
 			func_5a57c(1, 11);
-			Data_40002c64 = 1500;
+			Data_40002c64_MenuContextId = 1500;
 			break;
 		
 		case 1500:
-			//0x5b3d0
+			//0x5b3d0: Pole-Axis Dev.
 			func_5a57c(1, 11);
-			Data_40002c64 = 1600;
+			Data_40002c64_MenuContextId = 1600;
 			break;
 		
 		case 1600:
-			//0x5b3f0
+			//0x5b3f0: RA Bklash Corr.
 			func_5a57c(1, 11);
-			Data_40002c64 = 1700;
+			Data_40002c64_MenuContextId = 1700;
 			break;
 		
 		case 1700:
@@ -95,73 +95,73 @@ void HandleDownKey(void)
 			bData_40003171 = 1;
 			bData_40003172 = 1;
 			bData_40003170 = 1;
-			Data_40002c64 = 1100; //One star align
+			Data_40002c64_MenuContextId = 1100; //One star align
 			break;
 		
 		case 2100:
 			//0x5b448
 			func_5a57c(1, 12);
-			Data_40002c64 = 2200;
+			Data_40002c64_MenuContextId = 2200;
 			break;
 		
 		case 2200:
 			//0x5b468
 			func_5a57c(1, 12);
-			Data_40002c64 = 2300;
+			Data_40002c64_MenuContextId = 2300;
 			break;
 		
 		case 2300:
 			//0x5b488
 			func_5a57c(1, 12);
-			Data_40002c64 = 2400;
+			Data_40002c64_MenuContextId = 2400;
 			break;
 		
 		case 2400:
 			//0x5b4a8
 			func_5a57c(1, 12);
-			Data_40002c64 = 2500;
+			Data_40002c64_MenuContextId = 2500;
 			break;
 		
 		case 2500:
 			//0x5b4c8
 			func_5a57c(1, 12);
-			Data_40002c64 = 2600;
+			Data_40002c64_MenuContextId = 2600;
 			break;
 		
 		case 2600:
 			//0x5b4e8
 			func_5a57c(1, 12);
-			Data_40002c64 = 2700;
+			Data_40002c64_MenuContextId = 2700;
 			break;
 		
 		case 2700:
 			//0x5b508
 			func_5a57c(1, 12);
-			Data_40002c64 = 2800;
+			Data_40002c64_MenuContextId = 2800;
 			break;
 		
 		case 2800:
 			//0x5b528
 			func_5a57c(1, 12);
-			Data_40002c64 = 2900;
+			Data_40002c64_MenuContextId = 2900;
 			break;
 		
 		case 2900:
 			//0x5b548
 			func_5a57c(1, 12);
-			Data_40002c64 = 2110;
+			Data_40002c64_MenuContextId = 2110;
 			break;
 		
 		case 2110:
 			//0x5b568
 			func_5a57c(1, 12);
-			Data_40002c64 = 2120;
+			Data_40002c64_MenuContextId = 2120;
 			break;
 		
 		case 2120:
 			//0x5b588
 			func_5a57c(1, 12);
-			Data_40002c64 = 2130;
+			Data_40002c64_MenuContextId = 2130;
 			break;
 		
 		case 2130:
@@ -170,55 +170,55 @@ void HandleDownKey(void)
 			bData_40003175 = 1;
 			bData_40003176 = 1;
 			bData_40003174 = 1;
-			Data_40002c64 = 2100;
+			Data_40002c64_MenuContextId = 2100;
 			break;
 		
 		case 3100:
 			//0x5b5e0
 			func_5a57c(1, 13);
-			Data_40002c64 = 3200;
+			Data_40002c64_MenuContextId = 3200;
 			break;
 		
 		case 3200:
 			//0x5b600
 			func_5a57c(1, 13);
-			Data_40002c64 = 3300;
+			Data_40002c64_MenuContextId = 3300;
 			break;
 		
 		case 3300:
 			//0x5b620
 			func_5a57c(1, 13);
-			Data_40002c64 = 3400;
+			Data_40002c64_MenuContextId = 3400;
 			break;
 		
 		case 3400:
 			//0x5b640
 			func_5a57c(1, 13);
-			Data_40002c64 = 3500;
+			Data_40002c64_MenuContextId = 3500;
 			break;
 		
 		case 3500:
 			//0x5b660
 			func_5a57c(1, 13);
-			Data_40002c64 = 3600;
+			Data_40002c64_MenuContextId = 3600;
 			break;
 		
 		case 3600:
 			//0x5b680
 			func_5a57c(1, 13);
-			Data_40002c64 = 3700;
+			Data_40002c64_MenuContextId = 3700;
 			break;
 		
 		case 3700:
 			//0x5b6a0
 			func_5a57c(1, 13);
-			Data_40002c64 = 3800;
+			Data_40002c64_MenuContextId = 3800;
 			break;
 		
 		case 3800:
 			//0x5b6c0
 			func_5a57c(1, 13);
-			Data_40002c64 = 3900;
+			Data_40002c64_MenuContextId = 3900;
 			break;
 		
 		case 3900:
@@ -227,55 +227,55 @@ void HandleDownKey(void)
 			bData_40003179 = 1;
 			bData_4000317a = 1;
 			bData_40003178 = 1;
-			Data_40002c64 = 3100;
+			Data_40002c64_MenuContextId = 3100;
 			break;
 		
 		case 4100:
 			//0x5b718
 			func_5a57c(1, 14);
-			Data_40002c64 = 4200;
+			Data_40002c64_MenuContextId = 4200;
 			break;
 		
 		case 4200:
 			//0x5b738
 			func_5a57c(1, 14);
-			Data_40002c64 = 4300;
+			Data_40002c64_MenuContextId = 4300;
 			break;
 		
 		case 4300:
 			//0x5b758
 			func_5a57c(1, 14);
-			Data_40002c64 = 4400;
+			Data_40002c64_MenuContextId = 4400;
 			break;
 		
 		case 4400:
 			//0x5b778
 			func_5a57c(1, 14);
-			Data_40002c64 = 4500;
+			Data_40002c64_MenuContextId = 4500;
 			break;
 		
 		case 4500:
 			//0x5b798
 			func_5a57c(1, 14);
-			Data_40002c64 = 4600;
+			Data_40002c64_MenuContextId = 4600;
 			break;
 		
 		case 4600:
 			//0x5b7b8
 			func_5a57c(1, 14);
-			Data_40002c64 = 4700;
+			Data_40002c64_MenuContextId = 4700;
 			break;
 		
 		case 4700:
 			//0x5b7d8
 			func_5a57c(1, 14);
-			Data_40002c64 = 4800;
+			Data_40002c64_MenuContextId = 4800;
 			break;
 		
 		case 4800:
 			//0x5b7f8
 			func_5a57c(1, 14);
-			Data_40002c64 = 4900;
+			Data_40002c64_MenuContextId = 4900;
 			break;
 		
 		case 4900:
@@ -284,216 +284,216 @@ void HandleDownKey(void)
 			bData_4000317d = 1;
 			bData_4000317e = 1;
 			bData_4000317c = 1;
-			Data_40002c64 = 4100;
+			Data_40002c64_MenuContextId = 4100;
 			break;
 		
 		case 1402:
 			//0x5b850
-			Data_40002c64 = 1403;
+			Data_40002c64_MenuContextId = 1403;
 			break;
 		
 		case 1403:
 			//0x5b864
-			Data_40002c64 = 1402;
+			Data_40002c64_MenuContextId = 1402;
 			break;
 		
 		case 22011:
 			//0x5b878
 			bData_40003182 = 1;
 			bData_40003180 = 1;
-			Data_40002c64 = 2201;
+			Data_40002c64_MenuContextId = 2201;
 			break;
 		
 		case 2301:
 			//0x5b8a0
-			Data_40002c64 = 2302;
+			Data_40002c64_MenuContextId = 2302;
 			break;
 		
 		case 2302:
 			//0x5b8c0
-			Data_40002c64 = 2303;
+			Data_40002c64_MenuContextId = 2303;
 			break;
 		
 		case 2303:
 			//0x5b8e0
 			func_5a57c(1, 23);
-			Data_40002c64 = 2304;
+			Data_40002c64_MenuContextId = 2304;
 			break;
 		
 		case 2304:
 			//0x5b900
 			func_5a57c(1, 23);
-			Data_40002c64 = 2305;
+			Data_40002c64_MenuContextId = 2305;
 			break;
 		
 		case 2305:
 			//0x5b920
 			func_5a57c(1, 23);
-			Data_40002c64 = 2306;
+			Data_40002c64_MenuContextId = 2306;
 			break;
 		
 		case 2306:
 			//0x5b940
 			func_5a57c(1, 23);
-			Data_40002c64 = 2307;
+			Data_40002c64_MenuContextId = 2307;
 			break;
 		
 		case 2307:
 			//0x5b960
 			func_5a57c(1, 23);
-			Data_40002c64 = 2308;
+			Data_40002c64_MenuContextId = 2308;
 			break;
 		
 		case 2308:
 			//0x5b980
 			bData_40003186 = 1;
 			bData_40003184 = 1;
-			Data_40002c64 = 2301;
+			Data_40002c64_MenuContextId = 2301;
 			break;
 		
 		case 2501:
 			//0x5b9a8
-			Data_40002c64 = 2502;
+			Data_40002c64_MenuContextId = 2502;
 			break;
 		
 		case 2502:
 			//0x5b9bc
-			Data_40002c64 = 2503;
+			Data_40002c64_MenuContextId = 2503;
 			break;
 		
 		case 2503:
 			//0x5b9d0
-			Data_40002c64 = 2501;
+			Data_40002c64_MenuContextId = 2501;
 			break;
 		
 		case 2801:
 			//0x5b9e4
-			Data_40002c64 = 2802;
+			Data_40002c64_MenuContextId = 2802;
 			break;
 		
 		case 2802:
 			//0x5b9f8
-			Data_40002c64 = 2803;
+			Data_40002c64_MenuContextId = 2803;
 			break;
 		
 		case 2803:
 			//0x5ba0c
-			Data_40002c64 = 2804;
+			Data_40002c64_MenuContextId = 2804;
 			break;
 		
 		case 2804:
 			//0x5ba20
-			Data_40002c64 = 2801;
+			Data_40002c64_MenuContextId = 2801;
 			break;
 		
 		case 21101:
 			//0x5ba34
-			Data_40002c64 = 21102;
+			Data_40002c64_MenuContextId = 21102;
 			break;
 		
 		case 21102:
 			//0x5ba48
-			Data_40002c64 = 21103;
+			Data_40002c64_MenuContextId = 21103;
 			break;
 		
 		case 21103:
 			//0x5ba5c
-			Data_40002c64 = 21101;
+			Data_40002c64_MenuContextId = 21101;
 			break;
 		
 		case 3601:
 			//0x5ba70
-			Data_40002c64 = 3602;
+			Data_40002c64_MenuContextId = 3602;
 			break;
 		
 		case 3602:
 			//0x5ba84
-			Data_40002c64 = 3601;
+			Data_40002c64_MenuContextId = 3601;
 			break;
 		
 		case 3801:
 			//0x5ba98
-			Data_40002c64 = 3802;
+			Data_40002c64_MenuContextId = 3802;
 			break;
 		
 		case 3802:
 			//0x5baac
-			Data_40002c64 = 3801;
+			Data_40002c64_MenuContextId = 3801;
 			break;
 		
 		case 4301:
 			//0x5bbc0
-			Data_40002c64 = 4302;
+			Data_40002c64_MenuContextId = 4302;
 			break;
 		
 		case 4302:
 			//0x5bbd4
-			Data_40002c64 = 4301;
+			Data_40002c64_MenuContextId = 4301;
 			break;
 		
 		case 4801:
 			//0x5bbe8
-			Data_40002c64 = 4802;
+			Data_40002c64_MenuContextId = 4802;
 			break;
 		
 		case 4802:
 			//0x5bbfc
-			Data_40002c64 = 4803;
+			Data_40002c64_MenuContextId = 4803;
 			break;
 		
 		case 4803:
 			//0x5bc10
-			Data_40002c64 = 4804;
+			Data_40002c64_MenuContextId = 4804;
 			break;
 		
 		case 4804:
 			//0x5bc24
-			Data_40002c64 = 4805;
+			Data_40002c64_MenuContextId = 4805;
 			break;
 		
 		case 4805:
 			//0x5bc38
-			Data_40002c64 = 4801;
+			Data_40002c64_MenuContextId = 4801;
 			break;
 		
 		case 48051:
 			//0x5bc4c
-			Data_40002c64 = 48052;
+			Data_40002c64_MenuContextId = 48052;
 			break;
 		
 		case 48052:
 			//0x5bc60
-			Data_40002c64 = 48053;
+			Data_40002c64_MenuContextId = 48053;
 			break;
 		
 		case 48053:
 			//0x5bc74
-			Data_40002c64 = 48054;
+			Data_40002c64_MenuContextId = 48054;
 			break;
 		
 		case 48054:
 			//0x5bc88
-			Data_40002c64 = 48055;
+			Data_40002c64_MenuContextId = 48055;
 			break;
 		
 		case 48055:
 			//0x5bc9c
-			Data_40002c64 = 48056;
+			Data_40002c64_MenuContextId = 48056;
 			break;
 		
 		case 48056:
 			//0x5bcb0
-			Data_40002c64 = 48057;
+			Data_40002c64_MenuContextId = 48057;
 			break;
 		
 		case 48057:
 			//0x5bcc4
-			Data_40002c64 = 48058;
+			Data_40002c64_MenuContextId = 48058;
 			break;
 		
 		case 48058:
 			//0x5bcd8
-			Data_40002c64 = 48051;
+			Data_40002c64_MenuContextId = 48051;
 			break;
 		
 		case 0:
@@ -579,7 +579,7 @@ void HandleDownKey(void)
 			}
 			Data_40002eb0 = 1;
 			bData_40003189 = 1;
-			Data_40002c64 = 11203;
+			Data_40002c64_MenuContextId = 11203;
 			break;
 		
 		case 11203:
@@ -602,47 +602,47 @@ void HandleDownKey(void)
 		
 		case 45001:
 			//0x5beb8
-			Data_40002c64 = 45002;
+			Data_40002c64_MenuContextId = 45002;
 			break;
 		
 		case 45002:
 			//0x5becc
-			Data_40002c64 = 45001;
+			Data_40002c64_MenuContextId = 45001;
 			break;
 		
 		case 46001:
 			//0x5bee0
-			Data_40002c64 = 46002;
+			Data_40002c64_MenuContextId = 46002;
 			break;
 		
 		case 46002:
 			//0x5bef4
-			Data_40002c64 = 46001;
+			Data_40002c64_MenuContextId = 46001;
 			break;
 		
 		case 49001:
 			//0x5bf08
-			Data_40002c64 = 49002;
+			Data_40002c64_MenuContextId = 49002;
 			break;
 		
 		case 49002:
 			//0x5bf1c
-			Data_40002c64 = 49003;
+			Data_40002c64_MenuContextId = 49003;
 			break;
 		
 		case 49003:
 			//0x5bf30
-			Data_40002c64 = 49004;
+			Data_40002c64_MenuContextId = 49004;
 			break;
 		
 		case 49004:
 			//0x5bf44
-			Data_40002c64 = 49005;
+			Data_40002c64_MenuContextId = 49005;
 			break;
 		
 		case 49005:
 			//0x5bf58
-			Data_40002c64 = 49001;
+			Data_40002c64_MenuContextId = 49001;
 			break;
 		
 		case 21001:
@@ -658,7 +658,7 @@ void HandleDownKey(void)
 			break;
 		
 		case 22001:
-			//0x5bfb4
+			//0x5bfb4: Navigation -> Solar System
 			func_394();
 		case 31001:
 			//0x5bfc0
@@ -762,19 +762,19 @@ void HandleDownKey(void)
 		case 203:
 			//0x5c1fc
 			bData_4000318a = 6;
-			Data_40002c64 = 204;
+			Data_40002c64_MenuContextId = 204;
 			break;
 		
 		case 204:
 			//0x5c21c
 			bData_4000318a = 5;
-			Data_40002c64 = 205;
+			Data_40002c64_MenuContextId = 205;
 			break;
 		
 		case 205:
 			//0x5c23c
 			bData_4000318a = 6;
-			Data_40002c64 = 203;
+			Data_40002c64_MenuContextId = 203;
 			break;
 		
 		case 201:
@@ -839,32 +839,32 @@ void HandleDownKey(void)
 			
 		case 29001:
 			//0x5c360
-			Data_40002c64 = 29002;
+			Data_40002c64_MenuContextId = 29002;
 			bData_4000318a = 5;
 			break;
 		
 		case 29002:
 			//0x5c380
-			Data_40002c64 = 29001;
+			Data_40002c64_MenuContextId = 29001;
 			bData_4000318a = 6;
 			break;
 		
 		case 206:
 			//0x5c3a0
 			bData_4000318a = 6;
-			Data_40002c64 = 207;
+			Data_40002c64_MenuContextId = 207;
 			break;
 		
 		case 207:
 			//0x5c3c0
 			bData_4000318a = 5;
-			Data_40002c64 = 208;
+			Data_40002c64_MenuContextId = 208;
 			break;
 		
 		case 208:
 			//0x5c3e0
 			bData_4000318a = 6;
-			Data_40002c64 = 206;
+			Data_40002c64_MenuContextId = 206;
 			break;
 		
 		case 41001:
@@ -882,22 +882,22 @@ void HandleDownKey(void)
 		
 		case 43021:
 			//0x5c440
-			Data_40002c64 = 43022;
+			Data_40002c64_MenuContextId = 43022;
 			break;
 		
 		case 43022:
 			//0x5c454
-			Data_40002c64 = 43023;
+			Data_40002c64_MenuContextId = 43023;
 			break;
 		
 		case 43023:
 			//0x5c468
-			Data_40002c64 = 43024;
+			Data_40002c64_MenuContextId = 43024;
 			break;
 		
 		case 43024:
 			//0x5c47c
-			Data_40002c64 = 43021;
+			Data_40002c64_MenuContextId = 43021;
 			break;
 		
 		case 43002:
@@ -916,7 +916,7 @@ void HandleDownKey(void)
 		
 		case 47011:
 			//0x5c4e4
-			Data_40002c64 = 47011;
+			Data_40002c64_MenuContextId = 47011;
 			if (bData_4000316d < 1)
 			{
 				bData_4000316d++;
@@ -950,13 +950,13 @@ void HandleDownKey(void)
 			else
 			{
 				//0x5c6a4
-				if (bData_40002c60 == bData_400034a8)
+				if (bData_40002c60_CurrentAlignStarIndex == bData_400034a8_CurrentAlignStarCount)
 				{
-					bData_40002c60 = 1;
+					bData_40002c60_CurrentAlignStarIndex = 1;
 				}
 				else
 				{
-					bData_40002c60++;
+					bData_40002c60_CurrentAlignStarIndex++;
 				}
 			}
 			
@@ -964,47 +964,47 @@ void HandleDownKey(void)
 		
 		case 360021:
 			//0x5c6e4
-			Data_40002c64 = 360022;
+			Data_40002c64_MenuContextId = 360022;
 			bData_4000318a = 7;
 			break;
 		
 		case 360022:
 			//0x5c704
-			Data_40002c64 = 360021;
+			Data_40002c64_MenuContextId = 360021;
 			bData_4000318a = 7;
 			break;
 		
 		case 370021:
 			//0x5c724
-			Data_40002c64 = 370022;
+			Data_40002c64_MenuContextId = 370022;
 			bData_4000318a = 7;
 			break;
 		
 		case 370022:
-			Data_40002c64 = 370023;
+			Data_40002c64_MenuContextId = 370023;
 			bData_4000318a = 7;
 			//0x5c744
 			break;
 		
 		case 370023:
-			Data_40002c64 = 370021;
+			Data_40002c64_MenuContextId = 370021;
 			bData_4000318a = 7;
 			//0x5c764
 			break;
 		
 		case 360111:
 			//0x5c784
-			Data_40002c64 = 360112;
+			Data_40002c64_MenuContextId = 360112;
 			break;
 		
 		case 360112:
 			//0x5c798
-			Data_40002c64 = 360113;
+			Data_40002c64_MenuContextId = 360113;
 			break;
 		
 		case 360113:
 			//0x5c7ac
-			Data_40002c64 = 360111;
+			Data_40002c64_MenuContextId = 360111;
 			break;
 		
 		case 380011:
@@ -1119,7 +1119,7 @@ void HandleDownKey(void)
 			//0x5ca24
 			if (bData_40002f1e_SetupLocalData == 1)
 			{
-				Data_40002c64 = 42002;
+				Data_40002c64_MenuContextId = 42002;
 				bData_40002c6a = 0;
 			}
 			break;
@@ -1128,7 +1128,7 @@ void HandleDownKey(void)
 			//0x5ca54
 			if (bData_40002f1e_SetupLocalData == 1)
 			{
-				Data_40002c64 = 42001;
+				Data_40002c64_MenuContextId = 42001;
 				bData_40002c6a = 1;
 			}
 			break;
