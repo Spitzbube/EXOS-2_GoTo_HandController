@@ -2592,74 +2592,74 @@ unsigned char func_57b8(unsigned char* a, int* b, void* c)
 }
 
 /* 58ec - todo */
-unsigned char func_58ec(float r4, float r5, float r6[][2], unsigned char r7[][10], unsigned char sp304[][22])
+unsigned char GetCurrentAlignStars(float r4, float r5, float* equatorialCoord, unsigned char strNames[][10], unsigned char sp304[][22])
 {
-	int r9; 
-	unsigned char sl;
-	unsigned char fp;
+	int i; 
+	unsigned char cnt;
+	unsigned char j;
 	
-	float sp156[28];
-	float sp44[28];
-	unsigned char sp24[20]; //size??
-	unsigned char sp20;
+	float ra[28];
+	float dec[28];
+	unsigned char visible[20]; //size??
+	unsigned char k;
 	float sp16, sp12, sp8, sp4;
 
-	sp156[0] = 6.75850009918212890625;
-	sp44[0] = -16.7263050079345703125;
-	sp156[1] = 6.40180301666259765625;
-	sp44[1] = -52.69824981689453125;
-	sp156[2] = 18.620929718017578125;
-	sp44[2] = 38.790943145751953125;
-	sp156[3] = 14.6703472137451171875;
-	sp44[3] = -60.875278472900390625;
-	sp156[4] = 14.26785564422607421875;
-	sp44[4] = 19.1384716033935546875;
-	sp156[5] = 5.288404941558837890625;
-	sp44[5] = 46.0066375732421875;
-	sp156[6] = 5.248960971832275390625;
-	sp44[6] = -8.18952846527099609375;
-	sp156[7] = 7.662292003631591796875;
-	sp44[7] = 5.204332828521728515625;
-	sp156[8] = 1.63397800922393798828125;
-	sp44[8] = -57.187053680419921875;
-	sp156[9] = 5.09371089935302734375;
-	sp44[9] = 7.410167217254638671875;
-	sp156[10] = 19.8538360595703125;
-	sp44[10] = 8.890472412109375;
-	sp156[11] = 4.60669994354248046875;
-	sp44[11] = 16.52752685546875;
-	sp156[12] = 13.4276142120361328125;
-	sp44[12] = -11.2079448699951171875;
-	sp156[13] = 16.49939727783203125;
-	sp44[13] = -26.4533329010009765625;
-	sp156[14] = 22.9691143035888671875;
-	sp44[14] = -29.5733890533447265625;
-	sp156[15] = 20.6958770751953125;
-	sp44[15] = 45.308834075927734375;
-	sp156[16] = 10.14705562591552734375;
-	sp44[16] = 11.9264163970947265625;
-	sp156[17] = 3.41538906097412109375;
-	sp44[17] = 49.890056610107421875;
-	sp156[18] = 7.5854969024658203125;
-	sp44[18] = 31.87105560302734375;
-	sp156[19] = 9.46664142608642578125;
-	sp44[19] = -8.69580554962158203125;
-	sp156[20] = 2.6790111064910888671875;
-	sp44[20] = 89.2981109619140625;
-	sp156[21] = 0.1473419964313507080078125;
-	sp44[21] = 29.136417388916015625;
-	sp156[22] = 17.5893688201904296875;
-	sp44[22] = 12.55330562591552734375;
-	sp156[23] = 11.82501697540283203125;
-	sp44[23] = 14.52511119842529296875;
-	sp156[24] = 0.953800022602081298828125;
-	sp44[24] = 60.759693145751953125;
-	sp156[25] = 9.13812732696533203125;
-	sp44[25] = -43.468776702880859375;
-	sp156[26] = 13.40486621856689453125;
-	sp44[26] = 54.884029388427734375;
-	sp156[27] = 19.51886749267578125;
-	sp44[27] = 27.982250213623046875;
+	ra[0] = 6.75850009918212890625; //Sirius - Alpha CMa
+	dec[0] = -16.7263050079345703125;
+	ra[1] = 6.40180301666259765625; //Canopus - Alpha Car
+	dec[1] = -52.69824981689453125;
+	ra[2] = 18.620929718017578125; //Vega - Alpha Lyr
+	dec[2] = 38.790943145751953125;
+	ra[3] = 14.6703472137451171875; // Rigil Kentaurus / Toliman  - Alpa Cen
+	dec[3] = -60.875278472900390625;
+	ra[4] = 14.26785564422607421875; //Arcturus - Alpha Boo
+	dec[4] = 19.1384716033935546875;
+	ra[5] = 5.288404941558837890625; //Capella - Alpha Aur
+	dec[5] = 46.0066375732421875;
+	ra[6] = 5.248960971832275390625; //Rigel - Beta Ori
+	dec[6] = -8.18952846527099609375;
+	ra[7] = 7.662292003631591796875; //Procyon - Alpha CMi
+	dec[7] = 5.204332828521728515625;
+	ra[8] = 1.63397800922393798828125; //Achernar - Alpha Eri
+	dec[8] = -57.187053680419921875;
+	ra[9] = 5.09371089935302734375; //Betelgeuse - Alpa Ori
+	dec[9] = 7.410167217254638671875;
+	ra[10] = 19.8538360595703125; //Altair - Alpha Aql
+	dec[10] = 8.890472412109375;
+	ra[11] = 4.60669994354248046875; //Aldebaran - Alpha Tau
+	dec[11] = 16.52752685546875;
+	ra[12] = 13.4276142120361328125; //Spica - Alpha Vir
+	dec[12] = -11.2079448699951171875;
+	ra[13] = 16.49939727783203125; //Antares - Alpha Sco
+	dec[13] = -26.4533329010009765625;
+	ra[14] = 22.9691143035888671875; //Formalhaut - Alpha PsA
+	dec[14] = -29.5733890533447265625;
+	ra[15] = 20.6958770751953125; //Deneb - Alpha Cyg
+	dec[15] = 45.308834075927734375;
+	ra[16] = 10.14705562591552734375; //Regulus - Alpha Leo
+	dec[16] = 11.9264163970947265625;
+	ra[17] = 3.41538906097412109375; //Mirfak - Alpha Per
+	dec[17] = 49.890056610107421875;
+	ra[18] = 7.5854969024658203125; //Castor - Alpha Gem
+	dec[18] = 31.87105560302734375;
+	ra[19] = 9.46664142608642578125; //Alphard - Alpha Hya
+	dec[19] = -8.69580554962158203125;
+	ra[20] = 2.6790111064910888671875; //Polaris - Alpha UMi
+	dec[20] = 89.2981109619140625;
+	ra[21] = 0.1473419964313507080078125; //Sirrah / Alpheratz - Alpha And
+	dec[21] = 29.136417388916015625;
+	ra[22] = 17.5893688201904296875; //Rasalhagu - Alpha Oph
+	dec[22] = 12.55330562591552734375;
+	ra[23] = 11.82501697540283203125; //Denebola - Beta Leo
+	dec[23] = 14.52511119842529296875;
+	ra[24] = 0.953800022602081298828125; //Navi / Tsih / 27 Cas - Gamma Cas
+	dec[24] = 60.759693145751953125;
+	ra[25] = 9.13812732696533203125; //Suhail - Lambda Velorum
+	dec[25] = -43.468776702880859375;
+	ra[26] = 13.40486621856689453125; //Mizar - Zeta UMa
+	dec[26] = 54.884029388427734375;
+	ra[27] = 19.51886749267578125; //Albireo - Beta Cyg
+	dec[27] = 27.982250213623046875;
 	
 	if ((r4 >= 4) || (r4 <= 20))
 	{
@@ -2700,19 +2700,19 @@ unsigned char func_58ec(float r4, float r5, float r6[][2], unsigned char r7[][10
 		}
 	}
 	//5d00
-	r9 = 0;
-	sl = 0; 
-	for (; r9 < 28; r9++)
+	i = 0;
+	cnt = 0; 
+	for (; i < 28; i++)
 	{
 		//5d0c
 		if ((r4 >= 4) || (r4 <= 20))
 		{
 			//5d2c
-			if ((sp156[r9] >= sp8) && (sp156[r9] <= sp4) &&
-				(sp44[r9] >= sp16) && (sp44[r9] <= sp12))
+			if ((ra[i] >= sp8) && (ra[i] <= sp4) &&
+				(dec[i] >= sp16) && (dec[i] <= sp12))
 			{
-				sp24[sl] = r9;
-				sl++;
+				visible[cnt] = i;
+				cnt++;
 			}
 		}
 		else
@@ -2721,48 +2721,44 @@ unsigned char func_58ec(float r4, float r5, float r6[][2], unsigned char r7[][10
 			if ((r4 <= 4) || (r4 >= 20))
 			{
 				//5db0
-				if (((sp156[r9] >= sp8) && (sp156[r9] <= 24)) ||
-					((sp156[r9] >= 0) && (sp156[r9] <= sp4)))
+				if (((ra[i] >= sp8) && (ra[i] <= 24)) ||
+					((ra[i] >= 0) && (ra[i] <= sp4)))
 				{
 					//5e00
-					if ((sp44[r9] >= sp16) && (sp44[r9] <= sp12))
+					if ((dec[i] >= sp16) && (dec[i] <= sp12))
 					{
 						//5e28
-						sp24[sl] = r9;
-						sl++;
+						visible[cnt] = i;
+						cnt++;
 					}
 				}
 			}
 		}		
 	}
 	//5e44
-	if (sl > 0)
+	if (cnt > 0)
 	{
-		for (r9 = 0; r9 <= (sl-1); r9++)
+		for (i = 0; i <= (cnt-1); i++)
 		{
 			//5e54
-			#if 0
-			r6[r9][0] = sp156[ sp24[r9] ];
-			#else
-			((float*)r6)[r9*2] = sp156[ sp24[r9] ];
-			#endif
-			r6[r9][1] = sp44[ sp24[r9] ];
+			*(equatorialCoord + i*2)     = ra[ visible[i] ];
+			*(equatorialCoord + i*2 + 1) = dec[ visible[i] ];
 			
-			for (fp = 0; fp < 10; fp++)
+			for (j = 0; j < 10; j++)
 			{
 				//5e8c
-				r7[r9][fp] = Data_40000000[sp24[r9]][fp];
+				strNames[i][j] = strAlignStarsNames[visible[i]][j];
 			}
 			//5ec0
-			for (sp20 = 0; sp20 < 22; sp20++)
+			for (k = 0; k < 22; k++)
 			{
 				//5ecc
-				sp304[r9][sp20] = Data_40000118[sp24[r9]][sp20];
+				sp304[i][k] = Data_40000118[visible[i]][k];
 			}
 		}		
 	}
 	//5f2c
-	return sl-1;
+	return cnt-1;
 }
 
 /* 5f40 - todo */
@@ -4001,8 +3997,8 @@ void func_9178(void)
 		if (bData_40003431 == 0)
 		{
 			//91a0
-			/*sp256*/sp256.dData_0 = Data_40004128.dData_48;
-			/*sp264*/sp256.dData_8 = Data_40004128.dData_56;
+			/*sp256*/sp256.dData_0 = Data_40004128.geographicLongitude;
+			/*sp264*/sp256.dData_8 = Data_40004128.geographicLatitude;
 			Data_40004128.bData_356 = 1;
 			
 			switch (Data_40004128.Data_68)
@@ -4028,7 +4024,7 @@ void func_9178(void)
 					break;
 			}
 			//92c0
-			sp80 = func_7f30(Data_40004128.Data_40, Data_40004128.bData_44, Data_40004128.dData_48);
+			sp80 = func_7f30(Data_40004128.Data_40, Data_40004128.bData_44, Data_40004128.geographicLongitude);
 			
 			fData_400034c8 = sp80;
 
@@ -4627,9 +4623,9 @@ void func_acdc(double sp144, double sp152, /*sp176*/double* r4, double* r5)
 		sp152 = 0.0003;
 	}
 	//ad4c
-	sp120 = func_7f30(1, 0, Data_40004128.dData_48);
+	sp120 = func_7f30(1, 0, Data_40004128.geographicLongitude);
 	
-	sp112 = Data_40004128.dData_56;
+	sp112 = Data_40004128.geographicLatitude;
 	sp144 -= 180.0;
 	
 	sp128 = atan(sin(sp144 * sp136) / 
@@ -4832,8 +4828,8 @@ void func_b64c(double a, double b)
 /* b7c8 - todo */
 void func_b7c8(double a, double b)
 {
-	Data_40004128.dData_48 = a;
-	Data_40004128.dData_56 = b;
+	Data_40004128.geographicLongitude = a;
+	Data_40004128.geographicLatitude = b;
 }
 
 typedef struct
@@ -5243,26 +5239,26 @@ void fill_cdc4(int a, int b, int c)
 /* cdd0 - todo */
 void func_cdd0(void)
 {
-	unsigned char sp632[28][10]; //size???
-	unsigned char sp16[28][22]; //size???
+	unsigned char strStarNames[28][10];
+	unsigned char sp16[28][22];
 	
 	Data_40004128.Data_360 = 2;
 	Data_40004128.bData_364 = 0;
 	Data_40004128.Data_372 = 0;
 
-	bData_400034a8 = func_58ec(func_7f30(1, 0, Data_40004128.dData_48), 
-		Data_40004128.dData_56, (void*)Data_40004a68, sp632, sp16);
+	bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(func_7f30(1, 0, Data_40004128.geographicLongitude), 
+		Data_40004128.geographicLatitude, Data_40004a68_CurrentAlignStarEquatorialCoord, strStarNames, sp16);
 	
 	#if 0
-	Data_40004128.dData_376 = Data_40004a68[0][0];
-	Data_40004128.dData_384 = Data_40004a68[0][1];
-	Data_40004128.dData_392 = Data_40004a68[1][0];
-	Data_40004128.dData_400 = Data_40004a68[1][1];
+	Data_40004128.dData_376 = Data_40004a68_CurrentAlignStarEquatorialCoord[0][0];
+	Data_40004128.dData_384 = Data_40004a68_CurrentAlignStarEquatorialCoord[0][1];
+	Data_40004128.dData_392 = Data_40004a68_CurrentAlignStarEquatorialCoord[1][0];
+	Data_40004128.dData_400 = Data_40004a68_CurrentAlignStarEquatorialCoord[1][1];
 	#else
-	Data_40004128.dData_376 = Data_40004a68[0];
-	Data_40004128.dData_384 = Data_40004a68[1];
-	Data_40004128.dData_392 = Data_40004a68[2];
-	Data_40004128.dData_400 = Data_40004a68[3];
+	Data_40004128.dData_376 = Data_40004a68_CurrentAlignStarEquatorialCoord[0];
+	Data_40004128.dData_384 = Data_40004a68_CurrentAlignStarEquatorialCoord[1];
+	Data_40004128.dData_392 = Data_40004a68_CurrentAlignStarEquatorialCoord[2];
+	Data_40004128.dData_400 = Data_40004a68_CurrentAlignStarEquatorialCoord[3];
 	#endif
 	
 	dData_400033d8 = 0.0;
@@ -5379,8 +5375,8 @@ void func_d2cc(void)
 	Data_40004128.dData_16 = 0.165215023456907555976513890528;
 	Data_40004128.dData_24 = 0.000330464898018532459832846681635;
 	Data_40004128.dData_32 = 0.000240500240500240509066917637959;
-	Data_40004128.dData_48 = 102.7944;
-	Data_40004128.dData_56 = 25.027777;
+	Data_40004128.geographicLongitude = 102.7944;
+	Data_40004128.geographicLatitude = 25.027777;
 
 	Data_40004128.Data_64 = 8;
 	Data_40004128.Data_68 = 1;
@@ -6942,7 +6938,7 @@ void get_solar_system_object_equatorial_coordinates(int a, double* pAlpha, doubl
 	double sp208 = 0.0;
 	double sp200 = 0.0;
 	
-	/*sp192 =*/ func_7f30(1, 0, Data_40004128.dData_48);
+	/*sp192 =*/ func_7f30(1, 0, Data_40004128.geographicLongitude);
 	
 	sp376 = Data_40004128.dData_96;
 	Tau/*sp536*/ = (sp376 - 2451545.0) / 365250.0;
@@ -7319,7 +7315,7 @@ void func_1e228(void)
 		Data_40003190 = Data_4000318c;
 	}
 	
-	switch (Data_40002c64 - 500)
+	switch (Data_40002c64_MenuContextId - 500)
 	{
 		case 0: 
 			//0x1e328: 500 = Main Screen Help Pages
@@ -8640,8 +8636,8 @@ void func_2245c(int a, int b)
 /* 24574 - todo */
 void func_24574(void)
 {
-	dData_40002e28_SiteLongitude = Data_40004128.dData_48;
-	dData_40002e48_SiteLatitude = Data_40004128.dData_56;
+	dData_40002e28_SiteLongitude = Data_40004128.geographicLongitude;
+	dData_40002e48_SiteLatitude = Data_40004128.geographicLatitude;
 	Data_40002e54_Zone = Data_40004128.Data_64;
 	
 	Data_40002e18_SiteLongitudeDegrees = dData_40002e28_SiteLongitude;	
@@ -9015,8 +9011,8 @@ void SwapLanguageStrings(void)
 			Data_40002f28 = Data_400008c8;
 			Data_40002f2c = Data_400008d2;
 			Data_40002f30 = strEngOneStarAlign;
-			Data_40002f34 = Data_400008e7;
-			Data_40002f38 = Data_400008f6;
+			Data_40002f34 = strEngTwoStarAlign;
+			Data_40002f38 = strEngThreeStarAlign;
 			Data_40002f3c = Data_40000907;
 			Data_40002f40 = Data_40000913;
 			Data_40002f44 = Data_40000923;
@@ -9024,17 +9020,17 @@ void SwapLanguageStrings(void)
 			Data_40002f4c = "                     ";
 		
 			Data_40002f5c = strEngSolarSystem;
-			Data_40002f60 = Data_40000951;
-			Data_40002f64 = Data_4000095f;
-			Data_40002f68 = Data_4000096b;
-			Data_40002f6c = Data_4000097a;
-			Data_40002f70 = Data_40000987;
-			Data_40002f74 = Data_40000994;
-			Data_40002f78 = Data_400009a1;
-			Data_40002f7c = Data_400009b2;
-			Data_40002f80 = Data_400009c2;
-			Data_40002f84 = Data_400009d3;
-			Data_40002f88 = Data_400009e4;
+			Data_40002f60 = strEngConstellation;
+			Data_40002f64 = strEngFamousStar;
+			Data_40002f68 = strEngMessierCatal;
+			Data_40002f6c = strEngNGCCatalog;
+			Data_40002f70 = strEngICCatalogue;
+			Data_40002f74 = strEngSh2Catalog;
+			Data_40002f78 = strEngBrightStarCat;
+			Data_40002f7c = strEngSAOStarCatal;
+			Data_40002f80 = strEngCustomerObjects;
+			Data_40002f84 = strEngInputRAandDEC;
+			Data_40002f88 = strEngCustomLandGoal;
 			
 			Data_40002f8c = strEngCurrentObjects;
 			Data_40002f90 = Data_40000a05;
@@ -9085,7 +9081,7 @@ void SwapLanguageStrings(void)
 			Data_40003090 = Data_40000bd3;
 			Data_40003094 = Data_40000bde;
 			Data_40003098 = Data_40000bee;
-			Data_4000309c = Data_40000bfc;
+			Data_4000309c = strEngListAlignStars;
 			Data_400030a0 = Data_40000c14;
 			Data_400030a4 = Data_40000c20;
 			Data_400030a8 = Data_40000c35;
@@ -9196,7 +9192,7 @@ void SwapLanguageStrings(void)
 			Data_40003090 = Data_40000bd3;
 			Data_40003094 = Data_40000bde;
 			Data_40003098 = Data_40000bee;
-			Data_4000309c = Data_40000bfc;
+			Data_4000309c = strEngListAlignStars;
 			Data_400030a0 = Data_40000c14;
 			Data_400030a4 = Data_40000c20;
 			Data_400030a8 = Data_40000c35;
@@ -9306,7 +9302,7 @@ void SwapLanguageStrings(void)
 			Data_40003090 = Data_40000bd3;
 			Data_40003094 = Data_40000bde;
 			Data_40003098 = Data_40000bee;
-			Data_4000309c = Data_40000bfc;
+			Data_4000309c = strEngListAlignStars;
 			Data_400030a0 = Data_40000c14;
 			Data_400030a4 = Data_40000c20;
 			Data_400030a8 = Data_40000c35;
@@ -9416,7 +9412,7 @@ void SwapLanguageStrings(void)
 			Data_40003090 = Data_40000bd3;
 			Data_40003094 = Data_40000bde;
 			Data_40003098 = Data_40000bee;
-			Data_4000309c = Data_40000bfc;
+			Data_4000309c = strEngListAlignStars;
 			Data_400030a0 = Data_40000c14;
 			Data_400030a4 = Data_40000c20;
 			Data_400030a8 = Data_40000c35;
@@ -9526,7 +9522,7 @@ void SwapLanguageStrings(void)
 			Data_40003090 = Data_40000bd3;
 			Data_40003094 = Data_40000bde;
 			Data_40003098 = Data_40000bee;
-			Data_4000309c = Data_40000bfc;
+			Data_4000309c = strEngListAlignStars;
 			Data_400030a0 = Data_40000c14;
 			Data_400030a4 = Data_40000c20;
 			Data_400030a8 = Data_40000c35;

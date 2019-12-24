@@ -3,7 +3,7 @@
 /* 5d1ac - todo */
 void HandleUpKey(void)
 {
-	switch (Data_40002c64)
+	switch (Data_40002c64_MenuContextId)
 	{
 		//TODO
 		
@@ -23,12 +23,33 @@ void HandleUpKey(void)
 		case 1200:
 			//0x5d9e4
 			func_5a57c(0, 11);
-			Data_40002c64 = 1100;
+			Data_40002c64_MenuContextId = 1100;
 			//->0x5f0b4
 			break;
 		
 		//TODO
 		
+		case 12001:
+			//0x5ecb4
+			if (bData_40002c62 != 0)
+			{
+				Data_4000340c = 1;
+				bData_40003201 = 0;
+			}
+			else
+			{
+				if (bData_40002c60_CurrentAlignStarIndex == 1)
+				{
+					bData_40002c60_CurrentAlignStarIndex = bData_400034a8_CurrentAlignStarCount;
+				}
+				else
+				{
+					bData_40002c60_CurrentAlignStarIndex--;
+				}
+			}
+			//->0x5f0b4
+			break;
+
 		case 380011:
 			//0x5edfc: Background light
 			if (Data_40003248_CurrentDisplayPWM == 0)

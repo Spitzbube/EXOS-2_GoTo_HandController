@@ -32,8 +32,8 @@ typedef struct
 	double dData_32; //32
 	int Data_40; //40
 	unsigned char bData_44; //44
-	double dData_48; //48
-	double dData_56; //56
+	double geographicLongitude; //48
+	double geographicLatitude; //56
 	int Data_64; //64
 	int Data_68; //68
 	double dData_72; //72
@@ -124,7 +124,7 @@ typedef struct
 	
 } Struct_40004380;
 
-extern unsigned char Data_40000000[28][10]; //40000000
+extern unsigned char strAlignStarsNames[28][10]; //40000000
 extern unsigned char Data_40000118[28][22]; //40000118, size?? -> 40000380???
 extern char Data_40000380[]; //40000380
 extern char Data_4000038a[]; //4000038a
@@ -141,24 +141,24 @@ extern char Data_400008bd[]; //400008bd, size???
 extern char Data_400008c8[]; //400008c8, size???
 extern char Data_400008d2[]; //400008d2, size???
 extern char strEngOneStarAlign[]; //400008d8
-extern char Data_400008e7[]; //400008e7, size???
-extern char Data_400008f6[]; //400008f6, size???
+extern char strEngTwoStarAlign[]; //400008e7
+extern char strEngThreeStarAlign[]; //400008f6
 extern char Data_40000907[]; //40000907, size???
 extern char Data_40000913[]; //40000913, size???
 extern char Data_40000923[]; //40000923, size???
 extern char Data_40000933[]; //40000933, size???
 extern char strEngSolarSystem[]; //40000944
-extern char Data_40000951[]; //40000951, size???
-extern char Data_4000095f[]; //4000095f, size???
-extern char Data_4000096b[]; //4000096b, size???
-extern char Data_4000097a[]; //4000097a, size???
-extern char Data_40000987[]; //40000987, size???
-extern char Data_40000994[]; //40000994, size???
-extern char Data_400009a1[]; //400009a1, size???
-extern char Data_400009b2[]; //400009b2, size???
-extern char Data_400009c2[]; //400009c2, size???
-extern char Data_400009d3[]; //400009d3, size???
-extern char Data_400009e4[]; //400009e4, size???
+extern char strEngConstellation[]; //40000951
+extern char strEngFamousStar[]; //4000095f
+extern char strEngMessierCatal[]; //4000096b
+extern char strEngNGCCatalog[]; //4000097a
+extern char strEngICCatalogue[]; //40000987
+extern char strEngSh2Catalog[]; //40000994, size???
+extern char strEngBrightStarCat[]; //400009a1, size???
+extern char strEngSAOStarCatal[]; //400009b2, size???
+extern char strEngCustomerObjects[]; //400009c2, size???
+extern char strEngInputRAandDEC[]; //400009d3, size???
+extern char strEngCustomLandGoal[]; //400009e4, size???
 extern char strEngCurrentObjects[]; //400009f5
 extern char Data_40000a05[]; //40000a05, size???
 extern char Data_40000a15[]; //40000a15, size???
@@ -206,7 +206,7 @@ extern char Data_40000bc7[];
 extern char Data_40000bd3[];
 extern char Data_40000bde[];
 extern char Data_40000bee[];
-extern char Data_40000bfc[];
+extern char strEngListAlignStars[]; //40000bfc
 extern char Data_40000c14[];
 extern char Data_40000c20[];
 extern char Data_40000c35[];
@@ -493,10 +493,10 @@ extern char bData_40002c58; //40002c58
 extern unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
 extern char bData_40002c5a; //40002c5a
 extern int Data_40002c5c; //40002c5c
-extern unsigned char bData_40002c60; //40002c60
+extern unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
 extern char bData_40002c61; //40002c61
 extern char bData_40002c62; //40002c62
-extern int Data_40002c64; //40002c64
+extern int Data_40002c64_MenuContextId; //40002c64
 extern char bData_40002c68; //40002c68
 extern char bData_40002c69_KeyCode; //40002c69
 extern char bData_40002c6a; //40002c6a
@@ -921,7 +921,7 @@ extern int Data_4000348c; //4000348c
 extern double dData_40003490; //40003490
 extern char bData_40003498; //40003498
 extern double dData_400034a0; //400034a0
-extern unsigned char bData_400034a8; //400034a8
+extern unsigned char bData_400034a8_CurrentAlignStarCount; //400034a8
 extern char bData_400034a9; //400034a9
 extern char bData_400034aa; //400034aa
 extern float fData_400034ac; //400034ac
@@ -996,9 +996,9 @@ extern Struct_40004128 Data_40004128; //40004128
 extern Struct_40004380 Data_40004380; //40004380
 extern Struct_8ba4_0 Data_40004ad8; //40004ad8
 #if 0
-extern float Data_40004a68[][2]; //40004a68, array, size???
+extern float Data_40004a68_CurrentAlignStarEquatorialCoord[][2]; //40004a68
 #else
-extern float Data_40004a68[]; //40004a68, array, size???
+extern float Data_40004a68_CurrentAlignStarEquatorialCoord[]; //40004a68
 #endif
 extern Struct_8ba4 Data_40004ae8; //40004ae8
 extern double Data_40004b08[]; //40004b08, array?

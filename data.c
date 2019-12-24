@@ -2,7 +2,37 @@
 #include "my_types.h"
 #include "data.h"
 
-unsigned char Data_40000000[28][10]; //40000000
+unsigned char strAlignStarsNames[28][10] = //40000000
+{
+	"Sirius   ",
+	"Canopus  ",
+	"Vega     ",
+	"Alpha Cen",
+	"Arcturus ",
+	"Capella  ",
+	"Rigel    ",
+	"Procyon  ",
+	"Achernar ",
+	"Betelgeus",
+	"Altair   ",
+	"Aldebaran",
+	"Spica    ",
+	"Antares  ",
+	"Fomalhaut",
+	"Deneb    ",
+	"Regulus  ",
+	"Mirfak   ",
+	"Castor   ",
+	"Alphard  ",
+	"Polaris  ",
+	"Alpheratz",
+	"Rasalhagu",
+	"Denebola ",
+	"Navi     ",
+	"Suhail   ",
+	"Mizar    ",
+	"Albireo  "
+}; 
 unsigned char Data_40000118[28][22]; //40000118, size??
 char Data_40000380[10]; //40000380, size???
 char Data_4000038a[10]; //4000038a, size???
@@ -19,24 +49,24 @@ char Data_400008bd[] = "Navigation"; //400008bd
 char Data_400008c8[] = "Utilities"; //400008c8
 char Data_400008d2[] = "Setup"; //400008d2
 char strEngOneStarAlign[] = "One Star Align"; //400008d8
-char Data_400008e7[15]; //400008e7, size???
-char Data_400008f6[15]; //400008f6, size???
+char strEngTwoStarAlign[] = "Two Star Align"; //400008e7
+char strEngThreeStarAlign[] = "Three Star Align"; //400008f6
 char Data_40000907[12]; //40000907, size???
 char Data_40000913[16]; //40000913, size???
 char Data_40000923[16]; //40000923, size???
 char Data_40000933[17]; //40000933, size???
 char strEngSolarSystem[] = "Solar System"; //40000944
-char Data_40000951[42]; //40000951, size???
-char Data_4000095f[42]; //4000095f, size???
-char Data_4000096b[42]; //4000096b, size???
-char Data_4000097a[42]; //4000097a, size???
-char Data_40000987[42]; //40000987, size???
-char Data_40000994[42]; //40000994, size???
-char Data_400009a1[42]; //400009a1, size???
-char Data_400009b2[42]; //400009b2, size???
-char Data_400009c2[42]; //400009c2, size???
-char Data_400009d3[42]; //400009d3, size???
-char Data_400009e4[42]; //400009e4, size???
+char strEngConstellation[] = "Constellation"; //40000951
+char strEngFamousStar[] = "Famous Star"; //4000095f
+char strEngMessierCatal[] = "Messier Catal."; //4000096b
+char strEngNGCCatalog[] = "NGC Catalog."; //4000097a
+char strEngICCatalogue[] = "IC Catalogue"; //40000987
+char strEngSh2Catalog[] = "Sh2 Catalog."; //40000994
+char strEngBrightStarCat[] = "Bright Star Cat."; //400009a1
+char strEngSAOStarCatal[] = "SAO Star Catal."; //400009b2
+char strEngCustomerObjects[] = "Customer Objects"; //400009c2
+char strEngInputRAandDEC[] = "Input RA and DEC"; //400009d3
+char strEngCustomLandGoal[] = "Custom Land Goal"; //400009e4
 char strEngCurrentObjects[] = "Current Objects"; //400009f5
 char Data_40000a05[42]; //40000a05, size???
 char Data_40000a15[42]; //40000a15, size???
@@ -84,12 +114,12 @@ char Data_40000bc7[42];
 char Data_40000bd3[42];
 char Data_40000bde[42];
 char Data_40000bee[42];
-char Data_40000bfc[] = "List align stars:"; //40000bfc, content???
+char strEngListAlignStars[] = "List align stars:"; //40000bfc, size?
 char Data_40000c14[42];
 char Data_40000c20[42];
-char Data_40000c35[42];
-char Data_40000c4b[42];
-char Data_40000c60[42];
+char Data_40000c35[] = "  Please center this "; //40000c35
+char Data_40000c4b[] = "star to the field of"; //40000c4b
+char Data_40000c60[] = "view"; //40000c60, size???
 char Data_40000c7a[42];
 char Data_40000c92[42];
 char Data_40000ca6[42];
@@ -373,10 +403,10 @@ char bData_40002c58; //40002c58
 unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
 char bData_40002c5a; //40002c5a
 int Data_40002c5c; //40002c5c
-unsigned char bData_40002c60; //40002c60
+unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
 char bData_40002c61; //40002c61
 char bData_40002c62; //40002c62
-int Data_40002c64; //40002c64
+int Data_40002c64_MenuContextId; //40002c64
 char bData_40002c68; //40002c68
 char bData_40002c69_KeyCode; //40002c69
 char bData_40002c6a; //40002c6a
@@ -800,7 +830,7 @@ int Data_4000348c; //4000348c
 double dData_40003490; //40003490
 char bData_40003498; //40003498
 double dData_400034a0; //400034a0
-unsigned char bData_400034a8; //400034a8
+unsigned char bData_400034a8_CurrentAlignStarCount; //400034a8
 char bData_400034a9; //400034a9
 char bData_400034aa; //400034aa
 float fData_400034ac; //400034ac
@@ -874,9 +904,9 @@ char Data_4000410e[21]; //4000410e, size???
 Struct_40004128 Data_40004128; //40004128
 Struct_40004380 Data_40004380; //40004380
 #if 0
-float Data_40004a68[2][2]; //40004a68, array, size???
+float Data_40004a68_CurrentAlignStarEquatorialCoord[2][2]; //40004a68
 #else
-float Data_40004a68[4]; //40004a68, array, size???
+float Data_40004a68_CurrentAlignStarEquatorialCoord[28]; //40004a68
 #endif
 Struct_8ba4_0 Data_40004ad8; //40004ad8
 Struct_8ba4 Data_40004ae8; //40004ae8

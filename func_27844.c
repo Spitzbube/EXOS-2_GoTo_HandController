@@ -8,12 +8,12 @@ int func_27844(void)
 	#ifdef UART0_DEBUG
 	{
 		char buf[100];
-		snprintf(buf, sizeof(buf)-1, "func_27844: Data_40002c64=%d\n\r", Data_40002c64);
+		snprintf(buf, sizeof(buf)-1, "func_27844: Data_40002c64_MenuContextId=%d\n\r", Data_40002c64_MenuContextId);
 		uart0_send(buf, strlen(buf));
 	}
 	#endif
 	
-	switch (Data_40002c64)
+	switch (Data_40002c64_MenuContextId)
 	{
 		case 0:
 			//0x28030
@@ -124,8 +124,8 @@ int func_27844(void)
 					Data_40003368 = Data_40003f50.bData_1;
 					Data_4000336c = "                      ";
 					
-					Data_40004ad8.dData_0 = Data_40004128.dData_48;
-					Data_40004ad8.dData_8 = Data_40004128.dData_56;
+					Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+					Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 					Data_40004ae8.dData_0 = Data_40003f50.fData_12;
 					Data_40004ae8.dData_8 = Data_40003f50.fData_16;
 					fData_40002cd0_ObjectRightAscension = Data_40003f50.fData_12;
@@ -1307,46 +1307,46 @@ int func_27844(void)
 			//->3d71c
 			break;
 
-		case 0x2EE1: //12001
-			//0x2b68c
-			bData_400034a8 = func_58ec(func_7f30(1, 0, Data_40004128.dData_48), Data_40004128.dData_56,
-				(void*)Data_40004a68, Data_40003a14, Data_40003b2c);
+		case 12001:
+			//0x2b68c: One / Two / Three Star Align
+			bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(func_7f30(1, 0, Data_40004128.geographicLongitude), Data_40004128.geographicLatitude,
+				Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c);
 			
 			sprintf(Data_40003ffd, "R.a: %02dh%02dm                ",
-				(int) Data_40004a68[(bData_40002c60 - 1)*2],
-				(int) ((Data_40004a68[(bData_40002c60 - 1)*2] - (int) Data_40004a68[(bData_40002c60 - 1)*2]) * 60));
+				(int) Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2],
+				(int) ((Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2] - (int) Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2]) * 60));
 
-			if ((int) Data_40004a68[(bData_40002c60 - 1)*2] < 10)
+			if ((int) Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2] < 10)
 			{
 				Data_40003ffd[5] = ' ';
 			}
 			
-			if ((int) ((Data_40004a68[(bData_40002c60 - 1)*2] - (int) Data_40004a68[(bData_40002c60 - 1)*2]) * 60) < 10)
+			if ((int) ((Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2] - (int) Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2]) * 60) < 10)
 			{
 				Data_40003ffd[8] = ' ';
 			}
 			
-			if (Data_40004a68[2*(bData_40002c60 - 1) + 1] < 0)
+			if (Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1] < 0)
 			{
 				//2b848
 				sprintf(Data_40004012, "Dec:-%02d %02d                 ",
-					abs((int) Data_40004a68[2*(bData_40002c60 - 1) + 1]),
-					abs((int) ((Data_40004a68[2*(bData_40002c60 - 1) + 1] - (int) Data_40004a68[2*(bData_40002c60 - 1) + 1]) * 60)));				
+					abs((int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1]),
+					abs((int) ((Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1] - (int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1]) * 60)));				
 			}
 			else
 			{
 				//0x2ba08
 				sprintf(Data_40004012, "Dec:+%02d %02d                 ",
-					(int) Data_40004a68[2*(bData_40002c60 - 1) + 1],
-					abs((int) ((Data_40004a68[2*(bData_40002c60 - 1) + 1] - (int) Data_40004a68[2*(bData_40002c60 - 1) + 1]) * 60)));				
+					(int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1],
+					abs((int) ((Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1] - (int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1]) * 60)));				
 			}
 
-			if ((int) Data_40004a68[2*(bData_40002c60 - 1) + 1] < 10)
+			if ((int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1] < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
 			
-			if ((int) (((Data_40004a68[2*(bData_40002c60 - 1) + 1] - (int) Data_40004a68[2*(bData_40002c60 - 1) /*+ 1*/])+1) * 60) < 10) //BUG!
+			if ((int) (((Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1] - (int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) /*+ 1*/])+1) * 60) < 10) //BUG!
 			{
 				Data_40004012[8] = ' ';
 			}
@@ -1359,7 +1359,7 @@ int func_27844(void)
 					case 1:
 						//2bb98
 						dData_40002c90 = dData_40002d98;					
-						dData_40002c88 = func_7f30(1, 0, Data_40004128.dData_48) - dData_40002d78;
+						dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 						//->0x2bc04
 						while (dData_40002c88 >= 24)
 						{
@@ -1370,8 +1370,8 @@ int func_27844(void)
 							dData_40002c88 += 24;
 						}
 						//2bc54
-						Data_40004ad8.dData_0 = Data_40004128.dData_48;
-						Data_40004ad8.dData_8 = Data_40004128.dData_56;
+						Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+						Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 						
 						Data_40004b50.dData_0 = dData_40002c88;
 						Data_40004b50.dData_8 = dData_40002c90;
@@ -1434,11 +1434,11 @@ int func_27844(void)
 				}
 			} //if (bData_40002c62 != 0)
 			//0x2c074
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 			
-			Data_40004ae8.dData_0 = Data_40004a68[2*(bData_40002c60 - 1)];
-			Data_40004ae8.dData_8 = Data_40004a68[2*(bData_40002c60 - 1) + 1];
+			Data_40004ae8.dData_0 = Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1)];
+			Data_40004ae8.dData_8 = Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1];
 		
 			func_8ba4(Data_40004ad8, Data_40004ae8, Data_40004128.Data_40, Data_40004128.bData_44, Data_40004b08);
 
@@ -1484,11 +1484,11 @@ int func_27844(void)
 				Data_4000403c[8] = ' ';
 			}
 			
-			Data_40003360 = Data_4000309c;
+			Data_40003360 = Data_4000309c; //"List align stars:"???
 			Data_40003364 = "                     ";
-			Data_40003368 = Data_40003a14[bData_40002c60 - 1];
+			Data_40003368 = Data_40003a14[bData_40002c60_CurrentAlignStarIndex - 1];
 			Data_4000336c = "                        ";
-			Data_40003370 = Data_40004027;
+			Data_40003370 = Data_40004027; //"OBJ:      Azi:..."???
 			Data_40003374 = Data_4000403c;
 			Data_40003378 = Data_40003ffd;
 			Data_4000337c = Data_40004012;
@@ -1802,8 +1802,8 @@ int func_27844(void)
 			Data_40003368 = "                      ";
 			Data_4000336c = "                      ";
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -1923,8 +1923,8 @@ int func_27844(void)
 			//->0x3d71c
 			break;
 
-		case 0x5660: //22112
-			//0x2db70
+		case 22112: //Solar System Objects
+			//0x2db70: Sun Warning screen
 			Data_40003360 = "                     ";
 			Data_40003364 = "    DO NOT POINT     ";
 			Data_40003368 = "the telescope or its ";
@@ -1939,13 +1939,13 @@ int func_27844(void)
 			//->0x3d71c
 			break;
 
-		case 0x565F: //22111
-			//0x2dd24
+		case 22111: //Solar System Objects
+			//0x2dd24: Target Under Horizon / Slewing To Target / Find Target,Tracking
 			func_22060(bData_40002eb5_SolarSystemObjectNr, 
 				&fData_40002cd0_ObjectRightAscension, &fData_40002d18_ObjectDeclination);
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -2017,7 +2017,7 @@ int func_27844(void)
 			{
 				//2e2ec
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.dData_48) - dData_40002d78;
+				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 				//->0x2e354
 				while (dData_40002c88 >= 24)
 				{
@@ -2028,8 +2028,8 @@ int func_27844(void)
 					dData_40002c88 += 24;
 				}
 				//2e3a4
-				Data_40004ad8.dData_0 = Data_40004128.dData_48;
-				Data_40004ad8.dData_8 = Data_40004128.dData_56;
+				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dData_0 = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
@@ -2186,8 +2186,8 @@ int func_27844(void)
 		
 			Data_4000336c = Data_40003fe8;
 			
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 			
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -2314,8 +2314,8 @@ int func_27844(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003dd4.fData_36;
 			fData_40002d18_ObjectDeclination = Data_40003dd4.fData_40;
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -2387,7 +2387,7 @@ int func_27844(void)
 			{
 				//2fc08
 				dData_40002c90 = dData_40002d98;				
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.dData_48) - dData_40002d78;
+				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 				//->0x2fc70
 				while (dData_40002c88 >= 24)
 				{
@@ -2398,8 +2398,8 @@ int func_27844(void)
 					dData_40002c88 += 24;
 				}
 				//2fcc0
-				Data_40004ad8.dData_0 = Data_40004128.dData_48;
-				Data_40004ad8.dData_8 = Data_40004128.dData_56;
+				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dData_0 = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
@@ -2540,8 +2540,8 @@ int func_27844(void)
 		
 			Data_4000336c = Data_40003fe8;
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -2668,8 +2668,8 @@ int func_27844(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003d94.fData_56;
 			fData_40002d18_ObjectDeclination = Data_40003d94.fData_60;
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -2741,7 +2741,7 @@ int func_27844(void)
 			{
 				//31490
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.dData_48) - dData_40002d78;
+				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 				//->0x314f8
 				while (dData_40002c88 >= 24)
 				{
@@ -2752,8 +2752,8 @@ int func_27844(void)
 					dData_40002c88 += 24;
 				}
 				//31548
-				Data_40004ad8.dData_0 = Data_40004128.dData_48;
-				Data_40004ad8.dData_8 = Data_40004128.dData_56;
+				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dData_0 = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
@@ -2921,8 +2921,8 @@ int func_27844(void)
 			Data_40003368 = Data_40003e08.bData_60;
 			Data_4000336c = "                                                ";
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
@@ -3048,8 +3048,8 @@ int func_27844(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003e08.fData_4;
 			fData_40002d18_ObjectDeclination = Data_40003e08.fData_8;
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -3121,7 +3121,7 @@ int func_27844(void)
 			{
 				//32f2c
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.dData_48) - dData_40002d78;
+				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 				//->0x2e354
 				while (dData_40002c88 >= 24)
 				{
@@ -3132,8 +3132,8 @@ int func_27844(void)
 					dData_40002c88 += 24;
 				}
 				//32fe4
-				Data_40004ad8.dData_0 = Data_40004128.dData_48;
-				Data_40004ad8.dData_8 = Data_40004128.dData_56;
+				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dData_0 = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
@@ -3286,8 +3286,8 @@ int func_27844(void)
 			//0x33808
 			Data_4000336c = Data_40003ee0.bData_20;
 			
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
@@ -3413,8 +3413,8 @@ int func_27844(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003ee0.fData_8;
 			fData_40002d18_ObjectDeclination = Data_40003ee0.fData_12;
 
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -3486,7 +3486,7 @@ int func_27844(void)
 			{
 				//3485c
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.dData_48) - dData_40002d78;
+				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 
 				while (dData_40002c88 >= 24)
 				{
@@ -3497,8 +3497,8 @@ int func_27844(void)
 					dData_40002c88 += 24;
 				}
 				//34914
-				Data_40004ad8.dData_0 = Data_40004128.dData_48;
-				Data_40004ad8.dData_8 = Data_40004128.dData_56;
+				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dData_0 = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
@@ -3663,8 +3663,8 @@ int func_27844(void)
 			//0x35178
 			Data_4000336c = Data_40003ec0.bData_20;
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
@@ -3790,8 +3790,8 @@ int func_27844(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003ec0.fData_8;
 			fData_40002d18_ObjectDeclination = Data_40003ec0.fData_12;
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -3863,7 +3863,7 @@ int func_27844(void)
 			{
 				//3619c
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.dData_48) - dData_40002d78;
+				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 
 				while (dData_40002c88 >= 24)
 				{
@@ -3874,8 +3874,8 @@ int func_27844(void)
 					dData_40002c88 += 24;
 				}
 				//36254
-				Data_40004ad8.dData_0 = Data_40004128.dData_48;
-				Data_40004ad8.dData_8 = Data_40004128.dData_56;
+				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dData_0 = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
@@ -4027,8 +4027,8 @@ int func_27844(void)
 			Data_40003368 = "                                        ";
 			Data_4000336c = "                                        ";
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
@@ -4154,8 +4154,8 @@ int func_27844(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003350.fData_0;
 			fData_40002d18_ObjectDeclination = Data_40003350.fData_4;
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -4227,7 +4227,7 @@ int func_27844(void)
 			{
 				//37a84
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.dData_48) - dData_40002d78;
+				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 
 				while (dData_40002c88 >= 24)
 				{
@@ -4238,8 +4238,8 @@ int func_27844(void)
 					dData_40002c88 += 24;
 				}
 
-				Data_40004ad8.dData_0 = Data_40004128.dData_48;
-				Data_40004ad8.dData_8 = Data_40004128.dData_56;
+				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dData_0 = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
@@ -4392,8 +4392,8 @@ int func_27844(void)
 			//0x3835c
 			Data_4000336c = "                                          ";
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
@@ -4519,8 +4519,8 @@ int func_27844(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003ea0.fData_20;
 			fData_40002d18_ObjectDeclination = Data_40003ea0.fData_24;
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
@@ -4592,7 +4592,7 @@ int func_27844(void)
 			{
 				//39368
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.dData_48) - dData_40002d78;
+				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 
 				while (dData_40002c88 >= 24)
 				{
@@ -4603,8 +4603,8 @@ int func_27844(void)
 					dData_40002c88 += 24;
 				}
 				//39420
-				Data_40004ad8.dData_0 = Data_40004128.dData_48;
-				Data_40004ad8.dData_8 = Data_40004128.dData_56;
+				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dData_0 = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
@@ -4744,8 +4744,8 @@ int func_27844(void)
 			Data_40003368 = "                                        ";
 			Data_4000336c = "                                        ";
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
@@ -4871,8 +4871,8 @@ int func_27844(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003358_SAORecord.fData_0;
 			fData_40002d18_ObjectDeclination = Data_40003358_SAORecord.fData_4;
 		
-			Data_40004ad8.dData_0 = Data_40004128.dData_48;
-			Data_40004ad8.dData_8 = Data_40004128.dData_56;
+			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 			Data_40004ae8.dData_0 = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
@@ -4948,7 +4948,7 @@ int func_27844(void)
 			{
 				//3abfc
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.dData_48) - dData_40002d78;
+				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 
 				while (dData_40002c88 >= 24)
 				{
@@ -4959,8 +4959,8 @@ int func_27844(void)
 					dData_40002c88 += 24;
 				}
 				//3acb4
-				Data_40004ad8.dData_0 = Data_40004128.dData_48;
-				Data_40004ad8.dData_8 = Data_40004128.dData_56;
+				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
+				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dData_0 = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
@@ -5263,22 +5263,22 @@ int func_27844(void)
 			dData_40002c70 = func_d7ac(1, 
 				fData_40002cd0_ObjectRightAscension, 
 				fData_40002d18_ObjectDeclination, 
-				Data_40004128.dData_48, 
-				Data_40004128.dData_56, 
+				Data_40004128.geographicLongitude, 
+				Data_40004128.geographicLatitude, 
 				(unsigned char)Data_40004128.Data_64);
 
 			dData_40002c78 = func_d7ac(2, 
 				fData_40002cd0_ObjectRightAscension, 
 				fData_40002d18_ObjectDeclination, 
-				Data_40004128.dData_48, 
-				Data_40004128.dData_56, 
+				Data_40004128.geographicLongitude, 
+				Data_40004128.geographicLatitude, 
 				(unsigned char)Data_40004128.Data_64);
 
 			dData_40002c80 = func_d7ac(3, 
 				fData_40002cd0_ObjectRightAscension, 
 				fData_40002d18_ObjectDeclination, 
-				Data_40004128.dData_48, 
-				Data_40004128.dData_56, 
+				Data_40004128.geographicLongitude, 
+				Data_40004128.geographicLatitude, 
 				(unsigned char)Data_40004128.Data_64);
 				
 			sprintf(Data_40003fd3, "RiseTime:   %02dh%02dm",
