@@ -612,9 +612,9 @@ extern unsigned short wData_40002ec0; //40002ec0
 extern unsigned int Data_40002ec4_SAONr; //40002ec4
 extern int Data_40002ec8; //40002ec8
 extern unsigned short wData_40002ecc; //40002ecc
-extern unsigned char bData_40002ece; //40002ece
+extern unsigned char bData_40002ece_ConstellationNr; //40002ece
 extern unsigned short wData_40002ed0; //40002ed0
-extern unsigned char bData_40002ed2; //40002ed2
+extern unsigned char bData_40002ed2_FamousStarNr; //40002ed2
 extern unsigned short wData_40002ed4; //40002ed4
 extern unsigned short wData_40002ed6; //40002ed6
 extern unsigned short wData_40002ed8; //40002ed8

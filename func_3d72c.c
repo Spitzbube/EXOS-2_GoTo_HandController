@@ -12,7 +12,7 @@ void func_3d72c(void)
 			if (Data_4000318c != Data_40003190)
 			{
 				//3d77c
-				func_394();				
+				lcd_display_clear();				
 				Data_40003190 = Data_4000318c;
 			}
 			//3d790
@@ -271,15 +271,15 @@ void func_3d72c(void)
 								func_7e8(0, 7, 8, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 								func_7e8(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 							
-								func_864(0, 5, 15, (unsigned char*)Data_7906c);
-								func_864(0, 5, 18, (unsigned char*)Data_79078);
-								func_864(0, 5, 21, (unsigned char*)Data_79072);
-								func_864(0, 6, 15, (unsigned char*)Data_7906c);
-								func_864(0, 6, 18, (unsigned char*)Data_79078);
-								func_864(0, 6, 21, (unsigned char*)Data_79072);
-								func_864(0, 8, 15, (unsigned char*)Data_7906c);
-								func_864(0, 8, 18, (unsigned char*)Data_79078);
-								func_864(0, 8, 21, (unsigned char*)Data_79072);
+								lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+								lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+								lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 								//->0x3f8c8
 								break;
 							
@@ -294,18 +294,18 @@ void func_3d72c(void)
 								func_7e8(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 								func_7e8(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 							
-								func_864(0, 5, 15, (unsigned char*)Data_7906c);
-								func_864(0, 5, 18, (unsigned char*)Data_79078);
-								func_864(0, 5, 21, (unsigned char*)Data_79072);
-								func_864(0, 6, 15, (unsigned char*)Data_7906c);
-								func_864(0, 6, 18, (unsigned char*)Data_79078);
-								func_864(0, 6, 21, (unsigned char*)Data_79072);
-								func_864(0, 7, 15, (unsigned char*)Data_7906c);
-								func_864(0, 7, 18, (unsigned char*)Data_79078);
-								func_864(0, 7, 21, (unsigned char*)Data_79072);
-								func_864(0, 8, 15, (unsigned char*)Data_7906c);
-								func_864(0, 8, 18, (unsigned char*)Data_79078);
-								func_864(0, 8, 21, (unsigned char*)Data_79072);
+								lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+								lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+								lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapSecond);
+								lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 								break;
 						}
 					}
@@ -338,7 +338,7 @@ void func_3d72c(void)
 							//3f9c8
 							if (bData_400031e9 != 5)
 							{
-								func_394();
+								lcd_display_clear();
 							}
 							//0x3f9dc
 							bData_400031e9 = 5;
@@ -368,7 +368,7 @@ void func_3d72c(void)
 							//0x3fb58
 							if (bData_400031e9 != 6)
 							{
-								func_394();
+								lcd_display_clear();
 							}
 							//0x3fb6c
 							bData_400031e9 = 6;
@@ -383,12 +383,12 @@ void func_3d72c(void)
 							func_7e8(0, 5, 11, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
 							func_7e8(0, 6, 11, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 							
-							func_864(0, 5, 18, (unsigned char*)Data_7906c);
-							func_864(0, 5, 21, (unsigned char*)Data_79078);
-							func_864(0, 6, 18, (unsigned char*)Data_7906c);
-							func_864(0, 6, 21, (unsigned char*)Data_79078);
-							func_864(0, 8, 18, (unsigned char*)Data_7906c);
-							func_864(0, 8, 21, (unsigned char*)Data_79078);
+							lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapMinute);
+							lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapMinute);
+							lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapMinute);
 							
 							func_7e8(0, 6, 1, 4, "      ");
 							//->0x4047c
@@ -402,7 +402,7 @@ void func_3d72c(void)
 							//3fdcc
 							if (bData_400031e9 != 7)
 							{
-								func_394();
+								lcd_display_clear();
 							}
 							bData_400031e9 = 7;
 							
@@ -427,20 +427,20 @@ void func_3d72c(void)
 							func_7e8(0, 5, 11, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
 							func_7e8(0, 6, 11, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 
-							func_864(0, 5, 18, (unsigned char*)Data_7906c);
-							func_864(0, 5, 21, (unsigned char*)Data_79078);
-							func_864(0, 6, 18, (unsigned char*)Data_7906c);
-							func_864(0, 6, 21, (unsigned char*)Data_79078);
+							lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapMinute);
+							lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapMinute);
 							
 							func_7e8(0, 6, 1, 6, "       ");
 							func_7e8(0, 7, 1, 4, "OTA:");
 							func_7e8(0, 7, 11, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 							func_7e8(0, 8, 11, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 							
-							func_864(0, 7, 18, (unsigned char*)Data_7906c);
-							func_864(0, 7, 21, (unsigned char*)Data_79078);
-							func_864(0, 8, 18, (unsigned char*)Data_7906c);
-							func_864(0, 8, 21, (unsigned char*)Data_79078);
+							lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapMinute);
+							lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapMinute);
 							
 							func_7e8(0, 6, 1, 4, "    ");
 							//->0x402d8
@@ -453,7 +453,7 @@ void func_3d72c(void)
 								//4016c
 								if (bData_400031e9 != 8)
 								{
-									func_394();
+									lcd_display_clear();
 								}
 								bData_400031e9 = 8;
 								
@@ -479,7 +479,7 @@ void func_3d72c(void)
 							
 							if (bData_400031e9 != 8)
 							{
-								func_394();
+								lcd_display_clear();
 							}
 							bData_400031e9 = 8;
 							
@@ -623,15 +623,15 @@ void func_3d72c(void)
 					func_7e8(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					func_7e8(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
-					func_864(0, 5, 15, (unsigned char*)Data_7906c);
-					func_864(0, 5, 18, (unsigned char*)Data_79078);
-					func_864(0, 5, 21, (unsigned char*)Data_79072);
-					func_864(0, 6, 15, (unsigned char*)Data_7906c);
-					func_864(0, 6, 18, (unsigned char*)Data_79078);
-					func_864(0, 6, 21, (unsigned char*)Data_79072);
-					func_864(0, 8, 15, (unsigned char*)Data_7906c);
-					func_864(0, 8, 18, (unsigned char*)Data_79078);
-					func_864(0, 8, 21, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 23003:
@@ -649,15 +649,15 @@ void func_3d72c(void)
 					func_7e8(0, 7, 8, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					func_7e8(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
-					func_864(0, 5, 15, (unsigned char*)Data_7906c);
-					func_864(0, 5, 18, (unsigned char*)Data_79078);
-					func_864(0, 5, 21, (unsigned char*)Data_79072);
-					func_864(0, 6, 15, (unsigned char*)Data_7906c);
-					func_864(0, 6, 18, (unsigned char*)Data_79078);
-					func_864(0, 6, 21, (unsigned char*)Data_79072);
-					func_864(0, 8, 15, (unsigned char*)Data_7906c);
-					func_864(0, 8, 18, (unsigned char*)Data_79078);
-					func_864(0, 8, 21, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 22111:
@@ -683,18 +683,18 @@ void func_3d72c(void)
 					func_7e8(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					func_7e8(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
-					func_864(0, 5, 15, (unsigned char*)Data_7906c);
-					func_864(0, 5, 18, (unsigned char*)Data_79078);
-					func_864(0, 5, 21, (unsigned char*)Data_79072);
-					func_864(0, 6, 15, (unsigned char*)Data_7906c);
-					func_864(0, 6, 18, (unsigned char*)Data_79078);
-					func_864(0, 6, 21, (unsigned char*)Data_79072);
-					func_864(0, 7, 15, (unsigned char*)Data_7906c);
-					func_864(0, 7, 18, (unsigned char*)Data_79078);
-					func_864(0, 7, 21, (unsigned char*)Data_79072);
-					func_864(0, 8, 15, (unsigned char*)Data_7906c);
-					func_864(0, 8, 18, (unsigned char*)Data_79078);
-					func_864(0, 8, 21, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 					
 					if (bData_40002e8a == 2)
 					{
@@ -714,7 +714,7 @@ void func_3d72c(void)
 					//0x4161c
 				case 23014:
 					//0x41624
-					func_394();
+					lcd_display_clear();
 				
 					func_7e8(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -726,18 +726,18 @@ void func_3d72c(void)
 					func_7e8(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					func_7e8(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 
-					func_864(0, 5, 15, (unsigned char*)Data_7906c);
-					func_864(0, 5, 18, (unsigned char*)Data_79078);
-					func_864(0, 5, 21, (unsigned char*)Data_79072);
-					func_864(0, 6, 15, (unsigned char*)Data_7906c);
-					func_864(0, 6, 18, (unsigned char*)Data_79078);
-					func_864(0, 6, 21, (unsigned char*)Data_79072);
-					func_864(0, 7, 15, (unsigned char*)Data_7906c);
-					func_864(0, 7, 18, (unsigned char*)Data_79078);
-					func_864(0, 7, 21, (unsigned char*)Data_79072);
-					func_864(0, 8, 15, (unsigned char*)Data_7906c);
-					func_864(0, 8, 18, (unsigned char*)Data_79078);
-					func_864(0, 8, 21, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 				
 					if (bData_40002e8a == 2)
 					{
@@ -763,15 +763,15 @@ void func_3d72c(void)
 					func_7e8(0, 7, 8, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					func_7e8(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 
-					func_864(0, 5, 15, (unsigned char*)Data_7906c);
-					func_864(0, 5, 18, (unsigned char*)Data_79078);
-					func_864(0, 5, 21, (unsigned char*)Data_79072);
-					func_864(0, 6, 15, (unsigned char*)Data_7906c);
-					func_864(0, 6, 18, (unsigned char*)Data_79078);
-					func_864(0, 6, 21, (unsigned char*)Data_79072);
-					func_864(0, 8, 15, (unsigned char*)Data_7906c);
-					func_864(0, 8, 18, (unsigned char*)Data_79078);
-					func_864(0, 8, 21, (unsigned char*)Data_79072);				
+					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);				
 					break;
 				
 				case 23012:
@@ -932,9 +932,9 @@ void func_3d72c(void)
 				
 				case 203:
 					//0x42788
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
 
 					func_7e8(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -946,16 +946,16 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, 16, (unsigned char*)Data_4000337c);
 					func_7e8(1, 6, bData_4000318a, 1, (unsigned char*)&Data_40003374[bData_4000318a - 1]);
 				
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 204:
 					//0x4298c
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
 
 					func_7e8(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -967,16 +967,16 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, 16, (unsigned char*)Data_4000337c);
 					func_7e8(1, 7, bData_4000318a, 1, (unsigned char*)&Data_40003378[bData_4000318a - 1]);
 				
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 205:
 					//0x42b90
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
 
 					func_7e8(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -988,19 +988,19 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, 16, (unsigned char*)Data_4000337c);
 					func_7e8(1, 8, bData_4000318a, 1, (unsigned char*)&Data_4000337c[bData_4000318a - 1]);
 				
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 206:
 					//0x42d94
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
-					func_864(0, 7, 8, (unsigned char*)Data_7906c);
-					func_864(0, 7, 11, (unsigned char*)Data_79078);
-					func_864(0, 7, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
 				
 					func_7e8(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -1014,22 +1014,22 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, 3, "Alt");
 					func_7e8(1, 6, bData_4000318a, 1, (unsigned char*)&Data_40003374[bData_4000318a - 1]);
 
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
-					func_864(0, 7, 8, (unsigned char*)Data_7906c);
-					func_864(0, 7, 11, (unsigned char*)Data_79078);
-					func_864(0, 7, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 207:
 					//0x43048
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
-					func_864(0, 7, 8, (unsigned char*)Data_7906c);
-					func_864(0, 7, 11, (unsigned char*)Data_79078);
-					func_864(0, 7, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
 				
 					func_7e8(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -1043,22 +1043,22 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, 3, "Alt");
 					func_7e8(1, 7, bData_4000318a, 1, (unsigned char*)&Data_40003378[bData_4000318a - 1]);
 
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
-					func_864(0, 7, 8, (unsigned char*)Data_7906c);
-					func_864(0, 7, 11, (unsigned char*)Data_79078);
-					func_864(0, 7, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 208:
 					//0x43328
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
-					func_864(0, 7, 8, (unsigned char*)Data_7906c);
-					func_864(0, 7, 11, (unsigned char*)Data_79078);
-					func_864(0, 7, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
 				
 					func_7e8(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -1072,19 +1072,19 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, 3, "Alt");
 					func_7e8(1, 8, bData_4000318a, 1, (unsigned char*)&Data_4000337c[bData_4000318a - 1]);
 
-					func_864(0, 8, 8, (unsigned char*)Data_7906c);
-					func_864(0, 8, 11, (unsigned char*)Data_79078);
-					func_864(0, 8, 16, (unsigned char*)Data_79072);
-					func_864(0, 7, 8, (unsigned char*)Data_7906c);
-					func_864(0, 7, 11, (unsigned char*)Data_79078);
-					func_864(0, 7, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 29001:
 					//0x435dc
-					func_864(0, 5, 8, (unsigned char*)Data_7906c);
-					func_864(0, 5, 11, (unsigned char*)Data_79078);
-					func_864(0, 5, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
 				
 					func_7e8(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -1096,16 +1096,16 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 					func_7e8(1, 3, bData_4000318a, 1, (unsigned char*)&Data_40003368[bData_4000318a - 1]);
 				
-					func_864(0, 5, 8, (unsigned char*)Data_7906c);
-					func_864(0, 5, 11, (unsigned char*)Data_79078);
-					func_864(0, 5, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 29002: //???
 					//0x437f0
-					func_864(0, 5, 8, (unsigned char*)Data_7906c);
-					func_864(0, 5, 11, (unsigned char*)Data_79078);
-					func_864(0, 5, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
 				
 					func_7e8(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -1117,9 +1117,9 @@ void func_3d72c(void)
 					func_7e8(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 					func_7e8(1, 5, bData_4000318a, 1, (unsigned char*)&Data_40003370[bData_4000318a - 1]);
 				
-					func_864(0, 5, 8, (unsigned char*)Data_7906c);
-					func_864(0, 5, 11, (unsigned char*)Data_79078);
-					func_864(0, 5, 16, (unsigned char*)Data_79072);
+					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 48001:
@@ -1186,19 +1186,19 @@ void func_3d72c(void)
 					func_7e8(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					func_7e8(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
-					func_864(0, 3, 14, (unsigned char*)Data_7906c);
-					func_864(0, 3, 17, (unsigned char*)Data_79078);
-					func_864(0, 4, 14, (unsigned char*)Data_7906c);
-					func_864(0, 4, 17, (unsigned char*)Data_79078);
+					lcd_display_bitmap(0, 3, 14, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 3, 17, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 4, 14, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 4, 17, (unsigned char*)cBitmapMinute);
 					//->0x4684c
 					break;
 				
 				case 43002:
 					//0x44140
-					func_864(0, 4, 11, (unsigned char*)Data_7906c);
-					func_864(0, 4, 14, (unsigned char*)Data_79078);
-					func_864(0, 5, 10, (unsigned char*)Data_7906c);
-					func_864(0, 5, 13, (unsigned char*)Data_79078);
+					lcd_display_bitmap(0, 4, 11, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 4, 14, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 10, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 13, (unsigned char*)cBitmapMinute);
 
 					func_7e8(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					func_7e8(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -1232,10 +1232,10 @@ void func_3d72c(void)
 							break;						
 					}
 				
-					func_864(0, 4, 11, (unsigned char*)Data_7906c);
-					func_864(0, 4, 14, (unsigned char*)Data_79078);
-					func_864(0, 5, 10, (unsigned char*)Data_7906c);
-					func_864(0, 5, 13, (unsigned char*)Data_79078);
+					lcd_display_bitmap(0, 4, 11, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 4, 14, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 10, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 13, (unsigned char*)cBitmapMinute);
 					break;
 				
 				case 47041:
@@ -1268,8 +1268,8 @@ void func_3d72c(void)
 							break;
 					}
 				
-					func_864(0, 3, 8, (unsigned char*)Data_7906c);
-					func_864(0, 5, 8, (unsigned char*)Data_7906c);					
+					lcd_display_bitmap(0, 3, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);					
 					break;
 				
 				case 100:
@@ -1291,10 +1291,6 @@ void func_3d72c(void)
 				
 				case 35001:
 					//0x44938
-					break;
-				
-				case 28001: //0x6D61:
-					//0x4575c
 					break;
 				
 				case 360021:
@@ -1319,6 +1315,10 @@ void func_3d72c(void)
 				
 				case 211001:
 					//0x454d0
+					break;
+				
+				case 28001: //0x6D61:
+					//0x4575c
 					break;
 				
 				default:

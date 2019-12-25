@@ -482,20 +482,20 @@ void func_240e8(unsigned char a, int b)
 			break;
 		
 		case 2:
-			//0x241b0
-			bData_40002ece = b;
+			//0x241b0: Constellation
+			bData_40002ece_ConstellationNr = b;
 		
-			func_38dc(bData_40002ece, &Data_40003dd4);
+			func_38dc(bData_40002ece_ConstellationNr, &Data_40003dd4);
 		
-			sprintf(Data_4000410e, "Constellation %d          ", bData_40002ece);
+			sprintf(Data_4000410e, "Constellation %d          ", bData_40002ece_ConstellationNr);
 			//->0x24568
 			break;
 		
 		case 3:
 			//0x241e4
-			bData_40002ed2 = b;
+			bData_40002ed2_FamousStarNr = b;
 		
-			func_34e4(bData_40002ed2, &Data_40003d94);
+			func_34e4(bData_40002ed2_FamousStarNr, &Data_40003d94);
 
 			for (bData_40002f1d = 0; bData_40002f1d < 13; bData_40002f1d++)
 			{

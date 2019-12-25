@@ -31,7 +31,7 @@ void HandleEnterKey(void)
 		
 		case 101:
 			//0x52eb8
-			func_394();
+			lcd_display_clear();
 			Data_40002c64_MenuContextId = 102;		
 			break;
 		
@@ -90,12 +90,12 @@ void HandleEnterKey(void)
 					else
 					{
 						//0x530f4
-						func_394();
+						lcd_display_clear();
 						func_7950(1);
 						func_7e8(0, 3, 1, 22, " Target Out of Range  ");
 						func_7e8(0, 5, 1, 22, "Altitude < -15 Degree ");
 						func_659c(2000);
-						func_394();
+						lcd_display_clear();
 						
 						Data_40002c64_MenuContextId = 101;
 					}
@@ -462,7 +462,7 @@ void HandleEnterKey(void)
 		case 2100:
 			//0x543a8: Navigation -> Solar System
 			bData_40002eb5_SolarSystemObjectNr = 0;
-			func_394();
+			lcd_display_clear();
 			bData_40003432 = 0;
 			Data_40002c64_MenuContextId = 22001; 
 			break;
@@ -471,7 +471,7 @@ void HandleEnterKey(void)
 			//0x543d8
 			if (bData_40002eb5_SolarSystemObjectNr == 8/*Sun*/)
 			{
-				func_394();
+				lcd_display_clear();
 				
 				Data_40002c64_MenuContextId = 22112; //->Sun Warning screen
 				
@@ -494,7 +494,7 @@ void HandleEnterKey(void)
 				Data_40002f10 = bData_40002eb5_SolarSystemObjectNr;
 				
 				func_268c(bData_40002f0d, Data_40002f10);
-				func_394();
+				lcd_display_clear();
 				
 				Data_40002c64_MenuContextId = 22111;
 			}
@@ -507,22 +507,37 @@ void HandleEnterKey(void)
 			break;
 		
 		case 2200:
-			//0x5454c
-			bData_40002ece = 1;
-			func_394();
+			//0x5454c: Navigation -> Constellation
+			bData_40002ece_ConstellationNr = 1;
+			lcd_display_clear();
 			bData_40003432 = 0;
 			Data_40002c64_MenuContextId = 24001;
 			break;
 		
 		case 24001:
 			//0x5457c
-			//TODO
+			func_38dc(bData_40002ece_ConstellationNr, &Data_40003dd4);
+		
+			dData_40002cc8 = Data_40003dd4.fData_36;
+			dData_40002d10 = Data_40003dd4.fData_40;
+			bData_40002e88 = 1;
+		
+			func_b64c(dData_40002cc8, dData_40002d10);
+		
+			bData_40002f0d = 2;
+			Data_40002f10 = bData_40002ece_ConstellationNr;
+		
+			func_268c(bData_40002f0d, Data_40002f10);
+			lcd_display_clear();
+		
+			Data_40002c64_MenuContextId = 24002;
+			//->0x563b8
 			break;
 		
 		case 2300:
-			//0x5461c
-			bData_40002ed2 = 1;
-			func_394();
+			//0x5461c: Navigation -> Famous Star
+			bData_40002ed2_FamousStarNr = 1;
+			lcd_display_clear();
 			bData_40003432 = 0;
 			Data_40002c64_MenuContextId = 25001;
 			break;
@@ -536,14 +551,14 @@ void HandleEnterKey(void)
 			//0x546ec
 			wData_40002eb8_MessierNr = 1;
 			Data_40002ec8 = 0;
-			func_394();
+			lcd_display_clear();
 			bData_40003432 = 0;
 			Data_40002c64_MenuContextId = 23012;
 			break;
 		
 		case 23012:
 			//0x54728
-			func_394();
+			lcd_display_clear();
 			Data_40002c64_MenuContextId = 23002;
 			break;
 		
@@ -557,7 +572,7 @@ void HandleEnterKey(void)
 			wData_40002eba_NGCNr = 1;
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
-			func_394();
+			lcd_display_clear();
 			Data_40002c64_MenuContextId = 23003;
 			break;
 		
@@ -571,7 +586,7 @@ void HandleEnterKey(void)
 			wData_40002ebc_ICNr = 1;
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
-			func_394();
+			lcd_display_clear();
 			Data_40002c64_MenuContextId = 23004;
 			break;
 		
@@ -585,7 +600,7 @@ void HandleEnterKey(void)
 			wData_40002ebe_ShNr = 1;
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
-			func_394();
+			lcd_display_clear();
 			Data_40002c64_MenuContextId = 23005;
 			break;
 		
@@ -599,7 +614,7 @@ void HandleEnterKey(void)
 			wData_40002ec0 = 1;
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
-			func_394();
+			lcd_display_clear();
 			Data_40002c64_MenuContextId = 23006;
 			break;
 		
@@ -613,7 +628,7 @@ void HandleEnterKey(void)
 			Data_40002ec4_SAONr = 1;
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
-			func_394();
+			lcd_display_clear();
 			Data_40002c64_MenuContextId = 23007;
 			break;
 
@@ -631,7 +646,7 @@ void HandleEnterKey(void)
 			Data_40002f10 = Data_40002ec4_SAONr;
 			
 			func_268c(bData_40002f0d, Data_40002f10);
-			func_394();
+			lcd_display_clear();
 			
 			Data_40002c64_MenuContextId = 23017;
 			//->0x563b8
@@ -742,45 +757,45 @@ void HandleEnterKey(void)
 		case 49001: //???
 			//0x5502c
 			bData_40003196_CurrentLanguage = 1;
-			func_243c(0xdcb, 0, 528, Data_400035bc);	
+			flash_read(0xdcb, 0, 528, Data_400035bc);	
 			Data_400035bc[0] = bData_40003196_CurrentLanguage;		
-			func_24d4(0xdcb, 0, 528, Data_400035bc);
+			flash_write(0xdcb, 0, 528, Data_400035bc);
 			Data_40002c64_MenuContextId = 4800;
 			break;
 		
 		case 49002:
 			//0x55084
 			bData_40003196_CurrentLanguage = 2;
-			func_243c(0xdcb, 0, 528, Data_400035bc);	
+			flash_read(0xdcb, 0, 528, Data_400035bc);	
 			Data_400035bc[0] = bData_40003196_CurrentLanguage;		
-			func_24d4(0xdcb, 0, 528, Data_400035bc);
+			flash_write(0xdcb, 0, 528, Data_400035bc);
 			Data_40002c64_MenuContextId = 4800;
 			break;
 		
 		case 49003:
 			//0x550dc
 			bData_40003196_CurrentLanguage = 3;
-			func_243c(0xdcb, 0, 528, Data_400035bc);	
+			flash_read(0xdcb, 0, 528, Data_400035bc);	
 			Data_400035bc[0] = bData_40003196_CurrentLanguage;		
-			func_24d4(0xdcb, 0, 528, Data_400035bc);
+			flash_write(0xdcb, 0, 528, Data_400035bc);
 			Data_40002c64_MenuContextId = 4800;
 			break;
 		
 		case 49004:
 			//0x55134
 			bData_40003196_CurrentLanguage = 4;
-			func_243c(0xdcb, 0, 528, Data_400035bc);	
+			flash_read(0xdcb, 0, 528, Data_400035bc);	
 			Data_400035bc[0] = bData_40003196_CurrentLanguage;		
-			func_24d4(0xdcb, 0, 528, Data_400035bc);
+			flash_write(0xdcb, 0, 528, Data_400035bc);
 			Data_40002c64_MenuContextId = 4800;
 			break;
 		
 		case 49005:
 			//0x5518c
 			bData_40003196_CurrentLanguage = 5;
-			func_243c(0xdcb, 0, 528, Data_400035bc);	
+			flash_read(0xdcb, 0, 528, Data_400035bc);	
 			Data_400035bc[0] = bData_40003196_CurrentLanguage;		
-			func_24d4(0xdcb, 0, 528, Data_400035bc);
+			flash_write(0xdcb, 0, 528, Data_400035bc);
 			Data_40002c64_MenuContextId = 4800;
 			break;
 		
@@ -964,7 +979,7 @@ void HandleEnterKey(void)
 			//0x558dc
 			wData_40003250 = 1;
 			wData_40003252 = 0;
-			func_394();
+			lcd_display_clear();
 			Data_40002c64_MenuContextId = 43011;
 			break;
 		
