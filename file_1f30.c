@@ -17,8 +17,20 @@
 #define FLASH_CMD_BUF1_WRITE 0x84
 #define FLASH_CMD_CONT_ARRAY_READ 0xE8
 
-extern void func_394(void);
-extern void func_3ec(void);
+// LCD Display commands
+#define ST7565_CMD_DISPLAY_ON             0xAF
+#define ST7565_CMD_SET_PAGE               0xB0
+#define ST7565_CMD_SET_COLUMN_UPPER       0x10
+#define ST7565_CMD_SET_COLUMN_LOWER       0x00
+#define ST7565_CMD_SET_BIAS_9             0xA2
+#define ST7565_CMD_INTERNAL_RESET         0xE2
+#define ST7565_CMD_SET_VOLUME_FIRST       0x81
+#define ST7565_CMD_SET_DISP_NORMAL        0xA6
+#define ST7565_CMD_SET_ALLPTS_NORMAL      0xA4
+#define ST7565_CMD_SET_COM_REVERSE        0xC8
+
+extern void lcd_display_clear(void);
+extern void lcd_display_configure(void);
 extern void spi0_init(void);
 
 
@@ -32,95 +44,96 @@ int unknown_prologue(void)
 }
 
 /* 224 - complete */
-void func_224(unsigned char a)
+void lcd_write_data(unsigned char a)
 {
 	unsigned char i;
 	
 	IOCLR0 |= 0x400;
-	IOSET1 |= 0x800000;
+	IOSET1 |= (1 << 23); // A0 = 1 -> Display Data
 
 	for (i = 0; i < 8; i++)
 	{	
-		IOCLR0 |= 0x1000;
+		IOCLR0 |= (1 << 12);
 		if (a & 0x80)
 		{
-			IOSET0 |= 0x8000;
+			IOSET0 |= (1 << 15);
 		}
 		else
 		{
-			IOCLR0 |= 0x8000;
+			IOCLR0 |= (1 << 15);
 		}
 		
 		a <<= 1;
 		
-		IOSET0 |= 0x1000;
+		IOSET0 |= (1 << 12);
 	}
 	
 	IOSET0 |= 0x400;
 }
 	
 /* 2dc - complete */
-void func_2dc(unsigned char a)
+void lcd_write_command(unsigned char a)
 {
 	unsigned char i;
 	
 	IOCLR0 |= 0x400;
-	IOCLR1 |= 0x800000;
+	IOCLR1 |= (1 << 23); // A0 = 0 -> Control Data
 
 	for (i = 0; i < 8; i++)
 	{	
-		IOCLR0 |= 0x1000;
+		IOCLR0 |= (1 << 12);
 		if (a & 0x80)
 		{
-			IOSET0 |= 0x8000;
+			IOSET0 |= (1 << 15);
 		}
 		else
 		{
-			IOCLR0 |= 0x8000;
+			IOCLR0 |= (1 << 15);
 		}
 		
 		a <<= 1;
 		
-		IOSET0 |= 0x1000;
+		IOSET0 |= (1 << 12);
 	}
 	
 	IOSET0 |= 0x400;
 }
 
 /* 394 - complete */
-void func_394(void)
+void lcd_display_clear(void)
 {
 	int i, j;
 	for (i = 0; i < 8; i++)
 	{
-		func_2dc((i & 0xff) | 0xb0);
-		func_2dc(0x00);
-		func_2dc(0x10);
+		lcd_write_command((i & 0xff) | ST7565_CMD_SET_PAGE);
+		lcd_write_command(ST7565_CMD_SET_COLUMN_LOWER);
+		lcd_write_command(ST7565_CMD_SET_COLUMN_UPPER);
 		
 		for (j = 133; j > 0; j--)
 		{
-			func_224(0);
+			lcd_write_data(0);
 		}
 	}
 }
 
 /* 3ec - complete */
-void func_3ec(void)
+void lcd_display_configure(void)
 {
-	func_2dc(0xe2);
-	func_2dc(0xa2);
-	func_2dc(0x26);
-	func_2dc(0x2f);
-	func_2dc(0x81);
-	func_2dc(0x80);
-	func_2dc(0xa6);
-	func_2dc(0xa4);
-	func_2dc(0xc8);
-	func_2dc(0xaf);
-	func_2dc(0x60);
+	lcd_write_command(ST7565_CMD_INTERNAL_RESET);
+	lcd_write_command(ST7565_CMD_SET_BIAS_9);
+	lcd_write_command(0x26);
+	lcd_write_command(0x2f);
+	lcd_write_command(ST7565_CMD_SET_VOLUME_FIRST);
+	lcd_write_command(0x80);
+	lcd_write_command(ST7565_CMD_SET_DISP_NORMAL);
+	lcd_write_command(ST7565_CMD_SET_ALLPTS_NORMAL);
+	lcd_write_command(ST7565_CMD_SET_COM_REVERSE);
+	lcd_write_command(ST7565_CMD_DISPLAY_ON);
+	lcd_write_command(0x60);
 	
-	func_394();
+	lcd_display_clear();
 
+	//Backlight?
 	PWMPR = 0;
 	PWMMCR = 2;
 	PWMPCR = 0x2000;
@@ -163,11 +176,11 @@ void func_4ec(int a)
 }
 	
 /* 53c - complete */
-void func_53c(unsigned char a)
+void lcd_display_brightness(unsigned char a)
 {
 	a = a / 2 + 80;
-	func_2dc(0x81);
-	func_2dc(a);
+	lcd_write_command(ST7565_CMD_SET_VOLUME_FIRST);
+	lcd_write_command(a);
 }
 
 /* 570 - complete */
@@ -217,10 +230,10 @@ unsigned char spi0_write_read_byte(unsigned char a)
 
 
 /* 634 - complete */
-void func_634(int a, int b, unsigned char c, const unsigned char* d)
+void lcd_display_character(int inv, int row, unsigned char col, const unsigned char* d)
 {
 	char i, j, sl;
-	unsigned char sp4[6]; //sp4
+	unsigned char bitmap[6]; //sp4
 	unsigned char sp[4]; //sp
 
 	if ((d[0] >= 0x20) && (d[0] <= 0x7e))
@@ -234,11 +247,11 @@ void func_634(int a, int b, unsigned char c, const unsigned char* d)
 
 	sp[3] = 0x0b;
 
-	func_2dc(((c - 1) * 6 + 1) & 0x0f);
-	func_2dc(((((c - 1) * 6 + 1) & 0xf0) >> 4) | 0x10);
-	func_2dc(((b - 1) & 0x0f) | 0xb0);
+	lcd_write_command(((col - 1) * 6 + 1) & 0x0f);
+	lcd_write_command(((((col - 1) * 6 + 1) & 0xf0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
+	lcd_write_command(((row - 1) & 0x0f) | ST7565_CMD_SET_PAGE);
 
-	IO1CLR = 0x2000000;
+	IO1CLR = (1 << 25);
 
 	for (i = 3; i >= 0; i--)
 	{
@@ -253,28 +266,28 @@ void func_634(int a, int b, unsigned char c, const unsigned char* d)
 		{
 			if (sl & (0x80 >> j))
 			{
-				sp4[j] |= (1 << i);
+				bitmap[j] |= (1 << i);
 			}
 			else
 			{
-				sp4[j] &= ~(1 << i);
+				bitmap[j] &= ~(1 << i);
 			}
 		}
 	}
 
 	for (i = 0; i < 6; i++)
 	{
-		if (a == 0)
+		if (inv == 0)
 		{
-			func_224(sp4[i]);
+			lcd_write_data(bitmap[i]);
 		}
 		else
 		{
-			func_224(~sp4[i]);
+			lcd_write_data(~bitmap[i]);
 		}
 	}
 
-	IO1SET = 0x2000000;
+	IO1SET = (1 << 25);
 }
 
 /* 7e8 - complete */
@@ -291,7 +304,7 @@ void func_7e8(int a, unsigned char b, unsigned char c, unsigned char d, const un
 	{
 		if (e[i])
 		{
-			func_634(a, b, c + i, &e[i]);
+			lcd_display_character(a, b, c + i, &e[i]);
 		}
 		else
 		{
@@ -301,26 +314,29 @@ void func_7e8(int a, unsigned char b, unsigned char c, unsigned char d, const un
 }
 
 /* 864 - complete */
-void func_864(int a, int b, int c, unsigned char* d)
+void lcd_display_bitmap(int inv, int row, int col, unsigned char* bitmap)
 {
 	unsigned char i;
 	
-	func_2dc(((c - 1) * 6 + 1) & 0x0f);
-	func_2dc(((((c - 1) * 6 + 1) & 0xf0) >> 4) | 0x10);
-	func_2dc(((b - 1) & 0x0f) | 0xb0);
+	// Column Address Set 
+	lcd_write_command(((((col - 1) * 6 + 1) & 0x0f) >> 0) | ST7565_CMD_SET_COLUMN_LOWER);
+	lcd_write_command(((((col - 1) * 6 + 1) & 0xf0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
 	
-	if (a == 0)
+	// Page Address Set
+	lcd_write_command(((row - 1) & 0x0f) | ST7565_CMD_SET_PAGE);
+	
+	if (inv == 0)
 	{
 		for (i = 0; i < 6; i++)
 		{
-			func_224(d[i]);
+			lcd_write_data(bitmap[i]);
 		}
 	}
 	else
 	{
 		for (i = 0; i < 6; i++)
 		{
-			func_224(~d[i]);
+			lcd_write_data(~bitmap[i]);
 		}
 	}
 }
@@ -419,7 +435,7 @@ unsigned char func_91c(int r4, int r5, int r6, int r7, char* sp76)
 
 		sp20.b[3] = 0x0b;
 		
-		IO1CLR = 0x2000000;
+		IO1CLR = (1 << 25);
 		
 		for (sp8 = 3; sp8 >= 0; sp8--)
 		{
@@ -481,19 +497,19 @@ unsigned char func_91c(int r4, int r5, int r6, int r7, char* sp76)
 			}
 		}
 
-		func_2dc((sp12 + 1) & 0x0f);
-		func_2dc((((sp12 + 1) & 0xf0) >> 4) | 0x10);
-		func_2dc((((r5 - 1) << 1) & 0x0f) | 0xb0);
+		lcd_write_command((sp12 + 1) & 0x0f);
+		lcd_write_command((((sp12 + 1) & 0xf0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
+		lcd_write_command((((r5 - 1) << 1) & 0x0f) | ST7565_CMD_SET_PAGE);
 		
 		for (sp8 = 0; sp8 < sl; sp8++)
 		{
 			if (r4 == 0)
 			{
-				func_224(sp24[sp8]);
+				lcd_write_data(sp24[sp8]);
 			}
 			else
 			{
-				func_224(~sp24[sp8]);
+				lcd_write_data(~sp24[sp8]);
 			}
 		}
 
@@ -536,28 +552,28 @@ unsigned char func_91c(int r4, int r5, int r6, int r7, char* sp76)
 			}
 		}
 
-		func_2dc((sp12 + 1) & 0x0f);
-		func_2dc((((sp12 + 1) & 0xf0) >> 4) | 0x10);
-		func_2dc(((((r5 - 1) << 1) + 1) & 0x0f) | 0xb0);
+		lcd_write_command((sp12 + 1) & 0x0f);
+		lcd_write_command((((sp12 + 1) & 0xf0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
+		lcd_write_command(((((r5 - 1) << 1) + 1) & 0x0f) | ST7565_CMD_SET_PAGE);
 		
 		for (sp8 = 0; sp8 < sl; sp8++)
 		{
 			if (r4 == 0)
 			{
-				func_224(sp24[sp8]);
+				lcd_write_data(sp24[sp8]);
 			}
 			else
 			{
-				func_224(~sp24[sp8]);
+				lcd_write_data(~sp24[sp8]);
 			}	
 		}
 
 		sp4++;
 		
-		IO1SET = 0x2000000;
+		IO1SET = (1 << 25);
 	}
 	
-	IO1SET = 0x2000000;
+	IO1SET = (1 << 25);
 	
 	return r6 + r9;
 }
@@ -1343,7 +1359,7 @@ void func_227c(void)
 }
 
 /* 2328 - complete */
-void func_2328(void)
+void lpc_hw_init(void)
 {
 	PLL0CON = 0x01;
 	VPBDIV = 0;
@@ -1373,10 +1389,10 @@ void func_2328(void)
 		(1 <<18) | // P0.9 = RxD (UART1)
 		(0 <<20) | // P0.10 = GPIO Port 0.10
 		(0 <<22) | // P0.11 = GPIO Port 0.11
-		(0 <<24) | // P0.12 = GPIO Port 0.12
+		(0 <<24) | // P0.12 = GPIO Port 0.12 -> LCD Data Latch ?
 		(0 <<26) | // P0.13 = GPIO Port 0.13
 		(0 <<28) | // P0.14 = GPIO Port 0.14
-		(0 <<30);  // P0.15 = GPIO Port 0.15
+		(0 <<30);  // P0.15 = GPIO Port 0.15 -> LCD D7-D0 ?
 	PINSEL1 = //0x800046a8 = 10 00 00 00 00 00 00 00 01 00 01 10 10 10 10 00
 		(0 << 0) | // P0.16 = GPIO Port 0.16
 		(2 << 2) | // P0.17 = SCK1 (SSP)
@@ -1410,10 +1426,10 @@ void func_2328(void)
 		(1 <<10) | // P0.10 = Out
 		(0 <<11) | // P0.11 = In
 #endif
-		(1 <<12) | // P0.12 = Out
+		(1 <<12) | // P0.12 = Out -> LCD Data Latch ?
 		(1 <<13) | // P0.13 = Out
 		(0 <<14) | // P0.14 = In
-		(1 <<15) | // P0.15 = Out
+		(1 <<15) | // P0.15 = Out -> LCD D7-D0 ?
 		(1 <<16) | // P0.16 = Out
 		(0 <<22) | // P0.22 = In
 		(0 <<25) | // P0.25 = In
@@ -1428,9 +1444,9 @@ void func_2328(void)
 		(0 <<20) | // P1.20 = In
 		(0 <<21) | // P1.21 = In
 		(1 <<22) | // P1.22 = Out
-		(1 <<23) | // P1.23 = Out
-		(1 <<24) | // P1.24 = Out
-		(1 <<25);  // P1.25 = Out
+		(1 <<23) | // P1.23 = Out -> LCD A0 Pin (Command/Data) ?
+		(1 <<24) | // P1.24 = Out -> Chip Select for SPI Flash
+		(1 <<25);  // P1.25 = Out -> Chip Select for SPI Font ROM
 	IO1SET = 1 << 22; //0x00400000; P1.22 = High
 	IO0SET = 1 << 13; //0x00002000; P0.13 = High
 	IO0CLR = 1 << 16; //0x00010000; P0.16 = Low
@@ -1440,9 +1456,9 @@ void func_2328(void)
 	spi0_init();
 
 #ifndef OLIMEX_LPC2148
-	func_3ec();
-	func_394();
-	func_53c(0x80);
+	lcd_display_configure();
+	lcd_display_clear();
+	lcd_display_brightness(0x80);
 	setDisplayPWM(0xff);
 	
 	func_17d0();
@@ -1456,11 +1472,11 @@ void func_2328(void)
 }
 
 /* 243c - complete */
-void func_243c(unsigned int PageAdr, int b, int Count, unsigned char* Data)
+void flash_read(unsigned int PageAdr, int b, int Count, unsigned char* Data)
 {
 	unsigned short i = 0;
 	
-	IO1CLR = 0x1000000;
+	IO1CLR = (1 << 24);
 	
 	spi0_write_read_byte(FLASH_CMD_CONT_ARRAY_READ);
 	spi0_write_read_byte(PageAdr >> (16 - FLASH_PAGE_BITS));
@@ -1480,14 +1496,14 @@ void func_243c(unsigned int PageAdr, int b, int Count, unsigned char* Data)
 		i++;
 	}
 	
-	IOSET1 = 0x1000000;
+	IO1SET = (1 << 24);
 }
 
 /* 24d4 - complete */
-void func_24d4(int PageAdr, unsigned short BufAdr, int Count, unsigned char* Data)
+void flash_write(int PageAdr, unsigned short BufAdr, int Count, unsigned char* Data)
 {
 	unsigned short i;
-	IO1CLR = 0x1000000;
+	IO1CLR = (1 << 24);
 
 	spi0_write_read_byte(FLASH_CMD_BUF1_WRITE);
 	spi0_write_read_byte(0x00);
@@ -1499,8 +1515,8 @@ void func_24d4(int PageAdr, unsigned short BufAdr, int Count, unsigned char* Dat
 		spi0_write_read_byte(Data[i]);
 	}
 	
-	IO1SET = 0x1000000;
-	IO1CLR = 0x1000000;
+	IO1SET = (1 << 24);
+	IO1CLR = (1 << 24);
 	
 	if (PageAdr < 0x1000)
 	{
@@ -1510,7 +1526,7 @@ void func_24d4(int PageAdr, unsigned short BufAdr, int Count, unsigned char* Dat
 		spi0_write_read_byte(0);
 	}
 	
-	IO1SET = 0x1000000;
+	IO1SET = (1 << 24);
 	
 	func_2254(5);
 }
@@ -1522,14 +1538,14 @@ void func_258c(int a, unsigned char* b)
 	unsigned char i = 0;
 	b[0] = 1;
 
-	func_243c((0x37 << 6) | 5, 0, sizeof(sp), sp);
+	flash_read((0x37 << 6) | 5, 0, sizeof(sp), sp);
 
 	for (i = 0; i < 24; i++)
 	{
 		sp[(a - 1)*24 + i] = b[i];
 	}
 
-	func_24d4((0x37 << 6) | 5, 0, sizeof(sp), sp);
+	flash_write((0x37 << 6) | 5, 0, sizeof(sp), sp);
 }
 
 /* 260c - complete */
@@ -1539,14 +1555,14 @@ void func_260c(int a, unsigned char* b)
 	unsigned char i = 0;
 	b[0] = 1;
 
-	func_243c((0x37 << 6) | 6, 0, sizeof(sp), sp);
+	flash_read((0x37 << 6) | 6, 0, sizeof(sp), sp);
 
 	for (i = 0; i < 25; i++)
 	{
 		sp[25*(a - 1) + i] = b[i];
 	}
 
-	func_24d4((0x37 << 6) | 6, 0, sizeof(sp), sp);
+	flash_write((0x37 << 6) | 6, 0, sizeof(sp), sp);
 }
 
 /* 268c - complete */
@@ -1556,7 +1572,7 @@ void func_268c(unsigned char a, unsigned int b)
 	unsigned int r7;
 	unsigned char buf[57];
 
-	func_243c((0x37 << 6) | 7, 0, sizeof(buf), buf);
+	flash_read((0x37 << 6) | 7, 0, sizeof(buf), buf);
 
 	r6 = buf[1];
 	r7 = ((buf[2] - '0') * 100000) + 
@@ -1578,12 +1594,12 @@ void func_268c(unsigned char a, unsigned int b)
 			buf[0] = 8;
 		}
 
-		func_24d4((0x37 << 6) | 7, 0, sizeof(buf[0]), buf);
-		func_24d4((0x37 << 6) | 7, 8, sizeof(buf) - sizeof(buf[0]), &buf[1]);
+		flash_write((0x37 << 6) | 7, 0, sizeof(buf[0]), buf);
+		flash_write((0x37 << 6) | 7, 8, sizeof(buf) - sizeof(buf[0]), &buf[1]);
 		buf[1] = a;
-		func_24d4((0x37 << 6) | 7, 1, sizeof(buf[1]), &buf[1]);
+		flash_write((0x37 << 6) | 7, 1, sizeof(buf[1]), &buf[1]);
 		sprintf(buf, "%06d", b);
-		func_24d4((0x37 << 6) | 7, 2, 6, &buf[0]);
+		flash_write((0x37 << 6) | 7, 2, 6, &buf[0]);
 	}
 }
 
@@ -1592,7 +1608,7 @@ void func_27c4(float* a, float* b)
 {
 	unsigned char buf[5];
 
-	func_243c((0x37 << 6) | 9, 0, sizeof(buf), buf);
+	flash_read((0x37 << 6) | 9, 0, sizeof(buf), buf);
 
 	*a = (buf[0] - '0') * 100.0 + (buf[1] - '0') * 10.0 + buf[2] - '0';
 	*b = (buf[3] - '0') * 10.0 + buf[4] - '0';
@@ -1603,16 +1619,16 @@ void func_2910(int a, int b)
 {
 	unsigned char buf[5];
 	sprintf(buf, "%03d%02d", a, b);
-	func_24d4((0x37 << 6) | 9, 0, sizeof(buf), buf);
+	flash_write((0x37 << 6) | 9, 0, sizeof(buf), buf);
 }
 
 /* 29b0 - complete */
 void func_29b0(unsigned char* a, unsigned char* b, unsigned char* c, unsigned char* d)
 {
-	func_24d4(0xdca, 10, 8, a);
-	func_24d4(0xdca, 18, 6, b);
-	func_24d4(0xdca, 24, 5, c);
-	func_24d4(0xdca, 29, 3, d);
+	flash_write(0xdca, 10, 8, a);
+	flash_write(0xdca, 18, 6, b);
+	flash_write(0xdca, 24, 5, c);
+	flash_write(0xdca, 29, 3, d);
 }
 
 /* 2a1c - complete */
@@ -1621,7 +1637,7 @@ void func_2a1c(unsigned char* a, float* b, float* c, int* d)
 	unsigned char buf[22];
 	unsigned char i = 0;
 	
-	func_243c(0xdca, 10, sizeof(buf), buf);
+	flash_read(0xdca, 10, sizeof(buf), buf);
 	
 	for (i = 0; i < 8; i++)
 	{
@@ -1658,14 +1674,14 @@ void func_2df8(int a, int b, int c, int d, unsigned char* e)
 	unsigned char buf[528];
 	unsigned char i = 0;
 	
-	func_243c(b, 0, sizeof(buf), buf);
+	flash_read(b, 0, sizeof(buf), buf);
 	
 	for (i = 0; i < d; i++)
 	{
 		buf[d * (a % (528 / d)) + c + i] = e[i];
 	}
 	
-	func_24d4(b, 0, sizeof(buf), buf);
+	flash_write(b, 0, sizeof(buf), buf);
 }
 
 /* 2e94 - todo */
@@ -1680,18 +1696,18 @@ void func_2e94(unsigned short a)
 
 	Data_40002c24.wData = a;
 	
-	func_243c(0xFFF, 0, sizeof(buf), buf);
+	flash_read(0xFFF, 0, sizeof(buf), buf);
 	
 	buf[4] = Data_40002c24.bData[0];
 	buf[5] = Data_40002c24.bData[1];
 	
-	func_24d4(0xFFF, 0, sizeof(buf), buf);
+	flash_write(0xFFF, 0, sizeof(buf), buf);
 }
 
 /* 2f00 - todo */
 unsigned short func_2f00(void)
 {
-	func_243c(0xFFF, 0x04, 2, Data_40002c24.bData);
+	flash_read(0xFFF, 0x04, 2, Data_40002c24.bData);
 	
 	if (Data_40002c24.wData > 500)
 	{
@@ -1725,7 +1741,7 @@ int func_2f74(int a, int* b, int* c, int* d, int* e)
 	
 	fp = 16 * (a % 33);
 	
-	func_243c((unsigned short)(0xfde + (a / 33)), fp, sizeof(buf), buf);
+	flash_read((unsigned short)(0xfde + (a / 33)), fp, sizeof(buf), buf);
 	
 	for (i = 0; i < 4; i++)
 	{
@@ -1835,18 +1851,18 @@ void func_3238(unsigned short a)
 	
 	Data_40002c24.wData = a;
 	
-	func_243c(0xfff, 0, sizeof(buf), buf);
+	flash_read(0xfff, 0, sizeof(buf), buf);
 	
 	buf[8] = Data_40002c24.bData[0];
 	buf[9] = Data_40002c24.bData[1];
 	
-	func_24d4(0xfff, 0, sizeof(buf), buf);
+	flash_write(0xfff, 0, sizeof(buf), buf);
 }
 
 /* 32a4 - todo */
 int func_32a4(void)
 {
-	func_243c(0xfff, 0x08, 2, Data_40002c24.bData);
+	flash_read(0xfff, 0x08, 2, Data_40002c24.bData);
 	
 	if (Data_40002c24.wData > 66)
 	{
@@ -1869,18 +1885,18 @@ void func_32ec(unsigned short a)
 	
 	Data_40002c24.wData = a;
 	
-	func_243c(0xfff, 0, sizeof(buf), buf);
+	flash_read(0xfff, 0, sizeof(buf), buf);
 	
 	buf[10] = Data_40002c24.bData[0];
 	buf[11] = Data_40002c24.bData[1];
 	
-	func_24d4(0xfff, 0, sizeof(buf), buf);
+	flash_write(0xfff, 0, sizeof(buf), buf);
 }
 
 /* 3358 - todo */
 int func_3358(void)
 {
-	func_243c(0xfff, 0x0a, 2, Data_40002c24.bData);
+	flash_read(0xfff, 0x0a, 2, Data_40002c24.bData);
 	
 	if (Data_40002c24.wData > 65)
 	{
@@ -1926,7 +1942,7 @@ int func_33cc(unsigned short a, int* b, int* c)
 	sl = 8 * (a % 66);
 	fp = a / 66;
 	
-	func_243c(fp, sl, sizeof(buf), buf);
+	flash_read(fp, sl, sizeof(buf), buf);
 	
 	for (i = 0; i < 4; i++)
 	{
@@ -1961,7 +1977,7 @@ int func_34e4(int a, Struct_34e4* b)
 	r6 = (a - 1) / 10;
 	r7 = ((a - 1) % 10) * 51;
 
-	func_243c((unsigned short)(0x00 + r6), r7, sizeof(buf), buf);
+	flash_read((unsigned short)(0x00 + r6), r7, sizeof(buf), buf);
 	
 	for (i = 0; i < 10; i++)
 	{
@@ -2032,7 +2048,7 @@ int func_38dc(int a, Struct_38dc* b)
 	r6 = (a - 1) / 13;
 	r7 = ((a - 1) % 13) * 38;
 
-	func_243c((unsigned short)(0x04 + r6), r7, sizeof(buf), buf);
+	flash_read((unsigned short)(0x04 + r6), r7, sizeof(buf), buf);
 	
 	for (i = 0; i < 3; i++)
 	{
@@ -2093,7 +2109,7 @@ int func_3b58(int a, Struct_3b58* b)
 	r6 = (a - 1) / 4;
 	r7 = ((a - 1) % 4) * 124;
 	
-	func_243c((unsigned short)(0x0b + r6), r7, sizeof(buf), buf);
+	flash_read((unsigned short)(0x0b + r6), r7, sizeof(buf), buf);
 
 	b->wData_0 = buf[0] * 100 + buf[1];
 	b->fData_4 = buf[2] + buf[3] / 60.0 + buf[4] / 3600.0;
@@ -2178,7 +2194,7 @@ int func_4028(int a, Struct_4028* b)
 	r6 = (a - 1) / 22;
 	r7 = ((a - 1) % 22) * 24;
 	
-	func_243c((unsigned short)(0x27 + r6), r7, sizeof(buf), buf);
+	flash_read((unsigned short)(0x27 + r6), r7, sizeof(buf), buf);
 	
 	for (i = 0; i < 16; i++)
 	{
@@ -2226,7 +2242,7 @@ int func_435c(int a, Struct_435c* b)
 	r6 = (a - 1) / 88;
 	r7 = ((a - 1) % 88) * 6;
 	
-	func_243c((unsigned short)(0x2f + r6), r7, sizeof(buf), buf);
+	flash_read((unsigned short)(0x2f + r6), r7, sizeof(buf), buf);
 	
 	b->fData_0 = buf[0] + buf[1] / 60.0 + buf[2] / 3600.0;
 	
@@ -2258,7 +2274,7 @@ int func_4594(int a, Struct_4594* b)
 	r6 = (a - 1) / 27;
 	r7 = ((a - 1) % 27) * 19;
 	
-	func_243c((unsigned short)(0x33 + r6), r7, sizeof(buf), buf);
+	flash_read((unsigned short)(0x33 + r6), r7, sizeof(buf), buf);
 	
 	for (i = 0; i < 3; i++)
 	{
@@ -2308,7 +2324,7 @@ int func_4894(int a, Struct_4894* b)
 	r6 = (a - 1) / 27;
 	r7 = ((a - 1) % 27) * 19;
 	
-	func_243c((unsigned short)(0xfb + r6), r7, sizeof(buf), buf);
+	flash_read((unsigned short)(0xfb + r6), r7, sizeof(buf), buf);
 	
 	for (i = 0; i < 3; i++)
 	{
@@ -2357,7 +2373,7 @@ int flash_get_sao_data(unsigned int a, Struct_4b94* b)
 	r6 = (a - 1) / 88;
 	r7 = ((a - 1) % 88) * 6;
 	
-	func_243c((unsigned short)(0x21e + r6), r7, sizeof(buf), buf);
+	flash_read((unsigned short)(0x21e + r6), r7, sizeof(buf), buf);
 	
 	b->fData_0 = buf[0] + buf[1] / 60.0 + buf[2] / 3600.0;
 	
@@ -2389,7 +2405,7 @@ int func_4dd0(int a, Struct_4dd0* b)
 	r6 = (a - 1) / 26;
 	r7 = ((a - 1) % 26) * 20;
 
-	func_243c((unsigned short)(0xd9e + r6), r7, sizeof(buf), buf);
+	flash_read((unsigned short)(0xd9e + r6), r7, sizeof(buf), buf);
 
 	for (i = 0; i < 8; i++)
 	{
@@ -2429,7 +2445,7 @@ int flash_get_site_data(int a, Struct_SiteData* b)
 	r6 = (a - 1) / 13;
 	r7 = ((a - 1) % 13) * 40;
 	
-	func_243c((unsigned short)(0xdb7 + r6), r7, sizeof(buf), buf);
+	flash_read((unsigned short)(0xdb7 + r6), r7, sizeof(buf), buf);
 	
 	for (i = 0; i < 18; i++)
 	{
@@ -2489,7 +2505,7 @@ int func_5218(int a, Struct_5218* b)
 		return 0;
 	}
 	
-	func_243c(0xdc5, 0, sizeof(sp104), sp104);
+	flash_read(0xdc5, 0, sizeof(sp104), sp104);
 	
 	for (i = 0; i < 24; i++)
 	{
@@ -2531,7 +2547,7 @@ int func_54e0(int a, Struct_54e0* b)
 		return 0;
 	}
 	
-	func_243c(0xdc6, 0, sizeof(sp108), sp108);
+	flash_read(0xdc6, 0, sizeof(sp108), sp108);
 
 	for (i = 0; i < 25; i++)
 	{
@@ -2568,7 +2584,7 @@ unsigned char func_57b8(unsigned char* a, int* b, void* c)
 	unsigned char i;
 	unsigned char r8;
 	
-	func_243c(0xdc7, 0, sizeof(buf), buf);
+	flash_read(0xdc7, 0, sizeof(buf), buf);
 	
 	r8 = buf[0];
 	for (i = 0; i < r8; i++)
@@ -2844,9 +2860,9 @@ void func_5f40(void)
 	wData_40002ec0 = 0;
 	Data_40002ec4_SAONr = 0;
 	wData_40002ecc = 0;
-	bData_40002ece = 1;
+	bData_40002ece_ConstellationNr = 1;
 	wData_40002ed0 = 0;
-	bData_40002ed2 = 0;
+	bData_40002ed2_FamousStarNr = 0;
 	wData_40002ed4 = 0;
 	wData_40002ed6 = 0;
 	wData_40002ed8 = 0;
@@ -5594,22 +5610,22 @@ void func_dc20(unsigned char a, unsigned char b, unsigned char c)
 		}
 	};
 	
-	func_2dc(((b - 1) * 6 + 2) & 0x0F);
-	func_2dc(((((b - 1) * 6 + 2) & 0xF0) >> 4) | 0x10);
-	func_2dc(((a - 1) & 0x0F) | 0xb0);
+	lcd_write_command(((b - 1) * 6 + 2) & 0x0F);
+	lcd_write_command(((((b - 1) * 6 + 2) & 0xF0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
+	lcd_write_command(((a - 1) & 0x0F) | ST7565_CMD_SET_PAGE);
 	
 	for (i = 0; i < 16; i++)
 	{
-		func_224(sp4[c][i]);
+		lcd_write_data(sp4[c][i]);
 	}
 	
-	func_2dc(((b - 1) * 6 + 2) & 0x0F);
-	func_2dc(((((b - 1) * 6 + 2) & 0xF0) >> 4) | 0x10);
-	func_2dc((a & 0x0F) | 0xb0);
+	lcd_write_command(((b - 1) * 6 + 2) & 0x0F);
+	lcd_write_command(((((b - 1) * 6 + 2) & 0xF0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
+	lcd_write_command((a & 0x0F) | ST7565_CMD_SET_PAGE);
 	
 	for (i = 0; i < 16; i++)
 	{
-		func_224(sp4[c][i+16]);	
+		lcd_write_data(sp4[c][i+16]);	
 	}
 }
 
@@ -7829,9 +7845,9 @@ void func_20b94(void)
 	func_7e8(0, 3, 16, 2, Data_40003374 + 10);
 	func_7e8(0, 3, 19, 2, Data_40003374 + 13);
 	
-	func_864(0, 3, 15, (unsigned char*)Data_7906c);
-	func_864(0, 3, 18, (unsigned char*)Data_79078);
-	func_864(0, 3, 21, (unsigned char*)Data_79072);
+	lcd_display_bitmap(0, 3, 15, (unsigned char*)cBitmapDegree);
+	lcd_display_bitmap(0, 3, 18, (unsigned char*)cBitmapMinute);
+	lcd_display_bitmap(0, 3, 21, (unsigned char*)cBitmapSecond);
 	
 	if (abs(Data_40002e18_SiteLongitudeDegrees) < 100)
 	{
@@ -7858,9 +7874,9 @@ void func_20b94(void)
 	func_7e8(0, 4, 16, 2, Data_4000337c + 10);
 	func_7e8(0, 4, 19, 2, Data_4000337c + 13);
 	
-	func_864(0, 4, 15, (unsigned char*)Data_7906c);
-	func_864(0, 4, 18, (unsigned char*)Data_79078);
-	func_864(0, 4, 21, (unsigned char*)Data_79072);
+	lcd_display_bitmap(0, 4, 15, (unsigned char*)cBitmapDegree);
+	lcd_display_bitmap(0, 4, 18, (unsigned char*)cBitmapMinute);
+	lcd_display_bitmap(0, 4, 21, (unsigned char*)cBitmapSecond);
 	
 	if (abs(Data_40002e38_SiteLatitudeDegrees) < 100)
 	{
@@ -7890,9 +7906,9 @@ void func_20b94(void)
 	if (bData_40002e7a == 0)
 	{
 		//21138
-		func_864(0, 5, 15, (unsigned char*)Data_7906c);
-		func_864(0, 5, 18, (unsigned char*)Data_79078);
-		func_864(0, 5, 21, (unsigned char*)Data_79072);
+		lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+		lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+		lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
 		
 		if (abs(Data_40002d20) < 100)
 		{
@@ -7947,9 +7963,9 @@ void func_20b94(void)
 	func_7e8(0, 6, 16, 2, Data_4000338c + 10);
 	func_7e8(0, 6, 19, 2, Data_4000338c + 13);
 	
-	func_864(0, 6, 15, (unsigned char*)Data_7906c);
-	func_864(0, 6, 18, (unsigned char*)Data_79078);
-	func_864(0, 6, 21, (unsigned char*)Data_79072);
+	lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+	lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+	lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
 	
 	if (bData_40002e7a == 0)
 	{
@@ -7999,9 +8015,9 @@ void func_20b94(void)
 		//216f0
 		if (bData_40002e7a == 0)
 		{
-			func_864(0, 7, 15, (unsigned char*)Data_7906c);
-			func_864(0, 7, 18, (unsigned char*)Data_79078);
-			func_864(0, 7, 21, (unsigned char*)Data_79072);
+			lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
+			lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
+			lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapSecond);
 			
 			if (abs(Data_40002d20) < 100)
 			{
@@ -8057,9 +8073,9 @@ void func_20b94(void)
 		if (bData_40002e7a == 0)
 		{
 			//21960
-			func_864(0, 7, 15, (unsigned char*)Data_7906c);
-			func_864(0, 7, 18, (unsigned char*)Data_79078);
-			func_864(0, 7, 21, (unsigned char*)Data_79072);
+			lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
+			lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
+			lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapSecond);
 			
 			if (abs(Data_40002dac) < 100)
 			{
@@ -8115,9 +8131,9 @@ void func_20b94(void)
 	func_7e8(0, 8, 16, 2, Data_4000339c + 10);
 	func_7e8(0, 8, 19, 2, Data_4000339c + 13);
 	
-	func_864(0, 8, 15, (unsigned char*)Data_7906c);
-	func_864(0, 8, 18, (unsigned char*)Data_79078);
-	func_864(0, 8, 21, (unsigned char*)Data_79072);
+	lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+	lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+	lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 	
 	if ((bData_400034b4 == 1) &&
 		(bData_40002e88 == 2))

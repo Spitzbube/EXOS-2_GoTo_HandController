@@ -505,7 +505,7 @@ void HandleMinusKey(void)
 			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
 			{
 				//0x602e0
-				func_394();
+				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
 				Data_40002c64_MenuContextId = 22001;
@@ -541,7 +541,7 @@ void HandleMinusKey(void)
 			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
 			{
 				//60380
-				func_394();
+				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
 				Data_40002c64_MenuContextId = 24001;
@@ -572,7 +572,7 @@ void HandleMinusKey(void)
 			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
 			{
 				//0x6040c
-				func_394();
+				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
 				Data_40002c64_MenuContextId = 25001;
@@ -608,7 +608,7 @@ void HandleMinusKey(void)
 			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
 			{
 				//0x604b0
-				func_394();
+				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
 				Data_40002c64_MenuContextId = 23002;
@@ -639,7 +639,7 @@ void HandleMinusKey(void)
 			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
 			{
 				//0x6053c
-				func_394();
+				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
 				Data_40002c64_MenuContextId = 23003;
@@ -670,7 +670,7 @@ void HandleMinusKey(void)
 			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
 			{
 				//0x605c8
-				func_394();
+				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
 				Data_40002c64_MenuContextId = 23004;
@@ -701,7 +701,7 @@ void HandleMinusKey(void)
 			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
 			{
 				//0x60654
-				func_394();
+				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
 				Data_40002c64_MenuContextId = 23005;
@@ -732,7 +732,7 @@ void HandleMinusKey(void)
 			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
 			{
 				//0x606e0
-				func_394();
+				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
 				Data_40002c64_MenuContextId = 23006;
@@ -763,7 +763,7 @@ void HandleMinusKey(void)
 			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
 			{
 				//0x6076c
-				func_394();
+				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
 				Data_40002c64_MenuContextId = 23007;

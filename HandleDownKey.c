@@ -19,7 +19,7 @@ void HandleDownKey(void)
 		
 		case 500:
 			//0x5b2c0: Main Screen Help Pages
-			func_394();
+			lcd_display_clear();
 		
 			if (bData_40002c59_MainScreenHelpPage == 10)
 			{
@@ -659,7 +659,7 @@ void HandleDownKey(void)
 		
 		case 22001:
 			//0x5bfb4: Navigation -> Solar System
-			func_394();
+			lcd_display_clear();
 		case 31001:
 			//0x5bfc0
 			bData_40002eb5_SolarSystemObjectNr++;
@@ -670,24 +670,24 @@ void HandleDownKey(void)
 			break;
 		
 		case 24001:
-			//0x5bff4
-			func_394();
+			//0x5bff4: Navigation - Constellation
+			lcd_display_clear();
 		
-			bData_40002ece++;
-			if (bData_40002ece > 88)
+			bData_40002ece_ConstellationNr++;
+			if (bData_40002ece_ConstellationNr > 88)
 			{
-				bData_40002ece = 1;
+				bData_40002ece_ConstellationNr = 1;
 			}
 			break;
 		
 		case 25001:
 			//0x5c030
-			func_394();
+			lcd_display_clear();
 		
-			bData_40002ed2++;
-			if (bData_40002ed2 > 33)
+			bData_40002ed2_FamousStarNr++;
+			if (bData_40002ed2_FamousStarNr > 33)
 			{
-				bData_40002ed2 = 1;
+				bData_40002ed2_FamousStarNr = 1;
 			}
 			break;
 		
@@ -695,7 +695,7 @@ void HandleDownKey(void)
 			//0x5c06c
 		case 23002:
 			//0x5c074
-			func_394();
+			lcd_display_clear();
 		
 			wData_40002eb8_MessierNr++;
 			if (wData_40002eb8_MessierNr > 110)
@@ -706,7 +706,7 @@ void HandleDownKey(void)
 		
 		case 23003:
 			//0x5c0b0
-			func_394();
+			lcd_display_clear();
 		
 			wData_40002eba_NGCNr++;
 			if (wData_40002eba_NGCNr > 7840)
@@ -717,7 +717,7 @@ void HandleDownKey(void)
 		
 		case 23004:
 			//0x5c0f4
-			func_394();
+			lcd_display_clear();
 		
 			wData_40002ebc_ICNr++;
 			if (wData_40002ebc_ICNr > 5386)
@@ -728,7 +728,7 @@ void HandleDownKey(void)
 		
 		case 23005:
 			//0x5c138
-			func_394();
+			lcd_display_clear();
 		
 			wData_40002ebe_ShNr++;
 			if (wData_40002ebe_ShNr > 313)
@@ -739,7 +739,7 @@ void HandleDownKey(void)
 		
 		case 23006:
 			//0x5c17c
-			func_394();
+			lcd_display_clear();
 		
 			wData_40002ec0++;
 			if (wData_40002ec0 > 167)
@@ -750,7 +750,7 @@ void HandleDownKey(void)
 		
 		case 23007:
 			//0x5c1bc
-			func_394();
+			lcd_display_clear();
 		
 			Data_40002ec4_SAONr++;
 			if (Data_40002ec4_SAONr > 258997)
@@ -1033,7 +1033,7 @@ void HandleDownKey(void)
 		
 		case 43011:
 			//0x5c854
-			func_394();
+			lcd_display_clear();
 			func_59dd0();
 			break;
 		

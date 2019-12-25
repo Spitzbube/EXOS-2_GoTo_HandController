@@ -1,15 +1,15 @@
 
-const unsigned char Data_7906c[] = 
+const unsigned char cBitmapDegree[] = //7906c
 {
 	0x00, 0x06, 0x09, 0x09, 0x06, 0x00, 
 };
 
-const unsigned char Data_79072[] = 
+const unsigned char cBitmapSecond[] = //79072
 {
 	0x00, 0x0f, 0x00, 0x0f, 0x00, 0x00
 };
 
-const unsigned char Data_79078[] = 
+const unsigned char cBitmapMinute[] = //79078
 {
 	0x00, 0x00, 0x0f, 0x00, 0x00, 0x00, 0x00, 0x00
 };

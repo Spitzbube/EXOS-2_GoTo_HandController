@@ -10,14 +10,14 @@ extern void uart0_init(int);
 extern void uart1_write_byte(unsigned char);
 extern void uart1_init(int);
 extern void uart0_send(unsigned char* a, unsigned char b);
-extern void func_394(void);
+extern void lcd_display_clear(void);
 extern void func_7e8(int, unsigned char, unsigned char, unsigned char, const unsigned char*);
 extern int func_11d8(void);
 extern void func_1210(void);
 extern void func_2254(unsigned int);
-extern void func_2328(void);
-extern void func_243c(int, int, int, char*);
-extern void func_24d4(int, int, int, char*);
+extern void lpc_hw_init(void);
+extern void flash_read(int, int, int, char*);
+extern void flash_write(int, int, int, char*);
 extern void func_27c4(float*, float*);
 extern void func_2a1c(unsigned char* a, float* b, float* c, int* d);
 extern char func_32a4();
@@ -221,15 +221,15 @@ void HandleReset(void)
 	int zone;
 	unsigned short i;
 	
-	func_394();
+	lcd_display_clear();
 	func_7e8(0, 4, 1, 21, "System resetting...    ");
 	
 	i = 0;
 	for (i = 0; i < 16; i++)
 	{
 		//0x50b74
-		func_243c((unsigned short)(0xddd + i), 0, sizeof(sp40), sp40);		
-		func_24d4((unsigned short)(0xdc9 + i), 0, sizeof(sp40), sp40);
+		flash_read((unsigned short)(0xddd + i), 0, sizeof(sp40), sp40);		
+		flash_write((unsigned short)(0xdc9 + i), 0, sizeof(sp40), sp40);
 	}
 	
 	func_d2cc();
@@ -414,7 +414,7 @@ void HandlePlusKey(void)
 	{
 		case 0:
 			//0x60d78
-			func_394();
+			lcd_display_clear();
 		
 			Data_40002c64_MenuContextId = 1;
 			bData_400031be = 1;
@@ -451,7 +451,7 @@ void HandleFKey(void)
 			bData_4000319a_SkyLandTargetId = 1;
 			bData_4000319b = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x60ec4
 			break;
 		
@@ -469,7 +469,7 @@ void HandleFKey(void)
 			//0x60ea4
 		case 23007:
 			//0x60ea8
-			func_394();
+			lcd_display_clear();
 		
 			Data_40002ec8 = 0;
 		
@@ -489,7 +489,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 500; //Main Screen Help Pages
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 		
 			bData_40002c59_MainScreenHelpPage = 1;
 			//->0x61ec0
@@ -500,7 +500,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 501; //Telescope align
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -509,7 +509,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 502; //Target navigation
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -518,7 +518,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 503; //Utilities Commands
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -527,7 +527,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 504; //Parameter Setup
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 				
@@ -536,7 +536,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 505; //One star align
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -545,7 +545,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 506; //Two stars align
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -554,7 +554,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 507; //Three star align
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -563,7 +563,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 508; //Target Sync
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -572,7 +572,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 509; //Pole-Axis Deviation
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -581,7 +581,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 510; //RA Bklash Correction
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -590,7 +590,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 511; //DEC Bklash Correction
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -599,7 +599,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 516; //Solar System
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -608,7 +608,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 517; //Constellation
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -617,7 +617,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 518; //Famous Star
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -626,7 +626,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 519; //Messier Catalogue
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -635,7 +635,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 520; //NGC Deep Sky
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -644,7 +644,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 521; //IC Deep Sky
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -653,7 +653,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 522; //Sh2 Deep Sky
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -662,7 +662,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 523; //Bright Stars
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -671,7 +671,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 524; //SAO Star
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -680,7 +680,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 525; //User-def Object
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -689,7 +689,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 526; //Specify Ra Dec
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -698,7 +698,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 527; //Landmarks
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -707,7 +707,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 528; //Current Objects
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -716,7 +716,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 529; //Object Rise/Set
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -725,7 +725,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 530; //Lunar Phase
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -734,7 +734,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 531; //Timer
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -743,7 +743,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 532; //Alarm
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -752,7 +752,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 533; //Field Angle Cal
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -761,7 +761,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 534; //Magify Power Cal
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -770,7 +770,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 535; //Illumination
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -779,7 +779,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 537; //Parkzen
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -788,7 +788,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 538; //Time and Date
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -797,7 +797,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 539; //Daylight Saving
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -806,7 +806,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 540; //Site Setting
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -815,7 +815,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 541; //Sky/ Land
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -824,7 +824,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 542; //AZ/EQ
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -833,7 +833,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 543; //Telescope Zero
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -842,7 +842,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 544; //Tracking Rate
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -851,7 +851,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 545; //Language
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -860,7 +860,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 546; //Reset
 			bData_40002c58 = 1;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -869,7 +869,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 0;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -878,7 +878,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 1000;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -887,7 +887,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2000;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -896,7 +896,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 3000;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -905,7 +905,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 4000;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -914,7 +914,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 1100;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -923,7 +923,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 1200;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -932,7 +932,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 1300;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -941,7 +941,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 1400;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -950,7 +950,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 1500;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 
@@ -959,7 +959,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 1600;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -968,7 +968,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 1700;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -977,7 +977,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2100;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -986,7 +986,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2200;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -995,7 +995,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2300;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1004,7 +1004,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2400;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 
@@ -1013,7 +1013,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2500;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1022,7 +1022,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2600;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1031,7 +1031,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2700;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1040,7 +1040,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2800;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1049,7 +1049,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2900;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1058,7 +1058,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2110;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1067,7 +1067,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2120;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1076,7 +1076,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 2130;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1085,7 +1085,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 3100;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1094,7 +1094,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 3200;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1103,7 +1103,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 3300;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1112,7 +1112,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 3400;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1121,7 +1121,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 3500;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1130,7 +1130,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 3600;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1139,7 +1139,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 3700;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1148,7 +1148,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 3800;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1163,7 +1163,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 3900;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1172,7 +1172,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 4100;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1181,7 +1181,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 4200;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1190,7 +1190,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 4300;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1199,7 +1199,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 4400;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1208,7 +1208,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 4500;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1217,7 +1217,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 4600;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1226,7 +1226,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 4700;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -1235,7 +1235,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 4800;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 
@@ -1244,7 +1244,7 @@ void HandleHelpKey(void)
 			Data_40002c64_MenuContextId = 4900;
 			bData_40002c58 = 0;
 		
-			func_394();
+			lcd_display_clear();
 			//->0x61ec0
 			break;
 		
@@ -2199,7 +2199,7 @@ void func_6cb38(void)
 /* 6d054 - todo */
 int main(void)
 {
-	func_2328();
+	lpc_hw_init();
 	uart0_init(360);
 	uart1_init(360);
 
@@ -2207,13 +2207,13 @@ int main(void)
 	func_7590();
 	func_d2cc();
 	func_5099c();
-	func_243c(0xdcb, 0, 10, Data_40004c58);
+	flash_read(0xdcb, 0, 10, Data_40004c58);
 	bData_40003196_CurrentLanguage = Data_40004c58[0];
 	if (Data_40004c58[1] == 1)
 	{
 		ValidateDateTimeSetRTC();
 		Data_40004c58[1] = 0;
-		func_24d4(0xdcb, 0, 2, Data_40004c58);
+		flash_write(0xdcb, 0, 2, Data_40004c58);
 	}
 
 	ShowStartupScreen();
@@ -2370,7 +2370,7 @@ int main(void)
 	}
 	//6d630
 	func_659c(2000);
-	func_394();
+	lcd_display_clear();
 	
 	if (bData_40002f1e_SetupLocalData == 1)
 	{
@@ -2548,15 +2548,15 @@ int main(void)
 		if (bData_400031ed == 0)
 		{
 			//6f8e0
-			func_394();
+			lcd_display_clear();
 			func_7e8(0, 4, 1, 22, "System Initializing...");
 			get_all_solar_system_object_equatorial_coordinates();
 			func_659c(1000);
 			func_7950(1);
-			func_394();
+			lcd_display_clear();
 			func_7e8(0, 4, 1, 22, "System Initialized    ");
 			func_659c(1000);
-			func_394();
+			lcd_display_clear();
 			
 			bData_400031ed = 1;
 		}

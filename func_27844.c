@@ -2163,9 +2163,9 @@ int func_27844(void)
 			//->0x3d71c
 			break;
 
-		case 0x5DC1: //24001
+		case 24001:
 			//0x2ea8c
-			func_38dc(bData_40002ece, &Data_40003dd4);
+			func_38dc(bData_40002ece_ConstellationNr, &Data_40003dd4);
 		
 			fData_40002cd0_ObjectRightAscension = Data_40003dd4.fData_36;
 			fData_40002d18_ObjectDeclination = Data_40003dd4.fData_40;
@@ -2309,7 +2309,7 @@ int func_27844(void)
 
 		case 0x5DC2: //24002
 			//0x2f624
-			func_38dc(bData_40002ece, &Data_40003dd4);
+			func_38dc(bData_40002ece_ConstellationNr, &Data_40003dd4);
 		
 			fData_40002cd0_ObjectRightAscension = Data_40003dd4.fData_36;
 			fData_40002d18_ObjectDeclination = Data_40003dd4.fData_40;
@@ -2526,7 +2526,7 @@ int func_27844(void)
 		
 		case 0x61A9: //25001
 			//0x30404
-			func_34e4(bData_40002ed2, &Data_40003d94);
+			func_34e4(bData_40002ed2_FamousStarNr, &Data_40003d94);
 		
 			fData_40002cd0_ObjectRightAscension = Data_40003d94.fData_56;
 			fData_40002d18_ObjectDeclination = Data_40003d94.fData_60;
@@ -2663,7 +2663,7 @@ int func_27844(void)
 		
 		case 0x61AA: //25002
 			//0x30ea8
-			func_34e4(bData_40002ed2, &Data_40003d94);
+			func_34e4(bData_40002ed2_FamousStarNr, &Data_40003d94);
 		
 			fData_40002cd0_ObjectRightAscension = Data_40003d94.fData_56;
 			fData_40002d18_ObjectDeclination = Data_40003d94.fData_60;
