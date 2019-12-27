@@ -2524,8 +2524,8 @@ int func_27844(void)
 			//->0x3d71c
 			break;
 		
-		case 0x61A9: //25001
-			//0x30404
+		case 25001:
+			//0x30404: Famous Star item
 			func_34e4(bData_40002ed2_FamousStarNr, &Data_40003d94);
 		
 			fData_40002cd0_ObjectRightAscension = Data_40003d94.fData_56;
@@ -5340,16 +5340,16 @@ int func_27844(void)
 		
 		case 34002: // "Set Timer"
 			//0x3c0a8
-			sprintf(Data_400029e7, "%5lds", Data_40003214);
+			sprintf(strEngTimeRemain00000s, "%5lds", Data_40003214_UserTimerSeconds);
 		
-			Data_40003360 = Data_400029ca; // "Counting down:"?
+			Data_40003360 = strEngCountingDown; // "Counting down:"?
 			Data_40003364 = "";
-			Data_40003368 = Data_400029da; // "Time remain:"
+			Data_40003368 = strEngTimeRemain; // "Time remain:"
 			Data_4000336c = "";
-			Data_40003370 = Data_400029e7; // "00000s"
+			Data_40003370 = strEngTimeRemain00000s; // "00000s"
 			Data_40003374 = "";
 			Data_4000337c = "";
-			Data_40003378 = Data_400029ee; // "       Stop      Back"?
+			Data_40003378 = strEngStopBack; // "       Stop      Back"?
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5357,44 +5357,44 @@ int func_27844(void)
 				
 		case 34001: // "Set Timer"
 			//0x3c13c
-			Data_40003360 = Data_400029a1; // "Set timer:"?
+			Data_40003360 = strEngSetTimer; // "Set timer:"?
 			Data_40003364 = "";
-			Data_40003368 = Data_400029ac; // "00000s"?
+			Data_40003368 = strEng00000s; // "00000s"?
 			Data_4000336c = "";
 			Data_40003370 = Data_400029b3;
 			Data_40003374 = "";
-			Data_40003378 = Data_400029b4; // "      Start      Back"?
+			Data_40003378 = strEngStartBack; // "      Start      Back"?
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x88B9: //35001
-			//0x3c1bc
-			Data_40003360 = Data_40002a87;
+		case 35001:
+			//0x3c1bc: Alarm start
+			Data_40003360 = strEngInputTime;
 			Data_40003364 = "";
-			Data_40003368 = Data_40002a94;
+			Data_40003368 = strEngAlarm21h34m23s;
 			Data_4000336c = "";
 			Data_40003370 = "";
 			Data_40003374 = "";
 			Data_4000337c = "";
-			Data_40003378 = Data_40002a9e;
+			Data_40003378 = strEngAlarmOnBack;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x88BA: //35002
-			//0x3c23c
+		case 35002:
+			//0x3c23c: Alarm stop
 			Data_40003360 = "";
-			Data_40003364 = Data_40002a62;
+			Data_40003364 = strEngCloseAlarm;
 			Data_40003368 = "";
 			Data_4000336c = "";
 			Data_40003370 = "";
 			Data_40003374 = "";
 			Data_4000337c = "";
-			Data_40003378 = Data_40002a71;
+			Data_40003378 = strEngAlarmCloseBack;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5767,11 +5767,11 @@ int func_27844(void)
 		
 		case 49001: //Language
 			//0x3d344
-			Data_40003360 = Data_40002916; //"English"
-			Data_40003364 = Data_4000291e; //"German"
-			Data_40003368 = Data_40002925; //"French"
-			Data_4000336c = Data_4000292c; //"Italian"
-			Data_40003370 = Data_40002934; //"Spanish"
+			Data_40003360 = strEngEnglish;
+			Data_40003364 = strEngGerman;
+			Data_40003368 = strEngFrench;
+			Data_4000336c = strEngItalian;
+			Data_40003370 = strEngSpanish;
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";
@@ -5782,11 +5782,11 @@ int func_27844(void)
 		
 		case 0xBF6A: //49002
 			//0x3d3c0
-			Data_40003360 = Data_40002916;
-			Data_40003364 = Data_4000291e;
-			Data_40003368 = Data_40002925;
-			Data_4000336c = Data_4000292c;
-			Data_40003370 = Data_40002934;
+			Data_40003360 = strEngEnglish;
+			Data_40003364 = strEngGerman;
+			Data_40003368 = strEngFrench;
+			Data_4000336c = strEngItalian;
+			Data_40003370 = strEngSpanish;
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";
@@ -5797,11 +5797,11 @@ int func_27844(void)
 		
 		case 0xBF6B: //49003
 			//0x3d440
-			Data_40003360 = Data_40002916;
-			Data_40003364 = Data_4000291e;
-			Data_40003368 = Data_40002925;
-			Data_4000336c = Data_4000292c;
-			Data_40003370 = Data_40002934;
+			Data_40003360 = strEngEnglish;
+			Data_40003364 = strEngGerman;
+			Data_40003368 = strEngFrench;
+			Data_4000336c = strEngItalian;
+			Data_40003370 = strEngSpanish;
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";
@@ -5812,11 +5812,11 @@ int func_27844(void)
 		
 		case 0xBF6C: //49004
 			//0x3d594
-			Data_40003360 = Data_40002916;
-			Data_40003364 = Data_4000291e;
-			Data_40003368 = Data_40002925;
-			Data_4000336c = Data_4000292c;
-			Data_40003370 = Data_40002934;
+			Data_40003360 = strEngEnglish;
+			Data_40003364 = strEngGerman;
+			Data_40003368 = strEngFrench;
+			Data_4000336c = strEngItalian;
+			Data_40003370 = strEngSpanish;
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";
@@ -5827,11 +5827,11 @@ int func_27844(void)
 		
 		case 0xBF6D: //49005
 			//0x3d614
-			Data_40003360 = Data_40002916;
-			Data_40003364 = Data_4000291e;
-			Data_40003368 = Data_40002925;
-			Data_4000336c = Data_4000292c;
-			Data_40003370 = Data_40002934;
+			Data_40003360 = strEngEnglish;
+			Data_40003364 = strEngGerman;
+			Data_40003368 = strEngFrench;
+			Data_4000336c = strEngItalian;
+			Data_40003370 = strEngSpanish;
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";

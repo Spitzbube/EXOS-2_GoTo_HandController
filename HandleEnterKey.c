@@ -92,8 +92,8 @@ void HandleEnterKey(void)
 						//0x530f4
 						lcd_display_clear();
 						func_7950(1);
-						func_7e8(0, 3, 1, 22, " Target Out of Range  ");
-						func_7e8(0, 5, 1, 22, "Altitude < -15 Degree ");
+						lcd_display_string(0, 3, 1, 22, " Target Out of Range  ");
+						lcd_display_string(0, 5, 1, 22, "Altitude < -15 Degree ");
 						func_659c(2000);
 						lcd_display_clear();
 						
@@ -800,7 +800,7 @@ void HandleEnterKey(void)
 			break;
 		
 		case 4801:
-			//0x551e4
+			//0x551e4: Tracking Rate -> "Star Speed"
 			dData_40002c98 = 0;
 			bData_40002e7c = 0;
 			func_7950(2);
@@ -808,7 +808,7 @@ void HandleEnterKey(void)
 			break;
 		
 		case 4802:
-			//0x5521c
+			//0x5521c: Tracking Rate -> "Solar Speed"
 			dData_40002c98 = 0.000000298199444444444492059666153988;
 			bData_40002e7c = 1;
 			func_7950(2);
@@ -816,7 +816,7 @@ void HandleEnterKey(void)
 			break;
 		
 		case 4803:
-			//0x55254
+			//0x55254: "Moon Speed"
 			dData_40002c98 = 0.00000376886111111111134081550801123;
 			bData_40002e7c = 2;
 			func_7950(2);
@@ -824,7 +824,7 @@ void HandleEnterKey(void)
 			break;
 		
 		case 4804:
-			//0x55288
+			//0x55288: "Customize Speed"
 			bData_4000318a = 1;
 			sprintf(Data_400037cc, "+0%.2f", 1.0); //String???
 			sprintf(Data_400037dc, "+0%.2f  starspeed", 1.0);
@@ -832,7 +832,7 @@ void HandleEnterKey(void)
 			break;
 		
 		case 4805:
-			//0x552d0
+			//0x552d0: "Guiding Speed"
 			Data_40002c64_MenuContextId = 48051;
 			break;
 		
@@ -910,7 +910,20 @@ void HandleEnterKey(void)
 		
 		case 4100: // Time and Date
 			//55608
-			//TODO
+			func_6518();
+		
+			sprintf(Data_400037ec, "%04d-%02d-%02d",
+				Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
+			sprintf(Data_40003150, "%02d:%02d:%02d",
+				bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
+			sprintf(Data_40002655, "%04d-%02d-%02d", 
+				Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
+			sprintf(Data_40002660, "%02d:%02d:%02d", 
+				bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
+			
+			bData_4000318a = 1;
+			bData_40002e78 = 0;
+			Data_40002c64_MenuContextId = 41001;
 			break;
 		
 		case 41001: //"Date and Time Set: "
@@ -1039,7 +1052,7 @@ void HandleEnterKey(void)
 			HandleReset();
 			break;
 		
-		case 47011: //????
+		case 47011: //Telescope Mount -> "Please setup OTA zero"
 			//0x55db0
 			func_50778();
 			break;
@@ -1064,7 +1077,7 @@ void HandleEnterKey(void)
 		
 		case 3400: // Timer
 			//0x55e18
-			if (Data_40003214 != 0)
+			if (Data_40003214_UserTimerSeconds != 0)
 			{
 				Data_40002c64_MenuContextId = 34002; //->"Counting down:"
 			}
@@ -1086,15 +1099,30 @@ void HandleEnterKey(void)
 			
 		case 3500: // Alarm
 			//0x55ee0
-			//-> "Input time:"
+			if (bData_4000322c == 1)
+			{
+				//55ef4
+				Data_40002c64_MenuContextId = 35002;
+			}
+			else
+			{
+				//0x55f04
+				//-> "Input time:"
+				Data_40002c64_MenuContextId = 35001;
+				bData_4000318a = 1;
+			}
+			//->563b8
 			break;
 		
 		case 35001:
-			//0x55f20
+			//0x55f20: Alarm start?
+			func_4ff84();
 			break;
 		
 		case 35002:
-			//0x55f2c
+			//0x55f2c: Alarm stop?
+			bData_4000322c = 0;
+			Data_40002c64_MenuContextId = 35001;
 			break;
 		
 		case 3601:

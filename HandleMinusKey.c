@@ -42,14 +42,14 @@ void HandleMinusKey(void)
 				
 				bData_40002e8c = 0;
 				
-				func_7e8(0, 1, 1, 21, "                     ");
-				func_7e8(0, 2, 1, 21, "                     ");
-				func_7e8(0, 3, 1, 21, "                     ");
-				func_7e8(0, 4, 1, 21, "This Align Canceled  ");
-				func_7e8(0, 5, 1, 21, "                     ");
-				func_7e8(0, 6, 1, 21, "                     ");
-				func_7e8(0, 7, 1, 21, "                     ");
-				func_7e8(0, 8, 1, 21, "                     ");
+				lcd_display_string(0, 1, 1, 21, "                     ");
+				lcd_display_string(0, 2, 1, 21, "                     ");
+				lcd_display_string(0, 3, 1, 21, "                     ");
+				lcd_display_string(0, 4, 1, 21, "This Align Canceled  ");
+				lcd_display_string(0, 5, 1, 21, "                     ");
+				lcd_display_string(0, 6, 1, 21, "                     ");
+				lcd_display_string(0, 7, 1, 21, "                     ");
+				lcd_display_string(0, 8, 1, 21, "                     ");
 				
 				func_659c(1000);
 				func_7950(2);
@@ -1039,7 +1039,7 @@ void HandleMinusKey(void)
 			break;
 		
 		case 33001:
-			//0x60d28
+			//0x60d28: Curr. Lunar Phase
 			Data_40002c64_MenuContextId = 3300;
 			break;
 		

@@ -291,7 +291,7 @@ void lcd_display_character(int inv, int row, unsigned char col, const unsigned c
 }
 
 /* 7e8 - complete */
-void func_7e8(int a, unsigned char b, unsigned char c, unsigned char d, const unsigned char* e)
+void lcd_display_string(int a, unsigned char b, unsigned char c, unsigned char d, const unsigned char* e)
 {
 	unsigned char i;
 
@@ -911,15 +911,15 @@ void timer_isr(void) __irq
 
 	bData_40002c06++;
 	
-	if (Data_40003214 != 0)
+	if (Data_40003214_UserTimerSeconds != 0)
 	{
 		bData_40003265--;
 		if (bData_40003265 == 0)
 		{
 			bData_40003265 = 100;
 			
-			Data_40003214--;
-			if (Data_40003214 == 0)
+			Data_40003214_UserTimerSeconds--;
+			if (Data_40003214_UserTimerSeconds == 0)
 			{
 				bData_40002c08 = 160;
 				bData_40002c09 = bData_40002c08 - 1;				
@@ -5555,10 +5555,10 @@ void func_dc1c(void)
 }
 
 /* dc20 - todo */
-void func_dc20(unsigned char a, unsigned char b, unsigned char c)
+void lcd_display_lunar_phase(unsigned char row, unsigned char col, unsigned char idx)
 {
 	int i;
-	char sp4[8][32] = 
+	char bitmap[8][32] = 
 	{
 		{
 		0xe0, 0x18, 0x04, 0x02, 0x00, 0x01, 0x01, 0x01, 
@@ -5610,22 +5610,22 @@ void func_dc20(unsigned char a, unsigned char b, unsigned char c)
 		}
 	};
 	
-	lcd_write_command(((b - 1) * 6 + 2) & 0x0F);
-	lcd_write_command(((((b - 1) * 6 + 2) & 0xF0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
-	lcd_write_command(((a - 1) & 0x0F) | ST7565_CMD_SET_PAGE);
+	lcd_write_command(((col - 1) * 6 + 2) & 0x0F);
+	lcd_write_command(((((col - 1) * 6 + 2) & 0xF0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
+	lcd_write_command(((row - 1) & 0x0F) | ST7565_CMD_SET_PAGE);
 	
 	for (i = 0; i < 16; i++)
 	{
-		lcd_write_data(sp4[c][i]);
+		lcd_write_data(bitmap[idx][i]);
 	}
 	
-	lcd_write_command(((b - 1) * 6 + 2) & 0x0F);
-	lcd_write_command(((((b - 1) * 6 + 2) & 0xF0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
-	lcd_write_command((a & 0x0F) | ST7565_CMD_SET_PAGE);
+	lcd_write_command(((col - 1) * 6 + 2) & 0x0F);
+	lcd_write_command(((((col - 1) * 6 + 2) & 0xF0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
+	lcd_write_command((row & 0x0F) | ST7565_CMD_SET_PAGE);
 	
 	for (i = 0; i < 16; i++)
 	{
-		lcd_write_data(sp4[c][i+16]);	
+		lcd_write_data(bitmap[idx][i+16]);	
 	}
 }
 
@@ -5641,7 +5641,7 @@ char is_leap_year(int y)
 }
 
 /* dd84 - complete */
-int func_dd84(int year, int month)
+int get_days_of_month(int year, int month)
 {
 	int days = 31;
 	switch (month - 2)
@@ -5674,60 +5674,68 @@ int func_dd84(int year, int month)
 }
 
 /* de18 - todo */
-int func_de18(int a, int b, int c)
+int get_lunar_phase(int year, int month, int day)
 {
-	int r7;
-	int r8;
-	int sp;
-	int r9;
-	int sp4;
+	//Computes the moon phase index as a value from 0 to 7
+	//See: https://github.com/sighrobot/Moon/blob/master/src/com/abe/moon/MoonPhase.java
+
+	int phase;
+	int cent; //Number of century
+	int epact; //Epact (Date of Full Moon)
+	int diy; //Day in the year
+	int golden; //Golden number of year
 	
-	if ((b < 0) || (b > 12))
+	if ((month < 0) || (month > 12))
 	{
-		b = 0;
+		month = 0;
 	}
 	
-	r8 = Data_40002bc4[b] + c;
+	diy = Data_40002bc4_DayYear[month] + day;
 	
-	if (b > 2)
+	if (month > 2)
 	{
 		//de50
-		if (!(a % 4) && (!(a % 400) || (a % 100)))
+		if (!(year % 4) && (!(year % 400) || (year % 100)))
 		{
-			r8++;
+			diy++;
 		}
 	}
 	//0xde94
-	r7 = a / 100 + 1;
-	r9 = a % 19 + 1;
+	cent = year / 100 + 1;
+	golden = year % 19 + 1;
 	
-	sp = ((r7 * 8 + 5) / 25 + (r9 * 11 + 20) - 5 - ((r7 * 3) / 4 - 12)) % 30;
+	#if 0
+	X = (3 * C / 4) - 12;
+	Z = ((8 * C + 5) / 25 - 5;
+	E = (11 * G + 20 + Z - X) % 30;
+	#else
+	epact = ((8 * cent + 5) / 25 + (golden * 11 + 20) - 5 - ((cent * 3) / 4 - 12)) % 30;
+	#endif
 
-	if (sp <= 0)
+	if (epact <= 0)
 	{
-		sp += 30;
+		epact += 30;
 	}
 	//0xdf18
-	if (((sp == 25) && (r9 > 11)) || (sp == 24))
+	if (((epact == 25) && (golden > 11)) || (epact == 24))
 	{
 		//0xdf38
-		sp++;
+		epact++;
 	}
 	//0xdf44
-	sp4 = ((11 + (sp + r8) * 6) % 177 / 22) & 0x07;
-
-	return sp4;
+	phase = ((11 + (epact + diy) * 6) % 177 / 22) & 0x07;
+	return phase;
 }
 
 /* df84 - todo */
-void func_df84(int year, int month)
+void lcd_display_lunar_phase_screen(int year, int month)
 {
-	int r6;
-	int r7;
-	int r8 = -1;
-	int r9 = 2;
-	int sl = 1;
-	unsigned char sp12[][2] = 
+	int day;
+	int phaseIndex;
+	int phaseIndexPrevious = -1;
+	int row = 2;
+	int col = 1;
+	unsigned char dayDigits[][2] = 
 	{
 		{'0', '1'}, 
 		{'0', '2'}, 
@@ -5761,38 +5769,38 @@ void func_df84(int year, int month)
 		{'3', '0'},
 		{'3', '1'}, 
 	};
-	unsigned char sp4[7];
+	unsigned char year_month[7];
 	
-	sp4[0] = year / 1000 + '0';
-	sp4[1] = (year % 1000) / 100 + '0';
-	sp4[2] = (year % 100) / 10 + '0';
-	sp4[3] = (year % 100) % 10 + '0';
-	sp4[4] = '-';
-	sp4[5] = month / 10 + '0';
-	sp4[6] = month % 10 + '0';
+	year_month[0] = year / 1000 + '0';
+	year_month[1] = (year % 1000) / 100 + '0';
+	year_month[2] = (year % 100) / 10 + '0';
+	year_month[3] = (year % 100) % 10 + '0';
+	year_month[4] = '-';
+	year_month[5] = month / 10 + '0';
+	year_month[6] = month % 10 + '0';
 	
-	func_7e8(0, 1, 8, 7, sp4);
+	lcd_display_string(0, 1, 8, 7, year_month);
 	
-	for (r6 = 1; r6 <= func_dd84(year, month); r6++)
+	for (day = 1; day <= get_days_of_month(year, month); day++)
 	{
 		//0xe084
-		r7 = func_de18(year, month, r6);
-		if (r7 == r8)
+		phaseIndex = get_lunar_phase(year, month, day);
+		if (phaseIndex == phaseIndexPrevious)
 		{
 			continue;
 		}
 
-		r8 = r7;
+		phaseIndexPrevious = phaseIndex;
 		
-		func_dc20(r9, sl, r7);		
-		func_7e8(0, r9 + 2, sl, 2, sp12[r6-1]);
+		lcd_display_lunar_phase(row, col, phaseIndex);		
+		lcd_display_string(0, row + 2, col, 2, dayDigits[day-1]);
 		
-		sl += 4;
+		col += 4;
 		
-		if (sl > 20)
+		if (col > 20)
 		{
-			sl -= 20;
-			r9 += 3;
+			col -= 20;
+			row += 3;
 		}
 	}
 }
@@ -7339,91 +7347,91 @@ void func_1e228(void)
 			{
 				case 1:
 					//0x1e36c
-					func_7e8(0, 1, 1, 21, "*Key:                  ");
-					func_7e8(0, 3, 1, 21, "Press the key to cha- ");
-					func_7e8(0, 5, 1, 21, "-nge LED illuminance. ");
-					func_7e8(0, 7, 1, 21, "                      ");
+					lcd_display_string(0, 1, 1, 21, "*Key:                  ");
+					lcd_display_string(0, 3, 1, 21, "Press the key to cha- ");
+					lcd_display_string(0, 5, 1, 21, "-nge LED illuminance. ");
+					lcd_display_string(0, 7, 1, 21, "                      ");
 					//->0x1eb90
 					break;
 				
 				case 2:
 					//0x1e3e4
-					func_7e8(0, 1, 1, 21, "Green Key:             ");
-					func_7e8(0, 3, 1, 21, "Press the key to show ");
-					func_7e8(0, 5, 1, 21, "and select hitoric    ");
-					func_7e8(0, 7, 1, 21, "target quickly.       ");
+					lcd_display_string(0, 1, 1, 21, "Green Key:             ");
+					lcd_display_string(0, 3, 1, 21, "Press the key to show ");
+					lcd_display_string(0, 5, 1, 21, "and select hitoric    ");
+					lcd_display_string(0, 7, 1, 21, "target quickly.       ");
 					//->0x1eb90
 					break;
 				
 				case 3:
 					//0x1e580
-					func_7e8(0, 1, 1, 21, "Red Key:               ");
-					func_7e8(0, 3, 1, 21, "Show function menu    ");
-					func_7e8(0, 5, 1, 21, "or Enter.             ");
-					func_7e8(0, 7, 1, 21, "                      ");
+					lcd_display_string(0, 1, 1, 21, "Red Key:               ");
+					lcd_display_string(0, 3, 1, 21, "Show function menu    ");
+					lcd_display_string(0, 5, 1, 21, "or Enter.             ");
+					lcd_display_string(0, 7, 1, 21, "                      ");
 					//->0x1eb90
 					break;
 				
 				case 4:
 					//0x1e5f8
-					func_7e8(0, 1, 1, 21, "Yellow Key:            ");
-					func_7e8(0, 3, 1, 21, "Press the key to stop ");
-					func_7e8(0, 5, 1, 21, "or abandon or quit.   ");
-					func_7e8(0, 7, 1, 21, "                      ");
+					lcd_display_string(0, 1, 1, 21, "Yellow Key:            ");
+					lcd_display_string(0, 3, 1, 21, "Press the key to stop ");
+					lcd_display_string(0, 5, 1, 21, "or abandon or quit.   ");
+					lcd_display_string(0, 7, 1, 21, "                      ");
 					//->0x1eb90
 					break;
 				
 				case 5:
 					//0x1e670
-					func_7e8(0, 1, 1, 21, "Arrow Keys:            ");
-					func_7e8(0, 3, 1, 21, "Slew the telescope    ");
-					func_7e8(0, 5, 1, 21, "or Scroll in menu.    ");
-					func_7e8(0, 7, 1, 21, "                      ");
+					lcd_display_string(0, 1, 1, 21, "Arrow Keys:            ");
+					lcd_display_string(0, 3, 1, 21, "Slew the telescope    ");
+					lcd_display_string(0, 5, 1, 21, "or Scroll in menu.    ");
+					lcd_display_string(0, 7, 1, 21, "                      ");
 					//->0x1eb90
 					break;
 				
 				case 6:
 					//0x1e6e8
-					func_7e8(0, 1, 1, 21, "Number Keys:            ");
-					func_7e8(0, 3, 1, 21, "Press to input digits  ");
-					func_7e8(0, 5, 1, 21, "0 to 9, input letter   ");
-					func_7e8(0, 7, 1, 21, "or Change slew speed.  ");
+					lcd_display_string(0, 1, 1, 21, "Number Keys:            ");
+					lcd_display_string(0, 3, 1, 21, "Press to input digits  ");
+					lcd_display_string(0, 5, 1, 21, "0 to 9, input letter   ");
+					lcd_display_string(0, 7, 1, 21, "or Change slew speed.  ");
 					//->0x1eb90
 					break;
 				
 				case 7:
 					//0x1e89c
-					func_7e8(0, 1, 1, 21, "Stop Key:               ");
-					func_7e8(0, 3, 1, 21, "Press to pause when    ");
-					func_7e8(0, 5, 1, 21, "telescope in tracking, ");
-					func_7e8(0, 7, 1, 21, "moving or slewing.     ");
+					lcd_display_string(0, 1, 1, 21, "Stop Key:               ");
+					lcd_display_string(0, 3, 1, 21, "Press to pause when    ");
+					lcd_display_string(0, 5, 1, 21, "telescope in tracking, ");
+					lcd_display_string(0, 7, 1, 21, "moving or slewing.     ");
 					//->0x1eb90
 					break;
 				
 				case 8:
 					//0x1e914
-					func_7e8(0, 1, 1, 21, "Help Key:               ");
-					func_7e8(0, 3, 1, 21, "Show help file         ");
-					func_7e8(0, 5, 1, 21, "can be used in all     ");
-					func_7e8(0, 7, 1, 21, "levels menu.           ");
+					lcd_display_string(0, 1, 1, 21, "Help Key:               ");
+					lcd_display_string(0, 3, 1, 21, "Show help file         ");
+					lcd_display_string(0, 5, 1, 21, "can be used in all     ");
+					lcd_display_string(0, 7, 1, 21, "levels menu.           ");
 					//->0x1eb90
 					break;
 				
 				case 9:
 					//0x1e98c
-					func_7e8(0, 1, 1, 21, "F+(1 to 9):             ");
-					func_7e8(0, 3, 1, 21, "Show historic target   ");
-					func_7e8(0, 5, 1, 21, "                       ");
-					func_7e8(0, 7, 1, 21, "                       ");
+					lcd_display_string(0, 1, 1, 21, "F+(1 to 9):             ");
+					lcd_display_string(0, 3, 1, 21, "Show historic target   ");
+					lcd_display_string(0, 5, 1, 21, "                       ");
+					lcd_display_string(0, 7, 1, 21, "                       ");
 					//->0x1eb90
 					break;
 				
 				case 10:
 					//0x1eb18
-					func_7e8(0, 1, 1, 21, "F+0                     ");
-					func_7e8(0, 3, 1, 21, "Open or close key      ");
-					func_7e8(0, 5, 1, 21, "beep                   ");
-					func_7e8(0, 7, 1, 21, "                       ");
+					lcd_display_string(0, 1, 1, 21, "F+0                     ");
+					lcd_display_string(0, 3, 1, 21, "Open or close key      ");
+					lcd_display_string(0, 5, 1, 21, "beep                   ");
+					lcd_display_string(0, 7, 1, 21, "                       ");
 					//->0x1eb90
 					break;
 				#if 0
@@ -7437,370 +7445,370 @@ void func_1e228(void)
 		
 		case 1:
 			//0x1eb98: 501 = Telescope Align
-			func_7e8(0, 1, 1, 21, "Telescope align:      ");
-			func_7e8(0, 3, 1, 21, "Align Telescop point ");
-			func_7e8(0, 5, 1, 21, "Pole-axis aim and    ");
-			func_7e8(0, 7, 1, 21, "correct Backlash.    ");
+			lcd_display_string(0, 1, 1, 21, "Telescope align:      ");
+			lcd_display_string(0, 3, 1, 21, "Align Telescop point ");
+			lcd_display_string(0, 5, 1, 21, "Pole-axis aim and    ");
+			lcd_display_string(0, 7, 1, 21, "correct Backlash.    ");
 			//->0x20a50
 			break;
 		
 		case 2:
 			//0x1ec10
-			func_7e8(0, 1, 1, 21, "Target navigation:    ");
-			func_7e8(0, 3, 1, 21, "Select Target from   ");
-			func_7e8(0, 5, 1, 21, "database or input    ");
-			func_7e8(0, 7, 1, 21, "data.                ");
+			lcd_display_string(0, 1, 1, 21, "Target navigation:    ");
+			lcd_display_string(0, 3, 1, 21, "Select Target from   ");
+			lcd_display_string(0, 5, 1, 21, "database or input    ");
+			lcd_display_string(0, 7, 1, 21, "data.                ");
 			//->0x20a50
 			break;
 		
 		case 3:
 			//0x1ed94
-			func_7e8(0, 1, 1, 21, "Utilities Commands:   ");
-			func_7e8(0, 3, 1, 21, "Some tools in common ");
-			func_7e8(0, 5, 1, 21, "use.                 ");
-			func_7e8(0, 7, 1, 21, "                     ");
+			lcd_display_string(0, 1, 1, 21, "Utilities Commands:   ");
+			lcd_display_string(0, 3, 1, 21, "Some tools in common ");
+			lcd_display_string(0, 5, 1, 21, "use.                 ");
+			lcd_display_string(0, 7, 1, 21, "                     ");
 			//->0x20a50
 			break;
 		
 		case 4:
 			//0x1ee0c
-			func_7e8(0, 1, 1, 21, "Parameter Setup:      ");
-			func_7e8(0, 3, 1, 21, "Setup some parameter ");
-			func_7e8(0, 5, 1, 21, "in system.           ");
-			func_7e8(0, 7, 1, 21, "                     ");
+			lcd_display_string(0, 1, 1, 21, "Parameter Setup:      ");
+			lcd_display_string(0, 3, 1, 21, "Setup some parameter ");
+			lcd_display_string(0, 5, 1, 21, "in system.           ");
+			lcd_display_string(0, 7, 1, 21, "                     ");
 			//->0x20a50
 			break;
 		
 		case 5:
 			//0x1ee84
-			func_7e8(0, 1, 1, 21, "One star align:       ");
-			func_7e8(0, 3, 1, 21, "Select one star align");
-			func_7e8(0, 5, 1, 21, "the telescope point  ");
-			func_7e8(0, 7, 1, 21, "by hand.             ");
+			lcd_display_string(0, 1, 1, 21, "One star align:       ");
+			lcd_display_string(0, 3, 1, 21, "Select one star align");
+			lcd_display_string(0, 5, 1, 21, "the telescope point  ");
+			lcd_display_string(0, 7, 1, 21, "by hand.             ");
 			//->0x20a50
 			break;
 		
 		case 6:
 			//0x1f004
-			func_7e8(0, 1, 1, 21, "Two stars align:      ");
-			func_7e8(0, 3, 1, 21, "Select two star align");
-			func_7e8(0, 5, 1, 21, "the telescope point  ");
-			func_7e8(0, 7, 1, 21, "by hand.             ");
+			lcd_display_string(0, 1, 1, 21, "Two stars align:      ");
+			lcd_display_string(0, 3, 1, 21, "Select two star align");
+			lcd_display_string(0, 5, 1, 21, "the telescope point  ");
+			lcd_display_string(0, 7, 1, 21, "by hand.             ");
 			//->0x20a50
 			break;
 		
 		case 7:
 			//0x1f07c
-			func_7e8(0, 1, 1, 21, "Three star align:      ");
-			func_7e8(0, 3, 1, 21, "Select three stars    ");
-			func_7e8(0, 5, 1, 21, "align the telescope   ");
-			func_7e8(0, 7, 1, 21, "point by hand.        ");
+			lcd_display_string(0, 1, 1, 21, "Three star align:      ");
+			lcd_display_string(0, 3, 1, 21, "Select three stars    ");
+			lcd_display_string(0, 5, 1, 21, "align the telescope   ");
+			lcd_display_string(0, 7, 1, 21, "point by hand.        ");
 			//->0x20a50
 			break;
 		
 		case 8:
 			//0x1f0f4
-			func_7e8(0, 1, 1, 21, "Target Sync:           ");
-			func_7e8(0, 3, 1, 21, "Synchronizing the     ");
-			func_7e8(0, 5, 1, 21, "target parameter with ");
-			func_7e8(0, 7, 1, 21, "thetelescope point.   ");
+			lcd_display_string(0, 1, 1, 21, "Target Sync:           ");
+			lcd_display_string(0, 3, 1, 21, "Synchronizing the     ");
+			lcd_display_string(0, 5, 1, 21, "target parameter with ");
+			lcd_display_string(0, 7, 1, 21, "thetelescope point.   ");
 			//->0x20a50
 			break;
 		
 		case 9:
 			//0x1f16c
-			func_7e8(0, 1, 1, 21, "Pole-Axis Deviation:     ");
-			func_7e8(0, 3, 1, 21, "Show the Pole-Axis      ");
-			func_7e8(0, 5, 1, 21, "practice Deviation      ");
-			func_7e8(0, 7, 1, 21, "through the align.      ");
+			lcd_display_string(0, 1, 1, 21, "Pole-Axis Deviation:     ");
+			lcd_display_string(0, 3, 1, 21, "Show the Pole-Axis      ");
+			lcd_display_string(0, 5, 1, 21, "practice Deviation      ");
+			lcd_display_string(0, 7, 1, 21, "through the align.      ");
 			//->0x20a50
 			break;
 		
 		case 10:
 			//0x1f344
-			func_7e8(0, 1, 1, 21, "RA Bklash Correction:     ");
-			func_7e8(0, 3, 1, 21, "Correct the backlash     ");
-			func_7e8(0, 5, 1, 21, "in RA motor gear.        ");
-			func_7e8(0, 7, 1, 21, "                         ");
+			lcd_display_string(0, 1, 1, 21, "RA Bklash Correction:     ");
+			lcd_display_string(0, 3, 1, 21, "Correct the backlash     ");
+			lcd_display_string(0, 5, 1, 21, "in RA motor gear.        ");
+			lcd_display_string(0, 7, 1, 21, "                         ");
 			//->0x20a50
 			break;
 		
 		case 11:
 			//0x1f3bc
-			func_7e8(0, 1, 1, 21, "DEC Bklash Correction:    ");
-			func_7e8(0, 3, 1, 21, "Correct the backlash     ");
-			func_7e8(0, 5, 1, 21, "in DED motor gear.       ");
-			func_7e8(0, 7, 1, 21, "                         ");
+			lcd_display_string(0, 1, 1, 21, "DEC Bklash Correction:    ");
+			lcd_display_string(0, 3, 1, 21, "Correct the backlash     ");
+			lcd_display_string(0, 5, 1, 21, "in DED motor gear.       ");
+			lcd_display_string(0, 7, 1, 21, "                         ");
 			//->0x20a50
 			break;
 		
 		case 16:
 			//0x1f434
-			func_7e8(0, 1, 1, 21, "Solar System:            ");
-			func_7e8(0, 3, 1, 21, "Telescope can auto      ");
-			func_7e8(0, 5, 1, 21, "point at Planet, Sun,   ");
-			func_7e8(0, 7, 1, 21, "Moon.                   ");
+			lcd_display_string(0, 1, 1, 21, "Solar System:            ");
+			lcd_display_string(0, 3, 1, 21, "Telescope can auto      ");
+			lcd_display_string(0, 5, 1, 21, "point at Planet, Sun,   ");
+			lcd_display_string(0, 7, 1, 21, "Moon.                   ");
 			//->0x20a50
 			break;
 		
 		case 17:
 			//0x1f5c4
-			func_7e8(0, 1, 1, 21, "Constellation:         ");
-			func_7e8(0, 3, 1, 21, "Telescope can auto     ");
-			func_7e8(0, 5, 1, 21, "point at Constell-     ");
-			func_7e8(0, 7, 1, 21, "ation.                  ");
+			lcd_display_string(0, 1, 1, 21, "Constellation:         ");
+			lcd_display_string(0, 3, 1, 21, "Telescope can auto     ");
+			lcd_display_string(0, 5, 1, 21, "point at Constell-     ");
+			lcd_display_string(0, 7, 1, 21, "ation.                  ");
 			//->0x20a50
 			break;
 		
 		case 18:
 			//0x1f63c
-			func_7e8(0, 1, 1, 21, "Famous Star:           ");
-			func_7e8(0, 3, 1, 21, "Telescope can auto    ");
-			func_7e8(0, 5, 1, 21, "point at all famous   ");
-			func_7e8(0, 7, 1, 21, "stars.                ");
+			lcd_display_string(0, 1, 1, 21, "Famous Star:           ");
+			lcd_display_string(0, 3, 1, 21, "Telescope can auto    ");
+			lcd_display_string(0, 5, 1, 21, "point at all famous   ");
+			lcd_display_string(0, 7, 1, 21, "stars.                ");
 			//->0x20a50
 			break;
 		
 		case 19:
 			//0x1f6b4
-			func_7e8(0, 1, 1, 21, "Messier Catalogue:     ");
-			func_7e8(0, 3, 1, 21, "Telescope can auto    ");
-			func_7e8(0, 5, 1, 21, "point at all stars in ");
-			func_7e8(0, 7, 1, 21, "Messier Catalogue.    ");
+			lcd_display_string(0, 1, 1, 21, "Messier Catalogue:     ");
+			lcd_display_string(0, 3, 1, 21, "Telescope can auto    ");
+			lcd_display_string(0, 5, 1, 21, "point at all stars in ");
+			lcd_display_string(0, 7, 1, 21, "Messier Catalogue.    ");
 			//->0x20a50
 			break;
 		
 		case 20:
 			//0x1f838
-			func_7e8(0, 1, 1, 21, "NGC Deep Sky:           ");
-			func_7e8(0, 3, 1, 21, "Telescope can auto    ");
-			func_7e8(0, 5, 1, 21, "point at all stars    ");
-			func_7e8(0, 7, 1, 21, "in NGC deep sky.      ");
+			lcd_display_string(0, 1, 1, 21, "NGC Deep Sky:           ");
+			lcd_display_string(0, 3, 1, 21, "Telescope can auto    ");
+			lcd_display_string(0, 5, 1, 21, "point at all stars    ");
+			lcd_display_string(0, 7, 1, 21, "in NGC deep sky.      ");
 			//->0x20a50
 			break;
 		
 		case 21:
 			//0x1f8b0
-			func_7e8(0, 1, 1, 21, "IC Deep Sky:           ");
-			func_7e8(0, 3, 1, 21, "Telescope can auto    ");
-			func_7e8(0, 5, 1, 21, "point at all stars    ");
-			func_7e8(0, 7, 1, 21, "in IC deep sky.       ");
+			lcd_display_string(0, 1, 1, 21, "IC Deep Sky:           ");
+			lcd_display_string(0, 3, 1, 21, "Telescope can auto    ");
+			lcd_display_string(0, 5, 1, 21, "point at all stars    ");
+			lcd_display_string(0, 7, 1, 21, "in IC deep sky.       ");
 			//->0x20a50
 			break;
 		
 		case 22:
 			//0x1f928
-			func_7e8(0, 1, 1, 21, "Sh2 Deep Sky:          ");
-			func_7e8(0, 3, 1, 21, "Telescope can auto    ");
-			func_7e8(0, 5, 1, 21, "point at all stars    ");
-			func_7e8(0, 7, 1, 21, "in Sh2 Deep Sky.      ");
+			lcd_display_string(0, 1, 1, 21, "Sh2 Deep Sky:          ");
+			lcd_display_string(0, 3, 1, 21, "Telescope can auto    ");
+			lcd_display_string(0, 5, 1, 21, "point at all stars    ");
+			lcd_display_string(0, 7, 1, 21, "in Sh2 Deep Sky.      ");
 			//->0x20a50
 			break;
 		
 		case 23:
 			//0x1f9a0
-			func_7e8(0, 1, 1, 21, "Bright Stars:         ");
-			func_7e8(0, 3, 1, 21, "Telescope can auto   ");
-			func_7e8(0, 5, 1, 21, "point at all stars    ");
-			func_7e8(0, 7, 1, 21, "in Bright Stars.      ");
+			lcd_display_string(0, 1, 1, 21, "Bright Stars:         ");
+			lcd_display_string(0, 3, 1, 21, "Telescope can auto   ");
+			lcd_display_string(0, 5, 1, 21, "point at all stars    ");
+			lcd_display_string(0, 7, 1, 21, "in Bright Stars.      ");
 			//->0x20a50
 			break;
 		
 		case 24:
 			//0x1fa18
-			func_7e8(0, 1, 1, 21, "SAO Star:              ");
-			func_7e8(0, 3, 1, 21, "Telescope can auto   ");
-			func_7e8(0, 5, 1, 21, "point at all stars    ");
-			func_7e8(0, 7, 1, 21, "in SAO Star.         ");
+			lcd_display_string(0, 1, 1, 21, "SAO Star:              ");
+			lcd_display_string(0, 3, 1, 21, "Telescope can auto   ");
+			lcd_display_string(0, 5, 1, 21, "point at all stars    ");
+			lcd_display_string(0, 7, 1, 21, "in SAO Star.         ");
 			//->0x20a50
 			break;
 		
 		case 25:
 			//0x1fbb4
-			func_7e8(0, 1, 1, 21, "User-def Object:        ");
-			func_7e8(0, 3, 1, 21, "Input sky target        ");
-			func_7e8(0, 5, 1, 21, "parameter and save it.  ");
-			func_7e8(0, 7, 1, 21, "                         ");
+			lcd_display_string(0, 1, 1, 21, "User-def Object:        ");
+			lcd_display_string(0, 3, 1, 21, "Input sky target        ");
+			lcd_display_string(0, 5, 1, 21, "parameter and save it.  ");
+			lcd_display_string(0, 7, 1, 21, "                         ");
 			//->0x20a50
 			break;
 		
 		case 26:
 			//0x1fc2c
-			func_7e8(0, 1, 1, 21, "Specify Ra Dec:           ");
-			func_7e8(0, 3, 1, 21, "Input Target R.a and    ");
-			func_7e8(0, 5, 1, 21, "Des ,then point to it.   ");
-			func_7e8(0, 7, 1, 21, "                         ");
+			lcd_display_string(0, 1, 1, 21, "Specify Ra Dec:           ");
+			lcd_display_string(0, 3, 1, 21, "Input Target R.a and    ");
+			lcd_display_string(0, 5, 1, 21, "Des ,then point to it.   ");
+			lcd_display_string(0, 7, 1, 21, "                         ");
 			//->0x20a50
 			break;
 		
 		case 27:
 			//0x1fca4
-			func_7e8(0, 1, 1, 21, "Landmarks:             ");
-			func_7e8(0, 3, 1, 21, "Input land target     ");
-			func_7e8(0, 5, 1, 21, "parameter and save it. ");
-			func_7e8(0, 7, 1, 21, "                       ");
+			lcd_display_string(0, 1, 1, 21, "Landmarks:             ");
+			lcd_display_string(0, 3, 1, 21, "Input land target     ");
+			lcd_display_string(0, 5, 1, 21, "parameter and save it. ");
+			lcd_display_string(0, 7, 1, 21, "                       ");
 			//->0x20a50
 			break;
 		
 		case 28:
 			//0x1fd1c
-			func_7e8(0, 1, 1, 21, "Current Objects:      ");
-			func_7e8(0, 3, 1, 21, "Give planet's,solar  ");
-			func_7e8(0, 5, 1, 21, "and lunar rise,      ");
-			func_7e8(0, 7, 1, 21, "transit and set time. ");
+			lcd_display_string(0, 1, 1, 21, "Current Objects:      ");
+			lcd_display_string(0, 3, 1, 21, "Give planet's,solar  ");
+			lcd_display_string(0, 5, 1, 21, "and lunar rise,      ");
+			lcd_display_string(0, 7, 1, 21, "transit and set time. ");
 			//->0x20a50
 			break;
 		
 		case 29:
 			//0x1feec
-			func_7e8(0, 1, 1, 21, "Object Rise/Set:       ");
-			func_7e8(0, 3, 1, 21, "calculate star rise,  ");
-			func_7e8(0, 5, 1, 21, "transit and set time. ");
-			func_7e8(0, 7, 1, 21, "                      ");
+			lcd_display_string(0, 1, 1, 21, "Object Rise/Set:       ");
+			lcd_display_string(0, 3, 1, 21, "calculate star rise,  ");
+			lcd_display_string(0, 5, 1, 21, "transit and set time. ");
+			lcd_display_string(0, 7, 1, 21, "                      ");
 			//->0x20a50
 			break;
 		
 		case 30:
 			//0x1ff64
-			func_7e8(0, 1, 1, 21, "Lunar Phase:         ");
-			func_7e8(0, 3, 1, 21, "Show the lunar phase ");
-			func_7e8(0, 5, 1, 21, "                     ");
-			func_7e8(0, 7, 1, 21, "                     ");
+			lcd_display_string(0, 1, 1, 21, "Lunar Phase:         ");
+			lcd_display_string(0, 3, 1, 21, "Show the lunar phase ");
+			lcd_display_string(0, 5, 1, 21, "                     ");
+			lcd_display_string(0, 7, 1, 21, "                     ");
 			//->0x20a50
 			break;
 		
 		case 31:
 			//0x1ffdc
-			func_7e8(0, 1, 1, 21, "Timer:                 ");
-			func_7e8(0, 3, 1, 21, "Count down reminder  ");
-			func_7e8(0, 5, 1, 21, "                      ");
-			func_7e8(0, 7, 1, 21, "                       ");
+			lcd_display_string(0, 1, 1, 21, "Timer:                 ");
+			lcd_display_string(0, 3, 1, 21, "Count down reminder  ");
+			lcd_display_string(0, 5, 1, 21, "                      ");
+			lcd_display_string(0, 7, 1, 21, "                       ");
 			//->0x20a50
 			break;
 		
 		case 32:
 			//0x20054
-			func_7e8(0, 1, 1, 21, "Alarm:                  ");
-			func_7e8(0, 3, 1, 21, "Timeing alarm.         ");
-			func_7e8(0, 5, 1, 21, "                       ");
-			func_7e8(0, 7, 1, 21, "                       ");
+			lcd_display_string(0, 1, 1, 21, "Alarm:                  ");
+			lcd_display_string(0, 3, 1, 21, "Timeing alarm.         ");
+			lcd_display_string(0, 5, 1, 21, "                       ");
+			lcd_display_string(0, 7, 1, 21, "                       ");
 			//->0x20a50
 			break;
 		
 		case 33:
 			//0x200cc
-			func_7e8(0, 1, 1, 21, "Field Angle Cal:        ");
-			func_7e8(0, 3, 1, 21, "Calculate the teles- ");
-			func_7e8(0, 5, 1, 21, "cope's field angel.  ");
-			func_7e8(0, 7, 1, 21, "                     ");
+			lcd_display_string(0, 1, 1, 21, "Field Angle Cal:        ");
+			lcd_display_string(0, 3, 1, 21, "Calculate the teles- ");
+			lcd_display_string(0, 5, 1, 21, "cope's field angel.  ");
+			lcd_display_string(0, 7, 1, 21, "                     ");
 			//->0x20a50
 			break;
 		
 		case 34:
 			//0x2025c
-			func_7e8(0, 1, 1, 21, "Magify Power Cal:      ");
-			func_7e8(0, 3, 1, 21, "Calculate the teles-  ");
-			func_7e8(0, 5, 1, 21, "cope's magify power.  ");
-			func_7e8(0, 7, 1, 21, "                      ");
+			lcd_display_string(0, 1, 1, 21, "Magify Power Cal:      ");
+			lcd_display_string(0, 3, 1, 21, "Calculate the teles-  ");
+			lcd_display_string(0, 5, 1, 21, "cope's magify power.  ");
+			lcd_display_string(0, 7, 1, 21, "                      ");
 			//->0x20a50
 			break;
 		
 		case 35:
 			//0x202d4
-			func_7e8(0, 1, 1, 21, "Illumination:          ");
-			func_7e8(0, 3, 1, 21, "Set screen illumina-  ");
-			func_7e8(0, 5, 1, 21, "tion.                 ");
-			func_7e8(0, 7, 1, 21, "                      ");
+			lcd_display_string(0, 1, 1, 21, "Illumination:          ");
+			lcd_display_string(0, 3, 1, 21, "Set screen illumina-  ");
+			lcd_display_string(0, 5, 1, 21, "tion.                 ");
+			lcd_display_string(0, 7, 1, 21, "                      ");
 			//->0x20a50
 			break;
 		
 		case 37:
 			//0x2034c
-			func_7e8(0, 1, 1, 21, "Parkzen:               ");
-			func_7e8(0, 3, 1, 21, "Slew telescope to     ");
-			func_7e8(0, 5, 1, 21, "Original Position.    ");
-			func_7e8(0, 7, 1, 21, "                      ");
+			lcd_display_string(0, 1, 1, 21, "Parkzen:               ");
+			lcd_display_string(0, 3, 1, 21, "Slew telescope to     ");
+			lcd_display_string(0, 5, 1, 21, "Original Position.    ");
+			lcd_display_string(0, 7, 1, 21, "                      ");
 			//->0x20a50
 			break;
 		
 		case 38:
 			//0x203c4
-			func_7e8(0, 1, 1, 21, "Time and Date:         ");
-			func_7e8(0, 3, 1, 21, "Set local time and   ");
-			func_7e8(0, 5, 1, 21, "data for system.      ");
-			func_7e8(0, 7, 1, 21, "                      ");
+			lcd_display_string(0, 1, 1, 21, "Time and Date:         ");
+			lcd_display_string(0, 3, 1, 21, "Set local time and   ");
+			lcd_display_string(0, 5, 1, 21, "data for system.      ");
+			lcd_display_string(0, 7, 1, 21, "                      ");
 			//->0x20a50
 			break;
 		
 		case 39:
 			//0x2055c
-			func_7e8(0, 1, 1, 21, "Daylight Saving:        ");
-			func_7e8(0, 3, 1, 21, "Set Daylight Saving.   ");
-			func_7e8(0, 5, 1, 21, "                       ");
-			func_7e8(0, 7, 1, 21, "                       ");
+			lcd_display_string(0, 1, 1, 21, "Daylight Saving:        ");
+			lcd_display_string(0, 3, 1, 21, "Set Daylight Saving.   ");
+			lcd_display_string(0, 5, 1, 21, "                       ");
+			lcd_display_string(0, 7, 1, 21, "                       ");
 			//->0x20a50
 			break;
 		
 		case 40:
 			//0x205d4
-			func_7e8(0, 1, 1, 21, "Site Setting:            ");
-			func_7e8(0, 3, 1, 21, "Select local site       ");
-			func_7e8(0, 5, 1, 21, "from database or        ");
-			func_7e8(0, 7, 1, 21, "input data.             ");
+			lcd_display_string(0, 1, 1, 21, "Site Setting:            ");
+			lcd_display_string(0, 3, 1, 21, "Select local site       ");
+			lcd_display_string(0, 5, 1, 21, "from database or        ");
+			lcd_display_string(0, 7, 1, 21, "input data.             ");
 			//->0x20a50
 			break;
 		
 		case 41:
 			//0x2064c
-			func_7e8(0, 1, 1, 21, "Sky/ Land:             ");
-			func_7e8(0, 3, 1, 21, "Select sky or land    ");
-			func_7e8(0, 5, 1, 21, "mode                  ");
-			func_7e8(0, 7, 1, 21, "                      ");
+			lcd_display_string(0, 1, 1, 21, "Sky/ Land:             ");
+			lcd_display_string(0, 3, 1, 21, "Select sky or land    ");
+			lcd_display_string(0, 5, 1, 21, "mode                  ");
+			lcd_display_string(0, 7, 1, 21, "                      ");
 			//->0x20a50
 			break;
 		
 		case 42:
 			//0x206c4
-			func_7e8(0, 1, 1, 21, "AZ/EQ:                 ");
-			func_7e8(0, 3, 1, 21, "Set mount mode to be  ");
-			func_7e8(0, 5, 1, 21, "AZ or EQ mode.        ");
-			func_7e8(0, 7, 1, 21, "                      ");
+			lcd_display_string(0, 1, 1, 21, "AZ/EQ:                 ");
+			lcd_display_string(0, 3, 1, 21, "Set mount mode to be  ");
+			lcd_display_string(0, 5, 1, 21, "AZ or EQ mode.        ");
+			lcd_display_string(0, 7, 1, 21, "                      ");
 			//->0x20a50
 			break;
 		
 		case 43:
 			//0x20870
-			func_7e8(0, 1, 1, 21, "Telescope Zero:        ");
-			func_7e8(0, 3, 1, 21, "Set telescope Origin- ");
-			func_7e8(0, 5, 1, 21, "al Position.          ");
-			func_7e8(0, 7, 1, 21, "                      ");
+			lcd_display_string(0, 1, 1, 21, "Telescope Zero:        ");
+			lcd_display_string(0, 3, 1, 21, "Set telescope Origin- ");
+			lcd_display_string(0, 5, 1, 21, "al Position.          ");
+			lcd_display_string(0, 7, 1, 21, "                      ");
 			//->0x20a50
 			break;
 		
 		case 44:
 			//0x208e8
-			func_7e8(0, 1, 1, 21, "Tracking Rate:         ");
-			func_7e8(0, 3, 1, 21, "Set telescope track   ");
-			func_7e8(0, 5, 1, 21, "speed.                ");
-			func_7e8(0, 7, 1, 21, "                      ");
+			lcd_display_string(0, 1, 1, 21, "Tracking Rate:         ");
+			lcd_display_string(0, 3, 1, 21, "Set telescope track   ");
+			lcd_display_string(0, 5, 1, 21, "speed.                ");
+			lcd_display_string(0, 7, 1, 21, "                      ");
 			//->0x20a50
 			break;
 		
 		case 45:
 			//0x20960
-			func_7e8(0, 1, 1, 21, "Language:             ");
-			func_7e8(0, 3, 1, 21, "Select the menu      ");
-			func_7e8(0, 5, 1, 21, "language.            ");
-			func_7e8(0, 7, 1, 21, "                     ");
+			lcd_display_string(0, 1, 1, 21, "Language:             ");
+			lcd_display_string(0, 3, 1, 21, "Select the menu      ");
+			lcd_display_string(0, 5, 1, 21, "language.            ");
+			lcd_display_string(0, 7, 1, 21, "                     ");
 			//->0x20a50
 			break;
 		
 		case 46:
 			//0x209d8
-			func_7e8(0, 1, 1, 21, "Reset:                ");
-			func_7e8(0, 3, 1, 21, "All parameter resume ");
-			func_7e8(0, 5, 1, 21, "to the leave factory ");
-			func_7e8(0, 7, 1, 21, "state.               ");
+			lcd_display_string(0, 1, 1, 21, "Reset:                ");
+			lcd_display_string(0, 3, 1, 21, "All parameter resume ");
+			lcd_display_string(0, 5, 1, 21, "to the leave factory ");
+			lcd_display_string(0, 7, 1, 21, "state.               ");
 			//->0x20a50
 			break;
 		#if 0
@@ -7814,22 +7822,22 @@ void func_1e228(void)
 /* 20b94 - todo */
 void func_20b94(void)
 {
-	func_7e8(0, 1, 1, strlen(Data_40003360), (unsigned char*)Data_40003360);
-	func_7e8(0, 1, 14, strlen(Data_40003364), (unsigned char*)Data_40003364);
+	lcd_display_string(0, 1, 1, strlen(Data_40003360), (unsigned char*)Data_40003360);
+	lcd_display_string(0, 1, 14, strlen(Data_40003364), (unsigned char*)Data_40003364);
 	
 	if (bData_400031ea == 1)
 	{
 		if (bData_400031eb == 0)
 		{
 			//20c18
-			func_7e8(0, 2, 1, 22, ">>>>synchronizing<<<<");
+			lcd_display_string(0, 2, 1, 22, ">>>>synchronizing<<<<");
 			
 			bData_400031eb = 1;
 		}
 		else
 		{
 			//0x20c44
-			func_7e8(0, 2, 1, 22, "                      ");
+			lcd_display_string(0, 2, 1, 22, "                      ");
 			
 			bData_400031eb = 0;
 		}
@@ -7837,13 +7845,13 @@ void func_20b94(void)
 	else
 	{
 		//0x20c70
-			func_7e8(0, 2, 1, 22, "                      ");		
+			lcd_display_string(0, 2, 1, 22, "                      ");		
 	}
 	//0x20c8c
-	func_7e8(0, 3, 1, strlen(Data_40003370), Data_40003370);
-	func_7e8(0, 3, 6, 9, Data_40003374);
-	func_7e8(0, 3, 16, 2, Data_40003374 + 10);
-	func_7e8(0, 3, 19, 2, Data_40003374 + 13);
+	lcd_display_string(0, 3, 1, strlen(Data_40003370), Data_40003370);
+	lcd_display_string(0, 3, 6, 9, Data_40003374);
+	lcd_display_string(0, 3, 16, 2, Data_40003374 + 10);
+	lcd_display_string(0, 3, 19, 2, Data_40003374 + 13);
 	
 	lcd_display_bitmap(0, 3, 15, (unsigned char*)cBitmapDegree);
 	lcd_display_bitmap(0, 3, 18, (unsigned char*)cBitmapMinute);
@@ -7851,28 +7859,28 @@ void func_20b94(void)
 	
 	if (abs(Data_40002e18_SiteLongitudeDegrees) < 100)
 	{
-		func_7e8(0, 3, 12, 1, " ");
+		lcd_display_string(0, 3, 12, 1, " ");
 	}
 	
 	if (abs(Data_40002e18_SiteLongitudeDegrees) < 10)
 	{
-		func_7e8(0, 3, 13, 1, " ");
+		lcd_display_string(0, 3, 13, 1, " ");
 	}
 	
 	if (abs(Data_40002e1c_SiteLongitudeMinutes) < 10)
 	{
-		func_7e8(0, 3, 16, 1, " ");
+		lcd_display_string(0, 3, 16, 1, " ");
 	}
 	
 	if (abs(fData_40002e20_SiteLongitudeSeconds) < 10)
 	{
-		func_7e8(0, 3, 19, 1, " ");
+		lcd_display_string(0, 3, 19, 1, " ");
 	}
 	
-	func_7e8(0, 4, 1, strlen(Data_40003378), Data_40003378);
-	func_7e8(0, 4, 6, 9, Data_4000337c);
-	func_7e8(0, 4, 16, 2, Data_4000337c + 10);
-	func_7e8(0, 4, 19, 2, Data_4000337c + 13);
+	lcd_display_string(0, 4, 1, strlen(Data_40003378), Data_40003378);
+	lcd_display_string(0, 4, 6, 9, Data_4000337c);
+	lcd_display_string(0, 4, 16, 2, Data_4000337c + 10);
+	lcd_display_string(0, 4, 19, 2, Data_4000337c + 13);
 	
 	lcd_display_bitmap(0, 4, 15, (unsigned char*)cBitmapDegree);
 	lcd_display_bitmap(0, 4, 18, (unsigned char*)cBitmapMinute);
@@ -7880,28 +7888,28 @@ void func_20b94(void)
 	
 	if (abs(Data_40002e38_SiteLatitudeDegrees) < 100)
 	{
-		func_7e8(0, 4, 12, 1, " ");
+		lcd_display_string(0, 4, 12, 1, " ");
 	}
 	
 	if (abs(Data_40002e38_SiteLatitudeDegrees) < 10)
 	{
-		func_7e8(0, 4, 13, 1, " ");
+		lcd_display_string(0, 4, 13, 1, " ");
 	}
 	
 	if (abs(Data_40002e3c_SiteLatitudeMinutes) < 10)
 	{
-		func_7e8(0, 4, 16, 1, " ");
+		lcd_display_string(0, 4, 16, 1, " ");
 	}
 	
 	if (abs(fData_40002e40_SiteLatitudeSeconds) < 10)
 	{
-		func_7e8(0, 4, 19, 1, " ");
+		lcd_display_string(0, 4, 19, 1, " ");
 	}
 	
-	func_7e8(0, 5, 1, strlen(Data_40003380), Data_40003380);
-	func_7e8(0, 5, 6, 9, Data_40003384);
-	func_7e8(0, 5, 16, 2, Data_40003384 + 10);
-	func_7e8(0, 5, 19, 2, Data_40003384 + 13);
+	lcd_display_string(0, 5, 1, strlen(Data_40003380), Data_40003380);
+	lcd_display_string(0, 5, 6, 9, Data_40003384);
+	lcd_display_string(0, 5, 16, 2, Data_40003384 + 10);
+	lcd_display_string(0, 5, 19, 2, Data_40003384 + 13);
 	
 	if (bData_40002e7a == 0)
 	{
@@ -7912,56 +7920,56 @@ void func_20b94(void)
 		
 		if (abs(Data_40002d20) < 100)
 		{
-			func_7e8(0, 5, 12, 1, " ");
+			lcd_display_string(0, 5, 12, 1, " ");
 		}
 		
 		if (abs(Data_40002d20) < 10)
 		{
-			func_7e8(0, 5, 13, 1, " ");
+			lcd_display_string(0, 5, 13, 1, " ");
 		}
 
 		if (abs(Data_40002d24) < 10)
 		{
-			func_7e8(0, 5, 16, 1, " ");
+			lcd_display_string(0, 5, 16, 1, " ");
 		}
 		
 		if (abs(fData_40002d28) < 10)
 		{
-			func_7e8(0, 5, 19, 1, " ");
+			lcd_display_string(0, 5, 19, 1, " ");
 		}
 	}
 	else
 	{
 		//0x2127c
-		func_7e8(0, 5, 15, 1, "h");
-		func_7e8(0, 5, 18, 1, "m");
-		func_7e8(0, 5, 21, 1, "s");
+		lcd_display_string(0, 5, 15, 1, "h");
+		lcd_display_string(0, 5, 18, 1, "m");
+		lcd_display_string(0, 5, 21, 1, "s");
 
 		if (Data_40002cd8_ObjectRightAscensionHours < 100)
 		{
-			func_7e8(0, 5, 12, 1, " ");
+			lcd_display_string(0, 5, 12, 1, " ");
 		}
 		
 		if (Data_40002cd8_ObjectRightAscensionHours < 10)
 		{
-			func_7e8(0, 5, 13, 1, " ");
+			lcd_display_string(0, 5, 13, 1, " ");
 		}
 		
 		if (Data_40002cdc_ObjectRightAscensionMinutes < 10)
 		{
-			func_7e8(0, 5, 16, 1, " ");
+			lcd_display_string(0, 5, 16, 1, " ");
 		}
 		
 		if (fData_40002ce0_ObjectRightAscensionSeconds < 10)
 		{
-			func_7e8(0, 5, 19, 1, " ");
+			lcd_display_string(0, 5, 19, 1, " ");
 		}
 	}
 	//0x213c8
-	func_7e8(0, 6, 1, strlen(Data_40003388), Data_40003388);
-	func_7e8(0, 6, 6, 9, Data_4000338c);
-	func_7e8(0, 6, 16, 2, Data_4000338c + 10);
-	func_7e8(0, 6, 19, 2, Data_4000338c + 13);
+	lcd_display_string(0, 6, 1, strlen(Data_40003388), Data_40003388);
+	lcd_display_string(0, 6, 6, 9, Data_4000338c);
+	lcd_display_string(0, 6, 16, 2, Data_4000338c + 10);
+	lcd_display_string(0, 6, 19, 2, Data_4000338c + 13);
 	
 	lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
 	lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
@@ -7972,17 +7980,17 @@ void func_20b94(void)
 		//214ac
 		if (abs(Data_40002d48) < 10)
 		{
-			func_7e8(0, 6, 13, 1, " ");
+			lcd_display_string(0, 6, 13, 1, " ");
 		}
 		
 		if (abs(Data_40002d4c) < 10)
 		{
-			func_7e8(0, 6, 16, 1, " ");
+			lcd_display_string(0, 6, 16, 1, " ");
 		}
 		
 		if (abs(fData_40002d50) < 10)
 		{
-			func_7e8(0, 6, 19, 1, " ");
+			lcd_display_string(0, 6, 19, 1, " ");
 		}
 	}
 	else
@@ -7990,24 +7998,24 @@ void func_20b94(void)
 		//0x21574
 		if (abs(Data_40002d00_ObjectDeclinationDegrees) < 10)
 		{
-			func_7e8(0, 6, 13, 1, " ");
+			lcd_display_string(0, 6, 13, 1, " ");
 		}
 		
 		if (abs(Data_40002d04_ObjectDeclinationMinutes) < 10)
 		{
-			func_7e8(0, 6, 16, 1, " ");
+			lcd_display_string(0, 6, 16, 1, " ");
 		}
 
 		if (abs(fData_40002d08_ObjectDeclinationSeconds) < 10)
 		{
-			func_7e8(0, 6, 19, 1, " ");
+			lcd_display_string(0, 6, 19, 1, " ");
 		}
 	}
 	//0x21638
-	func_7e8(0, 7, 1, strlen(Data_40003390), Data_40003390);
-	func_7e8(0, 7, 6, 9, Data_40003394);
-	func_7e8(0, 7, 16, 2, Data_40003394 + 10);
-	func_7e8(0, 7, 19, 2, Data_40003394 + 13);
+	lcd_display_string(0, 7, 1, strlen(Data_40003390), Data_40003390);
+	lcd_display_string(0, 7, 6, 9, Data_40003394);
+	lcd_display_string(0, 7, 16, 2, Data_40003394 + 10);
+	lcd_display_string(0, 7, 19, 2, Data_40003394 + 13);
 	
 	if ((bData_400034b4 == 1) &&
 		(bData_40002e88 == 2))
@@ -8021,49 +8029,49 @@ void func_20b94(void)
 			
 			if (abs(Data_40002d20) < 100)
 			{
-				func_7e8(0, 7, 12, 1, " ");
+				lcd_display_string(0, 7, 12, 1, " ");
 			}
 			
 			if (abs(Data_40002d20) < 10)
 			{
-				func_7e8(0, 7, 13, 1, " ");
+				lcd_display_string(0, 7, 13, 1, " ");
 			}
 			
 			if (abs(Data_40002d24) < 10)
 			{
-				func_7e8(0, 7, 16, 1, " ");
+				lcd_display_string(0, 7, 16, 1, " ");
 			}
 			
 			if (abs(fData_40002d28) < 10)
 			{
-				func_7e8(0, 7, 19, 1, " ");
+				lcd_display_string(0, 7, 19, 1, " ");
 			}
 		}
 		else
 		{
 			//0x21844
-			func_7e8(0, 7, 15, 1, "h");
-			func_7e8(0, 7, 18, 1, "m");
-			func_7e8(0, 7, 21, 1, "s");
+			lcd_display_string(0, 7, 15, 1, "h");
+			lcd_display_string(0, 7, 18, 1, "m");
+			lcd_display_string(0, 7, 21, 1, "s");
 			
 			if (Data_40002cd8_ObjectRightAscensionHours < 100)
 			{
-				func_7e8(0, 7, 12, 1, " ");
+				lcd_display_string(0, 7, 12, 1, " ");
 			}
 			
 			if (Data_40002cd8_ObjectRightAscensionHours < 10)
 			{
-				func_7e8(0, 7, 13, 1, " ");
+				lcd_display_string(0, 7, 13, 1, " ");
 			}
 			
 			if (Data_40002cdc_ObjectRightAscensionMinutes < 10)
 			{
-				func_7e8(0, 7, 16, 1, " ");
+				lcd_display_string(0, 7, 16, 1, " ");
 			}
 						
 			if (fData_40002ce0_ObjectRightAscensionSeconds < 10)
 			{
-				func_7e8(0, 7, 19, 1, " ");
+				lcd_display_string(0, 7, 19, 1, " ");
 			}
 		}
 	}
@@ -8079,57 +8087,57 @@ void func_20b94(void)
 			
 			if (abs(Data_40002dac) < 100)
 			{
-				func_7e8(0, 7, 12, 1, " ");
+				lcd_display_string(0, 7, 12, 1, " ");
 			}
 			
 			if (abs(Data_40002dac) < 10)
 			{
-				func_7e8(0, 7, 13, 1, " ");
+				lcd_display_string(0, 7, 13, 1, " ");
 			}
 			
 			if (abs(Data_40002db0) < 10)
 			{
-				func_7e8(0, 7, 16, 1, " ");
+				lcd_display_string(0, 7, 16, 1, " ");
 			}
 			
 			if (abs(fData_40002db4) < 10)
 			{
-				func_7e8(0, 7, 19, 1, " ");
+				lcd_display_string(0, 7, 19, 1, " ");
 			}
 		}
 		else
 		{
 			//0x21aec
-			func_7e8(0, 7, 15, 1, "h");
-			func_7e8(0, 7, 18, 1, "m");
-			func_7e8(0, 7, 21, 1, "s");
+			lcd_display_string(0, 7, 15, 1, "h");
+			lcd_display_string(0, 7, 18, 1, "m");
+			lcd_display_string(0, 7, 21, 1, "s");
 			
 			if (Data_40002d68 < 100)
 			{
-				func_7e8(0, 7, 12, 1, " ");
+				lcd_display_string(0, 7, 12, 1, " ");
 			}
 			
 			if (Data_40002d68 < 10)
 			{
-				func_7e8(0, 7, 13, 1, " ");
+				lcd_display_string(0, 7, 13, 1, " ");
 			}
 			
 			if (Data_40002d6c < 10)
 			{
-				func_7e8(0, 7, 16, 1, " ");
+				lcd_display_string(0, 7, 16, 1, " ");
 			}
 			
 			if (fData_40002d70 < 10)
 			{
-				func_7e8(0, 7, 19, 1, " ");
+				lcd_display_string(0, 7, 19, 1, " ");
 			}
 		}
 	}
 	//0x21bf4
-	func_7e8(0, 8, 1, strlen(Data_40003398), Data_40003398);
-	func_7e8(0, 8, 6, 9, Data_4000339c);
-	func_7e8(0, 8, 16, 2, Data_4000339c + 10);
-	func_7e8(0, 8, 19, 2, Data_4000339c + 13);
+	lcd_display_string(0, 8, 1, strlen(Data_40003398), Data_40003398);
+	lcd_display_string(0, 8, 6, 9, Data_4000339c);
+	lcd_display_string(0, 8, 16, 2, Data_4000339c + 10);
+	lcd_display_string(0, 8, 19, 2, Data_4000339c + 13);
 	
 	lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
 	lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
@@ -8142,17 +8150,17 @@ void func_20b94(void)
 		{
 			if (abs(Data_40002d48) < 10)
 			{
-				func_7e8(0, 8, 13, 1, " ");
+				lcd_display_string(0, 8, 13, 1, " ");
 			}
 			
 			if (abs(Data_40002d4c) < 10)
 			{
-				func_7e8(0, 8, 16, 1, " ");
+				lcd_display_string(0, 8, 16, 1, " ");
 			}
 			
 			if (abs(fData_40002d50) < 10)
 			{
-				func_7e8(0, 8, 19, 1, " ");
+				lcd_display_string(0, 8, 19, 1, " ");
 			}
 		}
 		else
@@ -8160,17 +8168,17 @@ void func_20b94(void)
 			//0x21dc0
 			if (abs(Data_40002d00_ObjectDeclinationDegrees) < 10)
 			{
-				func_7e8(0, 8, 13, 1, " ");
+				lcd_display_string(0, 8, 13, 1, " ");
 			}
 			
 			if (abs(Data_40002d04_ObjectDeclinationMinutes) < 10)
 			{
-				func_7e8(0, 8, 16, 1, " ");
+				lcd_display_string(0, 8, 16, 1, " ");
 			}
 			
 			if (abs(fData_40002d08_ObjectDeclinationSeconds) < 10)
 			{
-				func_7e8(0, 8, 19, 1, " ");
+				lcd_display_string(0, 8, 19, 1, " ");
 			}
 		}
 	}
@@ -8181,17 +8189,17 @@ void func_20b94(void)
 		{
 			if (abs(Data_40002de0) < 10)
 			{
-				func_7e8(0, 8, 13, 1, " ");
+				lcd_display_string(0, 8, 13, 1, " ");
 			}
 			
 			if (abs(Data_40002de4) < 10)
 			{
-				func_7e8(0, 8, 16, 1, " ");
+				lcd_display_string(0, 8, 16, 1, " ");
 			}
 			
 			if (abs(fData_40002de8) < 10)
 			{
-				func_7e8(0, 8, 19, 1, " ");
+				lcd_display_string(0, 8, 19, 1, " ");
 			}
 		}
 		else
@@ -8199,17 +8207,17 @@ void func_20b94(void)
 			//0x21f60
 			if (abs(Data_40002d8c) < 10)
 			{
-				func_7e8(0, 8, 13, 1, " ");
+				lcd_display_string(0, 8, 13, 1, " ");
 			}
 			
 			if (abs(Data_40002d90) < 10)
 			{
-				func_7e8(0, 8, 16, 1, " ");
+				lcd_display_string(0, 8, 16, 1, " ");
 			}
 			
 			if (abs(fData_40002d94) < 10)
 			{
-				func_7e8(0, 8, 19, 1, " ");
+				lcd_display_string(0, 8, 19, 1, " ");
 			}
 		}	
 	}
@@ -9049,24 +9057,24 @@ void SwapLanguageStrings(void)
 			Data_40002f88 = strEngCustomLandGoal;
 			
 			Data_40002f8c = strEngCurrentObjects;
-			Data_40002f90 = Data_40000a05;
-			Data_40002f94 = Data_40000a15;
-			Data_40002f98 = Data_40000a27;
-			Data_40002f9c = Data_40000a2d;
-			Data_40002fa0 = Data_40000a33;
-			Data_40002fa4 = Data_40000a40;
-			Data_40002fa8 = Data_40000a4f;
-			Data_40002fac = Data_40000a60;
+			Data_40002f90 = strEngObjectRiseSet;
+			Data_40002f94 = strEngCurrLunarPhase;
+			Data_40002f98 = strEngTimer;
+			Data_40002f9c = strEngAlarm;
+			Data_40002fa0 = strEngEyepieceFOV;
+			Data_40002fa4 = strEngEyepieceMagn;
+			Data_40002fa8 = strEngDisplayIllumin;
+			Data_40002fac = strEngParkposition;
 			
 			Data_40002fb4 = strEngTimeAndDate;
-			Data_40002fb8 = Data_40000a7c;
-			Data_40002fbc = Data_40000a8c;
-			Data_40002fc0 = Data_40000a99;
-			Data_40002fc4 = Data_40000aa2;
-			Data_40002fc8 = Data_40000aab;
-			Data_40002fcc = Data_40000abb;
-			Data_40002fd0 = Data_40000ac9;
-			Data_40002fd4 = Data_40000ad2;
+			Data_40002fb8 = strEngDaylightSaving;
+			Data_40002fbc = strEngSiteSetting;
+			Data_40002fc0 = strEngSkyLand;
+			Data_40002fc4 = strEngAzEqu;
+			Data_40002fc8 = strEngTelescopeMount;
+			Data_40002fcc = strEngTrackingRate;
+			Data_40002fd0 = strEngLanguage;
+			Data_40002fd4 = strEngReset;
 
 			Data_40003028 = Data_40000ad8;
 			Data_4000302c = Data_40000ae8;
@@ -9092,11 +9100,11 @@ void SwapLanguageStrings(void)
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
-			Data_40003088 = Data_40000bbc;
-			Data_4000308c = Data_40000bc7;
-			Data_40003090 = Data_40000bd3;
-			Data_40003094 = Data_40000bde;
-			Data_40003098 = Data_40000bee;
+			Data_40003088 = strEngStarSpeed;
+			Data_4000308c = strEngSolarSpeed;
+			Data_40003090 = strEngMoonSpeed;
+			Data_40003094 = strEngCustomizeSpeed;
+			Data_40003098 = strEngGuidingSpeed;
 			Data_4000309c = strEngListAlignStars;
 			Data_400030a0 = Data_40000c14;
 			Data_400030a4 = Data_40000c20;
@@ -9203,11 +9211,11 @@ void SwapLanguageStrings(void)
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
-			Data_40003088 = Data_40000bbc;
-			Data_4000308c = Data_40000bc7;
-			Data_40003090 = Data_40000bd3;
-			Data_40003094 = Data_40000bde;
-			Data_40003098 = Data_40000bee;
+			Data_40003088 = strEngStarSpeed;
+			Data_4000308c = strEngSolarSpeed;
+			Data_40003090 = strEngMoonSpeed;
+			Data_40003094 = strEngCustomizeSpeed;
+			Data_40003098 = strEngGuidingSpeed;
 			Data_4000309c = strEngListAlignStars;
 			Data_400030a0 = Data_40000c14;
 			Data_400030a4 = Data_40000c20;
@@ -9313,11 +9321,11 @@ void SwapLanguageStrings(void)
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
-			Data_40003088 = Data_40000bbc;
-			Data_4000308c = Data_40000bc7;
-			Data_40003090 = Data_40000bd3;
-			Data_40003094 = Data_40000bde;
-			Data_40003098 = Data_40000bee;
+			Data_40003088 = strEngStarSpeed;
+			Data_4000308c = strEngSolarSpeed;
+			Data_40003090 = strEngMoonSpeed;
+			Data_40003094 = strEngCustomizeSpeed;
+			Data_40003098 = strEngGuidingSpeed;
 			Data_4000309c = strEngListAlignStars;
 			Data_400030a0 = Data_40000c14;
 			Data_400030a4 = Data_40000c20;
@@ -9423,11 +9431,11 @@ void SwapLanguageStrings(void)
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
-			Data_40003088 = Data_40000bbc;
-			Data_4000308c = Data_40000bc7;
-			Data_40003090 = Data_40000bd3;
-			Data_40003094 = Data_40000bde;
-			Data_40003098 = Data_40000bee;
+			Data_40003088 = strEngStarSpeed;
+			Data_4000308c = strEngSolarSpeed;
+			Data_40003090 = strEngMoonSpeed;
+			Data_40003094 = strEngCustomizeSpeed;
+			Data_40003098 = strEngGuidingSpeed;
 			Data_4000309c = strEngListAlignStars;
 			Data_400030a0 = Data_40000c14;
 			Data_400030a4 = Data_40000c20;
@@ -9533,11 +9541,11 @@ void SwapLanguageStrings(void)
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
-			Data_40003088 = Data_40000bbc;
-			Data_4000308c = Data_40000bc7;
-			Data_40003090 = Data_40000bd3;
-			Data_40003094 = Data_40000bde;
-			Data_40003098 = Data_40000bee;
+			Data_40003088 = strEngStarSpeed;
+			Data_4000308c = strEngSolarSpeed;
+			Data_40003090 = strEngMoonSpeed;
+			Data_40003094 = strEngCustomizeSpeed;
+			Data_40003098 = strEngGuidingSpeed;
 			Data_4000309c = strEngListAlignStars;
 			Data_400030a0 = Data_40000c14;
 			Data_400030a4 = Data_40000c20;

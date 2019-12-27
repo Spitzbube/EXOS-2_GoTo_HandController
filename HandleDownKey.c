@@ -432,27 +432,27 @@ void HandleDownKey(void)
 			break;
 		
 		case 4801:
-			//0x5bbe8
+			//0x5bbe8: Tracking Rate -> "Star Speed"
 			Data_40002c64_MenuContextId = 4802;
 			break;
 		
 		case 4802:
-			//0x5bbfc
+			//0x5bbfc -> "Solar Speed"
 			Data_40002c64_MenuContextId = 4803;
 			break;
 		
 		case 4803:
-			//0x5bc10
+			//0x5bc10 -> "Moon Speed"
 			Data_40002c64_MenuContextId = 4804;
 			break;
 		
 		case 4804:
-			//0x5bc24
+			//0x5bc24 -> "Customize Speed"
 			Data_40002c64_MenuContextId = 4805;
 			break;
 		
 		case 4805:
-			//0x5bc38
+			//0x5bc38 -> "Guiding Speed"
 			Data_40002c64_MenuContextId = 4801;
 			break;
 		
@@ -621,7 +621,7 @@ void HandleDownKey(void)
 			break;
 		
 		case 49001:
-			//0x5bf08
+			//0x5bf08: Language -> English
 			Data_40002c64_MenuContextId = 49002;
 			break;
 		
@@ -936,8 +936,8 @@ void HandleDownKey(void)
 			break;
 		
 		case 33001:
-			//0x5c558
-			Data_40003164++;
+			//0x5c558: Curr. Lunar Phase
+			Data_40003164_LunarPhaseYear++;
 			break;
 		
 		case 12001:

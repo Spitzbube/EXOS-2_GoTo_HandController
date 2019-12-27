@@ -68,23 +68,23 @@ char strEngCustomerObjects[] = "Customer Objects"; //400009c2
 char strEngInputRAandDEC[] = "Input RA and DEC"; //400009d3
 char strEngCustomLandGoal[] = "Custom Land Goal"; //400009e4
 char strEngCurrentObjects[] = "Current Objects"; //400009f5
-char Data_40000a05[42]; //40000a05, size???
-char Data_40000a15[42]; //40000a15, size???
-char Data_40000a27[42]; //40000a27, size???
-char Data_40000a2d[42]; //40000a2d, size???
-char Data_40000a33[42]; //40000a33, size???
-char Data_40000a40[42]; //40000a40, size???
-char Data_40000a4f[42]; //40000a4f, size???
-char Data_40000a60[42]; //40000a60, size???
+char strEngObjectRiseSet[] = "Object Rise/Set"; //40000a05
+char strEngCurrLunarPhase[] = "Curr. Lunar Phase"; //40000a15
+char strEngTimer[] = "Timer"; //40000a27
+char strEngAlarm[] = "Alarm"; //40000a2d
+char strEngEyepieceFOV[] = "Eyepiece FOV"; //40000a33
+char strEngEyepieceMagn[] = "Eyepiece Magn."; //40000a40
+char strEngDisplayIllumin[] = "Display Illumin."; //40000a4f
+char strEngParkposition[] = "Parkposition"; //40000a60
 char strEngTimeAndDate[] = "Time and Date "; //40000a6d
-char Data_40000a7c[42]; //40000a7c, size???
-char Data_40000a8c[42];
-char Data_40000a99[42];
-char Data_40000aa2[42];
-char Data_40000aab[42];
-char Data_40000abb[42];
-char Data_40000ac9[42];
-char Data_40000ad2[42];
+char strEngDaylightSaving[] = "Daylight Saving"; //40000a7c
+char strEngSiteSetting[] = "Site Setting"; //40000a8c
+char strEngSkyLand[] = "Sky/Land"; //40000a99
+char strEngAzEqu[] = "AZ / EQU"; //40000aa2
+char strEngTelescopeMount[] = "Telescope Mount"; //40000aab
+char strEngTrackingRate[] = "Tracking Rate"; //40000abb
+char strEngLanguage[] = "Language"; //40000ac9
+char strEngReset[] = "Reset"; //40000ad2
 char Data_40000ad8[42];
 char Data_40000ae8[42];
 char Data_40000af4[42];
@@ -109,14 +109,15 @@ char Data_40000ba3[42];
 char Data_40000baa[42];
 char Data_40000bae[42];
 char Data_40000bb5[42];
-char Data_40000bbc[42];
-char Data_40000bc7[42];
-char Data_40000bd3[42];
-char Data_40000bde[42];
-char Data_40000bee[42];
+char strEngStarSpeed[] = "Star Speed"; //40000bbc
+char strEngSolarSpeed[] = "Solar Speed"; //40000bc7
+char strEngMoonSpeed[] = "Moon Speed"; //40000bd3
+char strEngCustomizeSpeed[] = "Customize Speed"; //40000bde
+char strEngGuidingSpeed[] = "Guiding Speed"; //40000bee
 char strEngListAlignStars[] = "List align stars:"; //40000bfc, size?
 char Data_40000c14[42];
 char Data_40000c20[42];
+
 char Data_40000c35[] = "  Please center this "; //40000c35
 char Data_40000c4b[] = "star to the field of"; //40000c4b
 char Data_40000c60[] = "view"; //40000c60, size???
@@ -341,24 +342,29 @@ char Data_400028d7[22]; //400028d7
 char Data_400028e1[22]; //400028e1
 char Data_400028eb[22]; //400028eb
 char Data_40002901[22]; //40002901
-char Data_40002916[8]; //40002916
-char Data_4000291e[7]; //4000291e
-char Data_40002925[7]; //40002925
-char Data_4000292c[8]; //4000292c
-char Data_40002934[22]; //40002934
-char Data_400029a1[] = "Set timer:"; //400029a1
-char Data_400029ac[] = "      "; //400029ac
+
+char strEngEnglish[] = "English"; //40002916
+char strEngGerman[] = "German"; //4000291e
+char strEngFrench[] = "French"; //40002925
+char strEngItalian[] = "Italian"; //4000292c
+char strEngSpanish[] = "Spanish"; //40002934, size??
+char strEngSetTimer[] = "Set timer:"; //400029a1
+char strEng00000s[] = "00000s"; //400029ac
 char Data_400029b3[] = ""; //400029b3
-char Data_400029b4[] = "      Start      Back"; //400029b4
-char Data_400029ca[16] = "Counting down"; //400029ca
-char Data_400029da[] = "Time remain:"; //400029da
-char Data_400029e7[7]; //400029e7
-char Data_400029ee[] = "      Start      Back"; //400029ee, size???
-char Data_40002a62[15]; //40002a62
-char Data_40002a71[16]; //40002a71, size???
-char Data_40002a87[13]; //40002a87
-char Data_40002a94[10]; //40002a94
-char Data_40002a9e[16]; //40002a9e, size???
+char strEngStartBack[] = "      Start      Back"; //400029b4
+char strEngCountingDown[] = "Counting down"; //400029ca, size???
+char strEngTimeRemain[] = "Time remain:"; //400029da
+char strEngTimeRemain00000s[] = "00000s"; //400029e7
+char strEngStopBack[] = "       Stop      Back"; //400029ee, size???
+char Data_40002a3f[] = "00"; //40002a3f
+
+char Data_40002a42[] = "00"; //40002a42
+char Data_40002a45[] = "00"; //40002a45
+char strEngCloseAlarm[] =     "Close Alarm?  "; //40002a62
+char strEngAlarmCloseBack[] = "      Close    Back"; //40002a71, size???
+char strEngInputTime[] =      "Input time: "; //40002a87
+char strEngAlarm21h34m23s[] = "21h34m23s"; //40002a94
+char strEngAlarmOnBack[] =    "       On      Back "; //40002a9e, size???
 char Data_40002acb[] = "Background light"; //40002acb, content?
 char Data_40002adc[] = "Press up/down key"; //40002adc, content?
 char Data_40002aee[] = ""; //40002aee, content?
@@ -371,7 +377,10 @@ char Data_40002ba5[] = "Daylight saving"; //40002ba5
 char Data_40002bb5[] = "status:off"; //40002bb5
 char Data_40002bc0[] = ""; //40002bc0
 char Data_40002bc1[] = ""; //40002bc1
-int Data_40002bc4[13]; //40002bc4
+int Data_40002bc4_DayYear[13] = 
+{
+	-1, -1, 30, 58, 89, 119, 150, 180, 211, 241, 272, 303, 333
+}; //40002bc4
 unsigned char Data_40002bf8[8]; //40002bf8, size??
 unsigned char bData_40002c00; //40002c00
 unsigned char bData_40002c01; //40002c01
@@ -392,7 +401,7 @@ unsigned char bData_40002c12_uart1ReceiveDataCount; //40002c12
 char bData_40002c13_uart1ReceiveComplete; //40002c13
 unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
 unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
-int Data_40003214; //40003214
+int Data_40003214_UserTimerSeconds; //40003214
 unsigned char uart1_bRxData; //40002c19
 char bData_40002c1a; //40002c1a // V2.2: 40002c1e
 int Data_40002c1c; //40002c1c
@@ -678,8 +687,8 @@ char* Data_4000314c_SolarSystemObjectName; //4000314c
 char Data_40003150[30]; //40003150, size??
 unsigned char bData_40003161; //40003161
 char bData_40003162; //40003162
-int Data_40003164; //40003164
-int Data_40003168; //40003168
+int Data_40003164_LunarPhaseYear; //40003164
+int Data_40003168_LunarPhaseMonth; //40003168
 unsigned char bData_4000316d; //4000316d
 unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
@@ -741,9 +750,9 @@ int Data_40003204; //40003204
 int Data_40003208; //40003208
 char bData_40003210; //40003210
 char bData_40003211; //40003211
-int Data_40003220; //40003220
-int Data_40003224; //40003224
-int Data_40003228; //40003228
+int Data_40003220_AlarmHours; //40003220
+int Data_40003224_AlarmMinutes; //40003224
+int Data_40003228_AlarmSeconds; //40003228
 char bData_4000322c; //4000322c
 char bData_4000322d; //4000322d
 float fData_40003238; //40003238
