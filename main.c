@@ -11,7 +11,7 @@ extern void uart1_write_byte(unsigned char);
 extern void uart1_init(int);
 extern void uart0_send(unsigned char* a, unsigned char b);
 extern void lcd_display_clear(void);
-extern void func_7e8(int, unsigned char, unsigned char, unsigned char, const unsigned char*);
+extern void lcd_display_string(int, unsigned char, unsigned char, unsigned char, const unsigned char*);
 extern int func_11d8(void);
 extern void func_1210(void);
 extern void func_2254(unsigned int);
@@ -195,9 +195,37 @@ void func_4fda8(void)
 {
 }
 
+/* 4ff84 - todo */
+void func_4ff84(void)
+{
+	int h = atoi(Data_40002a3f);
+	int m = atoi(Data_40002a42);
+	int s = atoi(Data_40002a45);
+	
+	if ((h > 23) || (m > 59) || (s > 59))
+	{
+		Data_40002c64_MenuContextId = 35001;
+		bData_4000318a = 1;
+	}
+	else
+	{
+		//0x4ffe0
+		bData_4000322c = 1;
+		Data_40002c64_MenuContextId = 3500;
+		Data_40003220_AlarmHours = h;
+		Data_40003224_AlarmMinutes = m;
+		Data_40003228_AlarmSeconds = s;
+	}
+}
+
 /* 50018 - todo */
 void func_50018(void)
 {
+	unsigned int r1 = CTIME0;
+	unsigned int r0 = CTIME1;
+	
+	Data_40003164_LunarPhaseYear = (r0 >> 16) & 0xfff;
+	Data_40003168_LunarPhaseMonth = (r0 >> 8) & 0xf;
 }
 
 /* 50048 - todo */
@@ -222,7 +250,7 @@ void HandleReset(void)
 	unsigned short i;
 	
 	lcd_display_clear();
-	func_7e8(0, 4, 1, 21, "System resetting...    ");
+	lcd_display_string(0, 4, 1, 21, "System resetting...    ");
 	
 	i = 0;
 	for (i = 0; i < 16; i++)
@@ -394,6 +422,186 @@ void func_59dd0(void)
 /* 5a57c - todo */
 void func_5a57c(int a, int b)
 {
+	switch (a)
+	{
+		case 0:
+			//0x5a590
+			switch (b)
+			{
+				case 11:
+					//0x5a5d0
+					if (bData_40003173 > 1)
+					{
+						//5a5e4
+						bData_40003173--;
+					}
+					else
+					{
+						//0x5a5fc
+						bData_40003171--;
+					}
+					//0x5a610
+					if (bData_40003172 > 1)
+					{
+						//5a620
+						bData_40003172--;
+					}
+					else
+					{
+						//0x5a638
+						bData_40003170--;
+					}
+					//0x5a64c -> 0x5a860
+					break;
+				
+				case 12:
+					//0x5a650
+					break;
+				
+				case 13:
+					//0x5a6d0
+					break;
+				
+				case 14:
+					//0x5a750
+					break;
+				
+				case 22:
+					//0x5a7d0
+					break;
+				
+				case 23:
+					//0x5a814
+					break;
+				
+				default:
+					//0x5a858
+					break;
+			}
+			break;
+		
+		case 1:
+			//0x5a868
+			switch (b)
+			{
+				case 11:
+					//0x5a8a8: Alignment items
+					if (bData_40003173 < 4)
+					{
+						bData_40003173++;
+					}
+					else
+					{
+						bData_40003171++;
+					}
+
+					if (bData_40003172 < 8)
+					{
+						bData_40003172++;
+					}
+					else
+					{
+						bData_40003170++;
+					}
+					break;
+				
+				case 12:
+					//0x5a928: Navigation items
+					if (bData_40003177 < 4)
+					{
+						//5a93c
+						bData_40003177++;
+					}
+					else
+					{
+						//0x5a954
+						bData_40003175++;
+					}
+					//0x5a968
+					if (bData_40003176 < 8)
+					{
+						bData_40003176++;
+					}
+					else
+					{
+						//0x5a990
+						bData_40003174++;
+					}
+					//0x5a9a4 -> 0x5ab38
+					break;
+				
+				case 13:
+					//0x5a9a8: Utilities items
+					if (bData_4000317b < 4)
+					{
+						bData_4000317b++;
+					}
+					else
+					{
+						bData_40003179++;
+					}
+
+					if (bData_4000317a < 8)
+					{
+						bData_4000317a++;
+					}
+					else
+					{
+						bData_40003178++;
+					}
+					break;
+				
+				case 14:
+					//0x5aa28: Setup items
+					if (bData_4000317f < 4)
+					{
+						bData_4000317f++;
+					}
+					else
+					{
+						bData_4000317d++;
+					}
+
+					if (bData_4000317e < 8)
+					{
+						bData_4000317e++;
+					}
+					else
+					{
+						bData_4000317c++;
+					}
+					break;
+				
+				case 22:
+					//0x5aaa8
+					if (bData_40003182 < 8)
+					{
+						bData_40003182++;
+					}
+					else
+					{
+						bData_40003180++;
+					}
+					break;
+				
+				case 23:
+					//0x5aaec
+					if (bData_40003186 < 8)
+					{
+						bData_40003186++;
+					}
+					else
+					{
+						bData_40003184++;
+					}
+					break;
+			}
+			break;
+		
+		default:
+			//0x5ab40
+			break;
+	}
 }
 
 #include "HandleDownKey.c"
@@ -1788,9 +1996,9 @@ void func_6a2cc(void)
 	}
 	//6aaf0
 	if ((bData_4000322c == 1) && 
-		(Data_40003220 == bData_40002e62_Hours) &&
-		(Data_40003224 == bData_40002e63_Minutes) &&
-		(Data_40003228 == bData_40002e64_Seconds))
+		(Data_40003220_AlarmHours == bData_40002e62_Hours) &&
+		(Data_40003224_AlarmMinutes == bData_40002e63_Minutes) &&
+		(Data_40003228_AlarmSeconds == bData_40002e64_Seconds))
 	{
 		bData_4000322d = 1;
 	}
@@ -1900,8 +2108,8 @@ void func_6b17c(void)
 /* 6c804 - complete */
 void ShowStartupScreen(void)
 {
-	func_7e8(0, 3, 1, 22, " BRESSER GOTO SYSTEM  ");
-	func_7e8(0, 5, 1, 22, "     EXOS EQ v2.3     ");
+	lcd_display_string(0, 3, 1, 22, " BRESSER GOTO SYSTEM  ");
+	lcd_display_string(0, 5, 1, 22, "     EXOS EQ v2.3     ");
 }
 
 #endif //OLIMEX_LPC2148
@@ -2549,12 +2757,12 @@ int main(void)
 		{
 			//6f8e0
 			lcd_display_clear();
-			func_7e8(0, 4, 1, 22, "System Initializing...");
+			lcd_display_string(0, 4, 1, 22, "System Initializing...");
 			get_all_solar_system_object_equatorial_coordinates();
 			func_659c(1000);
 			func_7950(1);
 			lcd_display_clear();
-			func_7e8(0, 4, 1, 22, "System Initialized    ");
+			lcd_display_string(0, 4, 1, 22, "System Initialized    ");
 			func_659c(1000);
 			lcd_display_clear();
 			

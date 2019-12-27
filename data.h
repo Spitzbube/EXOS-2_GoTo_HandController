@@ -160,23 +160,23 @@ extern char strEngCustomerObjects[]; //400009c2, size???
 extern char strEngInputRAandDEC[]; //400009d3, size???
 extern char strEngCustomLandGoal[]; //400009e4, size???
 extern char strEngCurrentObjects[]; //400009f5
-extern char Data_40000a05[]; //40000a05, size???
-extern char Data_40000a15[]; //40000a15, size???
-extern char Data_40000a27[]; //40000a27, size???
-extern char Data_40000a2d[]; //40000a2d, size???
-extern char Data_40000a33[]; //40000a33, size???
-extern char Data_40000a40[]; //40000a40, size???
-extern char Data_40000a4f[]; //40000a4f, size???
-extern char Data_40000a60[]; //40000a60, size???
+extern char strEngObjectRiseSet[]; //40000a05
+extern char strEngCurrLunarPhase[]; //40000a15
+extern char strEngTimer[]; //40000a27
+extern char strEngAlarm[]; //40000a2d
+extern char strEngEyepieceFOV[]; //40000a33
+extern char strEngEyepieceMagn[]; //40000a40
+extern char strEngDisplayIllumin[]; //40000a4f
+extern char strEngParkposition[]; //40000a60
 extern char strEngTimeAndDate[]; //40000a6d
-extern char Data_40000a7c[]; //40000a7c, size???
-extern char Data_40000a8c[];
-extern char Data_40000a99[];
-extern char Data_40000aa2[];
-extern char Data_40000aab[];
-extern char Data_40000abb[];
-extern char Data_40000ac9[];
-extern char Data_40000ad2[];
+extern char strEngDaylightSaving[]; //40000a7c
+extern char strEngSiteSetting[];
+extern char strEngSkyLand[];
+extern char strEngAzEqu[];
+extern char strEngTelescopeMount[];
+extern char strEngTrackingRate[];
+extern char strEngLanguage[];
+extern char strEngReset[];
 extern char Data_40000ad8[];
 extern char Data_40000ae8[];
 extern char Data_40000af4[];
@@ -201,11 +201,12 @@ extern char Data_40000ba3[];
 extern char Data_40000baa[];
 extern char Data_40000bae[];
 extern char Data_40000bb5[];
-extern char Data_40000bbc[];
-extern char Data_40000bc7[];
-extern char Data_40000bd3[];
-extern char Data_40000bde[];
-extern char Data_40000bee[];
+extern char strEngStarSpeed[];
+extern char strEngSolarSpeed[];
+extern char strEngMoonSpeed[];
+extern char strEngCustomizeSpeed[];
+extern char strEngGuidingSpeed[];
+
 extern char strEngListAlignStars[]; //40000bfc
 extern char Data_40000c14[];
 extern char Data_40000c20[];
@@ -432,24 +433,29 @@ extern char Data_400028d7[]; //400028d7
 extern char Data_400028e1[]; //400028e1
 extern char Data_400028eb[]; //400028eb
 extern char Data_40002901[]; //40002901
-extern char Data_40002916[]; //40002916
-extern char Data_4000291e[]; //4000291e
-extern char Data_40002925[]; //40002925
-extern char Data_4000292c[]; //4000292c
-extern char Data_40002934[]; //40002934
-extern char Data_400029a1[]; //400029a1
-extern char Data_400029ac[]; //400029ac
+
+extern char strEngEnglish[]; //40002916
+extern char strEngGerman[]; //4000291e
+extern char strEngFrench[]; //40002925
+extern char strEngItalian[]; //4000292c
+extern char strEngSpanish[]; //40002934
+extern char strEngSetTimer[]; //400029a1
+extern char strEng00000s[]; //400029ac
 extern char Data_400029b3[]; //400029b3
-extern char Data_400029b4[]; //400029b4
-extern char Data_400029ca[]; //400029ca
-extern char Data_400029da[]; //400029da
-extern char Data_400029e7[]; //400029e7
-extern char Data_400029ee[]; //400029ee
-extern char Data_40002a62[]; //40002a62
-extern char Data_40002a71[]; //40002a71
-extern char Data_40002a87[]; //40002a87
-extern char Data_40002a94[]; //40002a94
-extern char Data_40002a9e[]; //40002a9e
+extern char strEngStartBack[]; //400029b4
+extern char strEngCountingDown[]; //400029ca
+extern char strEngTimeRemain[]; //400029da
+extern char strEngTimeRemain00000s[]; //400029e7
+extern char strEngStopBack[]; //400029ee
+extern char Data_40002a3f[]; //40002a3f
+extern char Data_40002a42[]; //40002a42
+extern char Data_40002a45[]; //40002a45
+extern char strEngCloseAlarm[]; //40002a62
+extern char strEngAlarmCloseBack[]; //40002a71
+extern char strEngInputTime[]; //40002a87
+extern char strEngAlarm21h34m23s[]; //40002a94
+extern char strEngAlarmOnBack[]; //40002a9e
+
 extern char Data_40002acb[]; //40002acb
 extern char Data_40002adc[]; //40002adc
 extern char Data_40002aee[]; //40002aee
@@ -462,7 +468,7 @@ extern char Data_40002ba5[]; //40002ba5
 extern char Data_40002bb5[]; //40002bb5
 extern char Data_40002bc0[]; //40002bc0
 extern char Data_40002bc1[]; //40002bc1
-extern int Data_40002bc4[]; //40002bc4
+extern int Data_40002bc4_DayYear[]; //40002bc4
 extern unsigned char Data_40002bf8[8]; //40002bf8, size??
 extern unsigned char bData_40002c00; //40002c00
 extern unsigned char bData_40002c01; //40002c01
@@ -768,8 +774,8 @@ extern char* Data_4000314c_SolarSystemObjectName; //4000314c
 extern char Data_40003150[]; //40003150, size??
 extern unsigned char bData_40003161; //40003161
 extern char bData_40003162; //40003162
-extern int Data_40003164; //40003164
-extern int Data_40003168; //40003168
+extern int Data_40003164_LunarPhaseYear; //40003164
+extern int Data_40003168_LunarPhaseMonth; //40003168
 extern unsigned char bData_4000316d; //4000316d
 extern unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 extern unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
@@ -831,11 +837,12 @@ extern int Data_40003204; //40003204
 extern int Data_40003208; //40003208
 extern char bData_40003210; //40003210
 extern char bData_40003211; //40003211
-extern int Data_40003214; //40003214
-extern int Data_40003220; //40003220
-extern int Data_40003224; //40003224
-extern int Data_40003228; //40003228
+extern int Data_40003214_UserTimerSeconds; //40003214
+extern int Data_40003220_AlarmHours; //40003220
+extern int Data_40003224_AlarmMinutes; //40003224
+extern int Data_40003228_AlarmSeconds; //40003228
 extern char bData_4000322c; //4000322c
+
 extern char bData_4000322d; //4000322d
 extern float fData_40003238; //40003238
 extern int Data_40003248_CurrentDisplayPWM; //40003248
