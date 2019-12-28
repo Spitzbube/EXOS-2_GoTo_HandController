@@ -23,6 +23,12 @@ typedef union
 	int Data;
 } Union_40002c28;
 
+typedef union
+{
+	unsigned char bData[4]; 
+	int Data;
+} Union_400031a0;
+
 typedef struct
 {
 	int Data_0; //0
@@ -636,10 +642,12 @@ extern float fData_40002f00; //40002f00
 extern int Data_40002f04; //40002f04
 extern int Data_40002f08; //40002f08
 extern char bData_40002f0c; //40002f0c
-extern unsigned char bData_40002f0d; //40002f0d
-extern int Data_40002f10; //40002f10
+extern unsigned char bData_40002f0d_RecentTargetType; //40002f0d
+//9 = SAO
+
+extern int bData_40002f10_RecentTargetId; //40002f10
 extern unsigned char bData_40002f14_RecentTargetCount; //40002f14
-extern unsigned char Data_40002f15[]; //40002f15, size???
+extern unsigned char Data_40002f15_RecentTargetTypeArray[]; //40002f15, size???
 extern unsigned char bData_40002f1d; //40002f1d
 extern char bData_40002f1e_SetupLocalData; //40002f1e
 extern char* Data_40002f20; //40002f20
@@ -814,9 +822,16 @@ extern unsigned char bData_4000319a_SkyLandTargetId; //4000319a
 extern char bData_4000319b; //4000319b
 extern char bData_4000319c; //4000319c
 extern char bData_4000319d; //4000319d
+extern Union_400031a0 Data_400031a0; //400031a0
 extern int Data_400031a4; //400031a4
+extern int Data_400031a8; //400031a8
+extern int Data_400031b4; //400031b4
 extern char bData_400031b8; //400031b8
 extern char bData_400031b9; //400031b9
+extern char bData_400031ba; //400031ba
+extern char bData_400031bb; //400031bb
+extern char bData_400031bc; //400031bc
+extern char bData_400031bd; //400031bd
 extern char bData_400031be; //400031be
 extern char bData_400031bf; //400031bf
 extern float fData_400031c0; //400031c0
@@ -880,8 +895,9 @@ extern double dData_40003330; //40003330
 extern double dData_40003338; //40003338
 extern double dData_40003340; //40003340
 extern double dData_40003348; //40003348
+
 extern Struct_435c Data_40003350; //40003350
-extern Struct_4b94 Data_40003358_SAORecord; //40003358
+extern Struct_SAOData Data_40003358_SAORecord; //40003358
 extern char* Data_40003360; //40003360
 extern char* Data_40003364; //40003364
 extern unsigned char* Data_40003368; //40003368
@@ -969,7 +985,7 @@ extern float fData_40003544; //40003544
 extern int Data_40003548; //40003548
 extern unsigned char Data_40003588_uart0ReceiveDataBuffer[]; //40003588
 extern unsigned char Data_40003592_uart1ReceiveDataBuffer[]; //40003592
-extern int Data_4000359c[]; //4000359c, size??
+extern int Data_4000359c_RecentTargetIdArray[]; //4000359c
 extern unsigned char Data_400035bc[]; //400035bc
 extern char Data_400037cc[]; //400037cc
 extern char Data_400037dc[]; //400037dc

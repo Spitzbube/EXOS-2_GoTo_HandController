@@ -40,7 +40,7 @@ int unknown_prologue(void)
 	int b;
 	int c;
 	int d;
-	return a+b * b / b - b-1;
+	return a+b * b / b - b;
 }
 
 /* 224 - complete */
@@ -1566,25 +1566,25 @@ void func_260c(int a, unsigned char* b)
 }
 
 /* 268c - complete */
-void func_268c(unsigned char a, unsigned int b)
+void flash_write_recent_target(unsigned char targetType, unsigned int targetId)
 {
-	unsigned char r6;
-	unsigned int r7;
+	unsigned char oldType;
+	unsigned int oldId;
 	unsigned char buf[57];
 
 	flash_read((0x37 << 6) | 7, 0, sizeof(buf), buf);
 
-	r6 = buf[1];
-	r7 = ((buf[2] - '0') * 100000) + 
+	oldType = buf[1];
+	oldId = ((buf[2] - '0') * 100000) + 
 		(((buf[3] - '0') * 10000)) + 
 		(((buf[4] - '0') * 1000)) +
 		(((buf[5] - '0') * 100)) +
 		(((buf[6] - '0') * 10)) +
 		(buf[7] - '0');
 
-	if ((a == r6) && (r7 == b))
+	if ((targetType == oldType) && (oldId == targetId))
 	{
-		r6 = 0;
+		oldType = 0;
 	}
 	else
 	{
@@ -1596,9 +1596,9 @@ void func_268c(unsigned char a, unsigned int b)
 
 		flash_write((0x37 << 6) | 7, 0, sizeof(buf[0]), buf);
 		flash_write((0x37 << 6) | 7, 8, sizeof(buf) - sizeof(buf[0]), &buf[1]);
-		buf[1] = a;
+		buf[1] = targetType;
 		flash_write((0x37 << 6) | 7, 1, sizeof(buf[1]), &buf[1]);
-		sprintf(buf, "%06d", b);
+		sprintf(buf, "%06d", targetId);
 		flash_write((0x37 << 6) | 7, 2, 6, &buf[0]);
 	}
 }
@@ -2359,7 +2359,7 @@ int func_4894(int a, Struct_4894* b)
 }
 
 /* 4b94 - complete */
-int flash_get_sao_data(unsigned int a, Struct_4b94* b)
+int flash_get_sao_data(unsigned int a, Struct_SAOData* b)
 {
 	unsigned char buf[6];
 	unsigned short r6;
@@ -2375,15 +2375,15 @@ int flash_get_sao_data(unsigned int a, Struct_4b94* b)
 	
 	flash_read((unsigned short)(0x21e + r6), r7, sizeof(buf), buf);
 	
-	b->fData_0 = buf[0] + buf[1] / 60.0 + buf[2] / 3600.0;
+	b->ra = buf[0] + buf[1] / 60.0 + buf[2] / 3600.0;
 	
 	if (buf[3] >= 0x80)
 	{
-		b->fData_4 = 0x80 - buf[3] - buf[4] / 60.0 - buf[5] / 3600.0;
+		b->dec = 0x80 - buf[3] - buf[4] / 60.0 - buf[5] / 3600.0;
 	}
 	else
 	{
-		b->fData_4 = buf[3] + buf[4] / 60.0 + buf[5] / 3600.0;
+		b->dec = buf[3] + buf[4] / 60.0 + buf[5] / 3600.0;
 	}
 	
 	return 1;
@@ -2578,23 +2578,23 @@ int func_54e0(int a, Struct_54e0* b)
 }
 
 /* 57b8 - complete */
-unsigned char func_57b8(unsigned char* a, int* b, void* c)
+unsigned char flash_get_recent_targets(unsigned char* targetTypes, int* targetIds, void* c)
 {
 	unsigned char buf[57];
 	unsigned char i;
-	unsigned char r8;
+	unsigned char count;
 	
-	flash_read(0xdc7, 0, sizeof(buf), buf);
+	flash_read((0x37 << 6) | 7, 0, sizeof(buf), buf);
 	
-	r8 = buf[0];
-	for (i = 0; i < r8; i++)
+	count = buf[0];
+	for (i = 0; i < count; i++)
 	{
-		a[i] = buf[1 + i*7];
+		targetTypes[i] = buf[1 + i*7];
 	}
 
-	for (i = 0; i < r8; i++)
+	for (i = 0; i < count; i++)
 	{
-		b[i] = 
+		targetIds[i] = 
 		(buf[2 + i*7] - '0') * 100000 +
 		(buf[3 + i*7] - '0') * 10000 +
 		(buf[4 + i*7] - '0') * 1000 +
@@ -2873,8 +2873,8 @@ void func_5f40(void)
 	Data_40002f04 = 0;
 	Data_40002f08 = 0;
 	bData_40002f0c = 0;
-	bData_40002f0d = 0;
-	Data_40002f10 = 0;
+	bData_40002f0d_RecentTargetType = 0;
+	bData_40002f10_RecentTargetId = 0;
 }
 
 /* 6518 - complete */

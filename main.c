@@ -402,6 +402,413 @@ double func_52720(int a)
 /* 57414 - todo */
 void func_57414(int a, int b, int c)
 {
+	char sp12[8];
+	char sp[8];
+	unsigned char i;
+	
+	bData_40003430 = 1;
+	bData_40003200 = 0;
+	bData_40003201 = 0;
+	
+	sp[0] = 0x55;
+	sp[1] = 0xaa;
+	sp[2] = 0x01;
+	sp[3] = 0x04;
+	
+	switch (a)
+	{
+		case 1:
+			//0x57488
+			sp[4] = 0x21;
+			break;
+		
+		case 2:
+			//0x57498
+			sp[4] = 0x01;
+			break;
+		
+		case 3:
+			//0x574a8
+			sp[4] = 0x61;
+			break;
+		
+		case 4:
+			//0x574b8
+			sp[4] = 0x41;
+			break;
+		
+		default:
+			//0x574c8
+			break;
+	}
+
+	switch (b)
+	{
+		case 3:
+			//0x574f8
+		case 1:
+			//0x57500
+			sp[5] = 0;
+			break;
+		
+		case 4:
+			//0x5750c
+		case 2:
+			//0x57514
+			sp[5] = 1;
+			break;
+		
+		default:
+			//0x57520
+			break;
+	}
+	
+	sp[6] = 0;
+	sp[7] = 0;
+	
+	for (i = 0; i < 8; i++)
+	{
+		//0x57540
+		uart1_write_byte(sp[i]);
+	}
+	
+	if (bData_4000319c == 0)
+	{
+		//5756c
+		bData_4000319c = 1;
+		
+		func_7590();
+		
+		sp12[0] = 0x55;
+		sp12[1] = 0xaa;
+		sp12[2] = 0x01;
+		sp12[3] = 0x04;
+		
+		switch (a)
+		{
+			case 1:
+				//0x575c0
+				sp12[4] = 0x01;
+				break;
+			
+			case 2:
+				//0x575d0
+				sp12[4] = 0x21;
+				break;
+			
+			case 3:
+				//0x575e0
+				sp12[4] = 0x41;
+				break;
+			
+			case 4:
+				//0x575f0
+				sp12[4] = 0x61;
+				break;
+			
+			default:
+				//0x57600
+				break;
+		}
+		
+		switch (b)
+		{
+			case 3:
+				//0x57630
+			case 1:
+				//0x57638
+				sp12[5] = 0;
+				break;
+			
+			case 4:
+				//0x57644
+			case 2:
+				//0x5764c
+				sp12[5] = 1;
+				break;
+			
+			default:
+				//0x57658
+				break;
+		}
+		
+		if (bData_40002c1a == 1)
+		{
+			//57674
+			switch (c)
+			{
+				case 0:
+					//0x576a8
+					sp12[6] = 0;
+					sp12[7] = 0;
+					bData_40002e88 = 0;
+					break;
+				
+				case 1:
+					//0x576c4
+					sp12[6] = 0;
+					sp12[7] = 5;
+					bData_40002e88 = 10;
+					break;
+				
+				case 2:
+					//0x576e8
+					sp12[6] = 0;
+					sp12[7] = 10;
+					bData_40002e88 = 10;
+					break;
+				
+				case 3:
+					//0x57708
+					sp12[6] = 0;
+					sp12[7] = 40;
+					bData_40002e88 = 10;
+					break;
+				
+				case 4:
+					//0x5772c
+					sp12[6] = 0;
+					sp12[7] = 160;
+					bData_40002e88 = 10;
+					break;
+				
+				case 5:
+					//0x57750
+					sp12[6] = 1;
+					sp12[7] = 64;
+					bData_40002e88 = 10;
+					break;
+				
+				case 6:
+					//0x57774
+					sp12[6] = 2;
+					sp12[7] = 128;
+					bData_40002e88 = 10;
+					break;
+				
+				case 7:
+					//0x57798
+					sp12[6] = 5;
+					sp12[7] = 0;
+					bData_40002e88 = 10;
+					break;
+				
+				case 8:
+					//0x577bc
+					sp12[6] = 10;
+					sp12[7] = 0;
+					bData_40002e88 = 10;
+					break;
+				
+				case 9:
+					//0x577e0
+					sp12[6] = 10;
+					sp12[7] = 0;
+					Data_400031a4 = 2560;
+					bData_400031b8 = 1;
+					bData_400031ba = sp12[4];
+					bData_400031bc = sp12[5];
+					Data_400031b4 = 1;
+					bData_400031b9 = 0;
+					bData_400031bb = sp12[4];
+					bData_400031bd = sp12[5];
+					Data_400031a8 = 0;
+					bData_40002e88 = 10;
+					break;
+				#if 0				
+				default:
+					//0x57870
+					break;
+				#endif
+			}
+		} //if (bData_40002c1a == 1)
+		//0x57874
+		if (bData_40002c1a == 2)
+		{
+			//57884
+			switch (c)
+			{
+				case 0:
+					//0x578b8
+					sp12[6] = 0;
+					sp12[7] = 0;
+					bData_40002e88 = 0;
+					break;
+				
+				case 1:
+					//0x578d4
+					sp12[6] = 0;
+					sp12[7] = 6;
+					bData_40002e88 = 10;
+					break;
+
+				case 2:
+					//0x578f8
+					sp12[6] = 0;
+					sp12[7] = 12;
+					bData_40002e88 = 10;
+					break;
+
+				case 3:
+					//0x5791c
+					sp12[6] = 0;
+					sp12[7] = 48;
+					bData_40002e88 = 10;
+					break;
+
+				case 4:
+					//0x57940
+					sp12[6] = 0;
+					sp12[7] = 96;
+					bData_40002e88 = 10;
+					break;
+
+				case 5:
+					//0x57964
+					sp12[6] = 0;
+					sp12[7] = 192;
+					bData_40002e88 = 10;
+					break;
+
+				case 6:
+					//0x57988
+					sp12[6] = 1;
+					sp12[7] = 128;
+					bData_40002e88 = 10;
+					break;
+
+				case 7:
+					//0x579ac
+					sp12[6] = 2;
+					sp12[7] = 28;
+					bData_40002e88 = 10;
+					break;
+
+				case 8:
+					//0x579d0
+					sp12[6] = 3;
+					sp12[7] = 56;
+					bData_40002e88 = 10;
+					break;
+
+				case 9:
+					//0x579f4
+					sp12[6] = 3;
+					sp12[7] = 212;
+					bData_40002e88 = 10;
+					break;
+				#if 0
+				default:
+					//0x57a18
+					break;
+				#endif
+			}
+		} //if (bData_40002c1a == 2)
+		//0x57a1c
+		for (i = 0; i < 8; i++)
+		{
+			//0x57a24
+			uart1_write_byte(sp12[i]);
+		}
+	} //if (bData_4000319c == 0)
+	//0x57a40
+}
+
+/* 57a4c - todo */
+void func_57a4c(void)
+{
+	switch (bData_4000318a - 5)
+	{
+		case 0:
+			//0x57a90
+			bData_4000318a = 6;
+			break;
+
+		case 1:
+			//0x57aa4
+			bData_4000318a = 7;
+			break;
+
+		case 2:
+			//0x57ab8
+			bData_4000318a = 9;
+			break;
+
+		case 4:
+			//0x57acc
+			bData_4000318a = 10;
+			break;
+
+		case 5:
+			//0x57ae0
+			bData_4000318a = 12;
+			break;
+
+		case 7:
+			//0x57af4
+			bData_4000318a = 13;
+			break;
+
+		case 8:
+			//0x57b08
+			bData_4000318a = 15;
+			break;
+		
+		case 10:
+			//0x57b1c
+			bData_4000318a = 5;
+			break;
+
+		default:
+			//0x57b30
+			break;
+	}
+}
+
+/* 57b40 - todo */
+void func_57b40(void)
+{
+	switch (bData_4000318a - 6)
+	{
+		case 0:
+			//0x57b80
+			bData_4000318a = 7;
+			break;
+
+		case 1:
+			//0x57b94
+			bData_4000318a = 9;
+			break;
+
+		case 3:
+			//0x57ba8
+			bData_4000318a = 10;
+			break;
+
+		case 4:
+			//0x57bbc
+			bData_4000318a = 12;
+			break;
+
+		case 6:
+			//0x57bd0
+			bData_4000318a = 13;
+			break;
+
+		case 7:
+			//0x57be4
+			bData_4000318a = 15;
+			break;
+
+		case 9:
+			//0x57bf8
+			bData_4000318a = 6;
+			break;
+		
+		default:
+			//0x57c0c
+			break;
+	}
 }
 
 /* 57c1c - todo */
@@ -2098,11 +2505,207 @@ double func_6ab74(int a)
 /* 6ae24 - todo */
 double func_6ae24(int a)
 {
+	unsigned char r5;
+	double sp8;
+	
+	bData_40002c13_uart1ReceiveComplete = 0;
+	
+	uart1_write_byte(0x55);
+	uart1_write_byte(0xaa);
+	uart1_write_byte(0x01);
+	uart1_write_byte(0x01);
+
+	switch (a)
+	{
+		case 1:
+			//0x6ae7c
+			uart1_write_byte(0x04);
+			break;
+		
+		case 2:
+			//0x6ae8c
+			uart1_write_byte(0x24);
+			break;
+		
+		case 3:
+			//0x6ae9c
+			uart1_write_byte(0x44);
+			break;
+		
+		case 4:
+			//0x6aeac
+			uart1_write_byte(0x64);
+			break;
+		
+		default:
+			//0x6aebc
+			break;		
+	}
+	
+	bData_40002c13_uart1ReceiveComplete = 0;
+	
+	func_2254(2);
+	
+	r5 = 20;
+	
+	if (bData_40002c1a != 0)
+	{
+		while ((bData_40002c13_uart1ReceiveComplete == 0) && (r5 > 2))
+		{
+			//0x6aef4
+			func_659c(5);
+			r5--;
+		}
+	}
+	//0x6af1c
+	if (bData_40002c13_uart1ReceiveComplete == 1)
+	{
+		//6af2c
+		switch (a)
+		{
+			case 1:
+				//0x6af50
+				if (Data_40003592_uart1ReceiveDataBuffer[0] == 0x04)
+				{
+					//6af64
+					Data_400031a0.bData[3] = Data_40003592_uart1ReceiveDataBuffer[2];
+					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
+					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
+					
+					sp8 = Data_400031a0.Data;
+					dData_40002d80 = sp8 * 360.0 / 841763108.524031996726989746094;
+				}
+				//0x6afcc -> 0x6b15c
+				break;
+			
+			case 2:
+				//0x6afd0
+				if (Data_40003592_uart1ReceiveDataBuffer[0] == 0x24)
+				{
+					//6af64
+					Data_400031a0.bData[3] = Data_40003592_uart1ReceiveDataBuffer[2];
+					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
+					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
+					
+					sp8 = Data_400031a0.Data;
+					dData_40002da0 = sp8 * 360.0 / 841763108.524031996726989746094;
+				}
+				//0x6b04c -> 0x6b15c
+				break;
+			
+			case 3:
+				//0x6b050
+				if (Data_40003592_uart1ReceiveDataBuffer[0] == 0x44)
+				{
+					//6b064
+					Data_400031a0.bData[3] = Data_40003592_uart1ReceiveDataBuffer[2];
+					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
+					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
+					
+					sp8 = Data_400031a0.Data;
+					dData_40002db8 = sp8 * 360.0 / 278879846.400000035762786865234;
+					#if 1
+					if (Data_400031a0.Data == 0)
+					{
+					}
+					#endif
+				}
+				//0x6b0d0 -> 0x6b15c
+				break;
+			
+			case 4:
+				//0x6b0d4
+				if (Data_40003592_uart1ReceiveDataBuffer[0] == 0x64)
+				{
+					//6b0e8
+					Data_400031a0.bData[3] = Data_40003592_uart1ReceiveDataBuffer[2];
+					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
+					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
+					
+					sp8 = Data_400031a0.Data;
+					dData_40002df0 = sp8 * 360.0 / 383201280.0;
+				}
+				//0x6b150 -> 0x6b15c
+				break;
+			
+			default:
+				//0x6b154
+				break;		
+		}
+		//6b160
+		bData_40002c13_uart1ReceiveComplete = 0;
+	}
+	//0x6b16c
 }
 
 /* 6b17c - todo */
 void func_6b17c(void)
 {
+	unsigned char r3;
+	
+	Data_40003204 = 0;
+	Data_40003208 = 0;
+	bData_40002c13_uart1ReceiveComplete = 0;
+	
+	uart1_write_byte(0x55);
+	uart1_write_byte(0xaa);
+	uart1_write_byte(0x01);
+	uart1_write_byte(0x01);
+	uart1_write_byte(0x81);
+	
+	bData_40002c13_uart1ReceiveComplete = 0;
+	
+	r3 = 10;
+	while ((bData_40002c13_uart1ReceiveComplete == 0) &&
+		(bData_40002c13_uart1ReceiveComplete == 0))
+	{
+		//0x6b1d8
+		func_2254(1);
+		r3--;
+	}
+	//0x6b208
+	if (bData_40002c13_uart1ReceiveComplete == 1)
+	{
+		//6b218
+		if (Data_40003592_uart1ReceiveDataBuffer[0] == 129)
+		{
+			//6b228
+			Data_40003592_uart1ReceiveDataBuffer[1] = 
+				~Data_40003592_uart1ReceiveDataBuffer[1];
+			
+			if ((Data_40003592_uart1ReceiveDataBuffer[1] & 1) == 1)
+			{
+				//6b250
+				Data_40003204 = 1;
+			}
+			//0x6b25c
+			if ((Data_40003592_uart1ReceiveDataBuffer[1] & 8) == 8)
+			{
+				//6b270
+				Data_40003204 = -1;
+			}
+			//0x6b27c
+			if ((Data_40003592_uart1ReceiveDataBuffer[1] & 2) == 2)
+			{
+				//6b290
+				Data_40003208 = 1;
+			}
+			//0x6b29c
+			if ((Data_40003592_uart1ReceiveDataBuffer[1] & 4) == 4)
+			{
+				//6b290
+				Data_40003208 = -1;
+			}
+			#if 1			
+			if ((Data_40003592_uart1ReceiveDataBuffer[1] & 16) == 16)
+			{
+			}
+			#endif
+		}
+		//0x6b2c0
+		bData_40002c13_uart1ReceiveComplete = 0;
+	}
+	//0x6b2cc
 }
 
 /* 6c804 - complete */

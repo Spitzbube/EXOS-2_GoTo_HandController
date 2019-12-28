@@ -396,8 +396,9 @@ int func_27844(void)
 			break;
 		
 		case 1:
-			//0x29994
-			bData_40002f14_RecentTargetCount = func_57b8(Data_40002f15, Data_4000359c, Data_400035bc);
+			//0x29994: Recent Targets
+			bData_40002f14_RecentTargetCount = flash_get_recent_targets(Data_40002f15_RecentTargetTypeArray, 
+				Data_4000359c_RecentTargetIdArray, Data_400035bc);
 			
 			Data_40003360 = "                      ";
 			Data_40003364 = "                      ";
@@ -435,10 +436,10 @@ int func_27844(void)
 				case 8:
 					//0x29b10
 					Data_4000339c = "8: ";
-					bData_40002f0d = Data_40002f15[7];
-					Data_40002f10 = Data_4000359c[7];
+					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[7];
+					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[7];
 				
-					func_240e8(bData_40002f0d, Data_40002f10);
+					func_240e8(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
@@ -452,10 +453,10 @@ int func_27844(void)
 				case 7:
 					//0x29bb8
 					Data_40003398 = "7: ";
-					bData_40002f0d = Data_40002f15[6];
-					Data_40002f10 = Data_4000359c[6];
+					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[6];
+					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[6];
 				
-					func_240e8(bData_40002f0d, Data_40002f10);
+					func_240e8(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
@@ -469,10 +470,10 @@ int func_27844(void)
 				case 6:
 					//0x29c5c
 					Data_40003394 = "6: ";
-					bData_40002f0d = Data_40002f15[5];
-					Data_40002f10 = Data_4000359c[5];
+					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[5];
+					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[5];
 				
-					func_240e8(bData_40002f0d, Data_40002f10);
+					func_240e8(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				
 					Data_40003374 = Data_400033a4;
 
@@ -488,10 +489,10 @@ int func_27844(void)
 				case 5:
 					//0x29d10
 					Data_40003390 = "5: ";
-					bData_40002f0d = Data_40002f15[4];
-					Data_40002f10 = Data_4000359c[4];
+					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[4];
+					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[4];
 				
-					func_240e8(bData_40002f0d, Data_40002f10);
+					func_240e8(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
@@ -505,10 +506,10 @@ int func_27844(void)
 				case 4:
 					//0x29e58
 					Data_4000338c = "4: ";
-					bData_40002f0d = Data_40002f15[3];
-					Data_40002f10 = Data_4000359c[3];
+					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[3];
+					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[3];
 				
-					func_240e8(bData_40002f0d, Data_40002f10);
+					func_240e8(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
@@ -522,10 +523,10 @@ int func_27844(void)
 				case 3:
 					//0x29efc
 					Data_40003388 = "3: ";
-					bData_40002f0d = Data_40002f15[2];
-					Data_40002f10 = Data_4000359c[2];
+					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[2];
+					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[2];
 				
-					func_240e8(bData_40002f0d, Data_40002f10);
+					func_240e8(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
@@ -539,10 +540,10 @@ int func_27844(void)
 				case 2:
 					//0x29fa0
 					Data_40003384 = "2: ";
-					bData_40002f0d = Data_40002f15[1];
-					Data_40002f10 = Data_4000359c[1];
+					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[1];
+					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[1];
 				
-					func_240e8(bData_40002f0d, Data_40002f10);
+					func_240e8(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
@@ -556,10 +557,10 @@ int func_27844(void)
 				case 1:
 					//0x2a044
 					Data_40003380 = "1: ";
-					bData_40002f0d = Data_40002f15[0];
-					Data_40002f10 = Data_4000359c[0];
+					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[0];
+					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[0];
 				
-					func_240e8(bData_40002f0d, Data_40002f10);
+					func_240e8(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				
 					Data_40003360 = Data_400033a4;
 				
@@ -1680,7 +1681,7 @@ int func_27844(void)
 			//->0x3d71c
 			break;
 		
-		case 0x2B61: //11105
+		case 11105:
 			//0x2cdc0
 			sprintf(Data_40003fa9, "%.1f", fData_40002e98);
 		
@@ -4729,12 +4730,12 @@ int func_27844(void)
 			//->0x3d71c					
 			break;
 		
-		case 0x59DF: //23007
-			//0x39b90
+		case 23007:
+			//0x39b90: SAO item
 			flash_get_sao_data(Data_40002ec4_SAONr, &Data_40003358_SAORecord);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003358_SAORecord.fData_0;
-			fData_40002d18_ObjectDeclination = Data_40003358_SAORecord.fData_4;
+			fData_40002cd0_ObjectRightAscension = Data_40003358_SAORecord.ra;
+			fData_40002d18_ObjectDeclination = Data_40003358_SAORecord.dec;
 		
 			sprintf(Data_40003fa9, "SAO:%d                          ",
 				Data_40002ec4_SAONr);
@@ -4868,8 +4869,8 @@ int func_27844(void)
 			//0x3a618
 			flash_get_sao_data(Data_40002ec4_SAONr, &Data_40003358_SAORecord);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003358_SAORecord.fData_0;
-			fData_40002d18_ObjectDeclination = Data_40003358_SAORecord.fData_4;
+			fData_40002cd0_ObjectRightAscension = Data_40003358_SAORecord.ra;
+			fData_40002d18_ObjectDeclination = Data_40003358_SAORecord.dec;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
