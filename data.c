@@ -549,10 +549,10 @@ float fData_40002f00; //40002f00
 int Data_40002f04; //40002f04
 int Data_40002f08; //40002f08
 char bData_40002f0c; //40002f0c
-unsigned char bData_40002f0d; //40002f0d
-int Data_40002f10; //40002f10
+unsigned char bData_40002f0d_RecentTargetType; //40002f0d
+int bData_40002f10_RecentTargetId; //40002f10
 unsigned char bData_40002f14_RecentTargetCount; //40002f14
-unsigned char Data_40002f15[8]; //40002f15, size???
+unsigned char Data_40002f15_RecentTargetTypeArray[8]; //40002f15, size???
 unsigned char bData_40002f1d; //40002f1d
 char bData_40002f1e_SetupLocalData; //40002f1e
 char* Data_40002f20; //40002f20
@@ -727,9 +727,16 @@ unsigned char bData_4000319a_SkyLandTargetId; //4000319a
 char bData_4000319b; //4000319b
 char bData_4000319c; //4000319c
 char bData_4000319d; //4000319d
+Union_400031a0 Data_400031a0; //400031a0
 int Data_400031a4; //400031a4
+int Data_400031a8; //400031a8
+int Data_400031b4; //400031b4
 char bData_400031b8; //400031b8
 char bData_400031b9; //400031b9
+char bData_400031ba; //400031ba
+char bData_400031bb; //400031bb
+char bData_400031bc; //400031bc
+char bData_400031bd; //400031bd
 char bData_400031be; //400031be
 char bData_400031bf; //400031bf
 float fData_400031c0; //400031c0
@@ -792,7 +799,7 @@ double dData_40003338; //40003338
 double dData_40003340; //40003340
 double dData_40003348; //40003348
 Struct_435c Data_40003350; //40003350
-Struct_4b94 Data_40003358_SAORecord; //40003358
+Struct_SAOData Data_40003358_SAORecord; //40003358
 char* Data_40003360; //40003360
 char* Data_40003364; //40003364
 unsigned char* Data_40003368; //40003368
@@ -880,8 +887,8 @@ float fData_40003544; //40003544
 int Data_40003548; //40003548
 unsigned char Data_40003588_uart0ReceiveDataBuffer[10]; //40003588
 unsigned char Data_40003592_uart1ReceiveDataBuffer[10]; //40003592
-int Data_4000359c[8]; //4000359c, size??
-unsigned char Data_400035bc[100]; //400035bc, size???
+int Data_4000359c_RecentTargetIdArray[8]; //4000359c, size??
+unsigned char Data_400035bc[528]; //400035bc
 char Data_400037cc[16]; //400037cc
 char Data_400037dc[16]; //400037dc
 char Data_400037ec[100]; //400037ec, size???

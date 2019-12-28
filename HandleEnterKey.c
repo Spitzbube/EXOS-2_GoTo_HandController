@@ -52,10 +52,10 @@ void HandleEnterKey(void)
 						
 						func_b64c(dData_40002cc8, dData_40002d10);
 						
-						bData_40002f0d = 10;
-						Data_40002f10 = bData_4000319a_SkyLandTargetId;
+						bData_40002f0d_RecentTargetType = 10;
+						bData_40002f10_RecentTargetId = bData_4000319a_SkyLandTargetId;
 						
-						func_268c(bData_40002f0d, Data_40002f10);
+						flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 						func_7950(1);
 						
 						Data_40002c64_MenuContextId = 0;
@@ -78,10 +78,10 @@ void HandleEnterKey(void)
 						func_b64c(dData_40002cc8, dData_40002d10);
 						
 						bData_400034aa = 1;
-						bData_40002f0d = 12;
-						Data_40002f10 = bData_4000319a_SkyLandTargetId;
+						bData_40002f0d_RecentTargetType = 12;
+						bData_40002f10_RecentTargetId = bData_4000319a_SkyLandTargetId;
 						
-						func_268c(bData_40002f0d, Data_40002f10);
+						flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 						func_7950(1);
 						
 						Data_40002c64_MenuContextId = 0;
@@ -396,12 +396,12 @@ void HandleEnterKey(void)
 		
 		case 1600: // RA Bklash Corr.
 			//0x54094
-			Data_40002c64_MenuContextId = 11102;
+			Data_40002c64_MenuContextId = 11102; //->RA Bklash Corr. - 1st page
 			break;
 		
 		case 11102:
 			//0x540a8
-			Data_40002c64_MenuContextId = 11101;
+			Data_40002c64_MenuContextId = 11101; //->RA Bklash Corr. - 2nd page
 			break;
 		
 		case 11103:
@@ -426,7 +426,7 @@ void HandleEnterKey(void)
 			break;
 		
 		case 11101:
-			//0x54200
+			//0x54200: RA Bklash Corr. - 2nd page
 			if (Data_40002e9c != 0)
 			{
 				//54218
@@ -435,8 +435,10 @@ void HandleEnterKey(void)
 				func_52720(1);
 			}
 			//0x54244
-			
-			//TODO
+			Data_40002e94 = 0;
+			fData_40002e90 = 0;
+			Data_40002e9c = 0;
+			Data_40002c64_MenuContextId = 11105;
 			break;
 		
 		case 1700: // DEC Bklash Corr.
@@ -490,10 +492,10 @@ void HandleEnterKey(void)
 				
 				func_b64c(dData_40002cc8, dData_40002d10);
 				
-				bData_40002f0d = 1;
-				Data_40002f10 = bData_40002eb5_SolarSystemObjectNr;
+				bData_40002f0d_RecentTargetType = 1;
+				bData_40002f10_RecentTargetId = bData_40002eb5_SolarSystemObjectNr;
 				
-				func_268c(bData_40002f0d, Data_40002f10);
+				flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				lcd_display_clear();
 				
 				Data_40002c64_MenuContextId = 22111;
@@ -524,10 +526,10 @@ void HandleEnterKey(void)
 		
 			func_b64c(dData_40002cc8, dData_40002d10);
 		
-			bData_40002f0d = 2;
-			Data_40002f10 = bData_40002ece_ConstellationNr;
+			bData_40002f0d_RecentTargetType = 2;
+			bData_40002f10_RecentTargetId = bData_40002ece_ConstellationNr;
 		
-			func_268c(bData_40002f0d, Data_40002f10);
+			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 			lcd_display_clear();
 		
 			Data_40002c64_MenuContextId = 24002;
@@ -624,7 +626,7 @@ void HandleEnterKey(void)
 			break;
 		
 		case 2900:
-			//0x54c48
+			//0x54c48: SAO Catalogue
 			Data_40002ec4_SAONr = 1;
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
@@ -633,19 +635,19 @@ void HandleEnterKey(void)
 			break;
 
 		case 23007:
-			//0x54c80
+			//0x54c80: SAO item
 			flash_get_sao_data(Data_40002ec4_SAONr, &Data_40003358_SAORecord);
 
-			dData_40002cc8 = Data_40003358_SAORecord.fData_0;
-			dData_40002d10 = Data_40003358_SAORecord.fData_4;
+			dData_40002cc8 = Data_40003358_SAORecord.ra;
+			dData_40002d10 = Data_40003358_SAORecord.dec;
 			bData_40002e88 = 1;
 			
 			func_b64c(dData_40002cc8, dData_40002d10);
 			
-			bData_40002f0d = 9;
-			Data_40002f10 = Data_40002ec4_SAONr;
+			bData_40002f0d_RecentTargetType = 9;
+			bData_40002f10_RecentTargetId = Data_40002ec4_SAONr;
 			
-			func_268c(bData_40002f0d, Data_40002f10);
+			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 			lcd_display_clear();
 			
 			Data_40002c64_MenuContextId = 23017;
@@ -675,7 +677,7 @@ void HandleEnterKey(void)
 			break;
 		
 		case 2120:
-			//0x54d84
+			//0x54d84: Input RA/DEC
 			Data_40002c64_MenuContextId = 29001;
 			bData_4000318a = 6;
 			func_50048();

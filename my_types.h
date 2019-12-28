@@ -73,10 +73,10 @@ typedef struct
 
 typedef struct
 {
-	float fData_0; //0
-	float fData_4; //4
+	float ra; //0
+	float dec; //4
 	
-} Struct_4b94;
+} Struct_SAOData;
 
 typedef struct
 {
