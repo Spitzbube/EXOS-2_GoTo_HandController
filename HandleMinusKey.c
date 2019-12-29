@@ -1,4 +1,6 @@
 
+//#include "menu.h"
+
 /* 5f230 - todo */
 void HandleMinusKey(void)
 {
@@ -31,9 +33,9 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 0;
 			break;
 		
-		case 12001:
+		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//0x5fa58: One / Two / Three Star Align
-			if (bData_40002c62 != 0)
+			if (bData_40002c62_AlignmentStarMode != 0)
 			{
 				//5fa6c
 				Data_40004128.bData_364 = 1;
@@ -52,7 +54,7 @@ void HandleMinusKey(void)
 				lcd_display_string(0, 8, 1, 21, "                     ");
 				
 				func_659c(1000);
-				func_7950(2);
+				beep1(2);
 				func_659c(100);
 				
 				Data_40002c64_MenuContextId = 0;
@@ -60,21 +62,21 @@ void HandleMinusKey(void)
 			else
 			{
 				//0x5fb8c
-				switch (Data_40002c5c)
+				switch (Data_40002c5c_AlignmentStarCount)
 				{
 					case 1:
 						//0x5fbb0
-						Data_40002c64_MenuContextId = 1100;
+						Data_40002c64_MenuContextId = MENU_CONTEXT_ONE_STAR_ALIGN; //1100;
 						break;
 					
 					case 2:
 						//0x5fbc4
-						Data_40002c64_MenuContextId = 1200;
+						Data_40002c64_MenuContextId = MENU_CONTEXT_TWO_STAR_ALIGN; //1200;
 						break;
 					
 					case 3:
 						//0x5fbd8
-						Data_40002c64_MenuContextId = 1300;
+						Data_40002c64_MenuContextId = MENU_CONTEXT_THREE_STAR_ALIGN; //1300;
 						break;
 					
 					default:
@@ -519,7 +521,7 @@ void HandleMinusKey(void)
 				
 				bData_40002e8c = 0;
 				
-				func_7950(2);
+				beep1(2);
 			}
 			//->0x60d48
 			break;
@@ -555,7 +557,7 @@ void HandleMinusKey(void)
 				
 				bData_40002e8c = 0;
 				
-				func_7950(2);
+				beep1(2);
 			}
 			//->0x60d48
 			break;
@@ -586,7 +588,7 @@ void HandleMinusKey(void)
 				
 				bData_40002e8c = 0;
 				
-				func_7950(2);
+				beep1(2);
 			}
 			//->0x60d48
 			break;
@@ -622,7 +624,7 @@ void HandleMinusKey(void)
 				
 				bData_40002e8c = 0;
 				
-				func_7950(2);
+				beep1(2);
 			}
 			//->0x60d48
 			break;
@@ -653,7 +655,7 @@ void HandleMinusKey(void)
 				
 				bData_40002e8c = 0;
 				
-				func_7950(2);
+				beep1(2);
 			}
 			//->0x60d48
 			break;
@@ -684,7 +686,7 @@ void HandleMinusKey(void)
 				
 				bData_40002e8c = 0;
 				
-				func_7950(2);
+				beep1(2);
 			}
 			//->0x60d48
 			break;
@@ -715,7 +717,7 @@ void HandleMinusKey(void)
 				
 				bData_40002e8c = 0;
 				
-				func_7950(2);
+				beep1(2);
 			}
 			//->0x60d48
 			break;
@@ -746,7 +748,7 @@ void HandleMinusKey(void)
 				
 				bData_40002e8c = 0;
 				
-				func_7950(2);
+				beep1(2);
 			}
 			//->0x60d48
 			break;
@@ -777,7 +779,7 @@ void HandleMinusKey(void)
 				
 				bData_40002e8c = 0;
 				
-				func_7950(2);
+				beep1(2);
 			}
 			//->0x60d48
 			break;
@@ -1015,9 +1017,9 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 4302;
 			break;
 		
-		case 100:
+		case MENU_CONTEXT_RESET_CONFIRM: //100:
 			//0x60ccc: Reset -> Cancel
-			Data_40002c64_MenuContextId = 4900; //Reset
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RESET; //4900;
 			break;
 		
 		case 47011:

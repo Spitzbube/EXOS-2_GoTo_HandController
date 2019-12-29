@@ -1,4 +1,6 @@
 
+//#include "menu.h"
+
 /* 5ab50 - todo */
 void HandleDownKey(void)
 {
@@ -610,14 +612,14 @@ void HandleDownKey(void)
 			Data_40002c64_MenuContextId = 45001;
 			break;
 		
-		case 46001:
+		case MENU_CONTEXT_MOUNT_AZ: //46001:
 			//0x5bee0
-			Data_40002c64_MenuContextId = 46002;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MOUNT_EQU; //46002;
 			break;
 		
-		case 46002:
+		case MENU_CONTEXT_MOUNT_EQU: //46002:
 			//0x5bef4
-			Data_40002c64_MenuContextId = 46001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MOUNT_AZ; //46001;
 			break;
 		
 		case 49001:
@@ -940,9 +942,9 @@ void HandleDownKey(void)
 			Data_40003164_LunarPhaseYear++;
 			break;
 		
-		case 12001:
+		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//0x5c674
-			if (bData_40002c62 != 0)
+			if (bData_40002c62_AlignmentStarMode != 0)
 			{
 				Data_4000340c = -1;
 				bData_40003201 = 0;

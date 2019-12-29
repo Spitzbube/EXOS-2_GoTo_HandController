@@ -504,10 +504,10 @@ extern Union_40002c28 Data_40002c28; //40002c28
 extern char bData_40002c58; //40002c58
 extern unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
 extern char bData_40002c5a; //40002c5a
-extern int Data_40002c5c; //40002c5c
+extern int Data_40002c5c_AlignmentStarCount; //40002c5c
 extern unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
 extern char bData_40002c61; //40002c61
-extern char bData_40002c62; //40002c62
+extern char bData_40002c62_AlignmentStarMode; //40002c62
 extern int Data_40002c64_MenuContextId; //40002c64
 extern char bData_40002c68; //40002c68
 extern char bData_40002c69_KeyCode; //40002c69
@@ -857,8 +857,7 @@ extern int Data_40003220_AlarmHours; //40003220
 extern int Data_40003224_AlarmMinutes; //40003224
 extern int Data_40003228_AlarmSeconds; //40003228
 extern char bData_4000322c; //4000322c
-
-extern char bData_4000322d; //4000322d
+extern char bData_4000322d_AlarmTimeElapsed; //4000322d
 extern float fData_40003238; //40003238
 extern int Data_40003248_CurrentDisplayPWM; //40003248
 extern unsigned short wData_40003250; //40003250

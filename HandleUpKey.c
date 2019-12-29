@@ -1,4 +1,5 @@
 
+//#include "menu.h"
 
 /* 5d1ac - todo */
 void HandleUpKey(void)
@@ -29,9 +30,9 @@ void HandleUpKey(void)
 		
 		//TODO
 		
-		case 12001:
+		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//0x5ecb4
-			if (bData_40002c62 != 0)
+			if (bData_40002c62_AlignmentStarMode != 0)
 			{
 				Data_4000340c = 1;
 				bData_40003201 = 0;

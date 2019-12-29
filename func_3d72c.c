@@ -1,8 +1,8 @@
 
 /* 3d72c - todo */
-void func_3d72c(void)
+void DisplayScreenItems(void)
 {
-	func_27844();
+	PrepareScreenItems();
 	
 	switch (bData_40003197_DisplayLinesPerMenuLine)
 	{
@@ -18,11 +18,11 @@ void func_3d72c(void)
 			//3d790
 			switch (Data_40002c64_MenuContextId)
 			{
-				case 0:
+				case MENU_CONTEXT_MAIN: //0:
 					//0x3da9c
 					if (bData_400031ed == 1)
 					{
-						func_20b94();
+						DisplayMainScreen();
 					}
 					//->4684c
 					break;
@@ -318,24 +318,24 @@ void func_3d72c(void)
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
 					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 				
-					func_7950(1);
-					func_2254(200);
-					func_7950(1);
-					func_2254(200);
-					func_7950(1);
-					func_2254(200);
+					beep1(1);
+					delay_loop(200);
+					beep1(1);
+					delay_loop(200);
+					beep1(1);
+					delay_loop(200);
 					Data_40002c64_MenuContextId = 0;
 					//->0x4684c
 					break;
 				
-				case 12001:
+				case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 					//0x3f9a4: One / Two / Three Star Align
-					if (bData_40002c62 == 0)
+					if (bData_40002c62_AlignmentStarMode == 0)
 					{
 						//3f9b8: Alignment Star Selection
-						if (Data_40002c5c == 0)
+						if (Data_40002c5c_AlignmentStarCount == 0)
 						{
-							//3f9c8
+							//3f9c8: Alignment complete
 							if (bData_400031e9 != 5)
 							{
 								lcd_display_clear();
@@ -343,10 +343,10 @@ void func_3d72c(void)
 							//0x3f9dc
 							bData_400031e9 = 5;
 							func_c8f4();
-							func_7950(3);
+							beep1(3);
 							
-							Data_40003364 = Data_400030b4;
-							Data_4000336c = Data_400030b8;
+							Data_40003364 = Data_400030b4; //"The telescope has be"
+							Data_4000336c = Data_400030b8; //"aligned!"
 							Data_40003374 = Data_400030bc;
 							
 							lcd_display_string(0, 1, 1, 22, "                       ");
@@ -358,11 +358,11 @@ void func_3d72c(void)
 							lcd_display_string(0, 7, 1, 22, "                       ");
 							lcd_display_string(0, 8, 1, 22, "                       ");
 							
-							func_2254(300);
+							delay_loop(300);
 							
-							Data_40002c64_MenuContextId = 0;
+							Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 							//->0x4047c
-						} //if (Data_40002c5c == 0)
+						} //if (Data_40002c5c_AlignmentStarCount == 0)
 						else
 						{
 							//0x3fb58
@@ -393,7 +393,7 @@ void func_3d72c(void)
 							lcd_display_string(0, 6, 1, 4, "      ");
 							//->0x4047c
 						}
-					} //if (bData_40002c62 == 0)
+					} //if (bData_40002c62_AlignmentStarMode == 0)
 					else
 					{
 						//0x3fdac: "Slewing to Target" / "Please center this star to the field of view"
@@ -519,7 +519,7 @@ void func_3d72c(void)
 				
 				case 11104:
 					//0x40610
-					func_7950(1);
+					beep1(1);
 				
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -530,14 +530,14 @@ void func_3d72c(void)
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
-					func_2254(800);
+					delay_loop(800);
 					Data_40002c64_MenuContextId = 11102;
 					//->0x4684c
 					break;
 				
 				case 11105:
 					//0x407b4
-					func_7950(3);
+					beep1(3);
 				
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -548,7 +548,7 @@ void func_3d72c(void)
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
-					func_2254(800);
+					delay_loop(800);
 					Data_40002c64_MenuContextId = 0;
 					break;
 				
@@ -570,7 +570,7 @@ void func_3d72c(void)
 				
 				case 11204:
 					//0x40ae8
-					func_7950(1);
+					beep1(1);
 				
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -581,13 +581,13 @@ void func_3d72c(void)
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
-					func_2254(800);
+					delay_loop(800);
 					Data_40002c64_MenuContextId = 11202;
 					break;
 				
 				case 11205:
 					//0x40c8c
-					func_7950(3);
+					beep1(3);
 				
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -598,7 +598,7 @@ void func_3d72c(void)
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
-					func_2254(800);
+					delay_loop(800);
 					Data_40002c64_MenuContextId = 0;
 					break;
 				
@@ -700,9 +700,9 @@ void func_3d72c(void)
 					{
 						//415e4
 						func_659c(2000);
-						func_7950(1);
+						beep1(1);
 						func_659c(1000);
-						func_7950(1);
+						beep1(1);
 						func_659c(1000);
 						
 						Data_40002c64_MenuContextId = 0;
@@ -743,9 +743,9 @@ void func_3d72c(void)
 					{
 						//418c4
 						func_659c(2000);
-						func_7950(1);
+						beep1(1);
 						func_659c(1000);
-						func_7950(1);
+						beep1(1);
 						func_659c(1000);
 						
 						Data_40002c64_MenuContextId = 0;
@@ -1272,7 +1272,7 @@ void func_3d72c(void)
 					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);					
 					break;
 				
-				case 100:
+				case MENU_CONTEXT_RESET_CONFIRM: //100:
 					//0x446e8: Reset
 					lcd_display_string(0, 1, 1, 21, "Are you sure reset   ");
 					lcd_display_string(0, 3, 1, 21, "System.                ");

@@ -5,6 +5,7 @@
 #include <math.h>
 #include "my_types.h"
 #include "data.h"
+#include "menu.h"
 
 extern void uart0_init(int);
 extern void uart1_write_byte(unsigned char);
@@ -14,7 +15,7 @@ extern void lcd_display_clear(void);
 extern void lcd_display_string(int, unsigned char, unsigned char, unsigned char, const unsigned char*);
 extern int func_11d8(void);
 extern void func_1210(void);
-extern void func_2254(unsigned int);
+extern void delay_loop(unsigned int);
 extern void lpc_hw_init(void);
 extern void flash_read(int, int, int, char*);
 extern void flash_write(int, int, int, char*);
@@ -29,7 +30,7 @@ extern void func_659c(int);
 extern void func_7590(void);
 extern void func_75c4(void);
 extern void func_c57c(void);
-extern void func_7950(int);
+extern void beep1(int);
 extern void func_8ba4(Struct_8ba4_0 a, Struct_8ba4 b/*sp208*/, int r4, int r5, double* r6);
 extern void func_d2cc(void);
 extern void func_9178(void);
@@ -44,7 +45,7 @@ extern void ValidateDateTimeSetRTC(void);
 
 extern void get_all_solar_system_object_equatorial_coordinates(void);
 extern void func_1e228(void);
-extern void func_3d72c(void);
+extern void DisplayScreenItems(void);
 extern void func_20b94(void);
 
 #ifndef OLIMEX_LPC2148
@@ -126,7 +127,7 @@ void func_4f804(void)
 			//0x4f8b0
 //			break;
 
-		case 0x59e9:
+		case 23017: //0x59e9:
 			//0x4f8b4
 			if (bData_400034a9 == 0)
 			{
@@ -363,10 +364,10 @@ void HandleReset(void)
 	}
 	
 	func_659c(2000);
-	func_7950(2);
+	beep1(2);
 	func_659c(100);
 	
-	Data_40002c64_MenuContextId = 0;
+	Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 }
 
 /* 5104c - todo */
@@ -811,15 +812,9 @@ void func_57b40(void)
 	}
 }
 
-/* 57c1c - todo */
-void HandleRightKey(void)
-{
-}
+#include "HandleRightKey.c"
 
-/* 5969c - todo */
-void HandleLeftKey(void)
-{
-}
+#include "HandleLeftKey.c"
 
 /* 59dd0 - todo */
 void func_59dd0(void)
@@ -1088,7 +1083,7 @@ void HandleFKey(void)
 		
 			Data_40002ec8 = 0;
 		
-			func_7950(1);
+			beep1(1);
 			break;
 				
 	}
@@ -2087,10 +2082,10 @@ void func_6a2cc(void)
 		func_659c(10);
 		func_1210();
 		
-		if (bData_4000322d == 1)
+		if (bData_4000322d_AlarmTimeElapsed == 1)
 		{
 			bData_4000322c = 0;
-			bData_4000322d = 0;
+			bData_4000322d_AlarmTimeElapsed = 0;
 		}
 	}
 	//6a314
@@ -2394,7 +2389,7 @@ void func_6a2cc(void)
 	//6aad4
 	if (bData_40002c58 == 0)
 	{
-		func_3d72c();
+		DisplayScreenItems();
 	}
 	else
 	{
@@ -2407,12 +2402,12 @@ void func_6a2cc(void)
 		(Data_40003224_AlarmMinutes == bData_40002e63_Minutes) &&
 		(Data_40003228_AlarmSeconds == bData_40002e64_Seconds))
 	{
-		bData_4000322d = 1;
+		bData_4000322d_AlarmTimeElapsed = 1;
 	}
 	//6ab54
-	if (bData_4000322d == 1)
+	if (bData_4000322d_AlarmTimeElapsed == 1)
 	{
-		func_7950(10);
+		beep1(10);
 	}
 }
 
@@ -2458,7 +2453,7 @@ double func_6ab74(int a)
 
 	bData_40002c13_uart1ReceiveComplete = 0;
 	
-	func_2254(10);
+	delay_loop(10);
 	
 	for (r5 = 50; (bData_40002c13_uart1ReceiveComplete == 0) && (r5 > 2); r5--)
 	{
@@ -2544,7 +2539,7 @@ double func_6ae24(int a)
 	
 	bData_40002c13_uart1ReceiveComplete = 0;
 	
-	func_2254(2);
+	delay_loop(2);
 	
 	r5 = 20;
 	
@@ -2660,7 +2655,7 @@ void func_6b17c(void)
 		(bData_40002c13_uart1ReceiveComplete == 0))
 	{
 		//0x6b1d8
-		func_2254(1);
+		delay_loop(1);
 		r3--;
 	}
 	//0x6b208
@@ -3219,9 +3214,29 @@ int main(void)
 	Data_40002c20 = 0;
 #endif //OLIMEX_LPC2148
 	//6d894 -> 729ec
-	while (1) //Main Loop
+	//##########################################################################
+	//#################### Main Loop ###########################################
+	//##########################################################################
+	while (1) 
 	{
-		//6d898
+		#ifdef UART0_DEBUG
+		{
+			static char buf[100];
+			snprintf(buf, sizeof(buf)-1, "Main Loop (Context: %d)\n\r", Data_40002c64_MenuContextId);
+			uart0_send(buf, strlen(buf));			
+			
+			snprintf(buf, sizeof(buf)-1, "dData_40002dc0: %f\n\r", dData_40002dc0);
+			uart0_send(buf, strlen(buf));
+			
+			snprintf(buf, sizeof(buf)-1, "dData_40002df8: %f\n\r", dData_40002df8);
+			uart0_send(buf, strlen(buf));
+			
+			snprintf(buf, sizeof(buf)-1, "bData_40002c1a: %d\n\r", bData_40002c1a);
+			uart0_send(buf, strlen(buf));
+		}
+		#endif 
+	
+		//6d898		
 		fData_40002efc = dData_40002dc0;
 		fData_40002f00 = dData_40002df8;
 		
@@ -3349,11 +3364,236 @@ int main(void)
 			else
 			{
 				//6ee78
+				dData_40002ce8 = Data_40004128.dData_88;
+				Data_40002cd8_ObjectRightAscensionHours = dData_40002ce8;
+				Data_40002cdc_ObjectRightAscensionMinutes =
+					(dData_40002ce8 - Data_40002cd8_ObjectRightAscensionHours) * 60.0;
+				#if 0
+				sp56 = Data_40002cdc_ObjectRightAscensionMinutes / 60.0;
+				sp40 = dData_40002ce8 - Data_40002cd8_ObjectRightAscensionHours;
+				sp32 = sp40 - sp56;
+				sp24 = sp32 * 3600.0;
+				fData_40002ce0_ObjectRightAscensionSeconds = sp24;
+				#else
+				fData_40002ce0_ObjectRightAscensionSeconds = 
+					((dData_40002ce8 - Data_40002cd8_ObjectRightAscensionHours) - 
+						Data_40002cdc_ObjectRightAscensionMinutes / 60.0) * 3600.0;
+				#endif
+				//6ef7c
+				fData_40002d18_ObjectDeclination = fabs(Data_40004128.dData_80);
+				Data_40002d00_ObjectDeclinationDegrees = fData_40002d18_ObjectDeclination;
+				#if 0
+				r5 = (float)Data_40002d00_ObjectDeclinationDegrees;
+				r4 = fData_40002d18_ObjectDeclination - r5;
+				sp64 = (double)r4;
+				sp56 = sp64 * 60.0;
+				#else
+				Data_40002d04_ObjectDeclinationMinutes = 
+					(fData_40002d18_ObjectDeclination - Data_40002d00_ObjectDeclinationDegrees) * 60.0;
+				#endif
+				#if 0
+				sp64 = Data_40002d04_ObjectDeclinationMinutes;
+				sp56 = sp64 / 60.0;
+				r5 = (float)Data_40002d00_ObjectDeclinationDegrees;
+				r4 = fData_40002d18_ObjectDeclination - r5;
+				sp48 = r4;
+				sp40 = sp48 - sp56;
+				sp32 = sp40 * 3600.0;
+				#else
+				fData_40002d08_ObjectDeclinationSeconds = 
+					((fData_40002d18_ObjectDeclination - Data_40002d00_ObjectDeclinationDegrees) - 
+						Data_40002d04_ObjectDeclinationMinutes / 60.0) * 3600.0;
+				#endif
 				
-				//TODO
-			}
+				if (Data_40004128.dData_80 > 0)
+				{
+					Data_40002d44 = 1;
+				}
+				else
+				{
+					Data_40002d44 = -1;
+				}
+				//0x6f0d4
+				func_6ae24(3);
 			
-			//TODO
+				Data_40004128.dData_208 = dData_40002db8;
+				dData_40002dc0 = Data_40004128.dData_208;
+				//->0x6f12c
+				while (dData_40002dc0 >= 360)
+				{
+					dData_40002dc0 -= 360;
+				}
+				//->0x6f164
+				while (dData_40002dc0 < 0)
+				{
+					dData_40002dc0 += 360;
+				}
+				//6f17c
+				dData_40002d78 = dData_40002dc0;
+				
+				func_659c(2);
+				func_6ae24(4);
+				
+				Data_40004128.dData_216 = dData_40002df0;
+				dData_40002df8 = fabs(Data_40004128.dData_216);
+				dData_40002d98 = dData_40002df8;
+				
+				if (Data_40004128.geographicLatitude >= 0)
+				{
+					//6f1f8
+					if (dData_40002d78 > 360)
+					{
+						dData_40002d78 += 360; //BUG?
+					}
+					//0x6f22c
+					dData_40002d78 -= 180;
+					
+					if (dData_40002d78 < 0)
+					{
+						dData_40002d78 += 360;
+					}
+					//0x6f27c
+					dData_40002d98 = 90 - dData_40002d98;
+					//->0x6f328
+				}
+				else
+				{
+					//0x6f29c
+					dData_40002d78 -= 180;
+					
+					if (dData_40002d78 < 0)
+					{
+						dData_40002d78 = -1 * dData_40002d78;
+					}
+					else
+					{
+						//0x6f2f0
+						dData_40002d78 = 360 - dData_40002d78;
+					}
+					//0x6f30c
+					dData_40002d98 -= 90;
+				}
+				//0x6f328
+				dData_40002d78 /= 15;
+				#if 0
+				sp64 = dData_400031f0 / 15;
+				sp56 = dData_40003420 / 15;
+				sp48 = dData_40002d78 - sp56;
+				sp40 = sp48 - sp64;
+				sp32 = (double)fData_400034c8;
+				sp24 = sp32 - sp40;
+				fData_40003508 = sp24;
+				#else
+				fData_40003508 = fData_400034c8 - 
+					(dData_40002d78 - dData_40003420 / 15 - dData_400031f0 / 15);
+				#endif
+				
+				if (fData_40003508 < 0)
+				{
+					fData_40003508 += 24;
+				}
+				//0x6f408
+				if (fData_40003508 > 24)
+				{
+					fData_40003508 -= 24;
+				}
+				//0x6f434
+				#if 0
+				sp64 = dData_40003420 / 15;
+				sp56 = dData_40002d78 - sp64;
+				sp48 = sp56 + dData_400033e8;
+				Data_40002d68 = sp48;
+				#else
+				Data_40002d68 = dData_40002d78 - dData_40003420 / 15 + dData_400033e8;
+				#endif
+				
+				#if 0
+				sp64 = Data_40002d68;
+				sp56 = dData_40003420 / 15;
+				sp48 = dData_40002d78 - sp56;
+				sp40 = sp48 + dData_400033e8;
+				sp32 = sp40 - sp64;
+				sp24 = sp32 * 60;
+				Data_40002d6c = sp24;
+				#else
+				Data_40002d6c = (dData_40002d78 - dData_40003420 / 15 + dData_400033e8 - Data_40002d68) * 60;
+				#endif
+				
+				#if 0
+				sp64 = Data_40002d6c;
+				sp56 = sp64 / 60;
+				sp48 = Data_40002d68;
+				sp40 = dData_40003420 / 15;
+				sp32 = dData_40002d78 - sp40;
+				sp24 = sp32 + dData_400033e8;
+				sp16 = sp24 - sp48;
+				sp8 = sp16 - sp56;
+				sp = sp8 * 3600.0;
+				fData_40002d70 = sp;
+				#else
+				fData_40002d70 = (dData_40002d78 - dData_40003420 / 15 + 
+					dData_400033e8 - Data_40002d68 - Data_40002d6c / 60.0) * 3600.0;
+				#endif
+				//6f5f8
+				if ((bData_40003200 == 1) && (Data_40004128.dData_304 == 2))
+				{
+					//6f624
+					dData_400033e8 = dData_40002ce8 - dData_40002d78;
+					Data_40002d68 = Data_40002cd8_ObjectRightAscensionHours;
+					Data_40002d6c = Data_40002cdc_ObjectRightAscensionMinutes;
+					fData_40002d70 = fData_40002ce0_ObjectRightAscensionSeconds;
+					bData_40002d88 = 1;
+				}
+				//0x6f67c
+				#if 0
+				sp64 = dData_40002d98 - dData_40003428;
+				sp56 = sp64 - dData_400031f8;
+				fData_4000350c = sp56;
+				#else
+				fData_4000350c = dData_40002d98 - dData_40003428 - dData_400031f8;
+				#endif
+				
+				Data_40002d8c = dData_40002d98 - dData_40003428 + dData_400033f0;
+				#if 0
+				sp64 = Data_40002d8c;
+				sp56 = dData_40002d98 - dData_40003428;
+				sp48 = sp56 + dData_400033f0;
+				sp40 = sp48 - sp64;
+				sp32 = sp40 * 60;
+				#else
+				Data_40002d90 = (dData_40002d98 - dData_40003428 + dData_400033f0 - Data_40002d8c) * 60;
+				#endif
+				
+				#if 0
+				sp64 = Data_40002d90;
+				sp56 = sp64 / 60;
+				sp48 = Data_40002d8c;
+				sp40 = dData_40002d98 - dData_40003428;
+				sp32 = sp40 + dData_400033f0;
+				sp24 = sp32 - sp48;
+				sp16 = sp24 - sp56;
+				sp8 = sp16 * 3600.0;
+				#else
+				fData_40002d94 = (dData_40002d98 - dData_40003428 + 
+					dData_400033f0 - Data_40002d8c - Data_40002d90 / 60.0) * 3600.0;
+				#endif
+				
+				if ((bData_40003201 == 1) && (Data_40004128.dData_312 == 2))
+				{
+					//6f868
+					#if 0
+					sp64 = fData_40002d18_ObjectDeclination;
+					dData_400033f0 = sp64 - dData_40002d98;
+					#else
+					dData_400033f0 = fData_40002d18_ObjectDeclination - dData_40002d98;
+					#endif
+					Data_40002d8c = Data_40002d00_ObjectDeclinationDegrees;
+					Data_40002d90 = Data_40002d04_ObjectDeclinationMinutes;
+					fData_40002d94 = fData_40002d08_ObjectDeclinationSeconds;
+					bData_40002da8 = 1;
+				}
+				//0x6f8d0
+			}
 		} //else if (bData_40002c1a == 2)
 		//6f8d0
 		if (bData_400031ed == 0)
@@ -3363,7 +3603,7 @@ int main(void)
 			lcd_display_string(0, 4, 1, 22, "System Initializing...");
 			get_all_solar_system_object_equatorial_coordinates();
 			func_659c(1000);
-			func_7950(1);
+			beep1(1);
 			lcd_display_clear();
 			lcd_display_string(0, 4, 1, 22, "System Initialized    ");
 			func_659c(1000);
@@ -3718,7 +3958,7 @@ int main(void)
 			//7296c
 			func_5f0c0();			
 			func_659c(100);
-			func_7950(2);		
+			beep1(2);		
 			//72980
 			Data_40002eb0 = 0;
 		} //if (Data_40002eb0 == 1)

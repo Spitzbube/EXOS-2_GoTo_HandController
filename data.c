@@ -121,9 +121,9 @@ char Data_40000c20[42];
 char Data_40000c35[] = "  Please center this "; //40000c35
 char Data_40000c4b[] = "star to the field of"; //40000c4b
 char Data_40000c60[] = "view"; //40000c60, size???
-char Data_40000c7a[42];
-char Data_40000c92[42];
-char Data_40000ca6[42];
+char Data_40000c7a[] = "The telescope has be   "; //40000c7a, size?
+char Data_40000c92[] = "aligned!           "; //40000c92, size?
+char Data_40000ca6[] = "                       "; //40000ca6, size?
 char Data_40000cbe[42];
 char Data_40000cd3[42];
 char Data_40000ce8[42];
@@ -411,10 +411,10 @@ Union_40002c28 Data_40002c28; //40002c28
 char bData_40002c58; //40002c58
 unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
 char bData_40002c5a; //40002c5a
-int Data_40002c5c; //40002c5c
+int Data_40002c5c_AlignmentStarCount; //40002c5c
 unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
 char bData_40002c61; //40002c61
-char bData_40002c62; //40002c62
+char bData_40002c62_AlignmentStarMode; //40002c62
 int Data_40002c64_MenuContextId; //40002c64
 char bData_40002c68; //40002c68
 char bData_40002c69_KeyCode; //40002c69
@@ -761,7 +761,7 @@ int Data_40003220_AlarmHours; //40003220
 int Data_40003224_AlarmMinutes; //40003224
 int Data_40003228_AlarmSeconds; //40003228
 char bData_4000322c; //4000322c
-char bData_4000322d; //4000322d
+char bData_4000322d_AlarmTimeElapsed; //4000322d
 float fData_40003238; //40003238
 int Data_40003248_CurrentDisplayPWM; //40003248
 unsigned short wData_40003250; //40003250

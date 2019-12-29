@@ -6,6 +6,7 @@
 #include <LPC214x.h>
 #include "my_types.h"
 #include "data.h"
+#include "menu.h"
 #include "file_79080.c"
 
 // configuration for the Atmel AT45DB161D device
@@ -1322,7 +1323,7 @@ void uart1_send_packets(unsigned char* a)
 }
 
 /* 2254 - complete */
-void func_2254(unsigned int a)
+void delay_loop(unsigned int a)
 {
 	unsigned int b;
 	for ( ; a > 1; a--)
@@ -1528,7 +1529,7 @@ void flash_write(int PageAdr, unsigned short BufAdr, int Count, unsigned char* D
 	
 	IO1SET = (1 << 24);
 	
-	func_2254(5);
+	delay_loop(5);
 }
 
 /* 258c - complete */
@@ -3549,7 +3550,7 @@ double func_7654(int a, int b, double sp64, double sp88, double sp96)
 }
 
 /* 7950 - todo */
-void func_7950(int a)
+void beep1(int a)
 {
 	bData_40002c08 = a << 5;
 	bData_40002c09 = bData_40002c08 - 1;
@@ -4472,7 +4473,7 @@ void func_9178(void)
 			
 			if (bData_40003498 != 0)
 			{
-				func_7950(1);
+				beep1(1);
 			}
 			
 			bData_40003498 = 0;
@@ -4493,7 +4494,7 @@ void func_9178(void)
 			Data_40004128.bData_356 = 0;
 			bData_40002e8c = 0;
 			
-			func_7950(1);
+			beep1(1);
 			
 			bData_40002e88 = 100;
 		}
@@ -7820,7 +7821,7 @@ void func_1e228(void)
 }
 
 /* 20b94 - todo */
-void func_20b94(void)
+void DisplayMainScreen(void)
 {
 	lcd_display_string(0, 1, 1, strlen(Data_40003360), (unsigned char*)Data_40003360);
 	lcd_display_string(0, 1, 14, strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -8658,7 +8659,7 @@ void func_2245c(int a, int b)
 #include "func_23130.c"
 
 /* 24574 - todo */
-void func_24574(void)
+void PrepareMainScreenItems(void)
 {
 	dData_40002e28_SiteLongitude = Data_40004128.geographicLongitude;
 	dData_40002e48_SiteLatitude = Data_40004128.geographicLatitude;
