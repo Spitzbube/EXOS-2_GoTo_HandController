@@ -1,23 +1,23 @@
 
 
 /* 27844 - todo */
-int func_27844(void)
+int PrepareScreenItems(void)
 {
 	SwapLanguageStrings();
 	
 	#ifdef UART0_DEBUG
 	{
 		char buf[100];
-		snprintf(buf, sizeof(buf)-1, "func_27844: Data_40002c64_MenuContextId=%d\n\r", Data_40002c64_MenuContextId);
+		snprintf(buf, sizeof(buf)-1, "PrepareScreenItems: MenuContextId=%d\n\r", Data_40002c64_MenuContextId);
 		uart0_send(buf, strlen(buf));
 	}
 	#endif
 	
 	switch (Data_40002c64_MenuContextId)
 	{
-		case 0:
+		case MENU_CONTEXT_MAIN: //0:
 			//0x28030
-			func_24574();
+			PrepareMainScreenItems();
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -582,7 +582,7 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 1000: //0x3e8:
+		case MENU_CONTEXT_ALIGNMENT: //1000:
 			//0x2a100 - Telescope Align
 			Data_40003360 = Data_40002f20; //Telescope Align
 			Data_40003364 = "";
@@ -606,7 +606,7 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 2000: //0x7D0:
+		case MENU_CONTEXT_NAVIGATION: //2000:
 			//0x2a220 - Navigation
 			Data_40003360 = Data_40002f20;
 			Data_40003364 = "";
@@ -630,7 +630,7 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 3000: //0xBB8:
+		case MENU_CONTEXT_UTILITIES: //3000:
 			//0x2a2f4 - Utilities
 			Data_40003360 = Data_40002f20;
 			Data_40003364 = "";
@@ -654,7 +654,7 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 4000: //0xFA0:
+		case MENU_CONTEXT_SETUP: //4000:
 			//0x2a3c8 - Setup
 			Data_40003360 = Data_40002f20;
 			Data_40003364 = "";
@@ -678,20 +678,20 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 1100: // One Star Align
-			//0x2a49c
-		case 1200: // Two Star Align
-			//0x2a4a4
-		case 1300: // Three Star Align
-			//0x2a4a8
-		case 1400: // Target Sync
-			//0x2a4ac
-		case 1500: // Pole-Axis Dev.
-			//0x2a4b0
-		case 1600: // RA Bklash Corr.
-			//0x2a4b4
-		case 1700: // DEC Bklash Corr.
-			//0x2a4b8
+		case MENU_CONTEXT_ONE_STAR_ALIGN: //1100:
+			//0x2a49c: One Star Align
+		case MENU_CONTEXT_TWO_STAR_ALIGN: //1200:
+			//0x2a4a4: Two Star Align
+		case MENU_CONTEXT_THREE_STAR_ALIGN: //1300:
+			//0x2a4a8: Three Star Align
+		case MENU_CONTEXT_TARGET_SYNC: //1400:
+			//0x2a4ac: Target Sync
+		case MENU_CONTEXT_POLE_AXIS_DEV: //1500:
+			//0x2a4b0: Pole-Axis Dev.
+		case MENU_CONTEXT_RA_BKBLASH_CORR: //1600:
+			//0x2a4b4: RA Bklash Corr.
+		case MENU_CONTEXT_DEC_BKLASH_CORR: //1700:
+			//0x2a4b8: DEC Bklash Corr.
 			func_2245c(11, bData_40003170);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_40003172;
@@ -704,30 +704,30 @@ int func_27844(void)
 			//->3d71c
 			break;
 		
-		case 2100: // Solar System
-			//0x2a500		
-		case 2200: // Constellation
-			//0x2a508
-		case 2300: // Famous Star
-			//0x2a50c
-		case 2400: // Messier Catal.
-			//0x2a510
-		case 2500: // NGC Catalog.
-			//0x2a514
-		case 2600: // IC Catalogue
-			//0x2a518
-		case 2700: // Sh2 Catalog.
-			//0x2a51c
-		case 2800: // Bright Star Cat.
-			//0x2a520
-		case 2900: // SAO Star Catal.
-			//0x2a524
-		case 2110: // Customer Objects
-			//0x2a528
-		case 2120: // Input RA and DEC
-			//0x2a52c
-		case 2130: // Custom Land Goal
-			//0x2a530
+		case MENU_CONTEXT_NAVIGATION_SOLAR_SYSTEM: //2100:
+			//0x2a500: Solar System
+		case MENU_CONTEXT_NAVIGATION_CONSTELLATION: //2200:
+			//0x2a508: Constellation
+		case MENU_CONTEXT_NAVIGATION_FAMOUS_STAR: //2300:
+			//0x2a50c: Famous Star
+		case MENU_CONTEXT_NAVIGATION_MESSIER_CAT: //2400:
+			//0x2a510: Messier Catal.
+		case MENU_CONTEXT_NAVIGATION_NGC_CAT: //2500:
+			//0x2a514: NGC Catalog.
+		case MENU_CONTEXT_NAVIGATION_IC_CAT: //2600:
+			//0x2a518: IC Catalogue
+		case MENU_CONTEXT_NAVIGATION_SH2_CAT: //2700:
+			//0x2a51c: Sh2 Catalog.
+		case MENU_CONTEXT_NAVIGATION_BRIGHT_STAR: //2800:
+			//0x2a520: Bright Star Cat.
+		case MENU_CONTEXT_NAVIGATION_SAO_CAT: //2900:
+			//0x2a524: SAO Star Catal.
+		case MENU_CONTEXT_NAVIGATION_CUST_OBJ: //2110:
+			//0x2a528: Customer Objects
+		case MENU_CONTEXT_NAVIGATION_RA_DEC: //2120:
+			//0x2a52c: Input RA and DEC
+		case MENU_CONTEXT_NAVIGATION_CUST_LAND: //2130:
+			//0x2a530: Custom Land Goal
 			func_2245c(12, bData_40003174);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_40003176;
@@ -1308,7 +1308,7 @@ int func_27844(void)
 			//->3d71c
 			break;
 
-		case 12001:
+		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//0x2b68c: One / Two / Three Star Align
 			bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(func_7f30(1, 0, Data_40004128.geographicLongitude), Data_40004128.geographicLatitude,
 				Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c);
@@ -1352,7 +1352,7 @@ int func_27844(void)
 				Data_40004012[8] = ' ';
 			}
 			//2bb70
-			if (bData_40002c62 != 0)
+			if (bData_40002c62_AlignmentStarMode != 0)
 			{
 				//2bb80
 				switch (bData_40002e7a)
@@ -1433,7 +1433,7 @@ int func_27844(void)
 						//0x2c068
 						break;
 				}
-			} //if (bData_40002c62 != 0)
+			} //if (bData_40002c62_AlignmentStarMode != 0)
 			//0x2c074
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
@@ -1501,7 +1501,7 @@ int func_27844(void)
 		
 		case 3:
 			//0x2c658
-			func_7950(1);
+			beep1(1);
 		
 			Data_40003360 = "Star move meridian";
 			Data_40003364 = "and telestope stop or";
@@ -5691,7 +5691,7 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0xB3B1: //46001
+		case MENU_CONTEXT_MOUNT_AZ: //46001:
 			//0x3d010
 			Data_40003360 = "Telescope Mount:";
 			Data_40003364 = "";
@@ -5706,7 +5706,7 @@ int func_27844(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0xB3B2: //46002
+		case MENU_CONTEXT_MOUNT_EQU: //46002:
 			//0x3d154
 			Data_40003360 = "Telescope Mount:";
 			Data_40003364 = "";

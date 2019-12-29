@@ -41,7 +41,7 @@ void func_5099c(void)
 	bData_400031b9 = 0;
 	Data_40002e80 = 0;
 	Data_40002e84 = 0;
-	bData_4000322d = 0;
+	bData_4000322d_AlarmTimeElapsed = 0;
 	bData_400031ea = 0;
 	bData_400031eb = 0;
 	bData_400031ec = 1;
