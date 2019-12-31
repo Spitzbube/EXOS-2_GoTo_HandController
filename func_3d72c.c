@@ -679,9 +679,9 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
 					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
-					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 6, 8, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
-					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+					lcd_display_string(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
 					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);

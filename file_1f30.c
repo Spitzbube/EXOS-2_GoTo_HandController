@@ -2806,12 +2806,12 @@ void func_5f40(void)
 	Data_40002d48 = 6;
 	Data_40002d4c = 3;
 	fData_40002d50 = 5.8;
-	Data_40002d68 = 2;
-	Data_40002d6c = 3;
-	fData_40002d70 = 2.3;
-	Data_40002d8c = 5;
-	Data_40002d90 = 2;
-	fData_40002d94 = 5.6;
+	Data_40002d68_OTARightAscensionHours = 2;
+	Data_40002d6c_OTARightAscensionMinutes = 3;
+	fData_40002d70_OTARightAscensionSeconds = 2.3;
+	Data_40002d8c_OTADeclinationDegrees = 5;
+	Data_40002d90_OTADeclinationMinutes = 2;
+	fData_40002d94_OTADeclinationSeconds = 5.6;
 	Data_40002dac = 8;
 	Data_40002db0 = 2;
 	fData_40002db4 = 5.8;
@@ -2836,7 +2836,7 @@ void func_5f40(void)
 	bData_40002e79_SkyLandTargetSeletion = 0;
 	bData_40002e7a = 0;
 	bData_40002e7b = 0;
-	bData_40002e7d = 5;
+	bData_40002e7d = MENU_ROTATING_SPEED_64; //5;
 	bData_40002e7e = 0;
 	bData_40002e88 = 0;
 	bData_40002e89 = 1;
@@ -3019,42 +3019,37 @@ void func_65d4(double sp40, double sp48)
 			{
 				switch (bData_40002e7d)
 				{
-					#if 0
-					case 0:
-						//->6d64
-						break;
-					#endif
-					case 1:
+					case MENU_ROTATING_SPEED_1: //1:
 						//->6bb4
 						Data_400033cc.dwData = 2*Data_40003408 + 6;
 						break;
 					
-					case 2:
+					case MENU_ROTATING_SPEED_2: //2:
 						//->6bd4
 						Data_400033cc.dwData = 16;
 						break;
 					
-					case 3:
+					case MENU_ROTATING_SPEED_8: //3:
 						//->6be8
 						Data_400033cc.dwData = 60;
 						break;
 					
-					case 4:
+					case MENU_ROTATING_SPEED_16: //4:
 						//->6bfc
 						Data_400033cc.dwData = 240;
 						break;
 					
-					case 5:
+					case MENU_ROTATING_SPEED_64: //5:
 						//->6c10
 						Data_400033cc.dwData = 460;
 						break;
 					
-					case 6:
+					case MENU_ROTATING_SPEED_128: //6:
 						//->6c24
 						Data_400033cc.dwData = 640;
 						break;
 					
-					case 7:
+					case MENU_ROTATING_SPEED_256: //7:
 						//->6c38
 						Data_400033cc.dwData = 2000;
 					
@@ -3069,7 +3064,7 @@ void func_65d4(double sp40, double sp48)
 						Data_400033cc.dwData = Data_40002e80;
 						break;
 					
-					case 8:
+					case MENU_ROTATING_SPEED_512: //8:
 						//->6c9c
 						Data_400033cc.dwData = 3200;
 					
@@ -3084,7 +3079,7 @@ void func_65d4(double sp40, double sp48)
 						Data_400033cc.dwData = Data_40002e80;
 						break;
 					
-					case 9:
+					case MENU_ROTATING_SPEED_MAX: //9:
 						//->6d00
 						Data_400033cc.dwData = 4800;
 					
@@ -3098,14 +3093,15 @@ void func_65d4(double sp40, double sp48)
 						}
 						Data_400033cc.dwData = Data_40002e80;
 						break;
+						
 					#if 0
 					default:
 						//->6d64
 						break;
-						#endif
+					#endif
 				}
 				//6d64
-			}
+			} //if (Data_40003408 != 0)
 			//6d68
 			uart1_write_byte(0x55);
 			uart1_write_byte(0xaa);
@@ -3118,7 +3114,7 @@ void func_65d4(double sp40, double sp48)
 			uart1_write_byte(Data_400033c8.bData[2]);
 			uart1_write_byte(Data_400033c8.bData[1]);
 			//->6f6c
-		}
+		} //if (bData_40002c1a == 1)
 		else
 		{
 			//6dec
@@ -3126,62 +3122,58 @@ void func_65d4(double sp40, double sp48)
 			{
 				switch (bData_40002e7d)
 				{
-					#if 0
-					case 0:
-						//->6ee8
-						break;
-					#endif
-					case 1:
+					case MENU_ROTATING_SPEED_1: //1:
 						//->6e38
 						Data_400033cc.dwData = 8;
 						break;
 					
-					case 2:
+					case MENU_ROTATING_SPEED_2: //2:
 						//->6e4c
 						Data_400033cc.dwData = 16;
 						break;
 					
-					case 3:
+					case MENU_ROTATING_SPEED_8: //3:
 						//->6e60
 						Data_400033cc.dwData = 32;
 						break;
 					
-					case 4:
+					case MENU_ROTATING_SPEED_16: //4:
 						//->6e74
 						Data_400033cc.dwData = 64;
 						break;
 					
-					case 5:
+					case MENU_ROTATING_SPEED_64: //5:
 						//->6e88
 						Data_400033cc.dwData = 100;
 						break;
 					
-					case 6:
+					case MENU_ROTATING_SPEED_128: //6:
 						//->6e9c
 						Data_400033cc.dwData = 200;
 						break;
 					
-					case 7:
+					case MENU_ROTATING_SPEED_256: //7:
 						//->6eb0
 						Data_400033cc.dwData = 400;
 						break;
 					
-					case 8:
+					case MENU_ROTATING_SPEED_512: //8:
 						//->6ec4
 						Data_400033cc.dwData = 600;
 						//break; //-> BUG??
 					
-					case 9:
+					case MENU_ROTATING_SPEED_MAX: //9:
 						//->6ed8
 						Data_400033cc.dwData = 980;
 						break;
+					
 					#if 0
 					default:
 						//->6ee8
 						break;
-						#endif
+					#endif
 				}
-			}
+			} //if (Data_40003408 != 0)
 			//6eec
 			if (Data_400033cc.dwData > 980)
 			{
@@ -3250,42 +3242,37 @@ void func_65d4(double sp40, double sp48)
 			{
 				switch (bData_40002e7d)
 				{
-					#if 0
-					case 0:
-						//->738c
-						break;
-					#endif
-					case 1:
+					case MENU_ROTATING_SPEED_1: //1:
 						//->71e8
 						Data_400033cc.dwData = 4;
 						break;
 					
-					case 2:
+					case MENU_ROTATING_SPEED_2: //2:
 						//->71fc
 						Data_400033cc.dwData = 16;
 						break;
 					
-					case 3:
+					case MENU_ROTATING_SPEED_8: //3:
 						//->7210
 						Data_400033cc.dwData = 60;
 						break;
 					
-					case 4:
+					case MENU_ROTATING_SPEED_16: //4:
 						//->7224
 						Data_400033cc.dwData = 240;
 						break;
 					
-					case 5:
+					case MENU_ROTATING_SPEED_64: //5:
 						//->7238
 						Data_400033cc.dwData = 460;
 						break;
 					
-					case 6:
+					case MENU_ROTATING_SPEED_128: //6:
 						//->724c
 						Data_400033cc.dwData = 640;
 						break;
 					
-					case 7:
+					case MENU_ROTATING_SPEED_256: //7:
 						//->7260
 						Data_400033cc.dwData = 2000;
 					
@@ -3300,7 +3287,7 @@ void func_65d4(double sp40, double sp48)
 						Data_400033cc.dwData = Data_40002e84;
 						break;
 					
-					case 8:
+					case MENU_ROTATING_SPEED_512: //8:
 						//->72c4
 						Data_400033cc.dwData = 3200;
 					
@@ -3315,7 +3302,7 @@ void func_65d4(double sp40, double sp48)
 						Data_400033cc.dwData = Data_40002e84;
 						break;
 					
-					case 9:
+					case MENU_ROTATING_SPEED_MAX: //9:
 						//->7328
 						Data_400033cc.dwData = 4800;
 					
@@ -3329,11 +3316,12 @@ void func_65d4(double sp40, double sp48)
 						}
 						Data_400033cc.dwData = Data_40002e84;
 						break;
+						
 					#if 0
 					default:
 						//->738c
 						break;
-						#endif
+					#endif
 				}
 			}
 			//7390
@@ -3348,7 +3336,7 @@ void func_65d4(double sp40, double sp48)
 			uart1_write_byte(Data_400033c8.bData[2]);
 			uart1_write_byte(Data_400033c8.bData[1]);
 			//->757c
-		}
+		} //if (bData_40002c1a == 1)
 		else
 		{
 			//73f8
@@ -3356,60 +3344,56 @@ void func_65d4(double sp40, double sp48)
 			{
 				switch (bData_40002e7d)
 				{
-					#if 0
-					case 0:
-						//->74f8
-						break;
-					#endif
-					case 1:
+					case MENU_ROTATING_SPEED_1: //1:
 						//->7444
 						Data_400033cc.dwData = 5;
 						break;
 					
-					case 2:
+					case MENU_ROTATING_SPEED_2: //2:
 						//->0x7458
 						Data_400033cc.dwData = 13;
 						break;
 					
-					case 3:
+					case MENU_ROTATING_SPEED_8: //3:
 						//->0x746c
 						Data_400033cc.dwData = 50;
 						break;
 					
-					case 4:
+					case MENU_ROTATING_SPEED_16: //4:
 						//->0x7480
 						Data_400033cc.dwData = 85;
 						break;
 					
-					case 5:
+					case MENU_ROTATING_SPEED_64: //5:
 						//->0x7494
 						Data_400033cc.dwData = 150;
 						break;
 					
-					case 6:
+					case MENU_ROTATING_SPEED_128: //6:
 						//->74a8
 						Data_400033cc.dwData = 220;
 						break;
 					
-					case 7:
+					case MENU_ROTATING_SPEED_256: //7:
 						//->0x74bc
 						Data_400033cc.dwData = 500;
 						break;
 					
-					case 8:
+					case MENU_ROTATING_SPEED_512: //8:
 						//->0x74d0
 						Data_400033cc.dwData = 800;
 						break;
 					
-					case 9:
+					case MENU_ROTATING_SPEED_MAX: //9:
 						//->0x74e4
 						Data_400033cc.dwData = 980;
 						break;
+					
 					#if 0
 					default:
 						//->74f8
 						break;
-						#endif
+					#endif
 				}
 			}
 			//74fc
@@ -3431,7 +3415,7 @@ void func_65d4(double sp40, double sp48)
 		}
 		//757c
 		func_659c(10);
-	}
+	} //if (bData_40002e8b == 0)
 }
 
 /* 7590 - complete */
@@ -3889,8 +3873,8 @@ double func_7f30(int a, int b, double sp192)
 	//http://www.geoastro.de/elevaz/basics/meeus.htm
 	//-> compute sidereal time at Greenwich (according to: Jean Meeus: Astronomical Algorithms)
 	T/*sp168*/ = (JD/*sp176*/ - 2451545.0) / 36525.0;
-	sp160 = (JD/*sp176*/ - 2451545.0) * 360.985647366289981619047466666 + 280.460618370000020149745978415 + 
-		0.000387993 * T*T/*sp168 * sp168*/ - T*T*T/*sp168 * sp168 * sp168*/ / 38710000.0;	
+	sp160 = 280.46061837 + 360.98564736629 * (JD - 2451545.0) + 
+		0.000387993 * T*T - T*T*T / 38710000.0;	
 	//883c
 	while (sp160 > 360.0)
 	{
@@ -3905,8 +3889,8 @@ double func_7f30(int a, int b, double sp192)
 	JD/*sp176*/ = (int)((sp116.wYear + 4716) * 365.25) + (int)((sp116.bMonth + 1) * 30.6001) + sp116.bDay + sp96 - 1524.5;
 	T/*sp168*/ = (JD/*sp176*/ - 2451545.0) / 36525.0;
 	
-	dData_400034a0 = (JD/*sp176*/ - 2451545.0) * 360.985647366289981619047466666 + 280.460618370000020149745978415 + 
-		0.000387993 * T*T/*sp168 * sp168*/ - T*T*T/*sp168 * sp168 * sp168*/ / 38710000.0;
+	dData_400034a0 = 280.46061837 + 360.98564736629 * (JD - 2451545.0) + 
+		0.000387993 * T*T - T*T*T / 38710000.0;
 	
 	while (dData_400034a0 > 360.0)
 	{
@@ -3938,55 +3922,58 @@ double func_7f30(int a, int b, double sp192)
 }
 
 /* 8ba4 - todo */
-void func_8ba4(Struct_8ba4_0 a/*sp176*/, Struct_8ba4 b/*sp208*/, int r4, int r5, double* r6)
+void func_8ba4(Struct_8ba4_0 a/*sp176*/, 
+							Struct_EquatorialCoordinates b/*sp208*/, 
+							int r4, int r5, 
+							Struct_HorizontalCoordinates* hor/*r6*/)
 {
-	double sp168 = 3.14159265359;
+	double pi = 3.14159265359;
 	double sp160 = a.dData_0; //sp176; 
-	double sp152 = a.dData_8; //sp184; 
-	double sp144 = b.dData_0; //sp208
-	double sp136 = b.dData_8; //sp216
-	double sp128;
-	double sp120;
-	double sp112;
-	double sp104;
+	double phi = a.dData_8/*sp184*/; //Geo latitude / sp152 
+	double alpha =  b.dRA; //Right ascension / sp208
+	double delta = b.dData_8; //Declination / sp216
+	double tau; //Local hour angle / sp128
+	double Theta; //Local sidereal time / sp120
+	double z; //Zenith distance / sp112
+	double A; //Azimuth / sp104
 	double sp96;
 	double sp88;
 	
-	sp120 = func_7f30(r4, r5, sp160);
+	Theta = func_7f30(r4, r5, sp160);
 	
-	sp128 = sp120 - sp144;
-	while (sp128 >= 24)
+	tau = Theta - alpha;
+	while (tau >= 24)
 	{
-		sp128 -= 24;
+		tau -= 24;
 	}
 	
-	while (sp128 < 0)
+	while (tau < 0)
 	{
-		sp128 += 24;
+		tau += 24;
 	}
 	//8cac
-	sp128 = sp128 * sp168 * 15.0 / 180.0;	
-	sp152 = sp152 * sp168 / 180.0;
-	sp136 = sp136 * sp168 / 180.0;
+	tau = tau * pi * 15.0 / 180.0;	
+	phi = phi * pi / 180.0;
+	delta = delta * pi / 180.0;
 	
-	sp112 = acos(sin(sp152) * sin(sp136) + cos(sp152) * cos(sp136) * cos(sp128));
-	sp104 = acos((sin(sp152) * cos(sp136) * cos(sp128) - cos(sp152) * sin(sp136)) / sin(sp112));
+	z = acos(sin(phi) * sin(delta) + cos(phi) * cos(delta) * cos(tau));
+	A = acos((sin(phi) * cos(delta) * cos(tau) - cos(phi) * sin(delta)) / sin(z));
 	
-	if (sp128 > sp168)
+	if (tau > pi)
 	{
-		sp104 = -1 * sp104;
+		A = -1 * A;
 	}
 	//8f38
-	sp96 = (sin(sp152) * sin(sp112) + cos(sp112) * cos(sp104) * cos(sp152)) / sin(sp112) * 15.04;
-	sp88 = cos(sp152) * 15.04 * sin(sp104);
-	
-	r6[0] = sp104 * 57.2957795130823228646477218717;
-	r6[1] = sp104 * 57.2957795130823228646477218717 + 180.0;
-	r6[4] = sp96;
-	r6[2] = sp112 * 57.2957795130823228646477218717;
-	r6[3] = 90.0 - sp112 * 57.2957795130823228646477218717;
-	r6[5] = sp88;
-	r6[6] = -sp88;
+	sp96 = (sin(phi) * sin(z) + cos(z) * cos(A) * cos(phi)) / sin(z) * 15.04; //15.041067?
+	sp88 = cos(phi) * 15.04 * sin(A);
+
+	hor->dData_0 = A * 57.2957795130823228646477218717;
+	hor->dData_8 = A * 57.2957795130823228646477218717 + 180.0;
+	hor->dData_32 = sp96;
+	hor->dZenithDistance = z * 57.2957795130823228646477218717;
+	hor->dAltitude = 90.0 - z * 57.2957795130823228646477218717;
+	hor->dData_40 = sp88;
+	hor->dData_48 = -sp88;
 }
 
 /* 9178 - todo */
@@ -3998,7 +3985,7 @@ void func_9178(void)
 	#else
 	Struct_8ba4_0 sp256;
 	#endif
-	Struct_8ba4 sp224;
+	Struct_EquatorialCoordinates sp224;
 	double sp152[9]; //size??
 	Struct_7978 sp104;
 	double sp96;
@@ -4033,7 +4020,7 @@ void func_9178(void)
 						Data_40004128.dData_72 += 24;
 					}
 					//928c
-					sp224.dData_0 = Data_40004128.dData_72;
+					sp224.dRA = Data_40004128.dData_72;
 					sp224.dData_8 = Data_40004128.dData_80;					
 					break;
 					
@@ -4048,10 +4035,10 @@ void func_9178(void)
 			#if 0
 			func_8ba4(sp256, sp264, sp224, Data_40004128.Data_40, Data_40004128.bData_44, sp152);
 			#else
-			func_8ba4(sp256, sp224, Data_40004128.Data_40, Data_40004128.bData_44, sp152);
+			func_8ba4(sp256, sp224, Data_40004128.Data_40, Data_40004128.bData_44, (void*)sp152);
 			#endif
 			
-			sp72 = sp80 - sp224.dData_0;
+			sp72 = sp80 - sp224.dRA;
 			
 			while (sp72 >= 24)
 			{
@@ -4245,7 +4232,7 @@ void func_9178(void)
 			{
 				Data_40004128.dData_304 = 0;
 				
-				if (bData_40002e7d > 6)
+				if (bData_40002e7d > MENU_ROTATING_SPEED_128/*6*/)
 				{
 					bData_40003498 = 1;
 				}
@@ -4258,7 +4245,7 @@ void func_9178(void)
 			{
 				Data_40004128.dData_312 = 0;
 				
-				if (bData_40002e7d > 6)
+				if (bData_40002e7d > MENU_ROTATING_SPEED_128/*6*/)
 				{
 					bData_40003498 = 1;
 				}
@@ -4797,7 +4784,7 @@ void func_b594(void)
 	Data_40004128.dData_264 = 0.0;
 	Data_40004128.dData_256 = 0.0;
 	
-	bData_40002e7d = 3;
+	bData_40002e7d = MENU_ROTATING_SPEED_8; //3;
 	bData_40003200 = 1;
 	bData_40003201 = 1;
 	
@@ -4829,7 +4816,7 @@ void func_b64c(double a, double b)
 	func_75c4();
 	
 	bData_400034cc = 0;
-	bData_40002e7d = 3;
+	bData_40002e7d = MENU_ROTATING_SPEED_8; //3;
 	bData_40003200 = 1;
 	bData_40003201 = 1;
 	
@@ -8113,22 +8100,22 @@ void DisplayMainScreen(void)
 			lcd_display_string(0, 7, 18, 1, "m");
 			lcd_display_string(0, 7, 21, 1, "s");
 			
-			if (Data_40002d68 < 100)
+			if (Data_40002d68_OTARightAscensionHours < 100)
 			{
 				lcd_display_string(0, 7, 12, 1, " ");
 			}
 			
-			if (Data_40002d68 < 10)
+			if (Data_40002d68_OTARightAscensionHours < 10)
 			{
 				lcd_display_string(0, 7, 13, 1, " ");
 			}
 			
-			if (Data_40002d6c < 10)
+			if (Data_40002d6c_OTARightAscensionMinutes < 10)
 			{
 				lcd_display_string(0, 7, 16, 1, " ");
 			}
 			
-			if (fData_40002d70 < 10)
+			if (fData_40002d70_OTARightAscensionSeconds < 10)
 			{
 				lcd_display_string(0, 7, 19, 1, " ");
 			}
@@ -8206,17 +8193,17 @@ void DisplayMainScreen(void)
 		else
 		{
 			//0x21f60
-			if (abs(Data_40002d8c) < 10)
+			if (abs(Data_40002d8c_OTADeclinationDegrees) < 10)
 			{
 				lcd_display_string(0, 8, 13, 1, " ");
 			}
 			
-			if (abs(Data_40002d90) < 10)
+			if (abs(Data_40002d90_OTADeclinationMinutes) < 10)
 			{
 				lcd_display_string(0, 8, 16, 1, " ");
 			}
 			
-			if (abs(fData_40002d94) < 10)
+			if (abs(fData_40002d94_OTADeclinationSeconds) < 10)
 			{
 				lcd_display_string(0, 8, 19, 1, " ");
 			}
@@ -8868,47 +8855,47 @@ void PrepareMainScreenItems(void)
 	//25058
 	switch (bData_40002e7d)
 	{
-		case 1:
+		case MENU_ROTATING_SPEED_1: //1:
 			//0x25158
 			Data_40003390 = "1X   ";
 			break;
 		
-		case 2:
+		case MENU_ROTATING_SPEED_2: //2:
 			//0x2516c
 			Data_40003390 = "2X   ";
 			break;
 		
-		case 3:
+		case MENU_ROTATING_SPEED_8: //3:
 			//0x25180
 			Data_40003390 = "8X   ";
 			break;
 		
-		case 4:
+		case MENU_ROTATING_SPEED_16: //4:
 			//0x25194
 			Data_40003390 = "16X  ";
 			break;
 		
-		case 5:
+		case MENU_ROTATING_SPEED_64: //5:
 			//0x251a8
 			Data_40003390 = "64X  ";
 			break;
 		
-		case 6:
+		case MENU_ROTATING_SPEED_128: //6:
 			//0x251bc
 			Data_40003390 = "128X";
 			break;
 		
-		case 7:
+		case MENU_ROTATING_SPEED_256: //7:
 			//0x251d0
 			Data_40003390 = "256X";
 			break;
 		
-		case 8:
+		case MENU_ROTATING_SPEED_512: //8:
 			//0x251e4
 			Data_40003390 = "512X";
 			break;
 		
-		case 9:
+		case MENU_ROTATING_SPEED_MAX: //9:
 			//0x251f8
 			Data_40003390 = "Max ";
 			break;
@@ -8929,7 +8916,9 @@ void PrepareMainScreenItems(void)
 		case 1:
 			//0x252b0
 			sprintf(Data_400040ba, " OTA: %03dh%02dm%02ds", 
-				Data_40002d68, Data_40002d6c, abs(fData_40002d70) & 0xff);
+				Data_40002d68_OTARightAscensionHours, 
+				Data_40002d6c_OTARightAscensionMinutes, 
+				abs(fData_40002d70_OTARightAscensionSeconds) & 0xff);
 			break;
 		
 		default:
@@ -8964,13 +8953,17 @@ void PrepareMainScreenItems(void)
 			{
 				//25534
 				sprintf(Data_400040e4, "      -%02d?%02d'%02d      ",
-					abs(Data_40002d8c), abs(Data_40002d90), abs(fData_40002d94) & 0xFF);
+					abs(Data_40002d8c_OTADeclinationDegrees), 
+					abs(Data_40002d90_OTADeclinationMinutes), 
+					abs(fData_40002d94_OTADeclinationSeconds) & 0xFF);
 			}
 			else
 			{
 				//0x255ac
 				sprintf(Data_400040e4, "      +%02d?%02d'%02d      ",
-					abs(Data_40002d8c), abs(Data_40002d90), abs(fData_40002d94) & 0xFF);
+					abs(Data_40002d8c_OTADeclinationDegrees), 
+					abs(Data_40002d90_OTADeclinationMinutes), 
+					abs(fData_40002d94_OTADeclinationSeconds) & 0xFF);
 			}
 			break;
 		
