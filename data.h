@@ -546,15 +546,15 @@ extern int Data_40002d44; //40002d44
 extern int Data_40002d48; //40002d48
 extern int Data_40002d4c; //40002d4c
 extern float fData_40002d50; //40002d50
-extern int Data_40002d68; //40002d68
-extern int Data_40002d6c; //40002d6c
-extern float fData_40002d70; //40002d70
+extern int Data_40002d68_OTARightAscensionHours; //40002d68
+extern int Data_40002d6c_OTARightAscensionMinutes; //40002d6c
+extern float fData_40002d70_OTARightAscensionSeconds; //40002d70
 extern double dData_40002d78; //40002d78
 extern double dData_40002d80; //40002d80
 extern char bData_40002d88; //40002d88
-extern int Data_40002d8c; //40002d8c
-extern int Data_40002d90; //40002d90
-extern float fData_40002d94; //40002d94
+extern int Data_40002d8c_OTADeclinationDegrees; //40002d8c
+extern int Data_40002d90_OTADeclinationMinutes; //40002d90
+extern float fData_40002d94_OTADeclinationSeconds; //40002d94
 extern double dData_40002d98; //40002d98
 extern double dData_40002da0; //40002da0
 extern char bData_40002da8; //40002da8
@@ -925,6 +925,8 @@ extern double dData_400033d8; //400033d8
 extern double dData_400033e0; //400033e0
 extern double dData_400033e8; //400033e8
 extern double dData_400033f0; //400033f0
+extern double dData_400033f8; //400033f8
+extern double dData_40003400; //40003400
 extern int Data_40003408; //40003408
 extern int Data_4000340c; //4000340c
 extern double dData_40003410; //40003410
@@ -1022,9 +1024,9 @@ extern float Data_40004a68_CurrentAlignStarEquatorialCoord[][2]; //40004a68
 #else
 extern float Data_40004a68_CurrentAlignStarEquatorialCoord[]; //40004a68
 #endif
-extern Struct_8ba4 Data_40004ae8; //40004ae8
+extern Struct_EquatorialCoordinates Data_40004ae8; //40004ae8
 extern double Data_40004b08[]; //40004b08, array?
-extern Struct_8ba4 Data_40004b50; //40004b50
+extern Struct_EquatorialCoordinates Data_40004b50; //40004b50
 extern double Data_40004b70[]; //40004b70
 extern Struct_40004b70 Data_40004b70_; //40004b70
 extern unsigned char Data_40004bb8[]; //40004bb8

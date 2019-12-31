@@ -140,11 +140,11 @@ typedef struct
 
 typedef struct
 {
-	double dData_0; //0
+	double dRA; //0
 	double dData_8; //8
 	double fill1; //16
 	double fill2;	//24
-} Struct_8ba4;
+} Struct_EquatorialCoordinates;
 
 typedef struct
 {
@@ -177,4 +177,14 @@ typedef struct
 } Struct_40004b70;
 
 
-
+typedef struct
+{
+	double dData_0; 
+	double dData_8; 
+	double dZenithDistance; //16
+	double dAltitude; //24 
+	double dData_32; 
+	double dData_40; 
+	double dData_48;
+	
+} Struct_HorizontalCoordinates;
