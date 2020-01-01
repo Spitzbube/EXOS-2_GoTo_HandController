@@ -135,8 +135,9 @@ typedef struct
 typedef struct
 {
 	double dData_0; //0
-	double dData_8; //8
-} Struct_8ba4_0;
+	double dLatitude; //8
+	
+} Struct_GeographicCoordinates;
 
 typedef struct
 {
@@ -180,11 +181,13 @@ typedef struct
 typedef struct
 {
 	double dData_0; 
-	double dData_8; 
+	double dAzimuth; //8
 	double dZenithDistance; //16
 	double dAltitude; //24 
 	double dData_32; 
 	double dData_40; 
 	double dData_48;
+	double fill1;
+	double fill2;
 	
 } Struct_HorizontalCoordinates;

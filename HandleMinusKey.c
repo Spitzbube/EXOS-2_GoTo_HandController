@@ -26,11 +26,11 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 101;
 			break;
 		
-		case 3:
+		case MENU_CONTEXT_MERIDIAN_FLIP: //3:
 			//0x5fa30
 			bData_40003210 = 1;
 			bData_40003211 = 0;
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
@@ -57,7 +57,7 @@ void HandleMinusKey(void)
 				beep1(2);
 				func_659c(100);
 				
-				Data_40002c64_MenuContextId = 0;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			}
 			else
 			{
@@ -869,7 +869,7 @@ void HandleMinusKey(void)
 			else
 			{
 				//0x608f4
-				func_6518();
+				get_rtc_date_time();
 				
 				sprintf(Data_400037ec, "%04d-%02d-%02d",
 					Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
