@@ -176,13 +176,13 @@ void HandleLeftKey(void)
 					if (bData_40002c1a == 1)
 					{
 						//599b0
-						func_57414(1, 3, bData_40002e7d);
+						func_57414(1, 3, bData_40002e7d_RotatingSpeed);
 						//->0x59a1c
 					}
 					else
 					{
 						//0x599c8
-						func_57414(3, 3, bData_40002e7d);
+						func_57414(3, 3, bData_40002e7d_RotatingSpeed);
 						//->0x59a1c
 					}
 				}
@@ -193,12 +193,12 @@ void HandleLeftKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//599f0
-					func_57414(1, 3, bData_40002e7d);
+					func_57414(1, 3, bData_40002e7d_RotatingSpeed);
 				}
 				else
 				{
 					//0x59a08
-					func_57414(3, 3, bData_40002e7d);
+					func_57414(3, 3, bData_40002e7d_RotatingSpeed);
 				}
 			}
 			//-> 0x59dc4
@@ -246,12 +246,12 @@ void HandleLeftKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//59afc
-					func_57414(1, 3, bData_40002e7d);
+					func_57414(1, 3, bData_40002e7d_RotatingSpeed);
 				}
 				else
 				{
 					//0x59b14
-					func_57414(3, 3, bData_40002e7d);
+					func_57414(3, 3, bData_40002e7d_RotatingSpeed);
 				}
 			}
 			//0x59b28 -> 0x59dc4

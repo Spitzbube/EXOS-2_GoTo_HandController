@@ -125,13 +125,13 @@ int PrepareScreenItems(void)
 					Data_4000336c = "                      ";
 					
 					Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-					Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+					Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 					Data_40004ae8.dRA = Data_40003f50.fData_12;
 					Data_40004ae8.dData_8 = Data_40003f50.fData_16;
 					fData_40002cd0_ObjectRightAscension = Data_40003f50.fData_12;
 					fData_40002d18_ObjectDeclination = Data_40003f50.fData_16;
 					
-					func_8ba4(Data_40004ad8, Data_40004ae8, 
+					convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 						Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 					//284f8
 					sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -740,24 +740,24 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 3100: // Current Objects
-			//0x2a578
-		case 3200: // Object Rise/Set
-			//0x2a580
+		case MENU_CONTEXT_CURRENT_OBJECTS: //3100:
+			//0x2a578: Current Objects
+		case MENU_CONTEXT_OBJECT_RISE_SET: //3200:
+			//0x2a580: Object Rise/Set
 		case 3300: // Curr. Lunar Phase
 			//0x2a584
 		case 3400: // Timer
 			//0x2a588
 		case 3500: // Alarm
 			//0x2a58c
-		case 3600: // Eyepiece FOV
-			//0x2a590
-		case 3700: // Eyepiece Magn.
-			//0x2a594
-		case 3800: // Display Illumin.
-			//0x2a598
-		case 3900: // Parkposition
-			//0x2a59c
+		case MENU_CONTEXT_EYEPIECE_FOV: //3600:
+			//0x2a590: Eyepiece FOV
+		case MENU_CONTEXT_EYEPIECE_MAGN: //3700:
+			//0x2a594: Eyepiece Magn.
+		case MENU_CONTEXT_DISPLAY_ILLUMINATION: //3800:
+			//0x2a598: Display Illumin.
+		case MENU_CONTEXT_PARK_POSITION: //3900:
+			//0x2a59c: Parkposition
 			func_2245c(13, bData_40003178);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_4000317a;
@@ -770,18 +770,18 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 4100: // Time and Date
-			//0x2a5e4
+		case MENU_CONTEXT_TIME_DATE: //4100:
+			//0x2a5e4: Time and Date
 		case 4200: // Daylight Saving
 			//0x2a5ec
-		case 4300: // Site Setting
-			//0x2a5f0
+		case MENU_CONTEXT_SITE_SETTING: //4300:
+			//0x2a5f0: Site Setting
 		case 4400: // Sky/Land
 			//0x2a5f4
 		case 4500: // AZ / EQ
 			//0x2a5f8
-		case 4600: // Telescope Mount
-			//0x2a5fc
+		case MENU_CONTEXT_TELESCOPE_MOUNT: //4600:
+			//0x2a5fc: Telescope Mount
 		case 4700: // Tracking Rate
 			//0x2a600
 		case 4800: // Language
@@ -1310,7 +1310,7 @@ int PrepareScreenItems(void)
 
 		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//0x2b68c: One / Two / Three Star Align
-			bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(func_7f30(1, 0, Data_40004128.geographicLongitude), Data_40004128.geographicLatitude,
+			bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude), Data_40004128.geographicLatitude,
 				Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c);
 			
 			sprintf(Data_40003ffd, "R.a: %02dh%02dm                ",
@@ -1355,12 +1355,12 @@ int PrepareScreenItems(void)
 			if (bData_40002c62_AlignmentStarMode != 0)
 			{
 				//2bb80
-				switch (bData_40002e7a)
+				switch (bData_40002e7a_MountType)
 				{
 					case 1:
 						//2bb98
 						dData_40002c90 = dData_40002d98;					
-						dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
+						dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 						//->0x2bc04
 						while (dData_40002c88 >= 24)
 						{
@@ -1372,18 +1372,18 @@ int PrepareScreenItems(void)
 						}
 						//2bc54
 						Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-						Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+						Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 						
 						Data_40004b50.dRA = dData_40002c88;
 						Data_40004b50.dData_8 = dData_40002c90;
 						
 #if 1
-						func_8ba4(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+						convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
 
 						dData_40002dd0 = Data_40004b70[1];
 						dData_40002e08 = Data_40004b70[3];
 #else
-						func_8ba4(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70_);
+						convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70_);
 
 						dData_40002dd0 = Data_40004b70_.dData_8; 
 						dData_40002e08 = Data_40004b70_.dData_24;
@@ -1436,12 +1436,12 @@ int PrepareScreenItems(void)
 			} //if (bData_40002c62_AlignmentStarMode != 0)
 			//0x2c074
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 			
 			Data_40004ae8.dRA = Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1)];
 			Data_40004ae8.dData_8 = Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1];
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 
 			sprintf(Data_40004027, "Azi:%03d %02d                ",
 				(int)Data_40004b08[1],
@@ -1499,7 +1499,7 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 		
-		case 3:
+		case MENU_CONTEXT_MERIDIAN_FLIP: //3:
 			//0x2c658
 			beep1(1);
 		
@@ -1804,12 +1804,12 @@ int PrepareScreenItems(void)
 			Data_4000336c = "                      ";
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ", 
@@ -1946,12 +1946,12 @@ int PrepareScreenItems(void)
 				&fData_40002cd0_ObjectRightAscension, &fData_40002d18_ObjectDeclination);
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ", 
@@ -2014,11 +2014,11 @@ int PrepareScreenItems(void)
 			dData_40002dd0 = dData_40002dc0;
 			dData_40002e08 = dData_40002df8;
 			
-			if (bData_40002e7a == 1)
+			if (bData_40002e7a_MountType == 1)
 			{
 				//2e2ec
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
+				dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 				//->0x2e354
 				while (dData_40002c88 >= 24)
 				{
@@ -2030,12 +2030,12 @@ int PrepareScreenItems(void)
 				}
 				//2e3a4
 				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+				Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				func_8ba4(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
 
 				dData_40002dd0 = Data_40004b70[1];
 				dData_40002e08 = Data_40004b70[3];
@@ -2188,12 +2188,12 @@ int PrepareScreenItems(void)
 			Data_4000336c = Data_40003fe8;
 			
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 			
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 			
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 				
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -2316,12 +2316,12 @@ int PrepareScreenItems(void)
 			fData_40002d18_ObjectDeclination = Data_40003dd4.fData_40;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -2384,11 +2384,11 @@ int PrepareScreenItems(void)
 			dData_40002dd0 = dData_40002dc0;
 			dData_40002e08 = dData_40002df8;
 			
-			if (bData_40002e7a == 1)
+			if (bData_40002e7a_MountType == 1)
 			{
 				//2fc08
 				dData_40002c90 = dData_40002d98;				
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
+				dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 				//->0x2fc70
 				while (dData_40002c88 >= 24)
 				{
@@ -2400,12 +2400,12 @@ int PrepareScreenItems(void)
 				}
 				//2fcc0
 				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+				Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				func_8ba4(Data_40004ad8, Data_40004b50, 
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
 					Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b70);
 				
 				dData_40002dd0 = Data_40004b70[1];
@@ -2542,12 +2542,12 @@ int PrepareScreenItems(void)
 			Data_4000336c = Data_40003fe8;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -2670,12 +2670,12 @@ int PrepareScreenItems(void)
 			fData_40002d18_ObjectDeclination = Data_40003d94.fData_60;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -2738,11 +2738,11 @@ int PrepareScreenItems(void)
 			dData_40002dd0 = dData_40002dc0;
 			dData_40002e08 = dData_40002df8;
 			
-			if (bData_40002e7a == 1)
+			if (bData_40002e7a_MountType == 1)
 			{
 				//31490
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
+				dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 				//->0x314f8
 				while (dData_40002c88 >= 24)
 				{
@@ -2754,12 +2754,12 @@ int PrepareScreenItems(void)
 				}
 				//31548
 				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+				Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				func_8ba4(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
 
 				dData_40002dd0 = Data_40004b70[1];
 				dData_40002e08 = Data_40004b70[3];
@@ -2923,11 +2923,11 @@ int PrepareScreenItems(void)
 			Data_4000336c = "                                                ";
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -3050,12 +3050,12 @@ int PrepareScreenItems(void)
 			fData_40002d18_ObjectDeclination = Data_40003e08.fData_8;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -3118,11 +3118,11 @@ int PrepareScreenItems(void)
 			dData_40002dd0 = dData_40002dc0;
 			dData_40002e08 = dData_40002df8;
 			
-			if (bData_40002e7a == 1)
+			if (bData_40002e7a_MountType == 1)
 			{
 				//32f2c
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
+				dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 				//->0x2e354
 				while (dData_40002c88 >= 24)
 				{
@@ -3134,12 +3134,12 @@ int PrepareScreenItems(void)
 				}
 				//32fe4
 				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+				Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				func_8ba4(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
 
 				dData_40002dd0 = Data_40004b70[1];
 				dData_40002e08 = Data_40004b70[3];				
@@ -3288,11 +3288,11 @@ int PrepareScreenItems(void)
 			Data_4000336c = Data_40003ee0.bData_20;
 			
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 			//3389c
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -3415,12 +3415,12 @@ int PrepareScreenItems(void)
 			fData_40002d18_ObjectDeclination = Data_40003ee0.fData_12;
 
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -3483,11 +3483,11 @@ int PrepareScreenItems(void)
 			dData_40002dd0 = dData_40002dc0;
 			dData_40002e08 = dData_40002df8;
 			
-			if (bData_40002e7a == 1)
+			if (bData_40002e7a_MountType == 1)
 			{
 				//3485c
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
+				dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 
 				while (dData_40002c88 >= 24)
 				{
@@ -3499,12 +3499,12 @@ int PrepareScreenItems(void)
 				}
 				//34914
 				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+				Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				func_8ba4(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
 
 				dData_40002dd0 = Data_40004b70[1];
 				dData_40002e08 = Data_40004b70[3];				
@@ -3665,11 +3665,11 @@ int PrepareScreenItems(void)
 			Data_4000336c = Data_40003ec0.bData_20;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 			//3520c
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -3792,12 +3792,12 @@ int PrepareScreenItems(void)
 			fData_40002d18_ObjectDeclination = Data_40003ec0.fData_12;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -3860,11 +3860,11 @@ int PrepareScreenItems(void)
 			dData_40002dd0 = dData_40002dc0;
 			dData_40002e08 = dData_40002df8;
 			
-			if (bData_40002e7a == 1)
+			if (bData_40002e7a_MountType == 1)
 			{
 				//3619c
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
+				dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 
 				while (dData_40002c88 >= 24)
 				{
@@ -3876,12 +3876,12 @@ int PrepareScreenItems(void)
 				}
 				//36254
 				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+				Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				func_8ba4(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
 
 				dData_40002dd0 = Data_40004b70[1];
 				dData_40002e08 = Data_40004b70[3];				
@@ -4029,11 +4029,11 @@ int PrepareScreenItems(void)
 			Data_4000336c = "                                        ";
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 				
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -4156,12 +4156,12 @@ int PrepareScreenItems(void)
 			fData_40002d18_ObjectDeclination = Data_40003350.fData_4;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -4224,11 +4224,11 @@ int PrepareScreenItems(void)
 			dData_40002dd0 = dData_40002dc0;
 			dData_40002e08 = dData_40002df8;
 			
-			if (bData_40002e7a == 1)
+			if (bData_40002e7a_MountType == 1)
 			{
 				//37a84
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
+				dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 
 				while (dData_40002c88 >= 24)
 				{
@@ -4240,12 +4240,12 @@ int PrepareScreenItems(void)
 				}
 
 				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+				Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				func_8ba4(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
 
 				dData_40002dd0 = Data_40004b70[1];
 				dData_40002e08 = Data_40004b70[3];				
@@ -4394,11 +4394,11 @@ int PrepareScreenItems(void)
 			Data_4000336c = "                                          ";
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 				
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -4521,12 +4521,12 @@ int PrepareScreenItems(void)
 			fData_40002d18_ObjectDeclination = Data_40003ea0.fData_24;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 		
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -4589,11 +4589,11 @@ int PrepareScreenItems(void)
 			dData_40002dd0 = dData_40002dc0;
 			dData_40002e08 = dData_40002df8;
 			
-			if (bData_40002e7a == 1)
+			if (bData_40002e7a_MountType == 1)
 			{
 				//39368
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
+				dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 
 				while (dData_40002c88 >= 24)
 				{
@@ -4605,12 +4605,12 @@ int PrepareScreenItems(void)
 				}
 				//39420
 				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+				Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				func_8ba4(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
 
 				dData_40002dd0 = Data_40004b70[1];
 				dData_40002e08 = Data_40004b70[3];				
@@ -4746,11 +4746,11 @@ int PrepareScreenItems(void)
 			Data_4000336c = "                                        ";
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 				
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -4873,11 +4873,11 @@ int PrepareScreenItems(void)
 			fData_40002d18_ObjectDeclination = Data_40003358_SAORecord.dec;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-			Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 			Data_40004ae8.dRA = fData_40002cd0_ObjectRightAscension;
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
-			func_8ba4(Data_40004ad8, Data_40004ae8, 
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
 
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
@@ -4945,11 +4945,11 @@ int PrepareScreenItems(void)
 			dData_40002dd0 = dData_40002dc0;
 			dData_40002e08 = dData_40002df8;
 			
-			if (bData_40002e7a == 1)
+			if (bData_40002e7a_MountType == 1)
 			{
 				//3abfc
 				dData_40002c90 = dData_40002d98;					
-				dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
+				dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - dData_40002d78;
 
 				while (dData_40002c88 >= 24)
 				{
@@ -4961,12 +4961,12 @@ int PrepareScreenItems(void)
 				}
 				//3acb4
 				Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
-				Data_40004ad8.dData_8 = Data_40004128.geographicLatitude;
+				Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
 				
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				func_8ba4(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
 
 				dData_40002dd0 = Data_40004b70[1];
 				dData_40002e08 = Data_40004b70[3];
@@ -5266,21 +5266,21 @@ int PrepareScreenItems(void)
 				fData_40002d18_ObjectDeclination, 
 				Data_40004128.geographicLongitude, 
 				Data_40004128.geographicLatitude, 
-				(unsigned char)Data_40004128.Data_64);
+				(unsigned char)Data_40004128.timeZone);
 
 			dData_40002c78 = func_d7ac(2, 
 				fData_40002cd0_ObjectRightAscension, 
 				fData_40002d18_ObjectDeclination, 
 				Data_40004128.geographicLongitude, 
 				Data_40004128.geographicLatitude, 
-				(unsigned char)Data_40004128.Data_64);
+				(unsigned char)Data_40004128.timeZone);
 
 			dData_40002c80 = func_d7ac(3, 
 				fData_40002cd0_ObjectRightAscension, 
 				fData_40002d18_ObjectDeclination, 
 				Data_40004128.geographicLongitude, 
 				Data_40004128.geographicLatitude, 
-				(unsigned char)Data_40004128.Data_64);
+				(unsigned char)Data_40004128.timeZone);
 				
 			sprintf(Data_40003fd3, "RiseTime:   %02dh%02dm",
 				(int)dData_40002c70,

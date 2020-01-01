@@ -4,13 +4,13 @@
 #include "data.h"
 
 extern void func_2df8(int a, int b, int c, int d, unsigned char* e);
-extern void func_5f40(void);
+extern void initialize_variables(void);
 
 
 /* 5099c - todo */
 void func_5099c(void)
 {
-	func_5f40();
+	initialize_variables();
 	
 	bData_4000316e_FocusLineOn8LineDisplay = 0;
 	Data_4000318c = 0;

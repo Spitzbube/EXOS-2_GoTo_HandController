@@ -2779,7 +2779,7 @@ unsigned char GetCurrentAlignStars(float r4, float r5, float* equatorialCoord, u
 }
 
 /* 5f40 - todo */
-void func_5f40(void)
+void initialize_variables(void)
 {
 	bData_40002f1e_SetupLocalData = 1;
 	bData_40002c58 = 0;
@@ -2787,7 +2787,7 @@ void func_5f40(void)
 	bData_40002c68 = 0;
 	bData_40002c6a = 0;
 	dData_40002c98 = 0.0;
-	bData_40002e7c = 0;
+	bData_40002e7c_TrackingRateType = 0;
 	dData_40002ca0 = 1.0;
 	dData_40002ca8 = 0.235;
 	dData_40002cb0 = 0.326;
@@ -2834,9 +2834,9 @@ void func_5f40(void)
 	bData_40002e63_Minutes = 18;
 	bData_40002e64_Seconds = 18;
 	bData_40002e79_SkyLandTargetSeletion = 0;
-	bData_40002e7a = 0;
-	bData_40002e7b = 0;
-	bData_40002e7d = MENU_ROTATING_SPEED_64; //5;
+	bData_40002e7a_MountType = MENU_MOUNT_TYPE_AZ; //0;
+	bData_40002e7b_GpsAvailable = 0;
+	bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_64; //5;
 	bData_40002e7e = 0;
 	bData_40002e88 = 0;
 	bData_40002e89 = 1;
@@ -2879,7 +2879,7 @@ void func_5f40(void)
 }
 
 /* 6518 - complete */
-void func_6518(void)
+void get_rtc_date_time(void)
 {
 	unsigned int r0 = CTIME0;
 	unsigned int r1 = CTIME1;
@@ -3017,7 +3017,7 @@ void func_65d4(double sp40, double sp48)
 			//6b68
 			if (Data_40003408 != 0)
 			{
-				switch (bData_40002e7d)
+				switch (bData_40002e7d_RotatingSpeed)
 				{
 					case MENU_ROTATING_SPEED_1: //1:
 						//->6bb4
@@ -3120,7 +3120,7 @@ void func_65d4(double sp40, double sp48)
 			//6dec
 			if (Data_40003408 != 0)
 			{
-				switch (bData_40002e7d)
+				switch (bData_40002e7d_RotatingSpeed)
 				{
 					case MENU_ROTATING_SPEED_1: //1:
 						//->6e38
@@ -3240,7 +3240,7 @@ void func_65d4(double sp40, double sp48)
 			//719c
 			if (Data_4000340c != 0)
 			{
-				switch (bData_40002e7d)
+				switch (bData_40002e7d_RotatingSpeed)
 				{
 					case MENU_ROTATING_SPEED_1: //1:
 						//->71e8
@@ -3342,7 +3342,7 @@ void func_65d4(double sp40, double sp48)
 			//73f8
 			if (Data_4000340c != 0)
 			{
-				switch (bData_40002e7d)
+				switch (bData_40002e7d_RotatingSpeed)
 				{
 					case MENU_ROTATING_SPEED_1: //1:
 						//->7444
@@ -3647,17 +3647,17 @@ void func_7d1c(Struct_7d1c* a)
 }
 
 /* 7f30 - todo */
-double func_7f30(int a, int b, double sp192)
+double get_local_sidereal_time(int a, int unused, double longitude/*sp192*/)
 {
 	double JD; //sp176;
 	double T; //sp168;
-	double sp160;
-	double sp152;
+	double theta0; //sp160;
+	double theta; //sp152;
 	Struct_7d1c sp140;
 	Struct_7d1c sp128;
 	Struct_7d1c sp116;
-	double sp104;
-	double sp96;
+	double A; //sp104;
+	double B; //sp96;
 	double hours; //sp88;
 	double sp80 = 3.1415927;
 	
@@ -3669,9 +3669,9 @@ double func_7f30(int a, int b, double sp192)
 			//0x7f6c
 			sp128 = sp140;
 			sp116 = sp128;
-			if ((sp128.bHours - Data_40004128.Data_64) < 0)
+			if ((sp128.bHours - Data_40004128.timeZone) < 0)
 			{
-				sp116.bHours = sp116.bHours - Data_40004128.Data_64 + 24;
+				sp116.bHours = sp116.bHours - Data_40004128.timeZone + 24;
 				sp116.bDay--;
 				if (sp116.bDay < 1)
 				{
@@ -3733,13 +3733,13 @@ double func_7f30(int a, int b, double sp192)
 					//8150 -> 83b0
 				}
 				//83b0
-			}
+			} //if ((sp128.bHours - Data_40004128.timeZone) < 0)
 			else
 			{
 				//8154
-				if ((sp128.bHours - Data_40004128.Data_64) > 24)
+				if ((sp128.bHours - Data_40004128.timeZone) > 24)
 				{
-					sp116.bHours = sp116.bHours - Data_40004128.Data_64 - 24;
+					sp116.bHours = sp116.bHours - Data_40004128.timeZone - 24;
 					sp116.bDay++;
 					switch (sp116.bMonth)
 					{
@@ -3838,7 +3838,7 @@ double func_7f30(int a, int b, double sp192)
 				else
 				{
 					//839c
-					sp116.bHours = sp128.bHours - Data_40004128.Data_64;
+					sp116.bHours = sp128.bHours - Data_40004128.timeZone;
 				}
 			}
 			//83b0 -> 83d4
@@ -3860,76 +3860,85 @@ double func_7f30(int a, int b, double sp192)
 		sp116.bMonth += 12;
 	}
 	//8404
-	sp104 = (int)(sp116.wYear * 1.0 / 100.0);
-	sp96 = 2.0 - sp104 + (int)(sp104 * 1.0 / 4.0);
+	A = (int)(sp116.wYear * 1.0 / 100.0);
+	B = 2.0 - A + (int)(A * 1.0 / 4.0);
 	
-	hours/*sp88*/ = (sp116.bHours + sp116.bMinutes / 60.0 + sp116.bSeconds / 3600.0 + sp116.wData_8 / 3600000.0) / 24.0;
-	Data_40004128.dData_104 = hours/*sp88*/;
+	hours/*sp88*/ = (sp116.bHours + sp116.bMinutes / 60.0 + 
+		sp116.bSeconds / 3600.0 + 
+		sp116.wData_8 / 3600000.0) / 24.0;
 	
-	JD/*sp176*/ = (int)((sp116.wYear + 4716) * 365.25) + (int)((sp116.bMonth + 1) * 30.6001) + sp116.bDay + hours/*sp88*/ + sp96 - 1524.5;
+	Data_40004128.dFractionalDay = hours/*sp88*/;
+	
+	JD/*sp176*/ = (int)((sp116.wYear + 4716) * 365.25) + 
+		(int)((sp116.bMonth + 1) * 30.6001) + 
+		sp116.bDay + hours/*sp88*/ + B - 1524.5;
 		
-	Data_40004128.dData_96 = JD/*sp176*/;
+	Data_40004128.dJulianDay = JD/*sp176*/;
 	
 	//http://www.geoastro.de/elevaz/basics/meeus.htm
 	//-> compute sidereal time at Greenwich (according to: Jean Meeus: Astronomical Algorithms)
 	T/*sp168*/ = (JD/*sp176*/ - 2451545.0) / 36525.0;
-	sp160 = 280.46061837 + 360.98564736629 * (JD - 2451545.0) + 
+		
+	theta0/*sp160*/ = 280.46061837 + 360.98564736629 * (JD - 2451545.0) + 
 		0.000387993 * T*T - T*T*T / 38710000.0;	
 	//883c
-	while (sp160 > 360.0)
+	while (theta0 > 360.0)
 	{
-		sp160 -= 360.0;
+		theta0 -= 360.0;
 	}
 	
-	while (sp160 < 0.0)
+	while (theta0 < 0.0)
 	{
-		sp160 += 360.0;
+		theta0 += 360.0;
 	}
 	//888c
-	JD/*sp176*/ = (int)((sp116.wYear + 4716) * 365.25) + (int)((sp116.bMonth + 1) * 30.6001) + sp116.bDay + sp96 - 1524.5;
+	JD/*sp176*/ = (int)((sp116.wYear + 4716) * 365.25) + 
+		(int)((sp116.bMonth + 1) * 30.6001) + 
+		sp116.bDay + B - 1524.5;
+		
 	T/*sp168*/ = (JD/*sp176*/ - 2451545.0) / 36525.0;
 	
-	dData_400034a0 = 280.46061837 + 360.98564736629 * (JD - 2451545.0) + 
+	dData_400034a0_SiderealTimeGreenwich0UT = 280.46061837 + 360.98564736629 * (JD - 2451545.0) + 
 		0.000387993 * T*T - T*T*T / 38710000.0;
 	
-	while (dData_400034a0 > 360.0)
+	while (dData_400034a0_SiderealTimeGreenwich0UT > 360.0)
 	{
-		dData_400034a0 -= 360.0;
+		dData_400034a0_SiderealTimeGreenwich0UT -= 360.0;
 	}
 
-	while (dData_400034a0 < 0.0)
+	while (dData_400034a0_SiderealTimeGreenwich0UT < 0.0)
 	{
-		dData_400034a0 += 360.0;
+		dData_400034a0_SiderealTimeGreenwich0UT += 360.0;
 	}
 	//8acc
-	dData_400034a0 /= 15;
+	dData_400034a0_SiderealTimeGreenwich0UT /= 15;
 	
-	sp152 = sp192 + sp160;
+	theta/*sp152*/ = longitude/*sp192*/ + theta0/*sp160*/;
 	
-	while (sp152 > 360.0)
+	while (theta > 360.0)
 	{
-		sp152 -= 360.0;
+		theta -= 360.0;
 	}
 	
-	while (sp152 < 0.0)
+	while (theta < 0.0)
 	{
-		sp152 += 360.0;
+		theta += 360.0;
 	}
 	
-	sp152 /= 15.0;
+	theta /= 15.0; //conversion to hours
 	
-	return sp152;
+	return theta;
 }
 
 /* 8ba4 - todo */
-void func_8ba4(Struct_8ba4_0 a/*sp176*/, 
+void convert_equatorial_to_horizontal(Struct_GeographicCoordinates a/*sp176*/, 
 							Struct_EquatorialCoordinates b/*sp208*/, 
 							int r4, int r5, 
 							Struct_HorizontalCoordinates* hor/*r6*/)
 {
 	double pi = 3.14159265359;
-	double sp160 = a.dData_0; //sp176; 
-	double phi = a.dData_8/*sp184*/; //Geo latitude / sp152 
+	double longitude = a.dData_0; //sp176; 
+	double phi = a.dLatitude/*sp184*/; //Geographic latitude / sp152 
 	double alpha =  b.dRA; //Right ascension / sp208
 	double delta = b.dData_8; //Declination / sp216
 	double tau; //Local hour angle / sp128
@@ -3939,7 +3948,7 @@ void func_8ba4(Struct_8ba4_0 a/*sp176*/,
 	double sp96;
 	double sp88;
 	
-	Theta = func_7f30(r4, r5, sp160);
+	Theta = get_local_sidereal_time(r4, r5, longitude);
 	
 	tau = Theta - alpha;
 	while (tau >= 24)
@@ -3968,7 +3977,7 @@ void func_8ba4(Struct_8ba4_0 a/*sp176*/,
 	sp88 = cos(phi) * 15.04 * sin(A);
 
 	hor->dData_0 = A * 57.2957795130823228646477218717;
-	hor->dData_8 = A * 57.2957795130823228646477218717 + 180.0;
+	hor->dAzimuth = A * 57.2957795130823228646477218717 + 180.0;
 	hor->dData_32 = sp96;
 	hor->dZenithDistance = z * 57.2957795130823228646477218717;
 	hor->dAltitude = 90.0 - z * 57.2957795130823228646477218717;
@@ -3979,19 +3988,14 @@ void func_8ba4(Struct_8ba4_0 a/*sp176*/,
 /* 9178 - todo */
 void func_9178(void)
 {
-	#if 0
-	double sp264;
-	double sp256;
-	#else
-	Struct_8ba4_0 sp256;
-	#endif
-	Struct_EquatorialCoordinates sp224;
-	double sp152[9]; //size??
+	Struct_GeographicCoordinates geoCoord; //sp256;
+	Struct_EquatorialCoordinates equCoord; //sp224;
+	Struct_HorizontalCoordinates horCoord; //sp152;
 	Struct_7978 sp104;
 	double sp96;
 	double sp88;
-	double sp80;
-	double sp72;
+	double theta; //Local sidereal time //sp80;
+	double H; //Local hour angle //sp72;
 	double sp64;
 	double sp56;
 	double sp48; 
@@ -4001,8 +4005,8 @@ void func_9178(void)
 		if (bData_40003431 == 0)
 		{
 			//91a0
-			/*sp256*/sp256.dData_0 = Data_40004128.geographicLongitude;
-			/*sp264*/sp256.dData_8 = Data_40004128.geographicLatitude;
+			/*sp256*/geoCoord.dData_0 = Data_40004128.geographicLongitude;
+			/*sp264*/geoCoord.dLatitude = Data_40004128.geographicLatitude;
 			Data_40004128.bData_356 = 1;
 			
 			switch (Data_40004128.Data_68)
@@ -4020,37 +4024,39 @@ void func_9178(void)
 						Data_40004128.dData_72 += 24;
 					}
 					//928c
-					sp224.dRA = Data_40004128.dData_72;
-					sp224.dData_8 = Data_40004128.dData_80;					
+					/*sp224*/equCoord.dRA = Data_40004128.dData_72;
+					/*sp224*/equCoord.dData_8 = Data_40004128.dData_80;					
 					break;
 					
 				default:
 					break;
 			}
 			//92c0
-			sp80 = func_7f30(Data_40004128.Data_40, Data_40004128.bData_44, Data_40004128.geographicLongitude);
+			theta = get_local_sidereal_time(Data_40004128.Data_40, Data_40004128.bData_44, 
+				Data_40004128.geographicLongitude);
 			
-			fData_400034c8 = sp80;
+			fData_400034c8 = theta;
 
-			#if 0
-			func_8ba4(sp256, sp264, sp224, Data_40004128.Data_40, Data_40004128.bData_44, sp152);
-			#else
-			func_8ba4(sp256, sp224, Data_40004128.Data_40, Data_40004128.bData_44, (void*)sp152);
-			#endif
+			convert_equatorial_to_horizontal(geoCoord/*sp256*/, 
+				equCoord/*sp224*/, 
+				Data_40004128.Data_40, 
+				Data_40004128.bData_44, 
+				&horCoord/*sp152*/);
 			
-			sp72 = sp80 - sp224.dRA;
+			//Compute the local hour angle
+			H = theta - /*sp224*/equCoord.dRA;
 			
-			while (sp72 >= 24)
+			while (H >= 24)
 			{
-				sp72 -= 24;
+				H -= 24;
 			}
 
-			while (sp72 < 0)
+			while (H < 0)
 			{
-				sp72 += 24;
+				H += 24;
 			}
 			
-			sp64 = sp72;
+			sp64 = H;
 			sp56 = Data_40004128.dData_80;
 			sp104.dData_32 = Data_40004380.dData_32;
 			sp104.dData_40 = Data_40004380.dData_40;
@@ -4059,7 +4065,7 @@ void func_9178(void)
 			sp104.dData_24 = Data_40004380.dData_24;
 			sp104.dData_16 = Data_40004380.dData_16;
 			
-			dData_40003458 = sp72;
+			dData_40003458 = H;
 			dData_40003460 = Data_40004128.dData_80;
 			
 			func_7978(sp104, &dData_40003458, &dData_40003460);
@@ -4067,7 +4073,7 @@ void func_9178(void)
 			sp64 = dData_40003458;
 			sp56 = dData_40003460;
 			
-			fData_400034c0 = sp64 - sp72;
+			fData_400034c0 = sp64 - H;
 			fData_400034c4 = sp56 - Data_40004128.dData_80;
 			
 			if (bData_400034cc == 1)
@@ -4079,13 +4085,13 @@ void func_9178(void)
 			//95a0
 			Data_40004128.dData_112 = sp64 * 15.0;
 			Data_40004128.dData_88 = sp64;
-			Data_40004128.dData_144 = sp72;
+			Data_40004128.dData_144 = H;
 			Data_40004128.dData_152 = Data_40004128.dData_80;
 			
 			if (bData_40002c1a == 1)
 			{
 				//9608
-				if (/*sp264*/sp256.dData_8 >= 0)
+				if (/*sp264*/geoCoord.dLatitude >= 0)
 				{
 					//9620
 					if (sp64 >= 12)
@@ -4103,7 +4109,7 @@ void func_9178(void)
 						Data_40004128.dData_120 = -1 * Data_40004128.dData_120;
 					}
 					//97b4
-				}
+				} //if (/*sp264*/geoCoord.dLatitude >= 0)
 				else
 				{
 					//96e0
@@ -4131,7 +4137,7 @@ void func_9178(void)
 			if (bData_40002c1a == 2)
 			{
 				//97ec
-				if (/*sp264*/sp256.dData_8 >= 0)
+				if (/*sp264*/geoCoord.dLatitude >= 0)
 				{
 					//9804
 					Data_40004128.dData_112 += 180;
@@ -4143,7 +4149,7 @@ void func_9178(void)
 					//9868
 					Data_40004128.dData_120 = 90 - sp56;
 					//->9934
-				}
+				} //if (/*sp264*/geoCoord.dLatitude >= 0)
 				else
 				{
 					//988c
@@ -4180,7 +4186,7 @@ void func_9178(void)
 				Data_40004128.dData_168 = Data_40004128.dData_136 - Data_40004128.dData_336 - Data_40004128.dData_592;
 			}
 			//->9b78
-		}
+		} //if (bData_40003431 == 0)
 		else
 		{
 			//9af0
@@ -4232,7 +4238,7 @@ void func_9178(void)
 			{
 				Data_40004128.dData_304 = 0;
 				
-				if (bData_40002e7d > MENU_ROTATING_SPEED_128/*6*/)
+				if (bData_40002e7d_RotatingSpeed > MENU_ROTATING_SPEED_128/*6*/)
 				{
 					bData_40003498 = 1;
 				}
@@ -4245,7 +4251,7 @@ void func_9178(void)
 			{
 				Data_40004128.dData_312 = 0;
 				
-				if (bData_40002e7d > MENU_ROTATING_SPEED_128/*6*/)
+				if (bData_40002e7d_RotatingSpeed > MENU_ROTATING_SPEED_128/*6*/)
 				{
 					bData_40003498 = 1;
 				}
@@ -4545,7 +4551,7 @@ void func_9178(void)
 			}
 		}
 		//aba0
-		if (/*sp176*/sp152[3] >= 0)
+		if (/*sp176*/horCoord.dAltitude >= 0)
 		{
 			//abb8
 			if (bData_40003431 == 0)
@@ -4560,10 +4566,10 @@ void func_9178(void)
 				func_65d4(Data_40004128.dData_256, Data_40004128.dData_264);
 				//->ac38
 			}
-		}
+		} //if (horCoord.dAltitude >= 0)
 		else
 		{
-			//ac00
+			//ac00: Under Horizon
 			func_65d4(0.0, 0.0);
 			
 			Data_40004128.bData_357 = 0;
@@ -4585,7 +4591,7 @@ void func_9178(void)
 			dData_40003490 = Data_40004128.dData_216;
 		}
 		//accc
-	}
+	} //if (Data_40004128.bData_357 != 0)
 	else
 	{
 		//ac9c
@@ -4627,7 +4633,7 @@ void func_acdc(double sp144, double sp152, /*sp176*/double* r4, double* r5)
 		sp152 = 0.0003;
 	}
 	//ad4c
-	sp120 = func_7f30(1, 0, Data_40004128.geographicLongitude);
+	sp120 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude);
 	
 	sp112 = Data_40004128.geographicLatitude;
 	sp144 -= 180.0;
@@ -4784,7 +4790,7 @@ void func_b594(void)
 	Data_40004128.dData_264 = 0.0;
 	Data_40004128.dData_256 = 0.0;
 	
-	bData_40002e7d = MENU_ROTATING_SPEED_8; //3;
+	bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_8; //3;
 	bData_40003200 = 1;
 	bData_40003201 = 1;
 	
@@ -4816,7 +4822,7 @@ void func_b64c(double a, double b)
 	func_75c4();
 	
 	bData_400034cc = 0;
-	bData_40002e7d = MENU_ROTATING_SPEED_8; //3;
+	bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_8; //3;
 	bData_40003200 = 1;
 	bData_40003201 = 1;
 	
@@ -5144,7 +5150,7 @@ void func_c8f4(void)
 		//c940
 		Data_40004128.Data_372++;
 		
-		if (bData_40002e7a == 0)
+		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 		{
 			//c964
 			switch (Data_40004128.Data_372)
@@ -5181,7 +5187,7 @@ void func_c8f4(void)
 					break;
 			}
 			//->0xcdc8
-		}
+		} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 		else
 		{
 			//0xcb30
@@ -5250,7 +5256,8 @@ void func_cdd0(void)
 	Data_40004128.bData_364 = 0;
 	Data_40004128.Data_372 = 0;
 
-	bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(func_7f30(1, 0, Data_40004128.geographicLongitude), 
+	bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(
+		get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude), 
 		Data_40004128.geographicLatitude, Data_40004a68_CurrentAlignStarEquatorialCoord, strStarNames, sp16);
 	
 	#if 0
@@ -5382,7 +5389,7 @@ void func_d2cc(void)
 	Data_40004128.geographicLongitude = 102.7944;
 	Data_40004128.geographicLatitude = 25.027777;
 
-	Data_40004128.Data_64 = 8;
+	Data_40004128.timeZone = 8;
 	Data_40004128.Data_68 = 1;
 	
 	Data_40004128.dData_72 = 4.4993833;
@@ -5505,7 +5512,7 @@ double func_d7ac(int a/*r4*/, double sp184, double sp208, double sp216, double s
 		sp152 = sp184 / 15.0 + sp120;
 	}
 	//0xd9bc
-	sp144 = dData_400034a0 - sp216 / 15.0 * sp128;
+	sp144 = dData_400034a0_SiderealTimeGreenwich0UT - sp216 / 15.0 * sp128;
 	//->0xda24
 	while ((sp152 - sp144) < 0.0)
 	{
@@ -5520,7 +5527,7 @@ double func_d7ac(int a/*r4*/, double sp184, double sp208, double sp216, double s
 	}
 	//daa4
 	sp160 = (sp152 - sp144) * (1.0 - sp136);	
-	sp168 = Data_40004128.Data_64 - sp216 / 15.0 + sp160;
+	sp168 = Data_40004128.timeZone - sp216 / 15.0 + sp160;
 	//->dbb8
 	while (sp168 <= 0.0)
 	{
@@ -6926,7 +6933,7 @@ void get_solar_system_object_equatorial_coordinates(int a, double* pAlpha, doubl
 	double Beta/*sp400*/;
 	double Alpha; //sp392; //Right Ascension
 	double Delta; //sp384; //Declination
-	double sp376;
+	double JD; //sp376; //Julian Day
 	double sp368;
 	double sp360;
 	double sp352;
@@ -6950,10 +6957,10 @@ void get_solar_system_object_equatorial_coordinates(int a, double* pAlpha, doubl
 	double sp208 = 0.0;
 	double sp200 = 0.0;
 	
-	/*sp192 =*/ func_7f30(1, 0, Data_40004128.geographicLongitude);
+	/*sp192 =*/ get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude);
 	
-	sp376 = Data_40004128.dData_96;
-	Tau/*sp536*/ = (sp376 - 2451545.0) / 365250.0;
+	JD/*sp376*/ = Data_40004128.dJulianDay;
+	Tau/*sp536*/ = (JD - 2451545.0) / 365250.0;
 	T/*sp528*/ = 10.0 * Tau/*sp536*/;
 	
 	switch (a - 2)
@@ -7899,7 +7906,7 @@ void DisplayMainScreen(void)
 	lcd_display_string(0, 5, 16, 2, Data_40003384 + 10);
 	lcd_display_string(0, 5, 19, 2, Data_40003384 + 13);
 	
-	if (bData_40002e7a == 0)
+	if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 	{
 		//21138
 		lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
@@ -7925,7 +7932,7 @@ void DisplayMainScreen(void)
 		{
 			lcd_display_string(0, 5, 19, 1, " ");
 		}
-	}
+	} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 	else
 	{
 		//0x2127c
@@ -7963,7 +7970,7 @@ void DisplayMainScreen(void)
 	lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
 	lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
 	
-	if (bData_40002e7a == 0)
+	if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 	{
 		//214ac
 		if (abs(Data_40002d48) < 10)
@@ -7980,7 +7987,7 @@ void DisplayMainScreen(void)
 		{
 			lcd_display_string(0, 6, 19, 1, " ");
 		}
-	}
+	} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 	else
 	{
 		//0x21574
@@ -8009,7 +8016,7 @@ void DisplayMainScreen(void)
 		(bData_40002e88 == 2))
 	{
 		//216f0
-		if (bData_40002e7a == 0)
+		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 		{
 			lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
 			lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
@@ -8034,7 +8041,7 @@ void DisplayMainScreen(void)
 			{
 				lcd_display_string(0, 7, 19, 1, " ");
 			}
-		}
+		} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 		else
 		{
 			//0x21844
@@ -8066,7 +8073,7 @@ void DisplayMainScreen(void)
 	else
 	{
 		//0x21950
-		if (bData_40002e7a == 0)
+		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 		{
 			//21960
 			lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
@@ -8092,7 +8099,7 @@ void DisplayMainScreen(void)
 			{
 				lcd_display_string(0, 7, 19, 1, " ");
 			}
-		}
+		} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 		else
 		{
 			//0x21aec
@@ -8134,7 +8141,7 @@ void DisplayMainScreen(void)
 	if ((bData_400034b4 == 1) &&
 		(bData_40002e88 == 2))
 	{
-		if (bData_40002e7a == 0)
+		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 		{
 			if (abs(Data_40002d48) < 10)
 			{
@@ -8150,7 +8157,7 @@ void DisplayMainScreen(void)
 			{
 				lcd_display_string(0, 8, 19, 1, " ");
 			}
-		}
+		} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 		else
 		{
 			//0x21dc0
@@ -8173,7 +8180,7 @@ void DisplayMainScreen(void)
 	else
 	{
 		//0x21e88
-		if (bData_40002e7a == 0)
+		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 		{
 			if (abs(Data_40002de0) < 10)
 			{
@@ -8189,7 +8196,7 @@ void DisplayMainScreen(void)
 			{
 				lcd_display_string(0, 8, 19, 1, " ");
 			}
-		}
+		} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 		else
 		{
 			//0x21f60
@@ -8650,7 +8657,7 @@ void PrepareMainScreenItems(void)
 {
 	dData_40002e28_SiteLongitude = Data_40004128.geographicLongitude;
 	dData_40002e48_SiteLatitude = Data_40004128.geographicLatitude;
-	Data_40002e54_Zone = Data_40004128.Data_64;
+	Data_40002e54_Zone = Data_40004128.timeZone;
 	
 	Data_40002e18_SiteLongitudeDegrees = dData_40002e28_SiteLongitude;	
 	Data_40002e1c_SiteLongitudeMinutes = (dData_40002e28_SiteLongitude - Data_40002e18_SiteLongitudeDegrees) * 60.0;
@@ -8704,14 +8711,14 @@ void PrepareMainScreenItems(void)
 	//0x24a88
 	Data_40003374 = Data_40004012;
 	
-	switch (bData_40002e7a)
+	switch (bData_40002e7a_MountType)
 	{
-		case 0:
+		case MENU_MOUNT_TYPE_AZ: //0:
 			//0x24ab0
 			Data_40003378 = "AZ";
 			break;
 		
-		case 1:
+		case MENU_MOUNT_TYPE_EQU: //1:
 			//0x24ac4
 			Data_40003378 = "EQ";
 			break;
@@ -8740,7 +8747,7 @@ void PrepareMainScreenItems(void)
 	//0x24be8
 	Data_4000337c = Data_4000403c;
 	
-	switch (bData_40002e7b)
+	switch (bData_40002e7b_GpsAvailable)
 	{
 		case 0:
 			//0x24c10
@@ -8757,15 +8764,15 @@ void PrepareMainScreenItems(void)
 			break;
 	}
 	
-	switch (bData_40002e7a)
+	switch (bData_40002e7a_MountType)
 	{
-		case 0:
+		case MENU_MOUNT_TYPE_AZ: //0:
 			//0x24d0c
 			sprintf(Data_40004066, " OBJ: %03d?%02d'%02.0f^", 
 				abs(Data_40002d20), abs(Data_40002d24), fabs(fData_40002d28));
 			break;
 		
-		case 1:
+		case MENU_MOUNT_TYPE_EQU: //1:
 			//0x24d88
 			sprintf(Data_40004066, " OBJ: %03dh%02dm%02ds",
 				Data_40002cd8_ObjectRightAscensionHours, 
@@ -8780,19 +8787,19 @@ void PrepareMainScreenItems(void)
 	//24dcc
 	Data_40003384 = Data_40004066;
 	
-	switch (bData_40002e7c)
+	switch (bData_40002e7c_TrackingRateType)
 	{
-		case 0:
+		case MENU_TRACKING_RATE_STAR_SPEED: //0:
 			//0x24e04
 			Data_40003388 = "Cel";
 			break;
 			
-		case 1:
+		case MENU_TRACKING_RATE_SOLAR_SPEED: //1:
 			//0x24e18
 			Data_40003388 = "Sun";
 			break;
 		
-		case 2:
+		case MENU_TRACKING_RATE_MOON_SPEED: //2:
 			//0x24e2c
 			Data_40003388 = "Lun";
 			break;
@@ -8807,9 +8814,9 @@ void PrepareMainScreenItems(void)
 			break;
 	}
 	//24e60
-	switch (bData_40002e7a)
+	switch (bData_40002e7a_MountType)
 	{
-		case 0:
+		case MENU_MOUNT_TYPE_AZ: //0:
 			//0x24e7c
 			if (Data_40004128.dData_120 > 90)
 			{
@@ -8826,7 +8833,7 @@ void PrepareMainScreenItems(void)
 			//->0x25048
 			break;
 		
-		case 1:
+		case MENU_MOUNT_TYPE_EQU: //1:
 			//0x24f84
 			if (Data_40002d44 == -1)
 			{
@@ -8853,7 +8860,7 @@ void PrepareMainScreenItems(void)
 	//2504c
 	Data_4000338c = Data_40004090;
 	//25058
-	switch (bData_40002e7d)
+	switch (bData_40002e7d_RotatingSpeed)
 	{
 		case MENU_ROTATING_SPEED_1: //1:
 			//0x25158
@@ -8905,15 +8912,15 @@ void PrepareMainScreenItems(void)
 			break;
 	}
 	//25218
-	switch (bData_40002e7a)
+	switch (bData_40002e7a_MountType)
 	{
-		case 0:
+		case MENU_MOUNT_TYPE_AZ: //0:
 			//0x25234
 			sprintf(Data_400040ba, " OTA: %03d?%02d'%02d^", 
 				abs(Data_40002dac), abs(Data_40002db0), abs(fData_40002db4) & 0xff);
 			break;
 		
-		case 1:
+		case MENU_MOUNT_TYPE_EQU: //1:
 			//0x252b0
 			sprintf(Data_400040ba, " OTA: %03dh%02dm%02ds", 
 				Data_40002d68_OTARightAscensionHours, 
@@ -8928,9 +8935,9 @@ void PrepareMainScreenItems(void)
 	//0x25304
 	Data_40003394 = Data_400040ba;
 	
-	switch (bData_40002e7a)
+	switch (bData_40002e7a_MountType)
 	{
-		case 0:
+		case MENU_MOUNT_TYPE_AZ: //0:
 			//0x25330
 			if ((fabs(Data_40004128.dData_216) > 90) ||
 				(dData_40002df8 < 0))
@@ -8947,7 +8954,7 @@ void PrepareMainScreenItems(void)
 			}
 			break;
 		
-		case 1:
+		case MENU_MOUNT_TYPE_EQU: //1:
 			//0x25518
 			if (dData_40002d98 < 0)
 			{

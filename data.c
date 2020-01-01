@@ -499,10 +499,10 @@ unsigned char bData_40002e64_Seconds; //40002e64
 unsigned short wData_40002e66; //40002e66
 unsigned char bData_40002e78; //40002e78
 unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79
-unsigned char bData_40002e7a; //40002e7a
-unsigned char bData_40002e7b; //40002e7b
-unsigned char bData_40002e7c; //40002e7c
-unsigned char bData_40002e7d; //40002e7d
+unsigned char bData_40002e7a_MountType; //40002e7a
+unsigned char bData_40002e7b_GpsAvailable; //40002e7b
+unsigned char bData_40002e7c_TrackingRateType; //40002e7c
+unsigned char bData_40002e7d_RotatingSpeed; //40002e7d
 char bData_40002e7e; //40002e7e
 int Data_40002e80; //40002e80
 int Data_40002e84; //40002e84
@@ -847,7 +847,7 @@ int Data_40003488; //40003488
 int Data_4000348c; //4000348c
 double dData_40003490; //40003490
 char bData_40003498; //40003498
-double dData_400034a0; //400034a0
+double dData_400034a0_SiderealTimeGreenwich0UT; //400034a0
 unsigned char bData_400034a8_CurrentAlignStarCount; //400034a8
 char bData_400034a9; //400034a9
 char bData_400034aa; //400034aa
@@ -926,7 +926,7 @@ float Data_40004a68_CurrentAlignStarEquatorialCoord[2][2]; //40004a68
 #else
 float Data_40004a68_CurrentAlignStarEquatorialCoord[28]; //40004a68
 #endif
-Struct_8ba4_0 Data_40004ad8; //40004ad8
+Struct_GeographicCoordinates Data_40004ad8; //40004ad8
 Struct_EquatorialCoordinates Data_40004ae8; //40004ae8
 double Data_40004b08[7]; //40004b08, array, size???
 Struct_EquatorialCoordinates Data_40004b50; //40004b50

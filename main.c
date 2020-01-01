@@ -25,13 +25,13 @@ extern char func_32a4();
 
 extern int func_5218(int a, Struct_5218* b);
 extern int func_54e0(int a, Struct_54e0* b);
-extern void func_6518(void);
+extern void get_rtc_date_time(void);
 extern void func_659c(int);
 extern void func_7590(void);
 extern void func_75c4(void);
 extern void func_c57c(void);
 extern void beep1(int);
-extern void func_8ba4(Struct_8ba4_0 a, Struct_EquatorialCoordinates b, int r4, int r5, double* r6);
+extern void func_8ba4(Struct_GeographicCoordinates a, Struct_EquatorialCoordinates b, int r4, int r5, double* r6);
 extern void func_d2cc(void);
 extern void func_9178(void);
 extern void func_acdc(double, double, double*, double*); 
@@ -147,13 +147,13 @@ void func_4f804(void)
 				{
 					//4f920
 					//40002e7d
-					func_4ee90(1, 4, bData_40002e7d, 2, 1, bData_40002e7d);
+					func_4ee90(1, 4, bData_40002e7d_RotatingSpeed, 2, 1, bData_40002e7d_RotatingSpeed);
 					//->4f9cc
 				}
 				else
 				{
 					//0x4f948
-					func_4ee90(3, 4, bData_40002e7d, 4, 1, bData_40002e7d);
+					func_4ee90(3, 4, bData_40002e7d_RotatingSpeed, 4, 1, bData_40002e7d_RotatingSpeed);
 					//->4f9cc
 				}
 			}
@@ -163,13 +163,13 @@ void func_4f804(void)
 				if (bData_40002c1a == 1)
 				{
 					//4f980
-					func_4ee90(1, 4, bData_40002e7d, 2, 1, bData_40002e7d);
+					func_4ee90(1, 4, bData_40002e7d_RotatingSpeed, 2, 1, bData_40002e7d_RotatingSpeed);
 					//->4f9cc
 				}
 				else
 				{
 					//4f9a8
-					func_4ee90(3, 4, bData_40002e7d, 4, 1, bData_40002e7d);
+					func_4ee90(3, 4, bData_40002e7d_RotatingSpeed, 4, 1, bData_40002e7d_RotatingSpeed);
 					//->4f9cc
 				}
 			}			
@@ -292,11 +292,11 @@ void HandleReset(void)
 	
 	if (bData_40002c1a == 1)
 	{
-		bData_40002e7a = 1;
+		bData_40002e7a_MountType = MENU_MOUNT_TYPE_EQU; //1;
 	}
 	else
 	{
-		bData_40002e7a = 0;
+		bData_40002e7a_MountType = MENU_MOUNT_TYPE_AZ; //0;
 	}
 	//50c98
 	Data_400034d0 = 0.05;
@@ -1880,10 +1880,10 @@ void Handle9Key(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x62ea4
-			bData_40002e7d = MENU_ROTATING_SPEED_MAX; //9;
+			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_MAX; //9;
 			if (bData_40002e89 == 0)
 			{
-				bData_40002e7d = MENU_ROTATING_SPEED_512; //8;
+				bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_512; //8;
 			}
 			//0x62ed0 -> 0x637dc
 			break;
@@ -1901,7 +1901,7 @@ void Handle8Key(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x639ac
-			bData_40002e7d = MENU_ROTATING_SPEED_512; //8;
+			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_512; //8;
 			//->0x64318
 			break;
 		
@@ -1918,7 +1918,7 @@ void Handle7Key(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x644e8
-			bData_40002e7d = MENU_ROTATING_SPEED_256; //7;
+			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_256; //7;
 			//->0x64e0c
 			break;
 		
@@ -1935,7 +1935,7 @@ void Handle6Key(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x64fdc
-			bData_40002e7d = MENU_ROTATING_SPEED_128; //6;
+			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_128; //6;
 			//->0x65888
 			break;
 		
@@ -1952,7 +1952,7 @@ void Handle5Key(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x65a58
-			bData_40002e7d = MENU_ROTATING_SPEED_64; //5;
+			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_64; //5;
 			//->0x6636c
 			break;
 		
@@ -1969,7 +1969,7 @@ void Handle4Key(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x6653c
-			bData_40002e7d = MENU_ROTATING_SPEED_16; //4;
+			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_16; //4;
 			//->0x66e30
 			break;
 		
@@ -1986,7 +1986,7 @@ void Handle3Key(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x67000
-			bData_40002e7d = MENU_ROTATING_SPEED_8; //3;
+			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_8; //3;
 			//->0x678ac
 			break;
 		
@@ -2003,7 +2003,7 @@ void Handle2Key(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x67a7c
-			bData_40002e7d = MENU_ROTATING_SPEED_2; //2;
+			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_2; //2;
 			//->0x68388
 			break;
 		
@@ -2020,7 +2020,7 @@ void Handle1Key(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x68af8
-			bData_40002e7d = MENU_ROTATING_SPEED_1; //1;
+			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_1; //1;
 			//->0x6933c
 			break;
 		
@@ -2184,7 +2184,7 @@ char ConvertKeyCode(void)
 /* 6a2cc - todo */
 void func_6a2cc(void)
 {
-	func_6518(); //-> get time from RTC
+	get_rtc_date_time();
 	
 	if (bData_40003505 != 0)
 	{
@@ -2484,7 +2484,7 @@ void func_6a2cc(void)
 		if (bData_400031ec != 0)
 		{
 			//6aa24
-			func_6518(); //-> get time from RTC
+			get_rtc_date_time();
 			
 			sprintf(Data_400037ec, "%04d-%02d-%02d", Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
 			sprintf(Data_40003150, "%02d:%02d:%02d", bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
@@ -3046,7 +3046,7 @@ void func_6cb38(void)
 			func_b4f0();
 		
 			Data_40002e54_Zone = fData_40003520;
-			Data_40004128.Data_64 = fData_40003520;
+			Data_40004128.timeZone = fData_40003520;
 		
 			CCR = (1 << 4); //clock from the 32 kHz oscillator that’s connected to the RTCX1 and RTCX2 pins
 			YEAR = Data_40003524_ReceiveExternalYear;
@@ -3169,11 +3169,11 @@ int main(void)
 
 	if (bData_40002c1a == 1)
 	{
-		bData_40002e7a = 1;
+		bData_40002e7a_MountType = MENU_MOUNT_TYPE_EQU; //1;
 	}
 	else
 	{
-		bData_40002e7a = 0;
+		bData_40002e7a_MountType = MENU_MOUNT_TYPE_AZ; //0;
 	}
 	
 	bData_40003432 = 0;
@@ -3290,7 +3290,7 @@ int main(void)
 	if (bData_40002f1e_SetupLocalData == 1)
 	{
 		//6d64c
-		func_6518(); //-> get time from RTC
+		get_rtc_date_time();
 		
 		if (Data_40002e5c_Year < 2000)
 		{
@@ -3365,7 +3365,7 @@ int main(void)
 		if (bData_40002c1a == 1)
 		{
 			//6d8d4
-			bData_40002e7a = 1;
+			bData_40002e7a_MountType = MENU_MOUNT_TYPE_EQU; //1;
 			//6d8e0
 			dData_40002ce8 = Data_40004128.dData_144 - 0.00083333333333/* 1/1200 */;
 			Data_40002cd8_ObjectRightAscensionHours = dData_40002ce8;
@@ -3674,14 +3674,14 @@ int main(void)
 		else if (bData_40002c1a == 2)
 		{
 			//6e568
-			if (bData_40002e7a == 0)
+			if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 			{
 				//6e578
 				
 				//TODO
 				
 				//6ee74 -> 6f8d0???
-			}
+			} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 			else
 			{
 				//6ee78
@@ -3965,18 +3965,29 @@ int main(void)
 			//TODO
 		}
 		//6fd80
-		if (bData_40003211 != 0)
+		if ((bData_40003211 != 0) && 
+				(bData_40003210 == 0) && 
+				(bData_40002e88 == 2) &&
+				(dData_40002ce8 >= 23.83) &&
+				(dData_40002ce8 < 23.99717))
 		{
-			//6fd90
-			
-			//TODO
+			//6fde0
+			bData_40003210 = 1;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MERIDIAN_FLIP;
 		}
 		//6fdf8
-		if (bData_40003210 != 0)
+		if ((bData_40003210 != 0) &&
+				(bData_40002e88 == 2) &&
+				(dData_40002ce8 >= 23.99717))
 		{
-			//6fe08
+			//6fe30
+			bData_40002e89 = 1;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN;
+			bData_40003210 = 0;
+			bData_40003211 = 0;
 			
-			//TODO
+			beep1(3);
+			func_b4f0();
 		}
 		//6fe64
 		if (bData_40002c1a == 1)
@@ -3992,7 +4003,7 @@ int main(void)
 			if (Data_40002c64_MenuContextId != MENU_CONTEXT_ALIGNMENT_STAR_CONTROL) //12001)
 			{
 				//70f6c
-				switch (bData_40002e7d)
+				switch (bData_40002e7d_RotatingSpeed)
 				{
 					case 0:
 						//0x70fa8
@@ -4094,7 +4105,7 @@ int main(void)
 						dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
 						dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
 						break;
-				} //switch (bData_40002e7d)
+				} //switch (bData_40002e7d_RotatingSpeed)
 				//0x717d4 -> 0x72040
 				
 			} //if (Data_40002c64_MenuContextId != MENU_CONTEXT_ALIGNMENT_STAR_CONTROL)
@@ -4126,7 +4137,7 @@ int main(void)
 			else
 			{
 				//720b0
-				if (bData_40002e7a == 0)
+				if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 				{
 					//720c0
 					func_acd8();

@@ -1,5 +1,5 @@
 
-extern double func_7f30(int a, int b, double sp192);
+extern double get_local_sidereal_time(int a, int b, double sp192);
 
 /* 69348 - todo */
 void Handle0Key(void)
@@ -10,7 +10,7 @@ void Handle0Key(void)
 			//0x6958c
 			if (bData_400034a9 == 0)
 			{
-				if (bData_40002e7a == 0)
+				if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 				{
 					if (bData_40002e89 == 0)
 					{
@@ -35,7 +35,7 @@ void Handle0Key(void)
 						func_b594();
 						//->0x69780
 					}
-				} //if (bData_40002e7a == 0)
+				} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 				else
 				{
 					//0x69658
@@ -52,7 +52,7 @@ void Handle0Key(void)
 						bData_40002e89 = 0;
 						dData_40002c90 = dData_40002d98;
 						
-						dData_40002c88 = func_7f30(1, 0, Data_40004128.geographicLongitude) - 
+						dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - 
 							dData_40002d78;
 						
 						dData_40002c88 += dData_400033e8;

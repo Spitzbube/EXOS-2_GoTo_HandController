@@ -538,12 +538,12 @@ void HandleDownKey(void)
 					if (bData_40002c1a == 1)
 					{
 						//5bd78
-						func_57414(2, 2, bData_40002e7d);
+						func_57414(2, 2, bData_40002e7d_RotatingSpeed);
 					}
 					else
 					{
 						//0x5bd90
-						func_57414(4, 2, bData_40002e7d);
+						func_57414(4, 2, bData_40002e7d_RotatingSpeed);
 					}
 				}
 			}
@@ -553,12 +553,12 @@ void HandleDownKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//5bdb8
-					func_57414(2, 2, bData_40002e7d);
+					func_57414(2, 2, bData_40002e7d_RotatingSpeed);
 				}
 				else
 				{
 					//0x5bdd0
-					func_57414(4, 2, bData_40002e7d);
+					func_57414(4, 2, bData_40002e7d_RotatingSpeed);
 				}
 			}
 			//->0x5ca8c

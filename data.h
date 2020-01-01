@@ -40,13 +40,13 @@ typedef struct
 	unsigned char bData_44; //44
 	double geographicLongitude; //48
 	double geographicLatitude; //56
-	int Data_64; //64
+	int timeZone; //64
 	int Data_68; //68
 	double dData_72; //72
 	double dData_80; //80
 	double dData_88; //88
-	double dData_96; //96
-	double dData_104; //104
+	double dJulianDay; //96
+	double dFractionalDay; //104
 	double dData_112; //112
 	double dData_120; //120
 	double dData_128; //128
@@ -592,10 +592,10 @@ extern unsigned char bData_40002e64_Seconds; //40002e64
 extern unsigned short wData_40002e66; //40002e66
 extern unsigned char bData_40002e78; //40002e78
 extern unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79
-extern unsigned char bData_40002e7a; //40002e7a
-extern unsigned char bData_40002e7b; //40002e7b
-extern unsigned char bData_40002e7c; //40002e7c
-extern unsigned char bData_40002e7d; //40002e7d
+extern unsigned char bData_40002e7a_MountType; //40002e7a
+extern unsigned char bData_40002e7b_GpsAvailable; //40002e7b
+extern unsigned char bData_40002e7c_TrackingRateType; //40002e7c
+extern unsigned char bData_40002e7d_RotatingSpeed; //40002e7d
 extern char bData_40002e7e; //40002e7e
 extern int Data_40002e80; //40002e80
 extern int Data_40002e84; //40002e84
@@ -944,7 +944,7 @@ extern int Data_40003488; //40003488
 extern int Data_4000348c; //4000348c
 extern double dData_40003490; //40003490
 extern char bData_40003498; //40003498
-extern double dData_400034a0; //400034a0
+extern double dData_400034a0_SiderealTimeGreenwich0UT; //400034a0
 extern unsigned char bData_400034a8_CurrentAlignStarCount; //400034a8
 extern char bData_400034a9; //400034a9
 extern char bData_400034aa; //400034aa
@@ -1018,7 +1018,7 @@ extern char Data_400040e4[]; //400040e4
 extern char Data_4000410e[]; //4000410e
 extern Struct_40004128 Data_40004128; //40004128
 extern Struct_40004380 Data_40004380; //40004380
-extern Struct_8ba4_0 Data_40004ad8; //40004ad8
+extern Struct_GeographicCoordinates Data_40004ad8; //40004ad8
 #if 0
 extern float Data_40004a68_CurrentAlignStarEquatorialCoord[][2]; //40004a68
 #else
