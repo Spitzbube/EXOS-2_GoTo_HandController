@@ -267,7 +267,7 @@ void HandleLeftKey(void)
 			func_591b8();
 			break;
 		
-		case 43002:
+		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
 			//0x59b44
 			func_58e64();
 			break;
@@ -379,10 +379,10 @@ void HandleLeftKey(void)
 			func_58adc();
 			break;
 		
-		case 43011:
+		case MENU_CONTEXT_COUNTRY_CITY_SELECTION: //43011:
 			//0x59ce0
 			lcd_display_clear();
-			func_58854();		
+			func_58854();	//-> Previous city
 			//break;
 		case 211001:
 			//0x59cf0
