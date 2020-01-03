@@ -1,5 +1,4 @@
 
-extern double get_local_sidereal_time(int a, int b, double sp192);
 
 /* 69348 - todo */
 void Handle0Key(void)
@@ -223,8 +222,10 @@ void Handle0Key(void)
 			//0x69f18
 			break;
 		
-		case 43002:
+		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
 			//0x69f90
+			func_62524(0);
+			//->0x6a0d4
 			break;
 		
 		case 47011:

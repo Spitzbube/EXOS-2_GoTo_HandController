@@ -39,9 +39,10 @@ extern void func_acd8(void);
 extern void func_b4f0(void);
 extern void func_b64c(double, double);
 extern void func_d784(int a);
+extern double get_local_sidereal_time(int a, int b, double sp192);
 
 extern void func_5099c(void);
-extern void ValidateDateTimeSetRTC(void);
+extern int ValidateDateTimeSetRTC(void);
 
 extern void get_all_solar_system_object_equatorial_coordinates(void);
 extern void func_1e228(void);
@@ -371,8 +372,168 @@ void HandleReset(void)
 }
 
 /* 5104c - todo */
-void func_5104c(void)
+void HandleCustomSiteData(void)
 {
+	unsigned char i;
+	unsigned char sp24[8];
+	unsigned char sp16[8];
+	unsigned char sp8[8];
+	unsigned char sp4[4];
+	
+	for (i = 0; i < 8; i++)
+	{
+		sp24[i] = Data_40002827[i + 6];
+	}
+	
+	sp16[0] = Data_40002837[6];
+	sp16[1] = atoi(&Data_40002837[7]);
+	sp16[2] = atoi(&Data_40002837[11]);
+	
+	sp8[0] = Data_40002847[6];
+	sp8[1] = atoi(&Data_40002847[7]);
+	sp8[2] = atoi(&Data_40002847[10]);
+	
+	sp4[0] = Data_40002856[6];
+	sp4[1] = atoi(&Data_40002856[7]);
+	
+	if ((sp16[1] > 179) || (sp16[2] > 59) ||
+		(sp8[1] > 89) || (sp8[2] > 59) ||
+		(sp4[1] > 11))
+	{
+		//0x5111c: Invalid Data
+		Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOM_SITE_INPUT; //43002;
+	}
+	else
+	{
+		//0x5112c
+		sp16[0] = Data_40002837[6];
+		sp16[1] = Data_40002837[7];
+		sp16[2] = Data_40002837[8];
+		sp16[3] = Data_40002837[9];
+		sp16[4] = Data_40002837[11];
+		sp16[5] = Data_40002837[12];
+		
+		sp8[0] = Data_40002847[6];
+		sp8[1] = Data_40002847[7];
+		sp8[2] = Data_40002847[8];
+		sp8[3] = Data_40002847[10];
+		sp8[4] = Data_40002847[11];
+		
+		sp4[0] = Data_40002856[6];
+		sp4[1] = Data_40002856[7];
+		sp4[2] = Data_40002856[8];
+		
+		func_29b0(sp24, sp16, sp8, sp4);
+		func_2a1c(Data_40003159, &fData_40002e30, &fData_40002e50, &Data_40002e58);
+		
+		dData_40002e28_SiteLongitude = fData_40002e30;
+		dData_40002e48_SiteLatitude = fData_40002e50;
+		Data_40002e54_Zone = Data_40002e58;
+		
+		Data_40004128.geographicLongitude = dData_40002e28_SiteLongitude;
+		Data_40004128.geographicLatitude = dData_40002e48_SiteLatitude;
+		Data_40004128.timeZone = Data_40002e54_Zone;
+		
+		beep1(2);
+		
+		if (bData_40002f1e_SetupLocalData == 1)
+		{
+			if (bData_40002c1a == 1)
+			{
+				//51290
+				lcd_display_clear();
+				
+				bData_400031ed = 0;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+				bData_40002f1e_SetupLocalData = 0;
+			}
+			else
+			{
+				//0x51340
+				Data_40002c64_MenuContextId = 47011;
+			}
+		}
+		else
+		{
+			//0x51350
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+		}
+	}
+}
+
+/* 51368 - todo */
+int ValidateDateTimeSetRTC(void)
+{
+	int valid = 1;
+	unsigned short y;
+	unsigned char m;
+	unsigned char d;
+	unsigned char h;
+	unsigned char min;
+	unsigned char s;
+	y = atoi(Data_40002655);
+	m = atoi(&Data_40002655[5]);
+	
+	if ((m > 12) || (m == 0))
+	{
+		return 0;
+	}
+	
+	d = atoi(&Data_40002655[8]);
+	
+	switch (m)
+	{
+		case 1:
+		case 3:
+		case 5:
+		case 7:
+		case 8:
+		case 10:
+		case 12:
+			if (d > 31) valid = 0;
+			break;
+		
+		case 2:
+			if (d > 29) valid = 0;
+			break;
+		
+		case 4:
+		case 6:
+		case 9:
+		case 11:
+			if (d > 30) valid = 0;
+			break;
+		
+		default:
+			break;
+	}
+	
+	if (d < 1) valid = 0;
+	
+	if (valid == 0) 
+	{
+		return 0;
+	}
+	
+	h = atoi(Data_40002660);
+	min = atoi(&Data_40002660[3]);
+	s = atoi(&Data_40002660[6]);
+	
+	if ((h > 23) || (min > 59) || (s > 59))
+	{
+		return 0;
+	}
+	
+	CCR = (1 << 4);
+	YEAR = y;
+	MONTH = m;
+	DOM = d;
+	HOUR = h;
+	MIN = min;
+	SEC = s;
+	CCR = (1 << 4) | (1 << 0); //CLKEN = 1
+	
+	return 1;
 }
 
 /* 514f8 - todo */
@@ -397,6 +558,68 @@ void func_52478(void)
 
 /* 52720 - todo */
 double func_52720(int a)
+{
+}
+
+#include "HandleEnterKey.c"
+
+/* 563c8 - todo */
+void func_563c8(void)
+{
+}
+
+/* 5660c - todo */
+void func_5660c(void)
+{
+}
+
+/* 56840 - todo */
+void func_56840(void)
+{
+}
+
+/* 56ac8 - todo */
+void func_56ac8(void)
+{
+}
+
+/* 56b54 - todo */
+void func_56b54(void)
+{
+}
+
+/* 56bf8 - todo */
+void func_56bf8(void)
+{
+}
+
+/* 56c4c - todo */
+void func_56c4c(void)
+{
+}
+
+/* 56d0c - todo */
+void func_56d0c(void)
+{
+}
+
+/* 56dac - todo */
+void func_56dac(void)
+{
+}
+
+/* 56e50 - todo */
+void func_56e50(void)
+{
+}
+
+/* 5718c - todo */
+void func_5718c(void)
+{
+}
+
+/* 57370 - todo */
+void func_57370(void)
 {
 }
 
@@ -1013,6 +1236,69 @@ void func_5a57c(int a, int b)
 /* 5f0c0 - todo */
 void func_5f0c0(void)
 {
+	if ((bData_4000319c == 1) || (bData_4000319d == 1))
+	{
+		//0x5f0e4
+		if (bData_4000319d == 1)
+		{
+			uart1_write_byte(0x55);
+			uart1_write_byte(0xaa);
+			uart1_write_byte(1);
+			uart1_write_byte(1);
+			uart1_write_byte(0);
+			
+			bData_40002e88 = 0;
+		}
+		//0x5f128
+		if (bData_4000319c == 1)
+		{
+			if (bData_40002c1a == 2)
+			{
+				uart1_write_byte(0x55);
+				uart1_write_byte(0xaa);
+				uart1_write_byte(1);
+				uart1_write_byte(1);
+				uart1_write_byte(0);
+				
+				bData_40002e88 = 0;
+			}
+			else
+			{
+				//0x5f180
+				if (bData_40002e7d_RotatingSpeed != MENU_ROTATING_SPEED_MAX) //9)
+				{
+					uart1_write_byte(0x55);
+					uart1_write_byte(0xaa);
+					uart1_write_byte(1);
+					uart1_write_byte(1);
+					uart1_write_byte(0);
+					
+					bData_40002e88 = 0;
+				}
+				else
+				{
+					//0x5f1c8
+					if (Data_400031a4 >= 4800)
+					{
+						Data_400031a4 = 4700;
+					}
+					//0x5f1e4
+					Data_400031b4 = -4;					
+				}
+			}
+		}
+		//0x5f1f0
+		if (bData_4000319c == 1)
+		{
+			bData_4000319c = 0;
+		}
+		//0x5f20c
+		if (bData_4000319d == 1)
+		{
+			bData_4000319d = 0;
+		}
+	}
+	//0x5f228
 }
 
 #include "HandleMinusKey.c"
@@ -1868,6 +2154,11 @@ void HandleHelpKey(void)
 
 /* 61ecc - todo */
 void func_61ecc(void)
+{
+}
+
+/* 62524 - todo */
+void func_62524(int a)
 {
 }
 

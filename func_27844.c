@@ -1074,8 +1074,8 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 
-		case 4301: //Country & City
-			//0x2af04
+		case MENU_CONTEXT_COUNTRY_CITY: //4301:
+			//0x2af04: Country & City
 			Data_40003360 = Data_40003060; // "Country & City"
 			Data_40003368 = Data_40003064; // "Custom Site"
 			Data_40003364 = "";
@@ -1090,11 +1090,11 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 4302: //Custom Site
-			//0x2af88
+		case MENU_CONTEXT_CUSTOM_SITE: //4302:
+			//0x2af88: Custom Site
 			Data_40003360 = Data_40003060;
-			Data_40003364 = Data_40003064;
-			Data_40003368 = "";
+			Data_40003368 = Data_40003064;
+			Data_40003364 = "";
 			Data_4000336c = "";
 			Data_40003370 = "";
 			Data_40003374 = "";
@@ -5558,8 +5558,8 @@ int PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 43011: //Country & City
-			//0x3c8f4
+		case MENU_CONTEXT_COUNTRY_CITY_SELECTION: //43011:
+			//0x3c8f4: Country & City
 			flash_get_site_data((unsigned short)(wData_40003250 + wData_40003252), &Data_40003f1c_FlashSiteData);
 
 			if (Data_40003f1c_FlashSiteData.fLongitude >= 0)
@@ -5646,7 +5646,7 @@ int PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 43002: //44001: //??????
+		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
 			//0x3ce9c: "Custom Site"
 			Data_40003360 = "Please Input Data: ";
 			//Data_40003364 = ""; //?????

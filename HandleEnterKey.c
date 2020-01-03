@@ -1,6 +1,4 @@
 
-extern double func_52720(int a);
-
 
 /* 52898 - todo */
 void HandleEnterKey(void)
@@ -1002,15 +1000,15 @@ void HandleEnterKey(void)
 			}
 			break;
 		
-		case 4301: //Country & City
-			//0x558dc
+		case MENU_CONTEXT_COUNTRY_CITY: //4301:
+			//0x558dc: Country & City
 			wData_40003250 = 1;
 			wData_40003252 = 0;
 			lcd_display_clear();
-			Data_40002c64_MenuContextId = 43011;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_COUNTRY_CITY_SELECTION; //43011;
 			break;
 		
-		case 43011:
+		case MENU_CONTEXT_COUNTRY_CITY_SELECTION: //43011:
 			//0x5590c
 			flash_get_site_data((unsigned short)(wData_40003250 + wData_40003252), &Data_40003f1c_FlashSiteData);
 		
@@ -1029,7 +1027,7 @@ void HandleEnterKey(void)
 				if (bData_40002c1a == 1)
 				{
 					bData_400031ed = 0;
-					Data_40002c64_MenuContextId = 0;
+					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 					bData_40002f1e_SetupLocalData = 0;
 				}
 				else
@@ -1041,19 +1039,76 @@ void HandleEnterKey(void)
 			else
 			{
 				//0x559f8
-				Data_40002c64_MenuContextId = 0;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			}
 			//->0x563b8
 			break;
 		
-		case 4302: //Custom Site
-			//0x55a08
-			//TODO
+		case MENU_CONTEXT_CUSTOM_SITE: //4302:
+			//0x55a08: Custom Site
+			bData_40002edc = 1;
+			bData_40003144 = 0;
+			bData_4000318a = 7;
+		
+			func_2a1c(Data_40003159, &fData_40002e30, &fData_40002e50, &Data_40002e58);
+		
+			/*Name:*/
+			Data_40002827[6] = Data_40003159[0];
+			Data_40002827[7] = Data_40003159[1];
+			Data_40002827[8] = Data_40003159[2];		
+			Data_40002827[9] = Data_40003159[3];		
+			Data_40002827[10] = Data_40003159[4];		
+			Data_40002827[11] = Data_40003159[5];		
+			Data_40002827[12] = Data_40003159[6];		
+			Data_40002827[13] = Data_40003159[7];		
+		
+			if (fData_40002e30 > 0)
+			{
+				//55abc
+				sprintf(Data_40002837, "  Lon:E%03dd%02df ",
+					abs((int)fData_40002e30),
+					abs((int)((fData_40002e30 - (int)fData_40002e30) * 60)));
+			}
+			else
+			{
+				//0x55b4c
+				sprintf(Data_40002837, "  Lon:W%03dd%02df ",
+					abs((int)fData_40002e30),
+					abs((int)((fData_40002e30 - (int)fData_40002e30) * 60)));
+			}
+			//0x55bd8
+			if (fData_40002e50 > 0)
+			{
+				//55bec
+				sprintf(Data_40002847, "  Lat:N%02dd%02df ",
+					abs((int)fData_40002e50),
+					abs((int)((fData_40002e50 - (int)fData_40002e50) * 60)));
+			}
+			else
+			{
+				//0x55c7c
+				sprintf(Data_40002847, "  Lat:S%02dd%02df ",
+					abs((int)fData_40002e50),
+					abs((int)((fData_40002e50 - (int)fData_40002e50) * 60)));
+			}
+			//0x55d08
+			if (Data_40002e58 > 0)
+			{
+				//55d18
+				sprintf(Data_40002856, " Zone:E%02d", abs(Data_40002e58));
+			}
+			else
+			{
+				//0x55d48
+				sprintf(Data_40002856, " Zone:W%02d", abs(Data_40002e58));
+			}
+			
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOM_SITE_INPUT; //43002;
 			break;
 		
-		case 43002: //Custom Site
+		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
 			//0x55d84
-			func_5104c();
+			HandleCustomSiteData();
 			break;
 		
 		case MENU_CONTEXT_RESET: //4900:

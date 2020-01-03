@@ -576,13 +576,16 @@ extern int Data_40002e18_SiteLongitudeDegrees; //40002e18
 extern int Data_40002e1c_SiteLongitudeMinutes; //40002e1c
 extern float fData_40002e20_SiteLongitudeSeconds; //40002e20
 extern double dData_40002e28_SiteLongitude; //40002e28
+extern float fData_40002e30; //40002e30
 extern int Data_40002e34; //40002e34
 extern int Data_40002e38_SiteLatitudeDegrees; //40002e38
 extern int Data_40002e3c_SiteLatitudeMinutes; //40002e3c
 extern float fData_40002e40_SiteLatitudeSeconds; //40002e40
 extern int Data_40002e44; //40002e44
 extern double dData_40002e48_SiteLatitude; //40002e48
+extern float fData_40002e50; //40002e50
 extern int Data_40002e54_Zone; //40002e54
+extern int Data_40002e58; //40002e58
 extern unsigned Data_40002e5c_Year; //40002e5c
 extern unsigned char bData_40002e60_Month; //40002e60
 extern unsigned char bData_40002e61_Day; //40002e61
@@ -631,6 +634,7 @@ extern unsigned short wData_40002ed4; //40002ed4
 extern unsigned short wData_40002ed6; //40002ed6
 extern unsigned short wData_40002ed8; //40002ed8
 extern unsigned short wData_40002eda; //40002eda
+extern char bData_40002edc; //40002edc
 extern char bData_40002edd; //40002edd
 extern char bData_40002ede; //40002ede
 extern char bData_40002edf; //40002edf
@@ -780,6 +784,7 @@ extern char* Data_40003140; //40003140
 extern unsigned char bData_40003144; //40003144
 extern char* Data_4000314c_SolarSystemObjectName; //4000314c
 extern char Data_40003150[]; //40003150, size??
+extern char Data_40003159[]; //40003159, size??
 extern unsigned char bData_40003161; //40003161
 extern char bData_40003162; //40003162
 extern int Data_40003164_LunarPhaseYear; //40003164
@@ -862,7 +867,7 @@ extern float fData_40003238; //40003238
 extern int Data_40003248_CurrentDisplayPWM; //40003248
 extern unsigned short wData_40003250; //40003250
 extern unsigned short wData_40003252; //40003252
-extern unsigned char bData_40003256; //40003256
+extern unsigned short wData_40003256; //40003256
 extern unsigned char bData_40003258; //40003258
 extern unsigned short wData_4000325a; //4000325a
 extern unsigned char bData_4000325c; //4000325c

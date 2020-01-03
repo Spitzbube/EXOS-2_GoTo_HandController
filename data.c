@@ -483,13 +483,16 @@ int Data_40002e18_SiteLongitudeDegrees; //40002e18
 int Data_40002e1c_SiteLongitudeMinutes; //40002e1c
 float fData_40002e20_SiteLongitudeSeconds; //40002e20
 double dData_40002e28_SiteLongitude; //40002e28
+float fData_40002e30; //40002e30
 int Data_40002e34; //40002e34
 int Data_40002e38_SiteLatitudeDegrees; //40002e38
 int Data_40002e3c_SiteLatitudeMinutes; //40002e3c
 float fData_40002e40_SiteLatitudeSeconds; //40002e40
 int Data_40002e44; //40002e44
 double dData_40002e48_SiteLatitude; //40002e48
+float fData_40002e50; //40002e50
 int Data_40002e54_Zone; //40002e54
+int Data_40002e58; //40002e58
 unsigned Data_40002e5c_Year; //40002e5c
 unsigned char bData_40002e60_Month; //40002e60
 unsigned char bData_40002e61_Day; //40002e61
@@ -538,6 +541,7 @@ unsigned short wData_40002ed4; //40002ed4
 unsigned short wData_40002ed6; //40002ed6
 unsigned short wData_40002ed8; //40002ed8
 unsigned short wData_40002eda; //40002eda
+char bData_40002edc; //40002edc
 char bData_40002edd; //40002edd
 char bData_40002ede; //40002ede
 char bData_40002edf; //40002edf
@@ -684,7 +688,8 @@ char* Data_40003114;
 char* Data_40003140; //40003140
 unsigned char bData_40003144; //40003144
 char* Data_4000314c_SolarSystemObjectName; //4000314c
-char Data_40003150[30]; //40003150, size??
+char Data_40003150[9]; //40003150, size??
+char Data_40003159[8]; //40003159, size??
 unsigned char bData_40003161; //40003161
 char bData_40003162; //40003162
 int Data_40003164_LunarPhaseYear; //40003164
@@ -766,7 +771,7 @@ float fData_40003238; //40003238
 int Data_40003248_CurrentDisplayPWM; //40003248
 unsigned short wData_40003250; //40003250
 unsigned short wData_40003252; //40003252
-unsigned char bData_40003256; //40003256
+unsigned short wData_40003256; //40003256
 unsigned char bData_40003258; //40003258
 unsigned short wData_4000325a; //4000325a
 unsigned char bData_4000325c; //4000325c
