@@ -439,7 +439,6 @@ extern char Data_400028d7[]; //400028d7
 extern char Data_400028e1[]; //400028e1
 extern char Data_400028eb[]; //400028eb
 extern char Data_40002901[]; //40002901
-
 extern char strEngEnglish[]; //40002916
 extern char strEngGerman[]; //4000291e
 extern char strEngFrench[]; //40002925
@@ -461,9 +460,8 @@ extern char strEngAlarmCloseBack[]; //40002a71
 extern char strEngInputTime[]; //40002a87
 extern char strEngAlarm21h34m23s[]; //40002a94
 extern char strEngAlarmOnBack[]; //40002a9e
-
-extern char Data_40002acb[]; //40002acb
-extern char Data_40002adc[]; //40002adc
+extern char strEngBackgroundLight[]; //40002acb
+extern char strEngPressUpDownKey[]; //40002adc
 extern char Data_40002aee[]; //40002aee
 extern char Data_40002aef[]; //40002aef
 extern char Data_40002b70[]; //40002b70
@@ -744,9 +742,9 @@ extern char* Data_40003078;
 extern char* Data_4000307c;
 extern char* Data_40003080;
 extern char* Data_40003084;
-extern char* Data_40003088;
-extern char* Data_4000308c;
-extern char* Data_40003090;
+extern char* strStarSpeed; //40003088
+extern char* strSolarSpeed; //4000308c
+extern char* strMoonSpeed; //40003090
 extern char* Data_40003094;
 extern char* Data_40003098;
 extern char* Data_4000309c;

@@ -1,10 +1,12 @@
 
+#if 0
 #include <LPC214x.h>
 #include "my_types.h"
 #include "data.h"
 
 extern void func_2df8(int a, int b, int c, int d, unsigned char* e);
 extern void initialize_variables(void);
+#endif
 
 
 /* 5099c - todo */

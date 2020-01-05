@@ -143,7 +143,7 @@ void HandleLeftKey(void)
 			//0x5992c
 		case 11202:
 			//0x59930
-		case 22111:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x59934
 		case 24002:
 			//0x59938

@@ -397,7 +397,7 @@ void DisplayScreenItems(void)
 					else
 					{
 						//0x3fdac: "Slewing to Target" / "Please center this star to the field of view"
-						if ((bData_40002e88 == 1) && (bData_400034cd == 0))
+						if ((bData_40002e88 == MENU_TRACKING_MODE_POINTING/*1*/) && (bData_400034cd == 0))
 						{
 							//3fdcc
 							if (bData_400031e9 != 7)
@@ -444,7 +444,7 @@ void DisplayScreenItems(void)
 							
 							lcd_display_string(0, 6, 1, 4, "    ");
 							//->0x402d8
-						} //if ((bData_40002e88 == 1) && (bData_400034cd == 0))
+						} //if ((bData_40002e88 == MENU_TRACKING_MODE_POINTING) && (bData_400034cd == 0))
 						else
 						{
 							//0x4015c
@@ -602,7 +602,7 @@ void DisplayScreenItems(void)
 					Data_40002c64_MenuContextId = 0;
 					break;
 				
-				case 22001:
+				case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION: //22001:
 					//0x40e30: Solar System object
 				case 24001:
 					//0x40e38: Constellation item
@@ -660,7 +660,7 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 					break;
 				
-				case 22111:
+				case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 					//0x412f8
 				case 24002:
 					//0x41300

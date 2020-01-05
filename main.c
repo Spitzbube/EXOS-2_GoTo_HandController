@@ -1,4 +1,5 @@
 
+#if 0
 #include <LPC214x.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -6,7 +7,9 @@
 #include "my_types.h"
 #include "data.h"
 #include "menu.h"
+#endif
 
+#if 0
 extern void uart0_init(int);
 extern void uart1_write_byte(unsigned char);
 extern void uart1_init(int);
@@ -48,6 +51,9 @@ extern void get_all_solar_system_object_equatorial_coordinates(void);
 extern void func_1e228(void);
 extern void DisplayScreenItems(void);
 extern void func_20b94(void);
+#endif
+
+#include "file_1f30.c"
 
 #ifndef OLIMEX_LPC2148
 
@@ -240,6 +246,10 @@ void func_50778(void)
 {
 
 }
+
+
+#include "file_5099c.c"
+
 
 /* 50b40 - todo */
 void HandleReset(void)
@@ -765,7 +775,7 @@ void func_57414(int a, int b, int speed)
 					//0x576a8
 					sp12[6] = 0;
 					sp12[7] = 0;
-					bData_40002e88 = 0;
+					bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
 					break;
 				
 				case MENU_ROTATING_SPEED_1: //1:
@@ -856,7 +866,7 @@ void func_57414(int a, int b, int speed)
 					//0x578b8
 					sp12[6] = 0;
 					sp12[7] = 0;
-					bData_40002e88 = 0;
+					bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
 					break;
 				
 				case MENU_ROTATING_SPEED_1: //1:
@@ -1247,7 +1257,7 @@ void func_5f0c0(void)
 			uart1_write_byte(1);
 			uart1_write_byte(0);
 			
-			bData_40002e88 = 0;
+			bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
 		}
 		//0x5f128
 		if (bData_4000319c == 1)
@@ -1260,7 +1270,7 @@ void func_5f0c0(void)
 				uart1_write_byte(1);
 				uart1_write_byte(0);
 				
-				bData_40002e88 = 0;
+				bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
 			}
 			else
 			{
@@ -1273,7 +1283,7 @@ void func_5f0c0(void)
 					uart1_write_byte(1);
 					uart1_write_byte(0);
 					
-					bData_40002e88 = 0;
+					bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
 				}
 				else
 				{
@@ -2509,7 +2519,8 @@ void func_6a2cc(void)
 			
 			case 1:
 				//0x6a3d8: "1"
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a40c
@@ -2520,7 +2531,8 @@ void func_6a2cc(void)
 				
 			case 2:
 				//0x6a420
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a454
@@ -2531,7 +2543,8 @@ void func_6a2cc(void)
 			
 			case 3:
 				//0x6a468
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a49c
@@ -2542,7 +2555,8 @@ void func_6a2cc(void)
 			
 			case 4:
 				//0x6a4b0
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a4e4
@@ -2553,7 +2567,8 @@ void func_6a2cc(void)
 			
 			case 5:
 				//0x6a4f8
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a52c
@@ -2564,7 +2579,8 @@ void func_6a2cc(void)
 						
 			case 6:
 				//0x6a540
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a574
@@ -2581,7 +2597,8 @@ void func_6a2cc(void)
 			
 			case 8:
 				//0x6a5a0
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a5d4
@@ -2592,7 +2609,8 @@ void func_6a2cc(void)
 			
 			case 9:
 				//0x6a5e8
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a61c
@@ -2627,7 +2645,8 @@ void func_6a2cc(void)
 			
 			case 14:
 				//0x6a690: "Up"
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a6c4
@@ -2638,7 +2657,8 @@ void func_6a2cc(void)
 			
 			case 15:
 				//0x6a6d8: "Down"
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a70c
@@ -2649,7 +2669,8 @@ void func_6a2cc(void)
 			
 			case 16:
 				//0x6a720: "Left"
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a754
@@ -2660,7 +2681,8 @@ void func_6a2cc(void)
 			
 			case 17:
 				//0x6a768: "Right"
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a79c
@@ -2682,7 +2704,8 @@ void func_6a2cc(void)
 			
 			case 22:
 				//0x6a7c8
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a7fc
@@ -2693,7 +2716,8 @@ void func_6a2cc(void)
 			
 			case 21:
 				//0x6a810
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a844
@@ -2704,7 +2728,8 @@ void func_6a2cc(void)
 			
 			case 23:
 				//0x6a858
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a88c
@@ -2715,7 +2740,8 @@ void func_6a2cc(void)
 			
 			case 24:
 				//0x6a8a0
-				if (((Data_40004128.bData_357 != 0) && (bData_40002e88 == 2)) ||
+				if (((Data_40004128.bData_357 != 0) && 
+					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
 					(Data_40004128.bData_357 == 0))
 				{
 					//6a8d4
@@ -4241,24 +4267,48 @@ int main(void)
 			//TODO
 		}
 		//6fb24
-		if (bData_40002e88 == 2)
+		if (bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)
 		{
 			//6fb34
 			func_6b17c();
 			
-			//TODO
+			Data_40003488 = Data_40002c1c;
+			Data_4000348c = Data_40002c20;
+			#if 0
+			sp64 = 2 * Data_40003488 + Data_40003204;
+			sp56 = sp64 * dData_40002ca0;
+			sp48 = sp56 * 0.00153;
+			Data_40004128.dData_584 = sp48 + Data_40004128.dData_584;
+			#else
+			Data_40004128.dData_584 = (2 * Data_40003488 + Data_40003204) * 
+				dData_40002ca0 * 0.00153 + Data_40004128.dData_584;
+			#endif
+
+			#if 0
+			sp64 = 4 * Data_4000348c + Data_40003208;
+			sp56 = sp64 * dData_40002ca0;
+			sp48 = sp56 * 0.00153;
+			Data_40004128.dData_592 = sp48 + Data_40004128.dData_592;
+			#else
+			Data_40004128.dData_592 = (4 * Data_4000348c + Data_40003208) * 
+				dData_40002ca0 * 0.00153 + Data_40004128.dData_592;
+			#endif
+			
+			Data_40002c1c = 0;
+			Data_40002c20 = 0;
 		}
 		//6fd3c
-		if (bData_40003211 == 0)
+		if ((bData_40003211 == 0) && 
+			(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/) &&
+			(dData_40002ce8 < 23.99999))
 		{
 			//6fd4c
-			
-			//TODO
+			bData_40003211 = 1;
 		}
 		//6fd80
 		if ((bData_40003211 != 0) && 
 				(bData_40003210 == 0) && 
-				(bData_40002e88 == 2) &&
+				(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/) &&
 				(dData_40002ce8 >= 23.83) &&
 				(dData_40002ce8 < 23.99717))
 		{
@@ -4268,7 +4318,7 @@ int main(void)
 		}
 		//6fdf8
 		if ((bData_40003210 != 0) &&
-				(bData_40002e88 == 2) &&
+				(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/) &&
 				(dData_40002ce8 >= 23.99717))
 		{
 			//6fe30

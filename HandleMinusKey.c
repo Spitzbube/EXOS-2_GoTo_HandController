@@ -143,64 +143,64 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 1000;
 			break;
 		
-		case 2100:
+		case MENU_CONTEXT_NAVIGATION_SOLAR_SYSTEM: //2100:
 			//0x5fcd8
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
-		case 2200:
+		case MENU_CONTEXT_NAVIGATION_CONSTELLATION: //2200:
 			//0x5fcec
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 2300:
 			//0x5fd00
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 2400:
 			//0x5fd14
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 2500:
 			//0x5fd28
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 2600:
 			//0x5fd3c
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 2700:
 			//0x5fd50
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 2800:
 			//0x5fd64
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 2900:
 			//0x5fd78
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 2110:
 			//0x5fdd8
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 2120:
 			//0x5fdec
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 2130:
 			//0x5fe00
-			Data_40002c64_MenuContextId = 2000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
 		case 3100:
@@ -404,29 +404,29 @@ void HandleMinusKey(void)
 			}
 			break;
 		
-		case 4801:
+		case MENU_CONTEXT_TRACKING_RATE_STAR_SPEED: //4801:
 			//0x60128
-			Data_40002c64_MenuContextId = 4700; //->Tracking Rate
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE; //4700;
 			break;
 		
-		case 4802:
+		case MENU_CONTEXT_TRACKING_RATE_SOLAR_SPEED: //4802:
 			//0x6013c
-			Data_40002c64_MenuContextId = 4700;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE; //4700;
 			break;
 		
-		case 4803:
+		case MENU_CONTEXT_TRACKING_RATE_MOON_SPEED: //4803:
 			//0x60150
-			Data_40002c64_MenuContextId = 4700;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE; //4700;
 			break;
 		
-		case 4804:
+		case MENU_CONTEXT_TRACKING_RATE_CUSTOM_SPEED: //4804:
 			//0x60164
-			Data_40002c64_MenuContextId = 4700;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE; //4700;
 			break;
 		
-		case 4805:
+		case MENU_CONTEXT_TRACKING_RATE_GUIDING_SPEED: //4805:
 			//0x60178
-			Data_40002c64_MenuContextId = 4700;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE; //4700;
 			break;
 		
 		case 45001:
@@ -495,12 +495,12 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 2700;
 			break;
 		
-		case 22001:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION: //22001:
 			//0x6029c
-			Data_40002c64_MenuContextId = 2100;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_SOLAR_SYSTEM; //2100;
 			break;
 		
-		case 22111:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x602b0
 			bData_40003432 = 0;
 		
@@ -510,7 +510,7 @@ void HandleMinusKey(void)
 				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
-				Data_40002c64_MenuContextId = 22001;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION; //22001;
 			}
 			else
 			{
@@ -526,14 +526,14 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 		
-		case 22112:
+		case MENU_CONTEXT_SUN_WARNING: //22112:
 			//0x60328
-			Data_40002c64_MenuContextId = 22001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION; //22001;
 			break;
 		
 		case 24001:
 			//0x6033c
-			Data_40002c64_MenuContextId = 2200;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CONSTELLATION; //2200;
 			break;
 		
 		case 24002:
@@ -853,9 +853,9 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 3601;
 			break;
 		
-		case 380011:
+		case MENU_CONTEXT_DISPLAY_ILLUMINATION_CONTROL: //380011:
 			//0x608b8
-			Data_40002c64_MenuContextId = 3800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DISPLAY_ILLUMINATION; //3800;
 			break;
 		
 		case 42001:

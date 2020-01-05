@@ -469,7 +469,7 @@ void func_240e8(unsigned char a, int b)
 			//0x24134
 			bData_40002eb5_SolarSystemObjectNr = b;
 			
-			func_22060(bData_40002eb5_SolarSystemObjectNr, 
+			get_solar_system_object_data(bData_40002eb5_SolarSystemObjectNr, 
 				&fData_40002cd0_ObjectRightAscension, 
 				&fData_40002d18_ObjectDeclination);
 		

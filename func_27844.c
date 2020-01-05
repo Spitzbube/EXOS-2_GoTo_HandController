@@ -1170,11 +1170,11 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 
-		case 4801: // "Tracking Rate"->
+		case MENU_CONTEXT_TRACKING_RATE_STAR_SPEED: //4801:
 			//0x2b2a4
-			Data_40003360 = Data_40003088; // "Star Speed"
-			Data_40003364 = Data_4000308c; // "Solar Speed"
-			Data_40003368 = Data_40003090; // "Moon Speed"
+			Data_40003360 = strStarSpeed;
+			Data_40003364 = strSolarSpeed;
+			Data_40003368 = strMoonSpeed;
 			Data_4000336c = Data_40003094; // "Customize Speed"
 			Data_40003370 = "";
 			Data_40003374 = "";
@@ -1186,11 +1186,11 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 0x12c2: //4802
+		case MENU_CONTEXT_TRACKING_RATE_SOLAR_SPEED: //4802:
 			//0x2b334
-			Data_40003360 = Data_40003088;
-			Data_40003364 = Data_4000308c;
-			Data_40003368 = Data_40003090;
+			Data_40003360 = strStarSpeed;
+			Data_40003364 = strSolarSpeed;
+			Data_40003368 = strMoonSpeed;
 			Data_4000336c = Data_40003094;
 			Data_40003370 = "";
 			Data_40003374 = "";
@@ -1202,11 +1202,11 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 0x12c3: //4803
+		case MENU_CONTEXT_TRACKING_RATE_MOON_SPEED: //4803
 			//0x2b3c8
-			Data_40003360 = Data_40003088;
-			Data_40003364 = Data_4000308c;
-			Data_40003368 = Data_40003090;
+			Data_40003360 = strStarSpeed;
+			Data_40003364 = strSolarSpeed;
+			Data_40003368 = strMoonSpeed;
 			Data_4000336c = Data_40003094;
 			Data_40003370 = "";
 			Data_40003374 = "";
@@ -1218,11 +1218,11 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 0x12C4: //4804
+		case MENU_CONTEXT_TRACKING_RATE_CUSTOM_SPEED: //4804
 			//0x2b45c
-			Data_40003360 = Data_40003088;
-			Data_40003364 = Data_4000308c;
-			Data_40003368 = Data_40003090;
+			Data_40003360 = strStarSpeed;
+			Data_40003364 = strSolarSpeed;
+			Data_40003368 = strMoonSpeed;
 			Data_4000336c = Data_40003094;
 			Data_40003370 = "";
 			Data_40003374 = "";
@@ -1234,11 +1234,11 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 0x12C5: //4805
+		case MENU_CONTEXT_TRACKING_RATE_GUIDING_SPEED: //4805
 			//0x2b4f0
-			Data_40003360 = Data_40003088;
-			Data_40003364 = Data_4000308c;
-			Data_40003368 = Data_40003090;
+			Data_40003360 = strStarSpeed;
+			Data_40003364 = strSolarSpeed;
+			Data_40003368 = strMoonSpeed;
 			Data_4000336c = Data_40003094;
 			Data_40003370 = "";
 			Data_40003374 = "";
@@ -1250,7 +1250,7 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 
-		case 0xBBB3: //48051
+		case MENU_CONTEXT_GUIDING_SPEED1: //48051
 			//0x2b584: Setup -> Tracking Rate -> Guiding Speed
 			Data_40003360 = "speed1:   x 0.125";
 			Data_40003364 = "speed2:   x 0.250";
@@ -1266,43 +1266,43 @@ int PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 0xBBB4: //48052
+		case MENU_CONTEXT_GUIDING_SPEED2: //48052
 			//0x2b600
 			bData_4000316e_FocusLineOn8LineDisplay = 2;
 			//->3d71c
 			break;
 		
-		case 0xBBB5: //48053
+		case MENU_CONTEXT_GUIDING_SPEED3: //48053
 			//0x2b614
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			//->3d71c
 			break;
 		
-		case 0xBBB6: //48054
+		case MENU_CONTEXT_GUIDING_SPEED4: //48054
 			//0x2b628
 			bData_4000316e_FocusLineOn8LineDisplay = 4;
 			//->3d71c
 			break;
 		
-		case 0xBBB7: //48055
+		case MENU_CONTEXT_GUIDING_SPEED5: //48055
 			//0x2b63c
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 			//->3d71c
 			break;
 		
-		case 0xBBB8: //48056
+		case MENU_CONTEXT_GUIDING_SPEED6: //48056
 			//0x2b650
 			bData_4000316e_FocusLineOn8LineDisplay = 6;
 			//->3d71c
 			break;
 		
-		case 48057: //0xBBB9
+		case MENU_CONTEXT_GUIDING_SPEED7: //48057
 			//0x2b664
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
 			//->3d71c
 			break;
 		
-		case 48058: //0xBBBA
+		case MENU_CONTEXT_GUIDING_SPEED8: //48058
 			//0x2b678
 			bData_4000316e_FocusLineOn8LineDisplay = 8;
 			//->3d71c
@@ -1793,9 +1793,9 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 		
-		case 22001: //Solar System Objects
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION: //22001:
 			//0x2d1b0
-			func_22060(bData_40002eb5_SolarSystemObjectNr, 
+			get_solar_system_object_data(bData_40002eb5_SolarSystemObjectNr, 
 				&fData_40002cd0_ObjectRightAscension, &fData_40002d18_ObjectDeclination);
 		
 			Data_40003360 = Data_4000314c_SolarSystemObjectName;
@@ -1924,7 +1924,7 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 
-		case 22112: //Solar System Objects
+		case MENU_CONTEXT_SUN_WARNING: //22112:
 			//0x2db70: Sun Warning screen
 			Data_40003360 = "                     ";
 			Data_40003364 = "    DO NOT POINT     ";
@@ -1940,9 +1940,9 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 
-		case 22111: //Solar System Objects
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x2dd24: Target Under Horizon / Slewing To Target / Find Target,Tracking
-			func_22060(bData_40002eb5_SolarSystemObjectNr, 
+			get_solar_system_object_data(bData_40002eb5_SolarSystemObjectNr, 
 				&fData_40002cd0_ObjectRightAscension, &fData_40002d18_ObjectDeclination);
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
@@ -5256,7 +5256,7 @@ int PrepareScreenItems(void)
 		
 		case 31001: // "Current Objects" -> Rise/Transit/Set
 			//0x3baa4
-			func_22060(bData_40002eb5_SolarSystemObjectNr, 
+			get_solar_system_object_data(bData_40002eb5_SolarSystemObjectNr, 
 				&fData_40002cd0_ObjectRightAscension, &fData_40002d18_ObjectDeclination);
 		
 			Data_40003360 = Data_4000314c_SolarSystemObjectName;
@@ -5484,9 +5484,9 @@ int PrepareScreenItems(void)
 		
 		case 380011: // "Background light"
 			//0x3c5cc
-			Data_40003360 = Data_40002acb; //"Background light"?
+			Data_40003360 = strEngBackgroundLight;
 			Data_40003364 = "";
-			Data_40003368 = Data_40002adc; //"Press up/down key"?
+			Data_40003368 = strEngPressUpDownKey;
 			Data_4000336c = "";
 			Data_40003370 = Data_40002aee;
 			Data_40003374 = "";

@@ -433,78 +433,78 @@ void HandleDownKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_COUNTRY_CITY; //4301;
 			break;
 		
-		case 4801:
+		case MENU_CONTEXT_TRACKING_RATE_STAR_SPEED: //4801:
 			//0x5bbe8: Tracking Rate -> "Star Speed"
-			Data_40002c64_MenuContextId = 4802;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE_SOLAR_SPEED; //4802;
 			break;
 		
-		case 4802:
+		case MENU_CONTEXT_TRACKING_RATE_SOLAR_SPEED: //4802:
 			//0x5bbfc -> "Solar Speed"
-			Data_40002c64_MenuContextId = 4803;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE_MOON_SPEED; //4803;
 			break;
 		
-		case 4803:
+		case MENU_CONTEXT_TRACKING_RATE_MOON_SPEED: //4803:
 			//0x5bc10 -> "Moon Speed"
-			Data_40002c64_MenuContextId = 4804;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE_CUSTOM_SPEED; //4804;
 			break;
 		
-		case 4804:
+		case MENU_CONTEXT_TRACKING_RATE_CUSTOM_SPEED: //4804:
 			//0x5bc24 -> "Customize Speed"
-			Data_40002c64_MenuContextId = 4805;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE_GUIDING_SPEED; //4805;
 			break;
 		
-		case 4805:
+		case MENU_CONTEXT_TRACKING_RATE_GUIDING_SPEED: //4805:
 			//0x5bc38 -> "Guiding Speed"
-			Data_40002c64_MenuContextId = 4801;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE_STAR_SPEED; //4801;
 			break;
 		
-		case 48051:
+		case MENU_CONTEXT_GUIDING_SPEED1: //48051:
 			//0x5bc4c
-			Data_40002c64_MenuContextId = 48052;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_GUIDING_SPEED2; //48052;
 			break;
 		
-		case 48052:
+		case MENU_CONTEXT_GUIDING_SPEED2: //48052:
 			//0x5bc60
-			Data_40002c64_MenuContextId = 48053;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_GUIDING_SPEED3; //48053;
 			break;
 		
-		case 48053:
+		case MENU_CONTEXT_GUIDING_SPEED3: //48053:
 			//0x5bc74
-			Data_40002c64_MenuContextId = 48054;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_GUIDING_SPEED4; //48054;
 			break;
 		
-		case 48054:
+		case MENU_CONTEXT_GUIDING_SPEED4: //48054:
 			//0x5bc88
-			Data_40002c64_MenuContextId = 48055;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_GUIDING_SPEED5; //48055;
 			break;
 		
-		case 48055:
+		case MENU_CONTEXT_GUIDING_SPEED5: //48055:
 			//0x5bc9c
-			Data_40002c64_MenuContextId = 48056;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_GUIDING_SPEED6; //48056;
 			break;
 		
-		case 48056:
+		case MENU_CONTEXT_GUIDING_SPEED6: //48056:
 			//0x5bcb0
-			Data_40002c64_MenuContextId = 48057;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_GUIDING_SPEED7; //48057;
 			break;
 		
-		case 48057:
+		case MENU_CONTEXT_GUIDING_SPEED7: //48057:
 			//0x5bcc4
-			Data_40002c64_MenuContextId = 48058;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_GUIDING_SPEED8; //48058;
 			break;
 		
-		case 48058:
+		case MENU_CONTEXT_GUIDING_SPEED8: //48058:
 			//0x5bcd8
-			Data_40002c64_MenuContextId = 48051;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_GUIDING_SPEED1; //48051;
 			break;
 		
-		case 0:
+		case MENU_CONTEXT_MAIN: //0:
 			//0x5bcec
 		case 11102:
 			//0x5bcf4
 		case 11202:
 			//0x5bcf8
-		case 22111:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x5bcfc
 		case 24002:
 			//0x5bd00
@@ -659,7 +659,7 @@ void HandleDownKey(void)
 			}
 			break;
 		
-		case 22001:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION: //22001:
 			//0x5bfb4: Navigation -> Solar System
 			lcd_display_clear();
 		case 31001:
@@ -1009,7 +1009,7 @@ void HandleDownKey(void)
 			Data_40002c64_MenuContextId = 360111;
 			break;
 		
-		case 380011:
+		case MENU_CONTEXT_DISPLAY_ILLUMINATION_CONTROL: //380011:
 			//0x5c7c0
 			if (Data_40003248_CurrentDisplayPWM == 255)
 			{
