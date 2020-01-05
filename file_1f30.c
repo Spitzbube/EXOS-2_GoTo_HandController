@@ -2838,7 +2838,7 @@ void initialize_variables(void)
 	bData_40002e7b_GpsAvailable = 0;
 	bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_64; //5;
 	bData_40002e7e = 0;
-	bData_40002e88 = 0;
+	bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
 	bData_40002e89 = 1;
 	bData_40002e8b = 0;
 	bData_40002e8c = 0;
@@ -4470,13 +4470,13 @@ void func_9178(void)
 			}
 			
 			bData_40003498 = 0;
-			bData_40002e88 = 2;
+			bData_40002e88 = MENU_TRACKING_MODE_TRACKING; //2;
 			//->a730
 		}
 		else
 		{
 			//a724
-			bData_40002e88 = 1;
+			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
 		}
 		//a730
 		if ((Data_40004128.dData_304 == 2.0) && 
@@ -4575,7 +4575,7 @@ void func_9178(void)
 			Data_40004128.bData_357 = 0;
 			Data_40004128.bData_356 = 0;
 			Data_40004128.bData_358 = 1;
-			bData_40002e88 = 3;			
+			bData_40002e88 = MENU_TRACKING_MODE_UNDER_HORIZON; //3;			
 		}
 		//ac38
 		if (bData_40003431 == 0)
@@ -4762,7 +4762,7 @@ void func_b4f0(void)
 	Data_40004128.bData_357 = 0;
 	Data_40004128.dData_312 = 0.0;
 	Data_40004128.dData_304 = 0.0;
-	bData_40002e88 = 0;
+	bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
 	
 	uart1_write_byte(0x55);
 	uart1_write_byte(0xaa);
@@ -6911,7 +6911,7 @@ void transform_ecliptical_to_equatorial_coordinates(double Lambda, double Beta, 
 }
 
 /* 1b528 - todo */
-void get_solar_system_object_equatorial_coordinates(int a, double* pAlpha, double* pDelta)
+void calculate_solar_system_object_equatorial_coordinates(int a, double* pAlpha, double* pDelta)
 {
 	double Tau/*sp536*/;
 	double T/*sp528*/;
@@ -7314,16 +7314,16 @@ void get_solar_system_object_equatorial_coordinates(int a, double* pAlpha, doubl
 /* 1e17c - todo */
 void get_all_solar_system_object_equatorial_coordinates(void)
 {
-	get_solar_system_object_equatorial_coordinates(1, &dData_400032b0_SunRightAscension, &dData_400032b8_SunDeclination); //Sun
-	get_solar_system_object_equatorial_coordinates(2, &dData_400032d0, &dData_400032d8); //Mercury
-	get_solar_system_object_equatorial_coordinates(3, &dData_400032e0, &dData_400032e8); //Venus
-	get_solar_system_object_equatorial_coordinates(4, &dData_400032f0, &dData_400032f8); //Mars
-	get_solar_system_object_equatorial_coordinates(5, &dData_40003300, &dData_40003308); //Jupiter
-	get_solar_system_object_equatorial_coordinates(6, &dData_40003310, &dData_40003318); //Saturn
-	get_solar_system_object_equatorial_coordinates(7, &dData_40003320, &dData_40003328); //Uranus
-	get_solar_system_object_equatorial_coordinates(8, &dData_40003330, &dData_40003338); //Neptune
-	get_solar_system_object_equatorial_coordinates(9, &dData_40003340, &dData_40003348); //Pluto
-	get_solar_system_object_equatorial_coordinates(10, &dData_400032c0, &dData_400032c8); //Moon
+	calculate_solar_system_object_equatorial_coordinates(1, &dData_400032b0_SunRightAscension, &dData_400032b8_SunDeclination); //Sun
+	calculate_solar_system_object_equatorial_coordinates(2, &dData_400032d0, &dData_400032d8); //Mercury
+	calculate_solar_system_object_equatorial_coordinates(3, &dData_400032e0, &dData_400032e8); //Venus
+	calculate_solar_system_object_equatorial_coordinates(4, &dData_400032f0, &dData_400032f8); //Mars
+	calculate_solar_system_object_equatorial_coordinates(5, &dData_40003300, &dData_40003308); //Jupiter
+	calculate_solar_system_object_equatorial_coordinates(6, &dData_40003310, &dData_40003318); //Saturn
+	calculate_solar_system_object_equatorial_coordinates(7, &dData_40003320, &dData_40003328); //Uranus
+	calculate_solar_system_object_equatorial_coordinates(8, &dData_40003330, &dData_40003338); //Neptune
+	calculate_solar_system_object_equatorial_coordinates(9, &dData_40003340, &dData_40003348); //Pluto
+	calculate_solar_system_object_equatorial_coordinates(10, &dData_400032c0, &dData_400032c8); //Moon
 }
 
 /* 1e228 - todo */
@@ -8013,7 +8013,7 @@ void DisplayMainScreen(void)
 	lcd_display_string(0, 7, 19, 2, Data_40003394 + 13);
 	
 	if ((bData_400034b4 == 1) &&
-		(bData_40002e88 == 2))
+		(bData_40002e88 == MENU_TRACKING_MODE_TRACKING)) //2))
 	{
 		//216f0
 		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
@@ -8139,7 +8139,7 @@ void DisplayMainScreen(void)
 	lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 	
 	if ((bData_400034b4 == 1) &&
-		(bData_40002e88 == 2))
+		(bData_40002e88 == MENU_TRACKING_MODE_TRACKING)) //2))
 	{
 		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 		{
@@ -8219,7 +8219,7 @@ void DisplayMainScreen(void)
 }
 
 /* 22060 - todo */
-void func_22060(int a, float* pRightAscension, float* pDeclination)
+void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclination)
 {
 	switch (a)
 	{
@@ -8983,24 +8983,24 @@ void PrepareMainScreenItems(void)
 	
 	switch (bData_40002e88)
 	{
-		case 0:
+		case MENU_TRACKING_MODE_STOP: //0:
 			//0x25678
 		case 100:
 			//0x25680
 			Data_40003398 = "Stop";
 			break;
 		
-		case 1:
+		case MENU_TRACKING_MODE_POINTING: //1:
 			//0x25690
 			Data_40003398 = "Poin";
 			break;
 		
-		case 2:
+		case MENU_TRACKING_MODE_TRACKING: //2:
 			//0x256a4
 			Data_40003398 = "Trac";
 			break;
 		
-		case 3:
+		case MENU_TRACKING_MODE_UNDER_HORIZON: //3:
 			//0x256b8
 			Data_40003398 = "UdHn";
 			break;
@@ -9012,7 +9012,7 @@ void PrepareMainScreenItems(void)
 	}
 	
 	if ((bData_400034b4 == 1) &&
-		(bData_40002e88 == 2))
+		(bData_40002e88 == MENU_TRACKING_MODE_TRACKING)) //2))
 	{
 		Data_40003394 = Data_40004066;
 		Data_4000339c = Data_40004090;
@@ -9101,9 +9101,9 @@ void SwapLanguageStrings(void)
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
-			Data_40003088 = strEngStarSpeed;
-			Data_4000308c = strEngSolarSpeed;
-			Data_40003090 = strEngMoonSpeed;
+			strStarSpeed = strEngStarSpeed;
+			strSolarSpeed = strEngSolarSpeed;
+			strMoonSpeed = strEngMoonSpeed;
 			Data_40003094 = strEngCustomizeSpeed;
 			Data_40003098 = strEngGuidingSpeed;
 			Data_4000309c = strEngListAlignStars;
@@ -9212,9 +9212,9 @@ void SwapLanguageStrings(void)
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
-			Data_40003088 = strEngStarSpeed;
-			Data_4000308c = strEngSolarSpeed;
-			Data_40003090 = strEngMoonSpeed;
+			strStarSpeed = strEngStarSpeed;
+			strSolarSpeed = strEngSolarSpeed;
+			strMoonSpeed = strEngMoonSpeed;
 			Data_40003094 = strEngCustomizeSpeed;
 			Data_40003098 = strEngGuidingSpeed;
 			Data_4000309c = strEngListAlignStars;
@@ -9322,9 +9322,9 @@ void SwapLanguageStrings(void)
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
-			Data_40003088 = strEngStarSpeed;
-			Data_4000308c = strEngSolarSpeed;
-			Data_40003090 = strEngMoonSpeed;
+			strStarSpeed = strEngStarSpeed;
+			strSolarSpeed = strEngSolarSpeed;
+			strMoonSpeed = strEngMoonSpeed;
 			Data_40003094 = strEngCustomizeSpeed;
 			Data_40003098 = strEngGuidingSpeed;
 			Data_4000309c = strEngListAlignStars;
@@ -9432,9 +9432,9 @@ void SwapLanguageStrings(void)
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
-			Data_40003088 = strEngStarSpeed;
-			Data_4000308c = strEngSolarSpeed;
-			Data_40003090 = strEngMoonSpeed;
+			strStarSpeed = strEngStarSpeed;
+			strSolarSpeed = strEngSolarSpeed;
+			strMoonSpeed = strEngMoonSpeed;
 			Data_40003094 = strEngCustomizeSpeed;
 			Data_40003098 = strEngGuidingSpeed;
 			Data_4000309c = strEngListAlignStars;
@@ -9542,9 +9542,9 @@ void SwapLanguageStrings(void)
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
-			Data_40003088 = strEngStarSpeed;
-			Data_4000308c = strEngSolarSpeed;
-			Data_40003090 = strEngMoonSpeed;
+			strStarSpeed = strEngStarSpeed;
+			strSolarSpeed = strEngSolarSpeed;
+			strMoonSpeed = strEngMoonSpeed;
 			Data_40003094 = strEngCustomizeSpeed;
 			Data_40003098 = strEngGuidingSpeed;
 			Data_4000309c = strEngListAlignStars;

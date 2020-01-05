@@ -121,7 +121,7 @@ void Handle0Key(void)
 			//0x69834
 			break;
 		
-		case 22111:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x69848
 			break;
 		

@@ -41,7 +41,7 @@ void HandleRightKey(void)
 			//0x57ea8
 		case 11202:
 			//0x57eac
-		case 22111:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x57eb0
 		case 24002:
 			//0x57eb4

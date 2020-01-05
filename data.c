@@ -365,8 +365,8 @@ char strEngAlarmCloseBack[] = "      Close    Back"; //40002a71, size???
 char strEngInputTime[] =      "Input time: "; //40002a87
 char strEngAlarm21h34m23s[] = "21h34m23s"; //40002a94
 char strEngAlarmOnBack[] =    "       On      Back "; //40002a9e, size???
-char Data_40002acb[] = "Background light"; //40002acb, content?
-char Data_40002adc[] = "Press up/down key"; //40002adc, content?
+char strEngBackgroundLight[] = "Background light"; //40002acb
+char strEngPressUpDownKey[] = "Press up/down key"; //40002adc
 char Data_40002aee[] = ""; //40002aee, content?
 char Data_40002aef[22]; //40002aef, size???
 char Data_40002b70[] = "daylight saving"; //40002b70
@@ -649,9 +649,9 @@ char* Data_40003078;
 char* Data_4000307c;
 char* Data_40003080;
 char* Data_40003084;
-char* Data_40003088;
-char* Data_4000308c;
-char* Data_40003090;
+char* strStarSpeed; //40003088
+char* strSolarSpeed; //4000308c
+char* strMoonSpeed; //40003090
 char* Data_40003094;
 char* Data_40003098;
 char* Data_4000309c;
