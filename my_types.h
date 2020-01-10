@@ -7,27 +7,27 @@ typedef struct
 	unsigned char bData_28[14]; //28
 	unsigned char bData_42[10]; //42
 	float fData_52; //52
-	float fData_56; //56
-	float fData_60; //60
-} Struct_34e4;
+	float fRightAscension; //56
+	float fDeclination; //60
+} Struct_FamousStarData;
 
 typedef struct
 {
 	unsigned char bData_0[5]; //0
 	unsigned char bData_5[21]; //5
 	unsigned char bData_26[10]; //26
-	float fData_36; //36
-	float fData_40; //40
-	unsigned short wData_44; //44
+	float fRightAscension; //36
+	float fDeclination; //40
+	unsigned short wArea; //44 / Square Degrees?
 	unsigned char bData_46; //46
-	unsigned char bData_47; //47
-} Struct_38dc;
+	unsigned char bQuantity; //47 / Number of Stars >6Mag?
+} Struct_ConstellationData;
 
 typedef struct
 {
 	unsigned short wData_0; //0
-	float fData_4; //4
-	float fData_8; //8
+	float fRightAscension; //4
+	float fDeclination; //8
 	float fData_12; //12
 	double dData_16; //16
 	unsigned char bData_24[8]; //24, size??
@@ -36,40 +36,40 @@ typedef struct
 	unsigned char bData_60[26]; //60, size??
 	unsigned char bData_86[22]; //86, size??
 	unsigned char bData_108[36]; //108, size??
-} Struct_3b58;
+} Struct_MessierData;
 
 typedef struct
 {
 	unsigned char bData_0[18]; //0
-	float fData_20; //20
-	float fData_24; //24
+	float fRightAscension; //20
+	float fDeclination; //24
 	float fData_28; //28
-} Struct_4028;
+} Struct_BrightStarData;
 
 typedef struct
 {
-	float fData_0; //0
-	float fData_4; //4
+	float fRightAscension; //0
+	float fDeclination; //4
 	
-} Struct_435c;
+} Struct_Sh2Data;
 
 typedef struct
 {
 	unsigned char bData_0[5]; //0
-	float fData_8; //8
-	float fData_12; //12
+	float fRightAscension; //8
+	float fDeclination; //12
 	float fData_16; //16
 	unsigned char bData_20[10]; //20 size??
-} Struct_4594;
+} Struct_ICData;
 
 typedef struct
 {
 	unsigned char bData_0[5]; //0
-	float fData_8; //8
-	float fData_12; //12
+	float fRightAscension; //8
+	float fDeclination; //12
 	float fData_16; //16
 	unsigned char bData_20[10]; //20 size??
-} Struct_4894;
+} Struct_NGCData;
 
 typedef struct
 {
@@ -187,7 +187,7 @@ typedef struct
 	double dData_32; 
 	double dData_40; 
 	double dData_48;
-	double fill1;
-	double fill2;
-	
+	double fill1; //56
+	double fill2; //64
+	//72
 } Struct_HorizontalCoordinates;

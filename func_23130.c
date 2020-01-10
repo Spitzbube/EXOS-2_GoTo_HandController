@@ -465,7 +465,7 @@ void func_240e8(unsigned char a, int b)
 {
 	switch (a)
 	{
-		case 1: //Solar System
+		case MENU_RECENT_TARGET_SOLAR_SYSTEM: //1:
 			//0x24134
 			bData_40002eb5_SolarSystemObjectNr = b;
 			
@@ -481,21 +481,23 @@ void func_240e8(unsigned char a, int b)
 			//->0x24568
 			break;
 		
-		case 2:
+		case MENU_RECENT_TARGET_CONSTELLATION: //2:
 			//0x241b0: Constellation
 			bData_40002ece_ConstellationNr = b;
 		
-			func_38dc(bData_40002ece_ConstellationNr, &Data_40003dd4);
+			flash_get_constellation_data(bData_40002ece_ConstellationNr, 
+				&Data_40003dd4_FlashConstellationData);
 		
 			sprintf(Data_4000410e, "Constellation %d          ", bData_40002ece_ConstellationNr);
 			//->0x24568
 			break;
 		
-		case 3:
+		case MENU_RECENT_TARGET_FAMOUS_STAR: //3:
 			//0x241e4
 			bData_40002ed2_FamousStarNr = b;
 		
-			func_34e4(bData_40002ed2_FamousStarNr, &Data_40003d94);
+			flash_get_famous_star_data(bData_40002ed2_FamousStarNr, 
+				&Data_40003d94_FlashFamousStarData);
 
 			for (bData_40002f1d = 0; bData_40002f1d < 13; bData_40002f1d++)
 			{
@@ -505,57 +507,57 @@ void func_240e8(unsigned char a, int b)
 			//->0x24568
 			break;
 		
-		case 4: //Messier
+		case MENU_RECENT_TARGET_MESSIER: //4:
 			//0x2425c
 			wData_40002eb8_MessierNr = b; 
 		
-			func_3b58(wData_40002eb8_MessierNr & 0xFF, &Data_40003e08);
+			flash_get_messier_data(wData_40002eb8_MessierNr & 0xFF, &Data_40003e08_FlashMessierData);
 		
 			sprintf(Data_4000410e, "Messier %d                  ", wData_40002eb8_MessierNr);
 			//->0x24568
 			break;
 		
-		case 5: //NGC
+		case MENU_RECENT_TARGET_NGC: //5:
 			//0x24290	
 			wData_40002eba_NGCNr = b; 
 		
-			func_4894(wData_40002eba_NGCNr, &Data_40003ee0);
+			flash_get_ngc_data(wData_40002eba_NGCNr, &Data_40003ee0_FlashNGCData);
 		
 			sprintf(Data_4000410e, "NGC %d                        ", wData_40002eba_NGCNr);
 			//->0x24568
 			break;
 		
-		case 6: //IC
+		case MENU_RECENT_TARGET_IC: //6:
 			//0x242c4
 			wData_40002ebc_ICNr = b; 
 		
-			func_4594(wData_40002ebc_ICNr, &Data_40003ec0);
+			flash_get_ic_data(wData_40002ebc_ICNr, &Data_40003ec0_FlashICData);
 		
 			sprintf(Data_4000410e, "IC %d                         ", wData_40002ebc_ICNr);
 			//->0x24568
 			break;
 		
-		case 7: //Sh
+		case MENU_RECENT_TARGET_SH2: //7:
 			//0x242f8
 			wData_40002ebe_ShNr = b; 
 		
-			func_435c(wData_40002ebe_ShNr, &Data_40003350);
+			flash_get_sh2_data(wData_40002ebe_ShNr, &Data_40003350_FlashSh2Data);
 		
 			sprintf(Data_4000410e, "Sh %d                           ", wData_40002ebe_ShNr);
 			//->0x24568
 			break;
 		
-		case 8:
+		case MENU_RECENT_TARGET_BRIGHT_STAR: //8:
 			//0x2432c
-			wData_40002ec0 = b; 
+			wData_40002ec0_BrightStarNr = b; 
 		
-			func_4028(wData_40002ec0 & 0xFF, &Data_40003ea0);
+			flash_get_bright_star_data(wData_40002ec0_BrightStarNr & 0xFF, &Data_40003ea0_FlashBrightStarData);
 
-			sprintf(Data_4000410e, "Bright %d                         ", wData_40002ec0);
+			sprintf(Data_4000410e, "Bright %d                         ", wData_40002ec0_BrightStarNr);
 			//->0x24568
 			break;
 		
-		case 9: //SAO
+		case MENU_RECENT_TARGET_SAO_CAT: //9:
 			//0x24478
 			Data_40002ec4_SAONr = b; 
 		

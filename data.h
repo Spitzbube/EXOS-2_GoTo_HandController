@@ -444,6 +444,7 @@ extern char strEngGerman[]; //4000291e
 extern char strEngFrench[]; //40002925
 extern char strEngItalian[]; //4000292c
 extern char strEngSpanish[]; //40002934
+extern char Data_4000294a[]; //4000294a
 extern char strEngSetTimer[]; //400029a1
 extern char strEng00000s[]; //400029ac
 extern char Data_400029b3[]; //400029b3
@@ -621,7 +622,7 @@ extern unsigned short wData_40002eb8_MessierNr; //40002eb8
 extern unsigned short wData_40002eba_NGCNr; //40002eba
 extern unsigned short wData_40002ebc_ICNr; //40002ebc
 extern unsigned short wData_40002ebe_ShNr; //40002ebe
-extern unsigned short wData_40002ec0; //40002ec0
+extern unsigned short wData_40002ec0_BrightStarNr; //40002ec0
 extern unsigned int Data_40002ec4_SAONr; //40002ec4
 extern int Data_40002ec8; //40002ec8
 extern unsigned short wData_40002ecc; //40002ecc
@@ -645,8 +646,6 @@ extern int Data_40002f04; //40002f04
 extern int Data_40002f08; //40002f08
 extern char bData_40002f0c; //40002f0c
 extern unsigned char bData_40002f0d_RecentTargetType; //40002f0d
-//9 = SAO
-
 extern int bData_40002f10_RecentTargetId; //40002f10
 extern unsigned char bData_40002f14_RecentTargetCount; //40002f14
 extern unsigned char Data_40002f15_RecentTargetTypeArray[]; //40002f15, size???
@@ -897,8 +896,7 @@ extern double dData_40003330; //40003330
 extern double dData_40003338; //40003338
 extern double dData_40003340; //40003340
 extern double dData_40003348; //40003348
-
-extern Struct_435c Data_40003350; //40003350
+extern Struct_Sh2Data Data_40003350_FlashSh2Data; //40003350
 extern Struct_SAOData Data_40003358_SAORecord; //40003358
 extern char* Data_40003360; //40003360
 extern char* Data_40003364; //40003364
@@ -996,13 +994,13 @@ extern char Data_400037dc[]; //400037dc
 extern char Data_400037ec[]; //400037ec, size???
 extern unsigned char Data_40003a14[][10]; //40003a14, size??
 extern unsigned char Data_40003b2c[][22]; //40003b2c, size??
-extern Struct_34e4 Data_40003d94; //40003d94
+extern Struct_FamousStarData Data_40003d94_FlashFamousStarData; //40003d94
 extern char Data_40003db0[]; //40003db0
-extern Struct_38dc Data_40003dd4; //40003dd4
-extern Struct_3b58 Data_40003e08; //40003e08
-extern Struct_4028 Data_40003ea0; //40003ea0
-extern Struct_4594 Data_40003ec0; //40003ec0
-extern Struct_4894 Data_40003ee0; //40003ee0
+extern Struct_ConstellationData Data_40003dd4_FlashConstellationData; //40003dd4
+extern Struct_MessierData Data_40003e08_FlashMessierData; //40003e08
+extern Struct_BrightStarData Data_40003ea0_FlashBrightStarData; //40003ea0
+extern Struct_ICData Data_40003ec0_FlashICData; //40003ec0
+extern Struct_NGCData Data_40003ee0_FlashNGCData; //40003ee0
 extern Struct_SiteData Data_40003f1c_FlashSiteData; //40003f1c
 extern Struct_5218 Data_40003f50; //40003f50
 extern Struct_54e0 Data_40003f64; //40003f64
@@ -1028,10 +1026,9 @@ extern float Data_40004a68_CurrentAlignStarEquatorialCoord[][2]; //40004a68
 extern float Data_40004a68_CurrentAlignStarEquatorialCoord[]; //40004a68
 #endif
 extern Struct_EquatorialCoordinates Data_40004ae8; //40004ae8
-extern double Data_40004b08[]; //40004b08, array?
+extern Struct_HorizontalCoordinates Data_40004b08; //40004b08
 extern Struct_EquatorialCoordinates Data_40004b50; //40004b50
-extern double Data_40004b70[]; //40004b70
-extern Struct_40004b70 Data_40004b70_; //40004b70
+extern Struct_HorizontalCoordinates Data_40004b70; //40004b70
 extern unsigned char Data_40004bb8[]; //40004bb8
 extern char Data_40004c58[]; //40004c58, size???
 

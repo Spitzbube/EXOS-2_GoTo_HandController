@@ -125,52 +125,52 @@ void Handle0Key(void)
 			//0x69848
 			break;
 		
-		case 24002:
+		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
 			//0x69850
 			break;
 		
-		case 25002:
+		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
 			//0x69854
 			break;
 		
-		case 23022:
+		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
 			//0x69858
 			break;
 		
-		case 23013:
+		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
 			//0x6985c
 			break;
 		
-		case 23014:
+		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
 			//0x69860
 			break;
 		
-		case 23015:
+		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
 			//0x69864
 			break;
 		
-		case 23016:
+		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
 			//0x69868
 			break;
 		
-		case 23017:
+		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
 			//0x6986c
 			break;
 		
-		case 23012:
+		case MENU_CONTEXT_MESSIER_OBJECT_DETAILS: //23012:
 			//0x698b4
-		case 23002:
+		case MENU_CONTEXT_MESSIER_OBJECT_SELECTION: //23002:
 			//0x698bc
 			break;
 		
-		case 23003:
+		case MENU_CONTEXT_NGC_OBJECT_SELECTION: //23003:
 			//0x6993c
 		
-		case 23004:
+		case MENU_CONTEXT_IC_OBJECT_SELECTION: //23004:
 			//0x699c8
 			break;
 		
-		case 23005:
+		case MENU_CONTEXT_SH2_OBJECT_SELECTION: //23005:
 			//0x69a54
 			break;
 		

@@ -490,7 +490,7 @@ void HandleEnterKey(void)
 				
 				func_b64c(dData_40002cc8, dData_40002d10);
 				
-				bData_40002f0d_RecentTargetType = 1;
+				bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_SOLAR_SYSTEM; //1;
 				bData_40002f10_RecentTargetId = bData_40002eb5_SolarSystemObjectNr;
 				
 				flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
@@ -513,7 +513,7 @@ void HandleEnterKey(void)
 			
 			func_b64c(dData_40002cc8, dData_40002d10);
 			
-			bData_40002f0d_RecentTargetType = 1;
+			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_SOLAR_SYSTEM; //1;
 			bData_40002f10_RecentTargetId = bData_40002eb5_SolarSystemObjectNr;
 			
 			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
@@ -527,26 +527,27 @@ void HandleEnterKey(void)
 			bData_40002ece_ConstellationNr = 1;
 			lcd_display_clear();
 			bData_40003432 = 0;
-			Data_40002c64_MenuContextId = 24001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CONSTELLATION_SELECTION; //24001;
 			break;
 		
-		case 24001:
+		case MENU_CONTEXT_CONSTELLATION_SELECTION: //24001:
 			//0x5457c
-			func_38dc(bData_40002ece_ConstellationNr, &Data_40003dd4);
+			flash_get_constellation_data(bData_40002ece_ConstellationNr, 
+				&Data_40003dd4_FlashConstellationData);
 		
-			dData_40002cc8 = Data_40003dd4.fData_36;
-			dData_40002d10 = Data_40003dd4.fData_40;
+			dData_40002cc8 = Data_40003dd4_FlashConstellationData.fRightAscension;
+			dData_40002d10 = Data_40003dd4_FlashConstellationData.fDeclination;
 			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
 		
 			func_b64c(dData_40002cc8, dData_40002d10);
 		
-			bData_40002f0d_RecentTargetType = 2;
+			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_CONSTELLATION; //2;
 			bData_40002f10_RecentTargetId = bData_40002ece_ConstellationNr;
 		
 			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 			lcd_display_clear();
 		
-			Data_40002c64_MenuContextId = 24002;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CONSTELLATION_TRACKING; //24002;
 			//->0x563b8
 			break;
 		
@@ -555,12 +556,26 @@ void HandleEnterKey(void)
 			bData_40002ed2_FamousStarNr = 1;
 			lcd_display_clear();
 			bData_40003432 = 0;
-			Data_40002c64_MenuContextId = 25001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_FAMOUS_STAR_SELECTION; //25001;
 			break;
 		
-		case 25001:
+		case MENU_CONTEXT_FAMOUS_STAR_SELECTION: //25001:
 			//0x5464c
-			//TODO
+			flash_get_famous_star_data(bData_40002ed2_FamousStarNr, &Data_40003d94_FlashFamousStarData);
+		
+			dData_40002cc8 = Data_40003d94_FlashFamousStarData.fRightAscension;
+			dData_40002d10 = Data_40003d94_FlashFamousStarData.fDeclination;
+			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+		
+			func_b64c(dData_40002cc8, dData_40002d10);
+
+			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_FAMOUS_STAR; //3;
+			bData_40002f10_RecentTargetId = bData_40002ed2_FamousStarNr;
+		
+			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
+			lcd_display_clear();
+		
+			Data_40002c64_MenuContextId = MENU_CONTEXT_FAMOUS_STAR_TRACKING; //25002;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_MESSIER_CAT: //2400:
@@ -569,18 +584,33 @@ void HandleEnterKey(void)
 			Data_40002ec8 = 0;
 			lcd_display_clear();
 			bData_40003432 = 0;
-			Data_40002c64_MenuContextId = 23012;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MESSIER_OBJECT_DETAILS; //23012;
 			break;
 		
-		case 23012:
+		case MENU_CONTEXT_MESSIER_OBJECT_DETAILS: //23012:
 			//0x54728
 			lcd_display_clear();
-			Data_40002c64_MenuContextId = 23002;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MESSIER_OBJECT_SELECTION; //23002;
 			break;
 		
-		case 23002: //???
+		case MENU_CONTEXT_MESSIER_OBJECT_SELECTION: //23002:
 			//0x54740
-			//TODO
+			flash_get_messier_data((unsigned char)wData_40002eb8_MessierNr, 
+				&Data_40003e08_FlashMessierData);
+		
+			dData_40002cc8 = Data_40003e08_FlashMessierData.fRightAscension;
+			dData_40002d10 = Data_40003e08_FlashMessierData.fDeclination;
+			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+		
+			func_b64c(dData_40002cc8, dData_40002d10);
+
+			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_MESSIER; //4;
+			bData_40002f10_RecentTargetId = wData_40002eb8_MessierNr;
+		
+			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
+			lcd_display_clear();
+		
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MESSIER_OBJECT_TRACKING; //23022;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_NGC_CAT: //2500:
@@ -589,12 +619,26 @@ void HandleEnterKey(void)
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
 			lcd_display_clear();
-			Data_40002c64_MenuContextId = 23003;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NGC_OBJECT_SELECTION; //23003;
 			break;
 		
-		case 23003:
+		case MENU_CONTEXT_NGC_OBJECT_SELECTION: //23003:
 			//0x5491c
-			//TODO
+			flash_get_ngc_data(wData_40002eba_NGCNr, &Data_40003ee0_FlashNGCData);
+		
+			dData_40002cc8 = Data_40003ee0_FlashNGCData.fRightAscension;
+			dData_40002d10 = Data_40003ee0_FlashNGCData.fDeclination;
+			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+		
+			func_b64c(dData_40002cc8, dData_40002d10);
+
+			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_NGC; //5;
+			bData_40002f10_RecentTargetId = wData_40002eba_NGCNr;
+		
+			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
+			lcd_display_clear();
+		
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NGC_OBJECT_TRACKING; //23013;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_IC_CAT: //2600:
@@ -603,12 +647,26 @@ void HandleEnterKey(void)
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
 			lcd_display_clear();
-			Data_40002c64_MenuContextId = 23004;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_IC_OBJECT_SELECTION; //23004;
 			break;
 		
-		case 23004:
+		case MENU_CONTEXT_IC_OBJECT_SELECTION: //23004:
 			//0x549f4
-			//TODO
+			flash_get_ic_data(wData_40002ebc_ICNr, &Data_40003ec0_FlashICData);
+		
+			dData_40002cc8 = Data_40003ec0_FlashICData.fRightAscension;
+			dData_40002d10 = Data_40003ec0_FlashICData.fDeclination;
+			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+		
+			func_b64c(dData_40002cc8, dData_40002d10);
+
+			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_IC; //6;
+			bData_40002f10_RecentTargetId = wData_40002ebc_ICNr;
+		
+			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
+			lcd_display_clear();
+		
+			Data_40002c64_MenuContextId = MENU_CONTEXT_IC_OBJECT_TRACKING; //23014;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_SH2_CAT: //2700:
@@ -617,26 +675,54 @@ void HandleEnterKey(void)
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
 			lcd_display_clear();
-			Data_40002c64_MenuContextId = 23005;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SH2_OBJECT_SELECTION; //23005;
 			break;
 		
-		case 23005:
+		case MENU_CONTEXT_SH2_OBJECT_SELECTION: //23005:
 			//0x54acc
-			//TODO
+			flash_get_sh2_data(wData_40002ebe_ShNr, &Data_40003350_FlashSh2Data);
+		
+			dData_40002cc8 = Data_40003350_FlashSh2Data.fRightAscension;
+			dData_40002d10 = Data_40003350_FlashSh2Data.fDeclination;
+			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+		
+			func_b64c(dData_40002cc8, dData_40002d10);
+
+			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_SH2; //7;
+			bData_40002f10_RecentTargetId = wData_40002ebe_ShNr;
+		
+			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
+			lcd_display_clear();
+		
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SH2_OBJECT_TRACKING; //23015;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_BRIGHT_STAR: //2800:
 			//0x54b6c
-			wData_40002ec0 = 1;
+			wData_40002ec0_BrightStarNr = 1;
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
 			lcd_display_clear();
-			Data_40002c64_MenuContextId = 23006;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_BRIGHT_STAR_SELECTION; //23006;
 			break;
 		
-		case 23006:
+		case MENU_CONTEXT_BRIGHT_STAR_SELECTION: //23006:
 			//0x54ba4
-			//TODO
+			flash_get_bright_star_data((unsigned char)wData_40002ec0_BrightStarNr, &Data_40003ea0_FlashBrightStarData);
+		
+			dData_40002cc8 = Data_40003ea0_FlashBrightStarData.fRightAscension;
+			dData_40002d10 = Data_40003ea0_FlashBrightStarData.fDeclination;
+			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+		
+			func_b64c(dData_40002cc8, dData_40002d10);
+
+			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_BRIGHT_STAR; //8;
+			bData_40002f10_RecentTargetId = wData_40002ec0_BrightStarNr;
+		
+			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
+			lcd_display_clear();
+		
+			Data_40002c64_MenuContextId = MENU_CONTEXT_BRIGHT_STAR_TRACKING; //23016;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_SAO_CAT: //2900:
@@ -645,10 +731,10 @@ void HandleEnterKey(void)
 			Data_40002ec8 = 0;
 			bData_40003432 = 0;
 			lcd_display_clear();
-			Data_40002c64_MenuContextId = 23007;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SAO_OBJECT_SELECTION; //23007;
 			break;
 
-		case 23007:
+		case MENU_CONTEXT_SAO_OBJECT_SELECTION: //23007:
 			//0x54c80: SAO item
 			flash_get_sao_data(Data_40002ec4_SAONr, &Data_40003358_SAORecord);
 
@@ -658,13 +744,13 @@ void HandleEnterKey(void)
 			
 			func_b64c(dData_40002cc8, dData_40002d10);
 			
-			bData_40002f0d_RecentTargetType = 9;
+			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_SAO_CAT; //9;
 			bData_40002f10_RecentTargetId = Data_40002ec4_SAONr;
 			
 			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 			lcd_display_clear();
 			
-			Data_40002c64_MenuContextId = 23017;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SAO_OBJECT_TRACKING; //23017;
 			//->0x563b8
 		
 		case MENU_CONTEXT_NAVIGATION_CUST_OBJ: //2110:
@@ -1178,10 +1264,33 @@ void HandleEnterKey(void)
 			
 		case 34001:
 			//0x55e58
+			if (bData_40003196_CurrentLanguage == 1)
+			{
+				//755e6c
+				Data_40003214_UserTimerSeconds = atoi(strEng00000s);
+			}
+			else
+			{
+				//0x55e80
+				Data_40003214_UserTimerSeconds = atoi(Data_4000294a);
+			}
+			//0x55e90
+			if (Data_40003214_UserTimerSeconds == 0)
+			{
+				Data_40002c64_MenuContextId = 34001; //->"Set timer:"
+			}
+			else
+			{
+				//0x55eb0
+				Data_40002c64_MenuContextId = 34002; //->"Counting down:"				
+			}
+			//0x55ebc -> 0x563b8
 			break;
 			
 		case 34002:
 			//0x55ec0
+			Data_40003214_UserTimerSeconds = 0;
+			Data_40002c64_MenuContextId = 34001; //->"Set timer:"
 			break;
 			
 		case 3500: // Alarm
@@ -1218,20 +1327,14 @@ void HandleEnterKey(void)
 		
 		case 360021:
 			//0x55f60
-			break;
-		
 		case 360022:
 			//0x55f68
 			break;
 		
 		case 370021:
 			//0x56048
-			break;
-		
 		case 370022:
 			//0x56050
-			break;
-		
 		case 370023:
 			//0x56054
 			break;
