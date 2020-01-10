@@ -505,21 +505,21 @@ void HandleUpKey(void)
 			//0x5e354
 		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x5e358
-		case 24002:
+		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
 			//0x5e35c
-		case 25002:
+		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
 			//0x5e360
-		case 23022:
+		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
 			//0x5e364
-		case 23013:
+		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
 			//0x5e368
-		case 23014:
+		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
 			//0x5e36c
-		case 23015:
+		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
 			//0x5e370
-		case 23016:
+		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
 			//0x5e374
-		case 23017:
+		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
 			//0x5e378
 			if (bData_400034a9 == 0)
 			{
@@ -691,7 +691,7 @@ void HandleUpKey(void)
 			}		
 			break;
 		
-		case 24001:
+		case MENU_CONTEXT_CONSTELLATION_SELECTION: //24001:
 			//0x5e694
 			lcd_display_clear();
 		
@@ -702,7 +702,7 @@ void HandleUpKey(void)
 			}
 			break;
 		
-		case 25001:
+		case MENU_CONTEXT_FAMOUS_STAR_SELECTION: //25001:
 			//0x5e6d0
 			lcd_display_clear();
 		
@@ -713,9 +713,9 @@ void HandleUpKey(void)
 			}
 			break;
 		
-		case 23012:
+		case MENU_CONTEXT_MESSIER_OBJECT_DETAILS: //23012:
 			//0x5e70c
-		case 23002:
+		case MENU_CONTEXT_MESSIER_OBJECT_SELECTION: //23002:
 			//0x5e714
 			lcd_display_clear();
 		
@@ -726,7 +726,7 @@ void HandleUpKey(void)
 			}
 			break;
 		
-		case 23003:
+		case MENU_CONTEXT_NGC_OBJECT_SELECTION: //23003:
 			//0x5e74c
 			lcd_display_clear();
 		
@@ -737,7 +737,7 @@ void HandleUpKey(void)
 			}
 			break;
 		
-		case 23004:
+		case MENU_CONTEXT_IC_OBJECT_SELECTION: //23004:
 			//0x5e788
 			lcd_display_clear();
 
@@ -748,7 +748,7 @@ void HandleUpKey(void)
 			}
 			break;
 		
-		case 23005:
+		case MENU_CONTEXT_SH2_OBJECT_SELECTION: //23005:
 			//0x5e8c8
 			lcd_display_clear();
 		
@@ -759,18 +759,18 @@ void HandleUpKey(void)
 			}
 			break;
 		
-		case 23006:
+		case MENU_CONTEXT_BRIGHT_STAR_SELECTION: //23006:
 			//0x5e904
 			lcd_display_clear();
 		
-			wData_40002ec0--;
-			if (wData_40002ec0 == 0)
+			wData_40002ec0_BrightStarNr--;
+			if (wData_40002ec0_BrightStarNr == 0)
 			{
-				wData_40002ec0 = 167;
+				wData_40002ec0_BrightStarNr = 167;
 			}
 			break;
 		
-		case 23007:
+		case MENU_CONTEXT_SAO_OBJECT_SELECTION: //23007:
 			//0x5e940
 			lcd_display_clear();
 		

@@ -132,61 +132,61 @@ int PrepareScreenItems(void)
 					fData_40002d18_ObjectDeclination = Data_40003f50.fData_16;
 					
 					convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-						Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+						Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 					//284f8
 					sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-						(int)(Data_40004b08[1]), 
-						(int)((Data_40004b08[1] - (int)(Data_40004b08[1])) * 60.0), 
-						(int)(Data_40004b08[1] * 3600.0) % 60);
+						(int)(Data_40004b08.dAzimuth), 
+						(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
+						(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 						
-					if (Data_40004b08[3] >= 0)
+					if (Data_40004b08.dAltitude >= 0)
 					{
 						//285d0
 						sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-							abs((int)Data_40004b08[3]), 
-							abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-							abs((int)(Data_40004b08[3] * 3600.0) % 60));
+							abs((int)Data_40004b08.dAltitude), 
+							abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+							abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 					}
 					else
 					{
 						//286cc
 						sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-							abs((int)Data_40004b08[3]), 
-							abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-							abs((int)(Data_40004b08[3] * 3600.0) % 60));
+							abs((int)Data_40004b08.dAltitude), 
+							abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+							abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 					}
 					//2885c
-					if ((int)(Data_40004b08[1]) < 100)
+					if ((int)(Data_40004b08.dAzimuth) < 100)
 					{
 						Data_40003ffd[11] = ' ';
 					}
 					
-					if ((int)(Data_40004b08[1]) < 10)
+					if ((int)(Data_40004b08.dAzimuth) < 10)
 					{
 						Data_40003ffd[12] = ' ';
 					}
 					//288a4
-					if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+					if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 					{
 						Data_40003ffd[15] = ' ';
 					}
 					//28910
-					if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+					if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 					{
 						Data_40003ffd[18] = ' ';
 					}
 					//28954
-					if (abs((int)Data_40004b08[3]) < 10)
+					if (abs((int)Data_40004b08.dAltitude) < 10)
 					{
 						Data_40004012[5] = ' ';
 					}
 					//2898c
-					if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+					if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 					{
 						Data_40004012[8] = ' ';
 					}
 					//28a0c
-					if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+					if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 					{
 						Data_40004012[11] = ' ';
 					}
@@ -261,62 +261,62 @@ int PrepareScreenItems(void)
 					Data_40003368 = Data_40003f64.bData_1;
 					Data_4000336c = "                      ";
 
-					Data_40004b08[1] = Data_40003f64.fData_12;
-					Data_40004b08[3] = Data_40003f64.fData_16;
+					Data_40004b08.dAzimuth = Data_40003f64.fData_12;
+					Data_40004b08.dAltitude = Data_40003f64.fData_16;
 										
 					sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-						(int)Data_40004b08[1],
-						(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-						(int)(Data_40004b08[1] * 3600.0) % 60);
+						(int)Data_40004b08.dAzimuth,
+						(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+						(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 					//28fe8
-					if (Data_40004b08[3] >= 0)
+					if (Data_40004b08.dAltitude >= 0)
 					{
 						//29004
 						sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-							abs((int)Data_40004b08[3]),
-							abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)),
-							abs((int)(Data_40004b08[3] * 3600.0) % 60));
+							abs((int)Data_40004b08.dAltitude),
+							abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)),
+							abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 					}
 					else
 					{
 						//2915c
 						sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-							abs((int)Data_40004b08[3]),
-							abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)),
-							abs((int)(Data_40004b08[3] * 3600.0) % 60));
+							abs((int)Data_40004b08.dAltitude),
+							abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)),
+							abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 					}
 					//29254
-					if ((int)Data_40004b08[1] < 100)
+					if ((int)Data_40004b08.dAzimuth < 100)
 					{
 						Data_40003ffd[11] = ' ';
 					}
 					//29278
-					if ((int)Data_40004b08[1] < 10)
+					if ((int)Data_40004b08.dAzimuth < 10)
 					{
 						Data_40003ffd[12] = ' ';
 					}
 					//2929c
-					if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+					if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 					{
 						Data_40003ffd[15] = ' ';
 					}
 					//29308
-					if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+					if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 					{
 						Data_40003ffd[18] = ' ';
 					}
 					//2934c
-					if (abs((int)Data_40004b08[3]) < 10)
+					if (abs((int)Data_40004b08.dAltitude) < 10)
 					{
 						Data_40004012[5] = ' ';
 					}
 					//29384
-					if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+					if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 					{
 						Data_40004012[8] = ' ';
 					}
 					//29404
-					if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+					if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 					{
 						Data_40004012[11] = ' ';
 					}
@@ -1377,17 +1377,11 @@ int PrepareScreenItems(void)
 						Data_40004b50.dRA = dData_40002c88;
 						Data_40004b50.dData_8 = dData_40002c90;
 						
-#if 1
-						convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+						convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
+							Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b70);
 
-						dData_40002dd0 = Data_40004b70[1];
-						dData_40002e08 = Data_40004b70[3];
-#else
-						convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70_);
-
-						dData_40002dd0 = Data_40004b70_.dData_8; 
-						dData_40002e08 = Data_40004b70_.dData_24;
-#endif						
+						dData_40002dd0 = Data_40004b70.dAzimuth;
+						dData_40002e08 = Data_40004b70.dAltitude;
 						
 						Data_40002dac = dData_40002dd0;
 						Data_40002db0 = (dData_40002dd0 - Data_40002dac) * 60;
@@ -1441,46 +1435,47 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dRA = Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1)];
 			Data_40004ae8.dData_8 = Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1];
 		
-			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 
 			sprintf(Data_40004027, "Azi:%03d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60));
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60));
 				
 			sprintf(Data_4000403c, "Alt:+%02d %02d               ",
-				abs((int)Data_40004b08[3]),
-				abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)));
+				abs((int)Data_40004b08.dAltitude),
+				abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)));
 			
 			if (bData_40002e88 == 1)
 			{
 				//2c2cc
 				sprintf(Data_40004027, "Azi:%03d %02d                ",
-					(int)Data_40004b08[1],
-					(int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60));
+					(int)Data_40004b08.dAzimuth,
+					(int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60));
 				
 				sprintf(Data_4000403c, "Alt:+%02d %02d               ",
-					abs((int)Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)));			
+					abs((int)Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)));			
 			}
 			//0x2c3fc
-			if ((int)Data_40004b08[1] < 100)
+			if ((int)Data_40004b08.dAzimuth < 100)
 			{
 				Data_40004027[4] = ' ';
 			}
-			if ((int)Data_40004b08[1] < 10)
+			if ((int)Data_40004b08.dAzimuth < 10)
 			{
 				Data_40004027[5] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
 				Data_40004027[8] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_4000403c[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
 				Data_4000403c[8] = ' ';
 			}
@@ -1810,56 +1805,56 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ", 
-				(int) Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60),
-				((int) (Data_40004b08[1] * 3600)) % 60);
+				(int) Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60),
+				((int) (Data_40004b08.dAzimuth * 3600)) % 60);
 				
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//2d35c
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int) Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)),
-					abs(((int) (Data_40004b08[3] * 3600)) % 60));
+					abs((int) Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)),
+					abs(((int) (Data_40004b08.dAltitude * 3600)) % 60));
 			}
 			else				
 			{
 				//0x2d458
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int) Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)),
-					abs(((int) (Data_40004b08[3] * 3600)) % 60));
+					abs((int) Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)),
+					abs(((int) (Data_40004b08.dAltitude * 3600)) % 60));
 			}
 			//0x2d550
-			if ((int) Data_40004b08[1] < 100)
+			if ((int) Data_40004b08.dAzimuth < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}
-			if ((int) Data_40004b08[1] < 10)
+			if ((int) Data_40004b08.dAzimuth < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if ((((int) (Data_40004b08[1] * 3600)) % 60) < 10)
+			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 			
-			if (abs((int) Data_40004b08[3]) < 10)
+			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int) (Data_40004b08[3] * 3600)) % 60) < 10)
+			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -1952,58 +1947,58 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ", 
-				(int) Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60),
-				((int) (Data_40004b08[1] * 3600)) % 60);
+				(int) Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60),
+				((int) (Data_40004b08.dAzimuth * 3600)) % 60);
 				
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//2de9c
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int) Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)),
-					abs(((int) (Data_40004b08[3] * 3600)) % 60));
+					abs((int) Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)),
+					abs(((int) (Data_40004b08.dAltitude * 3600)) % 60));
 			}
 			else				
 			{
 				//0x2df98
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int) Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)),
-					abs(((int) (Data_40004b08[3] * 3600)) % 60));
+					abs((int) Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)),
+					abs(((int) (Data_40004b08.dAltitude * 3600)) % 60));
 					
 				bData_40002e8a = 3;
 			}
 			//0x2e09c
-			if ((int) Data_40004b08[1] < 100)
+			if ((int) Data_40004b08.dAzimuth < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}
-			if ((int) Data_40004b08[1] < 10)
+			if ((int) Data_40004b08.dAzimuth < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if ((((int) (Data_40004b08[1] * 3600)) % 60) < 10)
+			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 			
-			if (abs((int) Data_40004b08[3]) < 10)
+			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int) (Data_40004b08[3] * 3600)) % 60) < 10)
+			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -2035,10 +2030,11 @@ int PrepareScreenItems(void)
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
+					Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b70);
 
-				dData_40002dd0 = Data_40004b70[1];
-				dData_40002e08 = Data_40004b70[3];
+				dData_40002dd0 = Data_40004b70.dAzimuth;
+				dData_40002e08 = Data_40004b70.dAltitude;
 			}
 			//0x2e44c
 			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
@@ -2103,8 +2099,8 @@ int PrepareScreenItems(void)
 				bData_40002e8a = bData_40002e88;
 			}
 			//0x2e94c
-			#if 0
-			if (Data_40004b08[3] < 0)
+			#if 1
+			if (Data_40004b08.dAltitude < 0)
 			{
 				if ((bData_40002e8a == 1) || (bData_40002e8a == 2))
 				{
@@ -2113,7 +2109,7 @@ int PrepareScreenItems(void)
 				}
 			}
 			#else
-			if ((Data_40004b08[3] < 0) &&
+			if ((Data_40004b08.dAltitude < 0) &&
 				((bData_40002e8a == 1) || (bData_40002e8a == 2)))
 			{
 				//0x2e988
@@ -2164,26 +2160,27 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 
-		case 24001:
+		case MENU_CONTEXT_CONSTELLATION_SELECTION: //24001:
 			//0x2ea8c
-			func_38dc(bData_40002ece_ConstellationNr, &Data_40003dd4);
+			flash_get_constellation_data(bData_40002ece_ConstellationNr, 
+				&Data_40003dd4_FlashConstellationData);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003dd4.fData_36;
-			fData_40002d18_ObjectDeclination = Data_40003dd4.fData_40;
+			fData_40002cd0_ObjectRightAscension = Data_40003dd4_FlashConstellationData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003dd4_FlashConstellationData.fDeclination;
 		
-			Data_40003360 = Data_40003dd4.bData_5;
+			Data_40003360 = Data_40003dd4_FlashConstellationData.bData_5;
 			Data_40003364 = "                      ";
 		
 			sprintf(Data_40003fd3, "    Area: %d SQ.Deg               ", 
-				Data_40003dd4.wData_44);
+				Data_40003dd4_FlashConstellationData.wArea);
 		
 			Data_40003368 = Data_40003fd3;
-			Data_40003368[0] = Data_40003dd4.bData_5[0];
-			Data_40003368[1] = Data_40003dd4.bData_5[1];
-			Data_40003368[2] = Data_40003dd4.bData_5[2];
+			Data_40003368[0] = Data_40003dd4_FlashConstellationData.bData_5[0];
+			Data_40003368[1] = Data_40003dd4_FlashConstellationData.bData_5[1];
+			Data_40003368[2] = Data_40003dd4_FlashConstellationData.bData_5[2];
 		
 			sprintf(Data_40003fe8, "Quantity: %d (>6Mag)             ",
-				Data_40003dd4.bData_47);
+				Data_40003dd4_FlashConstellationData.bQuantity);
 		
 			Data_4000336c = Data_40003fe8;
 			
@@ -2194,56 +2191,56 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 			
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 				
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//2ecb0
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60)),
-					abs(((int)(Data_40004b08[3] * 3600) % 60)));
+					abs((int)Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
+					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
 			}
 			else
 			{
 				//0x2ef0c
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60)),
-					abs(((int)(Data_40004b08[3] * 3600) % 60)));
+					abs((int)Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
+					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
 			}
 			//0x2f004
-			if ((int) Data_40004b08[1] < 100)
+			if ((int) Data_40004b08.dAzimuth < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}
-			if ((int) Data_40004b08[1] < 10)
+			if ((int) Data_40004b08.dAzimuth < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if ((((int) (Data_40004b08[1] * 3600)) % 60) < 10)
+			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 			
-			if (abs((int) Data_40004b08[3]) < 10)
+			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int) (Data_40004b08[3] * 3600)) % 60) < 10)
+			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -2308,12 +2305,12 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 
-		case 0x5DC2: //24002
+		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002
 			//0x2f624
-			func_38dc(bData_40002ece_ConstellationNr, &Data_40003dd4);
+			flash_get_constellation_data(bData_40002ece_ConstellationNr, &Data_40003dd4_FlashConstellationData);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003dd4.fData_36;
-			fData_40002d18_ObjectDeclination = Data_40003dd4.fData_40;
+			fData_40002cd0_ObjectRightAscension = Data_40003dd4_FlashConstellationData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003dd4_FlashConstellationData.fDeclination;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -2322,58 +2319,58 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//2f7b8
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60)),
-					abs(((int)(Data_40004b08[3] * 3600) % 60)));
+					abs((int)Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
+					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
 			}
 			else
 			{
 				//0x2f8b4
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60)),
-					abs(((int)(Data_40004b08[3] * 3600) % 60)));
+					abs((int)Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
+					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
 					
 				bData_40002e8a = 3;
 			}
 			//0x2f9b8
-			if ((int) Data_40004b08[1] < 100)
+			if ((int) Data_40004b08.dAzimuth < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}
-			if ((int) Data_40004b08[1] < 10)
+			if ((int) Data_40004b08.dAzimuth < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if ((((int) (Data_40004b08[1] * 3600)) % 60) < 10)
+			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 			
-			if (abs((int) Data_40004b08[3]) < 10)
+			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int) (Data_40004b08[3] * 3600)) % 60) < 10)
+			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -2406,10 +2403,10 @@ int PrepareScreenItems(void)
 				Data_40004b50.dData_8 = dData_40002c90;
 				
 				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
-					Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b70);
+					Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b70);
 				
-				dData_40002dd0 = Data_40004b70[1];
-				dData_40002e08 = Data_40004b70[3];
+				dData_40002dd0 = Data_40004b70.dAzimuth;
+				dData_40002e08 = Data_40004b70.dAltitude;
 			}
 			//0x2fd68
 			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
@@ -2473,7 +2470,7 @@ int PrepareScreenItems(void)
 				bData_40002e8a = bData_40002e88;
 			}
 			//0x302c8
-			if (Data_40004b08[3] < 0)
+			if (Data_40004b08.dAltitude < 0)
 			{
 				if ((bData_40002e8a == 1) || (bData_40002e8a == 2))
 				{
@@ -2517,7 +2514,7 @@ int PrepareScreenItems(void)
 			}
 			//303c4
 			Data_40003364 = "                              ";
-			Data_40003368 = Data_40003dd4.bData_5;
+			Data_40003368 = Data_40003dd4_FlashConstellationData.bData_5;
 			Data_4000336c = "                              ";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
@@ -2525,19 +2522,19 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 		
-		case 25001:
+		case MENU_CONTEXT_FAMOUS_STAR_SELECTION: //25001:
 			//0x30404: Famous Star item
-			func_34e4(bData_40002ed2_FamousStarNr, &Data_40003d94);
+			flash_get_famous_star_data(bData_40002ed2_FamousStarNr, &Data_40003d94_FlashFamousStarData);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003d94.fData_56;
-			fData_40002d18_ObjectDeclination = Data_40003d94.fData_60;
+			fData_40002cd0_ObjectRightAscension = Data_40003d94_FlashFamousStarData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003d94_FlashFamousStarData.fDeclination;
 		
-			Data_40003360 = Data_40003d94.bData_0;
+			Data_40003360 = Data_40003d94_FlashFamousStarData.bData_0;
 			Data_40003364 = "                                        ";
-			Data_40003368 = Data_40003d94.bData_28;
+			Data_40003368 = Data_40003d94_FlashFamousStarData.bData_28;
 		
 			sprintf(Data_40003fe8, "SAO:%d  MEG:%.1f",
-				Data_40003d94.Data_24, Data_40003d94.fData_52);
+				Data_40003d94_FlashFamousStarData.Data_24, Data_40003d94_FlashFamousStarData.fData_52);
 		
 			Data_4000336c = Data_40003fe8;
 		
@@ -2548,56 +2545,56 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 				
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//305f4
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60)),
-					abs(((int)(Data_40004b08[3] * 3600) % 60)));
+					abs((int)Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
+					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
 			}
 			else
 			{
 				//0x30790
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60)),
-					abs(((int)(Data_40004b08[3] * 3600) % 60)));
+					abs((int)Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
+					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
 			}
 			//0x30888
-			if ((int) Data_40004b08[1] < 100)
+			if ((int) Data_40004b08.dAzimuth < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}
-			if ((int) Data_40004b08[1] < 10)
+			if ((int) Data_40004b08.dAzimuth < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if ((((int) (Data_40004b08[1] * 3600)) % 60) < 10)
+			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 			
-			if (abs((int) Data_40004b08[3]) < 10)
+			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int) (Data_40004b08[3] * 3600)) % 60) < 10)
+			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -2662,12 +2659,12 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 		
-		case 0x61AA: //25002
+		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002
 			//0x30ea8
-			func_34e4(bData_40002ed2_FamousStarNr, &Data_40003d94);
+			flash_get_famous_star_data(bData_40002ed2_FamousStarNr, &Data_40003d94_FlashFamousStarData);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003d94.fData_56;
-			fData_40002d18_ObjectDeclination = Data_40003d94.fData_60;
+			fData_40002cd0_ObjectRightAscension = Data_40003d94_FlashFamousStarData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003d94_FlashFamousStarData.fDeclination;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -2676,58 +2673,58 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 				
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//31040
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60)),
-					abs(((int)(Data_40004b08[3] * 3600) % 60)));
+					abs((int)Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
+					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
 			}
 			else
 			{
 				//0x3113c
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]),
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60)),
-					abs(((int)(Data_40004b08[3] * 3600) % 60)));
+					abs((int)Data_40004b08.dAltitude),
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
+					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
 					
 				bData_40002e8a = 3;
 			}
 			//0x31240
-			if ((int) Data_40004b08[1] < 100)
+			if ((int) Data_40004b08.dAzimuth < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}
-			if ((int) Data_40004b08[1] < 10)
+			if ((int) Data_40004b08.dAzimuth < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if ((((int) (Data_40004b08[1] * 3600)) % 60) < 10)
+			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 			
-			if (abs((int) Data_40004b08[3]) < 10)
+			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int) (Data_40004b08[3] * 3600)) % 60) < 10)
+			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -2759,10 +2756,11 @@ int PrepareScreenItems(void)
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
+					Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b70);
 
-				dData_40002dd0 = Data_40004b70[1];
-				dData_40002e08 = Data_40004b70[3];
+				dData_40002dd0 = Data_40004b70.dAzimuth;
+				dData_40002e08 = Data_40004b70.dAltitude;
 			}
 			//0x315f4
 			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
@@ -2825,7 +2823,7 @@ int PrepareScreenItems(void)
 				bData_40002e8a = bData_40002e88;
 			}
 			
-			if ((Data_40004b08[3] < 0) &&
+			if ((Data_40004b08.dAltitude < 0) &&
 				((bData_40002e8a == 1) || (bData_40002e8a == 2)))
 			{
 				//0x31b30
@@ -2867,7 +2865,7 @@ int PrepareScreenItems(void)
 			}
 			//0x31bec
 			sprintf(Data_40003fbe, "Sao:%d                  ", 
-				Data_40003d94.Data_24);
+				Data_40003d94_FlashFamousStarData.Data_24);
 			
 			Data_40003364 = Data_40003fbe;
 			Data_40003368 = "                                        ";
@@ -2878,26 +2876,27 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 		
-		case 0x59E4: //23012
+		case MENU_CONTEXT_MESSIER_OBJECT_DETAILS: //23012
 			//0x31c44
-			func_3b58((unsigned char)wData_40002eb8_MessierNr, &Data_40003e08);
+			flash_get_messier_data((unsigned char)wData_40002eb8_MessierNr, 
+					&Data_40003e08_FlashMessierData);
 		
 			sprintf(Data_40003fa9, "Messier:%d   NGC:%d                   ",
-				wData_40002eb8_MessierNr, Data_40003e08.wData_0);
+				wData_40002eb8_MessierNr, Data_40003e08_FlashMessierData.wData_0);
 			
 			Data_40003360 = Data_40003fa9;
-			Data_40003364 = Data_40003e08.bData_32;
-			Data_40003368 = Data_40003e08.bData_60;
-			Data_4000336c = Data_40003e08.bData_108;
+			Data_40003364 = Data_40003e08_FlashMessierData.bData_32;
+			Data_40003368 = Data_40003e08_FlashMessierData.bData_60;
+			Data_4000336c = Data_40003e08_FlashMessierData.bData_108;
 			Data_40003370 = "                                                   ";
 		
 			sprintf(Data_40004012, "Size:%.1f Arc Minute                  ",
-				Data_40003e08.fData_12);
+				Data_40003e08_FlashMessierData.fData_12);
 		
 			Data_40003374 = Data_40004012;
 		
 			sprintf(Data_40004027, "Distance:%.1f                         ",
-				Data_40003e08.dData_16);
+				Data_40003e08_FlashMessierData.dData_16);
 		
 			Data_40003378 = Data_40004027;
 			Data_4000337c = "         K Light-Years";
@@ -2907,19 +2906,20 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 		
-		case 0x59DA: //23002
+		case MENU_CONTEXT_MESSIER_OBJECT_SELECTION: //23002
 			//0x31ef0
-			func_3b58((unsigned char)wData_40002eb8_MessierNr, &Data_40003e08);
+			flash_get_messier_data((unsigned char)wData_40002eb8_MessierNr, 
+					&Data_40003e08_FlashMessierData);
 
-			fData_40002cd0_ObjectRightAscension = Data_40003e08.fData_4;
-			fData_40002d18_ObjectDeclination = Data_40003e08.fData_8;
+			fData_40002cd0_ObjectRightAscension = Data_40003e08_FlashMessierData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003e08_FlashMessierData.fDeclination;
 		
 			sprintf(Data_40003fa9, "Messier:%d                        ",
 				wData_40002eb8_MessierNr);
 		
 			Data_40003360 = Data_40003fa9;
-			Data_40003364 = Data_40003e08.bData_32;
-			Data_40003368 = Data_40003e08.bData_60;
+			Data_40003364 = Data_40003e08_FlashMessierData.bData_32;
+			Data_40003368 = Data_40003e08_FlashMessierData.bData_60;
 			Data_4000336c = "                                                ";
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
@@ -2928,56 +2928,56 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 			//320b0
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//320cc
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x321c8
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			//0x32320
-			if ((int) Data_40004b08[1] < 100)
+			if ((int) Data_40004b08.dAzimuth < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}
-			if ((int) Data_40004b08[1] < 10)
+			if ((int) Data_40004b08.dAzimuth < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int) Data_40004b08[1]) * 60) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if ((((int) (Data_40004b08[1] * 3600)) % 60) < 10)
+			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 			
-			if (abs((int) Data_40004b08[3]) < 10)
+			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int) Data_40004b08[3]) * 60)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int) (Data_40004b08[3] * 3600)) % 60) < 10)
+			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -3042,12 +3042,13 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 
-		case 0x59EE: //23022
+		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022
 			//0x32940
-			func_3b58((unsigned char)wData_40002eb8_MessierNr, &Data_40003e08);
+			flash_get_messier_data((unsigned char)wData_40002eb8_MessierNr, 
+					&Data_40003e08_FlashMessierData);
 
-			fData_40002cd0_ObjectRightAscension = Data_40003e08.fData_4;
-			fData_40002d18_ObjectDeclination = Data_40003e08.fData_8;
+			fData_40002cd0_ObjectRightAscension = Data_40003e08_FlashMessierData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003e08_FlashMessierData.fDeclination;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -3056,58 +3057,58 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//32adc
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x32bd8
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 					
 				bData_40002e8a = 3;
 			}
 			//0x32cdc
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}			
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -3139,10 +3140,11 @@ int PrepareScreenItems(void)
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
+					Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b70);
 
-				dData_40002dd0 = Data_40004b70[1];
-				dData_40002e08 = Data_40004b70[3];				
+				dData_40002dd0 = Data_40004b70.dAzimuth;
+				dData_40002e08 = Data_40004b70.dAltitude;				
 			}
 			//0x33088
 			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
@@ -3206,7 +3208,7 @@ int PrepareScreenItems(void)
 				bData_40002e8a = bData_40002e88;
 			}
 			//0x33600
-			if ((Data_40004b08[3] < 0) &&
+			if ((Data_40004b08.dAltitude < 0) &&
 				((bData_40002e8a == 1) || (bData_40002e8a == 2)))
 			{
 				//0x3363c
@@ -3251,32 +3253,32 @@ int PrepareScreenItems(void)
 				wData_40002eb8_MessierNr);
 			
 			Data_40003364 = Data_40003fbe;
-			Data_40003368 = Data_40003e08.bData_32;
-			Data_4000336c = Data_40003e08.bData_60;
+			Data_40003368 = Data_40003e08_FlashMessierData.bData_32;
+			Data_4000336c = Data_40003e08_FlashMessierData.bData_60;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			//->0x3d71c
 			break;
 		
-		case 0x59DB: //23003
+		case MENU_CONTEXT_NGC_OBJECT_SELECTION: //23003
 			//0x33750
-			func_4894(wData_40002eba_NGCNr, &Data_40003ee0);
+			flash_get_ngc_data(wData_40002eba_NGCNr, &Data_40003ee0_FlashNGCData);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003ee0.fData_8;
-			fData_40002d18_ObjectDeclination = Data_40003ee0.fData_12;
+			fData_40002cd0_ObjectRightAscension = Data_40003ee0_FlashNGCData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003ee0_FlashNGCData.fDeclination;
 		
 			sprintf(Data_40003fa9, "NGC:%d                          ", 
 				wData_40002eba_NGCNr);
 		
 			Data_40003360 = Data_40003fa9;
-			Data_40003364 = Data_40003ee0.bData_0;
+			Data_40003364 = Data_40003ee0_FlashNGCData.bData_0;
 		
-			if (Data_40003ee0.fData_16 != 0)
+			if (Data_40003ee0_FlashNGCData.fData_16 != 0)
 			{
 				//337c4
 				sprintf(Data_40003fd3, "MEG:%.1f                          ", 
-					Data_40003ee0.fData_16);
+					Data_40003ee0_FlashNGCData.fData_16);
 				Data_40003368 = Data_40003fd3;
 			}
 			else
@@ -3285,7 +3287,7 @@ int PrepareScreenItems(void)
 				Data_40003368 = "                                          ";
 			}
 			//0x33808
-			Data_4000336c = Data_40003ee0.bData_20;
+			Data_4000336c = Data_40003ee0_FlashNGCData.bData_20;
 			
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -3293,56 +3295,56 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 			//3389c
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)(Data_40004b08[1]), 
-				(int)((Data_40004b08[1] - (int)(Data_40004b08[1])) * 60.0), 
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)(Data_40004b08.dAzimuth), 
+				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 				
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//33974
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x33b60
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			//0x33c58
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}			
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -3407,12 +3409,12 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 		
-		case 0x59E5: //23013
+		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013
 			//0x34278
-			func_4894(wData_40002eba_NGCNr, &Data_40003ee0);
+			flash_get_ngc_data(wData_40002eba_NGCNr, &Data_40003ee0_FlashNGCData);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003ee0.fData_8;
-			fData_40002d18_ObjectDeclination = Data_40003ee0.fData_12;
+			fData_40002cd0_ObjectRightAscension = Data_40003ee0_FlashNGCData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003ee0_FlashNGCData.fDeclination;
 
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -3421,58 +3423,58 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//3440c
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x34508
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 					
 				bData_40002e8a = 3;
 			}
 			//0x3460c
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}			
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -3504,10 +3506,11 @@ int PrepareScreenItems(void)
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
+					Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b70);
 
-				dData_40002dd0 = Data_40004b70[1];
-				dData_40002e08 = Data_40004b70[3];				
+				dData_40002dd0 = Data_40004b70.dAzimuth;
+				dData_40002e08 = Data_40004b70.dAltitude;				
 			}
 			//0x349b8
 			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
@@ -3571,7 +3574,7 @@ int PrepareScreenItems(void)
 				bData_40002e8a = bData_40002e88;
 			}
 			//0x34f24
-			if ((Data_40004b08[3] < 0) &&
+			if ((Data_40004b08.dAltitude < 0) &&
 				((bData_40002e8a == 1) || (bData_40002e8a == 2)))
 			{
 				//0x34f60
@@ -3616,13 +3619,13 @@ int PrepareScreenItems(void)
 				wData_40002eba_NGCNr);
 			
 			Data_40003364 = Data_40003fbe;
-			Data_40003368 = Data_40003ee0.bData_0;
+			Data_40003368 = Data_40003ee0_FlashNGCData.bData_0;
 			
-			if (Data_40003ee0.fData_16 != 0)
+			if (Data_40003ee0_FlashNGCData.fData_16 != 0)
 			{
 				//35060
 				sprintf(Data_40003fe8, "MEG:%.1f          ", 
-					Data_40003ee0.fData_16);
+					Data_40003ee0_FlashNGCData.fData_16);
 				Data_4000336c = Data_40003fe8;
 			}
 			else
@@ -3636,24 +3639,24 @@ int PrepareScreenItems(void)
 			//->0x3d71c			
 			break;
 		
-		case 0x59DC: //23004
+		case MENU_CONTEXT_IC_OBJECT_SELECTION: //23004
 			//0x350c0
-			func_4594(wData_40002ebc_ICNr, &Data_40003ec0);
+			flash_get_ic_data(wData_40002ebc_ICNr, &Data_40003ec0_FlashICData);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003ec0.fData_8;
-			fData_40002d18_ObjectDeclination = Data_40003ec0.fData_12;
+			fData_40002cd0_ObjectRightAscension = Data_40003ec0_FlashICData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003ec0_FlashICData.fDeclination;
 		
 			sprintf(Data_40003fa9, "IC:%d                          ", 
 				wData_40002ebc_ICNr);
 		
 			Data_40003360 = Data_40003fa9;
-			Data_40003364 = Data_40003ec0.bData_0;
+			Data_40003364 = Data_40003ec0_FlashICData.bData_0;
 		
-			if (Data_40003ec0.fData_16 != 0)
+			if (Data_40003ec0_FlashICData.fData_16 != 0)
 			{
 				//35134
 				sprintf(Data_40003fd3, "MEG:%.1f                          ", 
-					Data_40003ec0.fData_16);
+					Data_40003ec0_FlashICData.fData_16);
 				Data_40003368 = Data_40003fd3;
 			}
 			else
@@ -3662,7 +3665,7 @@ int PrepareScreenItems(void)
 				Data_40003368 = "                                          ";
 			}
 			//0x35178
-			Data_4000336c = Data_40003ec0.bData_20;
+			Data_4000336c = Data_40003ec0_FlashICData.bData_20;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -3670,56 +3673,56 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 			//3520c
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)(Data_40004b08[1]), 
-				(int)((Data_40004b08[1] - (int)(Data_40004b08[1])) * 60.0), 
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)(Data_40004b08.dAzimuth), 
+				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 				
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//352e4
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x3549c
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			//0x35594
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}			
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -3784,12 +3787,12 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 		
-		case 0x59E6: //23014
+		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014
 			//0x35bb4
-			func_4594(wData_40002ebc_ICNr, &Data_40003ec0);
+			flash_get_ic_data(wData_40002ebc_ICNr, &Data_40003ec0_FlashICData);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003ec0.fData_8;
-			fData_40002d18_ObjectDeclination = Data_40003ec0.fData_12;
+			fData_40002cd0_ObjectRightAscension = Data_40003ec0_FlashICData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003ec0_FlashICData.fDeclination;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -3798,58 +3801,58 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//35d4c
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x35e48
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 					
 				bData_40002e8a = 3;
 			}
 			//0x35f4c
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}			
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -3881,10 +3884,11 @@ int PrepareScreenItems(void)
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
+					Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b70);
 
-				dData_40002dd0 = Data_40004b70[1];
-				dData_40002e08 = Data_40004b70[3];				
+				dData_40002dd0 = Data_40004b70.dAzimuth;
+				dData_40002e08 = Data_40004b70.dAltitude;				
 			}
 			//0x362fc
 			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
@@ -3948,7 +3952,7 @@ int PrepareScreenItems(void)
 				bData_40002e8a = bData_40002e88;
 			}
 			//0x36874
-			if ((Data_40004b08[3] < 0) &&
+			if ((Data_40004b08.dAltitude < 0) &&
 				((bData_40002e8a == 1) || (bData_40002e8a == 2)))
 			{
 				//0x368b0
@@ -3993,13 +3997,13 @@ int PrepareScreenItems(void)
 				wData_40002ebc_ICNr);
 			
 			Data_40003364 = Data_40003fbe;
-			Data_40003368 = Data_40003ec0.bData_0;
+			Data_40003368 = Data_40003ec0_FlashICData.bData_0;
 			
-			if (Data_40003ec0.fData_16 != 0)
+			if (Data_40003ec0_FlashICData.fData_16 != 0)
 			{
 				//369b0
 				sprintf(Data_40003fe8, "MEG:%.1f          ", 
-					Data_40003ec0.fData_16);
+					Data_40003ec0_FlashICData.fData_16);
 				Data_4000336c = Data_40003fe8;
 			}
 			else
@@ -4013,12 +4017,12 @@ int PrepareScreenItems(void)
 			//->0x3d71c					
 			break;
 		
-		case 0x59DD: //23005
+		case MENU_CONTEXT_SH2_OBJECT_SELECTION: //23005
 			//0x36a10
-			func_435c(wData_40002ebe_ShNr, &Data_40003350);
+			flash_get_sh2_data(wData_40002ebe_ShNr, &Data_40003350_FlashSh2Data);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003350.fData_0;
-			fData_40002d18_ObjectDeclination = Data_40003350.fData_4;
+			fData_40002cd0_ObjectRightAscension = Data_40003350_FlashSh2Data.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003350_FlashSh2Data.fDeclination;
 		
 			sprintf(Data_40003fa9, "Sh2:%d                          ",
 				wData_40002ebe_ShNr);
@@ -4034,56 +4038,56 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 				
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)(Data_40004b08[1]), 
-				(int)((Data_40004b08[1] - (int)(Data_40004b08[1])) * 60.0), 
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)(Data_40004b08.dAzimuth), 
+				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 				
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//36be8
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x36d88
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			//0x36e80
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}			
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -4148,12 +4152,12 @@ int PrepareScreenItems(void)
 			//->0x3d71c		
 			break;
 		
-		case 0x59E7: //23015
+		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015
 			//0x374a0
-			func_435c(wData_40002ebe_ShNr, &Data_40003350);
+			flash_get_sh2_data(wData_40002ebe_ShNr, &Data_40003350_FlashSh2Data);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003350.fData_0;
-			fData_40002d18_ObjectDeclination = Data_40003350.fData_4;
+			fData_40002cd0_ObjectRightAscension = Data_40003350_FlashSh2Data.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003350_FlashSh2Data.fDeclination;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -4162,58 +4166,58 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//37634
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x37730
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 					
 				bData_40002e8a = 3;
 			}
 			//0x37834
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}			
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -4245,10 +4249,11 @@ int PrepareScreenItems(void)
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
+					Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b70);
 
-				dData_40002dd0 = Data_40004b70[1];
-				dData_40002e08 = Data_40004b70[3];				
+				dData_40002dd0 = Data_40004b70.dAzimuth;
+				dData_40002e08 = Data_40004b70.dAltitude;				
 			}
 			//0x37be4
 			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
@@ -4312,7 +4317,7 @@ int PrepareScreenItems(void)
 				bData_40002e8a = bData_40002e88;
 			}
 			//0x38150
-			if ((Data_40004b08[3] < 0) &&
+			if ((Data_40004b08.dAltitude < 0) &&
 				((bData_40002e8a == 1) || (bData_40002e8a == 2)))
 			{
 				//0x3818c
@@ -4365,24 +4370,24 @@ int PrepareScreenItems(void)
 			//->0x3d71c					
 			break;
 		
-		case 0x59DE: //23006
+		case MENU_CONTEXT_BRIGHT_STAR_SELECTION: //23006
 			//0x382a0
-			func_4028((unsigned char)wData_40002ec0, &Data_40003ea0);
+			flash_get_bright_star_data((unsigned char)wData_40002ec0_BrightStarNr, &Data_40003ea0_FlashBrightStarData);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003ea0.fData_20;
-			fData_40002d18_ObjectDeclination = Data_40003ea0.fData_24;
+			fData_40002cd0_ObjectRightAscension = Data_40003ea0_FlashBrightStarData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003ea0_FlashBrightStarData.fDeclination;
 		
 			sprintf(Data_40003fa9, "Bright:%d                          ",
-				wData_40002ec0);
+				wData_40002ec0_BrightStarNr);
 		
 			Data_40003360 = Data_40003fa9;
-			Data_40003364 = Data_40003ea0.bData_0;
+			Data_40003364 = Data_40003ea0_FlashBrightStarData.bData_0;
 		
-			if (Data_40003ea0.fData_28 != 0)
+			if (Data_40003ea0_FlashBrightStarData.fData_28 != 0)
 			{
 				//38318
 				sprintf(Data_40003fd3, "MEG:%.1f                          ",
-					Data_40003ea0.fData_28);
+					Data_40003ea0_FlashBrightStarData.fData_28);
 				Data_40003368 = Data_40003fd3;
 			}
 			else
@@ -4399,56 +4404,56 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 				
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)(Data_40004b08[1]), 
-				(int)((Data_40004b08[1] - (int)(Data_40004b08[1])) * 60.0), 
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)(Data_40004b08.dAzimuth), 
+				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 				
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//384cc
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x38668
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			//0x38760
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}			
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -4513,12 +4518,12 @@ int PrepareScreenItems(void)
 			//->0x3d71c		
 			break;
 		
-		case 0x59E8: //23016
+		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016
 			//0x38d80
-			func_4028((unsigned char)wData_40002ec0, &Data_40003ea0);
+			flash_get_bright_star_data((unsigned char)wData_40002ec0_BrightStarNr, &Data_40003ea0_FlashBrightStarData);
 		
-			fData_40002cd0_ObjectRightAscension = Data_40003ea0.fData_20;
-			fData_40002d18_ObjectDeclination = Data_40003ea0.fData_24;
+			fData_40002cd0_ObjectRightAscension = Data_40003ea0_FlashBrightStarData.fRightAscension;
+			fData_40002d18_ObjectDeclination = Data_40003ea0_FlashBrightStarData.fDeclination;
 		
 			Data_40004ad8.dData_0 = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -4527,58 +4532,58 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 		
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)Data_40004b08[1],
-				(int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0),
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)Data_40004b08.dAzimuth,
+				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//38f18
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x39014
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 					
 				bData_40002e8a = 3;
 			}
 			//0x39118
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}			
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -4610,10 +4615,11 @@ int PrepareScreenItems(void)
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
+					Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b70);
 
-				dData_40002dd0 = Data_40004b70[1];
-				dData_40002e08 = Data_40004b70[3];				
+				dData_40002dd0 = Data_40004b70.dAzimuth;
+				dData_40002e08 = Data_40004b70.dAltitude;				
 			}
 			//0x394c8
 			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
@@ -4677,7 +4683,7 @@ int PrepareScreenItems(void)
 				bData_40002e8a = bData_40002e88;
 			}
 			//0x39a40
-			if ((Data_40004b08[3] < 0) &&
+			if ((Data_40004b08.dAltitude < 0) &&
 				((bData_40002e8a == 1) || (bData_40002e8a == 2)))
 			{
 				//0x39a7c
@@ -4719,10 +4725,10 @@ int PrepareScreenItems(void)
 			}
 			//0x39b38
 			sprintf(Data_40003fbe, "Bright:%d                          ", 
-				wData_40002ec0);
+				wData_40002ec0_BrightStarNr);
 			
 			Data_40003364 = Data_40003fbe;
-			Data_40003368 = Data_40003ea0.bData_0;
+			Data_40003368 = Data_40003ea0_FlashBrightStarData.bData_0;
 			Data_4000336c = "                              ";
 
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
@@ -4730,7 +4736,7 @@ int PrepareScreenItems(void)
 			//->0x3d71c					
 			break;
 		
-		case 23007:
+		case MENU_CONTEXT_SAO_OBJECT_SELECTION: //23007:
 			//0x39b90: SAO item
 			flash_get_sao_data(Data_40002ec4_SAONr, &Data_40003358_SAORecord);
 		
@@ -4751,56 +4757,56 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 				
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)(Data_40004b08[1]), 
-				(int)((Data_40004b08[1] - (int)(Data_40004b08[1])) * 60.0), 
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)(Data_40004b08.dAzimuth), 
+				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 				
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//39d68
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//0x39f00
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			//0x39ff8
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}			
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -4865,7 +4871,7 @@ int PrepareScreenItems(void)
 			//->0x3d71c		
 			break;
 		
-		case 0x59E9: //23017
+		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017
 			//0x3a618
 			flash_get_sao_data(Data_40002ec4_SAONr, &Data_40003358_SAORecord);
 		
@@ -4878,63 +4884,63 @@ int PrepareScreenItems(void)
 			Data_40004ae8.dData_8 = fData_40002d18_ObjectDeclination;
 
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
-				Data_40004128.Data_40, Data_40004128.bData_44, (void*)Data_40004b08);
+				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 
 			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
-				(int)(Data_40004b08[1]), 
-				(int)((Data_40004b08[1] - (int)(Data_40004b08[1])) * 60.0), 
-				(int)(Data_40004b08[1] * 3600.0) % 60);
+				(int)(Data_40004b08.dAzimuth), 
+				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
+				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
 
-			if (Data_40004b08[3] >= 0)
+			if (Data_40004b08.dAltitude >= 0)
 			{
 				//3a7ac
 				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 			}
 			else
 			{
 				//3a8a8
 				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
-					abs((int)Data_40004b08[3]), 
-					abs((int)((Data_40004b08[3] - (int)(Data_40004b08[3])) * 60.0)), 
-					abs((int)(Data_40004b08[3] * 3600.0) % 60));
+					abs((int)Data_40004b08.dAltitude), 
+					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
+					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
 					
 				bData_40002e8a = 3;
 			}
 			//3a9ac
-			if ((int)(Data_40004b08[1]) < 100)
+			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
 				Data_40003ffd[11] = ' ';
 			}
 			//3a9d0
-			if ((int)(Data_40004b08[1]) < 10)
+			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
 				Data_40003ffd[12] = ' ';
 			}
 			//3a9f4
-			if ((int)((Data_40004b08[1] - (int)Data_40004b08[1]) * 60.0) < 10)
+			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
 				Data_40003ffd[15] = ' ';
 			}
 			//3aa60
-			if (((int)(Data_40004b08[1] * 3600.0) % 60) < 10)
+			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
 				Data_40003ffd[18] = ' ';
 			}
 			//3aaa4
-			if (abs((int)Data_40004b08[3]) < 10)
+			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
 				Data_40004012[5] = ' ';
 			}
 			//3aadc
-			if (abs((int)((Data_40004b08[3] - (int)Data_40004b08[3]) * 60.0)) < 10)
+			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
 				Data_40004012[8] = ' ';
 			}
 			//3ab5c
-			if (abs(((int)(Data_40004b08[3] * 3600.0)) % 60) < 10)
+			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
 				Data_40004012[11] = ' ';
 			}
@@ -4966,10 +4972,11 @@ int PrepareScreenItems(void)
 				Data_40004b50.dRA = dData_40002c88;
 				Data_40004b50.dData_8 = dData_40002c90;
 				
-				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, Data_40004128.Data_40, Data_40004128.bData_44, (void*)&Data_40004b70);
+				convert_equatorial_to_horizontal(Data_40004ad8, Data_40004b50, 
+					Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b70);
 
-				dData_40002dd0 = Data_40004b70[1];
-				dData_40002e08 = Data_40004b70[3];
+				dData_40002dd0 = Data_40004b70.dAzimuth;
+				dData_40002e08 = Data_40004b70.dAltitude;
 			}
 			//0x3ad58
 			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
@@ -5033,7 +5040,7 @@ int PrepareScreenItems(void)
 				bData_40002e8a = bData_40002e88;
 			}
 			//0x3b2c4
-			if ((Data_40004b08[3] < 0) &&
+			if ((Data_40004b08.dAltitude < 0) &&
 				((bData_40002e8a == 1) || (bData_40002e8a == 2)))
 			{
 				//0x3b300

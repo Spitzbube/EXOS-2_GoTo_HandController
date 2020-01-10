@@ -531,12 +531,12 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION; //22001;
 			break;
 		
-		case 24001:
+		case MENU_CONTEXT_CONSTELLATION_SELECTION: //24001:
 			//0x6033c
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CONSTELLATION; //2200;
 			break;
 		
-		case 24002:
+		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
 			//0x60350
 			bData_40003432 = 0;
 		
@@ -546,7 +546,7 @@ void HandleMinusKey(void)
 				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
-				Data_40002c64_MenuContextId = 24001;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_CONSTELLATION_SELECTION; //24001;
 			}
 			else
 			{
@@ -562,12 +562,12 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 
-		case 25001:
+		case MENU_CONTEXT_FAMOUS_STAR_SELECTION: //25001:
 			//0x603c8
-			Data_40002c64_MenuContextId = 2300;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_FAMOUS_STAR; //2300;
 			break;
 			
-		case 25002:
+		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
 			//0x603dc
 			bData_40003432 = 0;
 		
@@ -577,7 +577,7 @@ void HandleMinusKey(void)
 				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
-				Data_40002c64_MenuContextId = 25001;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_FAMOUS_STAR_SELECTION; //25001;
 			}
 			else
 			{
@@ -593,17 +593,17 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 		
-		case 23012:
+		case MENU_CONTEXT_MESSIER_OBJECT_DETAILS: //23012:
 			//0x60454
-			Data_40002c64_MenuContextId = 2400;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_MESSIER_CAT; //2400;
 			break;
 		
-		case 23002:
+		case MENU_CONTEXT_MESSIER_OBJECT_SELECTION: //23002:
 			//0x60468
-			Data_40002c64_MenuContextId = 23012;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MESSIER_OBJECT_DETAILS; //23012;
 			break;
 		
-		case 23022:
+		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
 			//0x60480
 			bData_40003432 = 0;
 		
@@ -613,7 +613,7 @@ void HandleMinusKey(void)
 				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
-				Data_40002c64_MenuContextId = 23002;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_MESSIER_OBJECT_SELECTION; //23002;
 			}
 			else
 			{
@@ -629,12 +629,12 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 		
-		case 23003:
+		case MENU_CONTEXT_NGC_OBJECT_SELECTION: //23003:
 			//0x604f8
-			Data_40002c64_MenuContextId = 2500;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_NGC_CAT; //2500;
 			break;
 		
-		case 23013:
+		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
 			//0x6050c
 			bData_40003432 = 0;
 		
@@ -644,7 +644,7 @@ void HandleMinusKey(void)
 				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
-				Data_40002c64_MenuContextId = 23003;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_NGC_OBJECT_SELECTION; //23003;
 			}
 			else
 			{
@@ -660,12 +660,12 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 		
-		case 23004:
+		case MENU_CONTEXT_IC_OBJECT_SELECTION: //23004:
 			//0x60584
-			Data_40002c64_MenuContextId = 2600;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_IC_CAT; //2600;
 			break;
 		
-		case 23014:
+		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
 			//0x60598
 			bData_40003432 = 0;
 		
@@ -675,7 +675,7 @@ void HandleMinusKey(void)
 				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
-				Data_40002c64_MenuContextId = 23004;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_IC_OBJECT_SELECTION; //23004;
 			}
 			else
 			{
@@ -691,12 +691,12 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 		
-		case 23005:
+		case MENU_CONTEXT_SH2_OBJECT_SELECTION: //23005:
 			//0x60610
-			Data_40002c64_MenuContextId = 2700;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_SH2_CAT; //2700;
 			break;
 		
-		case 23015:
+		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
 			//0x60624
 			bData_40003432 = 0;
 		
@@ -706,7 +706,7 @@ void HandleMinusKey(void)
 				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
-				Data_40002c64_MenuContextId = 23005;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_SH2_OBJECT_SELECTION; //23005;
 			}
 			else
 			{
@@ -722,12 +722,12 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 		
-		case 23006:
+		case MENU_CONTEXT_BRIGHT_STAR_SELECTION: //23006:
 			//0x6069c
-			Data_40002c64_MenuContextId = 2800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_BRIGHT_STAR; //2800;
 			break;
 		
-		case 23016:
+		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
 			//0x606b0
 			bData_40003432 = 0;
 		
@@ -737,7 +737,7 @@ void HandleMinusKey(void)
 				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
-				Data_40002c64_MenuContextId = 23006;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_BRIGHT_STAR_SELECTION; //23006;
 			}
 			else
 			{
@@ -753,12 +753,12 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 		
-		case 23007:
+		case MENU_CONTEXT_SAO_OBJECT_SELECTION: //23007:
 			//0x60728
-			Data_40002c64_MenuContextId = 2900;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_SAO_CAT; //2900;
 			break;
 		
-		case 23017:
+		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
 			//0x6073c
 			bData_40003432 = 0;
 		
@@ -768,7 +768,7 @@ void HandleMinusKey(void)
 				lcd_display_clear();
 				
 				Data_40004128.bData_357 = 0;
-				Data_40002c64_MenuContextId = 23007;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_SAO_OBJECT_SELECTION; //23007;
 			}
 			else
 			{

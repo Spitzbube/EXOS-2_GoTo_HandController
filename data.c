@@ -348,6 +348,7 @@ char strEngGerman[] = "German"; //4000291e
 char strEngFrench[] = "French"; //40002925
 char strEngItalian[] = "Italian"; //4000292c
 char strEngSpanish[] = "Spanish"; //40002934, size??
+char Data_4000294a[] = "xxxx"; //4000294a, content, size?
 char strEngSetTimer[] = "Set timer:"; //400029a1
 char strEng00000s[] = "00000s"; //400029ac
 char Data_400029b3[] = ""; //400029b3
@@ -530,7 +531,7 @@ unsigned short wData_40002eb8_MessierNr; //40002eb8
 unsigned short wData_40002eba_NGCNr; //40002eba
 unsigned short wData_40002ebc_ICNr; //40002ebc
 unsigned short wData_40002ebe_ShNr; //40002ebe
-unsigned short wData_40002ec0; //40002ec0
+unsigned short wData_40002ec0_BrightStarNr; //40002ec0
 unsigned int Data_40002ec4_SAONr; //40002ec4
 int Data_40002ec8; //40002ec8
 unsigned short wData_40002ecc; //40002ecc
@@ -803,7 +804,7 @@ double dData_40003330; //40003330
 double dData_40003338; //40003338
 double dData_40003340; //40003340
 double dData_40003348; //40003348
-Struct_435c Data_40003350; //40003350
+Struct_Sh2Data Data_40003350_FlashSh2Data; //40003350
 Struct_SAOData Data_40003358_SAORecord; //40003358
 char* Data_40003360; //40003360
 char* Data_40003364; //40003364
@@ -901,13 +902,13 @@ char Data_400037dc[16]; //400037dc
 char Data_400037ec[100]; //400037ec, size???
 unsigned char Data_40003a14[100][10]; //40003a14, size??
 unsigned char Data_40003b2c[100][22]; //40003b2c, size??
-Struct_34e4 Data_40003d94; //40003d94
+Struct_FamousStarData Data_40003d94_FlashFamousStarData; //40003d94
 char Data_40003db0[36]; //40003db0, size???
-Struct_38dc Data_40003dd4; //40003dd4
-Struct_3b58 Data_40003e08; //40003e08
-Struct_4028 Data_40003ea0; //40003ea0
-Struct_4594 Data_40003ec0; //40003ec0
-Struct_4894 Data_40003ee0; //40003ee0
+Struct_ConstellationData Data_40003dd4_FlashConstellationData; //40003dd4
+Struct_MessierData Data_40003e08_FlashMessierData; //40003e08
+Struct_BrightStarData Data_40003ea0_FlashBrightStarData; //40003ea0
+Struct_ICData Data_40003ec0_FlashICData; //40003ec0
+Struct_NGCData Data_40003ee0_FlashNGCData; //40003ee0
 Struct_SiteData Data_40003f1c_FlashSiteData; //40003f1c
 Struct_5218 Data_40003f50; //40003f50
 Struct_54e0 Data_40003f64; //40003f64
@@ -933,10 +934,9 @@ float Data_40004a68_CurrentAlignStarEquatorialCoord[28]; //40004a68
 #endif
 Struct_GeographicCoordinates Data_40004ad8; //40004ad8
 Struct_EquatorialCoordinates Data_40004ae8; //40004ae8
-double Data_40004b08[7]; //40004b08, array, size???
+Struct_HorizontalCoordinates Data_40004b08; //40004b08
 Struct_EquatorialCoordinates Data_40004b50; //40004b50
-double Data_40004b70[9]; //40004b70, size???
-Struct_40004b70 Data_40004b70_; //40004b70
+Struct_HorizontalCoordinates Data_40004b70; //40004b70
 unsigned char Data_40004bb8[8]; //40004bb8 size???
 char Data_40004c58[2 /*???*/]; //40004c58
 
