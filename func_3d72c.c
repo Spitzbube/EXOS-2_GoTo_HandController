@@ -549,7 +549,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					delay_loop(800);
-					Data_40002c64_MenuContextId = 0;
+					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 					break;
 				
 				case 11202:
@@ -599,7 +599,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					delay_loop(800);
-					Data_40002c64_MenuContextId = 0;
+					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 					break;
 				
 				case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION: //22001:
@@ -705,7 +705,7 @@ void DisplayScreenItems(void)
 						beep1(1);
 						func_659c(1000);
 						
-						Data_40002c64_MenuContextId = 0;
+						Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 					}
 					//0x41618 -> 0x4684c
 					break;
@@ -748,7 +748,7 @@ void DisplayScreenItems(void)
 						beep1(1);
 						func_659c(1000);
 						
-						Data_40002c64_MenuContextId = 0;
+						Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 					}
 					//0x418f8 -> 0x4684c
 					break;
@@ -1850,242 +1850,1239 @@ void DisplayScreenItems(void)
 				
 				case 102:
 					//0x48314
+					if (((Data_40003f64.bData_0 != 1) && (bData_40002e79_SkyLandTargetSeletion == 1)) ||
+						((Data_40003f50.bData_0 != 1) && (bData_40002e79_SkyLandTargetSeletion == 0)))
+					{
+						//0x48358
+						lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+						lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+						lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+						lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+						lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+						lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+						lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+						lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);						
+						//->0x489b0
+					}
+					else
+					{
+						//0x484dc
+						switch (bData_40002e79_SkyLandTargetSeletion)
+						{
+							case 0:
+								//0x484f8
+								lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+								lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+								lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+								lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+								lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+								lcd_display_string(0, 6, 8, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+								lcd_display_string(0, 7, 8, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+								lcd_display_string(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+							
+								lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+								lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+								lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
+								//->0x3f8c8
+								break;
+							
+							case 1:
+								//0x48734
+								lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+								lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+								lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+								lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+								lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+								lcd_display_string(0, 6, 8, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+								lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+								lcd_display_string(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+							
+								lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+								lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+								lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapSecond);
+								lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+								lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+								lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
+								break;
+						}
+					}
 					break;
 				
 				case 2:
 					//0x489b4
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+				
+					beep1(1);
+					delay_loop(200);
+					beep1(1);
+					delay_loop(200);
+					beep1(1);
+					delay_loop(200);
+					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+					//->0x4edc8
 					break;
 				
 				case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 					//0x48a88
+					if (bData_40002c62_AlignmentStarMode == 0)
+					{
+						//48a9c: Alignment Star Selection
+						if (Data_40002c5c_AlignmentStarCount == 0)
+						{
+							//48aac: Alignment complete
+							if (bData_400031e9 != 5)
+							{
+								lcd_display_clear();
+							}
+							//0x48ac0
+							bData_400031e9 = 5;
+							func_c8f4();
+							beep1(3);
+							
+							Data_40003364 = Data_400030b4; //"The telescope has be"
+							Data_4000336c = Data_400030b8; //"aligned!"
+							Data_40003374 = Data_400030bc;
+							
+							lcd_display_string(0, 1, 1, 22, "                       ");
+							lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 1, 22, "                       ");
+							lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 1, 22, "                       ");
+							lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 1, 22, "                       ");
+							lcd_display_string(0, 8, 1, 22, "                       ");
+							
+							delay_loop(300);
+							
+							Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+							//->0x4952c
+						} //if (Data_40002c5c_AlignmentStarCount == 0)
+						else
+						{
+							//0x48c3c
+							if (bData_400031e9 != 6)
+							{
+								lcd_display_clear();
+							}
+							//0x48c50
+							bData_400031e9 = 6;
+							
+							lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+							lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+							lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 1, 4, "OBJ:");
+							lcd_display_string(0, 7, 11, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+							lcd_display_string(0, 8, 11, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+							lcd_display_string(0, 5, 11, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+							lcd_display_string(0, 6, 11, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+							
+							lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapMinute);
+							lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapMinute);
+							lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapMinute);
+							
+							lcd_display_string(0, 6, 1, 4, "      ");
+							//->0x4952c
+						}
+					} //if (bData_40002c62_AlignmentStarMode == 0)
+					else
+					{
+						//0x48e90: "Slewing to Target" / "Please center this star to the field of view"
+						if ((bData_40002e88 == MENU_TRACKING_MODE_POINTING/*1*/) && (bData_400034cd == 0))
+						{
+							//48eb0
+							if (bData_400031e9 != 7)
+							{
+								lcd_display_clear();
+							}
+							bData_400031e9 = 7;
+							
+							Data_40003360 = Data_400030a0;
+							Data_40003364 = Data_400030a4;
+							
+							if (Data_40004128.Data_352 == 0)
+							{
+								//48f00
+								lcd_display_string(0, 1, 1, 21, "Slewing to Target   ");
+							}
+							else
+							{
+								//0x48f20
+								lcd_display_string(0, 1, 1, 21, "Pause                ");
+							}
+							//0x48f3c
+							lcd_display_string(0, 2, 1, 21, "                     ");
+							lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+							lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 1, 4, "OBJ:");
+							lcd_display_string(0, 5, 11, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+							lcd_display_string(0, 6, 11, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+
+							lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapMinute);
+							lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapMinute);
+							
+							lcd_display_string(0, 6, 1, 6, "       ");
+							lcd_display_string(0, 7, 1, 4, "OTA:");
+							lcd_display_string(0, 7, 11, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+							lcd_display_string(0, 8, 11, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+							
+							lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapMinute);
+							lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapDegree);
+							lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapMinute);
+							
+							lcd_display_string(0, 6, 1, 4, "    ");
+							//->0x493a4
+						} //if ((bData_40002e88 == MENU_TRACKING_MODE_POINTING) && (bData_400034cd == 0))
+						else
+						{
+							//0x4918c
+							if (bData_400034cd == 1)
+							{
+								//4919c
+								if (bData_400031e9 != 8)
+								{
+									lcd_display_clear();
+								}
+								bData_400031e9 = 8;
+								
+								Data_40003364 = Data_400030a8; //"  Please center this "
+								Data_4000336c = Data_400030ac; //"star to the field of"
+								Data_40003374 = Data_400030b0; //"view"
+								
+								lcd_display_string(0, 1, 1, 22, "                       ");
+								lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+								lcd_display_string(0, 3, 1, 22, "                       ");
+								lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+								lcd_display_string(0, 5, 1, 22, "                       ");
+								lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+								lcd_display_string(0, 7, 1, 22, "                       ");
+								lcd_display_string(0, 8, 1, 22, "                       ");																
+							}
+						}
+						//0x493a4
+						if (bData_40002e88 == 2)
+						{
+							//493b4
+							bData_400034cd = 1;
+							
+							if (bData_400031e9 != 8)
+							{
+								lcd_display_clear();
+							}
+							bData_400031e9 = 8;
+							
+							Data_40003364 = Data_400030a8;
+							Data_4000336c = Data_400030ac;
+							Data_40003374 = Data_400030b0;
+							
+							lcd_display_string(0, 1, 1, 22, "                       ");
+							lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 1, 22, "                       ");
+							lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 1, 22, "                       ");
+							lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 1, 22, "                       ");
+							lcd_display_string(0, 8, 1, 22, "                       ");																
+						}
+					}
+					//0x4952c -> 0x4edc8
 					break;
 				
 				case 11102:
 					//0x49530
-					break;
-				
 				case 11101:
 					//0x49538
-					break;
-				
 				case 11103:
 					//0x4953c
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 					break;
 				
 				case 11104:
 					//0x496c0
+					beep1(1);
+				
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					delay_loop(800);
+					Data_40002c64_MenuContextId = 11102;
 					break;
 				
 				case 11105:
 					//0x49864
+					beep1(3);
+				
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					delay_loop(800);
+					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 					break;
 				
 				case 11202:
 					//0x49a08
-					break;
-				
 				case 11201:
 					//0x49a10
-					break;
-				
 				case 11203:
 					//0x49a14
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);				
 					break;
 				
 				case 11204:
 					//0x49b98
+					beep1(1);
+				
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					delay_loop(800);
+					Data_40002c64_MenuContextId = 11202;
 					break;
 				
 				case 11205:
 					//0x49d3c
+					beep1(3);
+				
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					delay_loop(800);
+					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 					break;
 				
 				case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION: //22001:
 					//0x49ee0
-					break;
-				
 				case MENU_CONTEXT_CONSTELLATION_SELECTION: //24001:
 					//0x49ee8
-					break;
-				
 				case MENU_CONTEXT_MESSIER_OBJECT_SELECTION: //23002:
 					//0x49eec
-					break;
-				
 				case MENU_CONTEXT_SH2_OBJECT_SELECTION: //23005:
 					//0x49ef0
-					break;
-				
 				case MENU_CONTEXT_BRIGHT_STAR_SELECTION: //23006:
 					//0x49ef4
-					break;
-				
 				case MENU_CONTEXT_SAO_OBJECT_SELECTION: //23007:
 					//0x49ef8
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case MENU_CONTEXT_NGC_OBJECT_SELECTION: //23003:
 					//0x4a130
-					break;
-				
 				case MENU_CONTEXT_IC_OBJECT_SELECTION: //23004:
 					//0x4a138
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, 14, "Constellation:");
+					lcd_display_string(0, 2, 15, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, 5, "Type:");
+					lcd_display_string(0, 4, 6, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 8, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 8, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 					//0x4a3a8
-					break;
-				
 				case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
 					//0x4a3b0
-					break;
-				
 				case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
 					//0x4a3b4
-					break;
-				
 				case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
 					//0x4a3b8
-					break;
-				
 				case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
 					//0x4a3bc
-					break;
-				
 				case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
 					//0x4a3c0
-					break;
-
 				case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
 					//0x4a3c4
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 8, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
+					
+					if (bData_40002e8a == 2)
+					{
+						//4a644
+						func_659c(2000);
+						beep1(1);
+						func_659c(1000);
+						beep1(1);
+						func_659c(1000);
+						
+						Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+					}
 					break;
 				
 				case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
 					//0x4a67c
-					break;
-				
 				case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
 					//0x4a684
+					lcd_display_clear();
+				
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, 14, "Constellation:");
+					lcd_display_string(0, 3, 15, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 8, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
+				
+					if (bData_40002e8a == 2)
+					{
+						//4a96c
+						func_659c(2000);
+						beep1(1);
+						func_659c(1000);
+						beep1(1);
+						func_659c(1000);
+						
+						Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+					}
 					break;
 				
 				case MENU_CONTEXT_FAMOUS_STAR_SELECTION: //25001:
 					//0x4a9a4
+					func_91c(0, 1, 1, 64, (unsigned char*)Data_40003360);
+					lcd_display_string(0, 3, 0, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 8, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 8, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);				
 					break;
 				
 				case MENU_CONTEXT_MESSIER_OBJECT_DETAILS: //23012:
 					//0x4aba0
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 					break;
 				
 				case 201:
 					//0x4ad28
-					break;
-				
 				case 202:
 					//0x4ad30
-					break;
-				
 				case 101:
 					//0x4ad34
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003384), (unsigned char*)Data_40003384);
+				
+					switch (bData_4000319a_SkyLandTargetId)
+					{
+						case 1:
+							//0x4ada0
+							lcd_display_string(1, 3, 3, 2, (unsigned char*)Data_40003360);
+							lcd_display_string(0, 3, 10, 2, (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 17, 2, (unsigned char*)Data_40003368);
+							lcd_display_string(0, 5, 3, 2, (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 10, 2, (unsigned char*)Data_40003370);
+							lcd_display_string(0, 5, 17, 2, (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 3, 2, (unsigned char*)Data_40003378);
+							lcd_display_string(0, 7, 10, 2, (unsigned char*)Data_4000337c);
+							lcd_display_string(0, 7, 17, 2, (unsigned char*)Data_40003380);
+							//->0x42780
+							break;
+						
+						case 2:
+							//0x4aec8
+							lcd_display_string(0, 3, 3, 2, (unsigned char*)Data_40003360);
+							lcd_display_string(1, 3, 10, 2, (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 17, 2, (unsigned char*)Data_40003368);
+							lcd_display_string(0, 5, 3, 2, (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 10, 2, (unsigned char*)Data_40003370);
+							lcd_display_string(0, 5, 17, 2, (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 3, 2, (unsigned char*)Data_40003378);
+							lcd_display_string(0, 7, 10, 2, (unsigned char*)Data_4000337c);
+							lcd_display_string(0, 7, 17, 2, (unsigned char*)Data_40003380);
+							//->0x42780
+							break;
+						
+						case 3:
+							//0x4aff0
+							lcd_display_string(0, 3, 3, 2, (unsigned char*)Data_40003360);
+							lcd_display_string(0, 3, 10, 2, (unsigned char*)Data_40003364);
+							lcd_display_string(1, 3, 17, 2, (unsigned char*)Data_40003368);
+							lcd_display_string(0, 5, 3, 2, (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 10, 2, (unsigned char*)Data_40003370);
+							lcd_display_string(0, 5, 17, 2, (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 3, 2, (unsigned char*)Data_40003378);
+							lcd_display_string(0, 7, 10, 2, (unsigned char*)Data_4000337c);
+							lcd_display_string(0, 7, 17, 2, (unsigned char*)Data_40003380);
+							//->0x42780
+							break;
+						
+						case 4:
+							//0x4b118
+							lcd_display_string(0, 3, 3, 2, (unsigned char*)Data_40003360);
+							lcd_display_string(0, 3, 10, 2, (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 17, 2, (unsigned char*)Data_40003368);
+							lcd_display_string(1, 5, 3, 2, (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 10, 2, (unsigned char*)Data_40003370);
+							lcd_display_string(0, 5, 17, 2, (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 3, 2, (unsigned char*)Data_40003378);
+							lcd_display_string(0, 7, 10, 2, (unsigned char*)Data_4000337c);
+							lcd_display_string(0, 7, 17, 2, (unsigned char*)Data_40003380);
+							//->0x42780
+							break;
+						
+						case 5:
+							//0x4b240
+							lcd_display_string(0, 3, 3, 2, (unsigned char*)Data_40003360);
+							lcd_display_string(0, 3, 10, 2, (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 17, 2, (unsigned char*)Data_40003368);
+							lcd_display_string(0, 5, 3, 2, (unsigned char*)Data_4000336c);
+							lcd_display_string(1, 5, 10, 2, (unsigned char*)Data_40003370);
+							lcd_display_string(0, 5, 17, 2, (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 3, 2, (unsigned char*)Data_40003378);
+							lcd_display_string(0, 7, 10, 2, (unsigned char*)Data_4000337c);
+							lcd_display_string(0, 7, 17, 2, (unsigned char*)Data_40003380);
+							//->0x42780
+							break;
+						
+						case 6:
+							//0x4b368
+							lcd_display_string(0, 3, 3, 2, (unsigned char*)Data_40003360);
+							lcd_display_string(0, 3, 10, 2, (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 17, 2, (unsigned char*)Data_40003368);
+							lcd_display_string(0, 5, 3, 2, (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 10, 2, (unsigned char*)Data_40003370);
+							lcd_display_string(1, 5, 17, 2, (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 3, 2, (unsigned char*)Data_40003378);
+							lcd_display_string(0, 7, 10, 2, (unsigned char*)Data_4000337c);
+							lcd_display_string(0, 7, 17, 2, (unsigned char*)Data_40003380);
+							//->0x42780
+							break;
+						
+						case 7:
+							//0x4b490
+							lcd_display_string(0, 3, 3, 2, (unsigned char*)Data_40003360);
+							lcd_display_string(0, 3, 10, 2, (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 17, 2, (unsigned char*)Data_40003368);
+							lcd_display_string(0, 5, 3, 2, (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 10, 2, (unsigned char*)Data_40003370);
+							lcd_display_string(0, 5, 17, 2, (unsigned char*)Data_40003374);
+							lcd_display_string(1, 7, 3, 2, (unsigned char*)Data_40003378);
+							lcd_display_string(0, 7, 10, 2, (unsigned char*)Data_4000337c);
+							lcd_display_string(0, 7, 17, 2, (unsigned char*)Data_40003380);
+							//->0x42780
+							break;
+						
+						case 8:
+							//0x4b5b8
+							lcd_display_string(0, 3, 3, 2, (unsigned char*)Data_40003360);
+							lcd_display_string(0, 3, 10, 2, (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 17, 2, (unsigned char*)Data_40003368);
+							lcd_display_string(0, 5, 3, 2, (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 10, 2, (unsigned char*)Data_40003370);
+							lcd_display_string(0, 5, 17, 2, (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 3, 2, (unsigned char*)Data_40003378);
+							lcd_display_string(1, 7, 10, 2, (unsigned char*)Data_4000337c);
+							lcd_display_string(0, 7, 17, 2, (unsigned char*)Data_40003380);
+							//->0x42780
+							break;
+						
+						case 9:
+							//0x4b6e0
+							lcd_display_string(0, 3, 3, 2, (unsigned char*)Data_40003360);
+							lcd_display_string(0, 3, 10, 2, (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 17, 2, (unsigned char*)Data_40003368);
+							lcd_display_string(0, 5, 3, 2, (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 10, 2, (unsigned char*)Data_40003370);
+							lcd_display_string(0, 5, 17, 2, (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 3, 2, (unsigned char*)Data_40003378);
+							lcd_display_string(0, 7, 10, 2, (unsigned char*)Data_4000337c);
+							lcd_display_string(1, 7, 17, 2, (unsigned char*)Data_40003380);
+							//->0x42780
+							break;
+						#if 0
+						default:
+							//0x4b808
+							break;
+						#endif
+					}
 					break;
 				
 				case 203:
 					//0x4b810
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, 13, (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, 16, (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, 16, (unsigned char*)Data_4000337c);
+					lcd_display_string(1, 6, bData_4000318a, 1, (unsigned char*)&Data_40003374[bData_4000318a - 1]);
+				
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 204:
 					//0x4ba14
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, 13, (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, 16, (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, 16, (unsigned char*)Data_4000337c);
+					lcd_display_string(1, 7, bData_4000318a, 1, (unsigned char*)&Data_40003378[bData_4000318a - 1]);
+				
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 205:
 					//0x4bc54
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, 13, (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, 16, (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, 16, (unsigned char*)Data_4000337c);
+					lcd_display_string(1, 8, bData_4000318a, 1, (unsigned char*)&Data_4000337c[bData_4000318a - 1]);
+				
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 206:
 					//0x4be58
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
+				
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, 13, (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, 16, (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, 16, (unsigned char*)Data_4000337c);
+					lcd_display_string(0, 7, 1, 3, "Azi");
+					lcd_display_string(0, 8, 1, 3, "Alt");
+					lcd_display_string(1, 6, bData_4000318a, 1, (unsigned char*)&Data_40003374[bData_4000318a - 1]);
+
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 207:
 					//0x4c10c
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
+				
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, 13, (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, 16, (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, 16, (unsigned char*)Data_4000337c);
+					lcd_display_string(0, 7, 1, 3, "Azi");
+					lcd_display_string(0, 8, 1, 3, "Alt");
+					lcd_display_string(1, 7, bData_4000318a, 1, (unsigned char*)&Data_40003378[bData_4000318a - 1]);
+
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 208:
 					//0x4c3c0
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
+				
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, 13, (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, 16, (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, 16, (unsigned char*)Data_4000337c);
+					lcd_display_string(0, 7, 1, 3, "Azi");
+					lcd_display_string(0, 8, 1, 3, "Alt");
+					lcd_display_string(1, 8, bData_4000318a, 1, (unsigned char*)&Data_4000337c[bData_4000318a - 1]);
+
+					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 8, 16, (unsigned char*)cBitmapSecond);
+					lcd_display_bitmap(0, 7, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 29001:
 					//0x4c674
+					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
+				
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, 16, (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, 16, (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+					lcd_display_string(1, 3, bData_4000318a, 1, (unsigned char*)&Data_40003368[bData_4000318a - 1]);
+				
+					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 29002:
 					//0x4c888
+					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
+				
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, 16, (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, 16, (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+					lcd_display_string(1, 5, bData_4000318a, 1, (unsigned char*)&Data_40003370[bData_4000318a - 1]);
+				
+					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 11, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
 				case 48001:
 					//0x4ca9c
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+					lcd_display_string(1, 4, bData_4000318a, 1, (unsigned char*)&Data_4000336c[bData_4000318a - 1]);
 					break;
 				
 				case 41001:
 					//0x4cc58
+					switch (bData_40002e78)
+					{
+						case 0:
+							//0x4cc78
+							lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+							lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+							lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+							lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+							lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+							lcd_display_string(1, 3, bData_4000318a, 1, &Data_40003368[bData_4000318a - 1]);
+							break;
+						
+						case 1:
+							//0x4ce34
+							lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+							lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+							lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+							lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+							lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+							lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+							lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+							lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+						
+							lcd_display_string(1, 5, bData_4000318a, 1, (unsigned char*)&Data_40003370[bData_4000318a - 1]);
+							break;
+						
+						default:
+							//0x4d024
+							break;
+					}
 					break;
 				
 				case 43011:
 					//0x4d034
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					lcd_display_bitmap(0, 3, 14, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 3, 17, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 4, 14, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 4, 17, (unsigned char*)cBitmapMinute);
 					break;
 				
 				case 43002:
 					//0x4d20c
+					lcd_display_bitmap(0, 4, 11, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 4, 14, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 10, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 13, (unsigned char*)cBitmapMinute);
+
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					switch (bData_40003144)
+					{
+						case 0:
+							//0x4d40c
+							lcd_display_string(1, 3, bData_4000318a, 1, (unsigned char*)&Data_40003368[bData_4000318a - 1]);
+							break;
+						
+						case 1:
+							//0x4d448
+							lcd_display_string(1, 4, bData_4000318a, 1, (unsigned char*)&Data_4000336c[bData_4000318a - 1]);
+							break;
+						
+						case 2:
+							//0x4d484
+							lcd_display_string(1, 5, bData_4000318a, 1, (unsigned char*)&Data_40003370[bData_4000318a - 1]);
+							break;
+						
+						case 3:
+							//0x4d4c0
+							lcd_display_string(1, 6, bData_4000318a, 1, (unsigned char*)&Data_40003374[bData_4000318a - 1]);
+							break;						
+					}
+				
+					lcd_display_bitmap(0, 4, 11, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 4, 14, (unsigned char*)cBitmapMinute);
+					lcd_display_bitmap(0, 5, 10, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 13, (unsigned char*)cBitmapMinute);
 					break;
 				
 				case 47041:
 					//0x4d554
-					break;
-				
 				case 47011:
 					//0x4d55c
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, 8, (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, 8, (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003374); //BUG!
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					switch (bData_4000316d)
+					{
+						case 0:
+							//0x4d6d8
+							lcd_display_string(1, 3, bData_4000318a, 1, (unsigned char*)&Data_40003368[bData_4000318a - 1]);
+							break;
+						
+						case 1:
+							//0x4d714
+							lcd_display_string(1, 5, bData_4000318a, 1, (unsigned char*)&Data_40003370[bData_4000318a - 1]);
+							break;
+						
+						default:
+							//0x4d750
+							break;
+					}
+				
+					lcd_display_bitmap(0, 3, 8, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);					
 					break;
 				
 				case MENU_CONTEXT_RESET_CONFIRM: //100:
 					//0x4d788
+					lcd_display_string(0, 1, 1, 21, "Are you sure reset   ");
+					lcd_display_string(0, 3, 1, 21, "System.                ");
+					lcd_display_string(0, 5, 1, 21, "Back: Cancel          ");
+					lcd_display_string(0, 7, 1, 21, "Enter: Begin Reset      ");
 					break;
 				
 				case 33001:
 					//0x4d800
+					lcd_display_lunar_phase_screen(Data_40003164_LunarPhaseYear, Data_40003168_LunarPhaseMonth);
 					break;
 				
 				case 34001:
 					//0x4d81c
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003378/*BUG!*/), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+				
+					lcd_display_string(1, 3, bData_4000318a, 1, (unsigned char*)&Data_40003368[bData_4000318a - 1]);
 					break;
 				
 				case 35001:
 					//0x4d9d8
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+					lcd_display_string(1, 3, bData_4000318a, 1, (unsigned char*)&Data_40003368[bData_4000318a - 1]);
 					break;
 				
 				case 360021:
 					//0x4db94
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+					lcd_display_string(1, 3, bData_4000318a, 1, (unsigned char*)&Data_40003368[bData_4000318a - 1]);
 					break;
 				
 				case 360022:
 					//0x4dd50
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+					lcd_display_string(1, 5, bData_4000318a, 1, (unsigned char*)&Data_40003370[bData_4000318a - 1]);
 					break;
 				
 				case 370021:
 					//0x4df0c
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+					lcd_display_string(1, 3, bData_4000318a, 1, (unsigned char*)&Data_40003368[bData_4000318a - 1]);
+				
+					lcd_display_bitmap(0, 7, 10, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 13, (unsigned char*)cBitmapMinute);					
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapDegree);					
 					break;
 				
 				case 370022:
 					//0x4e140
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+					lcd_display_string(1, 5, bData_4000318a, 1, (unsigned char*)&Data_40003370[bData_4000318a - 1]);
+				
+					lcd_display_bitmap(0, 7, 10, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 13, (unsigned char*)cBitmapMinute);					
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapDegree);					
 					break;
 				
 				case 370023:
 					//0x4e338
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+					lcd_display_string(1, 7, bData_4000318a, 1, (unsigned char*)&Data_40003378[bData_4000318a - 1]);
+				
+					lcd_display_bitmap(0, 7, 10, (unsigned char*)cBitmapDegree);
+					lcd_display_bitmap(0, 7, 13, (unsigned char*)cBitmapMinute);					
+					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapDegree);					
 					break;
 				
 				case 211001:
 					//0x4e530
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+					switch (bData_40003262)
+					{
+						case 1:
+							//4e6c4
+							switch (bData_40003261)
+							{
+								case 0:
+									//0x4e6ec
+									lcd_display_string(1, 2, bData_4000318a, 1, (unsigned char*)&Data_40003364[bData_4000318a - 1]);
+									break;
+								
+								case 1:
+									//0x4e728
+									lcd_display_string(1, 3, bData_4000318a, 1, (unsigned char*)&Data_40003368[bData_4000318a - 1]);
+									break;
+								
+								case 2:
+									//0x4e764
+									lcd_display_string(1, 4, bData_4000318a, 1, (unsigned char*)&Data_4000336c[bData_4000318a - 1]);
+									break;
+								
+								default:
+									//0x4e7a0
+//									break;
+							}
+//							break;
+						
+						default:
+							//0x4e7b0
+							break;
+					}
 					break;
 				
 				case 28001:
 					//0x4e7bc
+					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
+					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
+					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
+					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+
+					switch (bData_40003263)
+					{
+						case 1:
+							//0x4e95c
+						case 3:
+							//0x4e964
+							switch (bData_40003260)
+							{
+								case 0:
+									//0x4e988
+									lcd_display_string(1, 2, bData_4000318a, 1, (unsigned char*)&Data_40003364[bData_4000318a - 1]);
+									break;
+								
+								case 1:
+									//0x4e9c4
+									lcd_display_string(1, 3, bData_4000318a, 1, (unsigned char*)&Data_40003368[bData_4000318a - 1]);
+									break;
+								
+								case 2:
+									//0x4ea00
+									lcd_display_string(1, 4, bData_4000318a, 1, (unsigned char*)&Data_4000336c[bData_4000318a - 1]);
+									break;
+								
+								default:
+									//0x4ea3c
+//									break;
+							}
+//							break;
+						
+						default:
+							//0x4ea4c
+							break;
+					}
 					break;
 				
 				default:
@@ -2149,11 +3146,13 @@ void DisplayScreenItems(void)
 						default:
 							//0x4edb8
 							break;
-					}
+					} //switch (bData_4000316f_FocusLineOn4LineDisplay)
 					break;
 				
 			} //switch (Data_40002c64_MenuContextId)
-		
+			break;
+			
+		default:
 			break;
 	} //switch (bData_40003197_DisplayLinesPerMenuLine)
 	//0x4edd0
