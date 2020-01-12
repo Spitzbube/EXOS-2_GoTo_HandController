@@ -91,6 +91,471 @@ void HandleStarKey(void)
 /* 4ee90 - todo */
 void func_4ee90(int a, int b, int c, int d, int e, int f)
 {
+	unsigned char sp[12];
+	unsigned char i;
+	
+	bData_40003430 = 1;
+	bData_40003200 = 0;
+	bData_40003201 = 0;
+	
+	if (bData_4000319d == 1)
+	{
+		//4eed4
+		sp[0] = 0x55;
+		sp[1] = 0xaa;
+		sp[2] = 0x01;
+		sp[3] = 0x04;
+		
+		switch (a)
+		{
+			case 1:
+				//0x4ef18
+				sp[4] = 0x01;
+				break;
+			
+			case 2:
+				//0x4ef28
+				sp[4] = 0x21;
+				break;
+			
+			case 3:
+				//0x4ef38
+				sp[4] = 0x41;
+				break;
+			
+			case 4:
+				//0x4ef48
+				sp[4] = 0x61;
+				break;
+			
+			default:
+				//0x4ef58
+				break;
+		}
+		
+		switch (b)
+		{
+			case 3:
+				//0x4ef88
+			case 1:
+				//0x4ef90
+				sp[5] = 0x00;
+				break;
+			
+			case 4:
+				//0x4ef9c
+			case 2:
+				//0x4efa4
+				sp[5] = 0x01;
+				break;
+						
+			default:
+				//0x4efb0
+				break;
+		}
+		
+		if (bData_40002c1a == 1)
+		{
+			//4efcc
+			switch (c)
+			{
+				case 0:
+					//0x4f000
+					sp[6] = 0x00;
+					sp[7] = 0x00;
+					bData_40002e88 = 0;
+					break;
+				
+				case 1:
+					//0x4f06c
+					sp[6] = 0;
+					sp[7] = 5;
+					bData_40002e88 = 10;
+					break;
+				
+				case 2:
+					//0x4f090
+					sp[6] = 0;
+					sp[7] = 10;
+					bData_40002e88 = 10;
+					break;
+				
+				case 3:
+					//0x4f0b0
+					sp[6] = 0;
+					sp[7] = 40;
+					bData_40002e88 = 10;
+					break;
+				
+				case 4:
+					//0x4f0d4
+					sp[6] = 0;
+					sp[7] = 160;
+					bData_40002e88 = 10;
+					break;
+				
+				case 5:
+					//0x4f0f8
+					sp[6] = 1;
+					sp[7] = 64;
+					bData_40002e88 = 10;
+					break;
+				
+				case 6:
+					//0x4f11c
+					sp[6] = 2;
+					sp[7] = 128;
+					bData_40002e88 = 10;
+					break;
+				
+				case 7:
+					//0x4f140
+					sp[6] = 5;
+					sp[7] = 0;
+					bData_40002e88 = 10;
+					break;
+				
+				case 8:
+					//0x4f164
+					sp[6] = 10;
+					sp[7] = 0;
+					bData_40002e88 = 10;
+					break;
+				
+				case 9:
+					//0x4f188
+					sp[6] = 10;
+					sp[7] = 0;
+					bData_40002e88 = 10;
+					break;
+				#if 0
+				default:
+					//0x4f1ac
+					break;
+				#endif
+			} //switch (c)			
+		} //if (bData_40002c1a == 1)
+		//0x4f1b0
+		if (bData_40002c1a == 2)
+		{
+			//4f1c0
+			switch (c)
+			{
+				case 0:
+					//0x4f1f4
+					sp[6] = 0;
+					sp[7] = 0;
+					bData_40002e88 = 0;
+					break;
+				
+				case 1:
+					//0x4f210
+					sp[6] = 0;
+					sp[7] = 6;
+					bData_40002e88 = 10;
+					break;
+				
+				case 2:
+					//0x4f234
+					sp[6] = 0;
+					sp[7] = 12;
+					bData_40002e88 = 10;
+					break;
+				
+				case 3:
+					//0x4f258
+					sp[6] = 0;
+					sp[7] = 48;
+					bData_40002e88 = 10;
+					break;
+				
+				case 4:
+					//0x4f27c
+					sp[6] = 0;
+					sp[7] = 96;
+					bData_40002e88 = 10;
+					break;
+				
+				case 5:
+					//0x4f2a0
+					sp[6] = 0;
+					sp[7] = 192;
+					bData_40002e88 = 10;
+					break;
+				
+				case 6:
+					//0x4f2c4
+					sp[6] = 1;
+					sp[7] = 128;
+					bData_40002e88 = 10;
+					break;
+				
+				case 7:
+					//0x4f2e8
+					sp[6] = 2;
+					sp[7] = 28;
+					bData_40002e88 = 10;
+					break;
+				
+				case 8:
+					//0x4f30c
+					sp[6] = 3;
+					sp[7] = 56;
+					bData_40002e88 = 10;
+					break;
+				
+				case 9:
+					//0x4f330
+					sp[6] = 3;
+					sp[7] = 212;
+					bData_40002e88 = 10;
+					break;
+				#if 0
+				default:
+					//0x4f354
+					break;
+				#endif
+			} //switch (c)			
+		}
+		//0x4f358
+		for (i = 0; i < 8; i++)
+		{
+			//0x4f360
+			uart1_write_byte(sp[i]);
+		}
+		
+		switch (d)
+		{
+			case 1:
+				//0x4f3a0
+				sp[4] = 0x01;
+				break;
+			
+			case 2:
+				//0x4f3b0
+				sp[4] = 0x21;
+				break;
+			
+			case 3:
+				//0x4f3c0
+				sp[4] = 0x41;
+				break;
+			
+			case 4:
+				//0x4f3d0
+				sp[4] = 0x61;
+				break;
+			
+			default:
+				//0x4f3e0
+				break;
+		}
+		
+		switch (e)
+		{
+			case 3:
+				//0x4f410
+			case 1:
+				//0x4f418
+				sp[5] = 0x00;
+				break;
+			
+			case 4:
+				//0x4f424
+			case 2:
+				//0x4f42c
+				sp[5] = 0x01;
+				break;
+						
+			default:
+				//0x4f438
+				break;
+		}
+		//0x4f440
+		if (bData_40002c1a == 1)
+		{
+			//4f454
+			switch (f)
+			{
+				case 0:
+					//0x4f488
+					sp[6] = 0x00;
+					sp[7] = 0x00;
+					bData_40002e88 = 0;
+					break;
+				
+				case 1:
+					//0x4f4a4
+					sp[6] = 0;
+					sp[7] = 5;
+					bData_40002e88 = 10;
+					break;
+				
+				case 2:
+					//0x4f4c8
+					sp[6] = 0;
+					sp[7] = 10;
+					bData_40002e88 = 10;
+					break;
+				
+				case 3:
+					//0x4f4e8
+					sp[6] = 0;
+					sp[7] = 40;
+					bData_40002e88 = 10;
+					break;
+				
+				case 4:
+					//0x4f50c
+					sp[6] = 0;
+					sp[7] = 160;
+					bData_40002e88 = 10;
+					break;
+				
+				case 5:
+					//0x4f530
+					sp[6] = 1;
+					sp[7] = 64;
+					bData_40002e88 = 10;
+					break;
+				
+				case 6:
+					//0x4f554
+					sp[6] = 2;
+					sp[7] = 128;
+					bData_40002e88 = 10;
+					break;
+				
+				case 7:
+					//0x4f578
+					sp[6] = 5;
+					sp[7] = 0;
+					bData_40002e88 = 10;
+					break;
+				
+				case 8:
+					//0x4f59c
+					sp[6] = 10;
+					sp[7] = 0;
+					bData_40002e88 = 10;
+					break;
+				
+				case 9:
+					//0x4f5c0
+					sp[6] = 10;
+					sp[7] = 0;
+					bData_40002e88 = 10;
+					break;
+				#if 0
+				default:
+					//0x4f5e4
+					break;
+				#endif
+			} //switch (f)			
+		}
+		//0x4f5e8
+		if (bData_40002c1a == 2)
+		{
+			//4f5f8
+			switch (f)
+			{
+				case 0:
+					//0x4f62c
+					sp[6] = 0;
+					sp[7] = 0;
+					bData_40002e88 = 0;
+					break;
+				
+				case 1:
+					//0x4f648
+					sp[6] = 0;
+					sp[7] = 6;
+					bData_40002e88 = 10;
+					break;
+				
+				case 2:
+					//0x4f66c
+					sp[6] = 0;
+					sp[7] = 12;
+					bData_40002e88 = 10;
+					break;
+				
+				case 3:
+					//0x4f690
+					sp[6] = 0;
+					sp[7] = 48;
+					bData_40002e88 = 10;
+					break;
+				
+				case 4:
+					//0x4f6b4
+					sp[6] = 0;
+					sp[7] = 96;
+					bData_40002e88 = 10;
+					break;
+				
+				case 5:
+					//0x4f6d8
+					sp[6] = 0;
+					sp[7] = 192;
+					bData_40002e88 = 10;
+					break;
+				
+				case 6:
+					//0x4f6fc
+					sp[6] = 1;
+					sp[7] = 128;
+					bData_40002e88 = 10;
+					break;
+				
+				case 7:
+					//0x4f720
+					sp[6] = 2;
+					sp[7] = 28;
+					bData_40002e88 = 10;
+					break;
+				
+				case 8:
+					//0x4f744
+					sp[6] = 3;
+					sp[7] = 56;
+					bData_40002e88 = 10;
+					break;
+				
+				case 9:
+					//0x4f768
+					sp[6] = 3;
+					sp[7] = 212;
+					bData_40002e88 = 10;
+					break;
+				#if 0
+				default:
+					//0x4f78c
+					break;
+				#endif
+			} //switch (f)			
+		} //if (bData_40002c1a == 2)
+		//0x4f790
+		for (i = 0; i < 8; i++)
+		{
+			//0x4f798
+			uart1_write_byte(sp[i]);
+		}
+	} //if (bData_4000319d == 1)
+	else
+	{
+		//0x4f7b8
+		bData_4000319d = 1;
+		
+		if (bData_4000319c == 0)
+		{
+			uart1_write_byte(0x55);
+			uart1_write_byte(0xaa);
+			uart1_write_byte(0x01);
+			uart1_write_byte(0x01);
+			uart1_write_byte(0xff);
+		}
+	}
 }
 
 /* 4f804 - todo */
@@ -98,43 +563,25 @@ void func_4f804(void)
 {
 	switch (Data_40002c64_MenuContextId)
 	{
-		case 0:
+		case MENU_CONTEXT_MAIN: //0:
 			//0x4f88c
-//			break;
-		
-		case 0x565f:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x4f894
-//			break;
-		
-		case 0x5DC2:
+		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
 			//0x4f898
-//			break;
-		
-		case 0x61AA:
+		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
 			//0x4f89c
-//			break;
-		
-		case 0x59EE:
+		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
 			//0x4f8a0
-//			break;
-		
-		case 0x59e5:
+		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
 			//0x4f8a4
-//			break;
-		
-		case 0x59e6:
+		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
 			//0x4f8a8
-//			break;
-
-		case 0x59e7:
+		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
 			//0x4f8ac
-//			break;
-		
-		case 0x59e8:
+		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
 			//0x4f8b0
-//			break;
-
-		case 23017: //0x59e9:
+		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
 			//0x4f8b4
 			if (bData_400034a9 == 0)
 			{
@@ -191,16 +638,169 @@ void func_4f804(void)
 /* 4f9e4 - todo */
 void func_4f9e4(void)
 {
+	switch (Data_40002c64_MenuContextId)
+	{
+		case MENU_CONTEXT_MAIN: //0:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
+		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
+		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
+		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
+		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
+		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
+		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
+		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
+		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
+			if (bData_400034a9 == 0)
+			{
+				//4faa4
+				if ((Data_40004128.bData_356 != 0) &&
+					(bData_40002e89 != 1))
+				{
+					Data_40003408 = 1;
+					Data_4000340c = -1;
+					bData_40003201 = 0;
+					bData_40003200 = 0;
+				}
+				//0x4faf4
+				else if (bData_40002c1a == 1)
+				{
+					func_4ee90(1, 4, bData_40002e7d_RotatingSpeed, 2, 2, bData_40002e7d_RotatingSpeed);
+				}
+				else
+				{
+					//0x4fb2c
+					func_4ee90(3, 4, bData_40002e7d_RotatingSpeed, 4, 2, bData_40002e7d_RotatingSpeed);
+				}
+			}
+			else
+			{
+				//0x4fb54
+				if (bData_40002c1a == 1)
+				{
+					func_4ee90(1, 4, bData_40002e7d_RotatingSpeed, 2, 2, bData_40002e7d_RotatingSpeed);
+				}
+				else
+				{
+					func_4ee90(3, 4, bData_40002e7d_RotatingSpeed, 4, 2, bData_40002e7d_RotatingSpeed);
+				}
+			}			
+			break;
+		
+		default:
+			break;
+	}	
 }
 
 /* 4fbc8 - todo */
 void func_4fbc8(void)
 {
+	switch (Data_40002c64_MenuContextId)
+	{
+		case MENU_CONTEXT_MAIN: //0:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
+		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
+		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
+		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
+		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
+		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
+		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
+		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
+		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
+			if (bData_400034a9 == 0)
+			{
+				//4fc88
+				if ((Data_40004128.bData_356 != 0) &&
+					(bData_40002e89 != 1))
+				{
+					Data_40003408 = -1;
+					Data_4000340c = -1;
+					bData_40003201 = 0;
+					bData_40003200 = 0;
+				}
+				//0x4fcd4
+				else if (bData_40002c1a == 1)
+				{
+					func_4ee90(1, 3, bData_40002e7d_RotatingSpeed, 2, 2, bData_40002e7d_RotatingSpeed);
+				}
+				else
+				{
+					//0x4fd0c
+					func_4ee90(3, 3, bData_40002e7d_RotatingSpeed, 4, 2, bData_40002e7d_RotatingSpeed);
+				}
+			}
+			else
+			{
+				//0x4fd34
+				if (bData_40002c1a == 1)
+				{
+					func_4ee90(1, 3, bData_40002e7d_RotatingSpeed, 2, 2, bData_40002e7d_RotatingSpeed);
+				}
+				else
+				{
+					func_4ee90(3, 3, bData_40002e7d_RotatingSpeed, 4, 2, bData_40002e7d_RotatingSpeed);
+				}
+			}			
+			break;
+		
+		default:
+			break;
+	}	
 }
 
 /* 4fda8 - todo */
 void func_4fda8(void)
 {
+	switch (Data_40002c64_MenuContextId)
+	{
+		case MENU_CONTEXT_MAIN: //0:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
+		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
+		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
+		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
+		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
+		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
+		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
+		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
+		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
+			if (bData_400034a9 == 0)
+			{
+				//4fe68
+				if ((Data_40004128.bData_356 != 0) &&
+					(bData_40002e89 != 1))
+				{
+					Data_40003408 = -1;
+					Data_4000340c = 1;
+					bData_40003201 = 0;
+					//bData_40003200 = 0; //??
+				}
+				//0x4feb0
+				else if (bData_40002c1a == 1)
+				{
+					func_4ee90(1, 3, bData_40002e7d_RotatingSpeed, 2, 1, bData_40002e7d_RotatingSpeed);
+				}
+				else
+				{
+					//0x4fee8
+					func_4ee90(3, 3, bData_40002e7d_RotatingSpeed, 4, 1, bData_40002e7d_RotatingSpeed);
+				}
+			}
+			else
+			{
+				//0x4ff10
+				if (bData_40002c1a == 1)
+				{
+					func_4ee90(1, 3, bData_40002e7d_RotatingSpeed, 2, 1, bData_40002e7d_RotatingSpeed);
+				}
+				else
+				{
+					func_4ee90(3, 3, bData_40002e7d_RotatingSpeed, 4, 1, bData_40002e7d_RotatingSpeed);
+				}
+			}			
+			break;
+		
+		default:
+			break;
+	}	
 }
 
 /* 4ff84 - todo */
@@ -239,6 +839,39 @@ void func_50018(void)
 /* 50048 - todo */
 void func_50048(void)
 {
+	if (bData_40002e7a_MountType == 0)
+	{
+		//50060
+		func_acdc(dData_40002dc0, dData_40002df8, &dData_40002c88, &dData_40002c90);
+		//->0x5013c
+	}
+	else
+	{
+		//0x50084
+		dData_40002c90 = dData_40002d98;		
+		dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - 
+			dData_40002d78;
+		
+		while (dData_40002c88 >= 24)
+		{
+			dData_40002c88 -= 24;
+		}
+		while (dData_40002c88 < 0)
+		{
+			dData_40002c88 += 24;
+		}		
+	}
+	//5013c
+	dData_40002cc8 = dData_40002c88;
+	Data_40002cb8 = dData_40002cc8;		
+	Data_40002cbc = (dData_40002cc8 - Data_40002cb8) * 60.0;
+	fData_40002cc0 = (dData_40002cc8 - Data_40002cb8 - Data_40002cbc / 60.0) * 3600.0;
+	//50238
+	dData_40002d10 = fabs(dData_40002c90);
+	Data_40002cf4 = dData_40002d10;		
+	Data_40002cf8 = (dData_40002d10 - Data_40002cf4) * 60.0;
+	fData_40002cfc = (dData_40002d10 - Data_40002cf4 - Data_40002cf8 / 60.0) * 3600.0;
+	//5033c
 }
 
 /* 50778 - todo */
