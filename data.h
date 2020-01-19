@@ -408,6 +408,8 @@ extern char Data_40002262[];
 extern char Data_40002282[];
 extern char Data_400022a2[];
 extern char Data_400022c2[];
+extern char Data_400022f2[]; //400022f2
+extern char Data_40002302[]; //40002302
 extern char Data_40002387[]; //40002387
 extern char Data_4000239a[]; //4000239a
 extern char Data_4000248c[]; //4000248c
@@ -423,8 +425,8 @@ extern char Data_40002660[]; //40002660, size???
 extern char Data_40002789[]; //40002789
 extern char Data_40002792[]; //40002792
 extern char Data_400027cf[]; //400027cf
-extern char Data_400027df[]; //400027df
-extern char Data_400027ef[]; //400027ef
+extern unsigned char Data_400027df[]; //400027df
+extern unsigned char Data_400027ef[]; //400027ef
 extern char Data_400027ff[]; //400027ff
 extern unsigned char Data_40002827[]; //40002827
 extern char Data_40002837[]; //40002837
@@ -873,8 +875,8 @@ extern unsigned char bData_40003261; //40003261
 extern unsigned char bData_40003262; //40003262
 extern unsigned char bData_40003263; //40003263
 extern unsigned char bData_40003265; //40003265
-extern float Data_4000329c; //4000329c
-extern float Data_400032a0; //400032a0
+extern float fData_4000329c; //4000329c
+extern float fData_400032a0; //400032a0
 extern unsigned char bData_400032a4; //400032a4
 extern double dData_400032b0_SunRightAscension; //400032b0
 extern double dData_400032b8_SunDeclination; //400032b8
@@ -1004,6 +1006,7 @@ extern Struct_NGCData Data_40003ee0_FlashNGCData; //40003ee0
 extern Struct_SiteData Data_40003f1c_FlashSiteData; //40003f1c
 extern Struct_5218 Data_40003f50; //40003f50
 extern Struct_54e0 Data_40003f64; //40003f64
+extern unsigned char Data_40003f90[]; //40003f90
 extern char Data_40003fa9[]; //40003fa9
 extern char Data_40003fbe[]; //40003fbe
 extern char Data_40003fd3[]; //40003fd3
