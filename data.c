@@ -310,6 +310,8 @@ char Data_40002262[32];
 char Data_40002282[32];
 char Data_400022a2[32];
 char Data_400022c2[32];
+char Data_400022f2[32]; //400022f2
+char Data_40002302[32]; //40002302
 char Data_40002387[19]; //40002387
 char Data_4000239a[20]; //4000239a, size???
 char Data_4000248c[21]; //4000248c
@@ -325,8 +327,8 @@ char Data_40002660[100]; //40002660, size???
 char Data_40002789[9]; //40002789
 char Data_40002792[50]; //40002792, size??
 char Data_400027cf[16]; //400027cf
-char Data_400027df[16]; //400027df
-char Data_400027ef[16]; //400027ef
+unsigned char Data_400027df[16]; //400027df
+unsigned char Data_400027ef[16]; //400027ef
 char Data_400027ff[16]; //400027ff
 char fill_40002836; //40002836
 unsigned char Data_40002827[16] = " Name:"; //40002827 size???
@@ -781,8 +783,8 @@ unsigned char bData_40003261; //40003261
 unsigned char bData_40003262; //40003262
 unsigned char bData_40003263; //40003263
 unsigned char bData_40003265; //40003265
-float Data_4000329c; //4000329c
-float Data_400032a0; //400032a0
+float fData_4000329c; //4000329c
+float fData_400032a0; //400032a0
 unsigned char bData_400032a4; //400032a4
 double dData_400032b0_SunRightAscension; //400032b0
 double dData_400032b8_SunDeclination; //400032b8
@@ -912,6 +914,7 @@ Struct_NGCData Data_40003ee0_FlashNGCData; //40003ee0
 Struct_SiteData Data_40003f1c_FlashSiteData; //40003f1c
 Struct_5218 Data_40003f50; //40003f50
 Struct_54e0 Data_40003f64; //40003f64
+unsigned char Data_40003f90[25]; //40003f90, size???
 char Data_40003fa9[21]; //40003fa9, size???
 char Data_40003fbe[21]; //40003fbe, size???
 char Data_40003fd3[21]; //40003fd3, size???

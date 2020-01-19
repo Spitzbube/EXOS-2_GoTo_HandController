@@ -176,12 +176,12 @@ void HandleEnterKey(void)
 			bData_4000318a = 5;
 			bData_400032a4 = 0;
 		
-			func_27c4(&Data_4000329c, &Data_400032a0);
+			func_27c4(&fData_4000329c, &fData_400032a0);
 		
-			sprintf(Data_400028d7, "Azi:%03d", (unsigned short)Data_4000329c);
-			sprintf(Data_400028e1, "Alt: %02d", (unsigned short)Data_400032a0);
-			sprintf(Data_40002789, "Azi:%03d", (unsigned short)Data_4000329c);
-			sprintf(Data_40002792, "Alt: %02d", (unsigned short)Data_400032a0);
+			sprintf(Data_400028d7, "Azi:%03d", (unsigned short)fData_4000329c);
+			sprintf(Data_400028e1, "Alt: %02d", (unsigned short)fData_400032a0);
+			sprintf(Data_40002789, "Azi:%03d", (unsigned short)fData_4000329c);
+			sprintf(Data_40002792, "Alt: %02d", (unsigned short)fData_400032a0);
 			break;
 		
 		case MENU_CONTEXT_TRACKING_RATE: //4700:
