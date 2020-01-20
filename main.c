@@ -9,50 +9,6 @@
 #include "menu.h"
 #endif
 
-#if 0
-extern void uart0_init(int);
-extern void uart1_write_byte(unsigned char);
-extern void uart1_init(int);
-extern void uart0_send(unsigned char* a, unsigned char b);
-extern void lcd_display_clear(void);
-extern void lcd_display_string(int, unsigned char, unsigned char, unsigned char, const unsigned char*);
-extern int func_11d8(void);
-extern void func_1210(void);
-extern void delay_loop(unsigned int);
-extern void lpc_hw_init(void);
-extern void flash_read(int, int, int, char*);
-extern void flash_write(int, int, int, char*);
-extern void flash_get_ota_zero_data(float*, float*);
-extern void func_2a1c(unsigned char* a, float* b, float* c, int* d);
-extern char func_32a4();
-
-extern int func_5218(int a, Struct_5218* b);
-extern int func_54e0(int a, Struct_54e0* b);
-extern void get_rtc_date_time(void);
-extern void func_659c(int);
-extern void func_7590(void);
-extern void func_75c4(void);
-extern void func_c57c(void);
-extern void beep1(int);
-extern void func_8ba4(Struct_GeographicCoordinates a, Struct_EquatorialCoordinates b, int r4, int r5, double* r6);
-extern void func_d2cc(void);
-extern void func_9178(void);
-extern void func_acdc(double, double, double*, double*); 
-extern void func_acd8(void);
-extern void func_b4f0(void);
-extern void func_b64c(double, double);
-extern void func_d784(int a);
-extern double get_local_sidereal_time(int a, int b, double sp192);
-
-extern void func_5099c(void);
-extern int ValidateDateTimeSetRTC(void);
-
-extern void get_all_solar_system_object_equatorial_coordinates(void);
-extern void func_1e228(void);
-extern void DisplayScreenItems(void);
-extern void func_20b94(void);
-#endif
-
 #include "file_1f30.c"
 
 #ifndef OLIMEX_LPC2148
@@ -1348,11 +1304,83 @@ void func_514f8(void)
 /* 517f4 - todo */
 void func_517f4(void)
 {
+	if (fData_40002db4 < 10)
+	{
+		//51810
+		sprintf(Data_400027df, "Azi:%03dh%02dm0%2.1fs",
+			Data_40002dac, Data_40002db0, fData_40002db4);
+		sprintf(Data_400022f2, "Azi:%03dh%02dm0%2.1fs",
+			Data_40002dac, Data_40002db0, fData_40002db4);
+	}
+	else
+	{
+		//0x5187c
+		sprintf(Data_400027df, "Azi:%03dh%02dm%2.1fs",
+			Data_40002dac, Data_40002db0, fData_40002db4);
+		sprintf(Data_400022f2, "Azi:%03dh%02dm0%2.1fs", //"Azi:%03dh%02dm%2.1fs", //BUG?
+			Data_40002dac, Data_40002db0, fData_40002db4);
+	}
+	//0x518e4
+	if (fData_40002de8 < 10)
+	{
+		//518f8
+		if (dData_40002df8 < 0)
+		{
+			//51910
+			sprintf(Data_400027ef, "Alt:-%02dd%02dm%2.1fs",
+				abs(Data_40002de0), abs(Data_40002de4), fabs(fData_40002de8));
+			sprintf(Data_40002302, "Alt:-%02dd%02dm%2.1fs",
+				abs(Data_40002de0), abs(Data_40002de4), fabs(fData_40002de8));
+		}
+		else
+		{
+			//0x519fc
+			sprintf(Data_400027ef, "Alt:+%02dd%02dm0%2.1fs",
+				Data_40002de0, Data_40002de4, fData_40002de8);
+			sprintf(Data_40002302, "Alt:+%02dd%02dm0%2.1fs",
+				Data_40002de0, Data_40002de4, fData_40002de8);
+		}
+	}
+	else
+	{
+		//0x51a68
+		if (dData_40002df8 < 0)
+		{
+			//51a80
+			sprintf(Data_400027ef, "Alt:-%02dd%02dm%2.1fs",
+				abs(Data_40002de0), abs(Data_40002de4), fabs(fData_40002de8));
+			sprintf(Data_40002302, "Alt:-%02dd%02dm%2.1fs",
+				abs(Data_40002de0), abs(Data_40002de4), fabs(fData_40002de8));
+		}
+		else
+		{
+			//0x51bf8
+			sprintf(Data_400027ef, "Alt:+%02dd%02dm%2.1fs",
+				Data_40002de0, Data_40002de4, fData_40002de8);
+			sprintf(Data_40002302, "Alt:+%02dd%02dm%2.1fs",
+				Data_40002de0, Data_40002de4, fData_40002de8);
+		}
+	}
+	//0x51c60
+	sprintf(Data_400027ff, "Name:Target0%d", 0);
 }
 
 /* 51c7c - todo */
 void func_51c7c(void)
 {
+	int r4 = atoi(&Data_400022f2[5]);
+	int r5 = atoi(&Data_400022f2[8]);
+	float r6 = atof(&Data_400022f2[11]);
+	int r7 = atoi(&Data_40002302[5]);
+	int r8 = atoi(&Data_40002302[8]);
+	float r9 = atof(&Data_40002302[11]);
+	
+	if ((r4 > 23) || (r5 > 59) || (r6 > 59.99) ||
+		(r7 > 89) || (r8 > 59) || (r9 > 59.99))
+	{
+		//0x51d4c
+	}
+	//0x51de8
 }
 
 /* 52478 - todo */
