@@ -6,9 +6,9 @@ void HandleMinusKey(void)
 {
 	switch (Data_40002c64_MenuContextId)
 	{
-		case 1:
+		case MENU_CONTEXT_RECENT_TARGETS: //1:
 			//0x5f9e0
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case 5000:
@@ -193,7 +193,7 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
-		case 2120:
+		case MENU_CONTEXT_NAVIGATION_RA_DEC: //2120:
 			//0x5fdec
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
@@ -208,7 +208,7 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 3000;
 			break;
 		
-		case 3200:
+		case MENU_CONTEXT_OBJECT_RISE_SET: //3200:
 			//0x5fe28
 			Data_40002c64_MenuContextId = 3000;
 			break;
@@ -798,29 +798,29 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 201;
 			break;
 		
-		case 29001:
+		case MENU_CONTEXT_RA_INPUT: //29001:
 			//0x607e4
 			if (bData_40003162 == 0)
 			{
-				Data_40002c64_MenuContextId = 2120;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_RA_DEC; //2120;
 			}
 			else
 			{
 				//0x60808
-				Data_40002c64_MenuContextId = 3200;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_OBJECT_RISE_SET; //3200;
 			}
 			break;
 		
-		case 29002:
+		case MENU_CONTEXT_DEC_INPUT: //29002:
 			//0x60818
 			if (bData_40003162 == 0)
 			{
-				Data_40002c64_MenuContextId = 2120;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_RA_DEC; //2120;
 			}
 			else
 			{
 				//0x6083c
-				Data_40002c64_MenuContextId = 3200;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_OBJECT_RISE_SET; //3200;
 			}
 			break;
 		
@@ -1022,22 +1022,22 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RESET; //4900;
 			break;
 		
-		case 47011:
+		case MENU_CONTEXT_OTA_ZERO_SETUP: //47011:
 			//0x60ce0
 			if (bData_40002f1e_SetupLocalData == 0)
 			{
-				Data_40002c64_MenuContextId = 4600;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_TELESCOPE_MOUNT; //4600;
 			}
 			else
 			{
 				//0x60d04
-				Data_40002c64_MenuContextId = 4301;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_COUNTRY_CITY; //4301;
 			}
 			break;
 		
-		case 32001:
+		case MENU_CONTEXT_RISE_SET_TIMES: //32001:
 			//0x60d14
-			Data_40002c64_MenuContextId = 29001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
 			break;
 		
 		case 33001:

@@ -27,7 +27,7 @@ void DisplayScreenItems(void)
 					//->4684c
 					break;
 				
-				case 1:
+				case MENU_CONTEXT_RECENT_TARGETS: //1:
 					//0x3dab8
 					if (bData_40002f14_RecentTargetCount != 0)
 					{
@@ -1080,7 +1080,7 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 7, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
-				case 29001:
+				case MENU_CONTEXT_RA_INPUT: //29001:
 					//0x435dc
 					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);
 					lcd_display_bitmap(0, 5, 11, (unsigned char*)cBitmapMinute);
@@ -1101,7 +1101,7 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
-				case 29002: //???
+				case MENU_CONTEXT_DEC_INPUT: //29002:
 					//0x437f0
 					lcd_display_bitmap(0, 5, 8, (unsigned char*)cBitmapDegree);
 					lcd_display_bitmap(0, 5, 11, (unsigned char*)cBitmapMinute);
@@ -1238,9 +1238,9 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 5, 13, (unsigned char*)cBitmapMinute);
 					break;
 				
-				case 47041:
+				case MENU_CONTEXT_OTA_ZERO_SETUP_RESTART: //47041:
 					//0x444b4
-				case 47011:
+				case MENU_CONTEXT_OTA_ZERO_SETUP: //47011:
 					//0x444bc
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -1642,7 +1642,7 @@ void DisplayScreenItems(void)
 					//->0x4edc8
 					break;
 				
-				case 1:
+				case MENU_CONTEXT_RECENT_TARGETS: //1:
 					//0x46b80
 					if (bData_40002f14_RecentTargetCount != 0)
 					{
@@ -2838,9 +2838,9 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 5, 13, (unsigned char*)cBitmapMinute);
 					break;
 				
-				case 47041:
+				case MENU_CONTEXT_OTA_ZERO_SETUP_RESTART: //47041:
 					//0x4d554
-				case 47011:
+				case MENU_CONTEXT_OTA_ZERO_SETUP: //47011:
 					//0x4d55c
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);

@@ -436,7 +436,7 @@ extern char Data_4000288e[]; //4000288e
 extern char Data_40002899[]; //40002899
 extern char Data_400028a5[]; //400028a5
 extern char Data_400028b3[]; //400028b3
-extern char Data_400028c1[]; //400028c1
+extern char strEngPleaseSetupOtaZero[]; //400028c1
 extern char Data_400028d7[]; //400028d7
 extern char Data_400028e1[]; //400028e1
 extern char Data_400028eb[]; //400028eb
@@ -877,7 +877,7 @@ extern unsigned char bData_40003263; //40003263
 extern unsigned char bData_40003265; //40003265
 extern float fData_4000329c; //4000329c
 extern float fData_400032a0; //400032a0
-extern unsigned char bData_400032a4; //400032a4
+extern unsigned char bData_400032a4_OTAZeroDataErrorCount; //400032a4
 extern double dData_400032b0_SunRightAscension; //400032b0
 extern double dData_400032b8_SunDeclination; //400032b8
 extern double dData_400032c0; //400032c0

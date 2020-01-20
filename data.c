@@ -326,9 +326,9 @@ char Data_40002655[11]; //40002655, size???
 char Data_40002660[100]; //40002660, size???
 char Data_40002789[9]; //40002789
 char Data_40002792[50]; //40002792, size??
-char Data_400027cf[16]; //400027cf
-unsigned char Data_400027df[16]; //400027df
-unsigned char Data_400027ef[16]; //400027ef
+char Data_400027cf[] = "Input Ra Dec:  "; //400027cf
+unsigned char Data_400027df[] = "R.a:           "; //400027df
+unsigned char Data_400027ef[] = "Dec:           "; //400027ef
 char Data_400027ff[16]; //400027ff
 char fill_40002836; //40002836
 unsigned char Data_40002827[16] = " Name:"; //40002827 size???
@@ -339,12 +339,11 @@ char Data_4000288e[11]; //4000288e
 char Data_40002899[12]; //40002899, size???
 char Data_400028a5[14]; //400028a5
 char Data_400028b3[20]; //400028b3, size???
-char Data_400028c1[22]; //400028c1
-char Data_400028d7[22]; //400028d7
-char Data_400028e1[22]; //400028e1
-char Data_400028eb[22]; //400028eb
-char Data_40002901[22]; //40002901
-
+char strEngPleaseSetupOtaZero[] = "Please setup OTA zero"; //400028c1
+char Data_400028d7[] = "Azi:000  "; //400028d7
+char Data_400028e1[] = "Alt: 00  "; //400028e1
+char Data_400028eb[] = "Data:error,try again!"; //400028eb
+char Data_40002901[] = "ok,poweroff,restart!"; //40002901
 char strEngEnglish[] = "English"; //40002916
 char strEngGerman[] = "German"; //4000291e
 char strEngFrench[] = "French"; //40002925
@@ -785,7 +784,7 @@ unsigned char bData_40003263; //40003263
 unsigned char bData_40003265; //40003265
 float fData_4000329c; //4000329c
 float fData_400032a0; //400032a0
-unsigned char bData_400032a4; //400032a4
+unsigned char bData_400032a4_OTAZeroDataErrorCount; //400032a4
 double dData_400032b0_SunRightAscension; //400032b0
 double dData_400032b8_SunDeclination; //400032b8
 double dData_400032c0; //400032c0

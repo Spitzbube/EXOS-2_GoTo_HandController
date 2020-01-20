@@ -228,7 +228,7 @@ void HandleRightKey(void)
 			}
 			break;
 		
-		case 47011:
+		case MENU_CONTEXT_OTA_ZERO_SETUP: //47011:
 			//0x5825c
 			func_56dac();
 			break;

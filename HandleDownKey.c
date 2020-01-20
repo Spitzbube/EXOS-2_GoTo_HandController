@@ -6,7 +6,7 @@ void HandleDownKey(void)
 {
 	switch (Data_40002c64_MenuContextId)
 	{
-		case 1:
+		case MENU_CONTEXT_RECENT_TARGETS: //1:
 			//0x5b27c
 			if (bData_4000316e_FocusLineOn8LineDisplay == bData_40002f14_RecentTargetCount)
 			{
@@ -839,15 +839,15 @@ void HandleDownKey(void)
 			}
 			break;
 			
-		case 29001:
+		case MENU_CONTEXT_RA_INPUT: //29001:
 			//0x5c360
-			Data_40002c64_MenuContextId = 29002;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_INPUT; //29002;
 			bData_4000318a = 5;
 			break;
 		
-		case 29002:
+		case MENU_CONTEXT_DEC_INPUT: //29002:
 			//0x5c380
-			Data_40002c64_MenuContextId = 29001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
 			bData_4000318a = 6;
 			break;
 		
@@ -916,9 +916,9 @@ void HandleDownKey(void)
 			}			
 			break;
 		
-		case 47011:
+		case MENU_CONTEXT_OTA_ZERO_SETUP: //47011:
 			//0x5c4e4
-			Data_40002c64_MenuContextId = 47011;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_OTA_ZERO_SETUP; //47011;
 			if (bData_4000316d < 1)
 			{
 				bData_4000316d++;
