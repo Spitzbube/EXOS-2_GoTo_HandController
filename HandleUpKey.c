@@ -11,7 +11,7 @@ void HandleUpKey(void)
 {
 	switch (Data_40002c64_MenuContextId)
 	{
-		case 1:
+		case MENU_CONTEXT_RECENT_TARGETS: //1:
 			//0x5d8d4
 			if (bData_4000316e_FocusLineOn8LineDisplay == 1)
 			{
@@ -625,15 +625,15 @@ void HandleUpKey(void)
 			Data_40002c64_MenuContextId = 46001;
 			break;
 		
-		case 29001:
+		case MENU_CONTEXT_RA_INPUT: //29001:
 			//0x5e568
-			Data_40002c64_MenuContextId = 29002;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_INPUT; //29002;
 			bData_4000318a = 5;
 			break;
 		
-		case 29002:
+		case MENU_CONTEXT_DEC_INPUT: //29002:
 			//0x5e588
-			Data_40002c64_MenuContextId = 29001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
 			bData_4000318a = 6;
 			break;
 		
@@ -930,9 +930,9 @@ void HandleUpKey(void)
 			//0x5ec20
 			break;
 		
-		case 47011:
+		case MENU_CONTEXT_OTA_ZERO_SETUP: //47011:
 			//0x5ec24
-			Data_40002c64_MenuContextId = 47011;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_OTA_ZERO_SETUP; //47011;
 			if (bData_4000316d > 0)
 			{
 				//5ec44

@@ -1560,7 +1560,7 @@ int PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 
-		case 18001:
+		case MENU_CONTEXT_POLE_AXIS_DEV_INPUT: //18001:
 			//0x2c85c
 			Data_40003360 = "Pole Axis Dev: ";
 			Data_40003364 = "";
@@ -5163,7 +5163,7 @@ int PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 
-		case 29001: // "Object Rise/Set" -> "Input Ra Dec:"
+		case MENU_CONTEXT_RA_INPUT: //29001: // "Object Rise/Set" -> "Input Ra Dec:"
 			//0x3b668
 			Data_40003360 = Data_400027cf; // "Input Ra Dec:"?
 			Data_40003364 = "";
@@ -5178,7 +5178,7 @@ int PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x714A: //29002
+		case MENU_CONTEXT_DEC_INPUT: //29002
 			//0x3b7d0
 			Data_40003360 = Data_400027cf;
 			Data_40003364 = "";
@@ -5313,7 +5313,7 @@ int PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x7D01: //32001
+		case MENU_CONTEXT_RISE_SET_TIMES: //32001
 			//0x3be30
 			sprintf(Data_40003fa9, "RiseTime:   %02dh%02dm", 
 				(int)dData_40002c70,
@@ -5728,9 +5728,9 @@ int PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 47011: // "Telescope Mount" -> "Please setup OTA zero"
+		case MENU_CONTEXT_OTA_ZERO_SETUP: //47011: // "Telescope Mount" -> "Please setup OTA zero"
 			//0x3d1d4
-			Data_40003360 = Data_400028c1; // "Please setup OTA zero"
+			Data_40003360 = strEngPleaseSetupOtaZero; // "Please setup OTA zero"
 			Data_40003368 = Data_400028d7; // "Azi:000°"
 			Data_40003370 = Data_400028e1; // "Alt: 00°"
 			Data_4000336c = "        Range:0-360";
@@ -5738,9 +5738,9 @@ int PrepareScreenItems(void)
 			Data_40003378 = "";
 			Data_4000337c = "";
 		
-			if (bData_400032a4 > 0)
+			if (bData_400032a4_OTAZeroDataErrorCount > 0)
 			{
-				bData_400032a4--;
+				bData_400032a4_OTAZeroDataErrorCount--;
 				Data_40003374 = "                                ";
 				Data_40003378 = Data_400028eb;
 			}
@@ -5758,9 +5758,9 @@ int PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 47041: //0xB7C1: 
+		case MENU_CONTEXT_OTA_ZERO_SETUP_RESTART: //47041:
 			//0x3d2c4
-			Data_40003360 = Data_400028c1;
+			Data_40003360 = strEngPleaseSetupOtaZero; // "Please setup OTA zero"
 			Data_40003368 = Data_400028d7;
 			Data_40003370 = Data_400028e1;
 			Data_40003378 = Data_40002901;

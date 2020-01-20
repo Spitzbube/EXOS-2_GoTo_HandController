@@ -36,7 +36,7 @@ void func_5099c(void)
 	bData_40003189 = 0;
 	bData_40003195 = 0;
 	bData_400031e1 = 0;
-	bData_400032a4 = 0;
+	bData_400032a4_OTAZeroDataErrorCount = 0;
 	bData_4000319b = 0;
 	bData_400031e9 = 0;
 	bData_400031b8 = 0;

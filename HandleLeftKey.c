@@ -332,7 +332,7 @@ void HandleLeftKey(void)
 			}
 			break;
 		
-		case 47011:
+		case MENU_CONTEXT_OTA_ZERO_SETUP: //47011:
 			//0x59c54
 			func_58dc0();
 			break;

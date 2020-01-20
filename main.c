@@ -22,7 +22,7 @@ extern void delay_loop(unsigned int);
 extern void lpc_hw_init(void);
 extern void flash_read(int, int, int, char*);
 extern void flash_write(int, int, int, char*);
-extern void func_27c4(float*, float*);
+extern void flash_get_ota_zero_data(float*, float*);
 extern void func_2a1c(unsigned char* a, float* b, float* c, int* d);
 extern char func_32a4();
 
@@ -943,7 +943,7 @@ void func_50048(void)
 }
 
 /* 50778 - todo */
-void func_50778(void)
+void HandleOTAZeroData(void)
 {
 	fData_4000329c = (unsigned short) atoi(&Data_400028d7[4]); //"Azi:%03d"
 	fData_400032a0 = (unsigned char) atoi(&Data_400028e1[5]); //"Alt: %02d"
@@ -955,7 +955,7 @@ void func_50778(void)
 		Data_40004128.dData_192 = fData_4000329c;
 		Data_40004128.dData_200 = fData_400032a0;
 		
-		func_2910((unsigned short) fData_4000329c, (unsigned short) fData_400032a0);
+		flash_write_ota_zero_data((unsigned short) fData_4000329c, (unsigned short) fData_400032a0);
 		
 		if (bData_40002f1e_SetupLocalData == 1)
 		{
@@ -967,14 +967,14 @@ void func_50778(void)
 		else
 		{
 			//0x5089c
-			Data_40002c64_MenuContextId = 47041;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_OTA_ZERO_SETUP_RESTART; //47041;
 		}
 	}
 	else
 	{
 		//0x508ac
-		Data_40002c64_MenuContextId = 47011;
-		bData_400032a4 = 20;
+		Data_40002c64_MenuContextId = MENU_CONTEXT_OTA_ZERO_SETUP; //47011;
+		bData_400032a4_OTAZeroDataErrorCount = 20;
 	}
 }
 
@@ -1044,7 +1044,7 @@ void HandleReset(void)
 	Data_400034d0 = 0.05;
 	Data_400034d8 = 0.045;
 	
-	func_27c4(&fData_4000329c, &fData_400032a0);
+	flash_get_ota_zero_data(&fData_4000329c, &fData_400032a0);
 	
 	Data_40004128.dData_192 = fData_4000329c;
 	Data_40004128.dData_200 = fData_400032a0;
@@ -1191,7 +1191,7 @@ void HandleCustomSiteData(void)
 			else
 			{
 				//0x51340
-				Data_40002c64_MenuContextId = 47011;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_OTA_ZERO_SETUP; //47011;
 			}
 		}
 		else
@@ -1282,25 +1282,24 @@ void func_514f8(void)
 {
 	int r4 = atoi(&Data_400022f2[4]);
 	int r5 = atoi(&Data_400022f2[8]);
-//	double sp8 = atof(&Data_400022f2[11]);
-	float sl = atof(&Data_400022f2[11]); //sp8;
+	float sl = atof(&Data_400022f2[11]);
 	int r6 = atoi(&Data_40002302[5]);
 	int r7 = atoi(&Data_40002302[8]);
-//	sp8 = atof(&Data_40002302[11]);
-	float r8 = atof(&Data_40002302[11]); //sp8;
-	unsigned char r9;
+	float r8 = atof(&Data_40002302[11]);
+	unsigned char i;
 	
-	if ((r4 >= 360) || (r5 > 89) || (sl >= 60.0) || (r6 > 89) || (r7 > 59) || (r8 > 59.0))
+	if ((r4 >= 360) || (r5 > 59) || (sl > 59.9999899999999968258634908125/*60.0*/) || 
+		(r6 > 89) || (r7 > 59) || (r8 > 59.9999899999999968258634908125/*60.0*/))
 	{
 		//0x515c0
-		if ((r6 > 89) || (r7 > 89) || (r8 > 59.0))
+		if ((r6 > 89) || (r7 > 59) || (r8 > 59.9999899999999968258634908125/*60.0*/))
 		{
 			//0x515f4
 			Data_40002c64_MenuContextId = 208;
 			bData_4000318a = 6;
 		}
 		//0x5160c
-		if ((r4 >= 360) || (r5 > 89) || (sl >= 60.0))
+		if ((r4 >= 360) || (r5 > 59) || (sl > 59.9999899999999968258634908125/*60.0*/))
 		{
 			//0x51640
 			Data_40002c64_MenuContextId = 207;
@@ -1311,10 +1310,10 @@ void func_514f8(void)
 	else
 	{
 		//0x5165c
-		for (r9 = 1; r9 < 9; r9++)
+		for (i = 1; i < 9; i++)
 		{
 			//0x51664
-			Data_40003f90[r9] = Data_400027ff[r9 + 4];
+			Data_40003f90[i] = Data_400027ff[i + 4];
 		}
 		
 		Data_40003f90[9] = Data_400027df[4] - '0';
@@ -2113,11 +2112,11 @@ void HandlePlusKey(void)
 {
 	switch (Data_40002c64_MenuContextId)
 	{
-		case 0:
+		case MENU_CONTEXT_MAIN: //0:
 			//0x60d78
 			lcd_display_clear();
 		
-			Data_40002c64_MenuContextId = 1;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RECENT_TARGETS; //1;
 			bData_400031be = 1;
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_400031e0 = 1;
@@ -3927,8 +3926,15 @@ void func_6b17c(void)
 /* 6c804 - complete */
 void ShowStartupScreen(void)
 {
+	#ifdef UART0_DEBUG
+	lcd_display_string(0, 1, 1, 22, "   OPEN GOTO SYSTEM   ");
+	lcd_display_string(0, 2, 1, 22, "based on EXOS EQ v2.3 ");
+	lcd_display_string(0, 4, 1, 22, "github.com/Spitzbube/ ");
+	lcd_display_string(0, 5, 1, 22, "Commit: 08ba598fa99635");
+	#else
 	lcd_display_string(0, 3, 1, 22, " BRESSER GOTO SYSTEM  ");
 	lcd_display_string(0, 5, 1, 22, "     EXOS EQ v2.3     ");
+	#endif
 }
 
 #endif //OLIMEX_LPC2148
@@ -4296,7 +4302,7 @@ int main(void)
 	Data_40004128.dData_192 = 100.0; 
 	Data_40004128.dData_200 = 60.0;
 	
-	func_27c4(&fData_4000329c, &fData_400032a0);
+	flash_get_ota_zero_data(&fData_4000329c, &fData_400032a0);
 	
 	Data_40004128.dData_192 = fData_4000329c;
 	Data_40004128.dData_200 = fData_400032a0;

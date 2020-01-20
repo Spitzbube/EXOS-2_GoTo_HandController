@@ -105,7 +105,7 @@ void HandleEnterKey(void)
 			//->0x563b8
 			break;
 		
-		case 1:
+		case MENU_CONTEXT_RECENT_TARGETS: //1:
 			//0x53164
 			//TODO
 			break;
@@ -171,12 +171,12 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_TELESCOPE_MOUNT: //4600:
 			//0x537e0: Telescope Mount
-			Data_40002c64_MenuContextId = 47011; //->"Please setup OTA zero"
+			Data_40002c64_MenuContextId = MENU_CONTEXT_OTA_ZERO_SETUP; //47011; //->"Please setup OTA zero"
 			bData_4000316d = 0;
 			bData_4000318a = 5;
-			bData_400032a4 = 0;
+			bData_400032a4_OTAZeroDataErrorCount = 0;
 		
-			func_27c4(&fData_4000329c, &fData_400032a0);
+			flash_get_ota_zero_data(&fData_4000329c, &fData_400032a0);
 		
 			sprintf(Data_400028d7, "Azi:%03d", (unsigned short)fData_4000329c);
 			sprintf(Data_400028e1, "Alt: %02d", (unsigned short)fData_400032a0);
@@ -389,7 +389,7 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_POLE_AXIS_DEV: //1500:
 			//0x54080: Pole-Axis Dev.
-			Data_40002c64_MenuContextId = 18001; //->"Pole Axis Dev: "
+			Data_40002c64_MenuContextId = MENU_CONTEXT_POLE_AXIS_DEV_INPUT; //18001; //->"Pole Axis Dev: "
 			break;
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR: //1600:
@@ -778,24 +778,24 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_NAVIGATION_RA_DEC: //2120:
 			//0x54d84: Input RA/DEC
-			Data_40002c64_MenuContextId = 29001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
 			bData_4000318a = 6;
 			func_50048();
 			break;
 		
-		case 29001:
+		case MENU_CONTEXT_RA_INPUT: //29001:
 			//0x54da8
 			func_51c7c();
 			break;
 		
-		case 29002:
+		case MENU_CONTEXT_DEC_INPUT: //29002:
 			//0x54db4
 			func_51c7c();
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_CUST_LAND: //2130:
 			//0x54dc0
-			Data_40002c64_MenuContextId = 2130;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_LAND; //2130;
 			bData_4000319a_SkyLandTargetId = 1;
 			break;
 		
@@ -813,7 +813,7 @@ void HandleEnterKey(void)
 		case 208:
 			//0x54e10
 			func_514f8();
-			Data_40002c64_MenuContextId = 2130;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_LAND; //2130;
 			break;
 		
 		case 4400: // Sky/Land
@@ -1137,7 +1137,7 @@ void HandleEnterKey(void)
 				else
 				{
 					//0x559e8
-					Data_40002c64_MenuContextId = 47011;
+					Data_40002c64_MenuContextId = MENU_CONTEXT_OTA_ZERO_SETUP; //47011;
 				}
 			}
 			else
@@ -1225,14 +1225,14 @@ void HandleEnterKey(void)
 			HandleReset();
 			break;
 		
-		case 47011: //Telescope Mount -> "Please setup OTA zero"
+		case MENU_CONTEXT_OTA_ZERO_SETUP: //47011: //Telescope Mount -> "Please setup OTA zero"
 			//0x55db0
-			func_50778();
+			HandleOTAZeroData();
 			break;
 		
 		case MENU_CONTEXT_OBJECT_RISE_SET: //3200:
 			//0x55dbc: Object Rise/Set
-			Data_40002c64_MenuContextId = 29001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
 			bData_4000318a = 6;
 			func_50048();
 			bData_40003162 = 1;

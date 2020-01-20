@@ -182,12 +182,15 @@ void Handle0Key(void)
 			//0x69b64
 			break;
 		
-		case 29001:
+		case MENU_CONTEXT_RA_INPUT: //29001:
 			//0x69bf0
-			break;
-		
 		case 204:
 			//0x69bf8
+			Data_400022f2[bData_4000318a - 1] = '0';
+			Data_400027df[bData_4000318a - 1] = '0';
+		
+			func_57b40();
+			//->0x6a0d4
 			break;
 		
 		case 207:
@@ -228,7 +231,7 @@ void Handle0Key(void)
 			//->0x6a0d4
 			break;
 		
-		case 47011:
+		case MENU_CONTEXT_OTA_ZERO_SETUP: //47011:
 			//0x69fa0
 			break;
 		

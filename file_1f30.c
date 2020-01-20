@@ -1605,7 +1605,7 @@ void flash_write_recent_target(unsigned char targetType, unsigned int targetId)
 }
 
 /* 27c4 - complete */
-void func_27c4(float* a, float* b)
+void flash_get_ota_zero_data(float* a, float* b)
 {
 	unsigned char buf[5];
 
@@ -1616,7 +1616,7 @@ void func_27c4(float* a, float* b)
 }
 
 /* 2910 - complete */
-void func_2910(int a, int b)
+void flash_write_ota_zero_data(int a, int b)
 {
 	unsigned char buf[5];
 	sprintf(buf, "%03d%02d", a, b);
