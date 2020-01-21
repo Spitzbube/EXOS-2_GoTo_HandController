@@ -1374,23 +1374,277 @@ void func_51c7c(void)
 	int r7 = atoi(&Data_40002302[5]);
 	int r8 = atoi(&Data_40002302[8]);
 	float r9 = atof(&Data_40002302[11]);
+	unsigned char i;
 	
 	if ((r4 > 23) || (r5 > 59) || (r6 > 59.99) ||
 		(r7 > 89) || (r8 > 59) || (r9 > 59.99))
 	{
 		//0x51d4c
+		if ((r7 > 89) || (r8 > 59) || (r9 > 59.99))
+		{
+			//0x51d80
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_INPUT; //29002;
+			bData_4000318a = 5;
+		}
+		//0x51d98
+		if ((r4 > 23) || (r5 > 59) || (r6 > 59.99))
+		{
+			//0x51dcc
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
+			bData_4000318a = 6;
+		}
+		//->0x5246c
 	}
-	//0x51de8
+	else
+	{
+		//0x51de8
+		if (bData_40003162 == 0)
+		{
+			//51df8
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+			Data_40002cb8 = r4;
+			Data_40002cbc = r5;
+			fData_40002cc0 = r6;
+			
+			if (Data_40002302[4] == '-')
+			{
+				//51e2c
+				Data_40002d40 = -1;
+			}
+			else
+			{
+				//0x51e3c
+				Data_40002d40 = 1;
+			}
+			//0x51e48
+			Data_40002cf4 = r7;
+			Data_40002cf8 = r8;
+			fData_40002cfc = r9;
+			
+			dData_40002cc8 = Data_40002cb8 + Data_40002cbc / 60.0 + fData_40002cc0 / 3600.0;
+			dData_40002d10 = Data_40002cf4 + Data_40002cf8 / 60.0 + fData_40002cfc / 3600.0;
+			dData_40002d10 = Data_40002d40 * dData_40002d10;
+			
+			bData_40002e88 = 1;
+			
+			func_b64c(dData_40002cc8, dData_40002d10);
+			
+			bData_40002f0d_RecentTargetType = 11;
+			bData_40002f10_RecentTargetId = 10;
+			
+			flash_write_recent_target(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
+			
+			Data_40003f78[0] = 111;
+			
+			for (i = 1; i < 9; i++)
+			{
+				//0x52078
+				Data_40003f78[i] = Data_400027ff[i + 4];
+			}
+			//5209c
+			Data_40003f78[9] = Data_400027df[5] - '0';
+			Data_40003f78[10] = Data_400027df[6] - '0';
+			Data_40003f78[11] = Data_400027df[8] - '0';
+			Data_40003f78[12] = Data_400027df[9] - '0';
+			Data_40003f78[13] = Data_400027df[11] - '0';
+			Data_40003f78[14] = Data_400027df[12] - '0';
+			Data_40003f78[15] = Data_400027df[14] - '0';
+			
+			Data_40003f78[16] = Data_400027ef[4];
+			Data_40003f78[17] = Data_400027ef[5] - '0';
+			Data_40003f78[18] = Data_400027ef[6] - '0';
+			Data_40003f78[19] = Data_400027ef[8] - '0';
+			Data_40003f78[20] = Data_400027ef[9] - '0';
+			Data_40003f78[21] = Data_400027ef[11] - '0';
+			Data_40003f78[22] = Data_400027ef[12] - '0';
+			Data_40003f78[23] = Data_400027ef[14] - '0';
+			
+			func_258c((unsigned char) bData_40002f10_RecentTargetId, Data_40003f78);
+			//->0x5246c
+		} //if (bData_40003162 == 0)
+		else
+		{
+			//0x521a4
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RISE_SET_TIMES; //32001;
+			Data_40002cb8 = r4;
+			Data_40002cbc = r5;
+			fData_40002cc0 = r6;
+			
+			if (Data_40002302[4] == '-')
+			{
+				//521d8
+				Data_40002d40 = -1;
+			}
+			else
+			{
+				//0x521e8
+				Data_40002d40 = 1;
+			}
+			//0x521f4
+			Data_40002cf4 = r7;
+			Data_40002cf8 = r8;
+			fData_40002cfc = r9;
+			
+			dData_40002cc8 = Data_40002cb8 + Data_40002cbc / 60.0 + fData_40002cc0 / 3600.0;
+			dData_40002d10 = Data_40002cf4 + Data_40002cf8 / 60.0 + fData_40002cfc / 3600.0;
+			dData_40002d10 = Data_40002d40 * dData_40002d10;
+			
+			dData_40002c70 = func_d7ac(1, 
+				dData_40002cc8, dData_40002d10, 
+				Data_40004128.geographicLongitude, Data_40004128.geographicLatitude, 
+				(unsigned char) Data_40004128.timeZone);
+			
+			dData_40002c78 = func_d7ac(2, 
+				dData_40002cc8, dData_40002d10, 
+				Data_40004128.geographicLongitude, Data_40004128.geographicLatitude, 
+				(unsigned char) Data_40004128.timeZone);
+			
+			dData_40002c80 = func_d7ac(3, 
+				dData_40002cc8, dData_40002d10, 
+				Data_40004128.geographicLongitude, Data_40004128.geographicLatitude, 
+				(unsigned char) Data_40004128.timeZone);
+		}
+	}
 }
 
 /* 52478 - todo */
 void func_52478(void)
 {
+	int r4 = atoi(&Data_400022f2[5]);
+	int r5 = atoi(&Data_400022f2[8]);
+	float sl = atof(&Data_400022f2[11]);
+	int r6 = atoi(&Data_40002302[5]);
+	int r7 = atoi(&Data_40002302[8]);
+	float r8 = atof(&Data_40002302[11]);
+	unsigned char i;
+	
+	if ((r4 > 23) || (r5 > 59) || (sl > 59.99) ||
+		(r6 > 89) || (r7 > 59) || (r8 > 59.99))
+	{
+		//0x52540
+		if ((r6 > 89) || (r7 > 59) || (r8 > 59.99))
+		{
+			//0x52574
+			Data_40002c64_MenuContextId = 205;
+			bData_4000318a = 5;
+		}
+		//0x5258c
+		if ((r4 > 23) || (r5 > 59) || (sl > 59.99))
+		{
+			//0x525c0
+			Data_40002c64_MenuContextId = 204;
+			bData_4000318a = 6;
+		}
+		//->0x52718
+	}
+	else
+	{
+		//0x525dc
+		Data_40003f78[0] = 111;
+		
+		for (i = 1; i < 9; i++)
+		{
+			//0x525f0
+			Data_40003f78[i] = Data_400027ff[i + 4];
+		}
+		//5209c
+		Data_40003f78[9] = Data_400027df[5] - '0';
+		Data_40003f78[10] = Data_400027df[6] - '0';
+		Data_40003f78[11] = Data_400027df[8] - '0';
+		Data_40003f78[12] = Data_400027df[9] - '0';
+		Data_40003f78[13] = Data_400027df[11] - '0';
+		Data_40003f78[14] = Data_400027df[12] - '0';
+		Data_40003f78[15] = Data_400027df[14] - '0';
+		
+		Data_40003f78[16] = Data_400027ef[4];
+		Data_40003f78[17] = Data_400027ef[5] - '0';
+		Data_40003f78[18] = Data_400027ef[6] - '0';
+		Data_40003f78[19] = Data_400027ef[8] - '0';
+		Data_40003f78[20] = Data_400027ef[9] - '0';
+		Data_40003f78[21] = Data_400027ef[11] - '0';
+		Data_40003f78[22] = Data_400027ef[12] - '0';
+		Data_40003f78[23] = Data_400027ef[14] - '0';
+		
+		func_258c(bData_4000319a_SkyLandTargetId, Data_40003f78);
+		beep1(1);
+	}
 }
 
 /* 52720 - todo */
 double func_52720(int a)
 {
+	union 
+	{
+		int a;
+		char b[4];
+	} sp8;
+	
+	uart1_write_byte(0x55);
+	uart1_write_byte(0xaa);
+	uart1_write_byte(0x01);
+	uart1_write_byte(0x03);
+	
+	switch (a)
+	{
+		case 1:
+			//0x5276c
+			uart1_write_byte(0x0f);
+			break;
+		
+		case 2:
+			//0x5277c
+			uart1_write_byte(0x2f);
+			break;
+		
+		case 3:
+			//0x5278c
+			uart1_write_byte(0x4f);
+			break;
+		
+		case 4:
+			//0x5279c
+			uart1_write_byte(0x6f);
+			break;
+		
+		default:
+			//0x527ac
+			break;
+	}
+	
+	switch (a)
+	{
+		case 1:
+			//0x527dc
+			sp8.a = fData_40002e98;
+			uart1_write_byte(sp8.b[1]);
+			uart1_write_byte(sp8.b[0]);
+			break;
+		
+		case 2:
+			//0x52804
+			sp8.a = fData_40002ea8;
+			uart1_write_byte(sp8.b[1]);
+			uart1_write_byte(sp8.b[0]);
+			break;
+		
+		case 3:
+			//0x5282c
+			sp8.a = fData_40002e98;
+			uart1_write_byte(sp8.b[1]);
+			uart1_write_byte(sp8.b[0]);
+			break;
+		
+		case 4:
+			//0x52854
+			sp8.a = fData_40002ea8;
+			uart1_write_byte(sp8.b[1]);
+			uart1_write_byte(sp8.b[0]);
+			break;
+		
+		default:
+			//0x5287c
+			break;
+	}
 }
 
 #include "HandleEnterKey.c"

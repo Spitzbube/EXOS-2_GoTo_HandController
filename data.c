@@ -913,6 +913,7 @@ Struct_NGCData Data_40003ee0_FlashNGCData; //40003ee0
 Struct_SiteData Data_40003f1c_FlashSiteData; //40003f1c
 Struct_5218 Data_40003f50; //40003f50
 Struct_54e0 Data_40003f64; //40003f64
+unsigned char Data_40003f78[24]; //40003f78
 unsigned char Data_40003f90[25]; //40003f90, size???
 char Data_40003fa9[21]; //40003fa9, size???
 char Data_40003fbe[21]; //40003fbe, size???

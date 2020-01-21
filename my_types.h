@@ -191,3 +191,4 @@ typedef struct
 	double fill2; //64
 	//72
 } Struct_HorizontalCoordinates;
+

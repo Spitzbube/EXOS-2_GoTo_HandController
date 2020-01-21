@@ -1006,6 +1006,7 @@ extern Struct_NGCData Data_40003ee0_FlashNGCData; //40003ee0
 extern Struct_SiteData Data_40003f1c_FlashSiteData; //40003f1c
 extern Struct_5218 Data_40003f50; //40003f50
 extern Struct_54e0 Data_40003f64; //40003f64
+extern unsigned char Data_40003f78[]; //40003f78
 extern unsigned char Data_40003f90[]; //40003f90
 extern char Data_40003fa9[]; //40003fa9
 extern char Data_40003fbe[]; //40003fbe
