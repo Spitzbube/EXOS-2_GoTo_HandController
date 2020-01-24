@@ -2422,8 +2422,8 @@ void initialize_variables(void)
 	Data_40002e94 = 0;
 	fData_40002ea0 = 0;
 	fData_40002ea8 = 23.8;
-	Data_40002eac = 0;
-	Data_40002ea4 = 0;
+	fData_40002eac = 0;
+	fData_40002ea4 = 0;
 	Data_40002eb0 = 0;
 	bData_40002eb4 = 0;
 	bData_40002eb5_SolarSystemObjectNr = 0;

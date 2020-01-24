@@ -308,11 +308,13 @@ void HandleDownKey(void)
 		
 		case 2301:
 			//0x5b8a0
+			func_5a57c(1, 23);
 			Data_40002c64_MenuContextId = 2302;
 			break;
 		
 		case 2302:
 			//0x5b8c0
+			func_5a57c(1, 23);
 			Data_40002c64_MenuContextId = 2303;
 			break;
 		
@@ -853,7 +855,7 @@ void HandleDownKey(void)
 		
 		case 206:
 			//0x5c3a0
-			bData_4000318a = 6;
+			bData_4000318a = 5;
 			Data_40002c64_MenuContextId = 207;
 			break;
 		

@@ -314,6 +314,8 @@ char Data_400022f2[32]; //400022f2
 char Data_40002302[32]; //40002302
 char Data_40002387[19]; //40002387
 char Data_4000239a[20]; //4000239a, size???
+char Data_40002474[13]; //40002474, size???
+char Data_40002481[11]; //40002481, size???
 char Data_4000248c[21]; //4000248c
 char Data_400024a1[20]; //400024a1, size??
 char Data_400024b5[20]; //400024b5
@@ -322,26 +324,38 @@ char Data_400024d6[11]; //400024d6, size??
 char Data_400024e1[14]; //400024e1
 char Data_400024ef[21]; //400024ef, size??
 char Data_40002504[100]; //40002504, size???
+unsigned char Data_4000251d[32]; //4000251d, size??
+unsigned char Data_4000253d[32]; //4000253d, size??
+unsigned char Data_4000255d[33]; //4000255d, size??
+unsigned char Data_4000257e[14]; //4000257e, size??
+unsigned char Data_4000258c[20]; //4000258c, size??
+unsigned char Data_400025a0[100]; //400025a0, size??
 char Data_40002655[11]; //40002655, size???
 char Data_40002660[100]; //40002660, size???
-char Data_40002789[9]; //40002789
-char Data_40002792[50]; //40002792, size??
+unsigned char Data_400026c3[100]; //400026c3, size???
+unsigned char Data_400026db[100]; //400026db, size???
+unsigned char Data_400026f3[100]; //400026f3, size??
+unsigned char Data_4000270a[100]; //4000270a, size???
+unsigned char Data_4000271a[100]; //4000271a, size???
+unsigned char Data_40002789[9]; //40002789
+unsigned char Data_40002792[50]; //40002792, size??
 char Data_400027cf[] = "Input Ra Dec:  "; //400027cf
 unsigned char Data_400027df[] = "R.a:           "; //400027df
 unsigned char Data_400027ef[] = "Dec:           "; //400027ef
-char Data_400027ff[16]; //400027ff
+unsigned char Data_400027ff[16]; //400027ff
 char fill_40002836; //40002836
 unsigned char Data_40002827[16] = " Name:"; //40002827 size???
-char Data_40002837[16] = "  Lon:"; //40002837 size??
-char Data_40002847[15] = "  Lat:"; //40002847 size??
-char Data_40002856[20] = " Zone:"; //40002856 size???
+unsigned char Data_40002837[16] = "  Lon:"; //40002837 size??
+unsigned char Data_40002847[15] = "  Lat:"; //40002847 size??
+unsigned char Data_40002856[20] = " Zone:"; //40002856 size???
+unsigned char Data_40002861[100]; //40002861, size???
 char Data_4000288e[11]; //4000288e
 char Data_40002899[12]; //40002899, size???
 char Data_400028a5[14]; //400028a5
 char Data_400028b3[20]; //400028b3, size???
 char strEngPleaseSetupOtaZero[] = "Please setup OTA zero"; //400028c1
-char Data_400028d7[] = "Azi:000  "; //400028d7
-char Data_400028e1[] = "Alt: 00  "; //400028e1
+unsigned char Data_400028d7[] = "Azi:000  "; //400028d7
+unsigned char Data_400028e1[] = "Alt: 00  "; //400028e1
 char Data_400028eb[] = "Data:error,try again!"; //400028eb
 char Data_40002901[] = "ok,poweroff,restart!"; //40002901
 char strEngEnglish[] = "English"; //40002916
@@ -415,7 +429,7 @@ unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
 char bData_40002c5a; //40002c5a
 int Data_40002c5c_AlignmentStarCount; //40002c5c
 unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
-char bData_40002c61; //40002c61
+unsigned char bData_40002c61; //40002c61
 char bData_40002c62_AlignmentStarMode; //40002c62
 int Data_40002c64_MenuContextId; //40002c64
 char bData_40002c68; //40002c68
@@ -521,9 +535,9 @@ float Data_40002e94; //40002e94
 float fData_40002e98; //40002e98
 float Data_40002e9c; //40002e9c
 float fData_40002ea0; //40002ea0
-int Data_40002ea4; //40002ea4
+float fData_40002ea4; //40002ea4
 float fData_40002ea8; //40002ea8
-int Data_40002eac; //40002eac
+float fData_40002eac; //40002eac
 int Data_40002eb0; //40002eb0
 unsigned char bData_40002eb4; //40002eb4
 unsigned char bData_40002eb5_SolarSystemObjectNr; //40002eb5
@@ -534,7 +548,7 @@ unsigned short wData_40002ebc_ICNr; //40002ebc
 unsigned short wData_40002ebe_ShNr; //40002ebe
 unsigned short wData_40002ec0_BrightStarNr; //40002ec0
 unsigned int Data_40002ec4_SAONr; //40002ec4
-int Data_40002ec8; //40002ec8
+unsigned int Data_40002ec8; //40002ec8
 unsigned short wData_40002ecc; //40002ecc
 unsigned char bData_40002ece_ConstellationNr; //40002ece
 unsigned short wData_40002ed0; //40002ed0
@@ -543,7 +557,7 @@ unsigned short wData_40002ed4; //40002ed4
 unsigned short wData_40002ed6; //40002ed6
 unsigned short wData_40002ed8; //40002ed8
 unsigned short wData_40002eda; //40002eda
-char bData_40002edc; //40002edc
+unsigned char bData_40002edc; //40002edc
 char bData_40002edd; //40002edd
 char bData_40002ede; //40002ede
 char bData_40002edf; //40002edf
@@ -729,7 +743,7 @@ unsigned char bData_40003195; //40003195
 unsigned char bData_40003196_CurrentLanguage; //40003196
 unsigned char bData_40003197_DisplayLinesPerMenuLine; //40003197
 char bData_40003198; //40003198
-char bData_40003199; //40003199
+unsigned char bData_40003199; //40003199
 unsigned char bData_4000319a_SkyLandTargetId; //4000319a
 char bData_4000319b; //4000319b
 char bData_4000319c; //4000319c
@@ -745,12 +759,13 @@ char bData_400031bb; //400031bb
 char bData_400031bc; //400031bc
 char bData_400031bd; //400031bd
 char bData_400031be; //400031be
-char bData_400031bf; //400031bf
+unsigned char bData_400031bf; //400031bf
 float fData_400031c0; //400031c0
 float fData_400031c4; //400031c4
 char bData_400031e0; //400031e0
 char bData_400031e1; //400031e1
 int Data_400031e4; //400031e4
+unsigned char bData_400031e8; //400031e8
 char bData_400031e9; //400031e9
 char bData_400031ea; //400031ea
 char bData_400031eb; //400031eb
@@ -769,7 +784,11 @@ int Data_40003224_AlarmMinutes; //40003224
 int Data_40003228_AlarmSeconds; //40003228
 char bData_4000322c; //4000322c
 char bData_4000322d_AlarmTimeElapsed; //4000322d
+float fData_40003230; //40003230
+float fData_40003234; //40003234
 float fData_40003238; //40003238
+float fData_4000323c; //4000323c
+float fData_40003240; //40003240
 int Data_40003248_CurrentDisplayPWM; //40003248
 unsigned short wData_40003250; //40003250
 unsigned short wData_40003252; //40003252
@@ -875,6 +894,7 @@ double dData_400034e0; //400034e0
 double dData_400034e8; //400034e8
 double dData_400034f0; //400034f0
 double dData_400034f8; //400034f8
+Union_40003500 Data_40003500; //40003500
 char bData_40003505;  //40003505
 float fData_40003508; //40003508
 float fData_4000350c; //4000350c

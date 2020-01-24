@@ -1,9 +1,291 @@
 
 //#include "menu.h"
 
-/* 5ca98 - todo */
+/* 5ca98 - complete */
 void func_5ca98(void)
 {
+	wData_40003252 = 0;
+	
+	switch (wData_40003250)
+	{
+		case 1:
+			//0x5cd64
+			wData_40003250 = 170;
+			break;
+		
+		case 2:
+			//0x5cd78
+		case 3:
+			//0x5cd80
+			wData_40003250--;
+			break;
+		
+		case 25:
+			//0x5cd98
+			wData_40003250 = 3;
+			break;
+		
+		case 26:
+			//0x5cdac
+			wData_40003250 = 25;
+			break;
+		
+		case 29:
+			//0x5cdc0
+			wData_40003250 = 26;
+			break;
+		
+		case 30:
+			//0x5cdd4
+		case 31:
+			//0x5cddc
+		case 32:
+			//0x5cde0
+		case 33:
+			//0x5cde4
+		case 34:
+			//0x5cde8
+		case 35:
+			//0x5cdec
+			wData_40003250--;
+			break;
+		
+		case 38:
+			//0x5ce04
+			wData_40003250 = 35;
+			break;
+		
+		case 39:
+			//0x5ce18
+		case 40:
+			//0x5ce20
+			wData_40003250--;
+			break;
+		
+		case 45:
+			//0x5ce38
+			wData_40003250 = 40;
+			break;
+		
+		case 46:
+			//0x5ce4c
+		case 47:
+			//0x5ce54
+		case 48:
+			//0x5ce58
+			wData_40003250--;
+			break;
+		
+		case 53:
+			//0x5ce70
+			wData_40003250 = 48;
+			break;
+		
+		case 54:
+			//0x5ce84
+		case 55:
+			//0x5ce8c
+		case 56:
+			//0x5ce90
+		case 57:
+			//0x5ce94
+		case 58:
+			//0x5ce98
+		case 59:
+			//0x5ce9c
+		case 60:
+			//0x5cea0
+			wData_40003250--;
+			break;
+		
+		case 62:
+			//0x5ceb8
+			wData_40003250 = 60;
+			break;
+		
+		case 63:
+			//0x5cecc
+		case 64:
+			//0x5ced4
+			wData_40003250--;
+			break;
+		
+		case 73:
+			//0x5ceec
+			wData_40003250 = 64;
+			break;
+		
+		case 74:
+			//0x5cf00
+		case 75:
+			//0x5cf08
+		case 76:
+			//0x5cf0c
+		case 77:
+			//0x5cf10
+			wData_40003250--;
+			break;
+		
+		case 80:
+			//0x5cf28
+			wData_40003250 = 77;
+			break;
+		
+		case 81:
+			//0x5cf3c
+		case 82:
+			//0x5cf44
+			wData_40003250--;
+			break;
+		
+		case 89:
+			//0x5cf5c
+			wData_40003250 = 82;
+			break;
+		
+		case 90:
+			//0x5cf70
+			wData_40003250 = 89;
+			break;
+		
+		case 92:
+			//0x5cf84
+			wData_40003250 = 90;
+			break;
+		
+		case 93:
+			//0x5cf98
+		case 94:
+			//0x5cfa0
+		case 95:
+			//0x5cfa4
+		case 96:
+			//0x5cfa8
+		case 97:
+			//0x5cfac
+			wData_40003250--;
+			break;
+		
+		case 99:
+			//0x5cfc4
+			wData_40003250 = 98;
+			break;
+		
+		case 98:
+			//0x5cfd8
+			wData_40003250 = 97;
+			break;
+		
+		case 105:
+			//0x5cfec
+			wData_40003250 = 99;
+			break;
+		
+		case 106:
+			//0x5d000
+		case 107:
+		case 108:
+		case 109:
+		case 110:
+		case 111:
+		case 112:
+		case 113:
+		case 114:
+		case 115:
+		case 116:
+		case 117:
+		case 118:
+		case 119:
+			//0x5d038
+			wData_40003250--;
+			break;
+		
+		case 121:
+			//0x5d050
+			wData_40003250 = 119;
+			break;
+		
+		case 122:
+			//0x5d064
+		case 123:
+			//0x5d06c
+		case 124:
+		case 125:
+		case 126:
+		case 127:
+		case 128:
+		case 129:
+		case 130:
+		case 131:
+		case 132:
+		case 133:
+		case 134:
+			//0x5d098
+			wData_40003250--;
+			break;
+		
+		case 143:
+			//0x5d0b0
+			wData_40003250 = 134;
+			break;
+		
+		case 144:
+			//0x5d0c4
+		case 145:
+			//0x5d0cc
+		case 146:
+		case 147:
+		case 148:
+		case 149:
+		case 150:
+			//0x5d0e0
+			wData_40003250--;
+			break;
+		
+		case 152:
+			//0x5d0f8
+			wData_40003250 = 150;
+			break;
+		
+		case 154:
+			//0x5d10c
+			wData_40003250 = 152;
+			break;
+		
+		case 155:
+			//0x5d120
+			wData_40003250 = 154;
+			break;
+		
+		case 156:
+			//0x5d134
+			wData_40003250 = 155;
+			break;
+		
+		case 158:
+			//0x5d148
+			wData_40003250 = 156;
+			break;
+		
+		case 159:
+			//0x5d15c
+		case 160:
+			//0x5d164
+		case 161:
+			//0x5d168
+		case 162:
+		case 163:
+		case 164:
+		case 165:
+		case 166:
+		case 167:
+		case 168:
+		case 169:
+		case 170:
+			//0x5d18c
+			wData_40003250--;		
+			break;
+	}
 }
 
 /* 5d1ac - todo */
@@ -27,6 +309,8 @@ void HandleUpKey(void)
 		
 		case 500:
 			//0x5d914: Main Screen Help Pages
+			lcd_display_clear();
+		
 			if (bData_40002c59_MainScreenHelpPage == 1)
 			{
 				bData_40002c59_MainScreenHelpPage = 10;

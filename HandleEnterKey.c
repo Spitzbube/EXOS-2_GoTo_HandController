@@ -107,7 +107,190 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_RECENT_TARGETS: //1:
 			//0x53164
-			//TODO
+			bData_40002f14_RecentTargetCount = flash_get_recent_targets(Data_40002f15_RecentTargetTypeArray,
+				Data_4000359c_RecentTargetIdArray,
+				Data_400035bc);
+		
+			switch (Data_40002f15_RecentTargetTypeArray[bData_4000316e_FocusLineOn8LineDisplay - 1])
+			{
+				case 1:
+					//0x531d4
+					bData_40003176 = 1;
+					bData_40003174 = 1;				
+					bData_40002eb5_SolarSystemObjectNr = 
+						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+				
+					lcd_display_clear();
+				
+					Data_40002c64_MenuContextId = MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION; //22001;
+					//->0x53690
+					break;
+				
+				case 2:
+					//0x5321c
+					bData_40003176 = 2;
+					bData_40003174 = 1;				
+					bData_40002ece_ConstellationNr = 
+						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+				
+					lcd_display_clear();
+				
+					Data_40002c64_MenuContextId = MENU_CONTEXT_CONSTELLATION_SELECTION; //24001;
+					//->0x53690
+					break;
+				
+				case 3:
+					//0x53268
+					bData_40003176 = 3;
+					bData_40003174 = 1;				
+					bData_40002ed2_FamousStarNr = 
+						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+				
+					lcd_display_clear();
+				
+					Data_40002c64_MenuContextId = MENU_CONTEXT_FAMOUS_STAR_SELECTION; //25001;
+					//->0x53690
+					break;
+				
+				case 4:
+					//0x532b4
+					bData_40003176 = 4;
+					bData_40003174 = 1;				
+					wData_40002eb8_MessierNr = 
+						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+					Data_40002ec8 = 0;
+				
+					lcd_display_clear();
+				
+					Data_40002c64_MenuContextId = MENU_CONTEXT_MESSIER_OBJECT_DETAILS; //23012;
+					//->0x53690
+					break;
+				
+				case 5:
+					//0x5330c
+					bData_40003176 = 5;
+					bData_40003174 = 1;				
+					wData_40002eba_NGCNr = 
+						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+					Data_40002ec8 = 0;
+				
+					lcd_display_clear();
+				
+					Data_40002c64_MenuContextId = MENU_CONTEXT_NGC_OBJECT_SELECTION; //23003;
+					//->0x53690
+					break;
+				
+				case 6:
+					//0x53364
+					bData_40003176 = 6;
+					bData_40003174 = 1;				
+					wData_40002ebc_ICNr = 
+						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+					Data_40002ec8 = 0;
+				
+					lcd_display_clear();
+				
+					Data_40002c64_MenuContextId = MENU_CONTEXT_IC_OBJECT_SELECTION; //23004;
+					//->0x53690
+					break;
+				
+				case 7:
+					//0x5345c
+					bData_40003176 = 7;
+					bData_40003174 = 1;				
+					wData_40002ebe_ShNr = 
+						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+					Data_40002ec8 = 0;
+				
+					lcd_display_clear();
+				
+					Data_40002c64_MenuContextId = MENU_CONTEXT_SH2_OBJECT_SELECTION; //23005;
+					//->0x53690
+					break;
+				
+				case 8:
+					//0x534b4
+					bData_40003176 = 8;
+					bData_40003174 = 1;				
+					wData_40002ec0_BrightStarNr = 
+						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+					Data_40002ec8 = 0;
+				
+					lcd_display_clear();
+				
+					Data_40002c64_MenuContextId = MENU_CONTEXT_BRIGHT_STAR_SELECTION; //23006;
+					//->0x53690
+					break;
+				
+				case 9:
+					//0x5350c
+					bData_40003176 = 8;
+					bData_40003174 = 2;				
+					Data_40002ec4_SAONr = 
+						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+					Data_40002ec8 = 0;
+				
+					lcd_display_clear();
+				
+					Data_40002c64_MenuContextId = MENU_CONTEXT_SAO_OBJECT_SELECTION; //23007;
+					//->0x53690
+					break;
+				
+				case 10:
+					//0x53564
+					if (bData_40002e79_SkyLandTargetSeletion == 0)
+					{
+						//53578
+						bData_4000319a_SkyLandTargetId = 
+							Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+						Data_40002c64_MenuContextId = 101;
+					}
+					else
+					{
+						//0x535a4
+						Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+					}
+					break;
+				
+				case 11:
+					//0x535b4
+					func_5218(10, &Data_40003f50);
+				
+					if (Data_40003f50.bData_0 == 111)
+					{
+						//535d4
+						dData_40002cc8 = Data_40003f50.fData_12;
+						dData_40002d10 = Data_40003f50.fData_16;
+						bData_40002e88 = 1;
+						
+						func_b64c(dData_40002cc8, dData_40002d10);						
+					}
+					//0x5361c
+					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+					break;
+				
+				case 12:
+					//0x5362c
+					if (bData_40002e79_SkyLandTargetSeletion == 1)
+					{
+						//53640
+						bData_4000319a_SkyLandTargetId = 
+							Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
+						Data_40002c64_MenuContextId = 101;
+					}
+					else
+					{
+						//0x5366c
+						Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+					}
+					break;
+				
+				default:
+					//0x5367c
+					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+					break;
+			}
+			//->0x563b8
 			break;
 		
 		case MENU_CONTEXT_ALIGNMENT: //1000:
@@ -250,8 +433,10 @@ void HandleEnterKey(void)
 							Data_40004128.geographicLatitude,
 							Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c);
 					
-						Data_40004128.dData_376 = Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2];
-						Data_40004128.dData_384 = Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2 + 1];
+						Data_40004128.dData_376 = 
+							Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2];
+						Data_40004128.dData_384 = 
+							Data_40004a68_CurrentAlignStarEquatorialCoord[1 + (bData_40002c60_CurrentAlignStarIndex - 1)*2];
 						
 						switch (Data_40002c5c_AlignmentStarCount)
 						{
@@ -268,6 +453,9 @@ void HandleEnterKey(void)
 							case 3:
 								//0x53ca8
 								func_d16c();
+								break;
+							
+							default:
 								break;
 						}
 						//0x53cbc
@@ -287,8 +475,10 @@ void HandleEnterKey(void)
 								Data_40004128.geographicLatitude,
 								Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c);
 							
-							Data_40004128.dData_392 = Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2];
-							Data_40004128.dData_400 = Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2 + 1];
+							Data_40004128.dData_392 = 
+								Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2];
+							Data_40004128.dData_400 = 
+								Data_40004a68_CurrentAlignStarEquatorialCoord[1 + (bData_40002c60_CurrentAlignStarIndex - 1)*2];
 							
 							if (Data_40004128.bData_364 == 0)
 							{
@@ -311,8 +501,10 @@ void HandleEnterKey(void)
 								Data_40004128.geographicLatitude,
 								Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c);
 							
-							Data_40004128.dData_408 = Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2];
-							Data_40004128.dData_416 = Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2 + 1];
+							Data_40004128.dData_408 = 
+								Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2];
+							Data_40004128.dData_416 = 
+								Data_40004a68_CurrentAlignStarEquatorialCoord[1 + (bData_40002c60_CurrentAlignStarIndex - 1)*2];
 							
 							if (Data_40004128.bData_364 == 0)
 							{
@@ -325,6 +517,10 @@ void HandleEnterKey(void)
 							bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
 						}
 						//0x53f38 -> 0x53f44
+						break;
+						
+					default:
+						//53f3c
 						break;
 				}
 				//53f44 -> 0x53f74
@@ -451,12 +647,27 @@ void HandleEnterKey(void)
 		
 		case 11203:
 			//0x54298
-			//TODO
+			fData_40002ea0 = fabs((dData_40002df8 - dData_40002e00) * 3600.0);
+			fData_40002ea4 += fData_40002ea0;
+			fData_40002eac += 1;
+			Data_40002eb0 = 0;
+			Data_40002c64_MenuContextId = 11204;
 			break;
 		
 		case 11201:
 			//0x54338
-			//TODO
+			if (fData_40002eac != 0)
+			{
+				//54350
+				fData_40002ea8 = fData_40002ea4 / fData_40002eac;
+
+				func_52720(2);
+			}
+			//0x5437c
+			fData_40002ea4 = 0;
+			fData_40002ea0 = 0;
+			fData_40002eac = 0;
+			Data_40002c64_MenuContextId = 11205;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_SOLAR_SYSTEM: //2100:
@@ -752,6 +963,7 @@ void HandleEnterKey(void)
 			
 			Data_40002c64_MenuContextId = MENU_CONTEXT_SAO_OBJECT_TRACKING; //23017;
 			//->0x563b8
+			break;
 		
 		case MENU_CONTEXT_NAVIGATION_CUST_OBJ: //2110:
 			//0x54d20: Customer Objects
@@ -823,7 +1035,51 @@ void HandleEnterKey(void)
 		
 		case 45001:
 			//0x54e38
-			//TODO
+			bData_40002e79_SkyLandTargetSeletion = 0;
+			bData_400034a9 = 0;
+			Data_40002c64_MenuContextId = 4400;
+		
+			Data_40003500.dwData = fabs((int) ((6.0 * dData_40002c98) / 15.04));
+		
+			uart1_write_byte(0x55);
+			uart1_write_byte(0xaa);
+			uart1_write_byte(0x01);
+			uart1_write_byte(0x04);
+			uart1_write_byte(0x41);
+		
+			if (dData_40002c98 > 0)
+			{
+				//54efc
+				uart1_write_byte(0x01);
+			}
+			else
+			{
+				//0x54f08
+				uart1_write_byte(0x00);
+			}
+			//0x54f10
+			uart1_write_byte(Data_40003500.bData[1]);
+			uart1_write_byte(Data_40003500.bData[0]);
+
+			uart1_write_byte(0x55);
+			uart1_write_byte(0xaa);
+			uart1_write_byte(0x01);
+			uart1_write_byte(0x04);
+			uart1_write_byte(0x01);
+			
+			if (dData_40002c98 > 0)
+			{
+				//54f68
+				uart1_write_byte(0x00);
+			}
+			else
+			{
+				//0x54f74
+				uart1_write_byte(0x01);
+			}
+			//0x54f7c
+			uart1_write_byte(Data_40003500.bData[1]);
+			uart1_write_byte(Data_40003500.bData[0]);
 			break;
 		
 		case 45002:
@@ -939,7 +1195,7 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_TRACKING_RATE_CUSTOM_SPEED: //4804:
 			//0x55288: "Customize Speed"
 			bData_4000318a = 1;
-			sprintf(Data_400037cc, "+0%.2f", 1.0); //String???
+			sprintf(Data_400037cc, "+0%.2f            ", 1.0); //String???
 			sprintf(Data_400037dc, "+0%.2f  starspeed", 1.0);
 			Data_40002c64_MenuContextId = 48001;
 			break;
@@ -951,7 +1207,12 @@ void HandleEnterKey(void)
 		
 		case 48001:
 			//0x552e4
-			//TODO
+			bData_40002e7c_TrackingRateType = 3;
+			dData_40002c98 = (1 - atof(Data_400037cc)) * 0.37 / 3600.0;
+		
+			beep1(2);
+		
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_GUIDING_SPEED1: //48051:
@@ -1238,8 +1499,9 @@ void HandleEnterKey(void)
 			bData_40003162 = 1;
 			break;
 		
-		case 32001:
+		case MENU_CONTEXT_RISE_SET_TIMES: //32001:
 			//0x55dec
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
 			break;
 		
 		case 3300: // Curr. Lunar Phase
@@ -1323,12 +1585,22 @@ void HandleEnterKey(void)
 		
 		case 3601:
 			//0x55f4c
+			Data_40002c64_MenuContextId = 360011;
 			break;
 		
 		case 360021:
 			//0x55f60
 		case 360022:
 			//0x55f68
+			fData_40003230 = atoi(&Data_400024c9[6]) * 1.0;
+			fData_40003234 = atoi(&Data_400024d6[6]) * 1.0;
+			fData_40003238 = fData_40003230 / fData_40003234;
+		
+			sprintf(Data_400024ef, "Magnification = %.1f         ", fData_40003238);
+			beep1(1);
+		
+			bData_4000318a = 7;
+			Data_40002c64_MenuContextId = 360021;
 			break;
 		
 		case 370021:
@@ -1337,14 +1609,29 @@ void HandleEnterKey(void)
 			//0x56050
 		case 370023:
 			//0x56054
+			fData_40003230 = atoi(&Data_400024c9[6]) * 1.0;
+			fData_40003234 = atoi(&Data_400024d6[6]) * 1.0;
+			fData_4000323c = atoi(&Data_400024e1[6]) * 1.0 + atoi(&Data_400024e1[9]) * 0.016666667;
+			fData_40003238 = fData_40003230 / fData_40003234;
+			fData_40003240 = fData_4000323c / fData_40003238;
+
+			sprintf(Data_40002504, "         FOV:%0.5f         ", fData_40003240);
+			beep1(1);
+		
+			bData_4000318a = 7;
+			Data_40002c64_MenuContextId = 370021;
 			break;
 		
 		case 360023:
 			//0x562f8
+			fData_40003230 = atoi(&Data_40002474[6]);
+			fData_40003234 = atoi(&Data_40002481[6]);
+			fData_40003238 = fData_40003230 / fData_40003234;
 			break;
 		
 		case 3801:
 			//0x5634c
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DISPLAY_ILLUMINATION_CONTROL; //380011;
 			break;
 		
 		case MENU_CONTEXT_DISPLAY_ILLUMINATION_CONTROL: //380011:
@@ -1354,9 +1641,20 @@ void HandleEnterKey(void)
 		
 		case 3802:
 			//0x5636c
+			if (bData_40003194 == 0)
+			{
+				setDisplayPWM(0xFF);
+				bData_40003194 = 1;
+			}
+			else
+			{
+				setDisplayPWM(0x00);
+				bData_40003194 = 0;
+			}
 			break;
-		
-		//TODO
+			
+		default:
+			break;
 	}	
 }
 
