@@ -600,6 +600,8 @@ void HandleMinusKey(void)
 		
 		case MENU_CONTEXT_MESSIER_OBJECT_SELECTION: //23002:
 			//0x60468
+			lcd_display_clear();
+		
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MESSIER_OBJECT_DETAILS; //23012;
 			break;
 		

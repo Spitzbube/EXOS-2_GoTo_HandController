@@ -29,6 +29,12 @@ typedef union
 	int Data;
 } Union_400031a0;
 
+typedef union
+{
+	unsigned char bData[4];
+	int dwData; 
+} Union_40003500; //40003500
+
 typedef struct
 {
 	int Data_0; //0
@@ -412,6 +418,8 @@ extern char Data_400022f2[]; //400022f2
 extern char Data_40002302[]; //40002302
 extern char Data_40002387[]; //40002387
 extern char Data_4000239a[]; //4000239a
+extern char Data_40002474[]; //40002474
+extern char Data_40002481[]; //40002487
 extern char Data_4000248c[]; //4000248c
 extern char Data_400024a1[]; //400024a1
 extern char Data_400024b5[]; //400024b5
@@ -420,25 +428,37 @@ extern char Data_400024d6[]; //400024d6
 extern char Data_400024e1[]; //400024e1
 extern char Data_400024ef[]; //400024ef
 extern char Data_40002504[]; //40002504
-extern char Data_40002655[]; //40002655, size???
-extern char Data_40002660[]; //40002660, size???
-extern char Data_40002789[]; //40002789
-extern char Data_40002792[]; //40002792
+extern unsigned char Data_4000251d[]; //4000251d
+extern unsigned char Data_4000253d[]; //4000253d
+extern unsigned char Data_4000255d[]; //4000255d
+extern unsigned char Data_4000257e[]; //4000257e
+extern unsigned char Data_4000258c[]; //4000258c
+extern unsigned char Data_400025a0[]; //400025a0
+extern char Data_40002655[]; //40002655
+extern char Data_40002660[]; //40002660
+extern unsigned char Data_400026c3[]; //400026c3
+extern unsigned char Data_400026db[]; //400026db
+extern unsigned char Data_400026f3[]; //400026f3
+extern unsigned char Data_4000270a[]; //4000270a
+extern unsigned char Data_4000271a[]; //4000271a
+extern unsigned char Data_40002789[]; //40002789
+extern unsigned char Data_40002792[]; //40002792
 extern char Data_400027cf[]; //400027cf
 extern unsigned char Data_400027df[]; //400027df
 extern unsigned char Data_400027ef[]; //400027ef
-extern char Data_400027ff[]; //400027ff
+extern unsigned char Data_400027ff[]; //400027ff
 extern unsigned char Data_40002827[]; //40002827
-extern char Data_40002837[]; //40002837
-extern char Data_40002847[]; //40002847
-extern char Data_40002856[]; //40002856
+extern unsigned char Data_40002837[]; //40002837
+extern unsigned char Data_40002847[]; //40002847
+extern unsigned char Data_40002856[]; //40002856
+extern unsigned char Data_40002861[]; //40002861
 extern char Data_4000288e[]; //4000288e
 extern char Data_40002899[]; //40002899
 extern char Data_400028a5[]; //400028a5
 extern char Data_400028b3[]; //400028b3
 extern char strEngPleaseSetupOtaZero[]; //400028c1
-extern char Data_400028d7[]; //400028d7
-extern char Data_400028e1[]; //400028e1
+extern unsigned char Data_400028d7[]; //400028d7
+extern unsigned char Data_400028e1[]; //400028e1
 extern char Data_400028eb[]; //400028eb
 extern char Data_40002901[]; //40002901
 extern char strEngEnglish[]; //40002916
@@ -507,7 +527,7 @@ extern unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
 extern char bData_40002c5a; //40002c5a
 extern int Data_40002c5c_AlignmentStarCount; //40002c5c
 extern unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
-extern char bData_40002c61; //40002c61
+extern unsigned char bData_40002c61; //40002c61
 extern char bData_40002c62_AlignmentStarMode; //40002c62
 extern int Data_40002c64_MenuContextId; //40002c64
 extern char bData_40002c68; //40002c68
@@ -613,9 +633,9 @@ extern float Data_40002e94; //40002e94
 extern float fData_40002e98; //40002e98
 extern float Data_40002e9c; //40002e9c
 extern float fData_40002ea0; //40002ea0
-extern int Data_40002ea4; //40002ea4
+extern float fData_40002ea4; //40002ea4
 extern float fData_40002ea8; //40002ea8
-extern int Data_40002eac; //40002eac
+extern float fData_40002eac; //40002eac
 extern int Data_40002eb0; //40002eb0
 extern unsigned char bData_40002eb4; //40002eb4
 extern unsigned char bData_40002eb5_SolarSystemObjectNr; //40002eb5
@@ -626,7 +646,7 @@ extern unsigned short wData_40002ebc_ICNr; //40002ebc
 extern unsigned short wData_40002ebe_ShNr; //40002ebe
 extern unsigned short wData_40002ec0_BrightStarNr; //40002ec0
 extern unsigned int Data_40002ec4_SAONr; //40002ec4
-extern int Data_40002ec8; //40002ec8
+extern unsigned int Data_40002ec8; //40002ec8
 extern unsigned short wData_40002ecc; //40002ecc
 extern unsigned char bData_40002ece_ConstellationNr; //40002ece
 extern unsigned short wData_40002ed0; //40002ed0
@@ -635,7 +655,7 @@ extern unsigned short wData_40002ed4; //40002ed4
 extern unsigned short wData_40002ed6; //40002ed6
 extern unsigned short wData_40002ed8; //40002ed8
 extern unsigned short wData_40002eda; //40002eda
-extern char bData_40002edc; //40002edc
+extern unsigned char bData_40002edc; //40002edc
 extern char bData_40002edd; //40002edd
 extern char bData_40002ede; //40002ede
 extern char bData_40002edf; //40002edf
@@ -821,7 +841,7 @@ extern unsigned char bData_40003195; //40003195
 extern unsigned char bData_40003196_CurrentLanguage; //40003196
 extern unsigned char bData_40003197_DisplayLinesPerMenuLine; //40003197
 extern char bData_40003198; //40003198
-extern char bData_40003199; //40003199
+extern unsigned char bData_40003199; //40003199
 extern unsigned char bData_4000319a_SkyLandTargetId; //4000319a
 extern char bData_4000319b; //4000319b
 extern char bData_4000319c; //4000319c
@@ -837,12 +857,13 @@ extern char bData_400031bb; //400031bb
 extern char bData_400031bc; //400031bc
 extern char bData_400031bd; //400031bd
 extern char bData_400031be; //400031be
-extern char bData_400031bf; //400031bf
+extern unsigned char bData_400031bf; //400031bf
 extern float fData_400031c0; //400031c0
 extern float fData_400031c4; //400031c4
 extern char bData_400031e0; //400031e0
 extern char bData_400031e1; //400031e1
 extern int Data_400031e4; //400031e4
+extern unsigned char bData_400031e8; //400031e8
 extern char bData_400031e9; //400031e9
 extern char bData_400031ea; //400031ea
 extern char bData_400031eb; //400031eb
@@ -862,7 +883,11 @@ extern int Data_40003224_AlarmMinutes; //40003224
 extern int Data_40003228_AlarmSeconds; //40003228
 extern char bData_4000322c; //4000322c
 extern char bData_4000322d_AlarmTimeElapsed; //4000322d
+extern float fData_40003230; //40003230
+extern float fData_40003234; //40003234
 extern float fData_40003238; //40003238
+extern float fData_4000323c; //4000323c
+extern float fData_40003240; //40003240
 extern int Data_40003248_CurrentDisplayPWM; //40003248
 extern unsigned short wData_40003250; //40003250
 extern unsigned short wData_40003252; //40003252
@@ -968,6 +993,7 @@ extern double dData_400034e0; //400034e0
 extern double dData_400034e8; //400034e8
 extern double dData_400034f0; //400034f0
 extern double dData_400034f8; //400034f8
+extern Union_40003500 Data_40003500; //40003500
 extern char bData_40003505;  //40003505
 extern float fData_40003508; //40003508
 extern float fData_4000350c; //4000350c
