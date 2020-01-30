@@ -1045,7 +1045,7 @@ void func_57414(int a, int b, int speed)
 					//0x577e0
 					sp12[6] = 10;
 					sp12[7] = 0;
-					Data_400031a4 = 2560;
+					Data_400031a4.Data = 2560;
 					bData_400031b8 = 1;
 					bData_400031ba = sp12[4];
 					bData_400031bc = sp12[5];

@@ -1835,9 +1835,9 @@ int func_30e4(unsigned char* a, int b, int c, int d, int e)
 }
 
 /* 3230 - complete */
-void func_3230(int a, int b, int c, int d)
+void func_3230(unsigned char* a, float* b, float* c)
 {
-	d = a;
+	a = a;
 }
 
 /* 3238 - complete */

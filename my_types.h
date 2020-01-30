@@ -192,3 +192,21 @@ typedef struct
 	//72
 } Struct_HorizontalCoordinates;
 
+typedef struct
+{
+	unsigned short wData_0; //0
+	unsigned short wData_2; //2
+	unsigned short wData_4; //4
+	
+} Struct_40003290;
+
+typedef struct
+{
+	unsigned char bData_0; //0
+	unsigned char bData_1; //1
+	unsigned char bData_2; //2
+	
+} Struct_40003296;
+
+
+

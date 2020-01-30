@@ -434,6 +434,12 @@ extern unsigned char Data_4000255d[]; //4000255d
 extern unsigned char Data_4000257e[]; //4000257e
 extern unsigned char Data_4000258c[]; //4000258c
 extern unsigned char Data_400025a0[]; //400025a0
+extern unsigned char Data_400025b5[]; //400025b5
+extern unsigned char Data_400025d9[]; //400025d9
+extern unsigned char Data_400025fe[]; //400025fe
+extern unsigned char Data_40002625[]; //40002625
+extern unsigned char Data_40002634[]; //40002634
+extern unsigned char Data_40002644[]; //40002644
 extern char Data_40002655[]; //40002655
 extern char Data_40002660[]; //40002660
 extern unsigned char Data_400026c3[]; //400026c3
@@ -531,7 +537,7 @@ extern unsigned char bData_40002c61; //40002c61
 extern char bData_40002c62_AlignmentStarMode; //40002c62
 extern int Data_40002c64_MenuContextId; //40002c64
 extern char bData_40002c68; //40002c68
-extern char bData_40002c69_KeyCode; //40002c69
+extern unsigned char bData_40002c69_KeyCode; //40002c69
 extern char bData_40002c6a; //40002c6a
 extern double dData_40002c70; //40002c70
 extern double dData_40002c78; //40002c78
@@ -562,11 +568,13 @@ extern float fData_40002d18_ObjectDeclination; //40002d18
 extern int Data_40002d20; //40002d20
 extern int Data_40002d24; //40002d24
 extern float fData_40002d28; //40002d28
+extern double dData_40002d30; //40002d30
 extern int Data_40002d40; //40002d40
 extern int Data_40002d44; //40002d44
 extern int Data_40002d48; //40002d48
 extern int Data_40002d4c; //40002d4c
 extern float fData_40002d50; //40002d50
+extern double dData_40002d58; //40002d58
 extern int Data_40002d68_OTARightAscensionHours; //40002d68
 extern int Data_40002d6c_OTARightAscensionMinutes; //40002d6c
 extern float fData_40002d70_OTARightAscensionSeconds; //40002d70
@@ -847,8 +855,9 @@ extern char bData_4000319b; //4000319b
 extern char bData_4000319c; //4000319c
 extern char bData_4000319d; //4000319d
 extern Union_400031a0 Data_400031a0; //400031a0
-extern int Data_400031a4; //400031a4
+extern Union_400031a0 Data_400031a4; //400031a4
 extern int Data_400031a8; //400031a8
+extern Union_400031a0 Data_400031ac; //400031ac
 extern int Data_400031b4; //400031b4
 extern char bData_400031b8; //400031b8
 extern char bData_400031b9; //400031b9
@@ -900,6 +909,11 @@ extern unsigned char bData_40003261; //40003261
 extern unsigned char bData_40003262; //40003262
 extern unsigned char bData_40003263; //40003263
 extern unsigned char bData_40003265; //40003265
+extern unsigned char Data_4000327f[]; //4000327f
+extern float fData_40003288; //40003288
+extern float fData_4000328c; //4000328c
+extern Struct_40003290 Data_40003290; //40003290
+extern Struct_40003296 Data_40003296; //40003296
 extern float fData_4000329c; //4000329c
 extern float fData_400032a0; //400032a0
 extern unsigned char bData_400032a4_OTAZeroDataErrorCount; //400032a4
@@ -994,6 +1008,7 @@ extern double dData_400034e8; //400034e8
 extern double dData_400034f0; //400034f0
 extern double dData_400034f8; //400034f8
 extern Union_40003500 Data_40003500; //40003500
+extern unsigned char bData_40003504; //40003504
 extern char bData_40003505;  //40003505
 extern float fData_40003508; //40003508
 extern float fData_4000350c; //4000350c
@@ -1019,7 +1034,9 @@ extern int Data_4000359c_RecentTargetIdArray[]; //4000359c
 extern unsigned char Data_400035bc[]; //400035bc
 extern char Data_400037cc[]; //400037cc
 extern char Data_400037dc[]; //400037dc
-extern char Data_400037ec[]; //400037ec, size???
+extern char Data_400037ec[]; //400037ec
+extern float Data_400037f8[]; //400037f8
+extern unsigned char Data_400038e8[][10]; //400038e8
 extern unsigned char Data_40003a14[][10]; //40003a14, size??
 extern unsigned char Data_40003b2c[][22]; //40003b2c, size??
 extern Struct_FamousStarData Data_40003d94_FlashFamousStarData; //40003d94
