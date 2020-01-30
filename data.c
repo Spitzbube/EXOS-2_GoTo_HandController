@@ -330,6 +330,12 @@ unsigned char Data_4000255d[33]; //4000255d, size??
 unsigned char Data_4000257e[14]; //4000257e, size??
 unsigned char Data_4000258c[20]; //4000258c, size??
 unsigned char Data_400025a0[100]; //400025a0, size??
+unsigned char Data_400025b5[100]; //400025b5, size???
+unsigned char Data_400025d9[100]; //400025d9, size??
+unsigned char Data_400025fe[100]; //400025fe, size??
+unsigned char Data_40002625[100]; //40002625, size???
+unsigned char Data_40002634[100]; //40002634, size???
+unsigned char Data_40002644[100]; //40002644, size???
 char Data_40002655[11]; //40002655, size???
 char Data_40002660[100]; //40002660, size???
 unsigned char Data_400026c3[100]; //400026c3, size???
@@ -417,7 +423,6 @@ unsigned char bData_40002c12_uart1ReceiveDataCount; //40002c12
 char bData_40002c13_uart1ReceiveComplete; //40002c13
 unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
 unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
-int Data_40003214_UserTimerSeconds; //40003214
 unsigned char uart1_bRxData; //40002c19
 char bData_40002c1a; //40002c1a // V2.2: 40002c1e
 int Data_40002c1c; //40002c1c
@@ -433,7 +438,7 @@ unsigned char bData_40002c61; //40002c61
 char bData_40002c62_AlignmentStarMode; //40002c62
 int Data_40002c64_MenuContextId; //40002c64
 char bData_40002c68; //40002c68
-char bData_40002c69_KeyCode; //40002c69
+unsigned char bData_40002c69_KeyCode; //40002c69
 char bData_40002c6a; //40002c6a
 double dData_40002c70; //40002c70
 double dData_40002c78; //40002c78
@@ -464,11 +469,13 @@ float fData_40002d18_ObjectDeclination; //40002d18
 int Data_40002d20; //40002d20
 int Data_40002d24; //40002d24
 float fData_40002d28; //40002d28
+double dData_40002d30; //40002d30
 int Data_40002d40; //40002d40
 int Data_40002d44; //40002d44
 int Data_40002d48; //40002d48
 int Data_40002d4c; //40002d4c
 float fData_40002d50; //40002d50
+double dData_40002d58; //40002d58
 int Data_40002d68_OTARightAscensionHours; //40002d68
 int Data_40002d6c_OTARightAscensionMinutes; //40002d6c
 float fData_40002d70_OTARightAscensionSeconds; //40002d70
@@ -749,8 +756,9 @@ char bData_4000319b; //4000319b
 char bData_4000319c; //4000319c
 char bData_4000319d; //4000319d
 Union_400031a0 Data_400031a0; //400031a0
-int Data_400031a4; //400031a4
+Union_400031a0 Data_400031a4; //400031a4
 int Data_400031a8; //400031a8
+Union_400031a0 Data_400031ac; //400031ac
 int Data_400031b4; //400031b4
 char bData_400031b8; //400031b8
 char bData_400031b9; //400031b9
@@ -779,6 +787,7 @@ int Data_40003204; //40003204
 int Data_40003208; //40003208
 char bData_40003210; //40003210
 char bData_40003211; //40003211
+int Data_40003214_UserTimerSeconds; //40003214
 int Data_40003220_AlarmHours; //40003220
 int Data_40003224_AlarmMinutes; //40003224
 int Data_40003228_AlarmSeconds; //40003228
@@ -801,6 +810,11 @@ unsigned char bData_40003261; //40003261
 unsigned char bData_40003262; //40003262
 unsigned char bData_40003263; //40003263
 unsigned char bData_40003265; //40003265
+unsigned char Data_4000327f[100]; //4000327f, size???
+float fData_40003288; //40003288
+float fData_4000328c; //4000328c
+Struct_40003290 Data_40003290; //40003290
+Struct_40003296 Data_40003296; //40003296
 float fData_4000329c; //4000329c
 float fData_400032a0; //400032a0
 unsigned char bData_400032a4_OTAZeroDataErrorCount; //400032a4
@@ -895,6 +909,7 @@ double dData_400034e8; //400034e8
 double dData_400034f0; //400034f0
 double dData_400034f8; //400034f8
 Union_40003500 Data_40003500; //40003500
+unsigned char bData_40003504; //40003504
 char bData_40003505;  //40003505
 float fData_40003508; //40003508
 float fData_4000350c; //4000350c
@@ -921,6 +936,8 @@ unsigned char Data_400035bc[528]; //400035bc
 char Data_400037cc[16]; //400037cc
 char Data_400037dc[16]; //400037dc
 char Data_400037ec[100]; //400037ec, size???
+float Data_400037f8[100]; //400037f8, size???
+unsigned char Data_400038e8[30][10]; //400038e8, size???
 unsigned char Data_40003a14[100][10]; //40003a14, size??
 unsigned char Data_40003b2c[100][22]; //40003b2c, size??
 Struct_FamousStarData Data_40003d94_FlashFamousStarData; //40003d94
