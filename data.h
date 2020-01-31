@@ -136,8 +136,8 @@ typedef struct
 	
 } Struct_40004380;
 
-extern unsigned char strAlignStarsNames[28][10]; //40000000
-extern unsigned char Data_40000118[28][22]; //40000118, size?? -> 40000380???
+extern unsigned char strAlignStarsNames[][10]; //40000000
+extern unsigned char Data_40000118[][22]; //40000118, size?? -> 40000380???
 extern char Data_40000380[]; //40000380
 extern char Data_4000038a[]; //4000038a
 extern char Data_40000394[]; //40000394

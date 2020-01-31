@@ -41,7 +41,7 @@ int unknown_prologue(void)
 	int b;
 	int c;
 	int d;
-	return a+b * b / b - b;
+	return a+b * b / b - b + b;
 }
 
 /* 224 - complete */
