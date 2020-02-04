@@ -622,7 +622,12 @@ unsigned char bData_40002edc; //40002edc
 char bData_40002edd; //40002edd
 char bData_40002ede; //40002ede
 char bData_40002edf; //40002edf
-//TODO
+int fill_40002ee0; //40002ee0
+int fill_40002ee4; //40002ee4
+int fill_40002ee8; //40002ee8
+int fill_40002eec; //40002eec
+int fill_40002ef0; //40002ef0
+unsigned short fill_40002ef4; //40002ef4
 char bData_40002ef6; //40002ef6
 char bData_40002ef7; //40002ef7
 int Data_40002ef8; //40002ef8
@@ -762,16 +767,29 @@ char* Data_40003104;
 char* Data_40003108;
 char* Data_4000310c;
 char* Data_40003110;
-char* Data_40003114;
+char* Data_40003114; //40003114
+int fill_40003118; //40003118
+int fill_4000311c; //4000311c
+int fill_40003120; //40003120
+int fill_40003124; //40003124
+int fill_40003128; //40003128
+int fill_4000312c; //4000312c
+int fill_40003130; //40003130
+int fill_40003134; //40003134
+int fill_40003138; //40003138
+int fill_4000313c; //4000313c
 char* Data_40003140; //40003140
 unsigned char bData_40003144; //40003144
+int fill_40003148; //40003148
 char* Data_4000314c_SolarSystemObjectName; //4000314c
-char Data_40003150[9]; //40003150, size??
+char Data_40003150[8]; //40003150, size??
+char fill_40003158; //40003158
 char Data_40003159[8]; //40003159, size??
 unsigned char bData_40003161; //40003161
 char bData_40003162; //40003162
 int Data_40003164_LunarPhaseYear; //40003164
 int Data_40003168_LunarPhaseMonth; //40003168
+char fill_4000316c; //4000316c
 unsigned char bData_4000316d; //4000316d
 unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
@@ -792,9 +810,13 @@ unsigned char bData_4000317d; //4000317d
 unsigned char bData_4000317e; //4000317e
 unsigned char bData_4000317f; //4000317f
 unsigned char bData_40003180; //40003180
+char fill_40003181; //40003181
 unsigned char bData_40003182; //40003182
+char fill_40003183; //40003183
 unsigned char bData_40003184; //40003184
+char fill_40003185; //40003185
 unsigned char bData_40003186; //40003186
+char fill_40003187; //40003187
 char bData_40003188; //40003188
 char bData_40003189; //40003189
 unsigned char bData_4000318a; //4000318a
@@ -814,6 +836,7 @@ Union_400031a0 Data_400031a0; //400031a0
 Union_400031a0 Data_400031a4; //400031a4
 int Data_400031a8; //400031a8
 Union_400031a0 Data_400031ac; //400031ac
+int fill_400031b0; //400031b0
 int Data_400031b4; //400031b4
 char bData_400031b8; //400031b8
 char bData_400031b9; //400031b9
@@ -825,6 +848,12 @@ char bData_400031be; //400031be
 unsigned char bData_400031bf; //400031bf
 float fData_400031c0; //400031c0
 float fData_400031c4; //400031c4
+int fill_400031c8; //400031c8
+int fill_400031cc; //400031cc
+int fill_400031d0; //400031d0
+int fill_400031d4; //400031d4
+int fill_400031d8; //400031d8
+int fill_400031dc; //400031dc
 char bData_400031e0; //400031e0
 char bData_400031e1; //400031e1
 int Data_400031e4; //400031e4
@@ -840,9 +869,12 @@ char bData_40003200; //40003200
 char bData_40003201; //40003201
 int Data_40003204; //40003204
 int Data_40003208; //40003208
+int fill_4000320c; //4000320c
 char bData_40003210; //40003210
 char bData_40003211; //40003211
 int Data_40003214_UserTimerSeconds; //40003214
+int fill_40003218; //40003218
+int fill_4000321c; //4000321c
 int Data_40003220_AlarmHours; //40003220
 int Data_40003224_AlarmMinutes; //40003224
 int Data_40003228_AlarmSeconds; //40003228
@@ -853,19 +885,33 @@ float fData_40003234; //40003234
 float fData_40003238; //40003238
 float fData_4000323c; //4000323c
 float fData_40003240; //40003240
+int fill_40003244; //40003244
 int Data_40003248_CurrentDisplayPWM; //40003248
+int fill_4000324c; //4000324c
 unsigned short wData_40003250; //40003250
 unsigned short wData_40003252; //40003252
+unsigned short fill_40003254; //40003254
 unsigned short wData_40003256; //40003256
 unsigned char bData_40003258; //40003258
 unsigned short wData_4000325a; //4000325a
 unsigned char bData_4000325c; //4000325c
+char fill_4000325d; //4000325d
+char fill_4000325e; //4000325e
+char fill_4000325f; //4000325f
 unsigned char bData_40003260; //40003260
 unsigned char bData_40003261; //40003261
 unsigned char bData_40003262; //40003262
 unsigned char bData_40003263; //40003263
+char fill_40003264; //40003264
 unsigned char bData_40003265; //40003265
-unsigned char Data_4000327f[100]; //4000327f, size???
+int fill_40003268; //40003268
+int fill_4000326c; //4000326c
+int fill_40003270; //40003270
+int fill_40003274; //40003274
+int fill_40003278; //40003278
+unsigned short fill_4000327c; //4000327c
+char fill_4000327e; //4000327e
+unsigned char Data_4000327f[8]; //4000327f, size???
 float fData_40003288; //40003288
 float fData_4000328c; //4000328c
 Struct_40003290 Data_40003290; //40003290
@@ -873,6 +919,7 @@ Struct_40003296 Data_40003296; //40003296
 float fData_4000329c; //4000329c
 float fData_400032a0; //400032a0
 unsigned char bData_400032a4_OTAZeroDataErrorCount; //400032a4
+double fill_400032a8; //400032a8
 double dData_400032b0_SunRightAscension; //400032b0
 double dData_400032b8_SunDeclination; //400032b8
 double dData_400032c0; //400032c0
@@ -917,8 +964,13 @@ char* Data_400033a8; //400033a8
 char* Data_400033ac; //400033ac
 char* Data_400033b0; //400033b0
 char* Data_400033b4; //400033b4
+int fill_400033b8; //400033b8
+int fill_400033bc; //400033bc
+int fill_400033c0; //400033c0
+int fill_400033c4; //400033c4
 Union_400033c8 Data_400033c8; //400033c8
 Union_400033cc Data_400033cc; //400033cc
+double fill_400033d0; //400033d0
 double dData_400033d8; //400033d8
 double dData_400033e0; //400033e0
 double dData_400033e8; //400033e8
@@ -934,10 +986,16 @@ double dData_40003428; //40003428
 char bData_40003430; //40003430
 char bData_40003431; //40003431
 char bData_40003432; //40003432
+double fill_40003438; //40003438
+double fill_40003440; //40003440
 double dData_40003448; //40003448
 double dData_40003450; //40003450
 double dData_40003458; //40003458
 double dData_40003460; //40003460
+double fill_40003468; //40003468
+double fill_40003470; //40003470
+double fill_40003478; //40003478
+double fill_40003480; //40003480
 int Data_40003488; //40003488
 int Data_4000348c; //4000348c
 double dData_40003490; //40003490
@@ -981,22 +1039,40 @@ unsigned char bData_4000352b_ReceiveExternalMinutes; //4000352b
 unsigned char bData_4000352c_ReceiveExternalSeconds; //4000352c
 unsigned char bData_4000352d; //4000352d
 unsigned char bData_4000352e; //4000352e
+int fill_40003530; //40003530
+int fill_40003534; //40003534
+int fill_40003538; //40003538
+int fill_4000353c; //4000353c
 float fData_40003540; //40003540
 float fData_40003544; //40003544
 int Data_40003548; //40003548
+int fill_4000354c; //4000354c
+int fill_40003550; //40003550
+int fill_40003554; //40003554
+int fill_40003558; //40003558
+int fill_4000355c; //4000355c
+int fill_40003560; //40003560
+int fill_40003564; //40003564
+int fill_40003568; //40003568
+int fill_4000356c; //4000356c
+int fill_40003570; //40003570
+int fill_40003574; //40003574
+int fill_40003578; //40003578
+int fill_4000357c; //4000357c
+int fill_40003580; //40003580
+int fill_40003584; //40003584
 unsigned char Data_40003588_uart0ReceiveDataBuffer[10]; //40003588
 unsigned char Data_40003592_uart1ReceiveDataBuffer[10]; //40003592
 int Data_4000359c_RecentTargetIdArray[8]; //4000359c, size??
 unsigned char Data_400035bc[528]; //400035bc
 char Data_400037cc[16]; //400037cc
 char Data_400037dc[16]; //400037dc
-char Data_400037ec[100]; //400037ec, size???
-float Data_400037f8[100]; //400037f8, size???
+char Data_400037ec[12]; //400037ec, size???
+float Data_400037f8[60]; //400037f8, size???
 unsigned char Data_400038e8[30][10]; //400038e8, size???
-unsigned char Data_40003a14[100][10]; //40003a14, size??
-unsigned char Data_40003b2c[100][22]; //40003b2c, size??
+unsigned char Data_40003a14[28][10]; //40003a14, size??
+unsigned char Data_40003b2c[28][22]; //40003b2c, size??
 Struct_FamousStarData Data_40003d94_FlashFamousStarData; //40003d94
-char Data_40003db0[36]; //40003db0, size???
 Struct_ConstellationData Data_40003dd4_FlashConstellationData; //40003dd4
 Struct_MessierData Data_40003e08_FlashMessierData; //40003e08
 Struct_BrightStarData Data_40003ea0_FlashBrightStarData; //40003ea0
@@ -1019,9 +1095,10 @@ char Data_40004066[42]; //40004066, size???
 char Data_40004090[42]; //40004090, size???
 char Data_400040ba[42]; //400040ba, size???
 char Data_400040e4[42]; //400040e4, size???
-char Data_4000410e[21]; //4000410e, size???
+/*unsigned*/ char Data_4000410e[21]; //4000410e, size???
 Struct_40004128 Data_40004128; //40004128
 Struct_40004380 Data_40004380; //40004380
+int fill_40004380_[430]; //4000438????
 #if 0
 float Data_40004a68_CurrentAlignStarEquatorialCoord[2][2]; //40004a68
 #else
@@ -1032,6 +1109,6 @@ Struct_EquatorialCoordinates Data_40004ae8; //40004ae8
 Struct_HorizontalCoordinates Data_40004b08; //40004b08
 Struct_EquatorialCoordinates Data_40004b50; //40004b50
 Struct_HorizontalCoordinates Data_40004b70; //40004b70
-unsigned char Data_40004bb8[8]; //40004bb8 size???
-char Data_40004c58[2 /*???*/]; //40004c58
+unsigned char Data_40004bb8[160]; //40004bb8 size???
+unsigned char Data_40004c58[100]; //40004c58, size?
 

@@ -1,7 +1,7 @@
 
 
 /* 27844 - todo */
-int PrepareScreenItems(void)
+void PrepareScreenItems(void)
 {
 	SwapLanguageStrings();
 	
@@ -2869,7 +2869,7 @@ int PrepareScreenItems(void)
 			
 			Data_40003364 = Data_40003fbe;
 			Data_40003368 = "                                        ";
-			Data_4000336c = Data_40003db0;
+			Data_4000336c = Data_40003d94_FlashFamousStarData.bData_28;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5867,8 +5867,5 @@ int PrepareScreenItems(void)
 			//0x3d714			
 			break;
 	}
-#if 1 //Workaround	
-	return 0;
-#endif
 }
 

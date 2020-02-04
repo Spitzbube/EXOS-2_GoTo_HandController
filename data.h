@@ -1028,7 +1028,16 @@ extern unsigned char bData_4000352e; //4000352e
 extern float fData_40003540; //40003540
 extern float fData_40003544; //40003544
 extern int Data_40003548; //40003548
+#if 1
 extern unsigned char Data_40003588_uart0ReceiveDataBuffer[]; //40003588
+#else
+typedef struct
+{
+	char a;
+	unsigned char bData[8]; //0
+} Union_40003588;
+extern Union_40003588 Data_40003588; //40003588
+#endif
 extern unsigned char Data_40003592_uart1ReceiveDataBuffer[]; //40003592
 extern int Data_4000359c_RecentTargetIdArray[]; //4000359c
 extern unsigned char Data_400035bc[]; //400035bc
@@ -1040,7 +1049,6 @@ extern unsigned char Data_400038e8[][10]; //400038e8
 extern unsigned char Data_40003a14[][10]; //40003a14, size??
 extern unsigned char Data_40003b2c[][22]; //40003b2c, size??
 extern Struct_FamousStarData Data_40003d94_FlashFamousStarData; //40003d94
-extern char Data_40003db0[]; //40003db0
 extern Struct_ConstellationData Data_40003dd4_FlashConstellationData; //40003dd4
 extern Struct_MessierData Data_40003e08_FlashMessierData; //40003e08
 extern Struct_BrightStarData Data_40003ea0_FlashBrightStarData; //40003ea0
@@ -1063,7 +1071,7 @@ extern char Data_40004066[]; //40004066
 extern char Data_40004090[]; //40004090
 extern char Data_400040ba[]; //400040ba
 extern char Data_400040e4[]; //400040e4
-extern char Data_4000410e[]; //4000410e
+extern /*unsigned*/ char Data_4000410e[]; //4000410e
 extern Struct_40004128 Data_40004128; //40004128
 extern Struct_40004380 Data_40004380; //40004380
 extern Struct_GeographicCoordinates Data_40004ad8; //40004ad8
@@ -1077,5 +1085,5 @@ extern Struct_HorizontalCoordinates Data_40004b08; //40004b08
 extern Struct_EquatorialCoordinates Data_40004b50; //40004b50
 extern Struct_HorizontalCoordinates Data_40004b70; //40004b70
 extern unsigned char Data_40004bb8[]; //40004bb8
-extern char Data_40004c58[]; //40004c58, size???
+extern unsigned char Data_40004c58[]; //40004c58, size???
 
