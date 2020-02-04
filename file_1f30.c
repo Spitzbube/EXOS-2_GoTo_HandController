@@ -34,15 +34,11 @@ extern void lcd_display_clear(void);
 extern void lcd_display_configure(void);
 extern void spi0_init(void);
 
-
-int unknown_prologue(void)
+	
+void fill_220(void)
 {
-	int a;
-	int b;
-	int c;
-	int d;
-	return a+b * b / b - b + b;
 }
+
 
 /* 224 - complete */
 void lcd_write_data(unsigned char a)
@@ -6853,7 +6849,8 @@ void calculate_solar_system_object_equatorial_coordinates(int a, double* pAlpha,
 		sp208 += sin((sp264 + sp256) * 0.01745329252) * -30383.0 + 
 			sin((2 * sp272 - 2 * sp248) * 0.01745329252) * 15327.0 - 
 			sin((2 * sp248 + sp256) * 0.01745329252) * 12528.0 + 
-			sin((2 * sp248 - sp256) * 0.01745329252) * 10980.0;
+			//sin((2 * sp248 - sp256) * 0.01745329252) * 10980.0; 
+			sin((sp256 - 2 * sp248) * 0.01745329252) * 10980.0; //->BUG?
 
 		sp200 = sin(sp248 * 0.01745329252) * 5128122.0 + 
 			sin((sp256 + sp248) * 0.01745329252) * 280602.0 + 

@@ -525,7 +525,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
-					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 5, 8, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
 					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
@@ -543,7 +543,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
-					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 5, 8, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
 					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
@@ -576,7 +576,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
-					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 5, 8, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
 					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
@@ -593,7 +593,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
-					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 5, 8, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
 					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
@@ -619,9 +619,9 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
 					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
-					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
-					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
-					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+					lcd_display_string(0, 6, 8, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 8, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
 					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
@@ -1522,7 +1522,7 @@ void DisplayScreenItems(void)
 						case 2: 
 							//0x45d44
 							lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
-							lcd_display_string(1, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+							lcd_display_string(2/*1*/, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364); //BUG?
 							lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 							lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
 							lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
@@ -1683,7 +1683,7 @@ void DisplayScreenItems(void)
 								lcd_display_string(0, 8, 1, 2, Data_4000339c);
 							
 								lcd_display_string(0, 1, 3, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
-								lcd_display_string(1, 2, 3, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
+								lcd_display_string(2/*1*/, 2, 3, (char)strlen(Data_40003364), (unsigned char*)Data_40003364); //BUG?
 								lcd_display_string(0, 3, 3, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 								lcd_display_string(0, 4, 3, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
 								lcd_display_string(0, 5, 3, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
@@ -2132,7 +2132,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
-					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 5, 8, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
 					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
@@ -2149,7 +2149,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
-					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 5, 8, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
 					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
@@ -2182,7 +2182,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
-					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 5, 8, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
 					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
@@ -2199,7 +2199,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
-					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
+					lcd_display_string(0, 5, 8, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
 					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
 					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
@@ -2225,9 +2225,9 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 3, 1, (char)strlen(Data_40003368), (unsigned char*)Data_40003368);
 					lcd_display_string(0, 4, 1, (char)strlen(Data_4000336c), (unsigned char*)Data_4000336c);
 					lcd_display_string(0, 5, 1, (char)strlen(Data_40003370), (unsigned char*)Data_40003370);
-					lcd_display_string(0, 6, 1, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
-					lcd_display_string(0, 7, 1, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
-					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
+					lcd_display_string(0, 6, 8, (char)strlen(Data_40003374), (unsigned char*)Data_40003374);
+					lcd_display_string(0, 7, 8, (char)strlen(Data_40003378), (unsigned char*)Data_40003378);
+					lcd_display_string(0, 8, 8, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
 					lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
@@ -3136,9 +3136,9 @@ void DisplayScreenItems(void)
 						
 						case 5:
 							//0x4ed30
-							func_91c(0, 1, 1, 136, Data_400033a8);
-							func_91c(0, 2, 1, 136, Data_400033ac);
-							func_91c(0, 3, 1, 136, Data_400033b0);
+							func_91c(1, 1, 1, 136, Data_400033a8);
+							func_91c(1, 2, 1, 136, Data_400033ac);
+							func_91c(1, 3, 1, 136, Data_400033b0);
 							func_91c(1, 4, 1, 136, Data_400033b4);
 							//->0x4edc0
 							break;

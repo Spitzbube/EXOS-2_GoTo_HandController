@@ -425,7 +425,7 @@ MEMMAP          EQU     0xE01FC040      ; Memory Mapping Control
 
                 ELSE
 ; User Initial Stack & Heap
-                AREA    |.text|, CODE, READONLY
+                AREA    |.my_text|, CODE, READONLY
 
                 IMPORT  __use_two_region_memory
                 EXPORT  __user_initial_stackheap

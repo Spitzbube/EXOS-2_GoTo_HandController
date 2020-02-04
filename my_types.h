@@ -36,6 +36,7 @@ typedef struct
 	unsigned char bData_60[26]; //60, size??
 	unsigned char bData_86[22]; //86, size??
 	unsigned char bData_108[36]; //108, size??
+	char fill[8]; //???
 } Struct_MessierData;
 
 typedef struct
@@ -69,6 +70,7 @@ typedef struct
 	float fDeclination; //12
 	float fData_16; //16
 	unsigned char bData_20[10]; //20 size??
+	char fill_30[28]; //30
 } Struct_NGCData;
 
 typedef struct

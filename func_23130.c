@@ -502,7 +502,7 @@ void func_240e8(unsigned char a, int b)
 			for (bData_40002f1d = 0; bData_40002f1d < 13; bData_40002f1d++)
 			{
 				//0x24210
-				Data_4000410e[bData_40002f1d] = Data_40003db0[bData_40002f1d+1];
+				Data_4000410e[bData_40002f1d] = ((char*)&Data_40003d94_FlashFamousStarData.bData_28)[bData_40002f1d+1];
 			}
 			//->0x24568
 			break;

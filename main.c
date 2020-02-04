@@ -5214,7 +5214,7 @@ int main(void)
 			Data_40004128.dData_216 = dData_40002da0;
 			dData_400034f8 = dData_40002da0;
 			dData_40002df8 = fabs(Data_40004128.dData_216);
-			dData_40002d98 = dData_40002df8;
+			dData_40002d98 = dData_40002df8; // = fabs(Data_40004128.dData_216);
 			dData_40002d98 = fabs(dData_40002d98);
 			//->0x6dc9c
 			while (dData_40002d98 > 360.0)
@@ -6599,8 +6599,12 @@ int main(void)
 		{
 			func_659c(100);
 		}
+#if 1
+		//Workaround
+		if (Data_40004128.bData_357) ;
+#endif		
 		//729ec -> 6d898
 #endif //OLIMEX_LPC2148
-	} //while (1)
+	} //while (1)	
 }
 
