@@ -609,7 +609,7 @@ unsigned short wData_40002ebc_ICNr; //40002ebc
 unsigned short wData_40002ebe_ShNr; //40002ebe
 unsigned short wData_40002ec0_BrightStarNr; //40002ec0
 unsigned int Data_40002ec4_SAONr; //40002ec4
-unsigned int Data_40002ec8; //40002ec8
+unsigned int Data_40002ec8_NavigationDirectInputNr; //40002ec8
 unsigned short wData_40002ecc; //40002ecc
 unsigned char bData_40002ece_ConstellationNr; //40002ece
 unsigned short wData_40002ed0; //40002ed0

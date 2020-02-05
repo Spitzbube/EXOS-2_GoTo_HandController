@@ -1830,7 +1830,7 @@ int func_30e4(unsigned char* a, int b, int c, int d, int e)
 	return 1;
 }
 
-/* 3230 - complete */
+/* 3230 - todo */
 void func_3230(unsigned char* a, float* b, float* c)
 {
 	a = a;

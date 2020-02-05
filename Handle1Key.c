@@ -37,14 +37,14 @@ void Handle1Key(void)
 			//68b68
 			lcd_display_clear();
 		
-			if (((10*Data_40002ec8 + 1) <= 110) && ((10*Data_40002ec8 + 1) != 0))
+			if (((10*Data_40002ec8_NavigationDirectInputNr + 1) <= 110) && ((10*Data_40002ec8_NavigationDirectInputNr + 1) != 0))
 			{
-				Data_40002ec8 = 10*Data_40002ec8 + 1;
+				Data_40002ec8_NavigationDirectInputNr = 10*Data_40002ec8_NavigationDirectInputNr + 1;
 			}
 			//0x62fbc
-			if ((Data_40002ec8 <= 110) && (Data_40002ec8 != 0))
+			if ((Data_40002ec8_NavigationDirectInputNr <= 110) && (Data_40002ec8_NavigationDirectInputNr != 0))
 			{
-				wData_40002eb8_MessierNr = Data_40002ec8;
+				wData_40002eb8_MessierNr = Data_40002ec8_NavigationDirectInputNr;
 			}
 			break;
 		
@@ -52,14 +52,14 @@ void Handle1Key(void)
 			//68bf0
 			lcd_display_clear();
 		
-			if (((10*Data_40002ec8 + 1) <= 7840) && ((10*Data_40002ec8 + 1) != 0))
+			if (((10*Data_40002ec8_NavigationDirectInputNr + 1) <= 7840) && ((10*Data_40002ec8_NavigationDirectInputNr + 1) != 0))
 			{
-				Data_40002ec8 = 10*Data_40002ec8 + 1;
+				Data_40002ec8_NavigationDirectInputNr = 10*Data_40002ec8_NavigationDirectInputNr + 1;
 			}
 
-			if ((Data_40002ec8 <= 7840) && (Data_40002ec8 != 0))
+			if ((Data_40002ec8_NavigationDirectInputNr <= 7840) && (Data_40002ec8_NavigationDirectInputNr != 0))
 			{
-				wData_40002eba_NGCNr = Data_40002ec8;
+				wData_40002eba_NGCNr = Data_40002ec8_NavigationDirectInputNr;
 			}
 			break;
 		
@@ -67,14 +67,14 @@ void Handle1Key(void)
 			//68c84
 			lcd_display_clear();
 		
-			if (((10*Data_40002ec8 + 1) <= 5386) && ((10*Data_40002ec8 + 1) != 0))
+			if (((10*Data_40002ec8_NavigationDirectInputNr + 1) <= 5386) && ((10*Data_40002ec8_NavigationDirectInputNr + 1) != 0))
 			{
-				Data_40002ec8 = 10*Data_40002ec8 + 1;
+				Data_40002ec8_NavigationDirectInputNr = 10*Data_40002ec8_NavigationDirectInputNr + 1;
 			}
 
-			if ((Data_40002ec8 <= 5386) && (Data_40002ec8 != 0))
+			if ((Data_40002ec8_NavigationDirectInputNr <= 5386) && (Data_40002ec8_NavigationDirectInputNr != 0))
 			{
-				wData_40002ebc_ICNr = Data_40002ec8;
+				wData_40002ebc_ICNr = Data_40002ec8_NavigationDirectInputNr;
 			}
 			break;
 		
@@ -82,14 +82,14 @@ void Handle1Key(void)
 			//68d18
 			lcd_display_clear();
 		
-			if (((10*Data_40002ec8 + 1) <= 313) && ((10*Data_40002ec8 + 1) != 0))
+			if (((10*Data_40002ec8_NavigationDirectInputNr + 1) <= 313) && ((10*Data_40002ec8_NavigationDirectInputNr + 1) != 0))
 			{
-				Data_40002ec8 = 10*Data_40002ec8 + 1;
+				Data_40002ec8_NavigationDirectInputNr = 10*Data_40002ec8_NavigationDirectInputNr + 1;
 			}
 
-			if ((Data_40002ec8 <= 313) && (Data_40002ec8 != 0))
+			if ((Data_40002ec8_NavigationDirectInputNr <= 313) && (Data_40002ec8_NavigationDirectInputNr != 0))
 			{
-				wData_40002ebe_ShNr = Data_40002ec8;
+				wData_40002ebe_ShNr = Data_40002ec8_NavigationDirectInputNr;
 			}
 			break;
 		
@@ -97,14 +97,14 @@ void Handle1Key(void)
 			//68e28
 			lcd_display_clear();
 		
-			if (((10*Data_40002ec8 + 1) <= 167) && ((10*Data_40002ec8 + 1) != 0))
+			if (((10*Data_40002ec8_NavigationDirectInputNr + 1) <= 167) && ((10*Data_40002ec8_NavigationDirectInputNr + 1) != 0))
 			{
-				Data_40002ec8 = 10*Data_40002ec8 + 1;
+				Data_40002ec8_NavigationDirectInputNr = 10*Data_40002ec8_NavigationDirectInputNr + 1;
 			}
 
-			if ((Data_40002ec8 <= 167) && (Data_40002ec8 != 0))
+			if ((Data_40002ec8_NavigationDirectInputNr <= 167) && (Data_40002ec8_NavigationDirectInputNr != 0))
 			{
-				wData_40002ec0_BrightStarNr = Data_40002ec8;
+				wData_40002ec0_BrightStarNr = Data_40002ec8_NavigationDirectInputNr;
 			}
 			break;
 		
@@ -112,14 +112,14 @@ void Handle1Key(void)
 			//68eb4
 			lcd_display_clear();
 		
-			if (((10*Data_40002ec8 + 1) <= 258997) && ((10*Data_40002ec8 + 1) != 0))
+			if (((10*Data_40002ec8_NavigationDirectInputNr + 1) <= 258997) && ((10*Data_40002ec8_NavigationDirectInputNr + 1) != 0))
 			{
-				Data_40002ec8 = 10*Data_40002ec8 + 1;
+				Data_40002ec8_NavigationDirectInputNr = 10*Data_40002ec8_NavigationDirectInputNr + 1;
 			}
 
-			if ((Data_40002ec8 <= 258997) && (Data_40002ec8 != 0))
+			if ((Data_40002ec8_NavigationDirectInputNr <= 258997) && (Data_40002ec8_NavigationDirectInputNr != 0))
 			{
-				Data_40002ec4_SAONr = Data_40002ec8;
+				Data_40002ec4_SAONr = Data_40002ec8_NavigationDirectInputNr;
 			}
 			break;
 		

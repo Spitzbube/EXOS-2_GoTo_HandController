@@ -654,7 +654,7 @@ extern unsigned short wData_40002ebc_ICNr; //40002ebc
 extern unsigned short wData_40002ebe_ShNr; //40002ebe
 extern unsigned short wData_40002ec0_BrightStarNr; //40002ec0
 extern unsigned int Data_40002ec4_SAONr; //40002ec4
-extern unsigned int Data_40002ec8; //40002ec8
+extern unsigned int Data_40002ec8_NavigationDirectInputNr; //40002ec8
 extern unsigned short wData_40002ecc; //40002ecc
 extern unsigned char bData_40002ece_ConstellationNr; //40002ece
 extern unsigned short wData_40002ed0; //40002ed0
