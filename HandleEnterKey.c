@@ -158,7 +158,7 @@ void HandleEnterKey(void)
 					bData_40003174 = 1;				
 					wData_40002eb8_MessierNr = 
 						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
-					Data_40002ec8 = 0;
+					Data_40002ec8_NavigationDirectInputNr = 0;
 				
 					lcd_display_clear();
 				
@@ -172,7 +172,7 @@ void HandleEnterKey(void)
 					bData_40003174 = 1;				
 					wData_40002eba_NGCNr = 
 						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
-					Data_40002ec8 = 0;
+					Data_40002ec8_NavigationDirectInputNr = 0;
 				
 					lcd_display_clear();
 				
@@ -186,7 +186,7 @@ void HandleEnterKey(void)
 					bData_40003174 = 1;				
 					wData_40002ebc_ICNr = 
 						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
-					Data_40002ec8 = 0;
+					Data_40002ec8_NavigationDirectInputNr = 0;
 				
 					lcd_display_clear();
 				
@@ -200,7 +200,7 @@ void HandleEnterKey(void)
 					bData_40003174 = 1;				
 					wData_40002ebe_ShNr = 
 						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
-					Data_40002ec8 = 0;
+					Data_40002ec8_NavigationDirectInputNr = 0;
 				
 					lcd_display_clear();
 				
@@ -214,7 +214,7 @@ void HandleEnterKey(void)
 					bData_40003174 = 1;				
 					wData_40002ec0_BrightStarNr = 
 						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
-					Data_40002ec8 = 0;
+					Data_40002ec8_NavigationDirectInputNr = 0;
 				
 					lcd_display_clear();
 				
@@ -228,7 +228,7 @@ void HandleEnterKey(void)
 					bData_40003174 = 2;				
 					Data_40002ec4_SAONr = 
 						Data_4000359c_RecentTargetIdArray[bData_4000316e_FocusLineOn8LineDisplay - 1];
-					Data_40002ec8 = 0;
+					Data_40002ec8_NavigationDirectInputNr = 0;
 				
 					lcd_display_clear();
 				
@@ -792,7 +792,7 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_NAVIGATION_MESSIER_CAT: //2400:
 			//0x546ec
 			wData_40002eb8_MessierNr = 1;
-			Data_40002ec8 = 0;
+			Data_40002ec8_NavigationDirectInputNr = 0;
 			lcd_display_clear();
 			bData_40003432 = 0;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MESSIER_OBJECT_DETAILS; //23012;
@@ -827,7 +827,7 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_NAVIGATION_NGC_CAT: //2500:
 			//0x548e4
 			wData_40002eba_NGCNr = 1;
-			Data_40002ec8 = 0;
+			Data_40002ec8_NavigationDirectInputNr = 0;
 			bData_40003432 = 0;
 			lcd_display_clear();
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NGC_OBJECT_SELECTION; //23003;
@@ -855,7 +855,7 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_NAVIGATION_IC_CAT: //2600:
 			//0x549bc
 			wData_40002ebc_ICNr = 1;
-			Data_40002ec8 = 0;
+			Data_40002ec8_NavigationDirectInputNr = 0;
 			bData_40003432 = 0;
 			lcd_display_clear();
 			Data_40002c64_MenuContextId = MENU_CONTEXT_IC_OBJECT_SELECTION; //23004;
@@ -883,7 +883,7 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_NAVIGATION_SH2_CAT: //2700:
 			//0x54a94
 			wData_40002ebe_ShNr = 1;
-			Data_40002ec8 = 0;
+			Data_40002ec8_NavigationDirectInputNr = 0;
 			bData_40003432 = 0;
 			lcd_display_clear();
 			Data_40002c64_MenuContextId = MENU_CONTEXT_SH2_OBJECT_SELECTION; //23005;
@@ -911,7 +911,7 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_NAVIGATION_BRIGHT_STAR: //2800:
 			//0x54b6c
 			wData_40002ec0_BrightStarNr = 1;
-			Data_40002ec8 = 0;
+			Data_40002ec8_NavigationDirectInputNr = 0;
 			bData_40003432 = 0;
 			lcd_display_clear();
 			Data_40002c64_MenuContextId = MENU_CONTEXT_BRIGHT_STAR_SELECTION; //23006;
@@ -939,7 +939,7 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_NAVIGATION_SAO_CAT: //2900:
 			//0x54c48: SAO Catalogue
 			Data_40002ec4_SAONr = 1;
-			Data_40002ec8 = 0;
+			Data_40002ec8_NavigationDirectInputNr = 0;
 			bData_40003432 = 0;
 			lcd_display_clear();
 			Data_40002c64_MenuContextId = MENU_CONTEXT_SAO_OBJECT_SELECTION; //23007;

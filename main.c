@@ -2357,7 +2357,7 @@ void HandleFKey(void)
 			//->0x60ec4
 			break;
 		
-		case 23012:
+		case MENU_CONTEXT_MESSIER_OBJECT_DETAILS: //23012:
 			//0x60e8c
 		case MENU_CONTEXT_MESSIER_OBJECT_SELECTION: //23002:
 			//0x60e94
@@ -2373,7 +2373,7 @@ void HandleFKey(void)
 			//0x60ea8
 			lcd_display_clear();
 		
-			Data_40002ec8 = 0;
+			Data_40002ec8_NavigationDirectInputNr = 0;
 		
 			beep1(1);
 			break;
