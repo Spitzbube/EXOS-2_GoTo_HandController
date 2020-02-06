@@ -959,7 +959,7 @@ void HandleReset(void)
 		flash_write((unsigned short)(0xdc9 + i), 0, sizeof(sp40), sp40);
 	}
 	
-	func_d2cc();
+	func_d1ec();
 	func_5099c();
 	
 	uart1_write_byte(0x55);
@@ -1567,83 +1567,6 @@ void func_52478(void)
 		
 		func_258c(bData_4000319a_SkyLandTargetId, Data_40003f78);
 		beep1(1);
-	}
-}
-
-/* 52720 - todo */
-double func_52720(int a)
-{
-	union 
-	{
-		int a;
-		char b[4];
-	} sp8;
-	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x03);
-	
-	switch (a)
-	{
-		case 1:
-			//0x5276c
-			uart1_write_byte(0x0f);
-			break;
-		
-		case 2:
-			//0x5277c
-			uart1_write_byte(0x2f);
-			break;
-		
-		case 3:
-			//0x5278c
-			uart1_write_byte(0x4f);
-			break;
-		
-		case 4:
-			//0x5279c
-			uart1_write_byte(0x6f);
-			break;
-		
-		default:
-			//0x527ac
-			break;
-	}
-	
-	switch (a)
-	{
-		case 1:
-			//0x527dc
-			sp8.a = fData_40002e98;
-			uart1_write_byte(sp8.b[1]);
-			uart1_write_byte(sp8.b[0]);
-			break;
-		
-		case 2:
-			//0x52804
-			sp8.a = fData_40002ea8;
-			uart1_write_byte(sp8.b[1]);
-			uart1_write_byte(sp8.b[0]);
-			break;
-		
-		case 3:
-			//0x5282c
-			sp8.a = fData_40002e98;
-			uart1_write_byte(sp8.b[1]);
-			uart1_write_byte(sp8.b[0]);
-			break;
-		
-		case 4:
-			//0x52854
-			sp8.a = fData_40002ea8;
-			uart1_write_byte(sp8.b[1]);
-			uart1_write_byte(sp8.b[0]);
-			break;
-		
-		default:
-			//0x5287c
-			break;
 	}
 }
 
@@ -3391,8 +3314,8 @@ unsigned char ConvertKeyCode(void)
 	return r4;
 }
 
-/* 6a2cc - todo */
-void func_6a2cc(void)
+/* 6a094 - todo */
+void func_6a094(void)
 {
 	get_rtc_date_time();
 	
@@ -3744,95 +3667,6 @@ void func_6a2cc(void)
 	{
 		beep1(10);
 	}
-}
-
-/* 6ab74 - todo */
-double func_6ab74(int a)
-{
-	unsigned char r5;
-	union
-	{
-		unsigned char b[4];
-		int i;
-	} sp8;
-	double d;
-
-	bData_40002c13_uart1ReceiveComplete = 0;
-	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
-	
-	switch (a)
-	{
-		case 1:
-			uart1_write_byte(0x10);
-			break;
-		
-		case 2:
-			uart1_write_byte(0x30);
-			break;
-		
-		case 3:
-			uart1_write_byte(0x50);
-			break;
-		
-		case 4:
-			uart1_write_byte(0x70);
-			break;
-		
-		default:
-			break;
-	}
-
-	bData_40002c13_uart1ReceiveComplete = 0;
-	
-	delay_loop(10);
-	
-	for (r5 = 50; (bData_40002c13_uart1ReceiveComplete == 0) && (r5 > 2); r5--)
-	{
-		func_659c(5);
-	}
-	
-	sp8.i = 0;
-		
-	if (bData_40002c13_uart1ReceiveComplete == 1)
-	{
-		switch (a)
-		{
-			case 1:
-				sp8.b[1] = Data_40003592_uart1ReceiveDataBuffer[1];
-				sp8.b[0] = Data_40003592_uart1ReceiveDataBuffer[2];
-			  d = sp8.i;
-				break;
-			
-			case 2:
-				sp8.b[1] = Data_40003592_uart1ReceiveDataBuffer[1];
-				sp8.b[0] = Data_40003592_uart1ReceiveDataBuffer[2];
-			  d = sp8.i;
-				break;
-			
-			case 3:
-				sp8.b[1] = Data_40003592_uart1ReceiveDataBuffer[1];
-				sp8.b[0] = Data_40003592_uart1ReceiveDataBuffer[2];
-			  d = sp8.i;
-				break;
-			
-			case 4:
-				sp8.b[1] = Data_40003592_uart1ReceiveDataBuffer[1];
-				sp8.b[0] = Data_40003592_uart1ReceiveDataBuffer[2];
-			  d = sp8.i;
-				break;
-			
-			default:
-				break;
-		}
-		
-		bData_40002c13_uart1ReceiveComplete = 0;
-	}
-
-	return d;
 }
 
 /* 6ae24 - todo */
@@ -4575,17 +4409,47 @@ void func_6c5e8(void)
 	}	
 }
 
-/* 6c804 - complete */
+/* 6c3d0 - complete */
 void ShowStartupScreen(void)
 {
+	unsigned char sp272[] = "JSDFJJFDFSGGDVV....VYYYCCCFJJJQQQQ'G'GEEEZZZ' 'ZZ1'2'2.33ZZZOee000000'e'0eOQJTTTErrrQQQr";
+	unsigned char sp184[] = "JFDSS'S'AYFEE//NGGYYMMVVVMMC'C'MEM//M'M'REEEEED12.334.5VOO0000O' 'DEEEeEEA'J'rrrrrQQQ'";
+	unsigned char sp96[] = "CervvYYv..VVVeVV1'.'V.90133423578DCCDDD004//' '/3r38445TD0000000D'T'EFDYYMrrrr'r'rQQQ";
+	unsigned char sp8[] = "DF'Y'YDSYYYVV'V'VA'E'F444900'2'GGG9577DDCD..D81763SSSVVVV8ZZA0CCD0A'O'AVVVOODMarrrQ'Q'r";
+	
 	#ifdef UART0_DEBUG
 	lcd_display_string(0, 1, 1, 22, "   OPEN GOTO SYSTEM   ");
-	lcd_display_string(0, 2, 1, 22, "based on EXOS EQ v2.3 ");
+	lcd_display_string(0, 2, 1, 22, "based on EXOS EQ v2.2 ");
 	lcd_display_string(0, 4, 1, 22, "github.com/Spitzbube/ ");
 	lcd_display_string(0, 5, 1, 22, "Commit: 08ba598fa99635");
 	#else
-	lcd_display_string(0, 3, 1, 22, " BRESSER GOTO SYSTEM  ");
-	lcd_display_string(0, 5, 1, 22, "     EXOS EQ v2.3     ");
+	lcd_display_string(0, 3, 4, 1, &sp184[75]);
+	lcd_display_string(0, 3, 5, 1, &sp8[68]);
+	lcd_display_string(0, 3, 6, 1, &sp184[29]);
+	lcd_display_string(0, 3, 7, 1, &sp96[18]);
+	lcd_display_string(0, 3, 8, 1, &sp272[35]);
+	lcd_display_string(0, 3, 9, 1, &sp8[68]);
+	lcd_display_string(0, 3, 10, 1, &sp96[66]);
+	lcd_display_string(0, 3, 11, 1, &sp8[68]);
+	lcd_display_string(0, 3, 14, 1, &sp184[6]);
+	lcd_display_string(0, 3, 15, 1, &sp8[3]);
+	lcd_display_string(0, 3, 16, 1, &sp184[6]);
+	lcd_display_string(0, 3, 17, 1, &sp96[66]);
+	lcd_display_string(0, 3, 18, 1, &sp8[19]);
+	lcd_display_string(0, 3, 19, 1, &sp184[38]);
+	
+	lcd_display_string(0, 5, 5, 1, &sp96[20]);
+	lcd_display_string(0, 5, 6, 1, &sp272[70]);
+	lcd_display_string(0, 5, 7, 1, &sp96[79]);
+	lcd_display_string(0, 5, 8, 1, &sp96[18]);
+	lcd_display_string(0, 5, 10, 1, &sp272[51]);
+	lcd_display_string(0, 5, 11, 1, &sp96[18]);
+	lcd_display_string(0, 5, 12, 1, &sp8[29]);
+	lcd_display_string(0, 5, 14, 1, &sp8[19]);
+	lcd_display_string(0, 5, 15, 1, &sp8[84]);
+	lcd_display_string(0, 5, 16, 1, &sp96[45]);
+	lcd_display_string(0, 5, 17, 1, &sp184[64]);
+	lcd_display_string(0, 5, 18, 1, &sp272[45]);
 	#endif
 }
 
@@ -4707,53 +4571,9 @@ void func_6cb38(void)
 	bData_4000352d = func_6c848();
 	
 	switch (bData_4000352d)
-	{
-		case 29:
-			//6cbd8: "Schwenk abbrechen"
-			func_b4f0();
-		
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 30:
-			//6cbf0: "Park Scope"?
-			func_75c4();
-		
-			bData_40003431 = 1;
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 31:
-			//6cc10: "Teleskop verbinden"?
-			sp60.fData = dData_40002e28_SiteLongitude;
-			sp56.fData = dData_40002e48_SiteLatitude;
-		
-			sp40[4] = 0xfe;
-			sp40[5] = sp60.bData[0];
-			sp40[6] = sp60.bData[1];
-			sp40[7] = sp60.bData[2];
-			sp40[8] = sp60.bData[3];
-			sp40[9] = sp56.bData[0];
-			sp40[10] = sp56.bData[1];
-			sp40[11] = sp56.bData[2];
-			sp40[12] = sp56.bData[3];
-			
-			uart0_send(sp40, 13);
-		
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 32:
-			//6cc98
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
+	{		
 		case 33:
-			//6ccac
+			//0x6c9b0
 			if (bData_40002c1a == 1)
 			{
 				sp40[4] = 0x50;
@@ -4766,37 +4586,31 @@ void func_6cb38(void)
 			uart0_send(sp40, 13);
 			
 			bData_4000352d = 1;
-			//->6d044
 			break;
-		
+
 		case 34:
-			//6cd00
-			bData_4000352d = 1;
-			//->6d044
+			//0x6ca04
+			bData_4000352d = 0;
 			break;
 		
 		case 35:
-			//6cd14
+			//0x6ca18
 			func_b64c(fData_40003510, fData_40003514);
 		
 			dData_400031f0 = 0;
 			dData_400031f8 = 0;
-			bData_4000352d = 1;
-			//->6d044
+			bData_4000352d = 0x20;
 			break;
 		
 		case 36:
-			//6cd7c
-			dData_40003410 = dData_400033d8;
-			dData_40003418 = -dData_400033e0;
-			dData_40003420 = dData_400033d8;
-			dData_40003428 = dData_400033e0;
-			bData_4000352d = 1;
-			//->6d044
+			//0x6ca7c
+			dData_400031f0 = Data_40004128.dData_328;
+			dData_400031f8 = -Data_40004128.dData_336;
+			bData_4000352d = 0x20;
 			break;
 		
 		case 37:
-			//6cdd4: "Standort einstellen"
+			//0x6cabc
 			bData_40002e89 = 1;
 		
 			func_b4f0();
@@ -4805,12 +4619,11 @@ void func_6cb38(void)
 			dData_40002e48_SiteLatitude = fData_4000351c_ReceiveExternalSiteLatitude;
 			Data_40004128.geographicLongitude = fData_40003518_ReceiveExternalSiteLongitude;
 			Data_40004128.geographicLatitude = fData_4000351c_ReceiveExternalSiteLatitude;
-			bData_4000352d = 1;
-			//->6d044
+			bData_4000352d = 0;
 			break;
 		
 		case 38:
-			//6ce50 - Set Clock
+			//0x6cb38
 			bData_40002e89 = 1;
 		
 			func_b4f0();
@@ -4827,28 +4640,14 @@ void func_6cb38(void)
 			SEC = bData_4000352c_ReceiveExternalSeconds;
 			CCR = (1 << 4) | (1 << 0); //CLKEN = 1
 		
-			bData_4000352d = 1;
-			//->6d044
+			bData_4000352d = 0;
 			break;
 		
-		case 1:
-			//6cef8
+		case 32:
+			//0x6cbe0
 			if (bData_4000352e > 2)
 			{
 				//6cf0c
-#ifndef OLIMEX_LPC2148
-				if (bData_40002c1a == 2)
-				{
-					//6cf1c
-					double sp32, sp24;
-					func_acdc(fData_4000350c, fData_40003508, &sp32, &sp24);					
-					fData_40003508 = sp32;
-					fData_4000350c = sp24;
-					dData_40003448 = sp32;
-					dData_40003450 = sp24;
-				}
-#endif
-				//6cfa8
 				sp60.fData = fData_40003508;
 				sp56.fData = fData_4000350c;
 				
@@ -4869,14 +4668,13 @@ void func_6cb38(void)
 			}
 			else
 			{
-				//6d024
+				//0x6cc70
 				bData_4000352e++;
 			}
-			//6d038 -> 6d044
 			break;
 		
 		default:
-			//6d03c
+			//0x6cc88
 			break;
 	}
 }
@@ -4890,7 +4688,7 @@ int main(void)
 
 #ifndef OLIMEX_LPC2148
 	func_7590();
-	func_d2cc();
+	func_d1ec();
 	func_5099c();
 	flash_read(0xdcb, 0, 10, Data_40004c58);
 	bData_40003196_CurrentLanguage = Data_40004c58[0];
@@ -4929,14 +4727,6 @@ int main(void)
 	
 	func_659c(10);
 	
-	fData_40002e98 = func_6ab74(1);
-
-	func_659c(50);
-	
-	fData_40002ea8 = func_6ab74(2);
-
-	func_659c(50);
-
 	if (bData_40002c1a == 1)
 	{
 		bData_40002e7a_MountType = MENU_MOUNT_TYPE_EQU; //1;
@@ -5689,12 +5479,12 @@ int main(void)
 			bData_400031ed = 1;
 		}
 		//6f94c
-		func_6a2cc(); //->KeyHandling
+		func_6a094(); //->KeyHandling
 		//6f950
 		if (Data_40004128.bData_364 == 0)
 		{
 			//6f960
-			func_c57c();
+			func_c4fc();
 			
 			bData_400034cc = 0;
 		}
@@ -6599,11 +6389,11 @@ int main(void)
 		{
 			func_659c(100);
 		}
-#if 1
+#if 0
 		//Workaround
 		if (Data_40004128.bData_357) ;
 #endif		
-		//729ec -> 6d898
+		//72644 -> 0x6d49c
 #endif //OLIMEX_LPC2148
 	} //while (1)	
 }

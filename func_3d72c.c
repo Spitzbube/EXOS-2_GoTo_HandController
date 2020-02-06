@@ -342,7 +342,7 @@ void DisplayScreenItems(void)
 							}
 							//0x3f9dc
 							bData_400031e9 = 5;
-							func_c8f4();
+							func_c874();
 							beep1(3);
 							
 							Data_40003364 = Data_400030b4; //"The telescope has be"
@@ -1950,7 +1950,7 @@ void DisplayScreenItems(void)
 							}
 							//0x48ac0
 							bData_400031e9 = 5;
-							func_c8f4();
+							func_c874();
 							beep1(3);
 							
 							Data_40003364 = Data_400030b4; //"The telescope has be"

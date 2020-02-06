@@ -10,7 +10,7 @@ void HandleEnterKey(void)
 			if (Data_40004128.bData_364 == 0)
 			{
 				//52e7c
-				func_c8f4();
+				func_c874();
 			}
 			else
 			{
@@ -442,17 +442,17 @@ void HandleEnterKey(void)
 						{
 							case 1:
 								//0x53c90
-								func_cf8c();
+								func_cf0c();
 								break;
 							
 							case 2:
 								//0x53c9c
-								func_d07c();
+								func_cffc();
 								break;
 							
 							case 3:
 								//0x53ca8
-								func_d16c();
+								func_d0ec();
 								break;
 							
 							default:
@@ -482,7 +482,7 @@ void HandleEnterKey(void)
 							
 							if (Data_40004128.bData_364 == 0)
 							{
-								func_c8f4();
+								func_c874();
 							}
 							//0x53ddc
 							bData_40002c61++;
@@ -508,7 +508,7 @@ void HandleEnterKey(void)
 							
 							if (Data_40004128.bData_364 == 0)
 							{
-								func_c8f4();
+								func_c874();
 							}
 							//0x53ef8
 							bData_40002c61++;
@@ -625,8 +625,6 @@ void HandleEnterKey(void)
 			{
 				//54218
 				fData_40002e98 = Data_40002e94 / Data_40002e9c;
-				
-				func_52720(1);
 			}
 			//0x54244
 			Data_40002e94 = 0;
@@ -660,8 +658,6 @@ void HandleEnterKey(void)
 			{
 				//54350
 				fData_40002ea8 = fData_40002ea4 / fData_40002eac;
-
-				func_52720(2);
 			}
 			//0x5437c
 			fData_40002ea4 = 0;
@@ -1030,7 +1026,7 @@ void HandleEnterKey(void)
 		
 		case 4400: // Sky/Land
 			//0x54e24
-			Data_40002c64_MenuContextId = 4400;
+			Data_40002c64_MenuContextId = 45001;
 			break;
 		
 		case 45001:
@@ -1092,18 +1088,7 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_AZ_EQU: //4500:
 			//0x54fc4: AZ / EQ
-			#if 1 //Original
-			Data_40002c64_MenuContextId = MENU_CONTEXT_AZ_EQU; //4500; //Bug? -> Non-functional
-			#else
-			if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
-			{
-				Data_40002c64_MenuContextId = MENU_CONTEXT_MOUNT_AZ; //46001;
-			}
-			else if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_EQU) //1)
-			{
-				Data_40002c64_MenuContextId = MENU_CONTEXT_MOUNT_EQU; //46002;
-			}
-			#endif
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MOUNT_AZ; //46001;
 			break;
 		
 		case MENU_CONTEXT_MOUNT_AZ: //46001:
@@ -1656,5 +1641,9 @@ void HandleEnterKey(void)
 		default:
 			break;
 	}	
+}
+
+void fill_5618c()
+{
 }
 
