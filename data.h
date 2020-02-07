@@ -136,285 +136,7 @@ typedef struct
 	
 } Struct_40004380;
 
-extern unsigned char strAlignStarsNames[][10]; //40000000
-extern unsigned char Data_40000118[][22]; //40000118, size?? -> 40000380???
-extern char Data_40000380[]; //40000380
-extern char Data_4000038a[]; //4000038a
-extern char Data_40000394[]; //40000394
-extern char Data_4000039e[]; //4000039e
-extern char Data_400003a8[]; //400003a8
-extern char Data_400003b2[]; //400003b2
-extern char Data_400003ba[]; //400003ba
-extern char Data_400003c2[]; //400003c2
-extern char Data_400003ca[]; //400003ca
-extern char Data_400003d4[]; //400003d4
-extern char strEngTelescopeAlign[]; //400008ad
-extern char Data_400008bd[]; //400008bd, size???
-extern char Data_400008c8[]; //400008c8, size???
-extern char Data_400008d2[]; //400008d2, size???
-extern char strEngOneStarAlign[]; //400008d8
-extern char strEngTwoStarAlign[]; //400008e7
-extern char strEngThreeStarAlign[]; //400008f6
-extern char Data_40000907[]; //40000907, size???
-extern char Data_40000913[]; //40000913, size???
-extern char Data_40000923[]; //40000923, size???
-extern char Data_40000933[]; //40000933, size???
-extern char strEngSolarSystem[]; //40000944
-extern char strEngConstellation[]; //40000951
-extern char strEngFamousStar[]; //4000095f
-extern char strEngMessierCatal[]; //4000096b
-extern char strEngNGCCatalog[]; //4000097a
-extern char strEngICCatalogue[]; //40000987
-extern char strEngSh2Catalog[]; //40000994, size???
-extern char strEngBrightStarCat[]; //400009a1, size???
-extern char strEngSAOStarCatal[]; //400009b2, size???
-extern char strEngCustomerObjects[]; //400009c2, size???
-extern char strEngInputRAandDEC[]; //400009d3, size???
-extern char strEngCustomLandGoal[]; //400009e4, size???
-extern char strEngCurrentObjects[]; //400009f5
-extern char strEngObjectRiseSet[]; //40000a05
-extern char strEngCurrLunarPhase[]; //40000a15
-extern char strEngTimer[]; //40000a27
-extern char strEngAlarm[]; //40000a2d
-extern char strEngEyepieceFOV[]; //40000a33
-extern char strEngEyepieceMagn[]; //40000a40
-extern char strEngDisplayIllumin[]; //40000a4f
-extern char strEngParkposition[]; //40000a60
-extern char strEngTimeAndDate[]; //40000a6d
-extern char strEngDaylightSaving[]; //40000a7c
-extern char strEngSiteSetting[];
-extern char strEngSkyLand[];
-extern char strEngAzEqu[];
-extern char strEngTelescopeMount[];
-extern char strEngTrackingRate[];
-extern char strEngLanguage[];
-extern char strEngReset[];
-extern char Data_40000ad8[];
-extern char Data_40000ae8[];
-extern char Data_40000af4[];
-extern char Data_40000aff[];
-extern char Data_40000b06[];
-extern char Data_40000b0a[];
-extern char Data_40000b11[];
-extern char Data_40000b18[];
-extern char Data_40000b1f[];
-extern char Data_40000b23[];
-extern char Data_40000b4d[];
-extern char Data_40000b55[];
-extern char Data_40000b5b[];
-extern char Data_40000b65[];
-extern char strEngCountryAndCity[];
-extern char strEngCustomSite[];
-extern char Data_40000b8a[];
-extern char Data_40000b91[];
-extern char Data_40000b95[];
-extern char Data_40000b9c[];
-extern char Data_40000ba3[];
-extern char Data_40000baa[];
-extern char Data_40000bae[];
-extern char Data_40000bb5[];
-extern char strEngStarSpeed[];
-extern char strEngSolarSpeed[];
-extern char strEngMoonSpeed[];
-extern char strEngCustomizeSpeed[];
-extern char strEngGuidingSpeed[];
-
-extern char strEngListAlignStars[]; //40000bfc
-extern char Data_40000c14[];
-extern char Data_40000c20[];
-extern char Data_40000c35[];
-extern char Data_40000c4b[];
-extern char Data_40000c60[];
-extern char Data_40000c7a[];
-extern char Data_40000c92[];
-extern char Data_40000ca6[];
-extern char Data_40000cbe[];
-extern char Data_40000cd3[];
-extern char Data_40000ce8[];
-extern char Data_40000cfb[];
-extern char Data_40000d06[];
-extern char Data_40000d1a[];
-extern char Data_40000d2f[];
-extern char Data_40000d44[];
-extern char Data_40000d59[];
-extern char Data_40000d66[];
-extern char Data_40000d7b[];
-extern char Data_40000d90[];
-extern char Data_40000da2[];
-extern char Data_40000db8[];
-extern char Data_40000dcf[];
-extern char Data_40000de3[];
-extern char Data_40000df9[];
-extern char Data_40000e0a[];
-extern char Data_40000e20[];
-extern char Data_40000e21[];
-extern char Data_40000e38[];
-extern char Data_40000e4e[];
-extern char Data_40000e62[]; //40000e62
-extern char Data_40000e82[];
-extern char Data_40000ea2[];
-extern char Data_40000ec2[];
-extern char Data_40000ee2[];
-extern char Data_40000f02[];
-extern char Data_40000f22[];
-extern char Data_40000f42[];
-extern char Data_40000f62[];
-extern char Data_40000f82[];
-extern char Data_40000fa2[];
-extern char Data_40000fc2[];
-extern char Data_40000fe2[];
-extern char Data_40001002[];
-extern char Data_40001022[];
-extern char Data_40001042[];
-extern char Data_40001062[];
-extern char Data_40001082[];
-extern char Data_400010a2[];
-extern char Data_400010c2[];
-extern char Data_400010e2[];
-extern char Data_40001102[];
-extern char Data_40001122[];
-extern char Data_40001142[];
-extern char Data_40001162[];
-extern char Data_40001182[];
-extern char Data_400011a2[];
-extern char Data_400011c2[];
-extern char Data_400011e2[];
-extern char Data_40001202[];
-extern char Data_40001222[];
-extern char Data_40001242[];
-extern char Data_40001262[];
-extern char Data_40001282[];
-extern char Data_400012a2[];
-extern char Data_400012c2[];
-extern char Data_400012e2[];
-extern char Data_40001302[];
-extern char Data_40001322[];
-extern char Data_40001342[];
-extern char Data_40001362[];
-extern char Data_40001382[];
-extern char Data_400013a2[];
-extern char Data_400013c2[];
-extern char Data_400013e2[];
-extern char Data_40001402[];
-extern char Data_40001422[];
-extern char Data_40001442[];
-extern char Data_40001462[];
-extern char Data_40001482[];
-extern char Data_400014a2[];
-extern char Data_400014c2[];
-extern char Data_400014e2[];
-extern char Data_40001502[];
-extern char Data_40001522[];
-extern char Data_40001542[];
-extern char Data_40001562[];
-extern char Data_40001582[];
-extern char Data_400015a2[];
-extern char Data_400015c2[];
-extern char Data_400015e2[];
-extern char Data_40001602[];
-extern char Data_40001622[];
-extern char Data_40001642[];
-extern char Data_40001662[];
-extern char Data_40001682[];
-extern char Data_400016a2[];
-extern char Data_400016c2[];
-extern char Data_400016e2[];
-extern char Data_40001702[];
-extern char Data_40001722[];
-extern char Data_40001742[];
-extern char Data_40001762[];
-extern char Data_40001782[];
-extern char Data_400017a2[];
-extern char Data_400017c2[];
-extern char Data_400017e2[];
-extern char Data_40001802[];
-extern char Data_40001822[];
-extern char Data_40001842[];
-extern char Data_40001862[];
-extern char Data_40001882[];
-extern char Data_400018a2[];
-extern char Data_400018c2[];
-extern char Data_400018e2[];
-extern char Data_40001902[];
-extern char Data_40001922[];
-extern char Data_40001942[];
-extern char Data_40001962[];
-extern char Data_40001982[];
-extern char Data_400019a2[];
-extern char Data_400019c2[];
-extern char Data_400019e2[];
-extern char Data_40001a02[];
-extern char Data_40001a22[];
-extern char Data_40001a42[];
-extern char Data_40001a62[];
-extern char Data_40001a82[];
-extern char Data_40001aa2[];
-extern char Data_40001ac2[];
-extern char Data_40001ae2[];
-extern char Data_40001b02[];
-extern char Data_40001b22[];
-extern char Data_40001b42[];
-extern char Data_40001b62[];
-extern char Data_40001b82[];
-extern char Data_40001ba2[];
-extern char Data_40001bc2[];
-extern char Data_40001be2[];
-extern char Data_40001c02[];
-extern char Data_40001c22[];
-extern char Data_40001c42[];
-extern char Data_40001c62[];
-extern char Data_40001c82[];
-extern char Data_40001ca2[];
-extern char Data_40001cc2[];
-extern char Data_40001ce2[];
-extern char Data_40001d02[];
-extern char Data_40001d22[];
-extern char Data_40001d42[];
-extern char Data_40001d62[];
-extern char Data_40001d82[];
-extern char Data_40001da2[];
-extern char Data_40001dc2[];
-extern char Data_40001de2[];
-extern char Data_40001e02[];
-extern char Data_40001e22[];
-extern char Data_40001e42[];
-extern char Data_40001e62[];
-extern char Data_40001e82[];
-extern char Data_40001ea2[];
-extern char Data_40001ec2[];
-extern char Data_40001ee2[];
-extern char Data_40001f02[];		
-extern char Data_40001f22[];
-extern char Data_40001f42[];
-extern char Data_40001f62[];
-extern char Data_40001f82[];
-extern char Data_40001fa2[];
-extern char Data_40001fc2[];
-extern char Data_40001fe2[];
-extern char Data_40002002[];
-extern char Data_40002022[];
-extern char Data_40002042[];
-extern char Data_40002062[];
-extern char Data_40002082[];
-extern char Data_400020a2[];
-extern char Data_400020c2[];
-extern char Data_400020e2[];
-extern char Data_40002102[];
-extern char Data_40002122[];
-extern char Data_40002142[];
-extern char Data_40002162[];
-extern char Data_40002182[];
-extern char Data_400021a2[];
-extern char Data_400021c2[];
-extern char Data_400021e2[];
-extern char Data_40002202[];
-extern char Data_40002222[];
-extern char Data_40002242[];
-extern char Data_40002262[];
-extern char Data_40002282[];
-extern char Data_400022a2[];
-extern char Data_400022c2[];
-extern char Data_400022f2[]; //400022f2
+extern char strCustomerObjectRaAziInputCheck[]; //400022f2
 extern char Data_40002302[]; //40002302
 extern char Data_40002387[]; //40002387
 extern char Data_4000239a[]; //4000239a
@@ -452,7 +174,7 @@ extern unsigned char Data_40002792[]; //40002792
 extern char Data_400027cf[]; //400027cf
 extern unsigned char Data_400027df[]; //400027df
 extern unsigned char Data_400027ef[]; //400027ef
-extern unsigned char Data_400027ff[]; //400027ff
+extern unsigned char strCustomerObjectNameInput[]; //400027ff
 extern unsigned char Data_40002827[]; //40002827
 extern unsigned char Data_40002837[]; //40002837
 extern unsigned char Data_40002847[]; //40002847
@@ -681,13 +403,14 @@ extern unsigned char bData_40002f14_RecentTargetCount; //40002f14
 extern unsigned char Data_40002f15_RecentTargetTypeArray[]; //40002f15, size???
 extern unsigned char bData_40002f1d; //40002f1d
 extern char bData_40002f1e_SetupLocalData; //40002f1e
-extern char* Data_40002f20; //40002f20
-extern char* Data_40002f24; //40002f24
-extern char* Data_40002f28; //40002f28
-extern char* Data_40002f2c; //40002f2c
-extern char* Data_40002f30; //40002f30
-extern char* Data_40002f34; //40002f34
-extern char* Data_40002f38; //40002f38
+
+extern char* strTelescopeAlign; //40002f20
+extern char* strNavigation; //40002f24
+extern char* strUtilities; //40002f28
+extern char* strSetup; //40002f2c
+extern char* strOneStarAlign; //40002f30
+extern char* strTwoStarAlign; //40002f34
+extern char* strThreeStarAlign; //40002f38
 extern char* Data_40002f3c; //40002f3c
 extern char* Data_40002f40; //40002f40
 extern char* Data_40002f44; //40002f44
@@ -696,8 +419,8 @@ extern char* Data_40002f4c; //40002f4c
 extern char* Data_40002f50; //40002f50
 extern char* Data_40002f54; //40002f54
 extern char* Data_40002f58; //40002f58
-extern char* Data_40002f5c; //40002f5c
-extern char* Data_40002f60; //40002f60
+extern char* strSolarSystem; //40002f5c
+extern char* strConstellation; //40002f60
 extern char* Data_40002f64; //40002f64
 extern char* Data_40002f68; //40002f68
 extern char* Data_40002f6c; //40002f6c
@@ -708,7 +431,7 @@ extern char* Data_40002f7c; //40002f7c
 extern char* Data_40002f80; //40002f80
 extern char* Data_40002f84; //40002f84
 extern char* Data_40002f88; //40002f88
-extern char* Data_40002f8c; //40002f8c
+extern char* strCurrentObjects; //40002f8c
 extern char* Data_40002f90; //40002f90
 extern char* Data_40002f94; //40002f94
 extern char* Data_40002f98; //40002f98
@@ -716,9 +439,9 @@ extern char* Data_40002f9c; //40002f9c
 extern char* Data_40002fa0; //40002fa0
 extern char* Data_40002fa4; //40002fa4
 extern char* Data_40002fa8; //40002fa8
-extern char* Data_40002fac; //40002fac
+extern char* strParkposition; //40002fac
 extern char* Data_40002fb0; //40002fb0
-extern char* Data_40002fb4; //40002fb4
+extern char* strTimeAndDate; //40002fb4
 extern char* Data_40002fb8; //40002fb8
 extern char* Data_40002fbc; //40002fbc
 extern char* Data_40002fc0; //40002fc0
@@ -761,8 +484,8 @@ extern char* Data_40003050;
 extern char* Data_40003054;
 extern char* Data_40003058;
 extern char* Data_4000305c;
-extern char* Data_40003060;
-extern char* Data_40003064;
+extern char* strCountryAndCity; //40003060
+extern char* strCustomSite; //40003064
 extern char* Data_40003068;
 extern char* Data_4000306c;
 extern char* Data_40003070;
@@ -919,8 +642,8 @@ extern float fData_400032a0; //400032a0
 extern unsigned char bData_400032a4_OTAZeroDataErrorCount; //400032a4
 extern double dData_400032b0_SunRightAscension; //400032b0
 extern double dData_400032b8_SunDeclination; //400032b8
-extern double dData_400032c0; //400032c0
-extern double dData_400032c8; //400032c8
+extern double dData_400032c0_MoonRightAscension; //400032c0
+extern double dData_400032c8_MoonDeclination; //400032c8
 extern double dData_400032d0; //400032d0
 extern double dData_400032d8; //400032d8
 extern double dData_400032e0; //400032e0

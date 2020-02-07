@@ -151,7 +151,7 @@ void HandleDownKey(void)
 		case MENU_CONTEXT_NAVIGATION_SAO_CAT: //2900:
 			//0x5b548
 			func_5a57c(1, 12);
-			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_OBJ; 2110;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_OBJ; //2110;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_CUST_OBJ: //2110:
@@ -271,10 +271,10 @@ void HandleDownKey(void)
 		case MENU_CONTEXT_TRACKING_RATE: //4700:
 			//0x5b7d8
 			func_5a57c(1, 14);
-			Data_40002c64_MenuContextId = 4800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_LANGUAGE; //4800;
 			break;
 		
-		case 4800:
+		case MENU_CONTEXT_LANGUAGE: //4800:
 			//0x5b7f8
 			func_5a57c(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RESET; //4900;
@@ -624,29 +624,29 @@ void HandleDownKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MOUNT_AZ; //46001;
 			break;
 		
-		case 49001:
+		case MENU_CONTEXT_ENGLISH: //49001:
 			//0x5bf08: Language -> English
-			Data_40002c64_MenuContextId = 49002;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_GERMAN; //49002;
 			break;
 		
-		case 49002:
+		case MENU_CONTEXT_GERMAN: //49002:
 			//0x5bf1c
-			Data_40002c64_MenuContextId = 49003;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_FRENCH; //49003;
 			break;
 		
-		case 49003:
+		case MENU_CONTEXT_FRENCH: //49003:
 			//0x5bf30
-			Data_40002c64_MenuContextId = 49004;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ITALIAN; //49004;
 			break;
 		
-		case 49004:
+		case MENU_CONTEXT_ITALIAN: //49004:
 			//0x5bf44
-			Data_40002c64_MenuContextId = 49005;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SPANISH; //49005;
 			break;
 		
-		case 49005:
+		case MENU_CONTEXT_SPANISH: //49005:
 			//0x5bf58
-			Data_40002c64_MenuContextId = 49001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ENGLISH; //49001;
 			break;
 		
 		case 21001:
@@ -763,7 +763,7 @@ void HandleDownKey(void)
 			}
 			break;
 		
-		case 203:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x5c1fc
 			bData_4000318a = 6;
 			Data_40002c64_MenuContextId = 204;
@@ -778,10 +778,10 @@ void HandleDownKey(void)
 		case 205:
 			//0x5c23c
 			bData_4000318a = 6;
-			Data_40002c64_MenuContextId = 203;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT; //203;
 			break;
 		
-		case 201:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x5c25c
 		case 202:
 			//0x5c264

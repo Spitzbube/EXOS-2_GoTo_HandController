@@ -565,7 +565,7 @@ void HandleUpKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TELESCOPE_MOUNT;
 			break;
 		
-		case 4800:
+		case MENU_CONTEXT_LANGUAGE: //4800:
 			//0x5de90
 			func_5a57c(0, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE;
@@ -574,7 +574,7 @@ void HandleUpKey(void)
 		case MENU_CONTEXT_RESET: //4900:
 			//0x5deb0
 			func_5a57c(0, 14);
-			Data_40002c64_MenuContextId = 4800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_LANGUAGE; //4800;
 			break;
 		
 		case 1402:
@@ -921,29 +921,29 @@ void HandleUpKey(void)
 			bData_4000318a = 6;
 			break;
 		
-		case 49001:
+		case MENU_CONTEXT_ENGLISH: //49001:
 			//0x5e5a8
-			Data_40002c64_MenuContextId = 49005;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SPANISH; //49005;
 			break;
 		
-		case 49005:
+		case MENU_CONTEXT_SPANISH: //49005:
 			//0x5e5bc
-			Data_40002c64_MenuContextId = 49004;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ITALIAN; //49004;
 			break;
 		
-		case 49004:
+		case MENU_CONTEXT_ITALIAN: //49004:
 			//0x5e5d0
-			Data_40002c64_MenuContextId = 49003;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_FRENCH; //49003;
 			break;
 		
-		case 49003:
+		case MENU_CONTEXT_FRENCH: //49003:
 			//0x5e5e4
-			Data_40002c64_MenuContextId = 49002;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_GERMAN; //49002;
 			break;
 		
-		case 49002:
+		case MENU_CONTEXT_GERMAN: //49002:
 			//0x5e5f8
-			Data_40002c64_MenuContextId = 49001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ENGLISH; //49001;
 			break;
 		
 		case 21001:
@@ -1065,7 +1065,7 @@ void HandleUpKey(void)
 			}
 			break;
 		
-		case 203:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x5e97c
 			bData_4000318a = 5;
 			Data_40002c64_MenuContextId = 205;
@@ -1080,10 +1080,10 @@ void HandleUpKey(void)
 		case 204:
 			//0x5e9bc
 			bData_4000318a = 6;
-			Data_40002c64_MenuContextId = 203;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT; //203;
 			break;
 		
-		case 201:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x5e9dc
 		case 202:
 			//0x5e9e4

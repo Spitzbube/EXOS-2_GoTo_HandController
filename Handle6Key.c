@@ -126,7 +126,7 @@ void Handle6Key(void)
 		case MENU_CONTEXT_RA_INPUT: //29001:
 		case 204:
 			//653b8
-			Data_400022f2[bData_4000318a - 1] = '6';
+			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '6';
 			Data_400027df[bData_4000318a - 1] = '6';
 		
 			func_57b40();
@@ -134,7 +134,7 @@ void Handle6Key(void)
 		
 		case 207:
 			//653ec
-			Data_400022f2[bData_4000318a - 1] = '6';
+			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '6';
 			Data_400027df[bData_4000318a - 1] = '6';
 		
 			func_57a4c();
@@ -166,7 +166,7 @@ void Handle6Key(void)
 			func_57a4c();
 			break;
 		
-		case 203:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 		case 206:
 			//654f8
 			switch (bData_400031e8)
@@ -212,7 +212,7 @@ void Handle6Key(void)
 					break;
 			}
 			//0x655e4
-			Data_400027ff[bData_4000318a - 1] = bData_400031e8;
+			strCustomerObjectNameInput[bData_4000318a - 1] = bData_400031e8;
 			break;
 		
 		case 48001:

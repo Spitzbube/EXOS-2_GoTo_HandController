@@ -188,7 +188,7 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
-		case 2110:
+		case MENU_CONTEXT_NAVIGATION_CUST_OBJ: //2110:
 			//0x5fdd8
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
@@ -305,22 +305,22 @@ void HandleMinusKey(void)
 		
 		case 2801:
 			//0x5ffa4
-			Data_40002c64_MenuContextId = 2110; //->User-def Object
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_OBJ; //2110;
 			break;
 		
 		case 2802:
 			//0x5ffb8
-			Data_40002c64_MenuContextId = 2110;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_OBJ; //2110;
 			break;
 		
 		case 2803:
 			//0x5ffcc
-			Data_40002c64_MenuContextId = 2110;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_OBJ; //2110;
 			break;
 		
 		case 2804:
 			//0x5ffe0
-			Data_40002c64_MenuContextId = 2110;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_OBJ; //2110;
 			break;
 		
 		case 21101:
@@ -786,18 +786,18 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 		
-		case 201:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x607b4
-			Data_40002c64_MenuContextId = 2110;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_OBJ; //2110;
 			break;
 		
-		case 203:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x607c8
 		case 204:
 			//0x607d0
 		case 205:
 			//0x607d4
-			Data_40002c64_MenuContextId = 201;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION; //201;
 			break;
 		
 		case MENU_CONTEXT_RA_INPUT: //29001:

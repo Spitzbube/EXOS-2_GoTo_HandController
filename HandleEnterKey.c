@@ -967,25 +967,25 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_NAVIGATION_CUST_OBJ: //2110:
 			//0x54d20: Customer Objects
-			Data_40002c64_MenuContextId = 201;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION; //201;
 			bData_4000319a_SkyLandTargetId = 1;
 			break;
 		
-		case 201:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x54d40
 			bData_4000318a = 6;		
 			func_50048();
-			Data_40002c64_MenuContextId = 203;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT; //203;
 			break;
 		
-		case 203:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x54d64		
 		case 204:
 			//0x54d6c
 		case 205:
 			//0x54d70
 			func_52478();
-			Data_40002c64_MenuContextId = 2110;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_OBJ; //2110;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_RA_DEC: //2120:
@@ -997,12 +997,12 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_RA_INPUT: //29001:
 			//0x54da8
-			func_51c7c();
+			HandleRectascensionDeclinationInput();
 			break;
 		
 		case MENU_CONTEXT_DEC_INPUT: //29002:
 			//0x54db4
-			func_51c7c();
+			HandleRectascensionDeclinationInput();
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_CUST_LAND: //2130:
@@ -1118,54 +1118,54 @@ void HandleEnterKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_AZ_EQU; //4500;
 			break;
 		
-		case 4800: // Language
+		case MENU_CONTEXT_LANGUAGE: //4800:
 			//0x55018
-			Data_40002c64_MenuContextId = 49001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ENGLISH; //49001;
 			break;
 		
-		case 49001: //???
+		case MENU_CONTEXT_ENGLISH: //49001:
 			//0x5502c
-			bData_40003196_CurrentLanguage = 1;
+			bData_40003196_CurrentLanguage = MENU_LANGUAGE_ENGLISH; //1;
 			flash_read(0xdcb, 0, 528, Data_400035bc);	
 			Data_400035bc[0] = bData_40003196_CurrentLanguage;		
 			flash_write(0xdcb, 0, 528, Data_400035bc);
-			Data_40002c64_MenuContextId = 4800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_LANGUAGE; //4800;
 			break;
 		
-		case 49002:
+		case MENU_CONTEXT_GERMAN: //49002:
 			//0x55084
-			bData_40003196_CurrentLanguage = 2;
+			bData_40003196_CurrentLanguage = MENU_LANGUAGE_GERMAN; //2;
 			flash_read(0xdcb, 0, 528, Data_400035bc);	
 			Data_400035bc[0] = bData_40003196_CurrentLanguage;		
 			flash_write(0xdcb, 0, 528, Data_400035bc);
-			Data_40002c64_MenuContextId = 4800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_LANGUAGE; //4800;
 			break;
 		
-		case 49003:
+		case MENU_CONTEXT_FRENCH: //49003:
 			//0x550dc
-			bData_40003196_CurrentLanguage = 3;
+			bData_40003196_CurrentLanguage = MENU_LANGUAGE_FRENCH; //3;
 			flash_read(0xdcb, 0, 528, Data_400035bc);	
 			Data_400035bc[0] = bData_40003196_CurrentLanguage;		
 			flash_write(0xdcb, 0, 528, Data_400035bc);
-			Data_40002c64_MenuContextId = 4800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_LANGUAGE; //4800;
 			break;
 		
-		case 49004:
+		case MENU_CONTEXT_ITALIAN: //49004:
 			//0x55134
-			bData_40003196_CurrentLanguage = 4;
+			bData_40003196_CurrentLanguage = MENU_LANGUAGE_ITALIAN; //4;
 			flash_read(0xdcb, 0, 528, Data_400035bc);	
 			Data_400035bc[0] = bData_40003196_CurrentLanguage;		
 			flash_write(0xdcb, 0, 528, Data_400035bc);
-			Data_40002c64_MenuContextId = 4800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_LANGUAGE; //4800;
 			break;
 		
-		case 49005:
+		case MENU_CONTEXT_SPANISH: //49005:
 			//0x5518c
-			bData_40003196_CurrentLanguage = 5;
+			bData_40003196_CurrentLanguage = MENU_LANGUAGE_SPANISH; //5;
 			flash_read(0xdcb, 0, 528, Data_400035bc);	
 			Data_400035bc[0] = bData_40003196_CurrentLanguage;		
 			flash_write(0xdcb, 0, 528, Data_400035bc);
-			Data_40002c64_MenuContextId = 4800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_LANGUAGE; //4800;
 			break;
 		
 		case MENU_CONTEXT_TRACKING_RATE_STAR_SPEED: //4801:

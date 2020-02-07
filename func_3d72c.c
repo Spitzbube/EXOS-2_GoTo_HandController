@@ -786,7 +786,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 					break;
 				
-				case 201:
+				case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 					//0x41c80
 				case 202:
 					//0x41c88
@@ -930,7 +930,7 @@ void DisplayScreenItems(void)
 					//->0x4684c
 					break;
 				
-				case 203:
+				case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 					//0x42788
 					lcd_display_bitmap(0, 8, 8, (unsigned char*)cBitmapDegree);
 					lcd_display_bitmap(0, 8, 11, (unsigned char*)cBitmapMinute);
@@ -2390,7 +2390,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 					break;
 				
-				case 201:
+				case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 					//0x4ad28
 				case 202:
 					//0x4ad30

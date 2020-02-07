@@ -146,7 +146,7 @@ void Handle9Key(void)
 			//0x632cc		
 		case 204:
 			//0x632d4
-			Data_400022f2[bData_4000318a - 1] = '9';
+			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '9';
 			Data_400027df[bData_4000318a - 1] = '9';
 		
 			func_57b40();
@@ -154,7 +154,7 @@ void Handle9Key(void)
 		
 		case 207:
 			//0x63308
-			Data_400022f2[bData_4000318a - 1] = '9';
+			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '9';
 			Data_400027df[bData_4000318a - 1] = '9';
 		
 			func_57a4c();
@@ -189,7 +189,7 @@ void Handle9Key(void)
 			func_57a4c();
 			break;
 		
-		case 203:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x6340c
 		case 206:
 			//0x63414
@@ -246,7 +246,7 @@ void Handle9Key(void)
 					break;
 			}
 			//0x63538
-			Data_400027ff[bData_4000318a - 1] = bData_400031e8;
+			strCustomerObjectNameInput[bData_4000318a - 1] = bData_400031e8;
 			break;
 		
 		case 48001:

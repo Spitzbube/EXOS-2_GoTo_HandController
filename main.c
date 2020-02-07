@@ -842,7 +842,7 @@ void func_50048(void)
 	if (fData_40002cc0 < 10)
 	{
 		//50384
-		sprintf(Data_400022f2, "R.a: %02dh%02dm0%2.1fs",
+		sprintf(strCustomerObjectRaAziInputCheck, "R.a: %02dh%02dm0%2.1fs",
 			Data_40002cb8, Data_40002cbc, fData_40002cc0);		
 		sprintf(Data_400027df, "R.a: %02dh%02dm0%2.1fs",
 			Data_40002cb8, Data_40002cbc, fData_40002cc0);
@@ -850,7 +850,7 @@ void func_50048(void)
 	else
 	{
 		//0x503f0
-		sprintf(Data_400022f2, "R.a: %02dh%02dm%3.1fs",
+		sprintf(strCustomerObjectRaAziInputCheck, "R.a: %02dh%02dm%3.1fs",
 			Data_40002cb8, Data_40002cbc, fData_40002cc0);
 		sprintf(Data_400027df, "R.a: %02dh%02dm%3.1fs",
 			Data_40002cb8, Data_40002cbc, fData_40002cc0);
@@ -895,7 +895,7 @@ void func_50048(void)
 		}
 	}
 	
-	sprintf(Data_400027ff, "Name:Target0%d", 0);
+	sprintf(strCustomerObjectNameInput, "Name:Target0%d", 0);
 }
 
 /* 50778 - todo */
@@ -1236,9 +1236,9 @@ int ValidateDateTimeSetRTC(void)
 /* 514f8 - todo */
 void func_514f8(void)
 {
-	int r4 = atoi(&Data_400022f2[4]);
-	int r5 = atoi(&Data_400022f2[8]);
-	float sl = atof(&Data_400022f2[11]);
+	int r4 = atoi(&strCustomerObjectRaAziInputCheck[4]);
+	int r5 = atoi(&strCustomerObjectRaAziInputCheck[8]);
+	float sl = atof(&strCustomerObjectRaAziInputCheck[11]);
 	int r6 = atoi(&Data_40002302[5]);
 	int r7 = atoi(&Data_40002302[8]);
 	float r8 = atof(&Data_40002302[11]);
@@ -1269,7 +1269,7 @@ void func_514f8(void)
 		for (i = 1; i < 9; i++)
 		{
 			//0x51664
-			Data_40003f90[i] = Data_400027ff[i + 4];
+			Data_40003f90[i] = strCustomerObjectNameInput[i + 4];
 		}
 		
 		Data_40003f90[9] = Data_400027df[4] - '0';
@@ -1309,7 +1309,7 @@ void func_517f4(void)
 		//51810
 		sprintf(Data_400027df, "Azi:%03dh%02dm0%2.1fs",
 			Data_40002dac, Data_40002db0, fData_40002db4);
-		sprintf(Data_400022f2, "Azi:%03dh%02dm0%2.1fs",
+		sprintf(strCustomerObjectRaAziInputCheck, "Azi:%03dh%02dm0%2.1fs",
 			Data_40002dac, Data_40002db0, fData_40002db4);
 	}
 	else
@@ -1317,7 +1317,7 @@ void func_517f4(void)
 		//0x5187c
 		sprintf(Data_400027df, "Azi:%03dh%02dm%2.1fs",
 			Data_40002dac, Data_40002db0, fData_40002db4);
-		sprintf(Data_400022f2, "Azi:%03dh%02dm0%2.1fs", //"Azi:%03dh%02dm%2.1fs", //BUG?
+		sprintf(strCustomerObjectRaAziInputCheck, "Azi:%03dh%02dm0%2.1fs", //"Azi:%03dh%02dm%2.1fs", //BUG?
 			Data_40002dac, Data_40002db0, fData_40002db4);
 	}
 	//0x518e4
@@ -1362,32 +1362,32 @@ void func_517f4(void)
 		}
 	}
 	//0x51c60
-	sprintf(Data_400027ff, "Name:Target0%d", 0);
+	sprintf(strCustomerObjectNameInput, "Name:Target0%d", 0);
 }
 
 /* 51c7c - todo */
-void func_51c7c(void)
+void HandleRectascensionDeclinationInput(void)
 {
-	int r4 = atoi(&Data_400022f2[5]);
-	int r5 = atoi(&Data_400022f2[8]);
-	float r6 = atof(&Data_400022f2[11]);
-	int r7 = atoi(&Data_40002302[5]);
-	int r8 = atoi(&Data_40002302[8]);
-	float r9 = atof(&Data_40002302[11]);
+	int raHours = atoi(&strCustomerObjectRaAziInputCheck[5]);
+	int raMinutes = atoi(&strCustomerObjectRaAziInputCheck[8]);
+	float raSeconds = atof(&strCustomerObjectRaAziInputCheck[11]);
+	int decDegrees = atoi(&Data_40002302[5]);
+	int decMinutes = atoi(&Data_40002302[8]);
+	float decSeconds = atof(&Data_40002302[11]);
 	unsigned char i;
 	
-	if ((r4 > 23) || (r5 > 59) || (r6 > 59.99) ||
-		(r7 > 89) || (r8 > 59) || (r9 > 59.99))
+	if ((raHours > 23) || (raMinutes > 59) || (raSeconds > 59.99) ||
+		(decDegrees > 89) || (decMinutes > 59) || (decSeconds > 59.99))
 	{
 		//0x51d4c
-		if ((r7 > 89) || (r8 > 59) || (r9 > 59.99))
+		if ((decDegrees > 89) || (decMinutes > 59) || (decSeconds > 59.99))
 		{
 			//0x51d80
 			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_INPUT; //29002;
 			bData_4000318a = 5;
 		}
 		//0x51d98
-		if ((r4 > 23) || (r5 > 59) || (r6 > 59.99))
+		if ((raHours > 23) || (raMinutes > 59) || (raSeconds > 59.99))
 		{
 			//0x51dcc
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
@@ -1402,9 +1402,9 @@ void func_51c7c(void)
 		{
 			//51df8
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
-			Data_40002cb8 = r4;
-			Data_40002cbc = r5;
-			fData_40002cc0 = r6;
+			Data_40002cb8 = raHours;
+			Data_40002cbc = raMinutes;
+			fData_40002cc0 = raSeconds;
 			
 			if (Data_40002302[4] == '-')
 			{
@@ -1417,9 +1417,9 @@ void func_51c7c(void)
 				Data_40002d40 = 1;
 			}
 			//0x51e48
-			Data_40002cf4 = r7;
-			Data_40002cf8 = r8;
-			fData_40002cfc = r9;
+			Data_40002cf4 = decDegrees;
+			Data_40002cf8 = decMinutes;
+			fData_40002cfc = decSeconds;
 			
 			dData_40002cc8 = Data_40002cb8 + Data_40002cbc / 60.0 + fData_40002cc0 / 3600.0;
 			dData_40002d10 = Data_40002cf4 + Data_40002cf8 / 60.0 + fData_40002cfc / 3600.0;
@@ -1439,7 +1439,7 @@ void func_51c7c(void)
 			for (i = 1; i < 9; i++)
 			{
 				//0x52078
-				Data_40003f78[i] = Data_400027ff[i + 4];
+				Data_40003f78[i] = strCustomerObjectNameInput[i + 4];
 			}
 			//5209c
 			Data_40003f78[9] = Data_400027df[5] - '0';
@@ -1466,9 +1466,9 @@ void func_51c7c(void)
 		{
 			//0x521a4
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RISE_SET_TIMES; //32001;
-			Data_40002cb8 = r4;
-			Data_40002cbc = r5;
-			fData_40002cc0 = r6;
+			Data_40002cb8 = raHours;
+			Data_40002cbc = raMinutes;
+			fData_40002cc0 = raSeconds;
 			
 			if (Data_40002302[4] == '-')
 			{
@@ -1481,9 +1481,9 @@ void func_51c7c(void)
 				Data_40002d40 = 1;
 			}
 			//0x521f4
-			Data_40002cf4 = r7;
-			Data_40002cf8 = r8;
-			fData_40002cfc = r9;
+			Data_40002cf4 = decDegrees;
+			Data_40002cf8 = decMinutes;
+			fData_40002cfc = decSeconds;
 			
 			dData_40002cc8 = Data_40002cb8 + Data_40002cbc / 60.0 + fData_40002cc0 / 3600.0;
 			dData_40002d10 = Data_40002cf4 + Data_40002cf8 / 60.0 + fData_40002cfc / 3600.0;
@@ -1510,9 +1510,9 @@ void func_51c7c(void)
 /* 52478 - todo */
 void func_52478(void)
 {
-	int r4 = atoi(&Data_400022f2[5]);
-	int r5 = atoi(&Data_400022f2[8]);
-	float sl = atof(&Data_400022f2[11]);
+	int r4 = atoi(&strCustomerObjectRaAziInputCheck[5]);
+	int r5 = atoi(&strCustomerObjectRaAziInputCheck[8]);
+	float sl = atof(&strCustomerObjectRaAziInputCheck[11]);
 	int r6 = atoi(&Data_40002302[5]);
 	int r7 = atoi(&Data_40002302[8]);
 	float r8 = atof(&Data_40002302[11]);
@@ -1545,7 +1545,7 @@ void func_52478(void)
 		for (i = 1; i < 9; i++)
 		{
 			//0x525f0
-			Data_40003f78[i] = Data_400027ff[i + 4];
+			Data_40003f78[i] = strCustomerObjectNameInput[i + 4];
 		}
 		//5209c
 		Data_40003f78[9] = Data_400027df[5] - '0';

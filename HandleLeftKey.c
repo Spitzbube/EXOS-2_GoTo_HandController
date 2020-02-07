@@ -893,7 +893,7 @@ void HandleLeftKey(void)
 			func_59440();
 			break;
 		
-		case 203:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x598e8
 		case 206:
 			//0x598f0
@@ -1039,7 +1039,7 @@ void HandleLeftKey(void)
 			func_58e64();
 			break;
 		
-		case 201:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x59b50
 		case 202:
 			//0x59b58

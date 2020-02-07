@@ -1275,7 +1275,7 @@ void HandleRightKey(void)
 			func_57a4c();
 			break;
 		
-		case 203:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x57e64
 		case 206:
 			//0x57e6c
@@ -1419,7 +1419,7 @@ void HandleRightKey(void)
 			func_56e50();
 			break;
 		
-		case 201:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x58158		
 		case 202:
 			//0x58160

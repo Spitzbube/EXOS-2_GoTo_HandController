@@ -584,21 +584,21 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_ALIGNMENT: //1000:
 			//0x2a100 - Telescope Align
-			Data_40003360 = Data_40002f20; //Telescope Align
+			Data_40003360 = strTelescopeAlign;
 			Data_40003364 = "";
-			Data_40003368 = Data_40002f24; //Navigation
+			Data_40003368 = strNavigation;
 			Data_4000336c = "";
-			Data_40003370 = Data_40002f28; //Utilities
+			Data_40003370 = strUtilities;
 			Data_40003374 = "";
-			Data_40003378 = Data_40002f2c; //Setup
+			Data_40003378 = strSetup;
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 		
-			Data_400033a8 = Data_40002f20;
-			Data_400033ac = Data_40002f24;
-			Data_400033b0 = Data_40002f28;
-			Data_400033b4 = Data_40002f2c;
+			Data_400033a8 = strTelescopeAlign;
+			Data_400033ac = strNavigation;
+			Data_400033b0 = strUtilities;
+			Data_400033b4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 1;
 		
@@ -608,21 +608,21 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_NAVIGATION: //2000:
 			//0x2a220 - Navigation
-			Data_40003360 = Data_40002f20;
+			Data_40003360 = strTelescopeAlign;
 			Data_40003364 = "";
-			Data_40003368 = Data_40002f24;
+			Data_40003368 = strNavigation;
 			Data_4000336c = "";
-			Data_40003370 = Data_40002f28;
+			Data_40003370 = strUtilities;
 			Data_40003374 = "";
-			Data_40003378 = Data_40002f2c;
+			Data_40003378 = strSetup;
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 		
-			Data_400033a8 = Data_40002f20;
-			Data_400033ac = Data_40002f24;
-			Data_400033b0 = Data_40002f28;
-			Data_400033b4 = Data_40002f2c;
+			Data_400033a8 = strTelescopeAlign;
+			Data_400033ac = strNavigation;
+			Data_400033b0 = strUtilities;
+			Data_400033b4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 2;
 		
@@ -632,21 +632,21 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_UTILITIES: //3000:
 			//0x2a2f4 - Utilities
-			Data_40003360 = Data_40002f20;
+			Data_40003360 = strTelescopeAlign;
 			Data_40003364 = "";
-			Data_40003368 = Data_40002f24;
+			Data_40003368 = strNavigation;
 			Data_4000336c = "";
-			Data_40003370 = Data_40002f28;
+			Data_40003370 = strUtilities;
 			Data_40003374 = "";
-			Data_40003378 = Data_40002f2c;
+			Data_40003378 = strSetup;
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 		
-			Data_400033a8 = Data_40002f20;
-			Data_400033ac = Data_40002f24;
-			Data_400033b0 = Data_40002f28;
-			Data_400033b4 = Data_40002f2c;
+			Data_400033a8 = strTelescopeAlign;
+			Data_400033ac = strNavigation;
+			Data_400033b0 = strUtilities;
+			Data_400033b4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 3;
 		
@@ -656,21 +656,21 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_SETUP: //4000:
 			//0x2a3c8 - Setup
-			Data_40003360 = Data_40002f20;
+			Data_40003360 = strTelescopeAlign;
 			Data_40003364 = "";
-			Data_40003368 = Data_40002f24;
+			Data_40003368 = strNavigation;
 			Data_4000336c = "";
-			Data_40003370 = Data_40002f28;
+			Data_40003370 = strUtilities;
 			Data_40003374 = "";
-			Data_40003378 = Data_40002f2c;
+			Data_40003378 = strSetup;
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
 		
-			Data_400033a8 = Data_40002f20;
-			Data_400033ac = Data_40002f24;
-			Data_400033b0 = Data_40002f28;
-			Data_400033b4 = Data_40002f2c;
+			Data_400033a8 = strTelescopeAlign;
+			Data_400033ac = strNavigation;
+			Data_400033b0 = strUtilities;
+			Data_400033b4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 4;
 		
@@ -778,15 +778,15 @@ void PrepareScreenItems(void)
 			//0x2a5f0: Site Setting
 		case 4400: // Sky/Land
 			//0x2a5f4
-		case 4500: // AZ / EQ
+		case MENU_CONTEXT_AZ_EQU: //4500:
 			//0x2a5f8
 		case MENU_CONTEXT_TELESCOPE_MOUNT: //4600:
 			//0x2a5fc: Telescope Mount
 		case 4700: // Tracking Rate
 			//0x2a600
-		case 4800: // Language
+		case MENU_CONTEXT_LANGUAGE: //4800:
 			//0x2a604
-		case 4900: // Reset
+		case MENU_CONTEXT_RESET: //4900:
 			//0x2a608
 			func_2245c(14, bData_4000317c);
 		
@@ -1076,8 +1076,8 @@ void PrepareScreenItems(void)
 
 		case MENU_CONTEXT_COUNTRY_CITY: //4301:
 			//0x2af04: Country & City
-			Data_40003360 = Data_40003060; // "Country & City"
-			Data_40003368 = Data_40003064; // "Custom Site"
+			Data_40003360 = strCountryAndCity;
+			Data_40003368 = strCustomSite;
 			Data_40003364 = "";
 			Data_4000336c = "";
 			Data_40003370 = "";
@@ -1092,8 +1092,8 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_CUSTOM_SITE: //4302:
 			//0x2af88: Custom Site
-			Data_40003360 = Data_40003060;
-			Data_40003368 = Data_40003064;
+			Data_40003360 = strCountryAndCity;
+			Data_40003368 = strCustomSite;
 			Data_40003364 = "";
 			Data_4000336c = "";
 			Data_40003370 = "";
@@ -5094,7 +5094,7 @@ void PrepareScreenItems(void)
 			//->0x3d71c
 			break; //case 23017:
 		
-		case 201: //0xc9
+		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x3b414
 			Data_40003360 = "F1";
 			Data_40003364 = "F2";
@@ -5112,7 +5112,7 @@ void PrepareScreenItems(void)
 			//->0x3d71c
 			break;
 		
-		case 203: //0xcb:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x3b4ac
 			sprintf(Data_40003fa9, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
@@ -5121,7 +5121,7 @@ void PrepareScreenItems(void)
 			Data_40003368 = "  Please Save Current";
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
-			Data_40003374 = Data_400027ff;
+			Data_40003374 = strCustomerObjectNameInput;
 			Data_40003378 = Data_400027df;
 			Data_4000337c = Data_400027ef;
 		
@@ -5138,7 +5138,7 @@ void PrepareScreenItems(void)
 			Data_40003368 = "  Please Save Current";
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
-			Data_40003374 = Data_400027ff;
+			Data_40003374 = strCustomerObjectNameInput;
 			Data_40003378 = Data_400027df;
 			Data_4000337c = Data_400027ef;
 		
@@ -5155,7 +5155,7 @@ void PrepareScreenItems(void)
 			Data_40003368 = "  Please Save Current";
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
-			Data_40003374 = Data_400027ff;
+			Data_40003374 = strCustomerObjectNameInput;
 			Data_40003378 = Data_400027df;
 			Data_4000337c = Data_400027ef;
 		
@@ -5219,7 +5219,7 @@ void PrepareScreenItems(void)
 			Data_40003368 = "  Please Save Current";
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
-			Data_40003374 = Data_400027ff;
+			Data_40003374 = strCustomerObjectNameInput;
 			Data_40003378 = Data_400027df;
 			Data_4000337c = Data_400027ef;
 		
@@ -5236,7 +5236,7 @@ void PrepareScreenItems(void)
 			Data_40003368 = "  Please Save Current";
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
-			Data_40003374 = Data_400027ff;
+			Data_40003374 = strCustomerObjectNameInput;
 			Data_40003378 = Data_400027df;
 			Data_4000337c = Data_400027ef;
 		
@@ -5253,7 +5253,7 @@ void PrepareScreenItems(void)
 			Data_40003368 = "  Please Save Current";
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
-			Data_40003374 = Data_400027ff;
+			Data_40003374 = strCustomerObjectNameInput;
 			Data_40003378 = Data_400027df;
 			Data_4000337c = Data_400027ef;
 		
@@ -5773,7 +5773,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 49001: //Language
+		case MENU_CONTEXT_ENGLISH: //49001
 			//0x3d344
 			Data_40003360 = strEngEnglish;
 			Data_40003364 = strEngGerman;
@@ -5788,7 +5788,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0xBF6A: //49002
+		case MENU_CONTEXT_GERMAN: //49002
 			//0x3d3c0
 			Data_40003360 = strEngEnglish;
 			Data_40003364 = strEngGerman;
@@ -5803,7 +5803,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0xBF6B: //49003
+		case MENU_CONTEXT_FRENCH: //49003
 			//0x3d440
 			Data_40003360 = strEngEnglish;
 			Data_40003364 = strEngGerman;
@@ -5818,7 +5818,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0xBF6C: //49004
+		case MENU_CONTEXT_ITALIAN: //49004
 			//0x3d594
 			Data_40003360 = strEngEnglish;
 			Data_40003364 = strEngGerman;
@@ -5833,7 +5833,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0xBF6D: //49005
+		case MENU_CONTEXT_SPANISH: //49005
 			//0x3d614
 			Data_40003360 = strEngEnglish;
 			Data_40003364 = strEngGerman;

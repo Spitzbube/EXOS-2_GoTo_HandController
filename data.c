@@ -2,435 +2,7 @@
 #include "my_types.h"
 #include "data.h"
 
-unsigned char strAlignStarsNames[][10] = //40000000
-{
-	"Sirius   ",
-	"Canopus  ",
-	"Vega     ",
-	"Alpha Cen",
-	"Arcturus ",
-	"Capella  ",
-	"Rigel    ",
-	"Procyon  ",
-	"Achernar ",
-	"Betelgeus",
-	"Altair   ",
-	"Aldebaran",
-	"Spica    ",
-	"Antares  ",
-	"Fomalhaut",
-	"Deneb    ",
-	"Regulus  ",
-	"Mirfak   ",
-	"Castor   ",
-	"Alphard  ",
-	"Polaris  ",
-	"Alpheratz",
-	"Rasalhagu",
-	"Denebola ",
-	"Navi     ",
-	"Suhail   ",
-	"Mizar    ",
-	"Albireo  "
-}; 
-unsigned char Data_40000118[][22] = //40000118
-{
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-	"                     ",
-};
-char Data_40000380[10] = "         "; //40000380, size???
-char Data_4000038a[10] = "         "; //4000038a, size???
-char Data_40000394[10] = "         "; //40000394, size???
-char Data_4000039e[10] = "         "; //4000039e, size???
-char Data_400003a8[10] = "         "; //400003a8, size???
-char Data_400003b2[8] = "       "; //400003b2, size???
-char Data_400003ba[8] = "       "; //400003ba, size???
-char Data_400003c2[8] = "       "; //400003c2, size???
-char Data_400003ca[10] = "         "; //400003ca, size???
-char Data_400003d4[10] = "         "; //400003d4, size???
-char fill_400003de[1231] = " "; //400003de?
-char strEngTelescopeAlign[] = "Telescope Align"; //400008ad
-char Data_400008bd[] = "Navigation"; //400008bd
-char Data_400008c8[] = "Utilities"; //400008c8
-char Data_400008d2[] = "Setup"; //400008d2
-char strEngOneStarAlign[] = "One Star Align"; //400008d8
-char strEngTwoStarAlign[] = "Two Star Align"; //400008e7
-char strEngThreeStarAlign[] = "Three Star Align"; //400008f6
-char Data_40000907[12] = "           "; //40000907, size???
-char Data_40000913[16] = "               "; //40000913, size???
-char Data_40000923[16] = "               "; //40000923, size???
-char Data_40000933[17] = "               "; //40000933, size???
-char strEngSolarSystem[] = "Solar System"; //40000944
-char strEngConstellation[] = "Constellation"; //40000951
-char strEngFamousStar[] = "Famous Star"; //4000095f
-char strEngMessierCatal[] = "Messier Catal."; //4000096b
-char strEngNGCCatalog[] = "NGC Catalog."; //4000097a
-char strEngICCatalogue[] = "IC Catalogue"; //40000987
-char strEngSh2Catalog[] = "Sh2 Catalog."; //40000994
-char strEngBrightStarCat[] = "Bright Star Cat."; //400009a1
-char strEngSAOStarCatal[] = "SAO Star Catal."; //400009b2
-char strEngCustomerObjects[] = "Customer Objects"; //400009c2
-char strEngInputRAandDEC[] = "Input RA and DEC"; //400009d3
-char strEngCustomLandGoal[] = "Custom Land Goal"; //400009e4
-char strEngCurrentObjects[] = "Current Objects"; //400009f5
-char strEngObjectRiseSet[] = "Object Rise/Set"; //40000a05
-char strEngCurrLunarPhase[] = "Curr. Lunar Phase"; //40000a15
-char strEngTimer[] = "Timer"; //40000a27
-char strEngAlarm[] = "Alarm"; //40000a2d
-char strEngEyepieceFOV[] = "Eyepiece FOV"; //40000a33
-char strEngEyepieceMagn[] = "Eyepiece Magn."; //40000a40
-char strEngDisplayIllumin[] = "Display Illumin."; //40000a4f
-char strEngParkposition[] = "Parkposition"; //40000a60
-char strEngTimeAndDate[] = "Time and Date "; //40000a6d
-char strEngDaylightSaving[] = "Daylight Saving"; //40000a7c
-char strEngSiteSetting[] = "Site Setting"; //40000a8c
-char strEngSkyLand[] = "Sky/Land"; //40000a99
-char strEngAzEqu[] = "AZ / EQU"; //40000aa2
-char strEngTelescopeMount[] = "Telescope Mount"; //40000aab
-char strEngTrackingRate[] = "Tracking Rate"; //40000abb
-char strEngLanguage[] = "Language"; //40000ac9
-char strEngReset[] = "Reset"; //40000ad2
-char Data_40000ad8[16] = " ";
-char Data_40000ae8[12] = " ";
-char Data_40000af4[11] = " ";
-char Data_40000aff[7] = " ";
-char Data_40000b06[4] = " ";
-char Data_40000b0a[7] = " ";
-char Data_40000b11[7] = " ";
-char Data_40000b18[7] = " ";
-char Data_40000b1f[4] = " ";
-char Data_40000b23[42] = " ";
-char Data_40000b4d[8] = " ";
-char Data_40000b55[6] = " ";
-char Data_40000b5b[10] = " ";
-char Data_40000b65[10] = " ";
-char strEngCountryAndCity[] = "Country & City"; //40000b6f
-char strEngCustomSite[] = "Custom Site"; //40000b7e
-char Data_40000b8a[7] = " ";
-char Data_40000b91[4] = " ";
-char Data_40000b95[7] = " ";
-char Data_40000b9c[7] = " ";
-char Data_40000ba3[7] = " ";
-char Data_40000baa[4] = " ";
-char Data_40000bae[7] = " ";
-char Data_40000bb5[7] = " ";
-char strEngStarSpeed[] = "Star Speed"; //40000bbc
-char strEngSolarSpeed[] = "Solar Speed"; //40000bc7
-char strEngMoonSpeed[] = "Moon Speed"; //40000bd3
-char strEngCustomizeSpeed[] = "Customize Speed"; //40000bde
-char strEngGuidingSpeed[] = "Guiding Speed"; //40000bee
-char strEngListAlignStars[24] = "List align stars:"; //40000bfc, size?
-char Data_40000c14[12] = " ";
-char Data_40000c20[21] = " ";
-char Data_40000c35[] = "  Please center this "; //40000c35
-char Data_40000c4b[] = "star to the field of"; //40000c4b
-char Data_40000c60[26] = "view"; //40000c60, size???
-char Data_40000c7a[] = "The telescope has be   "; //40000c7a, size?
-char Data_40000c92[] = "aligned!           "; //40000c92, size?
-char Data_40000ca6[] = "                       "; //40000ca6, size?
-char Data_40000cbe[21] = " ";
-char Data_40000cd3[21] = " ";
-char Data_40000ce8[19] = " ";
-char Data_40000cfb[11] = " ";
-char Data_40000d06[20] = " ";
-char Data_40000d1a[21] = " ";
-char Data_40000d2f[21] = " ";
-char Data_40000d44[21] = " ";
-char Data_40000d59[13] = " ";
-char Data_40000d66[21] = " ";
-char Data_40000d7b[21] = " ";
-char Data_40000d90[18] = " ";
-char Data_40000da2[22] = " ";
-char Data_40000db8[23] = " ";
-char Data_40000dcf[20] = " ";
-char Data_40000de3[22] = " ";
-char Data_40000df9[17] = " ";
-char Data_40000e0a[22] = " ";
-char Data_40000e20[1] = "";
-char Data_40000e21[23] = " ";
-char Data_40000e38[22] = " ";
-char Data_40000e4e[20] = " ";
-char Data_40000e62[32] = "Ausrichtung"; //40000e62
-char Data_40000e82[32] = " ";
-char Data_40000ea2[32] = " ";
-char Data_40000ec2[32] = " ";
-char Data_40000ee2[32] = " ";
-char Data_40000f02[32] = " ";
-char Data_40000f22[32] = " ";
-char Data_40000f42[32] = " ";
-char Data_40000f62[32] = " ";
-char Data_40000f82[32] = " ";
-char Data_40000fa2[32] = " ";
-char Data_40000fc2[32] = " ";
-char Data_40000fe2[32] = " ";
-char Data_40001002[32] = " ";
-char Data_40001022[32] = " ";
-char Data_40001042[32] = " ";
-char Data_40001062[32] = " ";
-char Data_40001082[32] = " ";
-char Data_400010a2[32] = " ";
-char Data_400010c2[32] = " ";
-char Data_400010e2[32] = " ";
-char Data_40001102[32] = " ";
-char Data_40001122[32] = " ";
-char Data_40001142[32] = " ";
-char Data_40001162[32] = " ";
-char Data_40001182[32] = " ";
-char Data_400011a2[32] = " ";
-char Data_400011c2[32] = " ";
-char Data_400011e2[32] = " ";
-char Data_40001202[32] = " ";
-char Data_40001222[32] = " ";
-char Data_40001242[32] = " ";			
-char Data_40001262[32] = " ";
-char Data_40001282[32] = " ";
-char Data_400012a2[32] = " ";
-char Data_400012c2[32] = " ";
-char Data_400012e2[32] = " ";
-char Data_40001302[32] = " ";
-char Data_40001322[32] = " ";
-char Data_40001342[32] = " ";
-char Data_40001362[32] = " ";
-char Data_40001382[32] = " ";
-char Data_400013a2[32] = " ";
-char Data_400013c2[32] = " ";
-char Data_400013e2[32] = " ";
-char Data_40001402[32] = " ";
-char Data_40001422[32] = " ";
-char Data_40001442[32] = " ";
-char Data_40001462[32] = " ";
-char Data_40001482[32] = " ";
-char Data_400014a2[32] = " ";
-char Data_400014c2[32] = " ";		
-char Data_400014e2[32] = " ";
-char Data_40001502[32] = " ";
-char Data_40001522[32] = " ";
-char Data_40001542[32] = " ";
-char Data_40001562[32] = " ";
-char Data_40001582[32] = " ";
-char Data_400015a2[32] = " ";
-char Data_400015c2[32] = " ";
-char Data_400015e2[32] = " ";
-char Data_40001602[32] = " ";
-char Data_40001622[32] = " ";
-char Data_40001642[32] = " ";
-char Data_40001662[32] = " ";
-char Data_40001682[32] = " ";
-char Data_400016a2[32] = " ";
-char Data_400016c2[32] = " ";
-char Data_400016e2[32] = " ";
-char Data_40001702[32] = " ";
-char Data_40001722[32] = " ";
-char Data_40001742[32] = " ";
-char Data_40001762[32] = " ";
-char Data_40001782[32] = " ";
-char Data_400017a2[32] = " ";
-char Data_400017c2[32] = " ";
-char Data_400017e2[32] = " ";
-char Data_40001802[32] = " ";
-char Data_40001822[32] = " ";
-char Data_40001842[32] = " ";
-char Data_40001862[32] = " ";
-char Data_40001882[32] = " ";
-char Data_400018a2[32] = " ";
-char Data_400018c2[32] = " ";
-char Data_400018e2[32] = " ";
-char Data_40001902[32] = " ";
-char Data_40001922[32] = " ";
-char Data_40001942[32] = " ";
-char Data_40001962[32] = " ";
-char Data_40001982[32] = " ";
-char Data_400019a2[32] = " ";
-char Data_400019c2[32] = " ";
-char Data_400019e2[32] = " ";
-char Data_40001a02[32] = " ";
-char Data_40001a22[32] = " ";
-char Data_40001a42[32] = " ";
-char Data_40001a62[32] = " ";
-char Data_40001a82[32] = " ";
-char Data_40001aa2[32] = " ";
-char Data_40001ac2[32] = " ";
-char Data_40001ae2[32] = " ";
-char Data_40001b02[32] = " ";
-char Data_40001b22[32] = " ";
-char Data_40001b42[32] = " ";
-char Data_40001b62[32] = " ";
-char Data_40001b82[32] = " ";
-char Data_40001ba2[32] = " ";
-char Data_40001bc2[32] = " ";
-char Data_40001be2[32] = " ";
-char Data_40001c02[32] = " ";
-char Data_40001c22[32] = " ";
-char Data_40001c42[32] = " ";
-char Data_40001c62[32] = " ";
-char Data_40001c82[32] = " ";
-char Data_40001ca2[32] = " ";
-char Data_40001cc2[32] = " ";
-char Data_40001ce2[32] = " ";
-char Data_40001d02[32] = " ";
-char Data_40001d22[32] = " ";
-char Data_40001d42[32] = " ";
-char Data_40001d62[32] = " ";
-char Data_40001d82[32] = " ";
-char Data_40001da2[32] = " ";
-char Data_40001dc2[32] = " ";
-char Data_40001de2[32] = " ";
-char Data_40001e02[32] = " ";
-char Data_40001e22[32] = " ";
-char Data_40001e42[32] = " ";
-char Data_40001e62[32] = " ";
-char Data_40001e82[32] = " ";
-char Data_40001ea2[32] = " ";
-char Data_40001ec2[32] = " ";
-char Data_40001ee2[32] = " ";
-char Data_40001f02[32] = " ";		
-char Data_40001f22[32] = " ";
-char Data_40001f42[32] = " ";
-char Data_40001f62[32] = " ";
-char Data_40001f82[32] = " ";
-char Data_40001fa2[32] = " ";
-char Data_40001fc2[32] = " ";
-char Data_40001fe2[32] = " ";
-char Data_40002002[32] = " ";
-char Data_40002022[32] = " ";
-char Data_40002042[32] = " ";
-char Data_40002062[32] = " ";
-char Data_40002082[32] = " ";
-char Data_400020a2[32] = " ";
-char Data_400020c2[32] = " ";
-char Data_400020e2[32] = " ";
-char Data_40002102[32] = " ";
-char Data_40002122[32] = " ";
-char Data_40002142[32] = " ";
-char Data_40002162[32] = " ";
-char Data_40002182[32] = " ";
-char Data_400021a2[32] = " ";
-char Data_400021c2[32] = " ";
-char Data_400021e2[32] = " ";
-char Data_40002202[32] = " ";
-char Data_40002222[32] = " ";
-char Data_40002242[32] = " ";
-char Data_40002262[32] = " ";
-char Data_40002282[32] = " ";
-char Data_400022a2[32] = " ";
-char Data_400022c2[48] = " ";
-char Data_400022f2[16] = " "; //400022f2
-char Data_40002302[133/*32*/] = " "; //40002302
-char Data_40002387[19] = " "; //40002387
-char Data_4000239a[218/*20*/] = " "; //4000239a, size???
-char Data_40002474[13] = " "; //40002474, size???
-char Data_40002481[11] = " "; //40002481, size???
-char Data_4000248c[21] = " "; //4000248c
-char Data_400024a1[20] = " "; //400024a1, size??
-char Data_400024b5[20] = " "; //400024b5
-char Data_400024c9[13] = " "; //400024c9, size??
-char Data_400024d6[11] = " "; //400024d6, size??
-char Data_400024e1[14] = " "; //400024e1
-char Data_400024ef[21] = " "; //400024ef, size??
-char Data_40002504[25] = " "; //40002504, size???
-unsigned char Data_4000251d[32] = " "; //4000251d, size??
-unsigned char Data_4000253d[32] = " "; //4000253d, size??
-unsigned char Data_4000255d[33] = " "; //4000255d, size??
-unsigned char Data_4000257e[14] = " "; //4000257e, size??
-unsigned char Data_4000258c[20] = " "; //4000258c, size??
-unsigned char Data_400025a0[21] = " "; //400025a0, size??
-unsigned char Data_400025b5[36] = " "; //400025b5, size???
-unsigned char Data_400025d9[37] = " "; //400025d9, size??
-unsigned char Data_400025fe[39] = " "; //400025fe, size??
-unsigned char Data_40002625[15] = " "; //40002625, size???
-unsigned char Data_40002634[16] = " "; //40002634, size???
-unsigned char Data_40002644[17] = " "; //40002644, size???
-char Data_40002655[11] = " "; //40002655, size???
-char Data_40002660[99] = " "; //40002660, size???
-unsigned char Data_400026c3[24] = " "; //400026c3, size???
-unsigned char Data_400026db[24] = " "; //400026db, size???
-unsigned char Data_400026f3[23] = " "; //400026f3, size??
-unsigned char Data_4000270a[16] = " "; //4000270a, size???
-unsigned char Data_4000271a[111] = " "; //4000271a, size???
-unsigned char Data_40002789[9] = " "; //40002789
-unsigned char Data_40002792[61] = " "; //40002792, size??
-char Data_400027cf[16] = "Input Ra Dec:  "; //400027cf
-unsigned char Data_400027df[16] = "R.a:           "; //400027df
-unsigned char Data_400027ef[16] = "Dec:           "; //400027ef
-unsigned char Data_400027ff[40] = " "; //400027ff
-unsigned char Data_40002827[16] = " Name:"; //40002827 size???
-unsigned char Data_40002837[16] = "  Lon:"; //40002837 size??
-unsigned char Data_40002847[15] = "  Lat:"; //40002847 size??
-unsigned char Data_40002856[11] = " Zone:"; //40002856 size???
-unsigned char Data_40002861[45] = " "; //40002861, size???
-char Data_4000288e[11] = " "; //4000288e
-char Data_40002899[12] = " "; //40002899, size???
-char Data_400028a5[14] = " "; //400028a5
-char Data_400028b3[14] = " "; //400028b3, size???
-char strEngPleaseSetupOtaZero[22] = "Please setup OTA zero"; //400028c1
-unsigned char Data_400028d7[10] = "Azi:000  "; //400028d7
-unsigned char Data_400028e1[10] = "Alt: 00  "; //400028e1
-char Data_400028eb[22] = "Data:error,try again!"; //400028eb
-char Data_40002901[] = "ok,poweroff,restart!"; //40002901
-char strEngEnglish[] = "English"; //40002916
-char strEngGerman[] = "German"; //4000291e
-char strEngFrench[] = "French"; //40002925
-char strEngItalian[] = "Italian"; //4000292c
-char strEngSpanish[22] = "Spanish"; //40002934, size??
-char Data_4000294a[87] = " "; //4000294a, content, size?
-char strEngSetTimer[11] = "Set timer:"; //400029a1
-char strEng00000s[7] = "00000s"; //400029ac
-char Data_400029b3[] = ""; //400029b3
-char strEngStartBack[22] = "      Start      Back"; //400029b4
-char strEngCountingDown[16] = "Counting down"; //400029ca, size???
-char strEngTimeRemain[13] = "Time remain:"; //400029da
-char strEngTimeRemain00000s[7] = "00000s"; //400029e7
-char strEngStopBack[81] = "       Stop      Back"; //400029ee, size???
-char Data_40002a3f[3] = "00"; //40002a3f
-char Data_40002a42[3] = "00"; //40002a42
-char Data_40002a45[29] = "00"; //40002a45
-char strEngCloseAlarm[15] = "Close Alarm?  "; //40002a62
-char strEngAlarmCloseBack[22] = "      Close    Back"; //40002a71, size???
-char strEngInputTime[13] = "Input time: "; //40002a87
-char strEngAlarm21h34m23s[10] = "21h34m23s"; //40002a94
-char strEngAlarmOnBack[45] =    "       On      Back "; //40002a9e, size???
-char strEngBackgroundLight[17] = "Background light"; //40002acb
-char strEngPressUpDownKey[18] = "Press up/down key"; //40002adc
-char Data_40002aee[] = ""; //40002aee, content?
-char Data_40002aef[129/*22*/] = " "; //40002aef, size???
-char Data_40002b70[16] = "daylight saving"; //40002b70
-char Data_40002b80[10] = "status:on"; //40002b80
-char Data_40002b8a[] = ""; //40002b8a
-char Data_40002b8b[26] = " "; //40002b8b, size???
-char Data_40002ba5[16] = "Daylight saving"; //40002ba5
-char Data_40002bb5[11] = "status:off"; //40002bb5
-char Data_40002bc0[] = ""; //40002bc0
-char Data_40002bc1[3] = " "; //40002bc1
-int Data_40002bc4_DayYear[13] = 
-{
-	-1, -1, 30, 58, 89, 119, 150, 180, 211, 241, 272, 303, 333
-}; //40002bc4
+
 unsigned char Data_40002bf8[8]; //40002bf8, size??
 unsigned char bData_40002c00; //40002c00
 unsigned char bData_40002c01; //40002c01
@@ -642,13 +214,14 @@ unsigned char bData_40002f14_RecentTargetCount; //40002f14
 unsigned char Data_40002f15_RecentTargetTypeArray[8]; //40002f15, size???
 unsigned char bData_40002f1d; //40002f1d
 char bData_40002f1e_SetupLocalData; //40002f1e
-char* Data_40002f20; //40002f20
-char* Data_40002f24; //40002f24
-char* Data_40002f28; //40002f28
-char* Data_40002f2c; //40002f2c
-char* Data_40002f30; //40002f30
-char* Data_40002f34; //40002f34
-char* Data_40002f38; //40002f38
+
+char* strTelescopeAlign; //40002f20
+char* strNavigation; //40002f24
+char* strUtilities; //40002f28
+char* strSetup; //40002f2c
+char* strOneStarAlign; //40002f30
+char* strTwoStarAlign; //40002f34
+char* strThreeStarAlign; //40002f38
 char* Data_40002f3c; //40002f3c
 char* Data_40002f40; //40002f40
 char* Data_40002f44; //40002f44
@@ -657,8 +230,8 @@ char* Data_40002f4c; //40002f4c
 char* Data_40002f50; //40002f50
 char* Data_40002f54; //40002f54
 char* Data_40002f58; //40002f58
-char* Data_40002f5c; //40002f5c
-char* Data_40002f60; //40002f60
+char* strSolarSystem; //40002f5c
+char* strConstellation; //40002f60
 char* Data_40002f64; //40002f64
 char* Data_40002f68; //40002f68
 char* Data_40002f6c; //40002f6c
@@ -669,7 +242,7 @@ char* Data_40002f7c; //40002f7c
 char* Data_40002f80; //40002f80
 char* Data_40002f84; //40002f84
 char* Data_40002f88; //40002f88
-char* Data_40002f8c; //40002f8c
+char* strCurrentObjects; //40002f8c
 char* Data_40002f90; //40002f90
 char* Data_40002f94; //40002f94
 char* Data_40002f98; //40002f98
@@ -677,9 +250,9 @@ char* Data_40002f9c; //40002f9c
 char* Data_40002fa0; //40002fa0
 char* Data_40002fa4; //40002fa4
 char* Data_40002fa8; //40002fa8
-char* Data_40002fac; //40002fac
+char* strParkposition; //40002fac
 char* Data_40002fb0; //40002fb0
-char* Data_40002fb4; //40002fb4
+char* strTimeAndDate; //40002fb4
 char* Data_40002fb8; //40002fb8
 char* Data_40002fbc; //40002fbc
 char* Data_40002fc0; //40002fc0
@@ -722,8 +295,8 @@ char* Data_40003050;
 char* Data_40003054;
 char* Data_40003058;
 char* Data_4000305c;
-char* Data_40003060;
-char* Data_40003064;
+char* strCountryAndCity; //40003060
+char* strCustomSite; //40003064
 char* Data_40003068;
 char* Data_4000306c;
 char* Data_40003070;
@@ -922,8 +495,8 @@ unsigned char bData_400032a4_OTAZeroDataErrorCount; //400032a4
 double fill_400032a8; //400032a8
 double dData_400032b0_SunRightAscension; //400032b0
 double dData_400032b8_SunDeclination; //400032b8
-double dData_400032c0; //400032c0
-double dData_400032c8; //400032c8
+double dData_400032c0_MoonRightAscension; //400032c0
+double dData_400032c8_MoonDeclination; //400032c8
 double dData_400032d0; //400032d0
 double dData_400032d8; //400032d8
 double dData_400032e0; //400032e0

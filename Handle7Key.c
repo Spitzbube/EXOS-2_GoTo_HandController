@@ -126,7 +126,7 @@ void Handle7Key(void)
 		case MENU_CONTEXT_RA_INPUT: //29001:
 		case 204:
 			//648c4
-			Data_400022f2[bData_4000318a - 1] = '7';
+			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '7';
 			Data_400027df[bData_4000318a - 1] = '7';
 		
 			func_57b40();
@@ -134,7 +134,7 @@ void Handle7Key(void)
 		
 		case 207:
 			//648f8
-			Data_400022f2[bData_4000318a - 1] = '7';
+			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '7';
 			Data_400027df[bData_4000318a - 1] = '7';
 		
 			func_57a4c();
@@ -168,7 +168,7 @@ void Handle7Key(void)
 			func_57a4c();
 			break;
 		
-		case 203:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 		case 206:
 			//64a04
 			switch (bData_400031e8)
@@ -224,7 +224,7 @@ void Handle7Key(void)
 					break;
 			}
 			//0x64b28
-			Data_400027ff[bData_4000318a - 1] = bData_400031e8;
+			strCustomerObjectNameInput[bData_4000318a - 1] = bData_400031e8;
 			break;
 		
 		case 48001:

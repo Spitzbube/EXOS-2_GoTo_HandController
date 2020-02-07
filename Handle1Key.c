@@ -126,7 +126,7 @@ void Handle1Key(void)
 		case MENU_CONTEXT_RA_INPUT: //29001:
 		case 204:
 			//68f50
-			Data_400022f2[bData_4000318a - 1] = '1';
+			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '1';
 			Data_400027df[bData_4000318a - 1] = '1';
 		
 			func_57b40();
@@ -134,7 +134,7 @@ void Handle1Key(void)
 		
 		case 207:
 			//68f84
-			Data_400022f2[bData_4000318a - 1] = '1';
+			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '1';
 			Data_400027df[bData_4000318a - 1] = '1';
 		
 			func_57a4c();
@@ -167,11 +167,11 @@ void Handle1Key(void)
 			func_57a4c();
 			break;
 		
-		case 203:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 		case 206:
 			//69090
 			bData_400031e8 = '1';
-			Data_400027ff[bData_4000318a - 1] = bData_400031e8;
+			strCustomerObjectNameInput[bData_4000318a - 1] = bData_400031e8;
 			break;
 		
 		case 48001:
