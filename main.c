@@ -9,6 +9,8 @@
 #include "menu.h"
 #endif
 
+#define UART0_DEBUG
+
 #include "file_1f30.c"
 
 #ifndef OLIMEX_LPC2148

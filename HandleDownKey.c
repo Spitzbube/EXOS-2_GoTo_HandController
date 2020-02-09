@@ -871,7 +871,7 @@ void HandleDownKey(void)
 			Data_40002c64_MenuContextId = 206;
 			break;
 		
-		case 41001:
+		case MENU_CONTEXT_TIME_DATE_INPUT: //41001:
 			//0x5c400
 			if (bData_40002e78 == 0)
 			{

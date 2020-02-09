@@ -1030,7 +1030,11 @@ void HandleEnterKey(void)
 		
 		case 4400: // Sky/Land
 			//0x54e24
+#ifdef V2_3
 			Data_40002c64_MenuContextId = 4400;
+#else
+			Data_40002c64_MenuContextId = 45001;
+#endif
 			break;
 		
 		case 45001:
@@ -1092,18 +1096,11 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_AZ_EQU: //4500:
 			//0x54fc4: AZ / EQ
-			#if 1 //Original
-			Data_40002c64_MenuContextId = MENU_CONTEXT_AZ_EQU; //4500; //Bug? -> Non-functional
-			#else
-			if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
-			{
-				Data_40002c64_MenuContextId = MENU_CONTEXT_MOUNT_AZ; //46001;
-			}
-			else if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_EQU) //1)
-			{
-				Data_40002c64_MenuContextId = MENU_CONTEXT_MOUNT_EQU; //46002;
-			}
-			#endif
+#ifdef V2_3
+			Data_40002c64_MenuContextId = MENU_CONTEXT_AZ_EQU; //4500;
+#else
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MOUNT_AZ; //46001;
+#endif
 			break;
 		
 		case MENU_CONTEXT_MOUNT_AZ: //46001:
@@ -1299,10 +1296,10 @@ void HandleEnterKey(void)
 			
 			bData_4000318a = 1;
 			bData_40002e78 = 0;
-			Data_40002c64_MenuContextId = 41001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TIME_DATE_INPUT; //41001;
 			break;
 		
-		case 41001: //"Date and Time Set: "
+		case MENU_CONTEXT_TIME_DATE_INPUT: //41001:
 			//0x556d8
 			if (ValidateDateTimeSetRTC() == 1)
 			{
@@ -1333,7 +1330,7 @@ void HandleEnterKey(void)
 				
 				bData_4000318a = 1;
 				bData_40002e78 = 0;
-				Data_40002c64_MenuContextId = 41001;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_TIME_DATE_INPUT; //41001;
 			}
 			//0x557e8 -> 0x563b8
 			break;
