@@ -21,7 +21,7 @@ void func_5099c(void)
 	bData_40003196_CurrentLanguage = MENU_LANGUAGE_ENGLISH; //1;
 	bData_4000319c = 0;
 	bData_4000319d = 0;
-	bData_40003198 = 0;
+	bCapsLock = 0;
 	bData_40003199 = 0;
 	bData_40002c1a = 0;
 	bData_40003431 = 0;
@@ -47,7 +47,7 @@ void func_5099c(void)
 	bData_400031ea = 0;
 	bData_400031eb = 0;
 	bData_400031ec = 1;
-	bData_400031ed = 1;
+	bSystemInitialized = 1;
 	dData_400031f0 = 0.0;
 	dData_400031f8 = 0.0;
 	bData_40003200 = 0;

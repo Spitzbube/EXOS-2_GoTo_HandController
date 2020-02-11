@@ -136,7 +136,7 @@ typedef struct
 	
 } Struct_40004380;
 
-extern char strCustomerObjectRaAziInputCheck[]; //400022f2
+extern char strCustomerObjectRaAziInputForTracking[]; //400022f2
 extern char Data_40002302[]; //40002302
 extern char Data_40002387[]; //40002387
 extern char Data_4000239a[]; //4000239a
@@ -172,13 +172,13 @@ extern unsigned char Data_4000271a[]; //4000271a
 extern unsigned char Data_40002789[]; //40002789
 extern unsigned char Data_40002792[]; //40002792
 extern char Data_400027cf[]; //400027cf
-extern unsigned char Data_400027df[]; //400027df
+extern unsigned char strCustomerObjectRaAziInputForStoring[]; //400027df
 extern unsigned char Data_400027ef[]; //400027ef
 extern unsigned char strCustomerObjectNameInput[]; //400027ff
-extern unsigned char Data_40002827[]; //40002827
-extern unsigned char Data_40002837[]; //40002837
-extern unsigned char Data_40002847[]; //40002847
-extern unsigned char Data_40002856[]; //40002856
+extern unsigned char strCustomSiteName[]; //40002827
+extern unsigned char strCustomSiteLongitude[]; //40002837
+extern unsigned char strCustomSiteLatitude[]; //40002847
+extern unsigned char strCustomSiteTimezone[]; //40002856
 extern unsigned char Data_40002861[]; //40002861
 extern char Data_4000288e[]; //4000288e
 extern char Data_40002899[]; //40002899
@@ -260,10 +260,10 @@ extern char bData_40002c62_AlignmentStarMode; //40002c62
 extern int Data_40002c64_MenuContextId; //40002c64
 extern char bData_40002c68; //40002c68
 extern unsigned char bData_40002c69_KeyCode; //40002c69
-extern char bData_40002c6a; //40002c6a
-extern double dData_40002c70; //40002c70
-extern double dData_40002c78; //40002c78
-extern double dData_40002c80; //40002c80
+extern char bDaylightSavingTime; //40002c6a
+extern double dObjectRiseTime; //40002c70
+extern double dObjectTransitTime; //40002c78
+extern double dObjectSetTime; //40002c80
 extern double dData_40002c88; //40002c88
 extern double dData_40002c90; //40002c90
 extern double dData_40002c98; //40002c98
@@ -327,16 +327,16 @@ extern int Data_40002e18_SiteLongitudeDegrees; //40002e18
 extern int Data_40002e1c_SiteLongitudeMinutes; //40002e1c
 extern float fData_40002e20_SiteLongitudeSeconds; //40002e20
 extern double dData_40002e28_SiteLongitude; //40002e28
-extern float fData_40002e30; //40002e30
+extern float fCustomSiteLongitude; //40002e30
 extern int Data_40002e34; //40002e34
 extern int Data_40002e38_SiteLatitudeDegrees; //40002e38
 extern int Data_40002e3c_SiteLatitudeMinutes; //40002e3c
 extern float fData_40002e40_SiteLatitudeSeconds; //40002e40
 extern int Data_40002e44; //40002e44
 extern double dData_40002e48_SiteLatitude; //40002e48
-extern float fData_40002e50; //40002e50
+extern float fCustomSiteLatitude; //40002e50
 extern int Data_40002e54_Zone; //40002e54
-extern int Data_40002e58; //40002e58
+extern int iCustomSiteTimeZone; //40002e58
 extern unsigned Data_40002e5c_Year; //40002e5c
 extern unsigned char bData_40002e60_Month; //40002e60
 extern unsigned char bData_40002e61_Day; //40002e61
@@ -344,7 +344,7 @@ extern unsigned char bData_40002e62_Hours; //40002e62
 extern unsigned char bData_40002e63_Minutes; //40002e63
 extern unsigned char bData_40002e64_Seconds; //40002e64
 extern unsigned short wData_40002e66; //40002e66
-extern unsigned char bData_40002e78; //40002e78
+extern unsigned char bDateTimeInputMode; //40002e78
 extern unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79
 extern unsigned char bData_40002e7a_MountType; //40002e7a
 extern unsigned char bData_40002e7b_GpsAvailable; //40002e7b
@@ -531,10 +531,10 @@ extern char* Data_4000310c;
 extern char* Data_40003110;
 extern char* Data_40003114;
 extern char* Data_40003140; //40003140
-extern unsigned char bData_40003144; //40003144
+extern unsigned char bCurrentCustomSiteInputLine; //40003144
 extern char* Data_4000314c_SolarSystemObjectName; //4000314c
 extern char Data_40003150[]; //40003150, size??
-extern char Data_40003159[]; //40003159, size??
+extern char arCustomSiteName[]; //40003159, size??
 extern unsigned char bData_40003161; //40003161
 extern char bData_40003162; //40003162
 extern int Data_40003164_LunarPhaseYear; //40003164
@@ -564,14 +564,14 @@ extern unsigned char bData_40003184; //40003184
 extern unsigned char bData_40003186; //40003186
 extern char bData_40003188; //40003188
 extern char bData_40003189; //40003189
-extern unsigned char bData_4000318a; //4000318a
+extern unsigned char bCharacterInputPosition; //4000318a
 extern int Data_4000318c; //4000318c
 extern int Data_40003190; //40003190
 extern char bData_40003194; //40003194
 extern unsigned char bData_40003195; //40003195
 extern unsigned char bData_40003196_CurrentLanguage; //40003196
 extern unsigned char bData_40003197_DisplayLinesPerMenuLine; //40003197
-extern char bData_40003198; //40003198
+extern char bCapsLock; //40003198
 extern unsigned char bData_40003199; //40003199
 extern unsigned char bData_4000319a_SkyLandTargetId; //4000319a
 extern char bData_4000319b; //4000319b
@@ -595,12 +595,12 @@ extern float fData_400031c4; //400031c4
 extern char bData_400031e0; //400031e0
 extern char bData_400031e1; //400031e1
 extern int Data_400031e4; //400031e4
-extern unsigned char bData_400031e8; //400031e8
+extern unsigned char bCustomerObjectNameChar; //400031e8
 extern char bData_400031e9; //400031e9
 extern char bData_400031ea; //400031ea
 extern char bData_400031eb; //400031eb
 extern char bData_400031ec; //400031ec
-extern char bData_400031ed; //400031ed
+extern char bSystemInitialized; //400031ed
 extern double dData_400031f0; //400031f0
 extern double dData_400031f8; //400031f8
 extern char bData_40003200; //40003200
@@ -615,11 +615,11 @@ extern int Data_40003224_AlarmMinutes; //40003224
 extern int Data_40003228_AlarmSeconds; //40003228
 extern char bData_4000322c; //4000322c
 extern char bData_4000322d_AlarmTimeElapsed; //4000322d
-extern float fData_40003230; //40003230
-extern float fData_40003234; //40003234
-extern float fData_40003238; //40003238
-extern float fData_4000323c; //4000323c
-extern float fData_40003240; //40003240
+extern float fMainFocalLength; //40003230
+extern float fSecondaryFocalLength; //40003234
+extern float fEyepieceMagnification; //40003238
+extern float fEyepieceFOV; //4000323c
+extern float fFieldOfView; //40003240
 extern int Data_40003248_CurrentDisplayPWM; //40003248
 extern unsigned short wData_40003250; //40003250
 extern unsigned short wData_40003252; //40003252
@@ -748,19 +748,10 @@ extern unsigned char bData_4000352b_ReceiveExternalMinutes; //4000352b
 extern unsigned char bData_4000352c_ReceiveExternalSeconds; //4000352c
 extern unsigned char bData_4000352d; //4000352d
 extern unsigned char bData_4000352e; //4000352e
-extern float fData_40003540; //40003540
-extern float fData_40003544; //40003544
-extern int Data_40003548; //40003548
-#if 1
+extern float fInitialCustomSiteLongitude; //40003540
+extern float fInitialCustomSiteLatitude; //40003544
+extern int iInitialCustomSiteTimezone; //40003548
 extern unsigned char Data_40003588_uart0ReceiveDataBuffer[]; //40003588
-#else
-typedef struct
-{
-	char a;
-	unsigned char bData[8]; //0
-} Union_40003588;
-extern Union_40003588 Data_40003588; //40003588
-#endif
 extern unsigned char Data_40003592_uart1ReceiveDataBuffer[]; //40003592
 extern int Data_4000359c_RecentTargetIdArray[]; //4000359c
 extern unsigned char Data_400035bc[]; //400035bc
@@ -807,6 +798,6 @@ extern Struct_EquatorialCoordinates Data_40004ae8; //40004ae8
 extern Struct_HorizontalCoordinates Data_40004b08; //40004b08
 extern Struct_EquatorialCoordinates Data_40004b50; //40004b50
 extern Struct_HorizontalCoordinates Data_40004b70; //40004b70
-extern unsigned char Data_40004bb8[]; //40004bb8
+extern unsigned char arInitialCustomSiteName[]; //40004bb8
 extern unsigned char Data_40004c58[]; //40004c58, size???
 

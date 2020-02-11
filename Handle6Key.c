@@ -12,8 +12,8 @@ void Handle6Key(void)
 			break;
 		
 		case 101:
-		case 201:
-		case 202:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
+		case MENU_CONTEXT_CUST_LAND_OBJ_SELECTION: //202:
 			//64ffc
 			bData_4000319a_SkyLandTargetId = 6;
 			break;
@@ -124,42 +124,42 @@ void Handle6Key(void)
 			break;
 		
 		case MENU_CONTEXT_RA_INPUT: //29001:
-		case 204:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_RA_INPUT: //204:
 			//653b8
-			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '6';
-			Data_400027df[bData_4000318a - 1] = '6';
+			strCustomerObjectRaAziInputForTracking[bCharacterInputPosition - 1] = '6';
+			strCustomerObjectRaAziInputForStoring[bCharacterInputPosition - 1] = '6';
 		
 			func_57b40();
 			break;
 		
-		case 207:
+		case MENU_CONTEXT_CUST_LAND_OBJ_AZI_INPUT: //207:
 			//653ec
-			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '6';
-			Data_400027df[bData_4000318a - 1] = '6';
+			strCustomerObjectRaAziInputForTracking[bCharacterInputPosition - 1] = '6';
+			strCustomerObjectRaAziInputForStoring[bCharacterInputPosition - 1] = '6';
 		
 			func_57a4c();
 			break;
 		
 		case MENU_CONTEXT_DEC_INPUT: //29002:
-		case 205:
-		case 208:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_DEC_INPUT: //205:
+		case MENU_CONTEXT_CUST_LAND_OBJ_ALT_INPUT: //208:
 			//65430
-			if (bData_4000318a != 5)
+			if (bCharacterInputPosition != 5)
 			{
-				Data_40002302[bData_4000318a - 1] = '6';
-				Data_400027ef[bData_4000318a - 1] = '6';
+				Data_40002302[bCharacterInputPosition - 1] = '6';
+				Data_400027ef[bCharacterInputPosition - 1] = '6';
 			}
 			else
 			{
-				if (Data_40002302[bData_4000318a - 1] == '+')
+				if (Data_40002302[bCharacterInputPosition - 1] == '+')
 				{
-					Data_40002302[bData_4000318a - 1] = '-';
-					Data_400027ef[bData_4000318a - 1] = '-';
+					Data_40002302[bCharacterInputPosition - 1] = '-';
+					Data_400027ef[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
-					Data_40002302[bData_4000318a - 1] = '+';
-					Data_400027ef[bData_4000318a - 1] = '+';
+					Data_40002302[bCharacterInputPosition - 1] = '+';
+					Data_400027ef[bCharacterInputPosition - 1] = '+';
 				}
 			}
 			
@@ -167,100 +167,100 @@ void Handle6Key(void)
 			break;
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
-		case 206:
+		case MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT: //206:
 			//654f8
-			switch (bData_400031e8)
+			switch (bCustomerObjectNameChar)
 			{
 				case '6':
 					//0x65544
-					bData_400031e8 = 'm';
+					bCustomerObjectNameChar = 'm';
 					break;
 				
 				case 'm': //109:
 					//0x65558
-					bData_400031e8 = 'n';
+					bCustomerObjectNameChar = 'n';
 					break;
 				
 				case 'n': //110:
 					//0x6556c
-					bData_400031e8 = 'o';
+					bCustomerObjectNameChar = 'o';
 					break;
 				
 				case 'o': //111:
 					//0x65580
-					bData_400031e8 = 'M';
+					bCustomerObjectNameChar = 'M';
 					break;
 				
 				case 'M': //77:
 					//0x65594
-					bData_400031e8 = 'N';
+					bCustomerObjectNameChar = 'N';
 					break;
 				
 				case 'N': //78:
 					//0x655a8
-					bData_400031e8 = 'O';
+					bCustomerObjectNameChar = 'O';
 					break;
 				
 				case 'O': //79:
 					//0x655bc
-					bData_400031e8 = '6';
+					bCustomerObjectNameChar = '6';
 					break;
 				
 				default:
 					//0x655d0
-					bData_400031e8 = '6';
+					bCustomerObjectNameChar = '6';
 					break;
 			}
 			//0x655e4
-			strCustomerObjectNameInput[bData_4000318a - 1] = bData_400031e8;
+			strCustomerObjectNameInput[bCharacterInputPosition - 1] = bCustomerObjectNameChar;
 			break;
 		
 		case 48001:
 			//65608
-			if (bData_4000318a != 1)
+			if (bCharacterInputPosition != 1)
 			{
 				//6561c
-				Data_400037cc[bData_4000318a - 1] = '6';
-				Data_400037dc[bData_4000318a - 1] = '6';
+				Data_400037cc[bCharacterInputPosition - 1] = '6';
+				Data_400037dc[bCharacterInputPosition - 1] = '6';
 			}
 			else
 			{
 				//0x6564c
-				if (Data_400037cc[bData_4000318a - 1] == '+')
+				if (Data_400037cc[bCharacterInputPosition - 1] == '+')
 				{
-					Data_400037cc[bData_4000318a - 1] = '-';
-					Data_400037dc[bData_4000318a - 1] = '-';
+					Data_400037cc[bCharacterInputPosition - 1] = '-';
+					Data_400037dc[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
-					Data_400037cc[bData_4000318a - 1] = '+';
-					Data_400037dc[bData_4000318a - 1] = '+';
+					Data_400037cc[bCharacterInputPosition - 1] = '+';
+					Data_400037dc[bCharacterInputPosition - 1] = '+';
 				}
 			}
 			//0x656c4
 			func_57370();
 			break;
 		
-		case 41001:
+		case MENU_CONTEXT_TIME_DATE_INPUT: //41001:
 			//656cc
-			if (bData_40002e78 == 0)
+			if (bDateTimeInputMode == 0)
 			{
-				Data_40002655[bData_4000318a - 1] = '6';
-				Data_400037ec[bData_4000318a - 1] = '6';
+				Data_40002655[bCharacterInputPosition - 1] = '6';
+				Data_400037ec[bCharacterInputPosition - 1] = '6';
 			}
 			else
 			{
 				//0x65710
-				Data_40002660[bData_4000318a - 1] = '6';
-				Data_40003150[bData_4000318a - 1] = '6';
+				Data_40002660[bCharacterInputPosition - 1] = '6';
+				Data_40003150[bCharacterInputPosition - 1] = '6';
 			}
 			//0x6573c
-			func_5718c();
+			HandleNextDateTimeInputPosition();
 			break;
 			
 		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
 			//65744
-			func_62524(6);
+			HandleCustomSiteInputChar(6);
 			break;
 		
 		case MENU_CONTEXT_OTA_ZERO_SETUP: //47011:
@@ -270,43 +270,43 @@ void Handle6Key(void)
 		
 		case 34001:
 			//65764
-			Data_4000294a[bData_4000318a - 1] = '6';
-			strEng00000s[bData_4000318a - 1] = '6';
+			Data_4000294a[bCharacterInputPosition - 1] = '6';
+			strEng00000s[bCharacterInputPosition - 1] = '6';
 		
 			func_56d0c();
 			break;
 		
 		case 35001:
 			//6579c
-			Data_40002a3f[bData_4000318a - 1] = '6';
-			strEngAlarm21h34m23s[bData_4000318a - 1] = '6';
+			Data_40002a3f[bCharacterInputPosition - 1] = '6';
+			strEngAlarm21h34m23s[bCharacterInputPosition - 1] = '6';
 		
 			func_56c4c();
 			break;
 		
-		case 360021:
-		case 370021:
+		case MENU_CONTEXT_EYEPIECE_MAGN_MF_INPUT: //360021:
+		case MENU_CONTEXT_EYEPIECE_FOV_MF_INPUT: //370021:
 			//657dc
-			Data_40002474[bData_4000318a - 1] = '6';
-			Data_400024c9[bData_4000318a - 1] = '6';
+			Data_40002474[bCharacterInputPosition - 1] = '6';
+			strEyepieceFovMfInput[bCharacterInputPosition - 1] = '6';
 		
-			func_56ac8();
+			HandleNextMfInputPosition();
 			break;
 		
-		case 360022:
-		case 370022:
+		case MENU_CONTEXT_EYEPIECE_MAGN_SF_INPUT: //360022:
+		case MENU_CONTEXT_EYEPIECE_FOV_SF_INPUT: //370022:
 			//65818
-			Data_40002481[bData_4000318a - 1] = '6';
-			Data_400024d6[bData_4000318a - 1] = '6';
+			Data_40002481[bCharacterInputPosition - 1] = '6';
+			strEyepieceFovSfInput[bCharacterInputPosition - 1] = '6';
 		
-			func_56bf8();
+			HandleNextSfInputPosition();
 			break;
 		
-		case 370023:
+		case MENU_CONTEXT_EYEPIECE_FOV_INPUT: //370023:
 			//6584c
-			Data_400024e1[bData_4000318a - 1] = '6';
+			strEyepieceFovInput[bCharacterInputPosition - 1] = '6';
 		
-			func_56b54();
+			HandleNextEyepieceFovInputPosition();
 			break;
 		
 		case 211001:

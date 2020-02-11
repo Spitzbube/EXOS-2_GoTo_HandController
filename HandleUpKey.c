@@ -478,28 +478,28 @@ void HandleUpKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_CURRENT_OBJECTS; //3100;
 			break;
 		
-		case 3300:
+		case MENU_CONTEXT_LUNAR_PHASE: //3300:
 			//0x5dcac
 			func_5a57c(0, 13);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_OBJECT_RISE_SET; //3200;
 			break;
 		
-		case 3400:
+		case MENU_CONTEXT_TIMER: //3400:
 			//0x5dccc
 			func_5a57c(0, 13);
-			Data_40002c64_MenuContextId = 3300;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_LUNAR_PHASE; //3300;
 			break;
 		
-		case 3500:
+		case MENU_CONTEXT_ALARM: //3500:
 			//0x5dcec
 			func_5a57c(0, 13);
-			Data_40002c64_MenuContextId = 3400;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TIMER; //3400;
 			break;
 		
 		case MENU_CONTEXT_EYEPIECE_FOV: //3600:
 			//0x5dd0c
 			func_5a57c(0, 13);
-			Data_40002c64_MenuContextId = 3500;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALARM; //3500;
 			break;
 		
 		case MENU_CONTEXT_EYEPIECE_MAGN: //3700:
@@ -912,13 +912,13 @@ void HandleUpKey(void)
 		case MENU_CONTEXT_RA_INPUT: //29001:
 			//0x5e568
 			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_INPUT; //29002;
-			bData_4000318a = 5;
+			bCharacterInputPosition = 5;
 			break;
 		
 		case MENU_CONTEXT_DEC_INPUT: //29002:
 			//0x5e588
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
-			bData_4000318a = 6;
+			bCharacterInputPosition = 6;
 			break;
 		
 		case MENU_CONTEXT_ENGLISH: //49001:
@@ -963,7 +963,7 @@ void HandleUpKey(void)
 			lcd_display_clear();			
 			//break;
 		
-		case 31001:
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJ_RISE_SET_TIMES: //31001:
 			//0x5e65c
 			if (bData_40002eb5_SolarSystemObjectNr == 0)
 			{
@@ -1067,25 +1067,25 @@ void HandleUpKey(void)
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x5e97c
-			bData_4000318a = 5;
-			Data_40002c64_MenuContextId = 205;
+			bCharacterInputPosition = 5;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_DEC_INPUT; //205;
 			break;
 		
-		case 205:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_DEC_INPUT: //205:
 			//0x5e99c
-			bData_4000318a = 6;
-			Data_40002c64_MenuContextId = 204;
+			bCharacterInputPosition = 6;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_RA_INPUT; //204;
 			break;
 		
-		case 204:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_RA_INPUT: //204:
 			//0x5e9bc
-			bData_4000318a = 6;
+			bCharacterInputPosition = 6;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT; //203;
 			break;
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x5e9dc
-		case 202:
+		case MENU_CONTEXT_CUST_LAND_OBJ_SELECTION: //202:
 			//0x5e9e4
 		case 101:
 			//0x5e9e8
@@ -1144,38 +1144,38 @@ void HandleUpKey(void)
 			}
 			break;
 		
-		case 206:
+		case MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT: //206:
 			//0x5eae0
-			bData_4000318a = 5;
-			Data_40002c64_MenuContextId = 208;
+			bCharacterInputPosition = 5;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUST_LAND_OBJ_ALT_INPUT; //208;
 			break;
 		
-		case 208:
+		case MENU_CONTEXT_CUST_LAND_OBJ_ALT_INPUT: //208:
 			//0x5eb00
-			bData_4000318a = 5;
-			Data_40002c64_MenuContextId = 207;
+			bCharacterInputPosition = 5;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUST_LAND_OBJ_AZI_INPUT; //207;
 			break;
 		
-		case 207:
+		case MENU_CONTEXT_CUST_LAND_OBJ_AZI_INPUT: //207:
 			//0x5eb20
-			bData_4000318a = 6;
-			Data_40002c64_MenuContextId = 206;
+			bCharacterInputPosition = 6;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT; //206;
 			break;
 		
 		case MENU_CONTEXT_TIME_DATE_INPUT: //41001:
 			//0x5eb40
-			if (bData_40002e78 == 0)
+			if (bDateTimeInputMode == 0)
 			{
 				//5eb54
-				bData_40002e78 = 1;
+				bDateTimeInputMode = 1;
 			}
 			else
 			{
 				//0x5eb64
-				bData_40002e78 = 0;
+				bDateTimeInputMode = 0;
 			}
 			//0x5eb70
-			bData_4000318a = 1;
+			bCharacterInputPosition = 1;
 			break;
 		
 		case 43021:
@@ -1200,16 +1200,16 @@ void HandleUpKey(void)
 		
 		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
 			//0x5ebd0
-			if (bData_40003144 == 0)
+			if (bCurrentCustomSiteInputLine == 0)
 			{
-				bData_40003144 = 3;
-				bData_4000318a = 7;
+				bCurrentCustomSiteInputLine = 3;
+				bCharacterInputPosition = 7;
 			}
 			else
 			{
 				//0x5ec00
-				bData_40003144--;
-				bData_4000318a = 7;
+				bCurrentCustomSiteInputLine--;
+				bCharacterInputPosition = 7;
 			}
 			//0x5ec20
 			break;
@@ -1230,12 +1230,12 @@ void HandleUpKey(void)
 			//0x5ec68
 			if (bData_4000316d == 0)
 			{
-				bData_4000318a = 5;
+				bCharacterInputPosition = 5;
 			}
 			else
 			{
 				//0x5ec88
-				bData_4000318a = 6;
+				bCharacterInputPosition = 6;
 			}
 			//0x5ec94
 			break;
@@ -1266,34 +1266,34 @@ void HandleUpKey(void)
 			//->0x5f0b4
 			break;
 			
-		case 360021:
+		case MENU_CONTEXT_EYEPIECE_MAGN_MF_INPUT: //360021:
 			//0x5ed20
-			Data_40002c64_MenuContextId = 360022;
-			bData_4000318a = 7;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_MAGN_SF_INPUT; //360022;
+			bCharacterInputPosition = 7;
 			break;
 		
-		case 360022:
+		case MENU_CONTEXT_EYEPIECE_MAGN_SF_INPUT: //360022:
 			//0x5ed40
-			Data_40002c64_MenuContextId = 360021;
-			bData_4000318a = 7;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_MAGN_MF_INPUT; //360021;
+			bCharacterInputPosition = 7;
 			break;
 		
-		case 370021:
+		case MENU_CONTEXT_EYEPIECE_FOV_MF_INPUT: //370021:
 			//0x5ed60
-			Data_40002c64_MenuContextId = 370023;
-			bData_4000318a = 7;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_FOV_INPUT; //370023;
+			bCharacterInputPosition = 7;
 			break;
 		
-		case 370023:
+		case MENU_CONTEXT_EYEPIECE_FOV_INPUT: //370023:
 			//0x5ed80
-			Data_40002c64_MenuContextId = 370022;
-			bData_4000318a = 7;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_FOV_SF_INPUT; //370022;
+			bCharacterInputPosition = 7;
 			break;
 		
-		case 370022:
+		case MENU_CONTEXT_EYEPIECE_FOV_SF_INPUT: //370022:
 			//0x5eda0
-			Data_40002c64_MenuContextId = 370021;
-			bData_4000318a = 7;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_FOV_MF_INPUT; //370021;
+			bCharacterInputPosition = 7;
 			break;
 		
 		case 360111:
@@ -1370,13 +1370,13 @@ void HandleUpKey(void)
 					if (bData_40003261 == 0)
 					{
 						bData_40003261 = 2;
-						bData_4000318a = 7;
+						bCharacterInputPosition = 7;
 					}
 					else
 					{
 						//0x5ef40
 						bData_40003261--;
-						bData_4000318a = 7;
+						bCharacterInputPosition = 7;
 					}
 					//break;
 				
@@ -1411,12 +1411,12 @@ void HandleUpKey(void)
 					if (bData_40003260 == 0)
 					{
 						bData_40003260 = 2;
-						bData_4000318a = 7;
+						bCharacterInputPosition = 7;
 					}
 					else
 					{
 						bData_40003260--;
-						bData_4000318a = 7;
+						bCharacterInputPosition = 7;
 					}
 					//break;
 				
@@ -1426,21 +1426,21 @@ void HandleUpKey(void)
 			}
 			break;
 		
-		case 42001:
+		case MENU_CONTEXT_DAYLIGHT_SAVING_ON: //42001:
 			//0x5f04c
 			if (bData_40002f1e_SetupLocalData == 1)
 			{
-				Data_40002c64_MenuContextId = 42002;
-				bData_40002c6a = 0;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING_OFF; //42002;
+				bDaylightSavingTime = 0;
 			}
 			break;
 			
-		case 42002:
+		case MENU_CONTEXT_DAYLIGHT_SAVING_OFF: //42002:
 			//0x5f07c
 			if (bData_40002f1e_SetupLocalData == 1)
 			{
-				Data_40002c64_MenuContextId = 42001;
-				bData_40002c6a = 1;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING_ON; //42001;
+				bDaylightSavingTime = 1;
 			}
 			break;
 			

@@ -793,9 +793,9 @@ void HandleMinusKey(void)
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x607c8
-		case 204:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_RA_INPUT: //204:
 			//0x607d0
-		case 205:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_DEC_INPUT: //205:
 			//0x607d4
 			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION; //201;
 			break;
@@ -826,18 +826,18 @@ void HandleMinusKey(void)
 			}
 			break;
 		
-		case 202:
+		case MENU_CONTEXT_CUST_LAND_OBJ_SELECTION: //202:
 			//0x6084c
-			Data_40002c64_MenuContextId = 2130;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_LAND; //2130;
 			break;
 		
-		case 206:
+		case MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT: //206:
 			//0x60860
-		case 207:
+		case MENU_CONTEXT_CUST_LAND_OBJ_AZI_INPUT: //207:
 			//0x60868
-		case 208:
+		case MENU_CONTEXT_CUST_LAND_OBJ_ALT_INPUT: //208:
 			//0x6086c
-			Data_40002c64_MenuContextId = 202;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUST_LAND_OBJ_SELECTION; //202;
 			break;
 		
 		case 360111:
@@ -860,13 +860,13 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_DISPLAY_ILLUMINATION; //3800;
 			break;
 		
-		case 42001:
+		case MENU_CONTEXT_DAYLIGHT_SAVING_ON: //42001:
 			//0x608cc
-		case 42002:
+		case MENU_CONTEXT_DAYLIGHT_SAVING_OFF: //42002:
 			//0x608d4
 			if (bData_40002f1e_SetupLocalData == 0)
 			{
-				Data_40002c64_MenuContextId = 4200;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING; //4200;
 			}
 			else
 			{
@@ -883,10 +883,10 @@ void HandleMinusKey(void)
 				sprintf(Data_40002660, "%02d:%02d:%02d",
 					bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
 				
-				bData_4000318a = 1;
-				bData_40002e78 = 0;
+				bCharacterInputPosition = 1;
+				bDateTimeInputMode = 0;
 				
-				Data_40002c64_MenuContextId = 41001;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_TIME_DATE_INPUT; //41001;
 			}
 			//0x609bc -> 0x60d48
 			break;

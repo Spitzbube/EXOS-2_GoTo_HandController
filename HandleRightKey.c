@@ -13,103 +13,103 @@ void func_563c8(void)
 			{
 				case 0:
 					//0x56410
-					if (bData_4000318a < 13)
+					if (bCharacterInputPosition < 13)
 					{
 						//56424
-						bData_4000318a++;
+						bCharacterInputPosition++;
 					}
 					else
 					{
 						//0x5643c
-						bData_4000318a = 7;
+						bCharacterInputPosition = 7;
 					}
 					//0x56448 -> 0x565f4
 					break;
 				
 				case 1:
 					//0x5644c
-					switch (bData_4000318a)
+					switch (bCharacterInputPosition)
 					{
 						case 7:
 							//0x56488
-							bData_4000318a = 8;
+							bCharacterInputPosition = 8;
 							break;
 						
 						case 8:
 							//0x5649c
-							bData_4000318a = 10;
+							bCharacterInputPosition = 10;
 							break;
 						
 						case 10:
 							//0x564b0
-							bData_4000318a = 11;
+							bCharacterInputPosition = 11;
 							break;
 						
 						case 11:
 							//0x564c4
-							bData_4000318a = 13;
+							bCharacterInputPosition = 13;
 							break;
 						
 						case 13:
 							//0x564d8
-							bData_4000318a = 14;
+							bCharacterInputPosition = 14;
 							break;
 						
 						case 14:
 							//0x564ec
-							bData_4000318a = 7;
+							bCharacterInputPosition = 7;
 							break;
 						
 						default:
 							//0x56500
 							break;
-					} //switch (bData_4000318a)
+					} //switch (bCharacterInputPosition)
 					//->0x565f4
 					break;
 				
 				case 2:
 					//0x56510
-					switch (bData_4000318a)
+					switch (bCharacterInputPosition)
 					{
 						case 7:
 							//0x56550
-							bData_4000318a = 8;
+							bCharacterInputPosition = 8;
 							break;
 						
 						case 8:
 							//0x56564
-							bData_4000318a = 9;
+							bCharacterInputPosition = 9;
 							break;
 						
 						case 9:
 							//0x56578
-							bData_4000318a = 11;
+							bCharacterInputPosition = 11;
 							break;
 												
 						case 11:
 							//0x5658c
-							bData_4000318a = 12;
+							bCharacterInputPosition = 12;
 							break;
 						
 						case 12:
 							//0x565a0
-							bData_4000318a = 14;
+							bCharacterInputPosition = 14;
 							break;
 						
 						case 14:
 							//0x565b4
-							bData_4000318a = 15;
+							bCharacterInputPosition = 15;
 							break;
 						
 						case 15:
 							//0x565c8
-							bData_4000318a = 7;
+							bCharacterInputPosition = 7;
 							break;
 						
 						default:
 							//0x565dc
 							break;
-					} //switch (bData_4000318a)
+					} //switch (bCharacterInputPosition)
 					//->
 					break;
 				
@@ -137,55 +137,55 @@ void func_5660c(void)
 			{
 				case 0:
 					//0x56644
-					if (bData_4000318a < 13)
+					if (bCharacterInputPosition < 13)
 					{
-						bData_4000318a++;
+						bCharacterInputPosition++;
 					}
 					else
 					{
 						//0x56670
-						bData_4000318a = 7;
+						bCharacterInputPosition = 7;
 					}
 					//->0x56828
 					break;
 				
 				case 1:
 					//0x56680
-					switch (bData_4000318a)
+					switch (bCharacterInputPosition)
 					{
 						case 7:
 							//0x566c0
-							bData_4000318a = 8;
+							bCharacterInputPosition = 8;
 							break;
 
 						case 8:
 							//0x566d4
-							bData_4000318a = 9;
+							bCharacterInputPosition = 9;
 							break;
 
 						case 9:
 							//0x566e8
-							bData_4000318a = 11;
+							bCharacterInputPosition = 11;
 							break;
 
 						case 11:
 							//0x566fc
-							bData_4000318a = 12;
+							bCharacterInputPosition = 12;
 							break;
 
 						case 12:
 							//0x56710
-							bData_4000318a = 14;
+							bCharacterInputPosition = 14;
 							break;
 
 						case 14:
 							//0x56724
-							bData_4000318a = 15;
+							bCharacterInputPosition = 15;
 							break;
 
 						case 15:
 							//0x56738
-							bData_4000318a = 7;
+							bCharacterInputPosition = 7;
 							break;
 
 						default:
@@ -196,36 +196,36 @@ void func_5660c(void)
 				
 				case 2:
 					//0x5675c
-					switch (bData_4000318a)
+					switch (bCharacterInputPosition)
 					{
 						case 7:
 							//0x56798
-							bData_4000318a = 8;
+							bCharacterInputPosition = 8;
 							break;
 						
 						case 8:
 							//0x567ac
-							bData_4000318a = 10;
+							bCharacterInputPosition = 10;
 							break;
 						
 						case 10:
 							//0x567c0
-							bData_4000318a = 11;
+							bCharacterInputPosition = 11;
 							break;
 						
 						case 11:
 							//0x567d4
-							bData_4000318a = 13;
+							bCharacterInputPosition = 13;
 							break;
 						
 						case 13:
 							//0x567e8
-							bData_4000318a = 14;
+							bCharacterInputPosition = 14;
 							break;
 						
 						case 14:
 							//0x567fc
-							bData_4000318a = 7;
+							bCharacterInputPosition = 7;
 							break;
 						
 						default:
@@ -340,28 +340,28 @@ void HandleNextCity(void)
 }
 
 /* 56ac8 - todo */
-void func_56ac8(void)
+void HandleNextMfInputPosition(void)
 {
-	switch (bData_4000318a)
+	switch (bCharacterInputPosition)
 	{
 		case 7:
 			//0x56af4
-			bData_4000318a = 8;
+			bCharacterInputPosition = 8;
 			break;
 		
 		case 8:
 			//0x56b08
-			bData_4000318a = 9;
+			bCharacterInputPosition = 9;
 			break;
 		
 		case 9:
 			//0x56b1c
-			bData_4000318a = 10;
+			bCharacterInputPosition = 10;
 			break;
 		
 		case 10:
 			//0x56b30
-			bData_4000318a = 7;
+			bCharacterInputPosition = 7;
 			break;
 		
 		default:
@@ -371,33 +371,33 @@ void func_56ac8(void)
 }
 
 /* 56b54 - todo */
-void func_56b54(void)
+void HandleNextEyepieceFovInputPosition(void)
 {
-	switch (bData_4000318a)
+	switch (bCharacterInputPosition)
 	{
 		case 7:
 			//0x56b84
-			bData_4000318a = 8;
+			bCharacterInputPosition = 8;
 			break;
 		
 		case 8:
 			//0x56b98
-			bData_4000318a = 9;
+			bCharacterInputPosition = 9;
 			break;
 		
 		case 9:
 			//0x56bac
-			bData_4000318a = 11;
+			bCharacterInputPosition = 11;
 			break;
 		
 		case 11:
 			//0x56bc0
-			bData_4000318a = 12;
+			bCharacterInputPosition = 12;
 			break;
 		
 		case 12:
 			//0x56bd4
-			bData_4000318a = 7;
+			bCharacterInputPosition = 7;
 			break;
 		
 		default:
@@ -407,18 +407,18 @@ void func_56b54(void)
 }
 
 /* 56bf8 - todo */
-void func_56bf8(void)
+void HandleNextSfInputPosition(void)
 {
-	switch (bData_4000318a)
+	switch (bCharacterInputPosition)
 	{
 		case 7:
 			//0x56c14
-			bData_4000318a = 8;
+			bCharacterInputPosition = 8;
 			break;
 		
 		case 8:
 			//0x56c28
-			bData_4000318a = 7;
+			bCharacterInputPosition = 7;
 			break;
 				
 		default:
@@ -430,36 +430,36 @@ void func_56bf8(void)
 /* 56c4c - todo */
 void func_56c4c(void)
 {
-	switch (bData_4000318a)
+	switch (bCharacterInputPosition)
 	{
 		case 1:
 			//0x56c84
-			bData_4000318a = 2;
+			bCharacterInputPosition = 2;
 			break;
 		
 		case 2:
 			//0x56c98
-			bData_4000318a = 4;
+			bCharacterInputPosition = 4;
 			break;
 		
 		case 4:
 			//0x56cac
-			bData_4000318a = 5;
+			bCharacterInputPosition = 5;
 			break;
 		
 		case 5:
 			//0x56cc0
-			bData_4000318a = 7;
+			bCharacterInputPosition = 7;
 			break;
 		
 		case 7:
 			//0x56cd4
-			bData_4000318a = 8;
+			bCharacterInputPosition = 8;
 			break;
 		
 		case 8:
 			//0x56ce8
-			bData_4000318a = 1;
+			bCharacterInputPosition = 1;
 			break;
 		
 		default:
@@ -471,31 +471,31 @@ void func_56c4c(void)
 /* 56d0c - todo */
 void func_56d0c(void)
 {
-	switch (bData_4000318a)
+	switch (bCharacterInputPosition)
 	{
 		case 1:
 			//0x56d38
-			bData_4000318a = 2;
+			bCharacterInputPosition = 2;
 			break;
 		
 		case 2:
 			//0x56d4c
-			bData_4000318a = 3;
+			bCharacterInputPosition = 3;
 			break;
 		
 		case 3:
 			//0x56d60
-			bData_4000318a = 4;
+			bCharacterInputPosition = 4;
 			break;
 		
 		case 4:
 			//0x56d74
-			bData_4000318a = 5;
+			bCharacterInputPosition = 5;
 			break;
 		
 		case 5:
 			//0x56d88
-			bData_4000318a = 1;
+			bCharacterInputPosition = 1;
 			break;
 		
 		default:
@@ -510,25 +510,25 @@ void func_56dac(void)
 	{
 		case 0:
 			//0x56dc8
-			if (bData_4000318a < 7)
+			if (bCharacterInputPosition < 7)
 			{
-				bData_4000318a++;
+				bCharacterInputPosition++;
 			}
 			else
 			{
-				bData_4000318a = 5;
+				bCharacterInputPosition = 5;
 			}
 			break;
 		
 		case 1:
 			//0x56e04
-			if (bData_4000318a < 7)
+			if (bCharacterInputPosition < 7)
 			{
-				bData_4000318a++;
+				bCharacterInputPosition++;
 			}
 			else
 			{
-				bData_4000318a = 6;
+				bCharacterInputPosition = 6;
 			}
 			break;
 		
@@ -547,52 +547,52 @@ void func_56e50(void)
 			//0x56e6c
 		case 3:
 			//0x56e74
-			switch (bData_40003144)
+			switch (bCurrentCustomSiteInputLine)
 			{
 				case 0:
 					//0x56e9c
-					if (bData_4000318a < 14)
+					if (bCharacterInputPosition < 14)
 					{
-						bData_4000318a++;
+						bCharacterInputPosition++;
 					}
 					else
 					{
-						bData_4000318a = 7;
+						bCharacterInputPosition = 7;
 					}
 					break;
 
 				case 1:
 					//0x56ed8
-					switch (bData_4000318a)
+					switch (bCharacterInputPosition)
 					{
 						case 7:
 							//0x56f10
-							bData_4000318a = 8;
+							bCharacterInputPosition = 8;
 							break;
 						
 						case 8:
 							//0x56f24
-							bData_4000318a = 9;
+							bCharacterInputPosition = 9;
 							break;
 						
 						case 9:
 							//0x56f38
-							bData_4000318a = 10;
+							bCharacterInputPosition = 10;
 							break;
 						
 						case 10:
 							//0x56f4c
-							bData_4000318a = 12;
+							bCharacterInputPosition = 12;
 							break;
 						
 						case 12:
 							//0x56f60
-							bData_4000318a = 13;
+							bCharacterInputPosition = 13;
 							break;
 						
 						case 13:
 							//0x56f74
-							bData_4000318a = 7;
+							bCharacterInputPosition = 7;
 							break;
 						
 						default:
@@ -603,31 +603,31 @@ void func_56e50(void)
 
 				case 2:
 					//0x56f98
-					switch (bData_4000318a)
+					switch (bCharacterInputPosition)
 					{
 						case 7:
 							//0x56fcc
-							bData_4000318a = 8;
+							bCharacterInputPosition = 8;
 							break;
 						
 						case 8:
 							//0x56fe0
-							bData_4000318a = 9;
+							bCharacterInputPosition = 9;
 							break;
 						
 						case 9:
 							//0x56ff4
-							bData_4000318a = 11;
+							bCharacterInputPosition = 11;
 							break;
 						
 						case 11:
 							//0x57008
-							bData_4000318a = 12;
+							bCharacterInputPosition = 12;
 							break;
 						
 						case 12:
 							//0x5701c
-							bData_4000318a = 7;
+							bCharacterInputPosition = 7;
 							break;
 												
 						default:
@@ -638,21 +638,21 @@ void func_56e50(void)
 
 				case 3:
 					//0x57040
-					switch (bData_4000318a)
+					switch (bCharacterInputPosition)
 					{
 						case 7:
 							//0x57068
-							bData_4000318a = 8;
+							bCharacterInputPosition = 8;
 							break;
 						
 						case 8:
 							//0x5707c
-							bData_4000318a = 9;
+							bCharacterInputPosition = 9;
 							break;
 						
 						case 9:
 							//0x57090
-							bData_4000318a = 7;
+							bCharacterInputPosition = 7;
 							break;
 																		
 						default:
@@ -663,26 +663,26 @@ void func_56e50(void)
 
 				case 4:
 					//0x570b4
-					switch (bData_4000318a)
+					switch (bCharacterInputPosition)
 					{
 						case 7:
 							//0x570e4
-							bData_4000318a = 8;
+							bCharacterInputPosition = 8;
 							break;
 						
 						case 8:
 							//0x570f8
-							bData_4000318a = 9;
+							bCharacterInputPosition = 9;
 							break;
 						
 						case 9:
 							//0x5710c
-							bData_4000318a = 10;
+							bCharacterInputPosition = 10;
 							break;
 																		
 						case 10:
 							//0x57120
-							bData_4000318a = 7;
+							bCharacterInputPosition = 7;
 							break;
 																		
 						default:
@@ -704,52 +704,52 @@ void func_56e50(void)
 }
 
 /* 5718c - complete */
-void func_5718c(void)
+void HandleNextDateTimeInputPosition(void)
 {
-	switch (bData_40002e78)
+	switch (bDateTimeInputMode)
 	{
 		case 0:
 			//0x571a8
-			switch (bData_4000318a)
+			switch (bCharacterInputPosition)
 			{
 				case 1:
 					//0x571ec
-					bData_4000318a = 2;
+					bCharacterInputPosition = 2;
 					break;
 
 				case 2:
 					//0x57200
-					bData_4000318a = 3;
+					bCharacterInputPosition = 3;
 					break;
 
 				case 3:
 					//0x57214
-					bData_4000318a = 4;
+					bCharacterInputPosition = 4;
 					break;
 
 				case 4:
 					//0x57228
-					bData_4000318a = 6;
+					bCharacterInputPosition = 6;
 					break;
 
 				case 6:
 					//0x5723c
-					bData_4000318a = 7;
+					bCharacterInputPosition = 7;
 					break;
 
 				case 7:
 					//0x57250
-					bData_4000318a = 9;
+					bCharacterInputPosition = 9;
 					break;
 
 				case 9:
 					//0x57264
-					bData_4000318a = 10;
+					bCharacterInputPosition = 10;
 					break;
 
 				case 10:
 					//0x57278
-					bData_4000318a = 1;
+					bCharacterInputPosition = 1;
 					break;
 
 				default:
@@ -760,36 +760,36 @@ void func_5718c(void)
 		
 		case 1:
 			//0x5729c
-			switch (bData_4000318a)
+			switch (bCharacterInputPosition)
 			{
 				case 1:
 					//0x572d8
-					bData_4000318a = 2;
+					bCharacterInputPosition = 2;
 					break;
 
 				case 2:
 					//0x572ec
-					bData_4000318a = 4;
+					bCharacterInputPosition = 4;
 					break;
 
 				case 4:
 					//0x57300
-					bData_4000318a = 5;
+					bCharacterInputPosition = 5;
 					break;
 
 				case 5:
 					//0x57314
-					bData_4000318a = 7;
+					bCharacterInputPosition = 7;
 					break;
 
 				case 7:
 					//0x57328
-					bData_4000318a = 8;
+					bCharacterInputPosition = 8;
 					break;
 
 				case 8:
 					//0x5733c
-					bData_4000318a = 1;
+					bCharacterInputPosition = 1;
 					break;
 
 				default:
@@ -807,31 +807,31 @@ void func_5718c(void)
 /* 57370 - todo */
 void func_57370(void)
 {
-	switch (bData_4000318a)
+	switch (bCharacterInputPosition)
 	{
 		case 1:
 			//0x573a0
-			bData_4000318a = 2;
+			bCharacterInputPosition = 2;
 			break;
 
 		case 2:
 			//0x573b4
-			bData_4000318a = 3;
+			bCharacterInputPosition = 3;
 			break;
 
 		case 3:
 			//0x573c8
-			bData_4000318a = 5;
+			bCharacterInputPosition = 5;
 			break;
 
 		case 5:
 			//0x573dc
-			bData_4000318a = 6;
+			bCharacterInputPosition = 6;
 			break;
 
 		case 6:
 			//0x573f0
-			bData_4000318a = 1;
+			bCharacterInputPosition = 1;
 			break;
 		
 		default:
@@ -1158,46 +1158,46 @@ void func_57414(int a, int b, int speed)
 /* 57a4c - complete */
 void func_57a4c(void)
 {
-	switch (bData_4000318a)
+	switch (bCharacterInputPosition)
 	{
 		case 5:
 			//0x57a90
-			bData_4000318a = 6;
+			bCharacterInputPosition = 6;
 			break;
 
 		case 6:
 			//0x57aa4
-			bData_4000318a = 7;
+			bCharacterInputPosition = 7;
 			break;
 
 		case 7:
 			//0x57ab8
-			bData_4000318a = 9;
+			bCharacterInputPosition = 9;
 			break;
 
 		case 9:
 			//0x57acc
-			bData_4000318a = 10;
+			bCharacterInputPosition = 10;
 			break;
 
 		case 10:
 			//0x57ae0
-			bData_4000318a = 12;
+			bCharacterInputPosition = 12;
 			break;
 
 		case 12:
 			//0x57af4
-			bData_4000318a = 13;
+			bCharacterInputPosition = 13;
 			break;
 
 		case 13:
 			//0x57b08
-			bData_4000318a = 15;
+			bCharacterInputPosition = 15;
 			break;
 		
 		case 15:
 			//0x57b1c
-			bData_4000318a = 5;
+			bCharacterInputPosition = 5;
 			break;
 
 		default:
@@ -1209,41 +1209,41 @@ void func_57a4c(void)
 /* 57b40 - complete */
 void func_57b40(void)
 {
-	switch (bData_4000318a)
+	switch (bCharacterInputPosition)
 	{
 		case 6:
 			//0x57b80
-			bData_4000318a = 7;
+			bCharacterInputPosition = 7;
 			break;
 
 		case 7:
 			//0x57b94
-			bData_4000318a = 9;
+			bCharacterInputPosition = 9;
 			break;
 
 		case 9:
 			//0x57ba8
-			bData_4000318a = 10;
+			bCharacterInputPosition = 10;
 			break;
 
 		case 10:
 			//0x57bbc
-			bData_4000318a = 12;
+			bCharacterInputPosition = 12;
 			break;
 
 		case 12:
 			//0x57bd0
-			bData_4000318a = 13;
+			bCharacterInputPosition = 13;
 			break;
 
 		case 13:
 			//0x57be4
-			bData_4000318a = 15;
+			bCharacterInputPosition = 15;
 			break;
 
 		case 15:
 			//0x57bf8
-			bData_4000318a = 6;
+			bCharacterInputPosition = 6;
 			break;
 		
 		default:
@@ -1259,30 +1259,30 @@ void HandleRightKey(void)
 	{
 		case 29001:
 			//0x57e3c
-		case 204:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_RA_INPUT: //204:
 			//0x57e44
 			func_57b40();
 			break;
 		
 		case 29002:
 			//0x57e4c
-		case 205:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_DEC_INPUT: //205:
 			//0x57e54
-		case 208:
+		case MENU_CONTEXT_CUST_LAND_OBJ_ALT_INPUT: //208:
 			//0x57e58
-		case 207:
+		case MENU_CONTEXT_CUST_LAND_OBJ_AZI_INPUT: //207:
 			//0x57e5c
 			func_57a4c();
 			break;
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x57e64
-		case 206:
+		case MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT: //206:
 			//0x57e6c
-			bData_4000318a++;
-			if (bData_4000318a > 13)
+			bCharacterInputPosition++;
+			if (bCharacterInputPosition > 13)
 			{
-				bData_4000318a = 6;
+				bCharacterInputPosition = 6;
 			}
 			//->0x583d0
 			break;
@@ -1409,9 +1409,9 @@ void HandleRightKey(void)
 			func_57370();
 			break;
 		
-		case 41001:
+		case MENU_CONTEXT_TIME_DATE_INPUT: //41001:
 			//0x58140
-			func_5718c();
+			HandleNextDateTimeInputPosition();
 			break;
 		
 		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
@@ -1421,7 +1421,7 @@ void HandleRightKey(void)
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x58158		
-		case 202:
+		case MENU_CONTEXT_CUST_LAND_OBJ_SELECTION: //202:
 			//0x58160
 		case 101:
 			//0x58164
@@ -1507,23 +1507,23 @@ void HandleRightKey(void)
 			func_56c4c();
 			break;
 		
-		case 360022:
+		case MENU_CONTEXT_EYEPIECE_MAGN_SF_INPUT: //360022:
 			//0x582bc
-		case 370022:
+		case MENU_CONTEXT_EYEPIECE_FOV_SF_INPUT: //370022:
 			//0x582c4
-			func_56bf8();
+			HandleNextSfInputPosition();
 			break;
 		
-		case 370023:
+		case MENU_CONTEXT_EYEPIECE_FOV_INPUT: //370023:
 			//0x582cc
-			func_56b54();
+			HandleNextEyepieceFovInputPosition();
 			break;
 		
-		case 360021:
+		case MENU_CONTEXT_EYEPIECE_MAGN_MF_INPUT: //360021:
 			//0x582d8
-		case 370021:
+		case MENU_CONTEXT_EYEPIECE_FOV_MF_INPUT: //370021:
 			//0x582e0
-			func_56ac8();
+			HandleNextMfInputPosition();
 			break;
 		
 		case MENU_CONTEXT_COUNTRY_CITY_SELECTION: //43011:
@@ -1563,21 +1563,21 @@ void HandleRightKey(void)
 			}
 			break;
 		
-		case 42001:
+		case MENU_CONTEXT_DAYLIGHT_SAVING_ON: //42001:
 			//0x58368
 			if (bData_40002f1e_SetupLocalData == 1)
 			{
-				Data_40002c64_MenuContextId = 42002;
-				bData_40002c6a = 0;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING_OFF; //42002;
+				bDaylightSavingTime = 0;
 			}
 			break;
 		
-		case 42002:
+		case MENU_CONTEXT_DAYLIGHT_SAVING_OFF: //42002:
 			//0x58398
 			if (bData_40002f1e_SetupLocalData == 1)
 			{
-				Data_40002c64_MenuContextId = 42001;
-				bData_40002c6a = 1;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING_ON; //42001;
+				bDaylightSavingTime = 1;
 			}
 			break;
 		

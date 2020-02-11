@@ -278,20 +278,20 @@ char Data_400022a2[32] = " ";
 char Data_400022c2[48] = " ";
 
 //Misc
-char strCustomerObjectRaAziInputCheck[16] = " "; //400022f2
+char strCustomerObjectRaAziInputForTracking[16] = " "; //400022f2
 char Data_40002302[133/*32*/] = " "; //40002302
 char Data_40002387[19] = " "; //40002387
 char Data_4000239a[218/*20*/] = " "; //4000239a, size???
 char Data_40002474[13] = " "; //40002474, size???
 char Data_40002481[11] = " "; //40002481, size???
 char Data_4000248c[21] = " "; //4000248c
-char Data_400024a1[20] = "Eyep. focal length:"; //400024a1, size??
-char Data_400024b5[20] = "Eyep. focal length:"; //400024b5
-char Data_400024c9[13] = "   MF:1893mm"; //400024c9, size??
-char Data_400024d6[11] = "   SF:43mm"; //400024d6, size??
-char Data_400024e1[14] = "E-FOV:001°00'"; //400024e1
-char Data_400024ef[21] = "Magnification = 44.0"; //400024ef, size??
-char Data_40002504[25] = "         FOV:0.02272°"; //40002504, size???
+char strEyepieceMagnCaption[20] = "Eyep. focal length:"; //400024a1, size??
+char strEyepieceFovCaption[20] = "Eyep. focal length:"; //400024b5
+char strEyepieceFovMfInput[13] = "   MF:1893mm"; //400024c9, size??
+char strEyepieceFovSfInput[11] = "   SF:43mm"; //400024d6, size??
+char strEyepieceFovInput[14] = "E-FOV:001°00'"; //400024e1
+char strEyepieceMagnification[21] = "Magnification = 44.0"; //400024ef, size??
+char strEyepieceFOV[25] = "         FOV:0.02272°"; //40002504, size???
 unsigned char Data_4000251d[32] = " "; //4000251d, size??
 unsigned char Data_4000253d[32] = " "; //4000253d, size??
 unsigned char Data_4000255d[33] = " "; //4000255d, size??
@@ -314,13 +314,13 @@ unsigned char Data_4000271a[111] = " "; //4000271a, size???
 unsigned char Data_40002789[9] = " "; //40002789
 unsigned char Data_40002792[61] = " "; //40002792, size??
 char Data_400027cf[16] = "Input Ra Dec:  "; //400027cf
-unsigned char Data_400027df[16] = "R.a:           "; //400027df
+unsigned char strCustomerObjectRaAziInputForStoring[16] = "R.a:           "; //400027df
 unsigned char Data_400027ef[16] = "Dec:           "; //400027ef
 unsigned char strCustomerObjectNameInput[40] = " "; //400027ff
-unsigned char Data_40002827[16] = " Name:"; //40002827 size???
-unsigned char Data_40002837[16] = "  Lon:"; //40002837 size??
-unsigned char Data_40002847[15] = "  Lat:"; //40002847 size??
-unsigned char Data_40002856[11] = " Zone:"; //40002856 size???
+unsigned char strCustomSiteName[16] = " Name:"; //40002827 size???
+unsigned char strCustomSiteLongitude[16] = "  Lon:"; //40002837 size??
+unsigned char strCustomSiteLatitude[15] = "  Lat:"; //40002847 size??
+unsigned char strCustomSiteTimezone[11] = " Zone:"; //40002856 size???
 unsigned char Data_40002861[45] = " "; //40002861, size???
 char Data_4000288e[11] = "Sky Target"; //4000288e
 char Data_40002899[12] = "Land Target"; //40002899, size???

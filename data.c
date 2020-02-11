@@ -50,10 +50,10 @@ char bData_40002c62_AlignmentStarMode; //40002c62
 int Data_40002c64_MenuContextId; //40002c64
 char bData_40002c68; //40002c68
 unsigned char bData_40002c69_KeyCode; //40002c69
-char bData_40002c6a; //40002c6a
-double dData_40002c70; //40002c70
-double dData_40002c78; //40002c78
-double dData_40002c80; //40002c80
+char bDaylightSavingTime; //40002c6a
+double dObjectRiseTime; //40002c70
+double dObjectTransitTime; //40002c78
+double dObjectSetTime; //40002c80
 double dData_40002c88; //40002c88
 double dData_40002c90; //40002c90
 double dData_40002c98; //40002c98
@@ -128,16 +128,16 @@ int Data_40002e18_SiteLongitudeDegrees; //40002e18
 int Data_40002e1c_SiteLongitudeMinutes; //40002e1c
 float fData_40002e20_SiteLongitudeSeconds; //40002e20
 double dData_40002e28_SiteLongitude; //40002e28
-float fData_40002e30; //40002e30
+float fCustomSiteLongitude; //40002e30
 int Data_40002e34; //40002e34
 int Data_40002e38_SiteLatitudeDegrees; //40002e38
 int Data_40002e3c_SiteLatitudeMinutes; //40002e3c
 float fData_40002e40_SiteLatitudeSeconds; //40002e40
 int Data_40002e44; //40002e44
 double dData_40002e48_SiteLatitude; //40002e48
-float fData_40002e50; //40002e50
+float fCustomSiteLatitude; //40002e50
 int Data_40002e54_Zone; //40002e54
-int Data_40002e58; //40002e58
+int iCustomSiteTimeZone; //40002e58
 unsigned Data_40002e5c_Year; //40002e5c
 unsigned char bData_40002e60_Month; //40002e60
 unsigned char bData_40002e61_Day; //40002e61
@@ -149,7 +149,7 @@ int fill_40002e68; //40002e68
 int fill_40002e6c; //40002e6c
 int fill_40002e70; //40002e70
 int fill_40002e74; //40002e74
-unsigned char bData_40002e78; //40002e78
+unsigned char bDateTimeInputMode; //40002e78
 unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79
 unsigned char bData_40002e7a_MountType; //40002e7a
 unsigned char bData_40002e7b_GpsAvailable; //40002e7b
@@ -352,12 +352,12 @@ int fill_40003134; //40003134
 int fill_40003138; //40003138
 int fill_4000313c; //4000313c
 char* Data_40003140; //40003140
-unsigned char bData_40003144; //40003144
+unsigned char bCurrentCustomSiteInputLine; //40003144
 int fill_40003148; //40003148
 char* Data_4000314c_SolarSystemObjectName; //4000314c
 char Data_40003150[8]; //40003150, size??
 char fill_40003158; //40003158
-char Data_40003159[8]; //40003159, size??
+char arCustomSiteName[8]; //40003159, size??
 unsigned char bData_40003161; //40003161
 char bData_40003162; //40003162
 int Data_40003164_LunarPhaseYear; //40003164
@@ -392,14 +392,14 @@ unsigned char bData_40003186; //40003186
 char fill_40003187; //40003187
 char bData_40003188; //40003188
 char bData_40003189; //40003189
-unsigned char bData_4000318a; //4000318a
+unsigned char bCharacterInputPosition; //4000318a
 int Data_4000318c; //4000318c
 int Data_40003190; //40003190
 char bData_40003194; //40003194
 unsigned char bData_40003195; //40003195
 unsigned char bData_40003196_CurrentLanguage; //40003196
 unsigned char bData_40003197_DisplayLinesPerMenuLine; //40003197
-char bData_40003198; //40003198
+char bCapsLock; //40003198
 unsigned char bData_40003199; //40003199
 unsigned char bData_4000319a_SkyLandTargetId; //4000319a
 char bData_4000319b; //4000319b
@@ -430,12 +430,12 @@ int fill_400031dc; //400031dc
 char bData_400031e0; //400031e0
 char bData_400031e1; //400031e1
 int Data_400031e4; //400031e4
-unsigned char bData_400031e8; //400031e8
+unsigned char bCustomerObjectNameChar; //400031e8
 char bData_400031e9; //400031e9
 char bData_400031ea; //400031ea
 char bData_400031eb; //400031eb
 char bData_400031ec; //400031ec
-char bData_400031ed; //400031ed
+char bSystemInitialized; //400031ed
 double dData_400031f0; //400031f0
 double dData_400031f8; //400031f8
 char bData_40003200; //40003200
@@ -453,11 +453,11 @@ int Data_40003224_AlarmMinutes; //40003224
 int Data_40003228_AlarmSeconds; //40003228
 char bData_4000322c; //4000322c
 char bData_4000322d_AlarmTimeElapsed; //4000322d
-float fData_40003230; //40003230
-float fData_40003234; //40003234
-float fData_40003238; //40003238
-float fData_4000323c; //4000323c
-float fData_40003240; //40003240
+float fMainFocalLength; //40003230
+float fSecondaryFocalLength; //40003234
+float fEyepieceMagnification; //40003238
+float fEyepieceFOV; //4000323c
+float fFieldOfView; //40003240
 int fill_40003244; //40003244
 int Data_40003248_CurrentDisplayPWM; //40003248
 int fill_4000324c; //4000324c
@@ -616,9 +616,9 @@ int fill_40003530; //40003530
 int fill_40003534; //40003534
 int fill_40003538; //40003538
 int fill_4000353c; //4000353c
-float fData_40003540; //40003540
-float fData_40003544; //40003544
-int Data_40003548; //40003548
+float fInitialCustomSiteLongitude; //40003540
+float fInitialCustomSiteLatitude; //40003544
+int iInitialCustomSiteTimezone; //40003548
 int fill_4000354c; //4000354c
 int fill_40003550; //40003550
 int fill_40003554; //40003554
@@ -682,6 +682,6 @@ Struct_EquatorialCoordinates Data_40004ae8; //40004ae8
 Struct_HorizontalCoordinates Data_40004b08; //40004b08
 Struct_EquatorialCoordinates Data_40004b50; //40004b50
 Struct_HorizontalCoordinates Data_40004b70; //40004b70
-unsigned char Data_40004bb8[160]; //40004bb8 size???
+unsigned char arInitialCustomSiteName[160]; //40004bb8 size???
 unsigned char Data_40004c58[100]; //40004c58, size?
 

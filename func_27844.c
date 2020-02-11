@@ -744,11 +744,11 @@ void PrepareScreenItems(void)
 			//0x2a578: Current Objects
 		case MENU_CONTEXT_OBJECT_RISE_SET: //3200:
 			//0x2a580: Object Rise/Set
-		case 3300: // Curr. Lunar Phase
+		case MENU_CONTEXT_LUNAR_PHASE: //3300:
 			//0x2a584
-		case 3400: // Timer
+		case MENU_CONTEXT_TIMER: //3400:
 			//0x2a588
-		case 3500: // Alarm
+		case MENU_CONTEXT_ALARM: //3500:
 			//0x2a58c
 		case MENU_CONTEXT_EYEPIECE_FOV: //3600:
 			//0x2a590: Eyepiece FOV
@@ -772,17 +772,17 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_TIME_DATE: //4100:
 			//0x2a5e4: Time and Date
-		case 4200: // Daylight Saving
+		case MENU_CONTEXT_DAYLIGHT_SAVING: //4200:
 			//0x2a5ec
 		case MENU_CONTEXT_SITE_SETTING: //4300:
 			//0x2a5f0: Site Setting
-		case 4400: // Sky/Land
+		case MENU_CONTEXT_SKY_LAND: //4400:
 			//0x2a5f4
 		case MENU_CONTEXT_AZ_EQU: //4500:
 			//0x2a5f8
 		case MENU_CONTEXT_TELESCOPE_MOUNT: //4600:
 			//0x2a5fc: Telescope Mount
-		case 4700: // Tracking Rate
+		case MENU_CONTEXT_TRACKING_RATE: //4700:
 			//0x2a600
 		case MENU_CONTEXT_LANGUAGE: //4800:
 			//0x2a604
@@ -5122,14 +5122,14 @@ void PrepareScreenItems(void)
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
 			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = Data_400027df;
+			Data_40003378 = strCustomerObjectRaAziInputForStoring;
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 204: //0xcc:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_RA_INPUT: //204:
 			//0x3b540
 			sprintf(Data_40003fa9, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
@@ -5139,14 +5139,14 @@ void PrepareScreenItems(void)
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
 			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = Data_400027df;
+			Data_40003378 = strCustomerObjectRaAziInputForStoring;
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 205: //0xcd:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_DEC_INPUT: //205:
 			//0x3b5d4
 			sprintf(Data_40003fa9, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
@@ -5156,7 +5156,7 @@ void PrepareScreenItems(void)
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
 			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = Data_400027df;
+			Data_40003378 = strCustomerObjectRaAziInputForStoring;
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
@@ -5167,7 +5167,7 @@ void PrepareScreenItems(void)
 			//0x3b668
 			Data_40003360 = Data_400027cf; // "Input Ra Dec:"?
 			Data_40003364 = "";
-			Data_40003368 = Data_400027df; // "R.a: 19h52m12.0s"?
+			Data_40003368 = strCustomerObjectRaAziInputForStoring; // "R.a: 19h52m12.0s"?
 			Data_4000336c = "";
 			Data_40003370 = Data_400027ef; // "Dec:+90 00 00.0 "?
 			Data_40003374 = "";
@@ -5182,7 +5182,7 @@ void PrepareScreenItems(void)
 			//0x3b7d0
 			Data_40003360 = Data_400027cf;
 			Data_40003364 = "";
-			Data_40003368 = Data_400027df;
+			Data_40003368 = strCustomerObjectRaAziInputForStoring;
 			Data_4000336c = "";
 			Data_40003370 = Data_400027ef;
 			Data_40003374 = "";
@@ -5193,7 +5193,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 				
-		case 202: //0xca:
+		case MENU_CONTEXT_CUST_LAND_OBJ_SELECTION: //202:
 			//0x3b850
 			Data_40003360 = "F1";
 			Data_40003364 = "F2";
@@ -5210,7 +5210,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 206: //0xce:
+		case MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT: //206:
 			//0x3b8e8
 			sprintf(Data_40003fa9, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
@@ -5220,14 +5220,14 @@ void PrepareScreenItems(void)
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
 			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = Data_400027df;
+			Data_40003378 = strCustomerObjectRaAziInputForStoring;
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 207: //0xcf:
+		case MENU_CONTEXT_CUST_LAND_OBJ_AZI_INPUT: //207:
 			//0x3b97c
 			sprintf(Data_40003fa9, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
@@ -5237,14 +5237,14 @@ void PrepareScreenItems(void)
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
 			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = Data_400027df;
+			Data_40003378 = strCustomerObjectRaAziInputForStoring;
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 208: //0xd0:
+		case MENU_CONTEXT_CUST_LAND_OBJ_ALT_INPUT: //208:
 			//0x3ba10
 			sprintf(Data_40003fa9, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
@@ -5254,35 +5254,35 @@ void PrepareScreenItems(void)
 			Data_4000336c = "Target & Input Target";
 			Data_40003370 = "                    ";
 			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = Data_400027df;
+			Data_40003378 = strCustomerObjectRaAziInputForStoring;
 			Data_4000337c = Data_400027ef;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 31001: // "Current Objects" -> Rise/Transit/Set
+		case MENU_CONTEXT_SOLAR_SYSTEM_OBJ_RISE_SET_TIMES: //31001:
 			//0x3baa4
 			get_solar_system_object_data(bData_40002eb5_SolarSystemObjectNr, 
 				&fData_40002cd0_ObjectRightAscension, &fData_40002d18_ObjectDeclination);
 		
 			Data_40003360 = Data_4000314c_SolarSystemObjectName;
 		
-			dData_40002c70 = func_d7ac(1, 
+			dObjectRiseTime = get_object_visibility_time(1, 
 				fData_40002cd0_ObjectRightAscension, 
 				fData_40002d18_ObjectDeclination, 
 				Data_40004128.geographicLongitude, 
 				Data_40004128.geographicLatitude, 
 				(unsigned char)Data_40004128.timeZone);
 
-			dData_40002c78 = func_d7ac(2, 
+			dObjectTransitTime = get_object_visibility_time(2, 
 				fData_40002cd0_ObjectRightAscension, 
 				fData_40002d18_ObjectDeclination, 
 				Data_40004128.geographicLongitude, 
 				Data_40004128.geographicLatitude, 
 				(unsigned char)Data_40004128.timeZone);
 
-			dData_40002c80 = func_d7ac(3, 
+			dObjectSetTime = get_object_visibility_time(3, 
 				fData_40002cd0_ObjectRightAscension, 
 				fData_40002d18_ObjectDeclination, 
 				Data_40004128.geographicLongitude, 
@@ -5290,18 +5290,18 @@ void PrepareScreenItems(void)
 				(unsigned char)Data_40004128.timeZone);
 				
 			sprintf(Data_40003fd3, "RiseTime:   %02dh%02dm",
-				(int)dData_40002c70,
-				(int)((dData_40002c70 - (int)dData_40002c70) * 60));
+				(int)dObjectRiseTime,
+				(int)((dObjectRiseTime - (int)dObjectRiseTime) * 60));
 			Data_40003368 = Data_40003fd3;
 
 			sprintf(Data_40003ffd, "TransitTime:%02dh%02dm",
-				(int)dData_40002c78,
-				(int)((dData_40002c78 - (int)dData_40002c78) * 60));
+				(int)dObjectTransitTime,
+				(int)((dObjectTransitTime - (int)dObjectTransitTime) * 60));
 			Data_40003370 = Data_40003ffd;
 				
 			sprintf(Data_40004027, "SetTime:    %02dh%02dm",
-				(int)dData_40002c80,
-				(int)((dData_40002c80 - (int)dData_40002c80) * 60));
+				(int)dObjectSetTime,
+				(int)((dObjectSetTime - (int)dObjectSetTime) * 60));
 			Data_40003378 = Data_40004027;
 				
 			Data_40003364 = "                    ";
@@ -5316,18 +5316,18 @@ void PrepareScreenItems(void)
 		case MENU_CONTEXT_RISE_SET_TIMES: //32001
 			//0x3be30
 			sprintf(Data_40003fa9, "RiseTime:   %02dh%02dm", 
-				(int)dData_40002c70,
-				(int)((dData_40002c70 - (int)dData_40002c70) * 60));		
+				(int)dObjectRiseTime,
+				(int)((dObjectRiseTime - (int)dObjectRiseTime) * 60));		
 			Data_40003360 = Data_40003fa9;
 		
 			sprintf(Data_40003fbe, "TransitTime:%02dh%02dm",
-				(int)dData_40002c78,
-				(int)((dData_40002c78 - (int)dData_40002c78) * 60));
+				(int)dObjectTransitTime,
+				(int)((dObjectTransitTime - (int)dObjectTransitTime) * 60));
 			Data_40003368 = Data_40003fbe;
 				
 			sprintf(Data_40003fd3, "SetTime:    %02dh%02dm",
-				(int)dData_40002c80,
-				(int)((dData_40002c80 - (int)dData_40002c80) * 60));
+				(int)dObjectSetTime,
+				(int)((dObjectSetTime - (int)dObjectSetTime) * 60));
 			Data_40003370 = Data_40003fd3;
 				
 			Data_40003364 = "";
@@ -5423,50 +5423,50 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x57E55: //360021
+		case MENU_CONTEXT_EYEPIECE_MAGN_MF_INPUT: //360021
 			//0x3c33c		
-			Data_40003360 = Data_400024a1; //->"Eyep. focal length:"?
+			Data_40003360 = strEyepieceMagnCaption; //->"Eyep. focal length:"?
 			Data_40003364 = "";
-			Data_40003368 = Data_400024c9;
+			Data_40003368 = strEyepieceFovMfInput;
 			Data_4000336c = "";
-			Data_40003370 = Data_400024d6;
+			Data_40003370 = strEyepieceFovSfInput;
 			Data_40003374 = "";
-			Data_40003378 = Data_400024ef;
+			Data_40003378 = strEyepieceMagnification;
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x57E56: //360022
+		case MENU_CONTEXT_EYEPIECE_MAGN_SF_INPUT: //360022
 			//0x3c41c
-			Data_40003360 = Data_400024a1;
+			Data_40003360 = strEyepieceMagnCaption;
 			Data_40003364 = "";
-			Data_40003368 = Data_400024c9;
+			Data_40003368 = strEyepieceFovMfInput;
 			Data_4000336c = "";
-			Data_40003370 = Data_400024d6;
+			Data_40003370 = strEyepieceFovSfInput;
 			Data_40003374 = "";
-			Data_40003378 = Data_400024ef;
+			Data_40003378 = strEyepieceMagnification;
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 0x5A565: //370021
+		case MENU_CONTEXT_EYEPIECE_FOV_MF_INPUT: //370021
 			//0x3c49c
-		case 0x5A566: //370022
+		case MENU_CONTEXT_EYEPIECE_FOV_SF_INPUT: //370022
 			//0x3c4a4
-		case 0x5A567: //370023
+		case MENU_CONTEXT_EYEPIECE_FOV_INPUT: //370023
 			//0x3c4a8
-			Data_40003360 = Data_400024b5; // "Eyep. focal length:"?
+			Data_40003360 = strEyepieceFovCaption; // "Eyep. focal length:"
 			Data_40003364 = "";
-			Data_40003368 = Data_400024c9; // "MF:1893mm"
+			Data_40003368 = strEyepieceFovMfInput; // "MF:1893mm"
 			Data_4000336c = "";
-			Data_40003370 = Data_400024d6; // "SF:43mm"
+			Data_40003370 = strEyepieceFovSfInput; // "SF:43mm"
 			Data_40003374 = "";
-			Data_40003378 = Data_400024e1; // "E-FOV:001°00'"
-			Data_4000337c = Data_40002504; // "         FOV:0.02272°"
+			Data_40003378 = strEyepieceFovInput; // "E-FOV:001°00'"
+			Data_4000337c = strEyepieceFOV; // "         FOV:0.02272°"
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5474,15 +5474,15 @@ void PrepareScreenItems(void)
 		
 		case 0x57E57: //360023
 			//0x3c524
-			sprintf(Data_4000248c, "MultiplyM:%d", fData_40003238);
+			sprintf(Data_4000248c, "MultiplyM:%d", fEyepieceMagnification);
 		
-			Data_40003360 = Data_400024a1;
+			Data_40003360 = strEyepieceMagnCaption;
 			Data_40003364 = "";
-			Data_40003368 = Data_400024c9;
+			Data_40003368 = strEyepieceFovMfInput;
 			Data_4000336c = "";
-			Data_40003370 = Data_400024d6;
+			Data_40003370 = strEyepieceFovSfInput;
 			Data_40003374 = "";
-			Data_40003378 = Data_400024ef;
+			Data_40003378 = strEyepieceMagnification;
 			Data_4000337c = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
@@ -5504,7 +5504,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 				
-		case 41001: //0xA029:
+		case MENU_CONTEXT_TIME_DATE_INPUT: //41001:
 			//0x3c64c
 			Data_40003360 = "Date and Time Set: ";
 			Data_40003364 = "";
@@ -5519,7 +5519,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 42001: //Daylight saving on
+		case MENU_CONTEXT_DAYLIGHT_SAVING_ON: //42001:
 			//0x3c6cc
 			Data_40003360 = Data_40002b70; //"daylight saving"
 			Data_40003364 = "";
@@ -5542,7 +5542,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 42002: //Daylight saving off
+		case MENU_CONTEXT_DAYLIGHT_SAVING_OFF: //42002:
 			//3c76c
 			Data_40003360 = Data_40002ba5; //"Daylight saving"
 			Data_40003364 = "";
@@ -5657,10 +5657,10 @@ void PrepareScreenItems(void)
 			//0x3ce9c: "Custom Site"
 			Data_40003360 = "Please Input Data: ";
 			//Data_40003364 = ""; //?????
-			Data_40003368 = Data_40002827; //" Name:"
-			Data_4000336c = Data_40002837; //"  Lon:"
-			Data_40003370 = Data_40002847; //"  Lat:"
-			Data_40003374 = Data_40002856; //" Zone:"
+			Data_40003368 = strCustomSiteName; //" Name:"
+			Data_4000336c = strCustomSiteLongitude; //"  Lon:"
+			Data_40003370 = strCustomSiteLatitude; //"  Lat:"
+			Data_40003374 = strCustomSiteTimezone; //" Zone:"
 			Data_40003378 = "";
 			Data_4000337c = "";
 			

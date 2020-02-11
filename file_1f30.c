@@ -8,6 +8,7 @@
 #include "data.h"
 #include "menu.h"
 #include "file_79080.c"
+#include "macros.h"
 
 // configuration for the Atmel AT45DB161D device
 #define FLASH_PAGE_BITS 10
@@ -1529,7 +1530,7 @@ void flash_write(int PageAdr, unsigned short BufAdr, int Count, unsigned char* D
 }
 
 /* 258c - complete */
-void func_258c(int a, unsigned char* b)
+void flash_write_cust_sky_target(int a, unsigned char* b)
 {
 	unsigned char sp[FLASH_PAGE_SIZE];
 	unsigned char i = 0;
@@ -1546,7 +1547,7 @@ void func_258c(int a, unsigned char* b)
 }
 
 /* 260c - complete */
-void func_260c(int a, unsigned char* b)
+void flash_write_cust_land_target(int a, unsigned char* b)
 {
 	unsigned char sp[FLASH_PAGE_SIZE];
 	unsigned char i = 0;
@@ -1620,48 +1621,49 @@ void flash_write_ota_zero_data(int a, int b)
 }
 
 /* 29b0 - complete */
-void func_29b0(unsigned char* a, unsigned char* b, unsigned char* c, unsigned char* d)
+void flash_write_custom_site_data(unsigned char* name, unsigned char* lon, unsigned char* lat, unsigned char* tz)
 {
-	flash_write(0xdca, 10, 8, a);
-	flash_write(0xdca, 18, 6, b);
-	flash_write(0xdca, 24, 5, c);
-	flash_write(0xdca, 29, 3, d);
+	flash_write((0x37 << 6) | 10, 10, 8, name);
+	flash_write((0x37 << 6) | 10, 18, 6, lon);
+	flash_write((0x37 << 6) | 10, 24, 5, lat);
+	flash_write((0x37 << 6) | 10, 29, 3, tz);
 }
 
 /* 2a1c - complete */
-void func_2a1c(unsigned char* a, float* b, float* c, int* d)
+void flash_get_custom_site_data(unsigned char* pName, 
+		float* pLongitude, float* pLatitude, int* pTimeZone)
 {
 	unsigned char buf[22];
 	unsigned char i = 0;
 	
-	flash_read(0xdca, 10, sizeof(buf), buf);
+	flash_read((0x37 << 6) | 10, 10, sizeof(buf), buf);
 	
 	for (i = 0; i < 8; i++)
 	{
-		a[i] = buf[i];
+		pName[i] = buf[i];
 	}
 	
-	*b = (buf[9] - '0') * 100.0 + (buf[10] - '0') * 10.0 + buf[11] - '0' + 
+	*pLongitude = (buf[9] - '0') * 100.0 + (buf[10] - '0') * 10.0 + buf[11] - '0' + 
 		((buf[12] - '0') * 10.0 + buf[13] - '0') / 60.0;
 	
 	if (buf[8] == 'W')
 	{
-		*b *= -1.0;
+		*pLongitude *= -1.0;
 	}
 	
-	*c = (buf[15] - '0') * 10.0 + buf[16] - '0' +
+	*pLatitude = (buf[15] - '0') * 10.0 + buf[16] - '0' +
 		((buf[17] - '0') * 10.0 + buf[18] - '0') / 60.0;
 	
 	if (buf[14] == 'S')
 	{
-		*c *= -1.0;
+		*pLatitude *= -1.0;
 	}
 		
-	*d = (buf[20] - '0') * 10.0 + buf[21] - '0';
+	*pTimeZone = (buf[20] - '0') * 10.0 + buf[21] - '0';
 	
 	if (buf[19] == 'W')
 	{
-		*d *= -1.0;
+		*pTimeZone *= -1.0;
 	}
 }
 
@@ -2187,7 +2189,7 @@ void initialize_variables(void)
 	bData_40002c58 = 0;
 	bData_40002c5a = 0;
 	bData_40002c68 = 0;
-	bData_40002c6a = 0;
+	bDaylightSavingTime = 0;
 	dData_40002c98 = 0.0;
 	bData_40002e7c_TrackingRateType = 0;
 	dData_40002ca0 = 1.0;
@@ -3008,7 +3010,7 @@ void func_7d1c(Struct_7d1c* a)
 	a->bSeconds = r1 & 0x3F;
 	a->wData_8 = bData_40002c06 * 10;
 	
-	if (bData_40002c6a != 0)
+	if (bDaylightSavingTime != 0)
 	{
 		if (a->bHours >= 1)
 		{
@@ -4875,7 +4877,9 @@ void func_d784(int a)
 }
 
 /* d7ac - todo */
-double func_d7ac(int a/*r4*/, double sp184, double sp208, double sp216, double sp224, int sp232/*r5*/)
+double get_object_visibility_time(int a, 
+	double rightAscension, double declination, 
+	double geoLongitude, double geoLatitude, int timeZone)
 {
 	double sp168;
 	double sp160;
@@ -4885,36 +4889,36 @@ double func_d7ac(int a/*r4*/, double sp184, double sp208, double sp216, double s
 	double sp128;
 	double sp120;
 	
-	sp184 *= 15.0;
+	rightAscension *= 15.0;
 	
 	sp136 = 0.00273043357646934187199505572607;
 	sp128 = 0.00273790925583078815358506474809;
 	
 	sp120 = fabs(acos((cos(1.58068652588952995863280648337) - 
-		sin(sp224 * 0.0174532925199399994997673246644) * 
-		sin(sp208 * 0.0174532925199399994997673246644)) / 
-		(cos(sp224 * 0.0174532925199399994997673246644) * 
-		cos(sp208 * 0.0174532925199399994997673246644)))) * 3.81971863420548984890956489835;
+		sin(geoLatitude * 0.0174532925199399994997673246644) * 
+		sin(declination * 0.0174532925199399994997673246644)) / 
+		(cos(geoLatitude * 0.0174532925199399994997673246644) * 
+		cos(declination * 0.0174532925199399994997673246644)))) * 3.81971863420548984890956489835;
 	
 	if (a == 1)
 	{
-		//d930
-		sp152 = sp184 / 15.0 - sp120;
+		//d930: Rise
+		sp152 = rightAscension / 15.0 - sp120;
 	}
 	//0xd960
 	if (a == 2)
 	{
-		//d968
-		sp152 = sp184 / 15.0;
+		//d968: Transit
+		sp152 = rightAscension / 15.0;
 	}
 	//0xd984
 	if (a == 3)
 	{
-		//d98c
-		sp152 = sp184 / 15.0 + sp120;
+		//d98c: Set
+		sp152 = rightAscension / 15.0 + sp120;
 	}
 	//0xd9bc
-	sp144 = dData_400034a0_SiderealTimeGreenwich0UT - sp216 / 15.0 * sp128;
+	sp144 = dData_400034a0_SiderealTimeGreenwich0UT - geoLongitude / 15.0 * sp128;
 	//->0xda24
 	while ((sp152 - sp144) < 0.0)
 	{
@@ -4929,7 +4933,7 @@ double func_d7ac(int a/*r4*/, double sp184, double sp208, double sp216, double s
 	}
 	//daa4
 	sp160 = (sp152 - sp144) * (1.0 - sp136);	
-	sp168 = Data_40004128.timeZone - sp216 / 15.0 + sp160;
+	sp168 = Data_40004128.timeZone - geoLongitude / 15.0 + sp160;
 	//->dbb8
 	while (sp168 <= 0.0)
 	{

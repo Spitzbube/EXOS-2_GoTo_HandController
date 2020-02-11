@@ -9,7 +9,8 @@
 #include "menu.h"
 #endif
 
-#define UART0_DEBUG
+//#define UART0_DEBUG
+#define V2_3
 
 #include "file_1f30.c"
 
@@ -771,7 +772,7 @@ void func_4ff84(void)
 	if ((h > 23) || (m > 59) || (s > 59))
 	{
 		Data_40002c64_MenuContextId = 35001;
-		bData_4000318a = 1;
+		bCharacterInputPosition = 1;
 	}
 	else
 	{
@@ -844,17 +845,17 @@ void func_50048(void)
 	if (fData_40002cc0 < 10)
 	{
 		//50384
-		sprintf(strCustomerObjectRaAziInputCheck, "R.a: %02dh%02dm0%2.1fs",
+		sprintf(strCustomerObjectRaAziInputForTracking, "R.a: %02dh%02dm0%2.1fs",
 			Data_40002cb8, Data_40002cbc, fData_40002cc0);		
-		sprintf(Data_400027df, "R.a: %02dh%02dm0%2.1fs",
+		sprintf(strCustomerObjectRaAziInputForStoring, "R.a: %02dh%02dm0%2.1fs",
 			Data_40002cb8, Data_40002cbc, fData_40002cc0);
 	}
 	else
 	{
 		//0x503f0
-		sprintf(strCustomerObjectRaAziInputCheck, "R.a: %02dh%02dm%3.1fs",
+		sprintf(strCustomerObjectRaAziInputForTracking, "R.a: %02dh%02dm%3.1fs",
 			Data_40002cb8, Data_40002cbc, fData_40002cc0);
-		sprintf(Data_400027df, "R.a: %02dh%02dm%3.1fs",
+		sprintf(strCustomerObjectRaAziInputForStoring, "R.a: %02dh%02dm%3.1fs",
 			Data_40002cb8, Data_40002cbc, fData_40002cc0);
 	}
 	//0x50458
@@ -918,7 +919,7 @@ void HandleOTAZeroData(void)
 		if (bData_40002f1e_SetupLocalData == 1)
 		{
 			//5087c
-			bData_400031ed = 0;
+			bSystemInitialized = 0;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			bData_40002f1e_SetupLocalData = 0;
 		}
@@ -944,7 +945,7 @@ void HandleOTAZeroData(void)
 void HandleReset(void)
 {
 	char sp40[528];
-	unsigned char sp20[20];
+	unsigned char customSiteName[20];
 	float lon;
 	float lat;
 	int zone;
@@ -1007,60 +1008,56 @@ void HandleReset(void)
 	Data_40004128.dData_192 = fData_4000329c;
 	Data_40004128.dData_200 = fData_400032a0;
 	
-	func_2a1c(sp20, &lon, &lat, &zone);
+	flash_get_custom_site_data(customSiteName, &lon, &lat, &zone);
 	
 	Data_40004128.geographicLongitude = lon;
 	Data_40004128.geographicLatitude = lat;
 	
 	Data_40002e54_Zone = zone;
 	
-	Data_40002827[6] = sp20[0];
-	Data_40002827[7] = sp20[1];
-	Data_40002827[8] = sp20[2];
-	Data_40002827[9] = sp20[3];
-	Data_40002827[10] = sp20[4];
-	Data_40002827[11] = sp20[5];
-	Data_40002827[12] = sp20[6];
-	Data_40002827[13] = sp20[7];
+	strCustomSiteName[6] = customSiteName[0];
+	strCustomSiteName[7] = customSiteName[1];
+	strCustomSiteName[8] = customSiteName[2];
+	strCustomSiteName[9] = customSiteName[3];
+	strCustomSiteName[10] = customSiteName[4];
+	strCustomSiteName[11] = customSiteName[5];
+	strCustomSiteName[12] = customSiteName[6];
+	strCustomSiteName[13] = customSiteName[7];
 	
 	if (lon > 0) //BUG? East is negative!
 	{
 		//50d90
-		sprintf(Data_40002837, "  Lon:E%03dd%02df ",
-			(int)lon,
-			(int)((lon - (int)lon) * 60));
+		sprintf(strCustomSiteLongitude, "  Lon:E%03dd%02df ",
+			DEGREES_MINUTES(lon));
 	}
 	else
 	{
 		//0x50edc
-		sprintf(Data_40002837, "  Lon:W%03dd%02df ",
-			(int)lon,
-			(int)((lon - (int)lon) * 60));
+		sprintf(strCustomSiteLongitude, "  Lon:W%03dd%02df ",
+			DEGREES_MINUTES(lon)); //Bug: abs()?
 	}
 	//0x50f30
 	if (lat > 0)
 	{
 		//50f40
-		sprintf(Data_40002847, "  Lat:N%02dd%02df ",
-			(int)lat,
-			(int)((lat - (int)lat) * 60));
+		sprintf(strCustomSiteLatitude, "  Lat:N%02dd%02df ",
+			DEGREES_MINUTES(lat));
 	}
 	else
 	{
 		//0x50f98
-		sprintf(Data_40002847, "  Lat:S%02dd%02df ",
-			(int)lat,
-			(int)((lat - (int)lat) * 60));
+		sprintf(strCustomSiteLatitude, "  Lat:S%02dd%02df ",
+			DEGREES_MINUTES(lat)); //Bug: abs()
 	}
 	//0x50fec
 	if (zone > 0)
 	{
-		sprintf(Data_40002856, " Zone:E%02d", zone);
+		sprintf(strCustomSiteTimezone, " Zone:E%02d", zone);
 	}
 	else
 	{
 		//0x5100c
-		sprintf(Data_40002856, " Zone:W%02d", zone);
+		sprintf(strCustomSiteTimezone, " Zone:W%02d", zone);
 	}
 	
 	func_659c(2000);
@@ -1074,30 +1071,30 @@ void HandleReset(void)
 void HandleCustomSiteData(void)
 {
 	unsigned char i;
-	unsigned char sp24[8];
-	unsigned char sp16[8];
-	unsigned char sp8[8];
-	unsigned char sp4[4];
+	unsigned char name[8];
+	unsigned char lon[8];
+	unsigned char lat[8];
+	unsigned char tz[4];
 	
 	for (i = 0; i < 8; i++)
 	{
-		sp24[i] = Data_40002827[i + 6];
+		name[i] = strCustomSiteName[i + 6];
 	}
 	
-	sp16[0] = Data_40002837[6];
-	sp16[1] = atoi(&Data_40002837[7]);
-	sp16[2] = atoi(&Data_40002837[11]);
+	lon[0] = strCustomSiteLongitude[6];
+	lon[1] = atoi(&strCustomSiteLongitude[7]);
+	lon[2] = atoi(&strCustomSiteLongitude[11]);
 	
-	sp8[0] = Data_40002847[6];
-	sp8[1] = atoi(&Data_40002847[7]);
-	sp8[2] = atoi(&Data_40002847[10]);
+	lat[0] = strCustomSiteLatitude[6];
+	lat[1] = atoi(&strCustomSiteLatitude[7]);
+	lat[2] = atoi(&strCustomSiteLatitude[10]);
 	
-	sp4[0] = Data_40002856[6];
-	sp4[1] = atoi(&Data_40002856[7]);
+	tz[0] = strCustomSiteTimezone[6];
+	tz[1] = atoi(&strCustomSiteTimezone[7]);
 	
-	if ((sp16[1] > 179) || (sp16[2] > 59) ||
-		(sp8[1] > 89) || (sp8[2] > 59) ||
-		(sp4[1] > 11))
+	if ((lon[1] > 179) || (lon[2] > 59) ||
+		(lat[1] > 89) || (lat[2] > 59) ||
+		(tz[1] > 11))
 	{
 		//0x5111c: Invalid Data
 		Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOM_SITE_INPUT; //43002;
@@ -1105,29 +1102,31 @@ void HandleCustomSiteData(void)
 	else
 	{
 		//0x5112c
-		sp16[0] = Data_40002837[6];
-		sp16[1] = Data_40002837[7];
-		sp16[2] = Data_40002837[8];
-		sp16[3] = Data_40002837[9];
-		sp16[4] = Data_40002837[11];
-		sp16[5] = Data_40002837[12];
+		lon[0] = strCustomSiteLongitude[6];
+		lon[1] = strCustomSiteLongitude[7];
+		lon[2] = strCustomSiteLongitude[8];
+		lon[3] = strCustomSiteLongitude[9];
+		lon[4] = strCustomSiteLongitude[11];
+		lon[5] = strCustomSiteLongitude[12];
 		
-		sp8[0] = Data_40002847[6];
-		sp8[1] = Data_40002847[7];
-		sp8[2] = Data_40002847[8];
-		sp8[3] = Data_40002847[10];
-		sp8[4] = Data_40002847[11];
+		lat[0] = strCustomSiteLatitude[6];
+		lat[1] = strCustomSiteLatitude[7];
+		lat[2] = strCustomSiteLatitude[8];
+		lat[3] = strCustomSiteLatitude[10];
+		lat[4] = strCustomSiteLatitude[11];
 		
-		sp4[0] = Data_40002856[6];
-		sp4[1] = Data_40002856[7];
-		sp4[2] = Data_40002856[8];
+		tz[0] = strCustomSiteTimezone[6];
+		tz[1] = strCustomSiteTimezone[7];
+		tz[2] = strCustomSiteTimezone[8];
 		
-		func_29b0(sp24, sp16, sp8, sp4);
-		func_2a1c(Data_40003159, &fData_40002e30, &fData_40002e50, &Data_40002e58);
+		flash_write_custom_site_data(name, lon, lat, tz);
+		flash_get_custom_site_data(arCustomSiteName, 
+			&fCustomSiteLongitude, &fCustomSiteLatitude, 
+			&iCustomSiteTimeZone);
 		
-		dData_40002e28_SiteLongitude = fData_40002e30;
-		dData_40002e48_SiteLatitude = fData_40002e50;
-		Data_40002e54_Zone = Data_40002e58;
+		dData_40002e28_SiteLongitude = fCustomSiteLongitude;
+		dData_40002e48_SiteLatitude = fCustomSiteLatitude;
+		Data_40002e54_Zone = iCustomSiteTimeZone;
 		
 		Data_40004128.geographicLongitude = dData_40002e28_SiteLongitude;
 		Data_40004128.geographicLatitude = dData_40002e48_SiteLatitude;
@@ -1142,7 +1141,7 @@ void HandleCustomSiteData(void)
 				//51290
 				lcd_display_clear();
 				
-				bData_400031ed = 0;
+				bSystemInitialized = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 				bData_40002f1e_SetupLocalData = 0;
 			}
@@ -1236,11 +1235,11 @@ int ValidateDateTimeSetRTC(void)
 }
 
 /* 514f8 - todo */
-void func_514f8(void)
+void HandleCustomerLandObjectInput(void)
 {
-	int r4 = atoi(&strCustomerObjectRaAziInputCheck[4]);
-	int r5 = atoi(&strCustomerObjectRaAziInputCheck[8]);
-	float sl = atof(&strCustomerObjectRaAziInputCheck[11]);
+	int r4 = atoi(&strCustomerObjectRaAziInputForTracking[4]);
+	int r5 = atoi(&strCustomerObjectRaAziInputForTracking[8]);
+	float sl = atof(&strCustomerObjectRaAziInputForTracking[11]);
 	int r6 = atoi(&Data_40002302[5]);
 	int r7 = atoi(&Data_40002302[8]);
 	float r8 = atof(&Data_40002302[11]);
@@ -1253,15 +1252,15 @@ void func_514f8(void)
 		if ((r6 > 89) || (r7 > 59) || (r8 > 59.9999899999999968258634908125/*60.0*/))
 		{
 			//0x515f4
-			Data_40002c64_MenuContextId = 208;
-			bData_4000318a = 6;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUST_LAND_OBJ_ALT_INPUT; //208;
+			bCharacterInputPosition = 6;
 		}
 		//0x5160c
 		if ((r4 >= 360) || (r5 > 59) || (sl > 59.9999899999999968258634908125/*60.0*/))
 		{
 			//0x51640
-			Data_40002c64_MenuContextId = 207;
-			bData_4000318a = 6;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUST_LAND_OBJ_AZI_INPUT; //207;
+			bCharacterInputPosition = 6;
 		}
 		//0x5179c
 	}
@@ -1274,17 +1273,17 @@ void func_514f8(void)
 			Data_40003f90[i] = strCustomerObjectNameInput[i + 4];
 		}
 		
-		Data_40003f90[9] = Data_400027df[4] - '0';
-		Data_40003f90[10] = Data_400027df[5] - '0';
-		Data_40003f90[11] = Data_400027df[6] - '0';
+		Data_40003f90[9] = strCustomerObjectRaAziInputForStoring[4] - '0';
+		Data_40003f90[10] = strCustomerObjectRaAziInputForStoring[5] - '0';
+		Data_40003f90[11] = strCustomerObjectRaAziInputForStoring[6] - '0';
 		
-		Data_40003f90[12] = Data_400027df[8] - '0';
-		Data_40003f90[13] = Data_400027df[9] - '0';
+		Data_40003f90[12] = strCustomerObjectRaAziInputForStoring[8] - '0';
+		Data_40003f90[13] = strCustomerObjectRaAziInputForStoring[9] - '0';
 		
-		Data_40003f90[14] = Data_400027df[11] - '0';
-		Data_40003f90[15] = Data_400027df[12] - '0';
+		Data_40003f90[14] = strCustomerObjectRaAziInputForStoring[11] - '0';
+		Data_40003f90[15] = strCustomerObjectRaAziInputForStoring[12] - '0';
 		
-		Data_40003f90[16] = Data_400027df[14] - '0';
+		Data_40003f90[16] = strCustomerObjectRaAziInputForStoring[14] - '0';
 		
 		Data_40003f90[17] = Data_400027ef[4]; // - '0';
 		Data_40003f90[18] = Data_400027ef[5] - '0';
@@ -1298,7 +1297,7 @@ void func_514f8(void)
 		
 		Data_40003f90[24] = Data_400027ef[14] - '0';
 		
-		func_260c(bData_4000319a_SkyLandTargetId, Data_40003f90);
+		flash_write_cust_land_target(bData_4000319a_SkyLandTargetId, Data_40003f90);
 		beep1(1);
 	}
 }
@@ -1309,17 +1308,17 @@ void func_517f4(void)
 	if (fData_40002db4 < 10)
 	{
 		//51810
-		sprintf(Data_400027df, "Azi:%03dh%02dm0%2.1fs",
+		sprintf(strCustomerObjectRaAziInputForStoring, "Azi:%03dh%02dm0%2.1fs",
 			Data_40002dac, Data_40002db0, fData_40002db4);
-		sprintf(strCustomerObjectRaAziInputCheck, "Azi:%03dh%02dm0%2.1fs",
+		sprintf(strCustomerObjectRaAziInputForTracking, "Azi:%03dh%02dm0%2.1fs",
 			Data_40002dac, Data_40002db0, fData_40002db4);
 	}
 	else
 	{
 		//0x5187c
-		sprintf(Data_400027df, "Azi:%03dh%02dm%2.1fs",
+		sprintf(strCustomerObjectRaAziInputForStoring, "Azi:%03dh%02dm%2.1fs",
 			Data_40002dac, Data_40002db0, fData_40002db4);
-		sprintf(strCustomerObjectRaAziInputCheck, "Azi:%03dh%02dm0%2.1fs", //"Azi:%03dh%02dm%2.1fs", //BUG?
+		sprintf(strCustomerObjectRaAziInputForTracking, "Azi:%03dh%02dm0%2.1fs", //"Azi:%03dh%02dm%2.1fs", //BUG?
 			Data_40002dac, Data_40002db0, fData_40002db4);
 	}
 	//0x518e4
@@ -1370,9 +1369,9 @@ void func_517f4(void)
 /* 51c7c - todo */
 void HandleRectascensionDeclinationInput(void)
 {
-	int raHours = atoi(&strCustomerObjectRaAziInputCheck[5]);
-	int raMinutes = atoi(&strCustomerObjectRaAziInputCheck[8]);
-	float raSeconds = atof(&strCustomerObjectRaAziInputCheck[11]);
+	int raHours = atoi(&strCustomerObjectRaAziInputForTracking[5]);
+	int raMinutes = atoi(&strCustomerObjectRaAziInputForTracking[8]);
+	float raSeconds = atof(&strCustomerObjectRaAziInputForTracking[11]);
 	int decDegrees = atoi(&Data_40002302[5]);
 	int decMinutes = atoi(&Data_40002302[8]);
 	float decSeconds = atof(&Data_40002302[11]);
@@ -1386,14 +1385,14 @@ void HandleRectascensionDeclinationInput(void)
 		{
 			//0x51d80
 			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_INPUT; //29002;
-			bData_4000318a = 5;
+			bCharacterInputPosition = 5;
 		}
 		//0x51d98
 		if ((raHours > 23) || (raMinutes > 59) || (raSeconds > 59.99))
 		{
 			//0x51dcc
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
-			bData_4000318a = 6;
+			bCharacterInputPosition = 6;
 		}
 		//->0x5246c
 	}
@@ -1444,13 +1443,13 @@ void HandleRectascensionDeclinationInput(void)
 				Data_40003f78[i] = strCustomerObjectNameInput[i + 4];
 			}
 			//5209c
-			Data_40003f78[9] = Data_400027df[5] - '0';
-			Data_40003f78[10] = Data_400027df[6] - '0';
-			Data_40003f78[11] = Data_400027df[8] - '0';
-			Data_40003f78[12] = Data_400027df[9] - '0';
-			Data_40003f78[13] = Data_400027df[11] - '0';
-			Data_40003f78[14] = Data_400027df[12] - '0';
-			Data_40003f78[15] = Data_400027df[14] - '0';
+			Data_40003f78[9] = strCustomerObjectRaAziInputForStoring[5] - '0';
+			Data_40003f78[10] = strCustomerObjectRaAziInputForStoring[6] - '0';
+			Data_40003f78[11] = strCustomerObjectRaAziInputForStoring[8] - '0';
+			Data_40003f78[12] = strCustomerObjectRaAziInputForStoring[9] - '0';
+			Data_40003f78[13] = strCustomerObjectRaAziInputForStoring[11] - '0';
+			Data_40003f78[14] = strCustomerObjectRaAziInputForStoring[12] - '0';
+			Data_40003f78[15] = strCustomerObjectRaAziInputForStoring[14] - '0';
 			
 			Data_40003f78[16] = Data_400027ef[4];
 			Data_40003f78[17] = Data_400027ef[5] - '0';
@@ -1461,7 +1460,7 @@ void HandleRectascensionDeclinationInput(void)
 			Data_40003f78[22] = Data_400027ef[12] - '0';
 			Data_40003f78[23] = Data_400027ef[14] - '0';
 			
-			func_258c((unsigned char) bData_40002f10_RecentTargetId, Data_40003f78);
+			flash_write_cust_sky_target((unsigned char) bData_40002f10_RecentTargetId, Data_40003f78);
 			//->0x5246c
 		} //if (bData_40003162 == 0)
 		else
@@ -1491,17 +1490,17 @@ void HandleRectascensionDeclinationInput(void)
 			dData_40002d10 = Data_40002cf4 + Data_40002cf8 / 60.0 + fData_40002cfc / 3600.0;
 			dData_40002d10 = Data_40002d40 * dData_40002d10;
 			
-			dData_40002c70 = func_d7ac(1, 
+			dObjectRiseTime = get_object_visibility_time(1, 
 				dData_40002cc8, dData_40002d10, 
 				Data_40004128.geographicLongitude, Data_40004128.geographicLatitude, 
 				(unsigned char) Data_40004128.timeZone);
 			
-			dData_40002c78 = func_d7ac(2, 
+			dObjectTransitTime = get_object_visibility_time(2, 
 				dData_40002cc8, dData_40002d10, 
 				Data_40004128.geographicLongitude, Data_40004128.geographicLatitude, 
 				(unsigned char) Data_40004128.timeZone);
 			
-			dData_40002c80 = func_d7ac(3, 
+			dObjectSetTime = get_object_visibility_time(3, 
 				dData_40002cc8, dData_40002d10, 
 				Data_40004128.geographicLongitude, Data_40004128.geographicLatitude, 
 				(unsigned char) Data_40004128.timeZone);
@@ -1510,32 +1509,32 @@ void HandleRectascensionDeclinationInput(void)
 }
 
 /* 52478 - todo */
-void func_52478(void)
+void HandleCustomerSkyObjectInput(void)
 {
-	int r4 = atoi(&strCustomerObjectRaAziInputCheck[5]);
-	int r5 = atoi(&strCustomerObjectRaAziInputCheck[8]);
-	float sl = atof(&strCustomerObjectRaAziInputCheck[11]);
+	int raHours = atoi(&strCustomerObjectRaAziInputForTracking[5]);
+	int raMinutes = atoi(&strCustomerObjectRaAziInputForTracking[8]);
+	float raSeconds = atof(&strCustomerObjectRaAziInputForTracking[11]);
 	int r6 = atoi(&Data_40002302[5]);
 	int r7 = atoi(&Data_40002302[8]);
 	float r8 = atof(&Data_40002302[11]);
 	unsigned char i;
 	
-	if ((r4 > 23) || (r5 > 59) || (sl > 59.99) ||
+	if ((raHours > 23) || (raMinutes > 59) || (raSeconds > 59.99) ||
 		(r6 > 89) || (r7 > 59) || (r8 > 59.99))
 	{
 		//0x52540
 		if ((r6 > 89) || (r7 > 59) || (r8 > 59.99))
 		{
 			//0x52574
-			Data_40002c64_MenuContextId = 205;
-			bData_4000318a = 5;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_DEC_INPUT; //205;
+			bCharacterInputPosition = 5;
 		}
 		//0x5258c
-		if ((r4 > 23) || (r5 > 59) || (sl > 59.99))
+		if ((raHours > 23) || (raMinutes > 59) || (raSeconds > 59.99))
 		{
 			//0x525c0
-			Data_40002c64_MenuContextId = 204;
-			bData_4000318a = 6;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_RA_INPUT; //204;
+			bCharacterInputPosition = 6;
 		}
 		//->0x52718
 	}
@@ -1550,13 +1549,13 @@ void func_52478(void)
 			Data_40003f78[i] = strCustomerObjectNameInput[i + 4];
 		}
 		//5209c
-		Data_40003f78[9] = Data_400027df[5] - '0';
-		Data_40003f78[10] = Data_400027df[6] - '0';
-		Data_40003f78[11] = Data_400027df[8] - '0';
-		Data_40003f78[12] = Data_400027df[9] - '0';
-		Data_40003f78[13] = Data_400027df[11] - '0';
-		Data_40003f78[14] = Data_400027df[12] - '0';
-		Data_40003f78[15] = Data_400027df[14] - '0';
+		Data_40003f78[9] = strCustomerObjectRaAziInputForStoring[5] - '0';
+		Data_40003f78[10] = strCustomerObjectRaAziInputForStoring[6] - '0';
+		Data_40003f78[11] = strCustomerObjectRaAziInputForStoring[8] - '0';
+		Data_40003f78[12] = strCustomerObjectRaAziInputForStoring[9] - '0';
+		Data_40003f78[13] = strCustomerObjectRaAziInputForStoring[11] - '0';
+		Data_40003f78[14] = strCustomerObjectRaAziInputForStoring[12] - '0';
+		Data_40003f78[15] = strCustomerObjectRaAziInputForStoring[14] - '0';
 		
 		Data_40003f78[16] = Data_400027ef[4];
 		Data_40003f78[17] = Data_400027ef[5] - '0';
@@ -1567,7 +1566,7 @@ void func_52478(void)
 		Data_40003f78[22] = Data_400027ef[12] - '0';
 		Data_40003f78[23] = Data_400027ef[14] - '0';
 		
-		func_258c(bData_4000319a_SkyLandTargetId, Data_40003f78);
+		flash_write_cust_sky_target(bData_4000319a_SkyLandTargetId, Data_40003f78);
 		beep1(1);
 	}
 }
@@ -2392,7 +2391,7 @@ void func_61ecc(int a)
 	unsigned char r4;
 	unsigned char sp[10];
 	
-	if (bData_40003198 != 0)
+	if (bCapsLock != 0)
 	{
 		r3 = 5;
 	}
@@ -2566,8 +2565,8 @@ void func_61ecc(int a)
 			{
 				case 0:
 					//0x622b8
-					Data_4000251d[bData_4000318a - 1] = sp[bData_40003199 + r3];
-					Data_4000257e[bData_4000318a - 1] = sp[bData_40003199 + r3];
+					Data_4000251d[bCharacterInputPosition - 1] = sp[bData_40003199 + r3];
+					Data_4000257e[bCharacterInputPosition - 1] = sp[bData_40003199 + r3];
 				
 					if (bData_40003199 < 4)
 					{
@@ -2583,16 +2582,16 @@ void func_61ecc(int a)
 				
 				case 1:
 					//0x62344
-					Data_4000253d[bData_4000318a - 1] = r4;
-					Data_4000258c[bData_4000318a - 1] = r4;
+					Data_4000253d[bCharacterInputPosition - 1] = r4;
+					Data_4000258c[bCharacterInputPosition - 1] = r4;
 				
 					func_5660c();
 					break;
 				
 				case 2:
 					//0x62378
-					Data_4000255d[bData_4000318a - 1] = r4;
-					Data_400025a0[bData_4000318a - 1] = r4;
+					Data_4000255d[bCharacterInputPosition - 1] = r4;
+					Data_400025a0[bCharacterInputPosition - 1] = r4;
 				
 					func_5660c();
 					break;
@@ -2676,14 +2675,14 @@ void func_623d0(int a)
 	{
 		case 0:
 			//0x624ac
-			Data_40002789[bData_4000318a - 1] = r3;
-			Data_400028d7[bData_4000318a - 1] = r3;
+			Data_40002789[bCharacterInputPosition - 1] = r3;
+			Data_400028d7[bCharacterInputPosition - 1] = r3;
 			break;
 		
 		case 1:
 			//0x624dc
-			Data_40002792[bData_4000318a - 1] = r3;
-			Data_400028e1[bData_4000318a - 1] = r3;
+			Data_40002792[bCharacterInputPosition - 1] = r3;
+			Data_400028e1[bCharacterInputPosition - 1] = r3;
 			break;
 		
 		default:
@@ -2695,171 +2694,171 @@ void func_623d0(int a)
 }
 
 /* 62524 - todo */
-void func_62524(int a)
+void HandleCustomSiteInputChar(int key)
 {
-	int r3;
-	unsigned char r4;
-	unsigned char sp[10];
+	int capsOffset;
+	unsigned char digitChar;
+	unsigned char alphaNumChars[10];
 	
-	if (bData_40003198 != 0)
+	if (bCapsLock != 0)
 	{
-		r3 = 5;
+		capsOffset = 5;
 	}
 	else
 	{
-		r3 = 0;
+		capsOffset = 0;
 	}
 	
-	switch (a)
+	switch (key)
 	{
 		case 0:
 			//0x6257c
-			r4 = '0';
-			sp[0] = '0';
-			sp[1] = '0';
-			sp[2] = '0';
-			sp[3] = '0';
-			sp[4] = '0';
-			sp[5] = '0';
-			sp[6] = '0';
-			sp[7] = '0';
-			sp[8] = '0';
-			sp[9] = '0';
+			digitChar = '0';
+			alphaNumChars[0] = '0';
+			alphaNumChars[1] = '0';
+			alphaNumChars[2] = '0';
+			alphaNumChars[3] = '0';
+			alphaNumChars[4] = '0';
+			alphaNumChars[5] = '0';
+			alphaNumChars[6] = '0';
+			alphaNumChars[7] = '0';
+			alphaNumChars[8] = '0';
+			alphaNumChars[9] = '0';
 			break;
 
 		case 1:
 			//0x625b4
-			r4 = '1';
-			sp[0] = '1';
-			sp[1] = '1';
-			sp[2] = '1';
-			sp[3] = '1';
-			sp[4] = '1';
-			sp[5] = '1';
-			sp[6] = '1';
-			sp[7] = '1';
-			sp[8] = '1';
-			sp[9] = '1';
+			digitChar = '1';
+			alphaNumChars[0] = '1';
+			alphaNumChars[1] = '1';
+			alphaNumChars[2] = '1';
+			alphaNumChars[3] = '1';
+			alphaNumChars[4] = '1';
+			alphaNumChars[5] = '1';
+			alphaNumChars[6] = '1';
+			alphaNumChars[7] = '1';
+			alphaNumChars[8] = '1';
+			alphaNumChars[9] = '1';
 			break;
 
 		case 2:
 			//0x625ec
-			r4 = '2';
-			sp[0] = '2';
-			sp[1] = 'a';
-			sp[2] = 'b';
-			sp[3] = 'c';
-			sp[4] = ' ';
-			sp[5] = '2';
-			sp[6] = 'A';
-			sp[7] = 'B';
-			sp[8] = 'C';
-			sp[9] = ' ';
+			digitChar = '2';
+			alphaNumChars[0] = '2';
+			alphaNumChars[1] = 'a';
+			alphaNumChars[2] = 'b';
+			alphaNumChars[3] = 'c';
+			alphaNumChars[4] = ' ';
+			alphaNumChars[5] = '2';
+			alphaNumChars[6] = 'A';
+			alphaNumChars[7] = 'B';
+			alphaNumChars[8] = 'C';
+			alphaNumChars[9] = ' ';
 			break;
 
 		case 3:
 			//0x62648
-			r4 = '3';
-			sp[0] = '3';
-			sp[1] = 'd';
-			sp[2] = 'e';
-			sp[3] = 'f';
-			sp[4] = ' ';
-			sp[5] = '3';
-			sp[6] = 'D';
-			sp[7] = 'E';
-			sp[8] = 'F';
-			sp[9] = ' ';
+			digitChar = '3';
+			alphaNumChars[0] = '3';
+			alphaNumChars[1] = 'd';
+			alphaNumChars[2] = 'e';
+			alphaNumChars[3] = 'f';
+			alphaNumChars[4] = ' ';
+			alphaNumChars[5] = '3';
+			alphaNumChars[6] = 'D';
+			alphaNumChars[7] = 'E';
+			alphaNumChars[8] = 'F';
+			alphaNumChars[9] = ' ';
 			break;
 
 		case 4:
 			//0x626a4
-			r4 = '4';
-			sp[0] = '4';
-			sp[1] = 'g';
-			sp[2] = 'h';
-			sp[3] = 'i';
-			sp[4] = ' ';
-			sp[5] = '4';
-			sp[6] = 'G';
-			sp[7] = 'H';
-			sp[8] = 'I';
-			sp[9] = ' ';
+			digitChar = '4';
+			alphaNumChars[0] = '4';
+			alphaNumChars[1] = 'g';
+			alphaNumChars[2] = 'h';
+			alphaNumChars[3] = 'i';
+			alphaNumChars[4] = ' ';
+			alphaNumChars[5] = '4';
+			alphaNumChars[6] = 'G';
+			alphaNumChars[7] = 'H';
+			alphaNumChars[8] = 'I';
+			alphaNumChars[9] = ' ';
 			break;
 
 		case 5:
 			//0x62700
-			r4 = '5';
-			sp[0] = '5';
-			sp[1] = 'j';
-			sp[2] = 'k';
-			sp[3] = 'l';
-			sp[4] = ' ';
-			sp[5] = '5';
-			sp[6] = 'J';
-			sp[7] = 'K';
-			sp[8] = 'L';
-			sp[9] = ' ';
+			digitChar = '5';
+			alphaNumChars[0] = '5';
+			alphaNumChars[1] = 'j';
+			alphaNumChars[2] = 'k';
+			alphaNumChars[3] = 'l';
+			alphaNumChars[4] = ' ';
+			alphaNumChars[5] = '5';
+			alphaNumChars[6] = 'J';
+			alphaNumChars[7] = 'K';
+			alphaNumChars[8] = 'L';
+			alphaNumChars[9] = ' ';
 			break;
 
 		case 6:
 			//0x6275c
-			r4 = '6';
-			sp[0] = '6';
-			sp[1] = 'm';
-			sp[2] = 'n';
-			sp[3] = 'o';
-			sp[4] = ' ';
-			sp[5] = '6';
-			sp[6] = 'M';
-			sp[7] = 'N';
-			sp[8] = 'O';
-			sp[9] = ' ';
+			digitChar = '6';
+			alphaNumChars[0] = '6';
+			alphaNumChars[1] = 'm';
+			alphaNumChars[2] = 'n';
+			alphaNumChars[3] = 'o';
+			alphaNumChars[4] = ' ';
+			alphaNumChars[5] = '6';
+			alphaNumChars[6] = 'M';
+			alphaNumChars[7] = 'N';
+			alphaNumChars[8] = 'O';
+			alphaNumChars[9] = ' ';
 			break;
 
 		case 7:
 			//0x627b8
-			r4 = '7';
-			sp[0] = '7';
-			sp[1] = 'p';
-			sp[2] = 'q';
-			sp[3] = 'r';
-			sp[4] = 's';
-			sp[5] = '7';
-			sp[6] = 'P';
-			sp[7] = 'Q';
-			sp[8] = 'R';
-			sp[9] = 'S';
+			digitChar = '7';
+			alphaNumChars[0] = '7';
+			alphaNumChars[1] = 'p';
+			alphaNumChars[2] = 'q';
+			alphaNumChars[3] = 'r';
+			alphaNumChars[4] = 's';
+			alphaNumChars[5] = '7';
+			alphaNumChars[6] = 'P';
+			alphaNumChars[7] = 'Q';
+			alphaNumChars[8] = 'R';
+			alphaNumChars[9] = 'S';
 			break;
 
 		case 8:
 			//0x62814
-			r4 = '8';
-			sp[0] = '8';
-			sp[1] = 't';
-			sp[2] = 'u';
-			sp[3] = 'v';
-			sp[4] = ' ';
-			sp[5] = '8';
-			sp[6] = 'T';
-			sp[7] = 'U';
-			sp[8] = 'V';
-			sp[9] = ' ';
+			digitChar = '8';
+			alphaNumChars[0] = '8';
+			alphaNumChars[1] = 't';
+			alphaNumChars[2] = 'u';
+			alphaNumChars[3] = 'v';
+			alphaNumChars[4] = ' ';
+			alphaNumChars[5] = '8';
+			alphaNumChars[6] = 'T';
+			alphaNumChars[7] = 'U';
+			alphaNumChars[8] = 'V';
+			alphaNumChars[9] = ' ';
 			break;
 
 		case 9:
 			//0x62870
-			r4 = '9';
-			sp[0] = '9';
-			sp[1] = 'w';
-			sp[2] = 'x';
-			sp[3] = 'y';
-			sp[4] = 'z';
-			sp[5] = '2';
-			sp[6] = 'W';
-			sp[7] = 'X';
-			sp[8] = 'Y';
-			sp[9] = 'Z';
+			digitChar = '9';
+			alphaNumChars[0] = '9';
+			alphaNumChars[1] = 'w';
+			alphaNumChars[2] = 'x';
+			alphaNumChars[3] = 'y';
+			alphaNumChars[4] = 'z';
+			alphaNumChars[5] = '2';
+			alphaNumChars[6] = 'W';
+			alphaNumChars[7] = 'X';
+			alphaNumChars[8] = 'Y';
+			alphaNumChars[9] = 'Z';
 			break;
 
 		default:
@@ -2873,12 +2872,12 @@ void func_62524(int a)
 			//0x628f4
 		case 3:
 			//0x628fc
-			switch (bData_40003144)
+			switch (bCurrentCustomSiteInputLine)
 			{
 				case 0:
-					//0x62924
-					Data_400026c3[bData_4000318a - 1] = sp[bData_40003199 + r3];
-					Data_40002827[bData_4000318a - 1] = sp[bData_40003199 + r3];
+					//0x62924: Name
+					Data_400026c3[bCharacterInputPosition - 1] = alphaNumChars[bData_40003199 + capsOffset];
+					strCustomSiteName[bCharacterInputPosition - 1] = alphaNumChars[bData_40003199 + capsOffset];
 				
 					if (bData_40003199 < 4)
 					{
@@ -2892,26 +2891,26 @@ void func_62524(int a)
 					break;
 				
 				case 1:
-					//0x629b0
-					if (bData_4000318a != 7)
+					//0x629b0: Longitude
+					if (bCharacterInputPosition != 7)
 					{
-						Data_400026db[bData_4000318a - 1] = r4;
-						Data_40002837[bData_4000318a - 1] = r4;
+						Data_400026db[bCharacterInputPosition - 1] = digitChar;
+						strCustomSiteLongitude[bCharacterInputPosition - 1] = digitChar;
 					}
 					else
 					{
 						//0x629f0
-						if (Data_400026db[bData_4000318a - 1] == 'E')
+						if (Data_400026db[bCharacterInputPosition - 1] == 'E')
 						{
 							//62a0c
-							Data_400026db[bData_4000318a - 1] = 'W';
-							Data_40002837[bData_4000318a - 1] = 'W';
+							Data_400026db[bCharacterInputPosition - 1] = 'W';
+							strCustomSiteLongitude[bCharacterInputPosition - 1] = 'W';
 						}
 						else
 						{
 							//0x62ad4
-							Data_400026db[bData_4000318a - 1] = 'E';
-							Data_40002837[bData_4000318a - 1] = 'E';
+							Data_400026db[bCharacterInputPosition - 1] = 'E';
+							strCustomSiteLongitude[bCharacterInputPosition - 1] = 'E';
 						}
 					}
 					//0x62b00
@@ -2920,26 +2919,26 @@ void func_62524(int a)
 					break;
 				
 				case 2:
-					//0x62b08
-					if (bData_4000318a != 7)
+					//0x62b08: Latitude
+					if (bCharacterInputPosition != 7)
 					{
-						Data_400026f3[bData_4000318a - 1] = r4;
-						Data_40002847[bData_4000318a - 1] = r4;
+						Data_400026f3[bCharacterInputPosition - 1] = digitChar;
+						strCustomSiteLatitude[bCharacterInputPosition - 1] = digitChar;
 					}
 					else
 					{
 						//0x62b48
-						if (Data_400026f3[bData_4000318a - 1] == 'N')
+						if (Data_400026f3[bCharacterInputPosition - 1] == 'N')
 						{
 							//62b64
-							Data_400026f3[bData_4000318a - 1] = 'S';
-							Data_40002847[bData_4000318a - 1] = 'S';
+							Data_400026f3[bCharacterInputPosition - 1] = 'S';
+							strCustomSiteLatitude[bCharacterInputPosition - 1] = 'S';
 						}
 						else
 						{
 							//0x62b94
-							Data_400026f3[bData_4000318a - 1] = 'N';
-							Data_40002847[bData_4000318a - 1] = 'N';
+							Data_400026f3[bCharacterInputPosition - 1] = 'N';
+							strCustomSiteLatitude[bCharacterInputPosition - 1] = 'N';
 						}
 					}
 					//0x62bc0
@@ -2948,26 +2947,26 @@ void func_62524(int a)
 					break;
 				
 				case 3:
-					//0x62bc8
-					if (bData_4000318a != 7)
+					//0x62bc8: Time Zone
+					if (bCharacterInputPosition != 7)
 					{
-						Data_4000270a[bData_4000318a - 1] = r4;
-						Data_40002856[bData_4000318a - 1] = r4;
+						Data_4000270a[bCharacterInputPosition - 1] = digitChar;
+						strCustomSiteTimezone[bCharacterInputPosition - 1] = digitChar;
 					}
 					else
 					{
 						//0x62c08
-						if (Data_4000270a[bData_4000318a - 1] == 'E')
+						if (Data_4000270a[bCharacterInputPosition - 1] == 'E')
 						{
 							//62c24
-							Data_4000270a[bData_4000318a - 1] = 'W';
-							Data_40002856[bData_4000318a - 1] = 'W';
+							Data_4000270a[bCharacterInputPosition - 1] = 'W';
+							strCustomSiteTimezone[bCharacterInputPosition - 1] = 'W';
 						}
 						else
 						{
 							//0x62c54
-							Data_4000270a[bData_4000318a - 1] = 'E';
-							Data_40002856[bData_4000318a - 1] = 'E';
+							Data_4000270a[bCharacterInputPosition - 1] = 'E';
+							strCustomSiteTimezone[bCharacterInputPosition - 1] = 'E';
 						}
 					}
 					//0x62c80
@@ -2977,8 +2976,8 @@ void func_62524(int a)
 				
 				case 4:
 					//0x62c88
-					Data_4000271a[bData_4000318a - 1] = r4;
-					Data_40002861[bData_4000318a - 1] = r4;
+					Data_4000271a[bCharacterInputPosition - 1] = digitChar;
+					Data_40002861[bCharacterInputPosition - 1] = digitChar;
 				
 					func_56e50();
 					//->0x62cc4
@@ -3012,7 +3011,7 @@ void func_68394(int a)
 	unsigned char r4;
 	unsigned char sp[10];
 	
-	if (bData_40003198 != 0)
+	if (bCapsLock != 0)
 	{
 		r3 = 5;
 	}
@@ -3177,8 +3176,8 @@ void func_68394(int a)
 			{
 				case 0:
 					//0x68790
-					Data_400025b5[bData_4000318a - 1] = sp[bData_40003199 + r3];
-					Data_40002625[bData_4000318a - 1] = sp[bData_40003199 + r3];
+					Data_400025b5[bCharacterInputPosition - 1] = sp[bData_40003199 + r3];
+					Data_40002625[bCharacterInputPosition - 1] = sp[bData_40003199 + r3];
 				
 					if (bData_40003199 < 4)
 					{
@@ -3192,8 +3191,8 @@ void func_68394(int a)
 				
 				case 1:
 					//0x6881c
-					Data_400025d9[bData_4000318a - 1] = r4;
-					Data_40002634[bData_4000318a - 1] = r4;
+					Data_400025d9[bCharacterInputPosition - 1] = r4;
+					Data_40002634[bCharacterInputPosition - 1] = r4;
 
 					func_563c8();
 					//->0x62cc4
@@ -3201,24 +3200,24 @@ void func_68394(int a)
 				
 				case 2:
 					//0x68850
-					if (bData_4000318a != 7)
+					if (bCharacterInputPosition != 7)
 					{
-						Data_400025fe[bData_4000318a - 1] = r4;
-						Data_40002644[bData_4000318a - 1] = r4;
+						Data_400025fe[bCharacterInputPosition - 1] = r4;
+						Data_40002644[bCharacterInputPosition - 1] = r4;
 					}
 					else
 					{
 						//0x68890
-						if (Data_400025fe[bData_4000318a - 1] == '+')
+						if (Data_400025fe[bCharacterInputPosition - 1] == '+')
 						{
-							Data_400025fe[bData_4000318a - 1] = '-';
-							Data_40002644[bData_4000318a - 1] = '-';
+							Data_400025fe[bCharacterInputPosition - 1] = '-';
+							Data_40002644[bCharacterInputPosition - 1] = '-';
 						}
 						else
 						{
 							//0x688dc
-							Data_400025fe[bData_4000318a - 1] = '+';
-							Data_40002644[bData_4000318a - 1] = '+';
+							Data_400025fe[bCharacterInputPosition - 1] = '+';
+							Data_40002644[bCharacterInputPosition - 1] = '+';
 						}
 					}
 					//0x68908
@@ -4002,7 +4001,7 @@ void func_6b17c(void)
 	if (bData_40002c13_uart1ReceiveComplete == 1)
 	{
 		//6b218
-		if (Data_40003592_uart1ReceiveDataBuffer[0] == 129)
+		if (Data_40003592_uart1ReceiveDataBuffer[0] == 0x81)
 		{
 			//6b228
 			Data_40003592_uart1ReceiveDataBuffer[1] = 
@@ -4964,96 +4963,61 @@ int main(void)
 	Data_40004128.dData_112 = -180.0;
 	Data_40004128.dData_120 = 90.0;
 	
-	func_2a1c(Data_40004bb8, &fData_40003540, &fData_40003544, &Data_40003548);
+	flash_get_custom_site_data(arInitialCustomSiteName, 
+		&fInitialCustomSiteLongitude, 
+		&fInitialCustomSiteLatitude, 
+		&iInitialCustomSiteTimezone);
 	
-	Data_40004128.geographicLongitude = fData_40003540;
-	Data_40004128.geographicLatitude = fData_40003544;
-	Data_40002e54_Zone = Data_40003548;
+	Data_40004128.geographicLongitude = fInitialCustomSiteLongitude;
+	Data_40004128.geographicLatitude = fInitialCustomSiteLatitude;
+	Data_40002e54_Zone = iInitialCustomSiteTimezone;
 	
-	Data_40002827[6] = Data_40004bb8[0];
-	Data_40002827[7] = Data_40004bb8[1];
-	Data_40002827[8] = Data_40004bb8[2];
-	Data_40002827[9] = Data_40004bb8[3];
-	Data_40002827[10] = Data_40004bb8[4];
-	Data_40002827[11] = Data_40004bb8[5];
-	Data_40002827[12] = Data_40004bb8[6];
-	Data_40002827[13] = Data_40004bb8[7];	
+	strCustomSiteName[6] = arInitialCustomSiteName[0];
+	strCustomSiteName[7] = arInitialCustomSiteName[1];
+	strCustomSiteName[8] = arInitialCustomSiteName[2];
+	strCustomSiteName[9] = arInitialCustomSiteName[3];
+	strCustomSiteName[10] = arInitialCustomSiteName[4];
+	strCustomSiteName[11] = arInitialCustomSiteName[5];
+	strCustomSiteName[12] = arInitialCustomSiteName[6];
+	strCustomSiteName[13] = arInitialCustomSiteName[7];	
 	//6d364
-	if (fData_40003540 > 0)
+	if (fInitialCustomSiteLongitude > 0)
 	{
 		//6d378
-		#if 0
-		r4 = (fData_40003540 - (int)fData_40003540) * 60;
-		r5 = fData_40003540;
-		sprintf(Data_40002837, "  Lon:E%03dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
-		#else
-		sprintf(Data_40002837, "  Lon:E%03dd%02df ", 
-			abs(fData_40003540), 
-			abs((fData_40003540 - (int)fData_40003540) * 60));
-		#endif
+		sprintf(strCustomSiteLongitude, "  Lon:E%03dd%02df ", 
+			DEGREES_MINUTES_ABS(fInitialCustomSiteLongitude));
 		//->6d494
 	}
 	else
 	{
 		//6d408
-		#if 0
-		r4 = (fData_40003540 - (int)fData_40003540) * 60;
-		r5 = fData_40003540;
-		sprintf(Data_40002837, "  Lon:W%03dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
-		#else
-		sprintf(Data_40002837, "  Lon:W%03dd%02df ", 
-			abs(fData_40003540), 
-			abs((fData_40003540 - (int)fData_40003540) * 60));
-		#endif
+		sprintf(strCustomSiteLongitude, "  Lon:W%03dd%02df ", 
+			DEGREES_MINUTES_ABS(fInitialCustomSiteLongitude));
 	}
 	//6d494
-	if (fData_40003544 > 0)
+	if (fInitialCustomSiteLatitude > 0)
 	{
 		//6d4a8
-		#if 0
-		r4 = (fData_40003544 - (int)fData_40003544) * 60;
-		r5 = fData_40003544;
-		sprintf(Data_40002847, "  Lat:N%02dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
-		#else
-		sprintf(Data_40002847, "  Lat:N%02dd%02df ", 
-			abs(fData_40003544), 
-			abs((fData_40003544 - (int)fData_40003544) * 60));
-		#endif
+		sprintf(strCustomSiteLatitude, "  Lat:N%02dd%02df ", 
+			DEGREES_MINUTES_ABS(fInitialCustomSiteLatitude));
 		//->6d5c4
 	}
 	else
 	{
 		//6d538
-		#if 0
-		r4 = (fData_40003544 - (int)fData_40003544) * 60;
-		r5 = fData_40003544;
-		sprintf(Data_40002847, "  Lat:S%02dd%02df ", (r5 >= 0)? r5: -r5, (r4 >= 0)? r4: -r4);
-		#else
-		sprintf(Data_40002847, "  Lat:S%02dd%02df ", 
-			abs(fData_40003544), 
-			abs((fData_40003544 - (int)fData_40003544) * 60));
-		#endif
+		sprintf(strCustomSiteLatitude, "  Lat:S%02dd%02df ", 
+			DEGREES_MINUTES_ABS(fInitialCustomSiteLatitude));
 	}
 	//6d5c4
-	if (Data_40003548 > 0)
+	if (iInitialCustomSiteTimezone > 0)
 	{
 		//6d5d4
-		#if 0
-		r4 = Data_40003548;
-		sprintf(Data_40002856, " Zone:E%02d", (r4 >= 0)? r4: -r4);
-		#else
-		sprintf(Data_40002856, " Zone:E%02d", abs(Data_40003548));
-		#endif
+		sprintf(strCustomSiteTimezone, " Zone:E%02d", abs(iInitialCustomSiteTimezone));
 	}
 	else
 	{
 		//6d604
-		#if 0
-		r4 = Data_40003548;
-		sprintf(Data_40002856, " Zone:W%02d", (r4 >= 0)? r4: -r4);
-		#else
-		sprintf(Data_40002856, " Zone:W%02d", abs(Data_40003548));
-		#endif
+		sprintf(strCustomSiteTimezone, " Zone:W%02d", abs(iInitialCustomSiteTimezone));
 	}
 	//6d630
 	func_659c(2000);
@@ -5080,9 +5044,9 @@ int main(void)
 		sprintf(Data_40002655, "%04d-%02d-%02d", Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
 		sprintf(Data_40002660, "%02d:%02d:%02d", bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
 		
-		bData_4000318a = 1;
-		bData_40002e78 = 0;
-		Data_40002c64_MenuContextId = 41001; //"Date and Time Set: "
+		bCharacterInputPosition = 1;
+		bDateTimeInputMode = 0;
+		Data_40002c64_MenuContextId = MENU_CONTEXT_TIME_DATE_INPUT; //41001;
 		//->6d880
 	}
 	else
@@ -5675,7 +5639,7 @@ int main(void)
 			}
 		} //else if (bData_40002c1a == 2)
 		//6f8d0
-		if (bData_400031ed == 0)
+		if (bSystemInitialized == 0)
 		{
 			//6f8e0
 			lcd_display_clear();
@@ -5688,7 +5652,7 @@ int main(void)
 			func_659c(1000);
 			lcd_display_clear();
 			
-			bData_400031ed = 1;
+			bSystemInitialized = 1;
 		}
 		//6f94c
 		func_6a2cc(); //->KeyHandling
@@ -5776,7 +5740,7 @@ int main(void)
 		//6fb24
 		if (bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)
 		{
-			//6fb34
+			//6fb34: Receive guiding value?
 			func_6b17c();
 			
 			Data_40003488 = Data_40002c1c;

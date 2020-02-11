@@ -255,45 +255,45 @@ void Handle0Key(void)
 		
 		case MENU_CONTEXT_RA_INPUT: //29001:
 			//0x69bf0
-		case 204:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_RA_INPUT: //204:
 			//0x69bf8
-			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '0';
-			Data_400027df[bData_4000318a - 1] = '0';
+			strCustomerObjectRaAziInputForTracking[bCharacterInputPosition - 1] = '0';
+			strCustomerObjectRaAziInputForStoring[bCharacterInputPosition - 1] = '0';
 		
 			func_57b40();
 			//->0x6a0d4
 			break;
 		
-		case 207:
+		case MENU_CONTEXT_CUST_LAND_OBJ_AZI_INPUT: //207:
 			//0x69c2c
-			strCustomerObjectRaAziInputCheck[bData_4000318a - 1] = '0';
-			Data_400027df[bData_4000318a - 1] = '0';
+			strCustomerObjectRaAziInputForTracking[bCharacterInputPosition - 1] = '0';
+			strCustomerObjectRaAziInputForStoring[bCharacterInputPosition - 1] = '0';
 		
 			func_57a4c();
 			break;
 		
 		case 29002:
 			//0x69c64
-		case 205:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_DEC_INPUT: //205:
 			//0x69c6c
-		case 208:
+		case MENU_CONTEXT_CUST_LAND_OBJ_ALT_INPUT: //208:
 			//0x69c70
-			if (bData_4000318a != 5)
+			if (bCharacterInputPosition != 5)
 			{
-				Data_40002302[bData_4000318a - 1] = '0';
-				Data_400027ef[bData_4000318a - 1] = '0';
+				Data_40002302[bCharacterInputPosition - 1] = '0';
+				Data_400027ef[bCharacterInputPosition - 1] = '0';
 			}
 			else
 			{
-				if (Data_40002302[bData_4000318a - 1] == '+')
+				if (Data_40002302[bCharacterInputPosition - 1] == '+')
 				{
-					Data_40002302[bData_4000318a - 1] = '-';
-					Data_400027ef[bData_4000318a - 1] = '-';
+					Data_40002302[bCharacterInputPosition - 1] = '-';
+					Data_400027ef[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
-					Data_40002302[bData_4000318a - 1] = '+';
-					Data_400027ef[bData_4000318a - 1] = '+';
+					Data_40002302[bCharacterInputPosition - 1] = '+';
+					Data_400027ef[bCharacterInputPosition - 1] = '+';
 				}
 			}
 			
@@ -302,71 +302,71 @@ void Handle0Key(void)
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x69d30
-		case 206:
+		case MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT: //206:
 			//0x69d38
-			switch (bData_400031e8)
+			switch (bCustomerObjectNameChar)
 			{
 				case '0':
 					//69d50
-					bData_400031e8 = ' ';
+					bCustomerObjectNameChar = ' ';
 					break;
 				
 				case ' ':
 					//0x69d64
-					bData_400031e8 = '0';
+					bCustomerObjectNameChar = '0';
 					break;
 				
 				default:
 					//0x69d78
-					bData_400031e8 = '0';
+					bCustomerObjectNameChar = '0';
 					break;
 			}
-			strCustomerObjectNameInput[bData_4000318a - 1] = bData_400031e8;			
+			strCustomerObjectNameInput[bCharacterInputPosition - 1] = bCustomerObjectNameChar;			
 			break;
 		
 		case 48001:
 			//0x69e54
-			if (bData_4000318a != 1)
+			if (bCharacterInputPosition != 1)
 			{
-				Data_400037cc[bData_4000318a - 1] = '0';
-				Data_400037dc[bData_4000318a - 1] = '0';
+				Data_400037cc[bCharacterInputPosition - 1] = '0';
+				Data_400037dc[bCharacterInputPosition - 1] = '0';
 			}
 			else
 			{
-				if (Data_400037cc[bData_4000318a - 1] == '+')
+				if (Data_400037cc[bCharacterInputPosition - 1] == '+')
 				{
-					Data_400037cc[bData_4000318a - 1] = '-';
-					Data_400037dc[bData_4000318a - 1] = '-';
+					Data_400037cc[bCharacterInputPosition - 1] = '-';
+					Data_400037dc[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
-					Data_400037cc[bData_4000318a - 1] = '+';
-					Data_400037dc[bData_4000318a - 1] = '+';
+					Data_400037cc[bCharacterInputPosition - 1] = '+';
+					Data_400037dc[bCharacterInputPosition - 1] = '+';
 				}
 			}
 
 			func_57370();
 			break;
 		
-		case 41001:
+		case MENU_CONTEXT_TIME_DATE_INPUT: //41001:
 			//0x69f18
-			if (bData_40002e78 == 0)
+			if (bDateTimeInputMode == 0)
 			{
-				Data_40002655[bData_4000318a - 1] = '0';
-				Data_400037ec[bData_4000318a - 1] = '0';
+				Data_40002655[bCharacterInputPosition - 1] = '0';
+				Data_400037ec[bCharacterInputPosition - 1] = '0';
 			}
 			else
 			{
-				Data_40002660[bData_4000318a - 1] = '0';
-				Data_40003150[bData_4000318a - 1] = '0';
+				Data_40002660[bCharacterInputPosition - 1] = '0';
+				Data_40003150[bCharacterInputPosition - 1] = '0';
 			}
 
-			func_5718c();
+			HandleNextDateTimeInputPosition();
 			break;
 		
 		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
 			//0x69f90
-			func_62524(0);
+			HandleCustomSiteInputChar(0);
 			//->0x6a0d4
 			break;
 		
@@ -377,45 +377,45 @@ void Handle0Key(void)
 		
 		case 34001:
 			//0x69fb0
-			Data_4000294a[bData_4000318a - 1] = '0';
-			strEng00000s[bData_4000318a - 1] = '0';
+			Data_4000294a[bCharacterInputPosition - 1] = '0';
+			strEng00000s[bCharacterInputPosition - 1] = '0';
 		
 			func_56d0c();
 			break;
 		
 		case 35001:
 			//0x69fe8
-			Data_40002a3f[bData_4000318a - 1] = '0';
-			strEngAlarm21h34m23s[bData_4000318a - 1] = '0';
+			Data_40002a3f[bCharacterInputPosition - 1] = '0';
+			strEngAlarm21h34m23s[bCharacterInputPosition - 1] = '0';
 		
 			func_56c4c();
 			break;
 		
-		case 360021:
+		case MENU_CONTEXT_EYEPIECE_MAGN_MF_INPUT: //360021:
 			//0x6a020
-		case 370021:
+		case MENU_CONTEXT_EYEPIECE_FOV_MF_INPUT: //370021:
 			//0x6a028
-			Data_40002474[bData_4000318a - 1] = '0';
-			Data_400024c9[bData_4000318a - 1] = '0';
+			Data_40002474[bCharacterInputPosition - 1] = '0';
+			strEyepieceFovMfInput[bCharacterInputPosition - 1] = '0';
 		
-			func_56ac8();
+			HandleNextMfInputPosition();
 			break;
 		
-		case 360022:
+		case MENU_CONTEXT_EYEPIECE_MAGN_SF_INPUT: //360022:
 			//0x6a05c
-		case 370022:
+		case MENU_CONTEXT_EYEPIECE_FOV_SF_INPUT: //370022:
 			//0x6a064
-			Data_40002481[bData_4000318a - 1] = '0';
-			Data_400024d6[bData_4000318a - 1] = '0';
+			Data_40002481[bCharacterInputPosition - 1] = '0';
+			strEyepieceFovSfInput[bCharacterInputPosition - 1] = '0';
 		
-			func_56bf8();
+			HandleNextSfInputPosition();
 			break;
 		
-		case 370023:
+		case MENU_CONTEXT_EYEPIECE_FOV_INPUT: //370023:
 			//0x6a098
-			Data_400024e1[bData_4000318a - 1] = '0';
+			strEyepieceFovInput[bCharacterInputPosition - 1] = '0';
 		
-			func_56b54();
+			HandleNextEyepieceFovInputPosition();
 			break;
 		
 		case 211001:

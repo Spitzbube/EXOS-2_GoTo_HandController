@@ -331,14 +331,14 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_EYEPIECE_FOV: //3600:
 			//0x53778: Eyepiece FOV
-			bData_4000318a = 7;
-			Data_40002c64_MenuContextId = 370021; //->"Eyep. focal length:"
+			bCharacterInputPosition = 7;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_FOV_MF_INPUT; //370021;
 			break;
 		
 		case MENU_CONTEXT_EYEPIECE_MAGN: //3700:
 			//0x53798: Eyepiece Magn.
-			bData_4000318a = 7;
-			Data_40002c64_MenuContextId = 360021; //->"Eyep. focal length:"
+			bCharacterInputPosition = 7;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_MAGN_MF_INPUT; //360021;
 			break;
 		
 		case MENU_CONTEXT_DISPLAY_ILLUMINATION: //3800:
@@ -356,7 +356,7 @@ void HandleEnterKey(void)
 			//0x537e0: Telescope Mount
 			Data_40002c64_MenuContextId = MENU_CONTEXT_OTA_ZERO_SETUP; //47011; //->"Please setup OTA zero"
 			bData_4000316d = 0;
-			bData_4000318a = 5;
+			bCharacterInputPosition = 5;
 			bData_400032a4_OTAZeroDataErrorCount = 0;
 		
 			flash_get_ota_zero_data(&fData_4000329c, &fData_400032a0);
@@ -973,25 +973,25 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x54d40
-			bData_4000318a = 6;		
+			bCharacterInputPosition = 6;		
 			func_50048();
 			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT; //203;
 			break;
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x54d64		
-		case 204:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_RA_INPUT: //204:
 			//0x54d6c
-		case 205:
+		case MENU_CONTEXT_CUSTOMER_OBJECT_DEC_INPUT: //205:
 			//0x54d70
-			func_52478();
+			HandleCustomerSkyObjectInput();
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_OBJ; //2110;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_RA_DEC: //2120:
 			//0x54d84: Input RA/DEC
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
-			bData_4000318a = 6;
+			bCharacterInputPosition = 6;
 			func_50048();
 			break;
 		
@@ -1011,27 +1011,27 @@ void HandleEnterKey(void)
 			bData_4000319a_SkyLandTargetId = 1;
 			break;
 		
-		case 202:
+		case MENU_CONTEXT_CUST_LAND_OBJ_SELECTION: //202:
 			//0x54de0
 			func_517f4();
-			bData_4000318a = 6;
-			Data_40002c64_MenuContextId = 206;
+			bCharacterInputPosition = 6;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT; //206;
 			break;
 		
-		case 206:
+		case MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT: //206:
 			//0x54e04
-		case 207:
+		case MENU_CONTEXT_CUST_LAND_OBJ_AZI_INPUT: //207:
 			//0x54e0c
-		case 208:
+		case MENU_CONTEXT_CUST_LAND_OBJ_ALT_INPUT: //208:
 			//0x54e10
-			func_514f8();
+			HandleCustomerLandObjectInput();
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_LAND; //2130;
 			break;
 		
-		case 4400: // Sky/Land
+		case MENU_CONTEXT_SKY_LAND: //4400:
 			//0x54e24
 #ifdef V2_3
-			Data_40002c64_MenuContextId = 4400;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SKY_LAND; //4400;
 #else
 			Data_40002c64_MenuContextId = 45001;
 #endif
@@ -1041,7 +1041,7 @@ void HandleEnterKey(void)
 			//0x54e38
 			bData_40002e79_SkyLandTargetSeletion = 0;
 			bData_400034a9 = 0;
-			Data_40002c64_MenuContextId = 4400;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SKY_LAND; //4400;
 		
 			Data_40003500.dwData = fabs((int) ((6.0 * dData_40002c98) / 15.04));
 		
@@ -1170,7 +1170,7 @@ void HandleEnterKey(void)
 			dData_40002c98 = 0;
 			bData_40002e7c_TrackingRateType = MENU_TRACKING_RATE_STAR_SPEED; //0;
 			beep1(2);
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_TRACKING_RATE_SOLAR_SPEED: //4802:
@@ -1178,7 +1178,7 @@ void HandleEnterKey(void)
 			dData_40002c98 = 0.000000298199444444444492059666153988;
 			bData_40002e7c_TrackingRateType = MENU_TRACKING_RATE_SOLAR_SPEED; //1;
 			beep1(2);
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_TRACKING_RATE_MOON_SPEED: //4803:
@@ -1186,12 +1186,12 @@ void HandleEnterKey(void)
 			dData_40002c98 = 0.00000376886111111111134081550801123;
 			bData_40002e7c_TrackingRateType = MENU_TRACKING_RATE_MOON_SPEED; //2;
 			beep1(2);
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_TRACKING_RATE_CUSTOM_SPEED: //4804:
 			//0x55288: "Customize Speed"
-			bData_4000318a = 1;
+			bCharacterInputPosition = 1;
 			sprintf(Data_400037cc, "+0%.2f            ", 1.0); //String???
 			sprintf(Data_400037dc, "+0%.2f  starspeed", 1.0);
 			Data_40002c64_MenuContextId = 48001;
@@ -1272,13 +1272,13 @@ void HandleEnterKey(void)
 			//0x555c4: Parkposition
 			func_75c4();
 			bData_40003431 = 1;
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_CURRENT_OBJECTS: //3100:
 			//0x555e8: Current Objects
 			bData_40002eb5_SolarSystemObjectNr = 0;
-			Data_40002c64_MenuContextId = 31001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SOLAR_SYSTEM_OBJ_RISE_SET_TIMES; //31001;
 			break;
 		
 		case MENU_CONTEXT_TIME_DATE: //4100:
@@ -1294,8 +1294,8 @@ void HandleEnterKey(void)
 			sprintf(Data_40002660, "%02d:%02d:%02d", 
 				bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
 			
-			bData_4000318a = 1;
-			bData_40002e78 = 0;
+			bCharacterInputPosition = 1;
+			bDateTimeInputMode = 0;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TIME_DATE_INPUT; //41001;
 			break;
 		
@@ -1306,7 +1306,7 @@ void HandleEnterKey(void)
 				//556e8
 				if (bData_40002f1e_SetupLocalData == 1)
 				{
-					Data_40002c64_MenuContextId = 42002; //->"Daylight saving off"
+					Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING_OFF; //42002;
 				}
 				else
 				{
@@ -1328,37 +1328,37 @@ void HandleEnterKey(void)
 				sprintf(Data_40002660, "%02d:%02d:%02d", 
 					bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
 				
-				bData_4000318a = 1;
-				bData_40002e78 = 0;
+				bCharacterInputPosition = 1;
+				bDateTimeInputMode = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_TIME_DATE_INPUT; //41001;
 			}
 			//0x557e8 -> 0x563b8
 			break;
 		
-		case 4200: // Daylight Saving
+		case MENU_CONTEXT_DAYLIGHT_SAVING: //4200:
 			//0x55868	
-			if (bData_40002c6a == 0)
+			if (bDaylightSavingTime == 0)
 			{
-				Data_40002c64_MenuContextId = 42002; //Daylight saving off
+				Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING_OFF; //42002;
 			}
 			else
 			{
-				Data_40002c64_MenuContextId = 42001; //Daylight saving on
+				Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING_ON; //42001;
 			}
 			break;
 		
-		case 42001:
+		case MENU_CONTEXT_DAYLIGHT_SAVING_ON: //42001:
 			//0x5589c		
-		case 42002: // "Daylight saving"
+		case MENU_CONTEXT_DAYLIGHT_SAVING_OFF: //42002:
 			//0x558a4
 			if (bData_40002f1e_SetupLocalData == 1)
 			{
-				Data_40002c64_MenuContextId = 4301; //->"Country & City"
+				Data_40002c64_MenuContextId = MENU_CONTEXT_COUNTRY_CITY; //4301;
 			}
 			else
 			{
 				beep1(1);
-				Data_40002c64_MenuContextId = 4200; //Daylight Saving?
+				Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING; //4200;
 			}
 			break;
 		
@@ -1388,7 +1388,7 @@ void HandleEnterKey(void)
 				//559b8
 				if (bData_40002c1a == 1)
 				{
-					bData_400031ed = 0;
+					bSystemInitialized = 0;
 					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 					bData_40002f1e_SetupLocalData = 0;
 				}
@@ -1409,60 +1409,58 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_CUSTOM_SITE: //4302:
 			//0x55a08: Custom Site
 			bData_40002edc = 1;
-			bData_40003144 = 0;
-			bData_4000318a = 7;
+			bCurrentCustomSiteInputLine = 0;
+			bCharacterInputPosition = 7;
 		
-			func_2a1c(Data_40003159, &fData_40002e30, &fData_40002e50, &Data_40002e58);
+			flash_get_custom_site_data(arCustomSiteName, 
+				&fCustomSiteLongitude, &fCustomSiteLatitude, 
+				&iCustomSiteTimeZone);
 		
 			/*Name:*/
-			Data_40002827[6] = Data_40003159[0];
-			Data_40002827[7] = Data_40003159[1];
-			Data_40002827[8] = Data_40003159[2];		
-			Data_40002827[9] = Data_40003159[3];		
-			Data_40002827[10] = Data_40003159[4];		
-			Data_40002827[11] = Data_40003159[5];		
-			Data_40002827[12] = Data_40003159[6];		
-			Data_40002827[13] = Data_40003159[7];		
+			strCustomSiteName[6] = arCustomSiteName[0];
+			strCustomSiteName[7] = arCustomSiteName[1];
+			strCustomSiteName[8] = arCustomSiteName[2];		
+			strCustomSiteName[9] = arCustomSiteName[3];		
+			strCustomSiteName[10] = arCustomSiteName[4];		
+			strCustomSiteName[11] = arCustomSiteName[5];		
+			strCustomSiteName[12] = arCustomSiteName[6];		
+			strCustomSiteName[13] = arCustomSiteName[7];		
 		
-			if (fData_40002e30 > 0)
+			if (fCustomSiteLongitude > 0)
 			{
 				//55abc
-				sprintf(Data_40002837, "  Lon:E%03dd%02df ",
-					abs((int)fData_40002e30),
-					abs((int)((fData_40002e30 - (int)fData_40002e30) * 60)));
+				sprintf(strCustomSiteLongitude, "  Lon:E%03dd%02df ",
+					DEGREES_MINUTES_ABS(fCustomSiteLongitude));
 			}
 			else
 			{
 				//0x55b4c
-				sprintf(Data_40002837, "  Lon:W%03dd%02df ",
-					abs((int)fData_40002e30),
-					abs((int)((fData_40002e30 - (int)fData_40002e30) * 60)));
+				sprintf(strCustomSiteLongitude, "  Lon:W%03dd%02df ",
+					DEGREES_MINUTES_ABS(fCustomSiteLongitude));
 			}
 			//0x55bd8
-			if (fData_40002e50 > 0)
+			if (fCustomSiteLatitude > 0)
 			{
 				//55bec
-				sprintf(Data_40002847, "  Lat:N%02dd%02df ",
-					abs((int)fData_40002e50),
-					abs((int)((fData_40002e50 - (int)fData_40002e50) * 60)));
+				sprintf(strCustomSiteLatitude, "  Lat:N%02dd%02df ",
+					DEGREES_MINUTES_ABS(fCustomSiteLatitude));
 			}
 			else
 			{
 				//0x55c7c
-				sprintf(Data_40002847, "  Lat:S%02dd%02df ",
-					abs((int)fData_40002e50),
-					abs((int)((fData_40002e50 - (int)fData_40002e50) * 60)));
+				sprintf(strCustomSiteLatitude, "  Lat:S%02dd%02df ",
+					DEGREES_MINUTES_ABS(fCustomSiteLatitude));
 			}
 			//0x55d08
-			if (Data_40002e58 > 0)
+			if (iCustomSiteTimeZone > 0)
 			{
 				//55d18
-				sprintf(Data_40002856, " Zone:E%02d", abs(Data_40002e58));
+				sprintf(strCustomSiteTimezone, " Zone:E%02d", abs(iCustomSiteTimeZone));
 			}
 			else
 			{
 				//0x55d48
-				sprintf(Data_40002856, " Zone:W%02d", abs(Data_40002e58));
+				sprintf(strCustomSiteTimezone, " Zone:W%02d", abs(iCustomSiteTimeZone));
 			}
 			
 			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOM_SITE_INPUT; //43002;
@@ -1491,7 +1489,7 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_OBJECT_RISE_SET: //3200:
 			//0x55dbc: Object Rise/Set
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
-			bData_4000318a = 6;
+			bCharacterInputPosition = 6;
 			func_50048();
 			bData_40003162 = 1;
 			break;
@@ -1501,13 +1499,13 @@ void HandleEnterKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
 			break;
 		
-		case 3300: // Curr. Lunar Phase
+		case MENU_CONTEXT_LUNAR_PHASE: //3300:
 			//0x55e00
 			Data_40002c64_MenuContextId = 33001;
 			func_50018();
 			break;
 		
-		case 3400: // Timer
+		case MENU_CONTEXT_TIMER: //3400:
 			//0x55e18
 			if (Data_40003214_UserTimerSeconds != 0)
 			{
@@ -1517,7 +1515,7 @@ void HandleEnterKey(void)
 			{
 				//0x55e3c
 				Data_40002c64_MenuContextId = 34001; //->"Set timer:"
-				bData_4000318a = 1;
+				bCharacterInputPosition = 1;
 			}
 			break;
 			
@@ -1552,7 +1550,7 @@ void HandleEnterKey(void)
 			Data_40002c64_MenuContextId = 34001; //->"Set timer:"
 			break;
 			
-		case 3500: // Alarm
+		case MENU_CONTEXT_ALARM: //3500:
 			//0x55ee0
 			if (bData_4000322c == 1)
 			{
@@ -1564,7 +1562,7 @@ void HandleEnterKey(void)
 				//0x55f04
 				//-> "Input time:"
 				Data_40002c64_MenuContextId = 35001;
-				bData_4000318a = 1;
+				bCharacterInputPosition = 1;
 			}
 			//->563b8
 			break;
@@ -1585,45 +1583,46 @@ void HandleEnterKey(void)
 			Data_40002c64_MenuContextId = 360011;
 			break;
 		
-		case 360021:
+		case MENU_CONTEXT_EYEPIECE_MAGN_MF_INPUT: //360021:
 			//0x55f60
-		case 360022:
+		case MENU_CONTEXT_EYEPIECE_MAGN_SF_INPUT: //360022:
 			//0x55f68
-			fData_40003230 = atoi(&Data_400024c9[6]) * 1.0;
-			fData_40003234 = atoi(&Data_400024d6[6]) * 1.0;
-			fData_40003238 = fData_40003230 / fData_40003234;
+			fMainFocalLength = atoi(&strEyepieceFovMfInput[6]) * 1.0;
+			fSecondaryFocalLength = atoi(&strEyepieceFovSfInput[6]) * 1.0;
+			fEyepieceMagnification = fMainFocalLength / fSecondaryFocalLength;
 		
-			sprintf(Data_400024ef, "Magnification = %.1f         ", fData_40003238);
+			sprintf(strEyepieceMagnification, "Magnification = %.1f         ", fEyepieceMagnification);
 			beep1(1);
 		
-			bData_4000318a = 7;
-			Data_40002c64_MenuContextId = 360021;
+			bCharacterInputPosition = 7;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_MAGN_MF_INPUT; //360021;
 			break;
 		
-		case 370021:
+		case MENU_CONTEXT_EYEPIECE_FOV_MF_INPUT: //370021:
 			//0x56048
-		case 370022:
+		case MENU_CONTEXT_EYEPIECE_FOV_SF_INPUT: //370022:
 			//0x56050
-		case 370023:
+		case MENU_CONTEXT_EYEPIECE_FOV_INPUT: //370023:
 			//0x56054
-			fData_40003230 = atoi(&Data_400024c9[6]) * 1.0;
-			fData_40003234 = atoi(&Data_400024d6[6]) * 1.0;
-			fData_4000323c = atoi(&Data_400024e1[6]) * 1.0 + atoi(&Data_400024e1[9]) * 0.016666667;
-			fData_40003238 = fData_40003230 / fData_40003234;
-			fData_40003240 = fData_4000323c / fData_40003238;
+			fMainFocalLength = atoi(&strEyepieceFovMfInput[6]) * 1.0;
+			fSecondaryFocalLength = atoi(&strEyepieceFovSfInput[6]) * 1.0;
+			fEyepieceFOV = atoi(&strEyepieceFovInput[6]) * 1.0 + 
+				atoi(&strEyepieceFovInput[9]) * 0.016666667;
+			fEyepieceMagnification = fMainFocalLength / fSecondaryFocalLength;
+			fFieldOfView = fEyepieceFOV / fEyepieceMagnification;
 
-			sprintf(Data_40002504, "         FOV:%0.5f         ", fData_40003240);
+			sprintf(strEyepieceFOV, "         FOV:%0.5f         ", fFieldOfView);
 			beep1(1);
 		
-			bData_4000318a = 7;
-			Data_40002c64_MenuContextId = 370021;
+			bCharacterInputPosition = 7;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_FOV_MF_INPUT; //370021;
 			break;
 		
 		case 360023:
 			//0x562f8
-			fData_40003230 = atoi(&Data_40002474[6]);
-			fData_40003234 = atoi(&Data_40002481[6]);
-			fData_40003238 = fData_40003230 / fData_40003234;
+			fMainFocalLength = atoi(&Data_40002474[6]);
+			fSecondaryFocalLength = atoi(&Data_40002481[6]);
+			fEyepieceMagnification = fMainFocalLength / fSecondaryFocalLength;
 			break;
 		
 		case 3801:
