@@ -14,10 +14,10 @@ void func_2245c(int a, int b)
 					Data_40003360 = strOneStarAlign;
 					Data_40003364 = strTwoStarAlign;
 					Data_40003368 = strThreeStarAlign;
-					Data_4000336c = Data_40002f3c;
-					Data_40003370 = Data_40002f40;
-					Data_40003374 = Data_40002f44;
-					Data_40003378 = Data_40002f48;
+					Data_4000336c = strTargetSync;
+					Data_40003370 = strPoleAxisDev;
+					Data_40003374 = strRaBklashCorr;
+					Data_40003378 = strDecBklashCorr;
 					Data_4000337c = Data_40002f4c;
 					//->0x227ac
 					break;
@@ -26,10 +26,10 @@ void func_2245c(int a, int b)
 					//0x22548
 					Data_40003360 = strTwoStarAlign;
 					Data_40003364 = strThreeStarAlign;
-					Data_40003368 = Data_40002f3c;
-					Data_4000336c = Data_40002f40;
-					Data_40003370 = Data_40002f44;
-					Data_40003374 = Data_40002f48;
+					Data_40003368 = strTargetSync;
+					Data_4000336c = strPoleAxisDev;
+					Data_40003370 = strRaBklashCorr;
+					Data_40003374 = strDecBklashCorr;
 					Data_40003378 = Data_40002f4c;
 					Data_4000337c = Data_40002f50;
 					//->0x227ac
@@ -38,10 +38,10 @@ void func_2245c(int a, int b)
 				case 3:
 					//0x225d0
 					Data_40003360 = strThreeStarAlign;
-					Data_40003364 = Data_40002f3c;
-					Data_40003368 = Data_40002f40;
-					Data_4000336c = Data_40002f44;
-					Data_40003370 = Data_40002f48;
+					Data_40003364 = strTargetSync;
+					Data_40003368 = strPoleAxisDev;
+					Data_4000336c = strRaBklashCorr;
+					Data_40003370 = strDecBklashCorr;
 					Data_40003374 = Data_40002f4c;
 					Data_40003378 = Data_40002f50;
 					Data_4000337c = Data_40002f54;
@@ -50,10 +50,10 @@ void func_2245c(int a, int b)
 				
 				case 4:
 					//0x22658
-					Data_40003360 = Data_40002f3c;
-					Data_40003364 = Data_40002f40;
-					Data_40003368 = Data_40002f44;
-					Data_4000336c = Data_40002f48;
+					Data_40003360 = strTargetSync;
+					Data_40003364 = strPoleAxisDev;
+					Data_40003368 = strRaBklashCorr;
+					Data_4000336c = strDecBklashCorr;
 					Data_40003370 = Data_40002f4c;
 					Data_40003374 = Data_40002f50;
 					Data_40003378 = Data_40002f54;
@@ -76,7 +76,7 @@ void func_2245c(int a, int b)
 					//0x227dc
 					Data_40003360 = strSolarSystem;
 					Data_40003364 = strConstellation;
-					Data_40003368 = Data_40002f64;
+					Data_40003368 = strFamousStar;
 					Data_4000336c = Data_40002f68;
 					Data_40003370 = Data_40002f6c;
 					Data_40003374 = Data_40002f70;
@@ -88,7 +88,7 @@ void func_2245c(int a, int b)
 				case 2:
 					//0x22864
 					Data_40003360 = strConstellation;
-					Data_40003364 = Data_40002f64;
+					Data_40003364 = strFamousStar;
 					Data_40003368 = Data_40002f68;
 					Data_4000336c = Data_40002f6c;
 					Data_40003370 = Data_40002f70;
@@ -100,7 +100,7 @@ void func_2245c(int a, int b)
 				
 				case 3:
 					//0x228ec
-					Data_40003360 = Data_40002f64;
+					Data_40003360 = strFamousStar;
 					Data_40003364 = Data_40002f68;
 					Data_40003368 = Data_40002f6c;
 					Data_4000336c = Data_40002f70;
@@ -382,52 +382,52 @@ void func_231d0(int a, int b)
 					Data_400033a8 = strOneStarAlign;
 					Data_400033ac = strTwoStarAlign;
 					Data_400033b0 = strThreeStarAlign;
-					Data_400033b4 = Data_40002f3c;
+					Data_400033b4 = strTargetSync;
 					break;
 
 				case 2:
 					//0x23288
 					Data_400033a8 = strTwoStarAlign;
 					Data_400033ac = strThreeStarAlign;
-					Data_400033b0 = Data_40002f3c;
-					Data_400033b4 = Data_40002f40;
+					Data_400033b0 = strTargetSync;
+					Data_400033b4 = strPoleAxisDev;
 					break;
 				
 				case 3:
 					//0x232d0
 					Data_400033a8 = strThreeStarAlign;
-					Data_400033ac = Data_40002f3c;
-					Data_400033b0 = Data_40002f40;
-					Data_400033b4 = Data_40002f44;
+					Data_400033ac = strTargetSync;
+					Data_400033b0 = strPoleAxisDev;
+					Data_400033b4 = strRaBklashCorr;
 					break;
 				
 				case 4:
 					//0x23318
-					Data_400033a8 = Data_40002f3c;
-					Data_400033ac = Data_40002f40;
-					Data_400033b0 = Data_40002f44;
-					Data_400033b4 = Data_40002f48;
+					Data_400033a8 = strTargetSync;
+					Data_400033ac = strPoleAxisDev;
+					Data_400033b0 = strRaBklashCorr;
+					Data_400033b4 = strDecBklashCorr;
 					break;
 				
 				case 5:
 					//0x23360
-					Data_400033a8 = Data_40002f40;
-					Data_400033ac = Data_40002f44;
-					Data_400033b0 = Data_40002f48;
+					Data_400033a8 = strPoleAxisDev;
+					Data_400033ac = strRaBklashCorr;
+					Data_400033b0 = strDecBklashCorr;
 					Data_400033b4 = Data_40002f4c;
 					break;
 				
 				case 6:
 					//0x233a8
-					Data_400033a8 = Data_40002f44;
-					Data_400033ac = Data_40002f48;
+					Data_400033a8 = strRaBklashCorr;
+					Data_400033ac = strDecBklashCorr;
 					Data_400033b0 = Data_40002f4c;
 					Data_400033b4 = Data_40002f50;
 					break;
 				
 				case 7:
 					//0x233f0
-					Data_400033a8 = Data_40002f48;
+					Data_400033a8 = strDecBklashCorr;
 					Data_400033ac = Data_40002f4c;
 					Data_400033b0 = Data_40002f50;
 					Data_400033b4 = Data_40002f54;
@@ -455,21 +455,21 @@ void func_231d0(int a, int b)
 					//0x234c8
 					Data_400033a8 = strSolarSystem;
 					Data_400033ac = strConstellation;
-					Data_400033b0 = Data_40002f64;
+					Data_400033b0 = strFamousStar;
 					Data_400033b4 = Data_40002f68;
 					break;
 
 				case 2:
 					//0x23510
 					Data_400033a8 = strConstellation;
-					Data_400033ac = Data_40002f64;
+					Data_400033ac = strFamousStar;
 					Data_400033b0 = Data_40002f68;
 					Data_400033b4 = Data_40002f6c;
 					break;
 				
 				case 3:
 					//0x23558
-					Data_400033a8 = Data_40002f64;
+					Data_400033a8 = strFamousStar;
 					Data_400033ac = Data_40002f68;
 					Data_400033b0 = Data_40002f6c;
 					Data_400033b4 = Data_40002f70;

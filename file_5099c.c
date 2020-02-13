@@ -22,7 +22,7 @@ void func_5099c(void)
 	bData_4000319c = 0;
 	bData_4000319d = 0;
 	bCapsLock = 0;
-	bData_40003199 = 0;
+	bMapKeyToCharIndex = 0;
 	bData_40002c1a = 0;
 	bData_40003431 = 0;
 	bData_40003210 = 0;
@@ -32,8 +32,8 @@ void func_5099c(void)
 	fData_400031c0 = 10.6;
 	fData_400031c4 = 63.25;
 	bData_400031e0 = 1;
-	bData_40003188 = 0;
-	bData_40003189 = 0;
+	bRaBacklashCorrectionDirection = 0;
+	bDecBacklashCorrectionDirection = 0;
 	bData_40003195 = 0;
 	bData_400031e1 = 0;
 	bData_400032a4_OTAZeroDataErrorCount = 0;

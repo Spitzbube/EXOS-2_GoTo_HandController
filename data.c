@@ -110,8 +110,8 @@ int Data_40002dac; //40002dac
 int Data_40002db0; //40002db0
 float fData_40002db4; //40002db4
 double dData_40002db8; //40002db8
-double dData_40002dc0; //40002dc0
-double dData_40002dc8; //40002dc8
+double dData_40002dc0_Azimuth; //40002dc0
+double dRaBklashCorrStartAzimuth; //40002dc8
 double dData_40002dd0; //40002dd0
 int fill_40002dd8; //40002dd8
 int fill_40002ddc; //40002ddc
@@ -171,7 +171,7 @@ float fData_40002ea0; //40002ea0
 float fData_40002ea4; //40002ea4
 float fData_40002ea8; //40002ea8
 float fData_40002eac; //40002eac
-int Data_40002eb0; //40002eb0
+int iBacklashCorrectionSlewing; //40002eb0
 unsigned char bData_40002eb4; //40002eb4
 unsigned char bData_40002eb5_SolarSystemObjectNr; //40002eb5
 unsigned short wData_40002eb6; //40002eb6
@@ -222,17 +222,17 @@ char* strSetup; //40002f2c
 char* strOneStarAlign; //40002f30
 char* strTwoStarAlign; //40002f34
 char* strThreeStarAlign; //40002f38
-char* Data_40002f3c; //40002f3c
-char* Data_40002f40; //40002f40
-char* Data_40002f44; //40002f44
-char* Data_40002f48; //40002f48
+char* strTargetSync; //40002f3c
+char* strPoleAxisDev; //40002f40
+char* strRaBklashCorr; //40002f44
+char* strDecBklashCorr; //40002f48
 char* Data_40002f4c; //40002f4c
 char* Data_40002f50; //40002f50
 char* Data_40002f54; //40002f54
 char* Data_40002f58; //40002f58
 char* strSolarSystem; //40002f5c
 char* strConstellation; //40002f60
-char* Data_40002f64; //40002f64
+char* strFamousStar; //40002f64
 char* Data_40002f68; //40002f68
 char* Data_40002f6c; //40002f6c
 char* Data_40002f70; //40002f70
@@ -390,8 +390,8 @@ unsigned char bData_40003184; //40003184
 char fill_40003185; //40003185
 unsigned char bData_40003186; //40003186
 char fill_40003187; //40003187
-char bData_40003188; //40003188
-char bData_40003189; //40003189
+char bRaBacklashCorrectionDirection; //40003188
+char bDecBacklashCorrectionDirection; //40003189
 unsigned char bCharacterInputPosition; //4000318a
 int Data_4000318c; //4000318c
 int Data_40003190; //40003190
@@ -400,7 +400,7 @@ unsigned char bData_40003195; //40003195
 unsigned char bData_40003196_CurrentLanguage; //40003196
 unsigned char bData_40003197_DisplayLinesPerMenuLine; //40003197
 char bCapsLock; //40003198
-unsigned char bData_40003199; //40003199
+unsigned char bMapKeyToCharIndex; //40003199
 unsigned char bData_4000319a_SkyLandTargetId; //4000319a
 char bData_4000319b; //4000319b
 char bData_4000319c; //4000319c

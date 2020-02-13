@@ -590,36 +590,36 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR: //1600:
 			//0x54094: RA Bklash Corr.
-			Data_40002c64_MenuContextId = 11102; //->RA Bklash Corr. - 1st page
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11102;
 			break;
 		
-		case 11102:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
 			//0x540a8
-			Data_40002c64_MenuContextId = 11101; //->RA Bklash Corr. - 2nd page
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT; //11101;
 			break;
 		
-		case 11103:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT: //11103:
 			//0x540bc
-			if (fabs(dData_40002dc0 - dData_40002dc8) > 5.0)
+			if (fabs(dData_40002dc0_Azimuth - dRaBklashCorrStartAzimuth) > 5.0)
 			{
 				//540fc
-				fData_40002e90 = fabs((dData_40002dc0 - dData_40002dc8 - 360.0) * 3600.0);
+				fData_40002e90 = fabs((dData_40002dc0_Azimuth - dRaBklashCorrStartAzimuth - 360.0) * 3600.0);
 				//->0x541b0
 			}
 			else
 			{
 				//0x54164
-				fData_40002e90 = fabs((dData_40002dc0 - dData_40002dc8) * 3600.0);
+				fData_40002e90 = fabs((dData_40002dc0_Azimuth - dRaBklashCorrStartAzimuth) * 3600.0);
 			}
 			//0x541b0
 			Data_40002e94 += fData_40002e90;
 			Data_40002e9c += 1;
-			Data_40002eb0 = 0;
-			Data_40002c64_MenuContextId = 11104;
+			iBacklashCorrectionSlewing = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR_RESULT; //11104;
 			//->0x563b8
 			break;
 		
-		case 11101:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT: //11101:
 			//0x54200: RA Bklash Corr. - 2nd page
 			if (Data_40002e9c != 0)
 			{
@@ -637,24 +637,24 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_DEC_BKLASH_CORR: //1700:
 			//0x54270: DEC Bklash Corr.
-			Data_40002c64_MenuContextId = 11202;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11202;
 			break;
 		
-		case 11202:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
 			//0x54284
-			Data_40002c64_MenuContextId = 11201;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_START_UP_DOWN; //11201;
 			break;
 		
-		case 11203:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203:
 			//0x54298
 			fData_40002ea0 = fabs((dData_40002df8 - dData_40002e00) * 3600.0);
 			fData_40002ea4 += fData_40002ea0;
 			fData_40002eac += 1;
-			Data_40002eb0 = 0;
-			Data_40002c64_MenuContextId = 11204;
+			iBacklashCorrectionSlewing = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKBLASH_CORR_RESULT; //11204;
 			break;
 		
-		case 11201:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_START_UP_DOWN: //11201:
 			//0x54338
 			if (fData_40002eac != 0)
 			{
@@ -974,7 +974,7 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x54d40
 			bCharacterInputPosition = 6;		
-			func_50048();
+			PrepareCustomerSkyObjectInputData();
 			Data_40002c64_MenuContextId = MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT; //203;
 			break;
 		
@@ -992,7 +992,7 @@ void HandleEnterKey(void)
 			//0x54d84: Input RA/DEC
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
 			bCharacterInputPosition = 6;
-			func_50048();
+			PrepareCustomerSkyObjectInputData();
 			break;
 		
 		case MENU_CONTEXT_RA_INPUT: //29001:
@@ -1013,7 +1013,7 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_CUST_LAND_OBJ_SELECTION: //202:
 			//0x54de0
-			func_517f4();
+			PrepareCustomerLandObjectInputData();
 			bCharacterInputPosition = 6;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT; //206;
 			break;
@@ -1490,7 +1490,7 @@ void HandleEnterKey(void)
 			//0x55dbc: Object Rise/Set
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_INPUT; //29001;
 			bCharacterInputPosition = 6;
-			func_50048();
+			PrepareCustomerSkyObjectInputData();
 			bData_40003162 = 1;
 			break;
 		
@@ -1514,12 +1514,12 @@ void HandleEnterKey(void)
 			else
 			{
 				//0x55e3c
-				Data_40002c64_MenuContextId = 34001; //->"Set timer:"
+				Data_40002c64_MenuContextId = MENU_CONTEXT_TIMER_SET; //34001;
 				bCharacterInputPosition = 1;
 			}
 			break;
 			
-		case 34001:
+		case MENU_CONTEXT_TIMER_SET: //34001:
 			//0x55e58
 			if (bData_40003196_CurrentLanguage == 1)
 			{
@@ -1534,20 +1534,20 @@ void HandleEnterKey(void)
 			//0x55e90
 			if (Data_40003214_UserTimerSeconds == 0)
 			{
-				Data_40002c64_MenuContextId = 34001; //->"Set timer:"
+				Data_40002c64_MenuContextId = MENU_CONTEXT_TIMER_SET; //34001;
 			}
 			else
 			{
 				//0x55eb0
-				Data_40002c64_MenuContextId = 34002; //->"Counting down:"				
+				Data_40002c64_MenuContextId = MENU_CONTEXT_TIMER_COUNTING; //34002;
 			}
 			//0x55ebc -> 0x563b8
 			break;
 			
-		case 34002:
+		case MENU_CONTEXT_TIMER_COUNTING: //34002:
 			//0x55ec0
 			Data_40003214_UserTimerSeconds = 0;
-			Data_40002c64_MenuContextId = 34001; //->"Set timer:"
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TIMER_SET; //34001;
 			break;
 			
 		case MENU_CONTEXT_ALARM: //3500:

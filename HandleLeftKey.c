@@ -450,7 +450,7 @@ void func_58c60(void)
 }
 
 /* 58d20 - todo */
-void func_58d20(void)
+void HandlePrevTimerInputPosition(void)
 {
 	switch (bCharacterInputPosition)
 	{
@@ -512,7 +512,7 @@ void func_58dc0(void)
 }
 
 /* 58e64 - complete */
-void func_58e64(void)
+void HandlePrevCustomSiteInputPosition(void)
 {
 	switch (bData_40002edc)
 	{
@@ -520,7 +520,7 @@ void func_58e64(void)
 		case 3:
 			switch (bCurrentCustomSiteInputLine)
 			{
-				case 0:
+				case 0: //Name
 					if (bCharacterInputPosition > 7)
 					{
 						bCharacterInputPosition--;
@@ -531,7 +531,7 @@ void func_58e64(void)
 					}
 					break;
 
-				case 1:
+				case 1: //Longitude
 					switch (bCharacterInputPosition)
 					{
 						case 7:
@@ -563,7 +563,7 @@ void func_58e64(void)
 					}
 					break;
 
-				case 2:
+				case 2: //Latitude
 					switch (bCharacterInputPosition)
 					{
 						case 7:
@@ -591,7 +591,7 @@ void func_58e64(void)
 					}
 					break;
 
-				case 3:
+				case 3: //Time Zone
 					switch (bCharacterInputPosition)
 					{
 						case 7:
@@ -646,7 +646,7 @@ void func_58e64(void)
 }
 
 /* 591b8 - todo */
-void func_591b8(void)
+void HandlePrevDateTimeInputPosition(void)
 {
 	switch (bDateTimeInputMode)
 	{
@@ -906,9 +906,9 @@ void HandleLeftKey(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x59924
-		case 11102:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
 			//0x5992c
-		case 11202:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
 			//0x59930
 		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x59934
@@ -982,34 +982,35 @@ void HandleLeftKey(void)
 			//0x59a4c -> 0x59dc4
 			break;
 		
-		case 11101:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT: //11101:
 			//0x59a50
-			dData_40002dc8 = dData_40002dc0;
+			dRaBklashCorrStartAzimuth = dData_40002dc0_Azimuth;
 		
 			if (bData_40002c1a == 1)
 			{
 				//59a74
-				func_57414(1, 3, 3);
+				func_57414(1, 3, MENU_ROTATING_SPEED_8); //3);
 				
 				bData_40002edd = 2;
 			}
 			else
 			{
 				//0x59a94
-				func_57414(3, 3, 3);
+				func_57414(3, 3, MENU_ROTATING_SPEED_8); //3);
 				
 				bData_40002edd = 0;
 			}
 			//0x59ab0
-			Data_40002eb0 = 1;
-			bData_40003188 = 2;
-			Data_40002c64_MenuContextId = 11103;
+			iBacklashCorrectionSlewing = 1;
+			bRaBacklashCorrectionDirection = 2;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT; //11103;
 			break;
 		
-		case 11103:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT: //11103:
 			//0x59ad8
-			if (bData_40003188 == 1)
+			if (bRaBacklashCorrectionDirection == 1)
 			{
+				//Slewing Left when started Right
 				if (bData_40002c1a == 1)
 				{
 					//59afc
@@ -1031,12 +1032,12 @@ void HandleLeftKey(void)
 		
 		case MENU_CONTEXT_TIME_DATE_INPUT: //41001:
 			//0x59b38
-			func_591b8();
+			HandlePrevDateTimeInputPosition();
 			break;
 		
 		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
 			//0x59b44
-			func_58e64();
+			HandlePrevCustomSiteInputPosition();
 			break;
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
@@ -1117,9 +1118,9 @@ void HandleLeftKey(void)
 			}
 			break;
 		
-		case 34001:
+		case MENU_CONTEXT_TIMER_SET: //34001:
 			//0x59c9c
-			func_58d20();
+			HandlePrevTimerInputPosition();
 			break;
 		
 		case 35001:

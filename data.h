@@ -171,9 +171,9 @@ extern unsigned char Data_4000270a[]; //4000270a
 extern unsigned char Data_4000271a[]; //4000271a
 extern unsigned char Data_40002789[]; //40002789
 extern unsigned char Data_40002792[]; //40002792
-extern char Data_400027cf[]; //400027cf
+extern char strInputRaDec[]; //400027cf
 extern unsigned char strCustomerObjectRaAziInputForStoring[]; //400027df
-extern unsigned char Data_400027ef[]; //400027ef
+extern unsigned char strCustomerObjectDecAltInputForStoring[]; //400027ef
 extern unsigned char strCustomerObjectNameInput[]; //400027ff
 extern unsigned char strCustomSiteName[]; //40002827
 extern unsigned char strCustomSiteLongitude[]; //40002837
@@ -313,8 +313,8 @@ extern int Data_40002dac; //40002dac
 extern int Data_40002db0; //40002db0
 extern float fData_40002db4; //40002db4
 extern double dData_40002db8; //40002db8
-extern double dData_40002dc0; //40002dc0
-extern double dData_40002dc8; //40002dc8
+extern double dData_40002dc0_Azimuth; //40002dc0
+extern double dRaBklashCorrStartAzimuth; //40002dc8
 extern double dData_40002dd0; //40002dd0
 extern int Data_40002de0; //40002de0
 extern int Data_40002de4; //40002de4
@@ -366,7 +366,7 @@ extern float fData_40002ea0; //40002ea0
 extern float fData_40002ea4; //40002ea4
 extern float fData_40002ea8; //40002ea8
 extern float fData_40002eac; //40002eac
-extern int Data_40002eb0; //40002eb0
+extern int iBacklashCorrectionSlewing; //40002eb0
 extern unsigned char bData_40002eb4; //40002eb4
 extern unsigned char bData_40002eb5_SolarSystemObjectNr; //40002eb5
 extern unsigned short wData_40002eb6; //40002eb6
@@ -411,17 +411,17 @@ extern char* strSetup; //40002f2c
 extern char* strOneStarAlign; //40002f30
 extern char* strTwoStarAlign; //40002f34
 extern char* strThreeStarAlign; //40002f38
-extern char* Data_40002f3c; //40002f3c
-extern char* Data_40002f40; //40002f40
-extern char* Data_40002f44; //40002f44
-extern char* Data_40002f48; //40002f48
+extern char* strTargetSync; //40002f3c
+extern char* strPoleAxisDev; //40002f40
+extern char* strRaBklashCorr; //40002f44
+extern char* strDecBklashCorr; //40002f48
 extern char* Data_40002f4c; //40002f4c
 extern char* Data_40002f50; //40002f50
 extern char* Data_40002f54; //40002f54
 extern char* Data_40002f58; //40002f58
 extern char* strSolarSystem; //40002f5c
 extern char* strConstellation; //40002f60
-extern char* Data_40002f64; //40002f64
+extern char* strFamousStar; //40002f64
 extern char* Data_40002f68; //40002f68
 extern char* Data_40002f6c; //40002f6c
 extern char* Data_40002f70; //40002f70
@@ -562,8 +562,8 @@ extern unsigned char bData_40003180; //40003180
 extern unsigned char bData_40003182; //40003182
 extern unsigned char bData_40003184; //40003184
 extern unsigned char bData_40003186; //40003186
-extern char bData_40003188; //40003188
-extern char bData_40003189; //40003189
+extern char bRaBacklashCorrectionDirection; //40003188
+extern char bDecBacklashCorrectionDirection; //40003189
 extern unsigned char bCharacterInputPosition; //4000318a
 extern int Data_4000318c; //4000318c
 extern int Data_40003190; //40003190
@@ -572,7 +572,7 @@ extern unsigned char bData_40003195; //40003195
 extern unsigned char bData_40003196_CurrentLanguage; //40003196
 extern unsigned char bData_40003197_DisplayLinesPerMenuLine; //40003197
 extern char bCapsLock; //40003198
-extern unsigned char bData_40003199; //40003199
+extern unsigned char bMapKeyToCharIndex; //40003199
 extern unsigned char bData_4000319a_SkyLandTargetId; //4000319a
 extern char bData_4000319b; //4000319b
 extern char bData_4000319c; //4000319c

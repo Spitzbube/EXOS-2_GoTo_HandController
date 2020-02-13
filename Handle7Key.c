@@ -23,10 +23,10 @@ void Handle7Key(void)
 			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_256; //7;
 			break;
 		
-		case 11102:
-		case 11202:
-		case 11103:
-		case 11203:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT: //11103:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203:
 		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//64540
 			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_256; //7;
@@ -147,7 +147,7 @@ void Handle7Key(void)
 			if (bCharacterInputPosition != 5)
 			{
 				Data_40002302[bCharacterInputPosition - 1] = '7';
-				Data_400027ef[bCharacterInputPosition - 1] = '7';
+				strCustomerObjectDecAltInputForStoring[bCharacterInputPosition - 1] = '7';
 			}
 			else
 			{
@@ -155,13 +155,13 @@ void Handle7Key(void)
 				if (Data_40002302[bCharacterInputPosition - 1] == '+')
 				{
 					Data_40002302[bCharacterInputPosition - 1] = '-';
-					Data_400027ef[bCharacterInputPosition - 1] = '-';
+					strCustomerObjectDecAltInputForStoring[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
 					//0x649c8
 					Data_40002302[bCharacterInputPosition - 1] = '-'; //'+'; //BUG! 
-					Data_400027ef[bCharacterInputPosition - 1] = '-'; //'+'; //BUG! 
+					strCustomerObjectDecAltInputForStoring[bCharacterInputPosition - 1] = '-'; //'+'; //BUG! 
 				}
 			}
 			
@@ -281,12 +281,12 @@ void Handle7Key(void)
 			func_623d0(7);
 			break;
 		
-		case 34001:
+		case MENU_CONTEXT_TIMER_SET: //34001:
 			//64ca8
 			Data_4000294a[bCharacterInputPosition - 1] = '7';
 			strEng00000s[bCharacterInputPosition - 1] = '7';
 		
-			func_56d0c();
+			HandleNextTimerInputPosition();
 			break;
 		
 		case 35001:

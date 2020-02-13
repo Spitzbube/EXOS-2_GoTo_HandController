@@ -469,7 +469,7 @@ void func_56c4c(void)
 }
 
 /* 56d0c - todo */
-void func_56d0c(void)
+void HandleNextTimerInputPosition(void)
 {
 	switch (bCharacterInputPosition)
 	{
@@ -539,7 +539,7 @@ void func_56dac(void)
 }
 
 /* 56e50 - complete */
-void func_56e50(void)
+void HandleNextCustomSiteInputPosition(void)
 {
 	switch (bData_40002edc)
 	{
@@ -550,7 +550,7 @@ void func_56e50(void)
 			switch (bCurrentCustomSiteInputLine)
 			{
 				case 0:
-					//0x56e9c
+					//0x56e9c: Name
 					if (bCharacterInputPosition < 14)
 					{
 						bCharacterInputPosition++;
@@ -562,7 +562,7 @@ void func_56e50(void)
 					break;
 
 				case 1:
-					//0x56ed8
+					//0x56ed8: Longitude
 					switch (bCharacterInputPosition)
 					{
 						case 7:
@@ -602,7 +602,7 @@ void func_56e50(void)
 					break;
 
 				case 2:
-					//0x56f98
+					//0x56f98: Latitude
 					switch (bCharacterInputPosition)
 					{
 						case 7:
@@ -637,7 +637,7 @@ void func_56e50(void)
 					break;
 
 				case 3:
-					//0x57040
+					//0x57040: Time Zone
 					switch (bCharacterInputPosition)
 					{
 						case 7:
@@ -1289,9 +1289,9 @@ void HandleRightKey(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x57ea0
-		case 11102:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
 			//0x57ea8
-		case 11202:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
 			//0x57eac
 		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x57eb0
@@ -1362,9 +1362,9 @@ void HandleRightKey(void)
 			}
 			break;
 		
-		case 11101:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT: //11101:
 			//0x57fcc
-			dData_40002dc8 = dData_40002dc0;
+			dRaBklashCorrStartAzimuth = dData_40002dc0_Azimuth;
 			if (bData_40002c1a == 1)
 			{
 				//57ff0
@@ -1380,16 +1380,16 @@ void HandleRightKey(void)
 				bData_40002edd = 0;
 			}
 			//0x5802c
-			Data_40002eb0 = 1;
-			bData_40003188 = 1;
-			Data_40002c64_MenuContextId = 11103;
+			iBacklashCorrectionSlewing = 1;
+			bRaBacklashCorrectionDirection = 1;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT; //11103;
 			break;
 		
-		case 11103:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT: //11103:
 			//0x58050
-			if (bData_40003188 == 2)
+			if (bRaBacklashCorrectionDirection == 2)
 			{
-				//58064
+				//58064: Slewing Right when started Left
 				if (bData_40002c1a == 1)
 				{
 					//58074
@@ -1402,7 +1402,7 @@ void HandleRightKey(void)
 				}
 			}
 			//0x58134
-			//break; //Fall through?
+			//break; //BUG: Fall through?
 		
 		case 48001:
 			//0x58138
@@ -1416,7 +1416,7 @@ void HandleRightKey(void)
 		
 		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
 			//0x5814c
-			func_56e50();
+			HandleNextCustomSiteInputPosition();
 			break;
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
@@ -1497,9 +1497,9 @@ void HandleRightKey(void)
 			}
 			break;
 		
-		case 34001:
+		case MENU_CONTEXT_TIMER_SET: //34001:
 			//0x582a4
-			func_56d0c();
+			HandleNextTimerInputPosition();
 			break;
 		
 		case 35001:

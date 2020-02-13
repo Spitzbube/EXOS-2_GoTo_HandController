@@ -500,11 +500,11 @@ void DisplayScreenItems(void)
 					//0x4047c -> 0x4684c
 					break;
 				
-				case 11102: //0x2b5e:
+				case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102: 
 					//0x40480
-				case 11101: //0x2b5d:
+				case MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT: //11101:
 					//0x40488
-				case 11103:
+				case MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT: //11103:
 					//0x4048c
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -517,7 +517,7 @@ void DisplayScreenItems(void)
 					//->0x4684c
 					break;
 				
-				case 11104:
+				case MENU_CONTEXT_RA_BKBLASH_CORR_RESULT: //11104:
 					//0x40610
 					beep1(1);
 				
@@ -531,7 +531,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					delay_loop(800);
-					Data_40002c64_MenuContextId = 11102;
+					Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11102;
 					//->0x4684c
 					break;
 				
@@ -552,11 +552,11 @@ void DisplayScreenItems(void)
 					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 					break;
 				
-				case 11202:
+				case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
 					//0x40958
-				case 11201:
+				case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_START_UP_DOWN: //11201:
 					//0x40960
-				case 11203:
+				case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203:
 					//0x40964
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -568,7 +568,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);				
 					break;
 				
-				case 11204:
+				case MENU_CONTEXT_DEC_BKBLASH_CORR_RESULT: //11204:
 					//0x40ae8
 					beep1(1);
 				
@@ -582,7 +582,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					delay_loop(800);
-					Data_40002c64_MenuContextId = 11202;
+					Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11202;
 					break;
 				
 				case 11205:
@@ -1285,7 +1285,7 @@ void DisplayScreenItems(void)
 					lcd_display_lunar_phase_screen(Data_40003164_LunarPhaseYear, Data_40003168_LunarPhaseMonth);
 					break;
 				
-				case 34001:
+				case MENU_CONTEXT_TIMER_SET: //34001:
 					//0x4477c
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -2108,11 +2108,11 @@ void DisplayScreenItems(void)
 					//0x4952c -> 0x4edc8
 					break;
 				
-				case 11102:
+				case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
 					//0x49530
-				case 11101:
+				case MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT: //11101:
 					//0x49538
-				case 11103:
+				case MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT: //11103:
 					//0x4953c
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -2124,7 +2124,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 					break;
 				
-				case 11104:
+				case MENU_CONTEXT_RA_BKBLASH_CORR_RESULT: //11104:
 					//0x496c0
 					beep1(1);
 				
@@ -2138,7 +2138,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					delay_loop(800);
-					Data_40002c64_MenuContextId = 11102;
+					Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11102;
 					break;
 				
 				case 11105:
@@ -2158,11 +2158,11 @@ void DisplayScreenItems(void)
 					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 					break;
 				
-				case 11202:
+				case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
 					//0x49a08
-				case 11201:
+				case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_START_UP_DOWN: //11201:
 					//0x49a10
-				case 11203:
+				case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203:
 					//0x49a14
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -2174,7 +2174,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);				
 					break;
 				
-				case 11204:
+				case MENU_CONTEXT_DEC_BKBLASH_CORR_RESULT: //11204:
 					//0x49b98
 					beep1(1);
 				
@@ -2188,7 +2188,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(0, 8, 1, (char)strlen(Data_4000337c), (unsigned char*)Data_4000337c);
 				
 					delay_loop(800);
-					Data_40002c64_MenuContextId = 11202;
+					Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11202;
 					break;
 				
 				case 11205:

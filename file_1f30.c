@@ -2254,7 +2254,7 @@ void initialize_variables(void)
 	fData_40002ea8 = 23.8;
 	fData_40002eac = 0;
 	fData_40002ea4 = 0;
-	Data_40002eb0 = 0;
+	iBacklashCorrectionSlewing = 0;
 	bData_40002eb4 = 0;
 	bData_40002eb5_SolarSystemObjectNr = 0;
 	wData_40002eb6 = 0;

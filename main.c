@@ -796,12 +796,12 @@ void func_50018(void)
 }
 
 /* 50048 - todo */
-void func_50048(void)
+void PrepareCustomerSkyObjectInputData(void)
 {
 	if (bData_40002e7a_MountType == 0)
 	{
 		//50060
-		func_acdc(dData_40002dc0, dData_40002df8, &dData_40002c88, &dData_40002c90);
+		func_acdc(dData_40002dc0_Azimuth, dData_40002df8, &dData_40002c88, &dData_40002c90);
 		//->0x5013c
 	}
 	else
@@ -866,7 +866,7 @@ void func_50048(void)
 		{
 			sprintf(Data_40002302, "Dec:-%02d %02d 0%2.1f ",
 				Data_40002cf4, Data_40002cf8, fData_40002cfc);
-			sprintf(Data_400027ef, "Dec:-%02dd%02dm0%2.1fs",
+			sprintf(strCustomerObjectDecAltInputForStoring, "Dec:-%02dd%02dm0%2.1fs",
 				Data_40002cf4, Data_40002cf8, fData_40002cfc);
 		}
 		else
@@ -874,7 +874,7 @@ void func_50048(void)
 			//0x5060c
 			sprintf(Data_40002302, "Dec:+%02d %02d 0%2.1f ",
 				Data_40002cf4, Data_40002cf8, fData_40002cfc);
-			sprintf(Data_400027ef, "Dec:+%02dd%02dm0%2.1fs",
+			sprintf(strCustomerObjectDecAltInputForStoring, "Dec:+%02dd%02dm0%2.1fs",
 				Data_40002cf4, Data_40002cf8, fData_40002cfc);
 		}
 	}
@@ -885,7 +885,7 @@ void func_50048(void)
 		{
 			sprintf(Data_40002302, "Dec:-%02d %02d %3.1f ",
 				Data_40002cf4, Data_40002cf8, fData_40002cfc);
-			sprintf(Data_400027ef, "Dec:-%02dd%02dm%3.1fs",
+			sprintf(strCustomerObjectDecAltInputForStoring, "Dec:-%02dd%02dm%3.1fs",
 				Data_40002cf4, Data_40002cf8, fData_40002cfc);
 		}
 		else
@@ -893,7 +893,7 @@ void func_50048(void)
 			//0x506f4
 			sprintf(Data_40002302, "Dec:+%02d %02d %3.1f ",
 				Data_40002cf4, Data_40002cf8, fData_40002cfc);
-			sprintf(Data_400027ef, "Dec:+%02dd%02dm%3.1fs",
+			sprintf(strCustomerObjectDecAltInputForStoring, "Dec:+%02dd%02dm%3.1fs",
 				Data_40002cf4, Data_40002cf8, fData_40002cfc);
 		}
 	}
@@ -1285,17 +1285,17 @@ void HandleCustomerLandObjectInput(void)
 		
 		Data_40003f90[16] = strCustomerObjectRaAziInputForStoring[14] - '0';
 		
-		Data_40003f90[17] = Data_400027ef[4]; // - '0';
-		Data_40003f90[18] = Data_400027ef[5] - '0';
-		Data_40003f90[19] = Data_400027ef[6] - '0';
+		Data_40003f90[17] = strCustomerObjectDecAltInputForStoring[4]; // - '0';
+		Data_40003f90[18] = strCustomerObjectDecAltInputForStoring[5] - '0';
+		Data_40003f90[19] = strCustomerObjectDecAltInputForStoring[6] - '0';
 		
-		Data_40003f90[20] = Data_400027ef[8] - '0';
-		Data_40003f90[21] = Data_400027ef[9] - '0';
+		Data_40003f90[20] = strCustomerObjectDecAltInputForStoring[8] - '0';
+		Data_40003f90[21] = strCustomerObjectDecAltInputForStoring[9] - '0';
 		
-		Data_40003f90[22] = Data_400027ef[11] - '0';
-		Data_40003f90[23] = Data_400027ef[12] - '0';
+		Data_40003f90[22] = strCustomerObjectDecAltInputForStoring[11] - '0';
+		Data_40003f90[23] = strCustomerObjectDecAltInputForStoring[12] - '0';
 		
-		Data_40003f90[24] = Data_400027ef[14] - '0';
+		Data_40003f90[24] = strCustomerObjectDecAltInputForStoring[14] - '0';
 		
 		flash_write_cust_land_target(bData_4000319a_SkyLandTargetId, Data_40003f90);
 		beep1(1);
@@ -1303,7 +1303,7 @@ void HandleCustomerLandObjectInput(void)
 }
 
 /* 517f4 - todo */
-void func_517f4(void)
+void PrepareCustomerLandObjectInputData(void)
 {
 	if (fData_40002db4 < 10)
 	{
@@ -1328,7 +1328,7 @@ void func_517f4(void)
 		if (dData_40002df8 < 0)
 		{
 			//51910
-			sprintf(Data_400027ef, "Alt:-%02dd%02dm%2.1fs",
+			sprintf(strCustomerObjectDecAltInputForStoring, "Alt:-%02dd%02dm%2.1fs",
 				abs(Data_40002de0), abs(Data_40002de4), fabs(fData_40002de8));
 			sprintf(Data_40002302, "Alt:-%02dd%02dm%2.1fs",
 				abs(Data_40002de0), abs(Data_40002de4), fabs(fData_40002de8));
@@ -1336,7 +1336,7 @@ void func_517f4(void)
 		else
 		{
 			//0x519fc
-			sprintf(Data_400027ef, "Alt:+%02dd%02dm0%2.1fs",
+			sprintf(strCustomerObjectDecAltInputForStoring, "Alt:+%02dd%02dm0%2.1fs",
 				Data_40002de0, Data_40002de4, fData_40002de8);
 			sprintf(Data_40002302, "Alt:+%02dd%02dm0%2.1fs",
 				Data_40002de0, Data_40002de4, fData_40002de8);
@@ -1348,7 +1348,7 @@ void func_517f4(void)
 		if (dData_40002df8 < 0)
 		{
 			//51a80
-			sprintf(Data_400027ef, "Alt:-%02dd%02dm%2.1fs",
+			sprintf(strCustomerObjectDecAltInputForStoring, "Alt:-%02dd%02dm%2.1fs",
 				abs(Data_40002de0), abs(Data_40002de4), fabs(fData_40002de8));
 			sprintf(Data_40002302, "Alt:-%02dd%02dm%2.1fs",
 				abs(Data_40002de0), abs(Data_40002de4), fabs(fData_40002de8));
@@ -1356,7 +1356,7 @@ void func_517f4(void)
 		else
 		{
 			//0x51bf8
-			sprintf(Data_400027ef, "Alt:+%02dd%02dm%2.1fs",
+			sprintf(strCustomerObjectDecAltInputForStoring, "Alt:+%02dd%02dm%2.1fs",
 				Data_40002de0, Data_40002de4, fData_40002de8);
 			sprintf(Data_40002302, "Alt:+%02dd%02dm%2.1fs",
 				Data_40002de0, Data_40002de4, fData_40002de8);
@@ -1451,14 +1451,14 @@ void HandleRectascensionDeclinationInput(void)
 			Data_40003f78[14] = strCustomerObjectRaAziInputForStoring[12] - '0';
 			Data_40003f78[15] = strCustomerObjectRaAziInputForStoring[14] - '0';
 			
-			Data_40003f78[16] = Data_400027ef[4];
-			Data_40003f78[17] = Data_400027ef[5] - '0';
-			Data_40003f78[18] = Data_400027ef[6] - '0';
-			Data_40003f78[19] = Data_400027ef[8] - '0';
-			Data_40003f78[20] = Data_400027ef[9] - '0';
-			Data_40003f78[21] = Data_400027ef[11] - '0';
-			Data_40003f78[22] = Data_400027ef[12] - '0';
-			Data_40003f78[23] = Data_400027ef[14] - '0';
+			Data_40003f78[16] = strCustomerObjectDecAltInputForStoring[4];
+			Data_40003f78[17] = strCustomerObjectDecAltInputForStoring[5] - '0';
+			Data_40003f78[18] = strCustomerObjectDecAltInputForStoring[6] - '0';
+			Data_40003f78[19] = strCustomerObjectDecAltInputForStoring[8] - '0';
+			Data_40003f78[20] = strCustomerObjectDecAltInputForStoring[9] - '0';
+			Data_40003f78[21] = strCustomerObjectDecAltInputForStoring[11] - '0';
+			Data_40003f78[22] = strCustomerObjectDecAltInputForStoring[12] - '0';
+			Data_40003f78[23] = strCustomerObjectDecAltInputForStoring[14] - '0';
 			
 			flash_write_cust_sky_target((unsigned char) bData_40002f10_RecentTargetId, Data_40003f78);
 			//->0x5246c
@@ -1557,14 +1557,14 @@ void HandleCustomerSkyObjectInput(void)
 		Data_40003f78[14] = strCustomerObjectRaAziInputForStoring[12] - '0';
 		Data_40003f78[15] = strCustomerObjectRaAziInputForStoring[14] - '0';
 		
-		Data_40003f78[16] = Data_400027ef[4];
-		Data_40003f78[17] = Data_400027ef[5] - '0';
-		Data_40003f78[18] = Data_400027ef[6] - '0';
-		Data_40003f78[19] = Data_400027ef[8] - '0';
-		Data_40003f78[20] = Data_400027ef[9] - '0';
-		Data_40003f78[21] = Data_400027ef[11] - '0';
-		Data_40003f78[22] = Data_400027ef[12] - '0';
-		Data_40003f78[23] = Data_400027ef[14] - '0';
+		Data_40003f78[16] = strCustomerObjectDecAltInputForStoring[4];
+		Data_40003f78[17] = strCustomerObjectDecAltInputForStoring[5] - '0';
+		Data_40003f78[18] = strCustomerObjectDecAltInputForStoring[6] - '0';
+		Data_40003f78[19] = strCustomerObjectDecAltInputForStoring[8] - '0';
+		Data_40003f78[20] = strCustomerObjectDecAltInputForStoring[9] - '0';
+		Data_40003f78[21] = strCustomerObjectDecAltInputForStoring[11] - '0';
+		Data_40003f78[22] = strCustomerObjectDecAltInputForStoring[12] - '0';
+		Data_40003f78[23] = strCustomerObjectDecAltInputForStoring[14] - '0';
 		
 		flash_write_cust_sky_target(bData_4000319a_SkyLandTargetId, Data_40003f78);
 		beep1(1);
@@ -1981,12 +1981,12 @@ void func_59dd0(void)
 }
 
 /* 5a57c - complete */
-void func_5a57c(int a, int b)
+void HandleLongListScroll(int upDown, int b)
 {
-	switch (a)
+	switch (upDown)
 	{
 		case 0:
-			//0x5a590
+			//0x5a590: Scroll Up
 			switch (b)
 			{
 				case 11:
@@ -2110,7 +2110,7 @@ void func_5a57c(int a, int b)
 			break;
 		
 		case 1:
-			//0x5a868
+			//0x5a868: Scroll Down
 			switch (b)
 			{
 				case 11:
@@ -2565,17 +2565,17 @@ void func_61ecc(int a)
 			{
 				case 0:
 					//0x622b8
-					Data_4000251d[bCharacterInputPosition - 1] = sp[bData_40003199 + r3];
-					Data_4000257e[bCharacterInputPosition - 1] = sp[bData_40003199 + r3];
+					Data_4000251d[bCharacterInputPosition - 1] = sp[bMapKeyToCharIndex + r3];
+					Data_4000257e[bCharacterInputPosition - 1] = sp[bMapKeyToCharIndex + r3];
 				
-					if (bData_40003199 < 4)
+					if (bMapKeyToCharIndex < 4)
 					{
-						bData_40003199++;
+						bMapKeyToCharIndex++;
 					}
 					else
 					{
 						//0x62334
-						bData_40003199 = 0;
+						bMapKeyToCharIndex = 0;
 					}
 					//->0x623b4
 					break;
@@ -2876,16 +2876,16 @@ void HandleCustomSiteInputChar(int key)
 			{
 				case 0:
 					//0x62924: Name
-					Data_400026c3[bCharacterInputPosition - 1] = alphaNumChars[bData_40003199 + capsOffset];
-					strCustomSiteName[bCharacterInputPosition - 1] = alphaNumChars[bData_40003199 + capsOffset];
+					Data_400026c3[bCharacterInputPosition - 1] = alphaNumChars[bMapKeyToCharIndex + capsOffset];
+					strCustomSiteName[bCharacterInputPosition - 1] = alphaNumChars[bMapKeyToCharIndex + capsOffset];
 				
-					if (bData_40003199 < 4)
+					if (bMapKeyToCharIndex < 4)
 					{
-						bData_40003199++;
+						bMapKeyToCharIndex++;
 					}
 					else
 					{
-						bData_40003199 = 0;
+						bMapKeyToCharIndex = 0;
 					}
 					//->0x62cc4
 					break;
@@ -2914,7 +2914,7 @@ void HandleCustomSiteInputChar(int key)
 						}
 					}
 					//0x62b00
-					func_56e50();
+					HandleNextCustomSiteInputPosition();
 					//->0x62cc4
 					break;
 				
@@ -2942,7 +2942,7 @@ void HandleCustomSiteInputChar(int key)
 						}
 					}
 					//0x62bc0
-					func_56e50();
+					HandleNextCustomSiteInputPosition();
 					//->0x62cc4
 					break;
 				
@@ -2970,7 +2970,7 @@ void HandleCustomSiteInputChar(int key)
 						}
 					}
 					//0x62c80
-					func_56e50();
+					HandleNextCustomSiteInputPosition();
 					//->0x62cc4
 					break;
 				
@@ -2979,14 +2979,14 @@ void HandleCustomSiteInputChar(int key)
 					Data_4000271a[bCharacterInputPosition - 1] = digitChar;
 					Data_40002861[bCharacterInputPosition - 1] = digitChar;
 				
-					func_56e50();
+					HandleNextCustomSiteInputPosition();
 					//->0x62cc4
 					break;
 				
 				default:
 					//0x62cbc
 					break;				
-			} //switch (bData_40003261)
+			} //switch (bCurrentCustomSiteInputLine)
 			break;
 		
 		default:
@@ -3176,16 +3176,16 @@ void func_68394(int a)
 			{
 				case 0:
 					//0x68790
-					Data_400025b5[bCharacterInputPosition - 1] = sp[bData_40003199 + r3];
-					Data_40002625[bCharacterInputPosition - 1] = sp[bData_40003199 + r3];
+					Data_400025b5[bCharacterInputPosition - 1] = sp[bMapKeyToCharIndex + r3];
+					Data_40002625[bCharacterInputPosition - 1] = sp[bMapKeyToCharIndex + r3];
 				
-					if (bData_40003199 < 4)
+					if (bMapKeyToCharIndex < 4)
 					{
-						bData_40003199++;
+						bMapKeyToCharIndex++;
 					}
 					else
 					{
-						bData_40003199 = 0;
+						bMapKeyToCharIndex = 0;
 					}
 					break;
 				
@@ -3686,10 +3686,10 @@ void func_6a2cc(void)
 	//6a948
 	if ((Data_40002c64_MenuContextId != MENU_CONTEXT_MAIN) && //0
 		(Data_40002c64_MenuContextId != MENU_CONTEXT_ALIGNMENT_STAR_CONTROL) && //12001
-		(Data_40002c64_MenuContextId != 0x2b5f) && //11103
-		(Data_40002c64_MenuContextId != 0x2bc3) && //11203
-		(Data_40002c64_MenuContextId != 0x2b5e) && //11102
-		(Data_40002c64_MenuContextId != 0x2bc2) && //11202
+		(Data_40002c64_MenuContextId != MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT) && //11103
+		(Data_40002c64_MenuContextId != MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN) && //11203
+		(Data_40002c64_MenuContextId != MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET) && //11102
+		(Data_40002c64_MenuContextId != MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET) && //11202
 		(bData_40003505 == 0))
 	{
 		if (bData_40002ef6 == 0)
@@ -5070,7 +5070,7 @@ int main(void)
 			snprintf(buf, sizeof(buf)-1, "Main Loop (Context: %d)\n\r", Data_40002c64_MenuContextId);
 			uart0_send(buf, strlen(buf));			
 			
-			snprintf(buf, sizeof(buf)-1, "dData_40002dc0: %f\n\r", dData_40002dc0);
+			snprintf(buf, sizeof(buf)-1, "dData_40002dc0_Azimuth: %f\n\r", dData_40002dc0_Azimuth);
 			uart0_send(buf, strlen(buf));
 			
 			snprintf(buf, sizeof(buf)-1, "dData_40002df8: %f\n\r", dData_40002df8);
@@ -5082,7 +5082,7 @@ int main(void)
 		#endif 
 	
 		//6d898		
-		fData_40002efc = dData_40002dc0;
+		fData_40002efc = dData_40002dc0_Azimuth;
 		fData_40002f00 = dData_40002df8;
 		
 		func_6cb38();
@@ -5171,7 +5171,7 @@ int main(void)
 			
 			Data_40004128.dData_208 = dData_40002d80;
 			dData_400034e8 = dData_40002d80;
-			dData_40002dc0 = Data_40004128.dData_208;
+			dData_40002dc0_Azimuth = Data_40004128.dData_208;
 			dData_40002d78 = dData_40002d80;
 			
 			func_659c(5);
@@ -5426,39 +5426,39 @@ int main(void)
 				func_6ae24(3);
 				
 				Data_40004128.dData_208 = dData_40002db8;
-				dData_40002dc0 = Data_40004128.dData_208;
+				dData_40002dc0_Azimuth = Data_40004128.dData_208;
 				
 				if (bData_40003430 == 0)
 				{
 					//6e7e8
-					dData_40002dc0 = Data_40004128.dData_192;
+					dData_40002dc0_Azimuth = Data_40004128.dData_192;
 				}
 				else
 				{
 					//0x6e800
-					dData_40002dc0 += Data_40004128.dData_192;
+					dData_40002dc0_Azimuth += Data_40004128.dData_192;
 				}
 				//0x6e820
-				while (dData_40002dc0 >= 360)
+				while (dData_40002dc0_Azimuth >= 360)
 				{
-					dData_40002dc0 -= 360;
+					dData_40002dc0_Azimuth -= 360;
 				}
 
-				while (dData_40002dc0 < 0)
+				while (dData_40002dc0_Azimuth < 0)
 				{
-					dData_40002dc0 += 360;
+					dData_40002dc0_Azimuth += 360;
 				}
 				//6e890
-				fData_40003508 = dData_40002dc0 - dData_40003410 - dData_400031f0;
-				Data_40002dac = dData_40002dc0 - dData_40003410 + dData_400033e8;
-				Data_40002db0 = (dData_40002dc0 - dData_40003410 + dData_400033e8 - Data_40002dac) * 60.0;
-				fData_40002db4 = (int)((dData_40002dc0 - dData_40003410 + dData_400033e8 - 
+				fData_40003508 = dData_40002dc0_Azimuth - dData_40003410 - dData_400031f0;
+				Data_40002dac = dData_40002dc0_Azimuth - dData_40003410 + dData_400033e8;
+				Data_40002db0 = (dData_40002dc0_Azimuth - dData_40003410 + dData_400033e8 - Data_40002dac) * 60.0;
+				fData_40002db4 = (int)((dData_40002dc0_Azimuth - dData_40003410 + dData_400033e8 - 
 						Data_40002dac - Data_40002db0 / 60.0) * 3600.0);
 				//6ea58
 				if ((bData_40003200 == 1) && (Data_40004128.dData_304 == 2.0))
 				{
 					//6ea84
-					dData_400033e8 = dData_40002d30 - dData_40002dc0;
+					dData_400033e8 = dData_40002d30 - dData_40002dc0_Azimuth;
 					Data_40002dac = Data_40002d20;
 					Data_40002db0 = Data_40002d24;
 					fData_40002db4 = fData_40002d28;
@@ -5533,19 +5533,19 @@ int main(void)
 				func_6ae24(3);
 			
 				Data_40004128.dData_208 = dData_40002db8;
-				dData_40002dc0 = Data_40004128.dData_208;
+				dData_40002dc0_Azimuth = Data_40004128.dData_208;
 				//->0x6f12c
-				while (dData_40002dc0 >= 360)
+				while (dData_40002dc0_Azimuth >= 360)
 				{
-					dData_40002dc0 -= 360;
+					dData_40002dc0_Azimuth -= 360;
 				}
 				//->0x6f164
-				while (dData_40002dc0 < 0)
+				while (dData_40002dc0_Azimuth < 0)
 				{
-					dData_40002dc0 += 360;
+					dData_40002dc0_Azimuth += 360;
 				}
 				//6f17c
-				dData_40002d78 = dData_40002dc0;
+				dData_40002d78 = dData_40002dc0_Azimuth;
 				
 				func_659c(2);
 				func_6ae24(4);
@@ -6292,7 +6292,7 @@ int main(void)
 			}
 		}
 		//720cc
-		if (Data_40002eb0 == 1)
+		if (iBacklashCorrectionSlewing == 1)
 		{
 			//720dc
 			func_659c(3000);
@@ -6304,7 +6304,7 @@ int main(void)
 					func_6ae24(3);
 				
 					Data_40004128.dData_208 = dData_40002db8;
-				  dData_40002dc0 = Data_40004128.dData_208;
+					dData_40002dc0_Azimuth = Data_40004128.dData_208;
 					//->7221c
 					break;
 				
@@ -6322,7 +6322,7 @@ int main(void)
 					func_6ae24(1);
 				
 					Data_40004128.dData_208 = dData_40002d80;
-					dData_40002dc0 = Data_40004128.dData_208;
+					dData_40002dc0_Azimuth = Data_40004128.dData_208;
 					break;
 				
 				case 3:
@@ -6348,7 +6348,7 @@ int main(void)
 					func_6ae24(3);
 				
 					Data_40004128.dData_208 = dData_40002db8;
-				  dData_40002dc0 = Data_40004128.dData_208;
+					dData_40002dc0_Azimuth = Data_40004128.dData_208;
 					//->0x72364
 					break;
 				
@@ -6366,7 +6366,7 @@ int main(void)
 					func_6ae24(1);
 				
 					Data_40004128.dData_208 = dData_40002d80;
-					dData_40002dc0 = Data_40004128.dData_208;
+					dData_40002dc0_Azimuth = Data_40004128.dData_208;
 					break;
 				
 				case 3:
@@ -6389,31 +6389,31 @@ int main(void)
 					func_6ae24(3);
 				
 					Data_40004128.dData_208 = dData_40002db8;
-				  dData_40002dc0 = Data_40004128.dData_208;
-					dData_40002dc0 += Data_40004128.dData_192;
+					dData_40002dc0_Azimuth = Data_40004128.dData_208;
+					dData_40002dc0_Azimuth += Data_40004128.dData_192;
 					//->72410
-					while (dData_40002dc0 >= 360.0)
+					while (dData_40002dc0_Azimuth >= 360.0)
 					{
 						//723f4
-						dData_40002dc0 -= 360.0;
+						dData_40002dc0_Azimuth -= 360.0;
 					}
 					//->72448
-					while (dData_40002dc0 < 0.0)
+					while (dData_40002dc0_Azimuth < 0.0)
 					{
 						//7242c
-						dData_40002dc0 += 360.0;
+						dData_40002dc0_Azimuth += 360.0;
 					}
 					//->7257c
-					while (fabs(dData_40002dc0 - dData_40002dc8) > 0.0014)
+					while (fabs(dData_40002dc0_Azimuth - dRaBklashCorrStartAzimuth) > 0.0014)
 					{
 						//72464
-						if (bData_40003188 == 2)
+						if (bRaBacklashCorrectionDirection == 2)
 						{
 							//72474
 							func_57414(3, 4, 1);
 						}
 						//72484
-						if (bData_40003188 == 1)
+						if (bRaBacklashCorrectionDirection == 1)
 						{
 							//72494
 							func_57414(3, 3, 1);
@@ -6424,19 +6424,19 @@ int main(void)
 						func_659c(10);
 						//724c4
 						Data_40004128.dData_208 = dData_40002db8;
-						dData_40002dc0 = Data_40004128.dData_208;
-						dData_40002dc0 += Data_40004128.dData_192;
+						dData_40002dc0_Azimuth = Data_40004128.dData_208;
+						dData_40002dc0_Azimuth += Data_40004128.dData_192;
 						//->7252c
-						while (dData_40002dc0 >= 360.0)
+						while (dData_40002dc0_Azimuth >= 360.0)
 						{
 							//72510
-							dData_40002dc0 -= 360.0;
+							dData_40002dc0_Azimuth -= 360.0;
 						}
 						//->72564
-						while (dData_40002dc0 < 0.0)
+						while (dData_40002dc0_Azimuth < 0.0)
 						{
 							//72548
-							dData_40002dc0 += 360.0;
+							dData_40002dc0_Azimuth += 360.0;
 						}
 					} //while(...)
 					//->72968
@@ -6453,13 +6453,13 @@ int main(void)
 					while (fabs(dData_40002df8 - dData_40002e00) > 0.0014)
 					{
 						//0x72618
-						if (bData_40003189 == 2)
+						if (bDecBacklashCorrectionDirection == 2)
 						{
 							//72628
 							func_57414(4, 2, 1);
 						}
 						//72638
-						if (bData_40003189 == 1)
+						if (bDecBacklashCorrectionDirection == 1)
 						{
 							//72648
 							func_57414(4, 1, 1);
@@ -6481,17 +6481,17 @@ int main(void)
 					func_6ae24(1);
 				
 					Data_40004128.dData_208 = dData_40002d80;
-					dData_40002dc0 = Data_40004128.dData_208;
+					dData_40002dc0_Azimuth = Data_40004128.dData_208;
 					//->727c4
-					while (fabs(dData_40002dc0 - dData_40002dc8) > 0.0014)
+					while (fabs(dData_40002dc0_Azimuth - dRaBklashCorrStartAzimuth) > 0.0014)
 					{
 						//7273c
-						if (bData_40003188 == 2)
+						if (bRaBacklashCorrectionDirection == 2)
 						{
 							func_57414(1, 4, 2);
 						}
 						
-						if (bData_40003188 == 1)
+						if (bRaBacklashCorrectionDirection == 1)
 						{
 							func_57414(1, 3, 2);
 						}
@@ -6501,7 +6501,7 @@ int main(void)
 						func_659c(10);
 						
 						Data_40004128.dData_208 = dData_40002d80;
-						dData_40002dc0 = Data_40004128.dData_208;
+						dData_40002dc0_Azimuth = Data_40004128.dData_208;
 					}
 					//->72968
 					break;
@@ -6516,12 +6516,12 @@ int main(void)
 					while (fabs(dData_40002df8 - dData_40002e00) > 0.0014)
 					{
 						//728a0
-						if (bData_40003189 == 2)
+						if (bDecBacklashCorrectionDirection == 2)
 						{
 							func_57414(2, 2, 2);
 						}
 						
-						if (bData_40003189 == 1)
+						if (bDecBacklashCorrectionDirection == 1)
 						{
 							func_57414(1, 1, 2);
 						}
@@ -6548,8 +6548,8 @@ int main(void)
 			func_659c(100);
 			beep1(2);		
 			//72980
-			Data_40002eb0 = 0;
-		} //if (Data_40002eb0 == 1)
+			iBacklashCorrectionSlewing = 0;
+		} //if (iBacklashCorrectionSlewing == 1)
 		//7298c
 		dData_40002ca8 = Data_40004380.dData_24;
 		dData_40002cb0 = Data_40004380.dData_16;

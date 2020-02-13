@@ -57,37 +57,37 @@ void HandleDownKey(void)
 		
 		case MENU_CONTEXT_ONE_STAR_ALIGN: //1100:
 			//0x5b350: One Star Align
-			func_5a57c(1, 11);
+			HandleLongListScroll(1, 11);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TWO_STAR_ALIGN; //1200;
 			break;
 		
 		case MENU_CONTEXT_TWO_STAR_ALIGN: //1200:
 			//0x5b370: Two Star Align
-			func_5a57c(1, 11);
+			HandleLongListScroll(1, 11);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_THREE_STAR_ALIGN; //1300;
 			break;
 		
 		case MENU_CONTEXT_THREE_STAR_ALIGN: //1300:
 			//0x5b390: Three Star Align
-			func_5a57c(1, 11);
+			HandleLongListScroll(1, 11);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TARGET_SYNC; //1400;
 			break;
 		
 		case MENU_CONTEXT_TARGET_SYNC: //1400:
 			//0x5b3b0: Target Sync
-			func_5a57c(1, 11);
+			HandleLongListScroll(1, 11);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_POLE_AXIS_DEV; //1500;
 			break;
 		
 		case MENU_CONTEXT_POLE_AXIS_DEV: //1500:
 			//0x5b3d0: Pole-Axis Dev.
-			func_5a57c(1, 11);
+			HandleLongListScroll(1, 11);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR; //1600;
 			break;
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR: //1600:
 			//0x5b3f0: RA Bklash Corr.
-			func_5a57c(1, 11);
+			HandleLongListScroll(1, 11);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKLASH_CORR; //1700;
 			break;
 		
@@ -102,67 +102,67 @@ void HandleDownKey(void)
 		
 		case MENU_CONTEXT_NAVIGATION_SOLAR_SYSTEM: //2100:
 			//0x5b448
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CONSTELLATION; //2200;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_CONSTELLATION: //2200:
 			//0x5b468
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_FAMOUS_STAR; //2300;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_FAMOUS_STAR: //2300:
 			//0x5b488
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_MESSIER_CAT; //2400;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_MESSIER_CAT: //2400:
 			//0x5b4a8
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_NGC_CAT; //2500;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_NGC_CAT: //2500:
 			//0x5b4c8
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_IC_CAT; //2600;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_IC_CAT: //2600:
 			//0x5b4e8
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_SH2_CAT; //2700;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_SH2_CAT: //2700:
 			//0x5b508
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_BRIGHT_STAR; //2800;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_BRIGHT_STAR: //2800:
 			//0x5b528
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_SAO_CAT; //2900;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_SAO_CAT: //2900:
 			//0x5b548
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_OBJ; //2110;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_CUST_OBJ: //2110:
 			//0x5b568
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_RA_DEC; //2120;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_RA_DEC: //2120:
 			//0x5b588
-			func_5a57c(1, 12);
+			HandleLongListScroll(1, 12);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION_CUST_LAND; //2130;
 			break;
 		
@@ -177,49 +177,49 @@ void HandleDownKey(void)
 		
 		case MENU_CONTEXT_CURRENT_OBJECTS: //3100:
 			//0x5b5e0
-			func_5a57c(1, 13);
+			HandleLongListScroll(1, 13);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_OBJECT_RISE_SET; //3200;
 			break;
 		
 		case MENU_CONTEXT_OBJECT_RISE_SET: //3200:
 			//0x5b600
-			func_5a57c(1, 13);
+			HandleLongListScroll(1, 13);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_LUNAR_PHASE; //3300;
 			break;
 		
 		case MENU_CONTEXT_LUNAR_PHASE: //3300:
 			//0x5b620
-			func_5a57c(1, 13);
+			HandleLongListScroll(1, 13);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TIMER; //3400;
 			break;
 		
 		case MENU_CONTEXT_TIMER: //3400:
 			//0x5b640
-			func_5a57c(1, 13);
+			HandleLongListScroll(1, 13);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_ALARM; //3500;
 			break;
 		
 		case MENU_CONTEXT_ALARM: //3500:
 			//0x5b660
-			func_5a57c(1, 13);
+			HandleLongListScroll(1, 13);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_FOV; //3600;
 			break;
 		
 		case MENU_CONTEXT_EYEPIECE_FOV: //3600:
 			//0x5b680
-			func_5a57c(1, 13);
+			HandleLongListScroll(1, 13);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_MAGN; //3700;
 			break;
 		
 		case MENU_CONTEXT_EYEPIECE_MAGN: //3700:
 			//0x5b6a0
-			func_5a57c(1, 13);
+			HandleLongListScroll(1, 13);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_DISPLAY_ILLUMINATION; //3800;
 			break;
 		
 		case MENU_CONTEXT_DISPLAY_ILLUMINATION: //3800:
 			//0x5b6c0
-			func_5a57c(1, 13);
+			HandleLongListScroll(1, 13);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_PARK_POSITION; //3900;
 			break;
 		
@@ -234,49 +234,49 @@ void HandleDownKey(void)
 		
 		case MENU_CONTEXT_TIME_DATE: //4100:
 			//0x5b718
-			func_5a57c(1, 14);
+			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = 4200;
 			break;
 		
 		case 4200:
 			//0x5b738
-			func_5a57c(1, 14);
+			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_SITE_SETTING; //4300;
 			break;
 		
 		case MENU_CONTEXT_SITE_SETTING: //4300:
 			//0x5b758
-			func_5a57c(1, 14);
+			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = 4400;
 			break;
 		
 		case 4400:
 			//0x5b778
-			func_5a57c(1, 14);
+			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_AZ_EQU; //4500;
 			break;
 		
 		case MENU_CONTEXT_AZ_EQU: //4500:
 			//0x5b798
-			func_5a57c(1, 14);
+			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TELESCOPE_MOUNT; //4600;
 			break;
 		
 		case MENU_CONTEXT_TELESCOPE_MOUNT: //4600:
 			//0x5b7b8
-			func_5a57c(1, 14);
+			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE; //4700;
 			break;
 		
 		case MENU_CONTEXT_TRACKING_RATE: //4700:
 			//0x5b7d8
-			func_5a57c(1, 14);
+			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_LANGUAGE; //4800;
 			break;
 		
 		case MENU_CONTEXT_LANGUAGE: //4800:
 			//0x5b7f8
-			func_5a57c(1, 14);
+			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RESET; //4900;
 			break;
 		
@@ -308,43 +308,43 @@ void HandleDownKey(void)
 		
 		case 2301:
 			//0x5b8a0
-			func_5a57c(1, 23);
+			HandleLongListScroll(1, 23);
 			Data_40002c64_MenuContextId = 2302;
 			break;
 		
 		case 2302:
 			//0x5b8c0
-			func_5a57c(1, 23);
+			HandleLongListScroll(1, 23);
 			Data_40002c64_MenuContextId = 2303;
 			break;
 		
 		case 2303:
 			//0x5b8e0
-			func_5a57c(1, 23);
+			HandleLongListScroll(1, 23);
 			Data_40002c64_MenuContextId = 2304;
 			break;
 		
 		case 2304:
 			//0x5b900
-			func_5a57c(1, 23);
+			HandleLongListScroll(1, 23);
 			Data_40002c64_MenuContextId = 2305;
 			break;
 		
 		case 2305:
 			//0x5b920
-			func_5a57c(1, 23);
+			HandleLongListScroll(1, 23);
 			Data_40002c64_MenuContextId = 2306;
 			break;
 		
 		case 2306:
 			//0x5b940
-			func_5a57c(1, 23);
+			HandleLongListScroll(1, 23);
 			Data_40002c64_MenuContextId = 2307;
 			break;
 		
 		case 2307:
 			//0x5b960
-			func_5a57c(1, 23);
+			HandleLongListScroll(1, 23);
 			Data_40002c64_MenuContextId = 2308;
 			break;
 		
@@ -502,9 +502,9 @@ void HandleDownKey(void)
 		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x5bcec
-		case 11102:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
 			//0x5bcf4
-		case 11202:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
 			//0x5bcf8
 		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
 			//0x5bcfc
@@ -566,7 +566,7 @@ void HandleDownKey(void)
 			//->0x5ca8c
 			break;
 		
-		case 11201:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_START_UP_DOWN: //11201:
 			//0x5bde8
 			dData_40002e00 = dData_40002df8;
 			if (bData_40002c1a == 1)
@@ -581,14 +581,14 @@ void HandleDownKey(void)
 				func_57414(4, 2, 3);
 				bData_40002edd = 1;
 			}
-			Data_40002eb0 = 1;
-			bData_40003189 = 1;
-			Data_40002c64_MenuContextId = 11203;
+			iBacklashCorrectionSlewing = 1;
+			bDecBacklashCorrectionDirection = 1;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN; //11203;
 			break;
 		
-		case 11203:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203:
 			//0x5be6c
-			if (bData_40003189 == 2)
+			if (bDecBacklashCorrectionDirection == 2)
 			{
 				if (bData_40002c1a == 1)
 				{

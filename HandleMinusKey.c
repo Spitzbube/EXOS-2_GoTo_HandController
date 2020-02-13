@@ -13,12 +13,12 @@ void HandleMinusKey(void)
 		
 		case 5000:
 			//0x5f9f4
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case 101:
 			//0x5fa08
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case 102:
@@ -87,60 +87,60 @@ void HandleMinusKey(void)
 			//->0x60d48
 			break;
 		
-		case 1000:
+		case MENU_CONTEXT_ALIGNMENT: //1000:
 			//0x5fbfc
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			//->0x60d48
 			break;
 		
-		case 2000:
+		case MENU_CONTEXT_NAVIGATION: //2000:
 			//0x5fc10
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
-		case 3000:
+		case MENU_CONTEXT_UTILITIES: //3000:
 			//0x5fc24
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
-		case 4000:
+		case MENU_CONTEXT_SETUP: //4000:
 			//0x5fc38
-			Data_40002c64_MenuContextId = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
-		case 1100:
+		case MENU_CONTEXT_ONE_STAR_ALIGN: //1100:
 			//0x5fc4c
-			Data_40002c64_MenuContextId = 1000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALIGNMENT; //1000;
 			break;
 		
-		case 1200:
+		case MENU_CONTEXT_TWO_STAR_ALIGN: //1200:
 			//0x5fc60
-			Data_40002c64_MenuContextId = 1000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALIGNMENT; //1000;
 			break;
 		
-		case 1300:
+		case MENU_CONTEXT_THREE_STAR_ALIGN: //1300:
 			//0x5fc74
-			Data_40002c64_MenuContextId = 1000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALIGNMENT; //1000;
 			break;
 		
-		case 1400:
+		case MENU_CONTEXT_TARGET_SYNC: //1400:
 			//0x5fc88
-			Data_40002c64_MenuContextId = 1000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALIGNMENT; //1000;
 			break;
 		
-		case 1500:
+		case MENU_CONTEXT_POLE_AXIS_DEV: //1500:
 			//0x5fc9c
-			Data_40002c64_MenuContextId = 1000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALIGNMENT; //1000;
 			break;
 		
-		case 1600:
+		case MENU_CONTEXT_RA_BKBLASH_CORR: //1600:
 			//0x5fcb0
-			Data_40002c64_MenuContextId = 1000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALIGNMENT; //1000;
 			break;
 		
-		case 1700:
+		case MENU_CONTEXT_DEC_BKLASH_CORR: //1700:
 			//0x5fcc4
-			Data_40002c64_MenuContextId = 1000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALIGNMENT; //1000;
 			break;
 		
 		case MENU_CONTEXT_NAVIGATION_SOLAR_SYSTEM: //2100:
@@ -218,7 +218,7 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 3000;
 			break;
 		
-		case 3400:
+		case MENU_CONTEXT_TIMER: //3400:
 			//0x5fe50
 			Data_40002c64_MenuContextId = 3000;
 			break;
@@ -338,14 +338,14 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 2130;
 			break;
 		
-		case 34001:
+		case MENU_CONTEXT_TIMER_SET: //34001:
 			//0x60030
-			Data_40002c64_MenuContextId = 3400;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TIMER; //3400;
 			break;
 		
-		case 34002:
+		case MENU_CONTEXT_TIMER_COUNTING: //34002:
 			//0x60044
-			Data_40002c64_MenuContextId = 3400;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TIMER; //3400;
 			break;
 		
 		case 35001:
@@ -454,30 +454,30 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 1500;
 			break;
 		
-		case 11102:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
 			//0x601f0
-			Data_40002c64_MenuContextId = 1600;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR; //1600;
 			break;
 		
-		case 11101:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT: //11101:
 			//0x60204
 			func_5f0c0();
 		
-			Data_40002c64_MenuContextId = 11102;
-			Data_40002eb0 = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11102;
+			iBacklashCorrectionSlewing = 0;
 			break;
 		
-		case 11202:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
 			//0x60228
-			Data_40002c64_MenuContextId = 1700;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKLASH_CORR; //1700;
 			break;
 		
-		case 11201:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_START_UP_DOWN: //11201:
 			//0x6023c
 			func_5f0c0();
 		
-			Data_40002c64_MenuContextId = 11202;
-			Data_40002eb0 = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11202;
+			iBacklashCorrectionSlewing = 0;
 			break;
 		
 		case 31001:

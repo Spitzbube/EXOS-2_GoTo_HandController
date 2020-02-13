@@ -23,7 +23,7 @@ void Handle0Key(void)
 						//0x695d4
 						bData_40002e89 = 0;
 
-						func_acdc(dData_40002dc0 + dData_400033e8,
+						func_acdc(dData_40002dc0_Azimuth + dData_400033e8,
 							dData_40002df8 + dData_400033f0,
 							&dData_40002c88, &dData_40002c90);
 						
@@ -77,13 +77,13 @@ void Handle0Key(void)
 			//0x69780 -> 0x6a0d4
 			break;
 		
-		case 11102:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
 			//0x69784
-		case 11202:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
 			//0x6978c
-		case 11103:
+		case MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT: //11103:
 			//0x69790
-		case 11203:
+		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203:
 			//0x69794
 			if (bData_40002e89 == 0)
 			{
@@ -281,19 +281,19 @@ void Handle0Key(void)
 			if (bCharacterInputPosition != 5)
 			{
 				Data_40002302[bCharacterInputPosition - 1] = '0';
-				Data_400027ef[bCharacterInputPosition - 1] = '0';
+				strCustomerObjectDecAltInputForStoring[bCharacterInputPosition - 1] = '0';
 			}
 			else
 			{
 				if (Data_40002302[bCharacterInputPosition - 1] == '+')
 				{
 					Data_40002302[bCharacterInputPosition - 1] = '-';
-					Data_400027ef[bCharacterInputPosition - 1] = '-';
+					strCustomerObjectDecAltInputForStoring[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
 					Data_40002302[bCharacterInputPosition - 1] = '+';
-					Data_400027ef[bCharacterInputPosition - 1] = '+';
+					strCustomerObjectDecAltInputForStoring[bCharacterInputPosition - 1] = '+';
 				}
 			}
 			
@@ -375,12 +375,12 @@ void Handle0Key(void)
 			func_623d0(0);
 			break;
 		
-		case 34001:
+		case MENU_CONTEXT_TIMER_SET: //34001:
 			//0x69fb0
 			Data_4000294a[bCharacterInputPosition - 1] = '0';
 			strEng00000s[bCharacterInputPosition - 1] = '0';
 		
-			func_56d0c();
+			HandleNextTimerInputPosition();
 			break;
 		
 		case 35001:
