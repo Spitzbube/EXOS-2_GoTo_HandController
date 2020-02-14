@@ -3853,12 +3853,12 @@ double func_6ae24(int a)
 	{
 		case 1:
 			//0x6ae7c
-			uart1_write_byte(0x04);
+			uart1_write_byte(0x04); //RA Inquire?
 			break;
 		
 		case 2:
 			//0x6ae8c
-			uart1_write_byte(0x24);
+			uart1_write_byte(0x24); //DEC Inquire?
 			break;
 		
 		case 3:
@@ -3907,7 +3907,7 @@ double func_6ae24(int a)
 					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
 					
 					sp8 = Data_400031a0.Data;
-					dData_40002d80 = sp8 * 360.0 / 841763108.524031996726989746094;
+					dData_40002d80 = sp8 * 360.0 / 841763108.524032;
 				}
 				//0x6afcc -> 0x6b15c
 				break;
@@ -3922,7 +3922,7 @@ double func_6ae24(int a)
 					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
 					
 					sp8 = Data_400031a0.Data;
-					dData_40002da0 = sp8 * 360.0 / 841763108.524031996726989746094;
+					dData_40002da0 = sp8 * 360.0 / 841763108.524032;
 				}
 				//0x6b04c -> 0x6b15c
 				break;
@@ -3937,7 +3937,7 @@ double func_6ae24(int a)
 					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
 					
 					sp8 = Data_400031a0.Data;
-					dData_40002db8 = sp8 * 360.0 / 278879846.400000035762786865234;
+					dData_40002db8 = sp8 * 360.0 / 278879846.40000004;
 					#if 1
 					if (Data_400031a0.Data == 0)
 					{
@@ -5702,18 +5702,18 @@ int main(void)
 					uart1_write_byte(0x55);
 					uart1_write_byte(0xaa);
 					uart1_write_byte(0x01);
-					uart1_write_byte(0x06);
+					uart1_write_byte(1 + 2 + 3);
 					
 					if (bData_400031ba == 0x01)
 					{
 						//6fa88
-						uart1_write_byte(0x02);
+						uart1_write_byte(0x02); //Send RA?
 					}
 					//0x6fa90
 					if (bData_400031ba == 0x21)
 					{
 						//6faa0
-						uart1_write_byte(0x22);
+						uart1_write_byte(0x22); //Send DEC?
 					}
 					//0x6faa8
 					uart1_write_byte(Data_400031a4.bData[1]);
@@ -5723,20 +5723,20 @@ int main(void)
 					uart1_write_byte(Data_400031ac.bData[1]);
 				}
 				//0x6fb24
-			}
+			} //if (Data_400031a4.Data >= 2560)
 			else
 			{
 				//0x6fae8
 				uart1_write_byte(0x55);
 				uart1_write_byte(0xaa);
 				uart1_write_byte(0x01);
-				uart1_write_byte(0x01);
+				uart1_write_byte(1);
 				uart1_write_byte(0x00);
 				
 				bData_400031b8 = 0;
 				bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
 			}
-		}
+		} //if ((bData_400031b8 != 0) && (Data_400031a4.Data <= 4800))
 		//6fb24
 		if (bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)
 		{
