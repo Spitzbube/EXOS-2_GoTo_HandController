@@ -1561,21 +1561,21 @@ void HandleEnterKey(void)
 			{
 				//0x55f04
 				//-> "Input time:"
-				Data_40002c64_MenuContextId = 35001;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_ALARM_INPUT; //35001;
 				bCharacterInputPosition = 1;
 			}
 			//->563b8
 			break;
 		
-		case 35001:
+		case MENU_CONTEXT_ALARM_INPUT: //35001:
 			//0x55f20: Alarm start?
-			func_4ff84();
+			HandleAlarmInputData();
 			break;
 		
 		case 35002:
 			//0x55f2c: Alarm stop?
 			bData_4000322c = 0;
-			Data_40002c64_MenuContextId = 35001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALARM_INPUT; //35001;
 			break;
 		
 		case 3601:

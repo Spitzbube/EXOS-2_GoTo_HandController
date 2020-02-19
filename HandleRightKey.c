@@ -1502,7 +1502,7 @@ void HandleRightKey(void)
 			HandleNextTimerInputPosition();
 			break;
 		
-		case 35001:
+		case MENU_CONTEXT_ALARM_INPUT: //35001:
 			//0x582b0
 			func_56c4c();
 			break;

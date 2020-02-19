@@ -348,14 +348,14 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TIMER; //3400;
 			break;
 		
-		case 35001:
+		case MENU_CONTEXT_ALARM_INPUT: //35001:
 			//0x60058
-			Data_40002c64_MenuContextId = 3500;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALARM; //3500;
 			break;
 		
 		case 35002:
 			//0x6006c
-			Data_40002c64_MenuContextId = 3500;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ALARM; //3500;
 			break;
 		
 		case 360021:

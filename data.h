@@ -138,7 +138,7 @@ typedef struct
 
 extern char strCustomerObjectRaAziInputForTracking[]; //400022f2
 extern char Data_40002302[]; //40002302
-extern char Data_40002387[]; //40002387
+extern char strEngTelescopeOneMX51[]; //40002387
 extern char Data_4000239a[]; //4000239a
 extern char Data_40002474[]; //40002474
 extern char Data_40002481[]; //40002487
@@ -179,7 +179,7 @@ extern unsigned char strCustomSiteName[]; //40002827
 extern unsigned char strCustomSiteLongitude[]; //40002837
 extern unsigned char strCustomSiteLatitude[]; //40002847
 extern unsigned char strCustomSiteTimezone[]; //40002856
-extern unsigned char Data_40002861[]; //40002861
+extern unsigned char strCustomSiteAltitude[]; //40002861
 extern char Data_4000288e[]; //4000288e
 extern char Data_40002899[]; //40002899
 extern char Data_400028a5[]; //400028a5
@@ -446,10 +446,10 @@ extern char* Data_40002fb8; //40002fb8
 extern char* Data_40002fbc; //40002fbc
 extern char* Data_40002fc0; //40002fc0
 extern char* Data_40002fc4; //40002fc4
-extern char* Data_40002fc8; //40002fc8
+extern char* strTelescopeMount; //40002fc8
 extern char* Data_40002fcc; //40002fcc
 extern char* Data_40002fd0; //40002fd0
-extern char* Data_40002fd4; //40002fd4
+extern char* strReset; //40002fd4
 extern char* Data_40002fd8; //40002fd8
 extern char* Data_40002fdc; //40002fdc
 extern char* Data_40002fe0; //40002fe0
@@ -470,20 +470,20 @@ extern char* Data_40003018; //40003018
 extern char* Data_4000301c; //4000301c
 extern char* Data_40003020; //40003020
 extern char* Data_40003024; //40003024
-extern char* Data_40003028;
-extern char* Data_4000302c;
-extern char* Data_40003030;
-extern char* Data_40003034;
-extern char* Data_40003038;
-extern char* Data_4000303c;
-extern char* Data_40003040;
+extern char* strScientificName; //40003028
+extern char* strSAOCatalog; //4000302c
+extern char* strHRCatalog; //40003030
+extern char* strSelect; //40003034
+extern char* strAdd; //40003038
+extern char* strDelete; //4000303c
+extern char* strModify; //40003040
 extern char* Data_40003044;
 extern char* Data_40003048;
 extern char* Data_4000304c;
-extern char* Data_40003050;
-extern char* Data_40003054;
-extern char* Data_40003058;
-extern char* Data_4000305c;
+extern char* strEyeshot; //40003050
+extern char* strRatio; //40003054
+extern char* strBackBoard; //40003058
+extern char* strAccessory; //4000305c
 extern char* strCountryAndCity; //40003060
 extern char* strCustomSite; //40003064
 extern char* Data_40003068;
@@ -500,8 +500,8 @@ extern char* strMoonSpeed; //40003090
 extern char* Data_40003094;
 extern char* Data_40003098;
 extern char* Data_4000309c;
-extern char* Data_400030a0;
-extern char* Data_400030a4;
+extern char* strSlewingTo; //400030a0
+extern char* strAutoloadAlignStars; //400030a4
 extern char* Data_400030a8;
 extern char* Data_400030ac;
 extern char* Data_400030b0;
@@ -510,11 +510,11 @@ extern char* Data_400030b8;
 extern char* Data_400030bc;
 extern char* Data_400030c0; //400030c0
 extern char* Data_400030c4; //400030c4
-extern char* Data_400030c8; //400030c8
-extern char* Data_400030cc; //400030cc
-extern char* Data_400030d0;
-extern char* Data_400030d4;
-extern char* Data_400030d8;
+extern char* strControlTerminal; //400030c8
+extern char* strPleaseAimAtThe; //400030cc
+extern char* strTelescopeToDistant; //400030d0
+extern char* strTargetThenPress; //400030d4
+extern char* strEnterKey; //400030d8
 extern char* Data_400030dc;
 extern char* Data_400030e0;
 extern char* Data_400030e4;

@@ -257,10 +257,10 @@ char* Data_40002fb8; //40002fb8
 char* Data_40002fbc; //40002fbc
 char* Data_40002fc0; //40002fc0
 char* Data_40002fc4; //40002fc4
-char* Data_40002fc8; //40002fc8
+char* strTelescopeMount; //40002fc8
 char* Data_40002fcc; //40002fcc
 char* Data_40002fd0; //40002fd0
-char* Data_40002fd4; //40002fd4
+char* strReset; //40002fd4
 char* Data_40002fd8; //40002fd8
 char* Data_40002fdc; //40002fdc
 char* Data_40002fe0; //40002fe0
@@ -281,20 +281,20 @@ char* Data_40003018; //40003018
 char* Data_4000301c; //4000301c
 char* Data_40003020; //40003020
 char* Data_40003024; //40003024
-char* Data_40003028;
-char* Data_4000302c;
-char* Data_40003030;
-char* Data_40003034;
-char* Data_40003038;
-char* Data_4000303c;
-char* Data_40003040;
+char* strScientificName; //40003028
+char* strSAOCatalog; //4000302c
+char* strHRCatalog; //40003030
+char* strSelect; //40003034
+char* strAdd; //40003038
+char* strDelete; //4000303c
+char* strModify; //40003040
 char* Data_40003044;
 char* Data_40003048;
 char* Data_4000304c;
-char* Data_40003050;
-char* Data_40003054;
-char* Data_40003058;
-char* Data_4000305c;
+char* strEyeshot; //40003050
+char* strRatio; //40003054
+char* strBackBoard; //40003058
+char* strAccessory; //4000305c
 char* strCountryAndCity; //40003060
 char* strCustomSite; //40003064
 char* Data_40003068;
@@ -311,8 +311,8 @@ char* strMoonSpeed; //40003090
 char* Data_40003094;
 char* Data_40003098;
 char* Data_4000309c;
-char* Data_400030a0;
-char* Data_400030a4;
+char* strSlewingTo; //400030a0
+char* strAutoloadAlignStars; //400030a4
 char* Data_400030a8;
 char* Data_400030ac;
 char* Data_400030b0;
@@ -321,11 +321,11 @@ char* Data_400030b8;
 char* Data_400030bc;
 char* Data_400030c0; //400030c0
 char* Data_400030c4; //400030c4
-char* Data_400030c8; //400030c8
-char* Data_400030cc; //400030cc
-char* Data_400030d0;
-char* Data_400030d4;
-char* Data_400030d8;
+char* strControlTerminal; //400030c8
+char* strPleaseAimAtThe; //400030cc
+char* strTelescopeToDistant; //400030d0
+char* strTargetThenPress; //400030d4
+char* strEnterKey; //400030d8
 char* Data_400030dc;
 char* Data_400030e0;
 char* Data_400030e4;

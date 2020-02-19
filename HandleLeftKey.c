@@ -1123,7 +1123,7 @@ void HandleLeftKey(void)
 			HandlePrevTimerInputPosition();
 			break;
 		
-		case 35001:
+		case MENU_CONTEXT_ALARM_INPUT: //35001:
 			//0x59ca8
 			func_58c60();
 			break;

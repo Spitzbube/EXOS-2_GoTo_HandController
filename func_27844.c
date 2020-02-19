@@ -28,7 +28,7 @@ void PrepareScreenItems(void)
 			//0x28054
 			Data_40003364 = Data_400030c0;
 			Data_4000336c = Data_400030c4;
-			Data_40003374 = Data_400030c8;
+			Data_40003374 = strControlTerminal;
 		
 			AdaptDisplayLinesPerMenuLine();
 			//->3d71c
@@ -852,11 +852,11 @@ void PrepareScreenItems(void)
 		
 		case 0x9c5: //2501
 			//0x2a6f8
-			Data_40003360 = Data_40003028;
+			Data_40003360 = strScientificName;
 			Data_40003364 = "";
-			Data_40003368 = Data_4000302c;
+			Data_40003368 = strSAOCatalog;
 			Data_4000336c = "";
-			Data_40003370 = Data_40003030;
+			Data_40003370 = strHRCatalog;
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";
@@ -868,11 +868,11 @@ void PrepareScreenItems(void)
 
 		case 0x9c6: //2502
 			//0x2a780
-			Data_40003360 = Data_40003028;
+			Data_40003360 = strScientificName;
 			Data_40003364 = "";
-			Data_40003368 = Data_4000302c;
+			Data_40003368 = strSAOCatalog;
 			Data_4000336c = "";
-			Data_40003370 = Data_40003030;
+			Data_40003370 = strHRCatalog;
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";
@@ -884,11 +884,11 @@ void PrepareScreenItems(void)
 		
 		case 0x9C7: //2503
 			//0x2a80c
-			Data_40003360 = Data_40003028;
+			Data_40003360 = strScientificName;
 			Data_40003364 = "";
-			Data_40003368 = Data_4000302c;
+			Data_40003368 = strSAOCatalog;
 			Data_4000336c = "";
-			Data_40003370 = Data_40003030;
+			Data_40003370 = strHRCatalog;
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";
@@ -900,13 +900,13 @@ void PrepareScreenItems(void)
 
 		case 0xAF1: //2801
 			//0x2a898
-			Data_40003360 = Data_40003034;
+			Data_40003360 = strSelect;
 			Data_40003364 = "";
-			Data_40003368 = Data_40003038;
+			Data_40003368 = strAdd;
 			Data_4000336c = "";
-			Data_40003370 = Data_4000303c;
+			Data_40003370 = strDelete;
 			Data_40003374 = "";
-			Data_40003378 = Data_40003040;
+			Data_40003378 = strModify;
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
@@ -916,13 +916,13 @@ void PrepareScreenItems(void)
 		
 		case 0xAF2: //2802
 			//0x2a924
-			Data_40003360 = Data_40003034;
+			Data_40003360 = strSelect;
 			Data_40003364 = "";
-			Data_40003368 = Data_40003038;
+			Data_40003368 = strAdd;
 			Data_4000336c = "";
-			Data_40003370 = Data_4000303c;
+			Data_40003370 = strDelete;
 			Data_40003374 = "";
-			Data_40003378 = Data_40003040;
+			Data_40003378 = strModify;
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
@@ -932,13 +932,13 @@ void PrepareScreenItems(void)
 		
 		case 0xAF3: //2803
 			//0x2aa2c
-			Data_40003360 = Data_40003034;
+			Data_40003360 = strSelect;
 			Data_40003364 = "";
-			Data_40003368 = Data_40003038;
+			Data_40003368 = strAdd;
 			Data_4000336c = "";
-			Data_40003370 = Data_4000303c;
+			Data_40003370 = strDelete;
 			Data_40003374 = "";
-			Data_40003378 = Data_40003040;
+			Data_40003378 = strModify;
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
@@ -948,13 +948,13 @@ void PrepareScreenItems(void)
 		
 		case 0xAF4: //2804
 			//0x2aabc
-			Data_40003360 = Data_40003034;
+			Data_40003360 = strSelect;
 			Data_40003364 = "";
-			Data_40003368 = Data_40003038;
+			Data_40003368 = strAdd;
 			Data_4000336c = "";
-			Data_40003370 = Data_4000303c;
+			Data_40003370 = strDelete;
 			Data_40003374 = "";
-			Data_40003378 = Data_40003040;
+			Data_40003378 = strModify;
 			Data_4000337c = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
@@ -1012,8 +1012,8 @@ void PrepareScreenItems(void)
 
 		case 0xE11: //3601
 			//0x2acec
-			Data_40003360 = Data_40003050;
-			Data_40003364 = Data_40003054;
+			Data_40003360 = strEyeshot;
+			Data_40003364 = strRatio;
 			Data_40003368 = "";
 			Data_4000336c = "";
 			Data_40003370 = "";
@@ -1028,8 +1028,8 @@ void PrepareScreenItems(void)
 
 		case 0xE12: //3602
 			//0x2ad70
-			Data_40003360 = Data_40003050;
-			Data_40003364 = Data_40003054;
+			Data_40003360 = strEyeshot;
+			Data_40003364 = strRatio;
 			Data_40003368 = "";
 			Data_4000336c = "";
 			Data_40003370 = "";
@@ -1044,8 +1044,8 @@ void PrepareScreenItems(void)
 		
 		case 0xED9: //3801
 			//0x2adf8
-			Data_40003360 = Data_40003058;
-			Data_40003364 = Data_4000305c;
+			Data_40003360 = strBackBoard;
+			Data_40003364 = strAccessory;
 			Data_40003368 = "";
 			Data_4000336c = "";
 			Data_40003370 = "";
@@ -1060,8 +1060,8 @@ void PrepareScreenItems(void)
 		
 		case 0xEDA: //3802
 			//0x2ae7c
-			Data_40003360 = Data_40003058;
-			Data_40003364 = Data_4000305c;
+			Data_40003360 = strBackBoard;
+			Data_40003364 = strAccessory;
 			Data_40003368 = "";
 			Data_4000336c = "";
 			Data_40003370 = "";
@@ -1603,13 +1603,13 @@ void PrepareScreenItems(void)
 		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
 			//0x2cad0: RA Bklash Corr. - 1st page
 			Data_40003360 = "                      ";
-			Data_40003364 = Data_400030cc; // "   Please aim at the"
+			Data_40003364 = strPleaseAimAtThe;
 			Data_40003368 = "                      ";
-			Data_4000336c = Data_400030d0; // "telescope to distant"
+			Data_4000336c = strTelescopeToDistant;
 			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030d4; // "target,then press"
+			Data_40003374 = strTargetThenPress;
 			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030d8; // "ENTER key!"
+			Data_4000337c = strEnterKey;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1635,13 +1635,13 @@ void PrepareScreenItems(void)
 		case MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT: //11103
 			//0x2cbf0
 			Data_40003360 = "                      ";
-			Data_40003364 = Data_400030ec;
+			Data_40003364 = Data_400030ec; //"Slewing....."
 			Data_40003368 = "                      ";
-			Data_4000336c = Data_400030f0;
+			Data_4000336c = Data_400030f0; //"After beep, turn tele"
 			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030f4;
+			Data_40003374 = Data_400030f4; //"-cope back to target"
 			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030f8;
+			Data_4000337c = Data_400030f8; //"then press,ENTER!"
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1668,7 +1668,7 @@ void PrepareScreenItems(void)
 			Data_4000336c = "                      ";
 			Data_40003370 = Data_40003fa9;
 			Data_40003374 = "                      ";
-			Data_40003378 = Data_40003104;
+			Data_40003378 = Data_40003104; //"          arcsecond"
 			Data_4000337c = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
@@ -1682,11 +1682,11 @@ void PrepareScreenItems(void)
 		
 			Data_40003360 = "                      ";
 			Data_40003364 = "                      ";
-			Data_40003368 = Data_40003108;
+			Data_40003368 = Data_40003108; //"The mean backlash is:"
 			Data_4000336c = "                      ";
 			Data_40003370 = Data_40003fa9;
 			Data_40003374 = "                      ";
-			Data_40003378 = Data_40003104;
+			Data_40003378 = Data_40003104; //"          arcsecond"
 			Data_4000337c = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
@@ -1697,13 +1697,13 @@ void PrepareScreenItems(void)
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
 			//0x2ce70
 			Data_40003360 = "                      ";
-			Data_40003364 = Data_400030cc; // "   Please aim at the"
+			Data_40003364 = strPleaseAimAtThe;
 			Data_40003368 = "                      ";
-			Data_4000336c = Data_400030d0; // "telescope to distant"
+			Data_4000336c = strTelescopeToDistant;
 			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030d4; // "target,then press"
+			Data_40003374 = strTargetThenPress;
 			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030d8; // "ENTER key!"
+			Data_4000337c = strEnterKey;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1776,11 +1776,11 @@ void PrepareScreenItems(void)
 		
 			Data_40003360 = "                      ";
 			Data_40003364 = "                      ";
-			Data_40003368 = Data_40003108;
+			Data_40003368 = Data_40003108; //"The mean backlash is:"
 			Data_4000336c = "                      ";
 			Data_40003370 = Data_40003fa9;
 			Data_40003374 = "                      ";
-			Data_40003378 = Data_40003104;
+			Data_40003378 = Data_40003104; //"          arcsecond"
 			Data_4000337c = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
@@ -5378,7 +5378,7 @@ void PrepareScreenItems(void)
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
 		
-		case 35001:
+		case MENU_CONTEXT_ALARM_INPUT: //35001:
 			//0x3c1bc: Alarm start
 			Data_40003360 = strEngInputTime;
 			Data_40003364 = "";
@@ -5410,9 +5410,9 @@ void PrepareScreenItems(void)
 		
 		case 0x57E4B: //360011
 			//0x3c2bc
-			Data_40003360 = Data_40002387;
+			Data_40003360 = strEngTelescopeOneMX51;
 			Data_40003364 = "";
-			Data_40003368 = Data_4000239a;
+			Data_40003368 = Data_4000239a; //"Scope:3'.3'"
 			Data_4000336c = "";
 			Data_40003370 = "";
 			Data_40003374 = "";

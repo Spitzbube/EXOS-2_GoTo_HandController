@@ -406,8 +406,8 @@ void DisplayScreenItems(void)
 							}
 							bData_400031e9 = 7;
 							
-							Data_40003360 = Data_400030a0;
-							Data_40003364 = Data_400030a4;
+							Data_40003360 = strSlewingTo;
+							Data_40003364 = strAutoloadAlignStars;
 							
 							if (Data_40004128.Data_352 == 0)
 							{
@@ -1300,7 +1300,7 @@ void DisplayScreenItems(void)
 					//->0x4684c
 					break;
 				
-				case 35001:
+				case MENU_CONTEXT_ALARM_INPUT: //35001:
 					//0x44938: Alarm
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -2014,8 +2014,8 @@ void DisplayScreenItems(void)
 							}
 							bData_400031e9 = 7;
 							
-							Data_40003360 = Data_400030a0;
-							Data_40003364 = Data_400030a4;
+							Data_40003360 = strSlewingTo;
+							Data_40003364 = strAutoloadAlignStars;
 							
 							if (Data_40004128.Data_352 == 0)
 							{
@@ -2899,7 +2899,7 @@ void DisplayScreenItems(void)
 					lcd_display_string(1, 3, bCharacterInputPosition, 1, (unsigned char*)&Data_40003368[bCharacterInputPosition - 1]);
 					break;
 				
-				case 35001:
+				case MENU_CONTEXT_ALARM_INPUT: //35001:
 					//0x4d9d8
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);

@@ -36,11 +36,6 @@ extern void lcd_display_configure(void);
 extern void spi0_init(void);
 
 	
-void fill_220(void)
-{
-}
-
-
 /* 224 - complete */
 void lcd_write_data(unsigned char a)
 {

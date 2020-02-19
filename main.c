@@ -763,11 +763,11 @@ void func_4fda8(void)
 }
 
 /* 4ff84 - todo */
-void func_4ff84(void)
+void HandleAlarmInputData(void)
 {
 	int h = atoi(Data_40002a3f);
-	int m = atoi(Data_40002a42);
-	int s = atoi(Data_40002a45);
+	int m = atoi(&Data_40002a3f[3]);
+	int s = atoi(&Data_40002a3f[6]);
 	
 	if ((h > 23) || (m > 59) || (s > 59))
 	{
@@ -778,7 +778,7 @@ void func_4ff84(void)
 	{
 		//0x4ffe0
 		bData_4000322c = 1;
-		Data_40002c64_MenuContextId = 3500;
+		Data_40002c64_MenuContextId = MENU_CONTEXT_ALARM; //3500;
 		Data_40003220_AlarmHours = h;
 		Data_40003224_AlarmMinutes = m;
 		Data_40003228_AlarmSeconds = s;
@@ -2975,9 +2975,9 @@ void HandleCustomSiteInputChar(int key)
 					break;
 				
 				case 4:
-					//0x62c88
+					//0x62c88: Altitude
 					Data_4000271a[bCharacterInputPosition - 1] = digitChar;
-					Data_40002861[bCharacterInputPosition - 1] = digitChar;
+					strCustomSite[bCharacterInputPosition - 1] = digitChar;
 				
 					HandleNextCustomSiteInputPosition();
 					//->0x62cc4
