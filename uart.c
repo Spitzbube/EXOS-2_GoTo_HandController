@@ -1,7 +1,7 @@
 
 
 /* 19f0 - complete */
-#ifdef OLIMEX_LPC2148
+#ifdef __GNUC__
 void uart1_isr(void) __attribute__ ((interrupt ("IRQ")));
 void uart1_isr(void)
 #else
@@ -107,7 +107,7 @@ void uart1_isr(void) __irq
 }
 
 /* 1c88 - complete */
-#ifdef OLIMEX_LPC2148
+#ifdef __GNUC__
 void uart0_isr(void) __attribute__ ((interrupt ("IRQ")));
 void uart0_isr(void)
 #else

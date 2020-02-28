@@ -225,6 +225,7 @@ unsigned char spi0_write_read_byte(unsigned char a)
 /* 634 - complete */
 void lcd_display_character(int inv, int row, unsigned char col, const unsigned char* d)
 {
+#ifndef OLIMEX_LPC2148
 	char i, j, sl;
 	unsigned char bitmap[6]; //sp4
 	unsigned char sp[4]; //sp
@@ -281,6 +282,7 @@ void lcd_display_character(int inv, int row, unsigned char col, const unsigned c
 	}
 
 	IO1SET = (1 << 25);
+#endif
 }
 
 /* 7e8 - complete */
@@ -337,6 +339,7 @@ void lcd_display_bitmap(int inv, int row, int col, unsigned char* bitmap)
 /* 91c - todo */
 unsigned char func_91c(int r4, int r5, int r6, int r7, char* sp76)
 {
+#ifndef OLIMEX_LPC2148
 	unsigned char sp24[16];
 	union
 	{
@@ -569,6 +572,7 @@ unsigned char func_91c(int r4, int r5, int r6, int r7, char* sp76)
 	IO1SET = (1 << 25);
 	
 	return r6 + r9;
+#endif
 }
 
 /* 11d8 - complete */
@@ -857,7 +861,7 @@ void func_17d0(void)
 }
 
 /* 17f8 - complete */
-#ifdef OLIMEX_LPC2148
+#ifdef __GNUC__
 void timer_isr(void) __attribute__ ((interrupt ("IRQ")));
 void timer_isr(void)
 #else
@@ -920,31 +924,57 @@ void timer_isr(void) __irq
 		}
 	}
 
-	T0IR = 1;
+	T0IR = 1; //Reset MR0 Interrupt
 	VICVectAddr = 0;
 }
 
 /* 19cc - complete */
-#ifdef OLIMEX_LPC2148
+#ifdef __GNUC__
 void rtc_isr(void) __attribute__ ((interrupt ("IRQ")));
 void rtc_isr(void)
 #else
 void rtc_isr(void) __irq
 #endif
 {
-	ILR = 3;
+	// Clear the RTC Interrupt Location Register regarding..
+	ILR = (1 << 0) // increment, 
+		| (1 << 1); // Alarm.
 	
 	bData_40002c06 = 0;
+	
+#ifdef OLIMEX_LPC2148
+	{
+		static int flag = 0;
+		if (flag)
+		{
+			IOSET0 = 0x00000800;
+			flag = 0;
+		}
+		else
+		{
+			IOCLR0 = 0x00000800;
+			flag = 1;
+		}
+	}
+#endif
 	
 	VICVectAddr = 0;
 }
 
 #include "uart.c"
 
+#ifdef __GNUC__
+//void delay_loop(unsigned int a) __attribute__((optimize(-O0)));
+#endif
+
 /* 2254 - complete */
 void delay_loop(unsigned int a)
 {
+#ifdef __GNUC__
+   volatile unsigned int b;
+#else
 	unsigned int b;
+#endif
 	for ( ; a > 1; a--)
 	{	
 		for (b = 0x0000ffff; b > 1; b--)
@@ -953,43 +983,79 @@ void delay_loop(unsigned int a)
 	}
 }
 
+#if 1//def OLIMEX_LPC2148
+#include "usb.c"
+#endif
+
+#if 1
+#include "LPCUSB/usbinit.c"
+#include "LPCUSB/usbhw_lpc.c"
+#include "LPCUSB/usbcontrol.c"
+#include "LPCUSB/usbstdreq.c"
+#endif
+
 /* 227c - complete */
-void func_227c(void)
+void lpc_interrupt_init(void)
 {
+	//Timer0
+	// Prescale Register
 	T0PR = 0;
+	// Match Control Register
 	T0MCR = 3;
+	// Match Register 0
 	T0MR0 = 0x1b000;
+	// Timer Control Register
 	T0TCR = 3;
 	T0TCR = 1;
 	
 	VICIntSelect = 0;
-	VICVectCntl0 = 0x24;
+	
+	// Slot 0 has the highest priority and slot 15 the lowest
+
+	VICVectCntl0 = (1 << 5) | 4; // TIMER0 -> Slot 0
 	VICVectAddr0 = (unsigned int) timer_isr;
-	VICIntEnable = 0x10;
-	VICVectCntl3 = 0x2d;
+	VICIntEnable = (1 << 4); // Enable TIMER0
+	
+	VICVectCntl3 = (1 << 5) | 13; // RTC -> Slot 3
 	VICVectAddr3 = (unsigned int) rtc_isr;
-	VICIntEnable = 0x2000;
-	CIIR = 0x01;
-	ILR = 0x03;
-	CCR = 0x11;
-	VICVectCntl1 = 0x26;
-	VICVectCntl2 = 0x27;
-	VICIntEnable = 0x80;
-	VICIntEnable = 0x40;
+	VICIntEnable = (1 << 13); // Enable RTC
+	
+	// Counter Increment Interrupt Register
+	CIIR = (1 << 0); //an increment of the Second value generates an interrupt
+
+	// Clear the RTC Interrupt Location Register regarding...
+	ILR = (1 << 0) // increment, 
+		| (1 << 1); // Alarm.
+	
+	// Clock Control Register
+	CCR = (1 << 4) | (1 << 0); //CLKEN + CLKSRC (from Oscillator)
+	
+	VICVectCntl1 = (1 << 5) | 6; // UART0 -> Slot 1
+	VICVectCntl2 = (1 << 5) | 7; // UART1 -> Slot 2
+	VICIntEnable = (1 << 7); // Enable UART1
+	VICIntEnable = (1 << 6); // Enable UART0
 }
 
 /* 2328 - complete */
 void lpc_hw_init(void)
 {
+	// Enable the PLL
 	PLL0CON = 0x01;
+	
+	// Setting peripheral Clock (pclk) to System Clock (cclk) / 4
 	VPBDIV = 0;
-	PLL0CFG = 0x23;
+	
+	// Setup the PLL to multiply the 11.0592 / 12Mhz XTAL input...
+	PLL0CFG = 0x03 //by 4,
+		| (1 << 5); //divide by 2.
 	PLL0FEED = 0xaa;
 	PLL0FEED = 0x55;
 	
+	// Wait for the PLL to lock to set frequency 
 	while (!(PLL0STAT & 0x400)) {}
 	
-	PLL0CON = 0x03;
+	// Connect the PLL as the clock source 
+	PLL0CON = 0x01 | 0x02;
 	PLL0FEED = 0xaa;
 	PLL0FEED = 0x55;
 	
@@ -1039,7 +1105,7 @@ void lpc_hw_init(void)
 		(0 << 2) | // P0.2 = In
 		(0 << 3) | // P0.3 = In
 		(1 << 7) | // P0.7 = Out
-#ifdef OLIMEX_LPC2148
+#if 1//def OLIMEX_LPC2148
 		(1 <<10) | // P0.10 = Out -> LED1
 		(1 <<11) | // P0.11 = Out -> LED2
 #else
@@ -1075,7 +1141,6 @@ void lpc_hw_init(void)
 	
 	spi0_init();
 
-#ifndef OLIMEX_LPC2148
 	lcd_display_configure();
 	lcd_display_clear();
 	lcd_display_brightness(0x80);
@@ -1086,14 +1151,18 @@ void lpc_hw_init(void)
 	bData_40002c08 = 0x10;
 	bData_40002c09 = 0x10;
 	bData_40002c07 = 0x00;
+
+#if 1//def OLIMEX_LPC2148
+	usb_init();
 #endif
 
-	func_227c();
+	lpc_interrupt_init();
 }
 
 /* 243c - complete */
 void flash_read(unsigned int PageAdr, int b, int Count, unsigned char* Data)
 {
+#ifndef OLIMEX_LPC2148
 	unsigned short i = 0;
 	
 	IO1CLR = (1 << 24);
@@ -1117,11 +1186,13 @@ void flash_read(unsigned int PageAdr, int b, int Count, unsigned char* Data)
 	}
 	
 	IO1SET = (1 << 24);
+#endif
 }
 
 /* 24d4 - complete */
 void flash_write(int PageAdr, unsigned short BufAdr, int Count, unsigned char* Data)
 {
+#ifndef OLIMEX_LPC2148
 	unsigned short i;
 	IO1CLR = (1 << 24);
 
@@ -1149,6 +1220,7 @@ void flash_write(int PageAdr, unsigned short BufAdr, int Count, unsigned char* D
 	IO1SET = (1 << 24);
 	
 	delay_loop(5);
+#endif
 }
 
 /* 258c - complete */
@@ -1919,10 +1991,18 @@ void get_rtc_date_time(void)
 	wData_40002e66 = bData_40002c06 * 10;
 }
 
+#ifdef __GNUC__
+//void func_659c(unsigned short a) __attribute__((optimize(-O0)));
+#endif
+
 /* 659c - complete */
 void func_659c(unsigned short a)
 {
+#ifdef __GNUC__
+	volatile unsigned short b;
+#else
 	unsigned short b;
+#endif
 	for (; a > 1; a--)
 	{
 		for (b = 10000; b > 1; b--)
@@ -2565,8 +2645,6 @@ void beep1(int a)
 	bData_40002c08 = a << 5;
 	bData_40002c09 = bData_40002c08 - 1;
 }
-
-#ifndef OLIMEX_LPC2148
 
 /* 7978 - todo */
 void func_7978(Struct_7978 sp, double* sp272, double* sp276)
@@ -3780,8 +3858,6 @@ void func_b4d0(void)
 	dData_40003490 = 10000.0;
 }
 
-#endif //OLIMEX_LPC2148
-
 /* b4f0 - todo */
 void func_b4f0(void)
 {
@@ -3858,8 +3934,6 @@ void func_b64c(double a, double b)
 	bData_40003210 = 0;
 	bData_40003211 = 0;
 }
-
-#ifndef OLIMEX_LPC2148
 
 /* b7c8 - todo */
 void func_b7c8(double a, double b)
@@ -7739,5 +7813,3 @@ void PrepareMainScreenItems(void)
 
 #include "func_3d72c.c"
 
-
-#endif //OLIMEX_LPC2148

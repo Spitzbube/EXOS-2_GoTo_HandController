@@ -14,8 +14,6 @@
 
 #include "file_1f30.c"
 
-#ifndef OLIMEX_LPC2148
-
 /* 4ede4 - todo */
 void HandleStarKey(void)
 {
@@ -2977,7 +2975,7 @@ void HandleCustomSiteInputChar(int key)
 				case 4:
 					//0x62c88: Altitude
 					Data_4000271a[bCharacterInputPosition - 1] = digitChar;
-					strCustomSite[bCharacterInputPosition - 1] = digitChar;
+					strCustomSiteAltitude[bCharacterInputPosition - 1] = digitChar;
 				
 					HandleNextCustomSiteInputPosition();
 					//->0x62cc4
@@ -3243,6 +3241,7 @@ void func_68394(int a)
 /* 6a0e4 - todo */
 unsigned char ConvertKeyCode(void)
 {
+#ifndef OLIMEX_LPC2148
 	unsigned char r3 = func_11d8();
 	unsigned char r4;
 	
@@ -3390,6 +3389,9 @@ unsigned char ConvertKeyCode(void)
 	}
 	
 	return r4;
+#else
+	return 0xFF;
+#endif
 }
 
 /* 6a2cc - todo */
@@ -4590,8 +4592,6 @@ void ShowStartupScreen(void)
 	#endif
 }
 
-#endif //OLIMEX_LPC2148
-
 /* 6c848 - todo */
 int func_6c848(void)
 {
@@ -4819,7 +4819,7 @@ void func_6cb38(void)
 			Data_40002e54_Zone = fData_40003520;
 			Data_40004128.timeZone = fData_40003520;
 		
-			CCR = (1 << 4); //clock from the 32 kHz oscillator that’s connected to the RTCX1 and RTCX2 pins
+			CCR = (1 << 4); //clock from the 32 kHz oscillator thatï¿½s connected to the RTCX1 and RTCX2 pins
 			YEAR = Data_40003524_ReceiveExternalYear;
 			MONTH = bData_40003528_ReceiveExternalMonth; 
 			DOM = bData_40003529_ReceiveExternalDay;
@@ -4837,7 +4837,6 @@ void func_6cb38(void)
 			if (bData_4000352e > 2)
 			{
 				//6cf0c
-#ifndef OLIMEX_LPC2148
 				if (bData_40002c1a == 2)
 				{
 					//6cf1c
@@ -4848,7 +4847,6 @@ void func_6cb38(void)
 					dData_40003448 = sp32;
 					dData_40003450 = sp24;
 				}
-#endif
 				//6cfa8
 				sp60.fData = fData_40003508;
 				sp56.fData = fData_4000350c;
@@ -4889,7 +4887,6 @@ int main(void)
 	uart0_init(360);
 	uart1_init(360);
 
-#ifndef OLIMEX_LPC2148
 	func_7590();
 	func_d2cc();
 	func_5099c();
@@ -5057,14 +5054,13 @@ int main(void)
 	//6d880
 	Data_40002c1c = 0;
 	Data_40002c20 = 0;
-#endif //OLIMEX_LPC2148
 	//6d894 -> 729ec
 	//##########################################################################
 	//#################### Main Loop ###########################################
 	//##########################################################################
 	while (1) 
 	{
-		#ifdef UART0_DEBUG
+		#if 0 //def UART0_DEBUG
 		{
 			static char buf[100];
 			snprintf(buf, sizeof(buf)-1, "Main Loop (Context: %d)\n\r", Data_40002c64_MenuContextId);
@@ -5087,12 +5083,14 @@ int main(void)
 		
 		func_6cb38();
 		
-#ifdef OLIMEX_LPC2148
-		int j;
-		for (j = 0; j < 500000; j++ );		// wait 500 msec
+#if 0 //OLIMEX_LPC2148
+		volatile int j;
+		//for (j = 0; j < 500000; j++ );		// wait 500 msec
+		func_659c(500);
 //		IOSET0 = 0x00000800;
 		IOCLR0 = 0x00000400;
-		for (j = 0; j < 500000; j++ );		// wait 500 msec
+		//for (j = 0; j < 500000; j++ );		// wait 500 msec
+		func_659c(500);
 		IOSET0 = 0x00000400;
 //		IOCLR0 = 0x00000800;
 #endif

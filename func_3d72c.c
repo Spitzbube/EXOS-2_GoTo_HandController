@@ -1431,7 +1431,11 @@ void DisplayScreenItems(void)
 								
 								default:
 									//0x45740
+#ifdef __GNUC__
+								   break;
+#else
 //									break;
+#endif
 							}
 //							break;
 						
@@ -1478,7 +1482,11 @@ void DisplayScreenItems(void)
 								
 								default:
 									//0x459dc
+#ifdef __GNUC__
+								   break;
+#else
 //									break;
+#endif
 							}
 //							break;
 						
@@ -3029,7 +3037,11 @@ void DisplayScreenItems(void)
 								
 								default:
 									//0x4e7a0
+#ifdef __GNUC__
+								   break;
+#else
 //									break;
+#endif
 							}
 //							break;
 						
@@ -3075,7 +3087,11 @@ void DisplayScreenItems(void)
 								
 								default:
 									//0x4ea3c
+#ifdef __GNUC__
+								   break;
+#else
 //									break;
+#endif
 							}
 //							break;
 						

@@ -1,0 +1,392 @@
+Archive member included because of file (symbol)
+
+../usbstack.a(usbhw_lpc.o)    main_msc.o (USBHwRegisterEPIntHandler)
+../usbstack.a(usbcontrol.o)   main_msc.o (USBRegisterRequestHandler)
+../usbstack.a(usbstdreq.o)    main_msc.o (USBRegisterDescriptors)
+../usbstack.a(usbinit.o)      main_msc.o (USBInit)
+/home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_udivsi3.o)
+                              printf.o (__udivsi3)
+/home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_umodsi3.o)
+                              printf.o (__umodsi3)
+/home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_dvmd_tls.o)
+                              /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_udivsi3.o) (__div0)
+/home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
+                              msc_scsi.o (memcpy)
+
+Memory Configuration
+
+Name             Origin             Length             Attributes
+flash            0x00000000         0x00080000
+ram_isp_low      0x40000120         0x000000df         a
+ram              0x40000200         0x00007f01
+ram_isp_high     0x40007fe0         0x00000020         a
+ram_usb_dma      0x7fd00000         0x00002000
+*default*        0x00000000         0xffffffff
+
+Linker script and memory map
+
+LOAD crt.o
+LOAD startup.o
+LOAD printf.o
+LOAD console.o
+LOAD main_msc.o
+LOAD msc_bot.o
+LOAD msc_scsi.o
+LOAD blockdev_sd.o
+LOAD lpc2000_spi.o
+LOAD ../usbstack.a
+START GROUP
+LOAD /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a
+LOAD /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a
+END GROUP
+                0x40007edc                _stack_end = 0x40007edc
+                0x00000000                . = 0x0
+
+startup
+ *(.startup)
+
+.text           0x00000000     0x323c
+ *(.text)
+ .text          0x00000000       0xd8 crt.o
+                0x00000000                _startup
+                0x00000040                Reset_Handler
+ .text          0x000000d8       0x80 startup.o
+                0x000000e4                UNDEF_Routine
+                0x000000e0                SWI_Routine
+                0x000000dc                FIQ_Routine
+                0x000000d8                IRQ_Routine
+                0x000000e8                Initialize
+ .text          0x00000158      0x45c printf.o
+                0x00000580                printf
+                0x00000548                sprintf
+ .text          0x000005b4       0xd8 console.o
+                0x00000600                putchar
+                0x000005b4                ConsoleInit
+                0x00000658                puts
+                0x0000063c                getchar
+ .text          0x0000068c      0x138 main_msc.o
+                0x0000068c                main
+ .text          0x000007c4      0x570 msc_bot.o
+                0x00000928                MSCBotBulkIn
+                0x00000d08                MSCBotReset
+                0x000009f0                MSCBotBulkOut
+ .text          0x00000d34      0x4a8 msc_scsi.o
+                0x00000d48                SCSIHandleData
+                0x00000f7c                SCSIHandleCmd
+                0x00000d34                SCSIReset
+ .text          0x000011dc      0x4ec blockdev_sd.o
+                0x00001368                BlockDevRead
+                0x000013f8                BlockDevInit
+                0x000015dc                BlockDevGetSize
+                0x00001260                BlockDevWrite
+ .text          0x000016c8      0x1d0 lpc2000_spi.o
+                0x000016c8                SPISetSpeed
+                0x000017d8                SPIInit
+                0x0000177c                SPIRecvN
+                0x000016e4                SPISend
+                0x00001728                SPISendN
+ .text          0x00001898      0x64c ../usbstack.a(usbhw_lpc.o)
+                0x000019cc                USBHwEPRead
+                0x00001d60                USBHwISR
+                0x00001a6c                USBHwEPWrite
+                0x00001cbc                USBHwEPConfig
+                0x00001cac                USBHwSetAddress
+                0x00001c9c                USBHwConnect
+                0x00001b44                USBHwEPStall
+                0x000018c4                USBHwRegisterDevIntHandler
+                0x000018f0                USBHwRegisterEPIntHandler
+                0x00001b34                USBHwConfigDevice
+                0x00001b64                USBHwNakIntEnable
+                0x00001b70                USBHwInit
+                0x00001898                USBHwRegisterFrameHandler
+                0x00001ec4                USBHwEPGetStatus
+ .text          0x00001ee4      0x350 ../usbstack.a(usbcontrol.o)
+                0x00002064                USBHandleControlTransfer
+                0x00001ee4                USBRegisterRequestHandler
+ .text          0x00002234      0x428 ../usbstack.a(usbstdreq.o)
+                0x00002254                USBGetDescriptor
+                0x00002244                USBRegisterCustomReqHandler
+                0x00002234                USBRegisterDescriptors
+                0x00002324                USBHandleStandardRequest
+ .text          0x0000265c       0x80 ../usbstack.a(usbinit.o)
+                0x0000265c                USBInit
+ .text          0x000026dc      0x110 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_udivsi3.o)
+                0x000026dc                __udivsi3
+                0x000026dc                __aeabi_uidiv
+                0x000027d4                __aeabi_uidivmod
+ .text          0x000027ec       0xcc /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_umodsi3.o)
+                0x000027ec                __umodsi3
+ .text          0x000028b8        0x4 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_dvmd_tls.o)
+                0x000028b8                __aeabi_ldiv0
+                0x000028b8                __div0
+                0x000028b8                __aeabi_idiv0
+ .text          0x000028bc       0xa0 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
+                0x000028bc                memcpy
+ *(.rodata)
+ .rodata        0x0000295c       0x71 main_msc.o
+ *fill*         0x000029cd        0x3 00
+ .rodata        0x000029d0       0x20 msc_bot.o
+ .rodata        0x000029f0       0x3e msc_scsi.o
+ *fill*         0x00002a2e        0x2 00
+ .rodata        0x00002a30       0x1c ../usbstack.a(usbhw_lpc.o)
+ .rodata        0x00002a4c       0x38 ../usbstack.a(usbcontrol.o)
+ .rodata        0x00002a84       0x28 ../usbstack.a(usbstdreq.o)
+ *(.rodata*)
+ .rodata.str1.4
+                0x00002aac        0x7 printf.o
+                                  0x8 (size before relaxing)
+ *fill*         0x00002ab3        0x1 00
+ .rodata.str1.4
+                0x00002ab4       0x64 main_msc.o
+ .rodata.str1.4
+                0x00002b18      0x183 msc_bot.o
+                                0x184 (size before relaxing)
+ *fill*         0x00002c9b        0x1 00
+ .rodata.str1.4
+                0x00002c9c      0x112 msc_scsi.o
+                                0x114 (size before relaxing)
+ *fill*         0x00002dae        0x2 00
+ .rodata.str1.4
+                0x00002db0      0x2a6 blockdev_sd.o
+                                0x2a8 (size before relaxing)
+ *fill*         0x00003056        0x2 00
+ .rodata.str1.4
+                0x00003058       0x13 lpc2000_spi.o
+                                 0x14 (size before relaxing)
+ *fill*         0x0000306b        0x1 00
+ .rodata.str1.4
+                0x0000306c       0x7c ../usbstack.a(usbhw_lpc.o)
+                                 0xa4 (size before relaxing)
+ .rodata.str1.4
+                0x000030e8       0x92 ../usbstack.a(usbcontrol.o)
+                                 0xd0 (size before relaxing)
+ *fill*         0x0000317a        0x2 00
+ .rodata.str1.4
+                0x0000317c       0xbb ../usbstack.a(usbstdreq.o)
+                                 0xe4 (size before relaxing)
+ *fill*         0x00003237        0x1 00
+ .rodata.str1.4
+                0x00003238        0x3 ../usbstack.a(usbinit.o)
+                                  0x4 (size before relaxing)
+ *(.glue_7)
+ *fill*         0x0000323b        0x1 00
+ *(.glue_7t)
+                0x0000323c                _etext = .
+
+.data           0x40000200        0x0 load address 0x0000323c
+                0x40000200                _data = .
+ *(.data)
+                0x40000200                _edata = .
+
+.bss            0x40000200      0x2d8
+                0x40000200                _bss_start = .
+ *(.bss)
+ .bss           0x40000200        0x4 main_msc.o
+ .bss           0x40000204       0x40 msc_bot.o
+ .bss           0x40000244      0x204 msc_scsi.o
+ .bss           0x40000448       0x48 ../usbstack.a(usbhw_lpc.o)
+ .bss           0x40000490       0x34 ../usbstack.a(usbcontrol.o)
+ .bss           0x400004c4        0xc ../usbstack.a(usbstdreq.o)
+ .bss           0x400004d0        0x8 ../usbstack.a(usbinit.o)
+                0x400004d8                . = ALIGN (0x4)
+                0x400004d8                _bss_end = .
+                0x400004d8                _end = .
+OUTPUT(msc.elf elf32-littlearm)
+
+.debug_abbrev   0x00000000     0x1069
+ .debug_abbrev  0x00000000       0x69 startup.o
+ .debug_abbrev  0x00000069      0x14d printf.o
+ .debug_abbrev  0x000001b6       0xb8 console.o
+ .debug_abbrev  0x0000026e       0xce main_msc.o
+ .debug_abbrev  0x0000033c      0x1e4 msc_bot.o
+ .debug_abbrev  0x00000520      0x102 msc_scsi.o
+ .debug_abbrev  0x00000622      0x1c2 blockdev_sd.o
+ .debug_abbrev  0x000007e4      0x12f lpc2000_spi.o
+ .debug_abbrev  0x00000913      0x24c ../usbstack.a(usbhw_lpc.o)
+ .debug_abbrev  0x00000b5f      0x149 ../usbstack.a(usbcontrol.o)
+ .debug_abbrev  0x00000ca8      0x23f ../usbstack.a(usbstdreq.o)
+ .debug_abbrev  0x00000ee7       0xa0 ../usbstack.a(usbinit.o)
+ .debug_abbrev  0x00000f87       0x14 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_udivsi3.o)
+ .debug_abbrev  0x00000f9b       0x14 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_umodsi3.o)
+ .debug_abbrev  0x00000faf       0x14 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_dvmd_tls.o)
+ .debug_abbrev  0x00000fc3       0xa6 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
+
+.debug_info     0x00000000     0x23d0
+ .debug_info    0x00000000       0xb4 startup.o
+ .debug_info    0x000000b4      0x350 printf.o
+ .debug_info    0x00000404       0xd2 console.o
+ .debug_info    0x000004d6      0x185 main_msc.o
+ .debug_info    0x0000065b      0x409 msc_bot.o
+ .debug_info    0x00000a64      0x2fc msc_scsi.o
+ .debug_info    0x00000d60      0x335 blockdev_sd.o
+ .debug_info    0x00001095      0x1a1 lpc2000_spi.o
+ .debug_info    0x00001236      0x634 ../usbstack.a(usbhw_lpc.o)
+ .debug_info    0x0000186a      0x33f ../usbstack.a(usbcontrol.o)
+ .debug_info    0x00001ba9      0x4c7 ../usbstack.a(usbstdreq.o)
+ .debug_info    0x00002070       0xbe ../usbstack.a(usbinit.o)
+ .debug_info    0x0000212e       0x88 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_udivsi3.o)
+ .debug_info    0x000021b6       0x88 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_umodsi3.o)
+ .debug_info    0x0000223e       0x88 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_dvmd_tls.o)
+ .debug_info    0x000022c6      0x10a /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
+
+.debug_line     0x00000000      0xb6b
+ .debug_line    0x00000000       0x63 startup.o
+ .debug_line    0x00000063      0x101 printf.o
+ .debug_line    0x00000164       0x53 console.o
+ .debug_line    0x000001b7       0x74 main_msc.o
+ .debug_line    0x0000022b      0x107 msc_bot.o
+ .debug_line    0x00000332       0xde msc_scsi.o
+ .debug_line    0x00000410       0xfb blockdev_sd.o
+ .debug_line    0x0000050b       0x87 lpc2000_spi.o
+ .debug_line    0x00000592      0x186 ../usbstack.a(usbhw_lpc.o)
+ .debug_line    0x00000718       0xcc ../usbstack.a(usbcontrol.o)
+ .debug_line    0x000007e4      0x107 ../usbstack.a(usbstdreq.o)
+ .debug_line    0x000008eb       0x51 ../usbstack.a(usbinit.o)
+ .debug_line    0x0000093c       0x8d /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_udivsi3.o)
+ .debug_line    0x000009c9       0x76 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_umodsi3.o)
+ .debug_line    0x00000a3f       0x61 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_dvmd_tls.o)
+ .debug_line    0x00000aa0       0xcb /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
+
+.debug_frame    0x00000000      0x72c
+ .debug_frame   0x00000000       0x60 startup.o
+ .debug_frame   0x00000060       0xd0 printf.o
+ .debug_frame   0x00000130       0x58 console.o
+ .debug_frame   0x00000188       0x44 main_msc.o
+ .debug_frame   0x000001cc       0xac msc_bot.o
+ .debug_frame   0x00000278       0x64 msc_scsi.o
+ .debug_frame   0x000002dc       0xc0 blockdev_sd.o
+ .debug_frame   0x0000039c       0x68 lpc2000_spi.o
+ .debug_frame   0x00000404      0x16c ../usbstack.a(usbhw_lpc.o)
+ .debug_frame   0x00000570       0x98 ../usbstack.a(usbcontrol.o)
+ .debug_frame   0x00000608       0x74 ../usbstack.a(usbstdreq.o)
+ .debug_frame   0x0000067c       0x38 ../usbstack.a(usbinit.o)
+ .debug_frame   0x000006b4       0x28 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_udivsi3.o)
+ .debug_frame   0x000006dc       0x28 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_umodsi3.o)
+ .debug_frame   0x00000704       0x28 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
+
+.debug_pubnames
+                0x00000000      0x45b
+ .debug_pubnames
+                0x00000000       0x63 startup.o
+ .debug_pubnames
+                0x00000063       0x29 printf.o
+ .debug_pubnames
+                0x0000008c       0x43 console.o
+ .debug_pubnames
+                0x000000cf       0x1b main_msc.o
+ .debug_pubnames
+                0x000000ea       0x45 msc_bot.o
+ .debug_pubnames
+                0x0000012f       0x45 msc_scsi.o
+ .debug_pubnames
+                0x00000174       0x5a blockdev_sd.o
+ .debug_pubnames
+                0x000001ce       0x54 lpc2000_spi.o
+ .debug_pubnames
+                0x00000222      0x132 ../usbstack.a(usbhw_lpc.o)
+ .debug_pubnames
+                0x00000354       0x4d ../usbstack.a(usbcontrol.o)
+ .debug_pubnames
+                0x000003a1       0x7f ../usbstack.a(usbstdreq.o)
+ .debug_pubnames
+                0x00000420       0x1e ../usbstack.a(usbinit.o)
+ .debug_pubnames
+                0x0000043e       0x1d /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
+
+.debug_aranges  0x00000000      0x200
+ .debug_aranges
+                0x00000000       0x20 startup.o
+ .debug_aranges
+                0x00000020       0x20 printf.o
+ .debug_aranges
+                0x00000040       0x20 console.o
+ .debug_aranges
+                0x00000060       0x20 main_msc.o
+ .debug_aranges
+                0x00000080       0x20 msc_bot.o
+ .debug_aranges
+                0x000000a0       0x20 msc_scsi.o
+ .debug_aranges
+                0x000000c0       0x20 blockdev_sd.o
+ .debug_aranges
+                0x000000e0       0x20 lpc2000_spi.o
+ .debug_aranges
+                0x00000100       0x20 ../usbstack.a(usbhw_lpc.o)
+ .debug_aranges
+                0x00000120       0x20 ../usbstack.a(usbcontrol.o)
+ .debug_aranges
+                0x00000140       0x20 ../usbstack.a(usbstdreq.o)
+ .debug_aranges
+                0x00000160       0x20 ../usbstack.a(usbinit.o)
+ .debug_aranges
+                0x00000180       0x20 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_udivsi3.o)
+ .debug_aranges
+                0x000001a0       0x20 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_umodsi3.o)
+ .debug_aranges
+                0x000001c0       0x20 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/libgcc.a(_dvmd_tls.o)
+ .debug_aranges
+                0x000001e0       0x20 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
+
+.debug_ranges   0x00000000      0x188
+ .debug_ranges  0x00000000       0x30 startup.o
+ .debug_ranges  0x00000030       0x30 msc_bot.o
+ .debug_ranges  0x00000060       0x18 blockdev_sd.o
+ .debug_ranges  0x00000078       0x18 lpc2000_spi.o
+ .debug_ranges  0x00000090       0x78 ../usbstack.a(usbhw_lpc.o)
+ .debug_ranges  0x00000108       0x80 ../usbstack.a(usbstdreq.o)
+
+.debug_str      0x00000000      0xada
+ .debug_str     0x00000000       0x86 startup.o
+ .debug_str     0x00000086       0x6a printf.o
+                                 0xde (size before relaxing)
+ .debug_str     0x000000f0       0x34 console.o
+                                 0x73 (size before relaxing)
+ .debug_str     0x00000124       0xa7 main_msc.o
+                                0x10e (size before relaxing)
+ .debug_str     0x000001cb      0x1a2 msc_bot.o
+                                0x253 (size before relaxing)
+ .debug_str     0x0000036d       0xe7 msc_scsi.o
+                                0x1bb (size before relaxing)
+ .debug_str     0x00000454       0xdc blockdev_sd.o
+                                0x161 (size before relaxing)
+ .debug_str     0x00000530       0x57 lpc2000_spi.o
+                                 0xd2 (size before relaxing)
+ .debug_str     0x00000587      0x26b ../usbstack.a(usbhw_lpc.o)
+                                0x2ea (size before relaxing)
+ .debug_str     0x000007f2       0x94 ../usbstack.a(usbcontrol.o)
+                                0x1b4 (size before relaxing)
+ .debug_str     0x00000886      0x160 ../usbstack.a(usbstdreq.o)
+                                0x25b (size before relaxing)
+ .debug_str     0x000009e6       0x39 ../usbstack.a(usbinit.o)
+                                 0xb0 (size before relaxing)
+ .debug_str     0x00000a1f       0xbb /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
+                                 0xe7 (size before relaxing)
+
+.comment        0x00000000       0xea
+ .comment       0x00000000       0x12 startup.o
+ .comment       0x00000012       0x12 printf.o
+ .comment       0x00000024       0x12 console.o
+ .comment       0x00000036       0x12 main_msc.o
+ .comment       0x00000048       0x12 msc_bot.o
+ .comment       0x0000005a       0x12 msc_scsi.o
+ .comment       0x0000006c       0x12 blockdev_sd.o
+ .comment       0x0000007e       0x12 lpc2000_spi.o
+ .comment       0x00000090       0x12 ../usbstack.a(usbhw_lpc.o)
+ .comment       0x000000a2       0x12 ../usbstack.a(usbcontrol.o)
+ .comment       0x000000b4       0x12 ../usbstack.a(usbstdreq.o)
+ .comment       0x000000c6       0x12 ../usbstack.a(usbinit.o)
+ .comment       0x000000d8       0x12 /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
+
+.debug_loc      0x00000000     0x1a02
+ .debug_loc     0x00000000      0x5ae printf.o
+ .debug_loc     0x000005ae       0x63 console.o
+ .debug_loc     0x00000611       0xfb main_msc.o
+ .debug_loc     0x0000070c      0x297 msc_bot.o
+ .debug_loc     0x000009a3      0x24e msc_scsi.o
+ .debug_loc     0x00000bf1      0x2a7 blockdev_sd.o
+ .debug_loc     0x00000e98       0x45 lpc2000_spi.o
+ .debug_loc     0x00000edd      0x3f1 ../usbstack.a(usbhw_lpc.o)
+ .debug_loc     0x000012ce      0x297 ../usbstack.a(usbcontrol.o)
+ .debug_loc     0x00001565      0x390 ../usbstack.a(usbstdreq.o)
+ .debug_loc     0x000018f5       0x32 ../usbstack.a(usbinit.o)
+ .debug_loc     0x00001927       0xdb /home/stc2hi/opt/arm/bin/../lib/gcc/arm-elf/4.1.0/../../../../arm-elf/lib/libc.a(memcpy.o)
