@@ -728,7 +728,7 @@ void func_4fda8(void)
 					Data_40003408 = -1;
 					Data_4000340c = 1;
 					bData_40003201 = 0;
-					//bData_40003200 = 0; //??
+					//bData_40003200 = 0; //Bug??
 				}
 				//0x4feb0
 				else if (bData_40002c1a == 1)
@@ -3242,143 +3242,143 @@ void func_68394(int a)
 unsigned char ConvertKeyCode(void)
 {
 #ifndef OLIMEX_LPC2148
-	unsigned char r3 = func_11d8();
-	unsigned char r4;
+	unsigned char hwKey = get_hw_key_code();
+	unsigned char menuKey;
 	
-	if (r3 & 0x20)
+	if (hwKey & 0x20) //Valid?
 	{
-		r3 &= 0x1f;
+		hwKey &= 0x1f;
 		
-		func_1210();
+		ack_hw_key();
 		
 		bData_40002c68 = 0;
 		Data_400031e4 = 0;
 	}
 	else
 	{
-		r3 = 100;
+		hwKey = 100;
 	}
 	
-	switch (r3)
+	switch (hwKey)
 	{
 		case 1:
 			//0x6a18c: 10100001 / 11100001
-			r4 = 16;
+			menuKey = 16;
 			break;
 		
 		case 2:
 			//0x6a198: 10100010 / 11100010
-			r4 = 1;
+			menuKey = 1;
 			break;
 		
 		case 3:
 			//0x6a1a4: 10100011 / 11100011
-			r4 = 4;
+			menuKey = 4;
 			break;
 		
 		case 4:
 			//0x6a1b0: 10100100 / 11100100
-			r4 = 7;
+			menuKey = 7;
 			break;
 		
 		case 5:
 			//0x6a1bc: 10100101 / 11100101
-			r4 = 10;
+			menuKey = 10;
 			break;
 		
 		case 6:
 			//0x6a1c8: 10100110 / 11100110
-			r4 = 15;
+			menuKey = 15;
 			break;
 		
 		case 7:
 			//0x6a1d4: 10100111 / 11100111
-			r4 = 2;
+			menuKey = 2;
 			break;
 		
 		case 8:
 			//0x6a1e0: 10101000 / 11101000
-			r4 = 5;
+			menuKey = 5;
 			break;
 		
 		case 9:
 			//0x6a1ec: 10101001 / 11101001
-			r4 = 8;
+			menuKey = 8;
 			break;
 		
 		case 10:
 			//0x6a1f8: 10101010 / 11101010
-			r4 = 0;
+			menuKey = 0;
 			break;
 		
 		case 11:
 			//0x6a204: 10101011 / 11101011
-			r4 = 17;
+			menuKey = 17;
 			break;
 		
 		case 12:
 			//0x6a210: 10101100 / 11101100
-			r4 = 3;
+			menuKey = 3;
 			break;
 		
 		case 13:
 			//0x6a21c: 10101101 / 11101101
-			r4 = 6;
+			menuKey = 6;
 			break;
 		
 		case 14:
 			//0x6a228: 10101110 / 11101110
-			r4 = 9;
+			menuKey = 9;
 			break;
 		
 		case 15:
 			//0x6a234: 10101111 / 11101111
-			r4 = 11;
+			menuKey = 11;
 			break;
 		
 		case 16:
 			//0x6a240: 10110000 / 11110000
-			r4 = 14;
+			menuKey = 14;
 			break;
 		
 		case 17:
 			//0x6a24c: 10110001 / 11110001
-			r4 = 19;
+			menuKey = 19;
 			break;
 		
 		case 18:
 			//0x6a258: 10110010 / 11110010
-			r4 = 12;
+			menuKey = 12;
 			break;
 		
 		case 19:
 			//0x6a264: 10110011 / 11110011
-			r4 = 20;
+			menuKey = 20;
 			break;
 		
 		case 20:
 			//0x6a270: 10110100 / 11110100
-			r4 = 13;
+			menuKey = 13;
 			break;
 		
 		case 21:
 			//0x6a27c
-			r4 = 21;
+			menuKey = 21;
 			break;
 		
 		case 22:
 			//0x6a288
-			r4 = 22;
+			menuKey = 22;
 			break;
 		
 		case 23:
 			//0x6a294
-			r4 = 23;
+			menuKey = 23;
 			break;
 		
 		case 24:
 			//0x6a2a0
-			r4 = 24;
+			menuKey = 24;
 			break;
 
 		default:
@@ -3388,21 +3388,21 @@ unsigned char ConvertKeyCode(void)
 			break;
 	}
 	
-	return r4;
+	return menuKey;
 #else
 	return 0xFF;
 #endif
 }
 
 /* 6a2cc - todo */
-void func_6a2cc(void)
+void UserInterfaceCycle(void)
 {
 	get_rtc_date_time();
 	
 	if (bData_40003505 != 0)
 	{
 		func_659c(10);
-		func_1210();
+		ack_hw_key();
 		
 		if (bData_4000322d_AlarmTimeElapsed == 1)
 		{
@@ -4841,7 +4841,7 @@ void func_6cb38(void)
 				{
 					//6cf1c
 					double sp32, sp24;
-					func_acdc(fData_4000350c, fData_40003508, &sp32, &sp24);					
+					func_acdc(fData_40003508, fData_4000350c, &sp32, &sp24);					
 					fData_40003508 = sp32;
 					fData_4000350c = sp24;
 					dData_40003448 = sp32;
@@ -5653,7 +5653,7 @@ int main(void)
 			bSystemInitialized = 1;
 		}
 		//6f94c
-		func_6a2cc(); //->KeyHandling
+		UserInterfaceCycle();
 		//6f950
 		if (Data_40004128.bData_364 == 0)
 		{

@@ -3,12 +3,12 @@
 #include "data.h"
 
 
-unsigned char Data_40002bf8[8]; //40002bf8, size??
-unsigned char bData_40002c00; //40002c00
-unsigned char bData_40002c01; //40002c01
+unsigned char sHwKeyQueue[8]; //40002bf8, size??
+unsigned char bHwKeyQueueReadPtr; //40002c00
+unsigned char bHwKeyQueueWritePtr; //40002c01
 unsigned char bData_40002c02; //40002c02
 unsigned char bData_40002c03; //40002c03
-unsigned char bData_40002c04; //40002c04
+unsigned char bHwKeyCode; //40002c04
 unsigned char bData_40002c05; //40002c05
 unsigned char bData_40002c06; //40002c06
 unsigned char bData_40002c07; //40002c07

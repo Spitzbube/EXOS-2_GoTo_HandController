@@ -19,6 +19,14 @@
 #define FLASH_CMD_BUF1_WRITE 0x84
 #define FLASH_CMD_CONT_ARRAY_READ 0xE8
 
+#define GPIO_FLASH_CS (1 << 24) //P1.24
+#define ENABLE_FLASH_CS (IO1CLR = GPIO_FLASH_CS)
+#define DISABLE_FLASH_CS (IO1SET = GPIO_FLASH_CS)
+
+#define GPIO_FONTROM_CS (1 << 25) //P1.25
+#define ENABLE_FONTROM_CS (IO1CLR = GPIO_FONTROM_CS)
+#define DISABLE_FONTROM_CS (IO1SET = GPIO_FONTROM_CS)
+
 // LCD Display commands
 #define ST7565_CMD_DISPLAY_ON             0xAF
 #define ST7565_CMD_SET_PAGE               0xB0
@@ -245,7 +253,7 @@ void lcd_display_character(int inv, int row, unsigned char col, const unsigned c
 	lcd_write_command(((((col - 1) * 6 + 1) & 0xf0) >> 4) | ST7565_CMD_SET_COLUMN_UPPER);
 	lcd_write_command(((row - 1) & 0x0f) | ST7565_CMD_SET_PAGE);
 
-	IO1CLR = (1 << 25);
+	ENABLE_FONTROM_CS;
 
 	for (i = 3; i >= 0; i--)
 	{
@@ -281,7 +289,7 @@ void lcd_display_character(int inv, int row, unsigned char col, const unsigned c
 		}
 	}
 
-	IO1SET = (1 << 25);
+	DISABLE_FONTROM_CS;
 #endif
 }
 
@@ -431,7 +439,7 @@ unsigned char func_91c(int r4, int r5, int r6, int r7, char* sp76)
 
 		sp20.b[3] = 0x0b;
 		
-		IO1CLR = (1 << 25);
+		ENABLE_FONTROM_CS;
 		
 		for (sp8 = 3; sp8 >= 0; sp8--)
 		{
@@ -566,119 +574,131 @@ unsigned char func_91c(int r4, int r5, int r6, int r7, char* sp76)
 
 		sp4++;
 		
-		IO1SET = (1 << 25);
-	}
+		DISABLE_FONTROM_CS;
+	} //while ((sp = ((unsigned short*)sp76)[sp4]) != 0)
 	
-	IO1SET = (1 << 25);
+	DISABLE_FONTROM_CS;
 	
 	return r6 + r9;
 #endif
 }
 
 /* 11d8 - complete */
-unsigned char func_11d8(void)
+unsigned char get_hw_key_code(void)
 {
-	if (bData_40002c00 == bData_40002c01)
+	if (bHwKeyQueueReadPtr == bHwKeyQueueWritePtr)
 	{
-		return bData_40002c04;
+		return bHwKeyCode;
 	}
 	else
 	{
-		return Data_40002bf8[bData_40002c00];
+		return sHwKeyQueue[bHwKeyQueueReadPtr];
 	}
 }
 
 /* 1210 - complete */
-void func_1210(void)
+void ack_hw_key(void)
 {
-	if (bData_40002c00 == bData_40002c01)
+	if (bHwKeyQueueReadPtr == bHwKeyQueueWritePtr)
 	{
-		bData_40002c04 |= 0x80;
+		bHwKeyCode |= 0x80;
 	}
 	else
 	{
-		bData_40002c00 = (bData_40002c00 + 1) % 8;
+		bHwKeyQueueReadPtr = (bHwKeyQueueReadPtr + 1) % 8;
 	}
 }
 
 /* 1268 - complete */
-void func_1268(void)
+void read_key_matrix(void)
 {
-	unsigned char r0, r1, i, r3, ip, lr;
+	unsigned char row, col, i, r3, ip, lr;
 	unsigned int r4;
 	
 	r3 = 0;
-	r1 = 0;
-	r0 = 0;
+	col = 0;
+	row = 0;
 	ip = 0;
 	
 	for (i = 0; i < 4; i++)
 	{
-		IO1SET = 0xf0000;
-		IO1DIR = 0x3c00000;
-		IO1DIR |= (0x80000 >> i);
-		IO1CLR = 0x80000 >> i;
+		// Write Value 1 on Column GPIO lines: P1.16, P1.17, P1.18, P1.19
+		IO1SET = (1 << 16) | (1 << 17) | (1 << 18) | (1 << 19);
 		
-		if ((IO0PIN & 0x72400000) ^ 0x72400000)
+		// Output: P1.22, P1.23, P1.24, P1.25
+		IO1DIR = (1 << 22) | (1 << 23) | (1 << 24) | (1 << 25);
+		
+		// Output: P1.16 + i
+		IO1DIR |= ((1 << 19) >> i); // 19 / 18 / 17 / 16
+		
+		// Write Value 0 on Column GPIO lines: P1.16 + i
+		IO1CLR = (1 << 19) >> i;
+		
+		// Read Row GPIO lines: P0.22, P0.25, P0.28, P0.29, P0.30
+		if ((IO0PIN & ((1 << 22) | (1 << 25) | (1 << 28) | (1 << 29) | (1 << 30))) ^ 
+				((1 << 22) | (1 << 25) | (1 << 28) | (1 << 29) | (1 << 30)))
 		{
 			r4 = IO0PIN;
-			if ((r4 & 0x400000) == 0)
+			if ((r4 & (1 << 22)) == 0)
 			{
-				r0 = 1;
-				lr = r1;
-				r1 = i;
+				row = 1;
+				lr = col;
+				col = i;
 				r3++;
 				ip++;
 			}
 
-			if ((r4 & 0x2000000) == 0)
+			if ((r4 & (1 << 25)) == 0)
 			{
-				r0 = 2;
-				r1 = i;
+				row = 2;
+				col = i;
 				r3++;
 			}
 
-			if ((r4 & 0x10000000) == 0)
+			if ((r4 & (1 << 28)) == 0)
 			{
-				r0 = 3;
-				r1 = i;
+				row = 3;
+				col = i;
 				r3++;
 			}
 
-			if ((r4 & 0x20000000) == 0)
+			if ((r4 & (1 << 29)) == 0)
 			{
-				r0 = 4;
-				r1 = i;
+				row = 4;
+				col = i;
 				r3++;
 			}
 
-			if ((r4 & 0x40000000) == 0)
+			if ((r4 & (1 << 30)) == 0)
 			{
-				r0 = 5;
-				r1 = i;
+				row = 5;
+				col = i;
 				r3++;
 			}
 		}
-	}
+	} //for (i = 0; i < 4; i++)
 
 	if (r3 == 0)
 	{
+		//No Key
 		lr = 0;
 	}
 	else if (r3 == 1)
 	{
-		lr = r1 * 5 + r0;
+		//Single Key
+		lr = col * 5 + row;
 	}
 	else if ((r3 == 2) && (ip == 2))
 	{
+		//Two Keys (First Row)
 		switch (lr)
 		{
 			case 0:
-				if (r1 == 1)
+				if (col == 1)
 				{
 					lr = 21;
 				}
-				else if (r1 == 3)
+				else if (col == 3)
 				{
 					lr = 22;
 				}
@@ -689,7 +709,7 @@ void func_1268(void)
 				break;
 				
 			case 1:
-				if (r1 == 2)
+				if (col == 2)
 				{
 					lr = 23;
 				}
@@ -700,7 +720,7 @@ void func_1268(void)
 				break;
 			
 			case 2:
-				if (r1 == 3)
+				if (col == 3)
 				{
 					lr = 24;
 				}
@@ -721,16 +741,18 @@ void func_1268(void)
 
 	if (lr != 0)
 	{
-		if ((bData_40002c04 & 0x1f) == lr)
+		if ((bHwKeyCode & 0x1f) == lr)
 		{
 			if (bData_40002c02 > 9)
 			{
-				bData_40002c04 |= 0x20;
+				//Valid
+				bHwKeyCode |= 0x20;
 			}
 
 			if (bData_40002c02 > 0xc0)
 			{
-				bData_40002c04 |= 0x40;
+				//Long Press
+				bHwKeyCode |= 0x40;
 			}
 
 			if (bData_40002c02 < 0xff)
@@ -738,35 +760,35 @@ void func_1268(void)
 				bData_40002c02++;
 			}
 		}
-		else if ((bData_40002c04 & 0x1f) >= 21)
+		else if ((bHwKeyCode & 0x1f) >= 21)
 		{
-			switch (bData_40002c04 & 0x1f)
+			switch (bHwKeyCode & 0x1f)
 			{
 				case 21:
 					if ((lr == 1) || (lr == 6))
 					{
-						bData_40002c04 = (bData_40002c04 & 0xe0) | lr;
+						bHwKeyCode = (bHwKeyCode & 0xe0) | lr;
 					}
 					break;
 				
 				case 22:
 					if ((lr == 1) || (lr == 16))
 					{
-						bData_40002c04 = (bData_40002c04 & 0xe0) | lr;
+						bHwKeyCode = (bHwKeyCode & 0xe0) | lr;
 					}
 					break;
 				
 				case 23:
 					if ((lr == 11) || (lr == 6))
 					{
-						bData_40002c04 = (bData_40002c04 & 0xe0) | lr;
+						bHwKeyCode = (bHwKeyCode & 0xe0) | lr;
 					}
 					break;
 				
 				case 24:
 					if ((lr == 11) || (lr == 16))
 					{
-						bData_40002c04 = (bData_40002c04 & 0xe0) | lr;
+						bHwKeyCode = (bHwKeyCode & 0xe0) | lr;
 					}
 					break;
 				
@@ -780,7 +802,7 @@ void func_1268(void)
 			{
 				if (bData_40002c03 > 9)
 				{
-						bData_40002c04 = (bData_40002c04 & 0xe0) | lr;
+						bHwKeyCode = (bHwKeyCode & 0xe0) | lr;
 				}
 
 				if (bData_40002c03 < 0xff)
@@ -792,7 +814,7 @@ void func_1268(void)
 			{
 				bData_40002c05 = 0;
 				
-				switch (bData_40002c04 & 0x1f)
+				switch (bHwKeyCode & 0x1f)
 				{
 					case 1:
 						if ((lr == 21) || (lr == 22))
@@ -829,24 +851,24 @@ void func_1268(void)
 		}
 		else
 		{
-			bData_40002c04 = lr;
+			bHwKeyCode = lr;
 			bData_40002c05 = 0;
 			bData_40002c03 = 0;
 			bData_40002c02 = 0;
 		}
-	}
+	} //if (lr != 0)
 	else
 	{
-		if ((bData_40002c04 & 0x20) && ((bData_40002c04 & 0x80) == 0))
+		if ((bHwKeyCode & 0x20) && ((bHwKeyCode & 0x80) == 0))
 		{
-			if (((bData_40002c01 + 1) % 8) != bData_40002c00)
+			if (((bHwKeyQueueWritePtr + 1) % 8) != bHwKeyQueueReadPtr)
 			{
-				Data_40002bf8[bData_40002c01] = bData_40002c04;
-				bData_40002c01 = (bData_40002c01 + 1) % 8;
+				sHwKeyQueue[bHwKeyQueueWritePtr] = bHwKeyCode;
+				bHwKeyQueueWritePtr = (bHwKeyQueueWritePtr + 1) % 8;
 			}
 		}
 		
-		bData_40002c04 = 0;
+		bHwKeyCode = 0;
 		bData_40002c02 = 0;
 	}
 }
@@ -855,9 +877,9 @@ void func_1268(void)
 void func_17d0(void)
 {
 	bData_40002c02 = 0;
-	bData_40002c01 = 0;
-	bData_40002c00 = 0;
-	bData_40002c04 = 0;
+	bHwKeyQueueWritePtr = 0;
+	bHwKeyQueueReadPtr = 0;
+	bHwKeyCode = 0;
 }
 
 /* 17f8 - complete */
@@ -868,35 +890,55 @@ void timer_isr(void)
 void timer_isr(void) __irq
 #endif
 {
-	func_1268();
+	read_key_matrix();
 	
 	if (bData_40002c08 == 0)
 	{
-		IO1SET = 0x400000;
-		
+		IO1SET = (1 << 22);
+#ifdef OLIMEX_LPC2148
+		// Set LED1
+		IOSET0 = (1 << 10);
+#endif
+				
 		bData_40002c07 = 0;
 	}
 	else if (bData_40002c09 == 0)
 	{
-		IO1CLR = 0x400000;
+		IO1CLR = (1 << 22);
+#ifdef OLIMEX_LPC2148
+		// Clear LED1
+		IOCLR0 = (1 << 10);
+#endif
 		
 		bData_40002c07 = 0;
 	}
 	else if (bData_40002c07 <= bData_40002c08)
 	{
-		IO1CLR = 0x400000;
+		IO1CLR = (1 << 22);
+#ifdef OLIMEX_LPC2148
+		// Clear LED1
+		IOCLR0 = (1 << 10);
+#endif
 		
 		bData_40002c07++;
 	}
 	else if (bData_40002c07 <= bData_40002c09)
 	{
-		IO1SET = 0x400000;
+		IO1SET = (1 << 22);
+#ifdef OLIMEX_LPC2148
+		// Set LED1
+		IOSET0 = (1 << 10);
+#endif
 		
 		bData_40002c07++;
 	}
 	else if (bData_40002c08 >= bData_40002c09)
 	{
-		IO1SET = 0x400000;
+		IO1SET = (1 << 22);
+#ifdef OLIMEX_LPC2148
+		// Set LED1
+		IOSET0 = (1 << 10);
+#endif
 		
 		bData_40002c07 = 0;
 		bData_40002c08 = 0;
@@ -944,15 +986,16 @@ void rtc_isr(void) __irq
 	
 #ifdef OLIMEX_LPC2148
 	{
+		// Blinking LED2
 		static int flag = 0;
 		if (flag)
 		{
-			IOSET0 = 0x00000800;
+			IOSET0 = (1 << 11);
 			flag = 0;
 		}
 		else
 		{
-			IOCLR0 = 0x00000800;
+			IOCLR0 = (1 << 11);
 			flag = 1;
 		}
 	}
@@ -983,11 +1026,11 @@ void delay_loop(unsigned int a)
 	}
 }
 
-#if 1//def OLIMEX_LPC2148
+#ifdef OLIMEX_LPC2148
 #include "usb.c"
 #endif
 
-#if 1
+#if 0
 #include "LPCUSB/usbinit.c"
 #include "LPCUSB/usbhw_lpc.c"
 #include "LPCUSB/usbcontrol.c"
@@ -1105,7 +1148,7 @@ void lpc_hw_init(void)
 		(0 << 2) | // P0.2 = In
 		(0 << 3) | // P0.3 = In
 		(1 << 7) | // P0.7 = Out
-#if 1//def OLIMEX_LPC2148
+#ifdef OLIMEX_LPC2148
 		(1 <<10) | // P0.10 = Out -> LED1
 		(1 <<11) | // P0.11 = Out -> LED2
 #else
@@ -1117,19 +1160,19 @@ void lpc_hw_init(void)
 		(0 <<14) | // P0.14 = In
 		(1 <<15) | // P0.15 = Out -> LCD D7-D0 ?
 		(1 <<16) | // P0.16 = Out
-		(0 <<22) | // P0.22 = In
-		(0 <<25) | // P0.25 = In
-		(0 <<28) | // P0.28 = In
-		(0 <<29) | // P0.29 = In
-		(0 <<30);  // P0.30 = In
+		(0 <<22) | // P0.22 = In -> Key Matrix Row 1
+		(0 <<25) | // P0.25 = In -> Key Matrix Row 2
+		(0 <<28) | // P0.28 = In -> Key Matrix Row 3
+		(0 <<29) | // P0.29 = In -> Key Matrix Row 4
+		(0 <<30);  // P0.30 = In -> Key Matrix Row 5
 	IO1DIR = //0x03cf0000 = 00 00 00 11 11 00 11 11 00 00 00 00 00 00 00 00
-		(1 <<16) | // P1.16 = Out
-		(1 <<17) | // P1.17 = Out
-		(1 <<18) | // P1.18 = Out
-		(1 <<19) | // P1.19 = Out
+		(1 <<16) | // P1.16 = Out -> Key Matrix Column 3
+		(1 <<17) | // P1.17 = Out -> Key Matrix Column 2
+		(1 <<18) | // P1.18 = Out -> Key Matrix Column 1
+		(1 <<19) | // P1.19 = Out -> Key Matrix Column 0
 		(0 <<20) | // P1.20 = In
 		(0 <<21) | // P1.21 = In
-		(1 <<22) | // P1.22 = Out
+		(1 <<22) | // P1.22 = Out -> Buzzer???
 		(1 <<23) | // P1.23 = Out -> LCD A0 Pin (Command/Data) ?
 		(1 <<24) | // P1.24 = Out -> Chip Select for SPI Flash
 		(1 <<25);  // P1.25 = Out -> Chip Select for SPI Font ROM
@@ -1152,7 +1195,7 @@ void lpc_hw_init(void)
 	bData_40002c09 = 0x10;
 	bData_40002c07 = 0x00;
 
-#if 1//def OLIMEX_LPC2148
+#ifdef OLIMEX_LPC2148
 	usb_init();
 #endif
 
@@ -1165,7 +1208,7 @@ void flash_read(unsigned int PageAdr, int b, int Count, unsigned char* Data)
 #ifndef OLIMEX_LPC2148
 	unsigned short i = 0;
 	
-	IO1CLR = (1 << 24);
+	ENABLE_FLASH_CS;
 	
 	spi0_write_read_byte(FLASH_CMD_CONT_ARRAY_READ);
 	spi0_write_read_byte(PageAdr >> (16 - FLASH_PAGE_BITS));
@@ -1185,7 +1228,7 @@ void flash_read(unsigned int PageAdr, int b, int Count, unsigned char* Data)
 		i++;
 	}
 	
-	IO1SET = (1 << 24);
+	DISABLE_FLASH_CS;
 #endif
 }
 
@@ -1194,7 +1237,7 @@ void flash_write(int PageAdr, unsigned short BufAdr, int Count, unsigned char* D
 {
 #ifndef OLIMEX_LPC2148
 	unsigned short i;
-	IO1CLR = (1 << 24);
+	ENABLE_FLASH_CS;
 
 	spi0_write_read_byte(FLASH_CMD_BUF1_WRITE);
 	spi0_write_read_byte(0x00);
@@ -1206,8 +1249,8 @@ void flash_write(int PageAdr, unsigned short BufAdr, int Count, unsigned char* D
 		spi0_write_read_byte(Data[i]);
 	}
 	
-	IO1SET = (1 << 24);
-	IO1CLR = (1 << 24);
+	DISABLE_FLASH_CS;
+	ENABLE_FLASH_CS;
 	
 	if (PageAdr < 0x1000)
 	{
@@ -1217,7 +1260,7 @@ void flash_write(int PageAdr, unsigned short BufAdr, int Count, unsigned char* D
 		spi0_write_read_byte(0);
 	}
 	
-	IO1SET = (1 << 24);
+	DISABLE_FLASH_CS;
 	
 	delay_loop(5);
 #endif

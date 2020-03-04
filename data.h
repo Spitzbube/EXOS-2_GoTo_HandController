@@ -224,12 +224,12 @@ extern char Data_40002bb5[]; //40002bb5
 extern char Data_40002bc0[]; //40002bc0
 extern char Data_40002bc1[]; //40002bc1
 extern int Data_40002bc4_DayYear[]; //40002bc4
-extern unsigned char Data_40002bf8[8]; //40002bf8, size??
-extern unsigned char bData_40002c00; //40002c00
-extern unsigned char bData_40002c01; //40002c01
+extern unsigned char sHwKeyQueue[8]; //40002bf8, size??
+extern unsigned char bHwKeyQueueReadPtr; //40002c00
+extern unsigned char bHwKeyQueueWritePtr; //40002c01
 extern unsigned char bData_40002c02; //40002c02
 extern unsigned char bData_40002c03; //40002c03
-extern unsigned char bData_40002c04; //40002c04
+extern unsigned char bHwKeyCode; //40002c04
 extern unsigned char bData_40002c05; //40002c05
 extern unsigned char bData_40002c06; //40002c06
 extern unsigned char bData_40002c07; //40002c07
