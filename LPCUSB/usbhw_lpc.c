@@ -516,10 +516,12 @@ DEBUG_LED_OFF(9);
  */
 BOOL USBHwInit(void)
 {
+	#if 0
 	// configure P0.23 for Vbus sense
 	PINSEL1 = (PINSEL1 & ~(3 << 14)) | (1 << 14);	// P0.23
 	// configure P0.31 for CONNECT
 	PINSEL1 = (PINSEL1 & ~(3 << 30)) | (2 << 30);	// P0.31
+	#endif
 
 	// enable PUSB
 	PCONP |= (1 << 31);		

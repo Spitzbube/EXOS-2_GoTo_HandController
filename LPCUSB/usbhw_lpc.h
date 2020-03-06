@@ -32,7 +32,9 @@
 	These are private to the usbhw module
 */
 
-#if 0
+#if 1
+#include "lpc214x.h"
+#else
 /* Common LPC2148 definitions, related to USB */
 #define	PCONP			*(volatile unsigned int *)0xE01FC0C4
 #define	PLL1CON			*(volatile unsigned int *)0xE01FC0A0

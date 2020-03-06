@@ -253,9 +253,15 @@ void usb_init(void)
 
    USBHwNakIntEnable(INACK_BI);
 
-   VICIntEnable = (1 << 22); // Enable USB
+#if 1
    VICVectCntl4 = (1 << 5) | 22; // USB -> Slot 4
    VICVectAddr4 = (unsigned int) usb_isr;
+   VICIntEnable = (1 << 22); // Enable USB
+#else
+   VICVectCntl0 = (1 << 5) | 22; // USB -> Slot 0
+   VICVectAddr0 = (unsigned int) usb_isr;
+   VICIntEnable = (1 << 22); // Enable USB
+#endif
 
    USBHwConnect(1);
 }

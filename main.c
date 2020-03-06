@@ -12,6 +12,8 @@
 //#define UART0_DEBUG
 #define V2_3
 
+extern void uart0_send(unsigned char* a, unsigned char b);
+
 #include "file_1f30.c"
 
 /* 4ede4 - todo */
@@ -4887,6 +4889,18 @@ int main(void)
 	uart0_init(360);
 	uart1_init(360);
 
+#ifdef USE_USB
+	usb_init();
+#endif
+	
+	if (0)
+	{
+		int res = mmcInitMedia();
+		static char buf[100];
+		snprintf(buf, sizeof(buf)-1, "mmcInitMedia res = 0x%x\n\r", res);
+		uart0_send(buf, strlen(buf));
+	}
+
 	func_7590();
 	func_d2cc();
 	func_5099c();
@@ -5055,6 +5069,7 @@ int main(void)
 	Data_40002c1c = 0;
 	Data_40002c20 = 0;
 	//6d894 -> 729ec
+	
 	//##########################################################################
 	//#################### Main Loop ###########################################
 	//##########################################################################

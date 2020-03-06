@@ -39,10 +39,6 @@
 #define ST7565_CMD_SET_ALLPTS_NORMAL      0xA4
 #define ST7565_CMD_SET_COM_REVERSE        0xC8
 
-extern void lcd_display_clear(void);
-extern void lcd_display_configure(void);
-extern void spi0_init(void);
-
 	
 /* 224 - complete */
 void lcd_write_data(unsigned char a)
@@ -217,8 +213,11 @@ int func_570(unsigned int a)
 /* 5ec - complete */
 void spi0_init(void)
 {
-	S0SPCCR = 0x08;
-	S0SPCR = 0x20;
+   //SPI Clock Counter Register: PCLK / 8
+	S0SPCCR = 8;
+
+	//SPI Control Register: MSTR
+	S0SPCR = (1 << 5);
 }
 
 /* 604 - complete */
@@ -1026,7 +1025,7 @@ void delay_loop(unsigned int a)
 	}
 }
 
-#ifdef OLIMEX_LPC2148
+#ifdef USE_USB
 #include "usb.c"
 #endif
 
@@ -1035,6 +1034,11 @@ void delay_loop(unsigned int a)
 #include "LPCUSB/usbhw_lpc.c"
 #include "LPCUSB/usbcontrol.c"
 #include "LPCUSB/usbstdreq.c"
+#endif
+
+#ifdef OLIMEX_LPC2148
+#include "ssp.c"
+#include "mmc.c"
 #endif
 
 /* 227c - complete */
@@ -1055,6 +1059,7 @@ void lpc_interrupt_init(void)
 	
 	// Slot 0 has the highest priority and slot 15 the lowest
 
+	#if 1
 	VICVectCntl0 = (1 << 5) | 4; // TIMER0 -> Slot 0
 	VICVectAddr0 = (unsigned int) timer_isr;
 	VICIntEnable = (1 << 4); // Enable TIMER0
@@ -1062,6 +1067,15 @@ void lpc_interrupt_init(void)
 	VICVectCntl3 = (1 << 5) | 13; // RTC -> Slot 3
 	VICVectAddr3 = (unsigned int) rtc_isr;
 	VICIntEnable = (1 << 13); // Enable RTC
+	#else
+	VICVectCntl1 = (1 << 5) | 4; // TIMER0 -> Slot 1
+	VICVectAddr1 = (unsigned int) timer_isr;
+	VICIntEnable = (1 << 4); // Enable TIMER0
+	
+	VICVectCntl4 = (1 << 5) | 13; // RTC -> Slot 4
+	VICVectAddr4 = (unsigned int) rtc_isr;
+	VICIntEnable = (1 << 13); // Enable RTC
+	#endif
 	
 	// Counter Increment Interrupt Register
 	CIIR = (1 << 0); //an increment of the Second value generates an interrupt
@@ -1073,8 +1087,13 @@ void lpc_interrupt_init(void)
 	// Clock Control Register
 	CCR = (1 << 4) | (1 << 0); //CLKEN + CLKSRC (from Oscillator)
 	
+	#if 1
 	VICVectCntl1 = (1 << 5) | 6; // UART0 -> Slot 1
 	VICVectCntl2 = (1 << 5) | 7; // UART1 -> Slot 2
+	#else
+	VICVectCntl2 = (1 << 5) | 6; // UART0 -> Slot 2
+	VICVectCntl3 = (1 << 5) | 7; // UART1 -> Slot 3
+	#endif
 	VICIntEnable = (1 << 7); // Enable UART1
 	VICIntEnable = (1 << 6); // Enable UART0
 }
@@ -1088,9 +1107,15 @@ void lpc_hw_init(void)
 	// Setting peripheral Clock (pclk) to System Clock (cclk) / 4
 	VPBDIV = 0;
 	
-	// Setup the PLL to multiply the 11.0592 / 12Mhz XTAL input...
-	PLL0CFG = 0x03 //by 4,
+#ifdef OLIMEX_LPC2148
+	// Setup the PLL to multiply the 12 MHz XTAL input...
+	PLL0CFG = 0x03 //by 4
 		| (1 << 5); //divide by 2.
+#else
+	// Setup the PLL to multiply the 11.0592 MHz XTAL input...
+	PLL0CFG = 0x03 //by 4,
+		| (1 << 5); //divide by 2. CCLK = 44.2368 MHz / Fcco = 176,9472
+#endif
 	PLL0FEED = 0xaa;
 	PLL0FEED = 0x55;
 	
@@ -1183,6 +1208,9 @@ void lpc_hw_init(void)
 	IO1SET = 1 << 25; //0x02000000; P1.25 = High
 	
 	spi0_init();
+#ifdef OLIMEX_LPC2148
+	ssp_init();
+#endif
 
 	lcd_display_configure();
 	lcd_display_clear();
@@ -1194,10 +1222,6 @@ void lpc_hw_init(void)
 	bData_40002c08 = 0x10;
 	bData_40002c09 = 0x10;
 	bData_40002c07 = 0x00;
-
-#ifdef OLIMEX_LPC2148
-	usb_init();
-#endif
 
 	lpc_interrupt_init();
 }

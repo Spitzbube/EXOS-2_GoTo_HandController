@@ -224,7 +224,7 @@ void uart0_init(int a)
 	U0DLM = 0;
 	U0DLL = 78;
 #else
-	// 12000000 * 2/2 / (16 * 72) = 10416.67 => 10000?
+	// 11059200 * 2/2 / (16 * 72) = 9600
 	U0DLM = 0;
 	U0DLL = 72;
 #endif
@@ -232,7 +232,11 @@ void uart0_init(int a)
 	U0LCR = 0x03;
 	U0FCR = 0x01; //U0IIR = 0x01;?
 	U0IER = 0x01;
-	VICVectAddr1 = (unsigned int) uart0_isr;
+	#if 1
+	VICVectAddr1 = (unsigned int) uart0_isr; //UART0 -> Slot 1
+	#else
+	VICVectAddr2 = (unsigned int) uart0_isr; //UART0 -> Slot 2
+	#endif
 	
 	bData_40002c0a_uart0ReceiveDataCount = 0;
 	bData_40002c0b_uart0ReceiveComplete = 0;
@@ -304,7 +308,7 @@ void uart1_init(int a)
 	U1DLM = 0;
 	U1DLL = 78;
 #else
-	// 12000000 * 2/2 / (16 * 72) = 10416.67 => 10000?
+	// 11059200 * 2/2 / (16 * 72) = 9600
 	U1DLM = 0;
 	U1DLL = 72;
 #endif
@@ -312,7 +316,11 @@ void uart1_init(int a)
 	U1LCR = 0x03;
 	U1FCR = 0x01; //
 	U1IER = 0x01;
-	VICVectAddr2 = (unsigned int) uart1_isr;
+	#if 1
+	VICVectAddr2 = (unsigned int) uart1_isr; //UART1 -> Slot 2
+	#else
+	VICVectAddr3 = (unsigned int) uart1_isr; //UART1 -> Slot 3
+	#endif
 	
 	bData_40002c12_uart1ReceiveDataCount = 0;
 	bData_40002c13_uart1ReceiveComplete = 0;
