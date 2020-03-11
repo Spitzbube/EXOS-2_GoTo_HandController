@@ -1181,10 +1181,10 @@ void lpc_hw_init(void)
 		(0 <<11) | // P0.11 = In
 #endif
 		(1 <<12) | // P0.12 = Out -> LCD Data Latch ?
-		(1 <<13) | // P0.13 = Out
+		(1 <<13) | // P0.13 = Out -> LED torch?
 		(0 <<14) | // P0.14 = In
 		(1 <<15) | // P0.15 = Out -> LCD D7-D0 ?
-		(1 <<16) | // P0.16 = Out
+		(1 <<16) | // P0.16 = Out -> LED torch?
 		(0 <<22) | // P0.22 = In -> Key Matrix Row 1
 		(0 <<25) | // P0.25 = In -> Key Matrix Row 2
 		(0 <<28) | // P0.28 = In -> Key Matrix Row 3
@@ -1958,19 +1958,26 @@ void initialize_variables(void)
 	dData_40002cb0 = 0.326;
 	dData_40002c88 = 0.0;
 	dData_40002c90 = 0.0;
-	Data_40002cb8 = 0x0b;
-	Data_40002cbc = 0x29;
+	
+	//Rectascension
+	Data_40002cb8 = 11;
+	Data_40002cbc = 41;
 	fData_40002cc0 = 12.6;
+	
+	//Declination
 	Data_40002d40 = 1;
-	Data_40002cf4 = 0x37;
-	Data_40002cf8 = 0x0b;
+	Data_40002cf4 = 55;
+	Data_40002cf8 = 11;
 	fData_40002cfc = 1.9;
+	
 	Data_40002d20 = 1;
 	Data_40002d24 = 3;
 	fData_40002d28 = 5.9;
+	
 	Data_40002d48 = 6;
 	Data_40002d4c = 3;
 	fData_40002d50 = 5.8;
+	
 	Data_40002d68_OTARightAscensionHours = 2;
 	Data_40002d6c_OTARightAscensionMinutes = 3;
 	fData_40002d70_OTARightAscensionSeconds = 2.3;
@@ -4969,978 +4976,15 @@ void lcd_display_lunar_phase_screen(int year, int month)
 	}
 }
 
-//For the following see: https://pymeeus.readthedocs.io/en/latest/Earth.html
-//https://www.avrfreaks.net/forum/best-microcontroller-heavy-computation?page=all
-
-/* e11c - complete */
-double earth_heliocentric_longitude(double a)
-{
-	double L0 = 0.0;
-	double L1 = 0.0;
-	double L2 = 0.0;
-	double L3 = 0.0;
-	double L4 = 0.0;
-	double L5 = 0.0;
-	double res = 0.0;
-
-	L0 += 175347046 * cos(0.0 + a * 0.0);
-	L0 += 3341656 * cos(4.6692568 + a * 6283.07585); 
-	L0 += 34894 * cos(4.6261 + a * 12566.1517); 
-	L0 += 3497 * cos(2.7441 + a * 5753.3849);
-	L0 += 3418 * cos(2.8289 + a * 3.5231);
-	L0 += 3136 * cos(3.6277 + a * 77713.7715);
-	
-	L1 += 628331966747 * cos(0.0 + a * 0.0);
-	L1 += 206059 * cos(2.678235 + a * 6283.07585);
-	L1 += 4303 * cos(2.6351 + a * 12566.1517);
-	
-	L2 += 52919 * cos(0.0 + a * 0.0);
-	L2 += 8720 * cos(1.0721 + a * 6283.0758);
-		
-	res = (L0 +
-		L1 * a +
-		L2 * a*a + 
-		L3 * a*a*a + 
-		L4 * a*a*a*a + 
-		L5 * a*a*a*a*a) / 100000000.0;
-	
-	return res;
-}
-
-/* e8fc - todo */
-double earth_heliocentric_latitude(double a)
-{
-	double B0 = 0.0;
-	double B1 = 0.0;
-	double res = 0.0;
-	
-	B0 += 280.0 * cos(3.199 + a * 84334.662);
-	B0 += 102.0 * cos(5.422 + a * 5507.553);
-	B0 += 80.0 * cos(3.88 + a * 5223.69);
-	B0 += 44.0 * cos(3.7 + a * 2352.87);
-	B0 += 32.0 * cos(4 + a * 1577.34);
-	
-	B1 += 9.0 * cos(3.9 + a * 5507.55);
-	B1 += 6.0 * cos(1.73 + a * 1577.34); //5223.69); //BUG!!!
-	
-	res = (B0 + B1 * a) / 100000000.0;
-	
-	return res;
-}
-
-/* ecf8 - todo */
-double earth_radius_vector(double a)
-{
-	double R0 = 0.0;
-	double R1 = 0.0;
-	double R2 = 0.0;
-	double R3 = 0.0;
-	double R4 = 0.0;
-	double res = 0.0;
-	
-	R0 += 100013989 * cos(0.0 + a * 0.0);
-	R0 += 1670700 * cos(3.0984635 + a * 6283.07585);
-	R0 += 13956 * cos(3.05525 + a * 12566.1517);
-	R0 += 3084 * cos(5.1985 + a * 77713.7715);
-	
-	R1 += 103019 * cos(1.10749 + a * 6283.07585);
-	R1 += 1721 * cos(1.0644 + a * 12566.1517);
-	
-	R2 += 4359 * cos(5.7846 + a * 6283.0758);
-	
-	res = (R0 +
-		R1 * a +
-		R2 * a*a + 
-		R3 * a*a*a + 
-		R4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-//http://home.mnet-online.de/reimay/Projects/pc/Astronomie/libaa/AAMercury.cpp
-
-/* f22c - todo */
-double mercury_ecliptic_longitude(double a)
-{
-	double L0 = 0.0;
-	double L1 = 0.0;
-	double L2 = 0.0;
-	double L3 = 0.0;
-	double L4 = 0.0;
-	double L5 = 0.0;
-	double res = 0.0;
-	
-	L0 += 440250710 * cos(0.0 + a * 0.0);
-	L0 += 40989415 * cos(1.48302034 + a * 26087.90314157);
-	L0 += 5046294 * cos(4.4778549 + a * 52175.8062831);
-	L0 += 855347 * cos(1.165203 + a * 78263.709425);
-	L0 += 165590 * cos(4.119692 + a * 104351.612566);
-	L0 += 34562 * cos(0.77931 + a * 130439.51571);
-	L0 += 7583 * cos(3.7135 + a * 156527.4188);
-	L0 += 3560 * cos(1.5120 + a * 1109.3786);
-	
-	L1 += 2608814706223 * cos(0.0 + a * 0.0);
-	L1 += 1126008 * cos(6.2170397 + a * 26087.9031416);
-	L1 += 303471 * cos(3.055655 + a * 52175.806283);
-	L1 += 80538 * cos(6.10455 + a * 78263.70942);
-	L1 += 21245 * cos(2.83532 + a * 104351.61257);
-	
-	L2 += 53050 * cos(0.0 + a * 0.0);
-	L2 += 16904 * cos(4.69072 + a * 26087.90314);
-	
-	res = (L0 +
-		L1 * a +
-		L2 * a*a + 
-		L3 * a*a*a + 
-		L4 * a*a*a*a +
-		L5 * a*a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* fc20 - todo */
-double mercury_ecliptic_latitude(double a)
-{
-	double B0 = 0.0;
-	double B1 = 0.0;
-	double B2 = 0.0;
-	double B3 = 0.0;
-	double B4 = 0.0;
-	double res = 0.0;
-	
-	B0 += 11737529 * cos(1.98357499 + a * 26087.90314157);
-	B0 += 2388077 * cos(5.0373896 + a * 52175.8062831);
-	B0 += 1222840 * cos(3.1415927 + a * 0.0);
-	B0 += 543252 * cos(1.796444 + a * 78263.709425);
-	B0 += 129779 * cos(4.832325 + a * 104351.612566);
-	B0 += 31867 * cos(1.58088 + a * 130439.51571);
-	
-	B1 += 429151 * cos(3.501698 + a * 26087.903142);
-	B1 += 146234 * cos(3.141593 + a * 0.0);
-	B1 += 22675 * cos(0.01515 + a * 52175.80628);
-	
-	B2 += 11831 * cos(4.79066 + a * 26087.90314);
-	B2 += 1914 * cos(0.0 + a * 0.0);
-	B2 += 1045 * cos(1.2122 + a * 52175.8063);
-	
-	res = (B0 +
-		B1 * a +
-		B2 * a*a + 
-		B3 * a*a*a + 
-		B4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 103dc - todo */
-double mercury_radius_vector(double a)
-{
-	double R0 = 0.0;
-	double R1 = 0.0;
-	double R2 = 0.0;
-	double R3 = 0.0;
-	double res = 0.0;
-	
-	R0 += 39528272 * cos(0.0 + a * 0.0);
-	R0 += 7834132 * cos(6.1923372 + a * 26087.9031416);
-	R0 += 795526 * cos(2.959897 + a * 52175.806283);
-	R0 += 121282 * cos(6.010642 + a * 78263.709425);
-	R0 += 21922 * cos(2.77820 + a * 104351.61257);
-
-	R1 += 217348 * cos(4.656172 + a * 26087.9031416); //26087.903142); //BUG???
-	R1 += 44142 * cos(1.42386 + a * 52175.80628);
-	R1 += 10094 * cos(4.47466 + a * 8263.70942); //78263.70942); //BUG???
-	
-	R2 += 3118 * cos(3.0823 + a * 26087.9031);
-	R2 += 1245 * cos(6.1518 + a * 52175.8063);
-	R2 += 425 * cos(2.926 + a * 78263.709);
-	R2 += 136 * cos(5.98 + a * 104351.613);
-	
-	res = (R0 +
-		R1 * a +
-		R2 * a*a + 
-		R3 * a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 10b2c - todo */
-double venus_ecliptic_longitude(double a)
-{
-	double L0 = 0.0;
-	double L1 = 0.0;
-	double L2 = 0.0;
-	double L3 = 0.0;
-	double L4 = 0.0;
-	double L5 = 0.0;
-	double res = 0.0;
-	
-	L0 += 317614667 * cos(0.0 + a * 0.0);
-	L0 += 1353968 * cos(5.5931332 + a * 10213.2855462);
-	L0 += 89892 * cos(5.30650 + a * 20426.57109);
-	L0 += 5477 * cos(4.4163 + a * 7860.4194);
-	
-	L1 += 1021352943053 * cos(0.0 + a * 0.0);
-	L1 += 95708 * cos(2.46424 + a * 10213.28555);
-	L1 += 14445 * cos(0.51625 + a * 20426.57109);
-	
-	L2 += 54127 * cos(0.0 + a * 0.0);
-	L2 += 3891 * cos(0.3451 + a * 10213.2855);
-	L2 += 1338 * cos(2.0201 + a * 20426.5711);
-	
-	res = (L0 +
-		L1 * a +
-		L2 * a*a + 
-		L3 * a*a*a +
-		L4 * a*a*a*a +
-		L5 * a*a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 1127c - todo */
-double venus_ecliptic_latitude(double a)
-{
-	double B0 = 0.0;
-	double B1 = 0.0;
-	double B2 = 0.0;
-	double B3 = 0.0;
-	double B4 = 0.0;
-	double res = 0.0;
-	
-	B0 += 5923638 * cos(0.2670278 + a * 10213.2855462);
-	B0 += 40108 * cos(1.14737 + a * 20426.57109);
-	B0 += 32815 * cos(3.14159 + a * 0.0);
-	
-	B1 += 513348 * cos(1.803643 + a * 10213.285546);
-	B1 += 4380 * cos(3.3862 + a * 20426.5711);
-	
-	B2 += 22378 * cos(3.38509 + a * 10213.28555);
-	
-	res = (B0 + B1 * a + B2 * a*a + B3 * a*a*a + B4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 1173c - todo */
-double venus_radius_vector(double a)
-{
-	double R0 = 0.0;
-	double R1 = 0.0;
-	double R2 = 0.0;
-	double R3 = 0.0;
-	double R4 = 0.0;
-	double res = 0.0;
-	
-	R0 += 72334821 * cos(0.0 + a * 0.0);
-	R0 += 489824 * cos(4.021518 + a * 10213.285546);
-
-	R1 += 34551 * cos(0.89199 + a * 10213.28555);
-
-	R2 += 1407 * cos(5.0637 + a * 10213.2855);
-	
-	res = (R0 + R1 * a + R2 * a*a + R3 * a*a*a + R4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 11af4 - todo */
-double mars_ecliptic_longitude(double a)
-{
-	double L0 = 0.0;
-	double L1 = 0.0;
-	double L2 = 0.0;
-	double L3 = 0.0;
-	double L4 = 0.0;
-	double L5 = 0.0;
-	double res = 0.0;
-	
-	L0 += 620347712 * cos(0.0 + a * 0.0);
-	L0 += 18656368 * cos(5.05037100 + a * 3340.61242670);
-	L0 += 1108217 * cos(5.4009984 + a * 6681.2248534);
-	L0 += 91798 * cos(5.75479 + a * 10021.83728);
-	L0 += 27745 * cos(5.97050 + a * 3.52312);
-	L0 += 12316 * cos(0.84956 + a * 2810.92146);
-	L0 += 10610 * cos(2.93959 + a * 2281.23050);
-
-	L1 += 334085627474 * cos(0.0 + a * 0.0);
-	L1 += 1458227 * cos(3.6042605 + a * 3340.6124267);
-	L1 += 164901 * cos(3.926313 + a * 6681.224853);
-	L1 += 19963 * cos(4.26594 + a * 10021.83728);
-
-	L2 += 58016 * cos(2.04979 + a * 3340.61243);
-	L2 += 54188 * cos(0.0 + a * 0.0);
-	L2 += 13908 * cos(2.45742 + a * 6681.22485);
-	
-	res = (L0 + L1 * a + L2 * a*a + L3 * a*a*a + L4 * a*a*a*a + L5 * a*a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-	
-/* 12450 - todo */
-double mars_ecliptic_latitude(double a)
-{
-	double B0 = 0.0;
-	double B1 = 0.0;
-	double B2 = 0.0;
-	double B3 = 0.0;
-	double B4 = 0.0;
-	double res = 0.0;
-	
-	B0 += 3197135 * cos(3.7683204 + a * 3340.6124267);
-	B0 += 298033 * cos(4.106170 + a * 6681.224853);
-	B0 += 289105 * cos(0.0 + a * 0.0);
-	B0 += 31366 * cos(4.44651 + a * 10021.83728);
-	
-	B1 += 350069 * cos(5.368478 + a * 3340.612427);
-	B1 += 14116 * cos(3.14159 + a * 0.0);
-	B1 += 9671 * cos(5.4788 + a * 6681.2249);
-
-	B2 += 16727 * cos(0.60221 + a * 3340.61243);
-	B2 += 4987 * cos(3.1416 + a * 0.0);
-
-	res = (B0 + B1 * a + B2 * a*a + B3 * a*a*a + B4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 12a8c - todo */
-double mars_radius_vector(double a)
-{
-	double R0 = 0.0;
-	double R1 = 0.0;
-	double R2 = 0.0;
-	double R3 = 0.0;
-	double R4 = 0.0;
-	double res = 0.0;
-	
-	R0 += 153033488 * cos(0.0 + a * 0.0);
-	R0 += 14184953 * cos(3.47971284 + a * 3340.61242670);
-	R0 += 660776 * cos(3.817834 + a * 6681.224853);
-	R0 += 46179 * cos(4.15595 + a * 10021.83728);
-	R0 += 8110 * cos(5.5596 + a * 2810.9215);
-	
-	R1 += 1107433 * cos(2.0325052 + a * 3340.6124267);
-	R1 += 103176 * cos(2.370718 + a * 6681.224853);
-	R1 += 12877 * cos(0.0 + a * 0.0);
-	R1 += 10816 * cos(2.70888 + a * 10021.83728);
-	
-	R2 += 44242 * cos(0.47931 + a * 3340.61243);
-	R2 += 8138 * cos(0.8700 + a * 6681.2249);
-
-	res = (R0 + R1 * a + R2 * a*a + R3 * a*a*a + R4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 131ac - todo */
-double jupiter_ecliptic_longitude(double a)
-{
-	double L0 = 0.0;
-	double L1 = 0.0;
-	double L2 = 0.0;
-	double L3 = 0.0;
-	double L4 = 0.0;
-	double L5 = 0.0;
-	double res = 0.0;
-	
-	L0 += 59954691 * cos(0.0 + a * 0.0);
-	L0 += 9695899 * cos(5.0619179 + a * 529.6909651);
-	L0 += 573610 * cos(1.444062 + a * 7.113547);
-	L0 += 306389 * cos(5.41734/*5.417347*/ + a * 1059.381930); //BUG?
-	L0 += 97178 * cos(4.14265 + a * 632.78374);
-	L0 += 72903 * cos(3.64043 + a * 522.57742);
-	L0 += 64264 * cos(3.41145 + a * 103.09277);
-
-	L1 += 52993480757 * cos(0.0 + a * 0.0);
-	L1 += 489741 * cos(4.220667 + a * 529.690965);
-	L1 += 228919 * cos(6.026475 + a * 7.113547);
-	L1 += 27655 * cos(4.57266 + a * 1059.38193);
-	L1 += 20721 * cos(5.45939 + a * 522.57742);
-	L1 += 12106 * cos(0.16986 + a * 536.80451);
-
-	L2 += 47234 * cos(4.32148 + a * 7.11355);
-	L2 += 38966 * cos(0.0 + a * 0.0);
-	L2 += 30629 * cos(2.93021 + a * 529.69097);
-
-	L3 += 6502 * cos(2.5986 + a * 7.1135);
-	L3 += 1357 * cos(1.3464 + a * 529.6910);
-
-	res = (L0 + L1 * a + L2 * a*a + L3 * a*a*a + L4 * a*a*a*a + L5 * a*a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 13d10 - todo */
-double jupiter_ecliptic_latitude(double a)
-{
-	double B0 = 0.0;
-	double B1 = 0.0;
-	double B2 = 0.0;
-	double B3 = 0.0;
-	double B4 = 0.0;
-	double B5 = 0.0;
-	double res = 0.0;
-	
-	B0 += 2268616 * cos(3.5585261 + a * 529.6909651);
-	B0 += 110090 * cos(0.0 + a * 0.0);
-	B0 += 109972 * cos(3.908093 + a * 1059.381930);
-
-	B1 += 177352 * cos(5.701665 + a * 529.690965);
-	B1 += 3230 * cos(5.7794 + a * 1059.3819);
-	B1 += 3081 * cos(5.4746 + a * 522.5774);
-	B1 += 2212 * cos(4.7346/*4.7348*/ + a * 536.8045); //BUG?
-	B1 += 1694 * cos(3.1416 + a * 0.0);
-
-	B2 += 8094 * cos(1.4632 + a * 529.6910);
-	B2 += 813 * cos(3.1416 + a * 0.0);
-	B2 += 742 * cos(0.957 + a * 522.577);
-	B2 += 399 * cos(2.899 + a * 536.8); //536.805); //BUG?
-	B2 += 342 * cos(1.447 + a * 1059.382);
-	
-	res = (B0 + B1 * a + B2 * a*a + B3 * a*a*a + B4 * a*a*a*a + B5 * a*a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 145e4 - todo */
-double jupiter_radius_vector(double a)
-{
-	double R0 = 0.0;
-	double R1 = 0.0;
-	double R2 = 0.0;
-	double R3 = 0.0;
-	double R4 = 0.0;
-	double R5 = 0.0;
-	double res = 0.0;
-	
-	R0 += 520887429 * cos(0.0 + a * 0.0);
-	R0 += 25209327 * cos(3.49108640 + a * 529.69096509);
-	R0 += 610600 * cos(3.841154 + a * 1059.381930);
-	R0 += 282029 * cos(2.574199 + a * 632.783739);
-	R0 += 187647 * cos(2.075904 + a * 522.577418);
-	R0 += 86793 * cos(0.71001 + a * 419.48464);
-	R0 += 72063 * cos(0.21466 + a * 536.80451);
-	R0 += 65517 * cos(5.97996 + a * 316.39187);
-	R0 += 30135 * cos(2.16132 + a * 949.17561);
-	R0 += 29135 * cos(1.67759 + a * 103.02977); //103.09277); //BUG?
-	R0 += 23947 * cos(0.27458 + a * 7.11355);
-
-	R1 += 1271802 * cos(2.6493751 + a * 529.6909651);
-	R1 += 61662 * cos(3.00076 + a * 1059.38193);
-	R1 += 53444 * cos(3.89718 + a * 522.57742);
-	R1 += 41390 * cos(0.0 + a * 0.0);
-	R1 += 31185 * cos(4.88277 + a * 536.80451);
-	R1 += 11847 * cos(2.41330 + a * 419.48464);
-	R1 += 9166 * cos(4.7598 + a * 7.1135);
-
-	R2 += 79645 * cos(1.35866 + a * 529.69097);
-	R2 += 8252 * cos(5.7777 + a * 522.5774);
-	R2 += 7030 * cos(3.2748 + a * 536.8045);
-	R2 += 5314 * cos(1.8384 + a * 1059.3819);
-
-	res = (R0 + R1 * a + R2 * a*a + R3 * a*a*a + R4 * a*a*a*a + R5 * a*a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 15340 - todo */
-double saturn_ecliptic_longitude(double a)
-{
-	double L0 = 0.0;
-	double L1 = 0.0;
-	double L2 = 0.0;
-	double L3 = 0.0;
-	double L4 = 0.0;
-	double L5 = 0.0;
-	double res = 0.0;
-	
-	L0 += 87401354 * cos(0.0 + a * 0.0);
-	L0 += 11107660 * cos(3.96205090 + a * 213.29909544);
-	L0 += 1414151 * cos(4.5858152 + a * 7.1135470);
-	L0 += 398379 * cos(0.521120 + a * 206.185548);
-	L0 += 350769 * cos(3.303299 + a * 426.598191);
-	L0 += 206816 * cos(0.246584 + a * 103.092774);
-	L0 += 79271 * cos(3.84007 + a * 220.41264);
-	L0 += 23990 * cos(4.66977 + a * 110.20632);
-	L0 += 16574 * cos(0.43719 + a * 419.48464);
-	L0 += 15820 * cos(0.93809 + a * 632.78374);
-	L0 += 15054 * cos(2.71670 + a * 639.89729);
-	L0 += 14907 * cos(5.76903 + a * 316.39187);
-
-	L1 += 21354295596 * cos(0.0 + a * 0.0);
-	L1 += 1296855 * cos(1.828205/*1.8282054*/ + a * 213.2990954); //BUG?
-	L1 += 564348 * cos(2.885001 + a * 7.113547);
-	L1 += 107679 * cos(2.277699 + a * 206.185548);
-	L1 += 98323 * cos(1.08070 + a * 426.59819);
-	L1 += 40255 * cos(2.04128 + a * 220.41264);
-	L1 += 19942 * cos(1.27955 + a * 103.09277);
-	L1 += 10512 * cos(2.74880 + a * 14.22709);
-
-	L2 += 116441 * cos(1.179879 + a * 7.113547);
-	L2 += 91921 * cos(0.07425 + a * 213.29910);
-	L2 += 90592 * cos(0.0 + a * 0.0);
-
-	res = (L0 + L1 * a + L2 * a*a + L3 * a*a*a + L4 * a*a*a*a + L5 * a*a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 16114 - todo */
-double saturn_ecliptic_latitude(double a)
-{
-	double B0 = 0.0;
-	double B1 = 0.0;
-	double B2 = 0.0;
-	double B3 = 0.0;
-	double B4 = 0.0;
-	double B5 = 0.0;
-	double res = 0.0;
-	
-	B0 += 4330678 * cos(3.6028443 + a * 213.2990954);
-	B0 += 240348 * cos(2.852385 + a * 426.598191);
-	B0 += 84746 * cos(0.0 + a * 0.0);
-	B0 += 34116 * cos(0.57297 + a * 206.18555);
-	B0 += 30863 * cos(3.48442 + a * 220.41264);
-
-	B1 += 397555 * cos(5.332900 + a * 213.299095);
-	B1 += 49479 * cos(3.14159 + a * 0.0);
-	B1 += 18572 * cos(6.09919 + a * 426.59819);
-	B1 += 14801 * cos(2.30586 + a * 206.18555);
-	B1 += 9644 * cos(1.6967 + a * 220.4126);
-
-	B2 += 20630 * cos(0.50482 + a * 213.29910);
-	B2 += 3720 * cos(3.9983 + a * 206.1855);
-	B2 += 1627 * cos(6.1819 + a * 220.4126);
-	B2 += 1346 * cos(0.0 + a * 0.0);
-	
-	res = (B0 + B1 * a + B2 * a*a + B3 * a*a*a + B4 * a*a*a*a + B5 * a*a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 16a5c - todo */
-double saturn_radius_vector(double a)
-{
-	double R0 = 0.0;
-	double R1 = 0.0;
-	double R2 = 0.0;
-	double R3 = 0.0;
-	double R4 = 0.0;
-	double R5 = 0.0;
-	double res = 0.0;
-	
-	R0 += 955758136 * cos(0.0 + a * 0.0);
-	R0 += 52921382 * cos(2.39226220 + a * 213.29909544);
-	R0 += 1873680 * cos(5.2354961 + a * 206.1855484);
-	R0 += 1464664 * cos(1.6476305 + a * 426.5981909);
-	R0 += 821891 * cos(5.935200 + a * 316.391870);
-	R0 += 547507 * cos(5.015326 + a * 103.092774);
-	R0 += 371684 * cos(2.271148 + a * 220.412642);
-	R0 += 361778 * cos(3.139043 + a * 7.113547);
-	R0 += 140618 * cos(5.074067/*5.704067*/ + a * 632.783739); //BUG?
-	R0 += 108975 * cos(3.293136 + a * 110.206321);
-
-	R1 += 6182981 * cos(0.2584352 + a * 213.2990954);
-	R1 += 506578 * cos(0.711147 + a * 206.185548);
-	R1 += 341394 * cos(5.796358 + a * 426.598191);
-	R1 += 188491 * cos(0.472157 + a * 220.412642);
-	R1 += 186262 * cos(3.141593 + a * 0.0);
-	R1 += 143891 * cos(1.407449 + a * 7.113547);
-
-	R2 += 436902 * cos(4.786717 + a * 213.299095);
-	R2 += 71923 * cos(2.50070 + a * 206.18555);
-	R2 += 49767 * cos(4.97168 + a * 220.412642); //220.41264); //BUG?
-
-	res = (R0 + R1 * a + R2 * a*a + R3 * a*a*a + R4 * a*a*a*a + R5 * a*a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 17630 - todo */
-double uranus_ecliptic_longitude(double a)
-{
-	double L0 = 0.0;
-	double L1 = 0.0;
-	double L2 = 0.0;
-	double L3 = 0.0;
-	double L4 = 0.0;
-	double res = 0.0;
-	
-	L0 += 548129294 * cos(0.0 + a * 0.0);
-	L0 += 9260408 * cos(0.8910642 + a * 74.7815986);
-	L0 += 1504248 * cos(3.6271926 + a * 1.4844727);
-	L0 += 365982 * cos(1.899622 + a * 73.297126);
-	L0 += 272328 * cos(3.358237 + a * 149.563197);
-	L0 += 70328 * cos(5.39254 + a * 63.73590);
-	L0 += 68893 * cos(6.09292 + a * 76.26607);
-	L0 += 61999 * cos(2.26952 + a * 2.96895);
-	L0 += 61951 * cos(2.85099 + a * 11.04570);
-	L0 += 26469 * cos(3.14152 + a * 71.81265 );
-	L0 += 25711 * cos(6.11380 + a * 454.90937 );
-
-	L1 += 7502543122 * cos(0.0 + a * 0.0);
-	L1 += 154458 * cos(5.242017 + a * 74.7815986); //74.781599); //BUG?
-	L1 += 24456 * cos(1.71256 + a * 1.4844727); //1.48447); //BUG?
-	L1 += 9258 * cos(0.4284 + a * 73.297126); //11.0457); //BUG?
-	L1 += 8266 * cos(1.5022 + a * 149.563197); //63.7359); //BUG?
-	L1 += 7842 * cos(1.3198 + a * 63.7359); //149.5632); //BUG?
-
-	L2 += 53033 * cos(0.0 + a * 0.0);
-	L2 += 2358 * cos(2.2601 + a * 74.7816);
-
-	res = (L0 + L1 * a + L2 * a*a + L3 * a*a*a + L4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 18160 - todo */
-double uranus_ecliptic_latitude(double a)
-{
-	double B0 = 0.0;
-	double B1 = 0.0;
-	double B2 = 0.0;
-	double B3 = 0.0;
-	double B4 = 0.0;
-	double res = 0.0;
-	
-	B0 += 1346278 * cos(2.6187781 + a * 74.7815986);
-	B0 += 62341 * cos(5.08111 + a * 149.56320);
-	B0 += 61601 * cos(3.14159 + a * 0.0);
-	B0 += 9964 * cos(1.6160 + a * 76.2661);
-	B0 += 9926 * cos(0.5763 + a * 73.2971);
-
-	B1 += 206366 * cos(4.123943 + a * 74.781599);
-	B1 += 8563 * cos(0.3382 + a * 149.5632);
-
-	B2 += 9212 * cos(5.8004 + a * 74.7816);
-	
-	res = (B0 + B1 * a + B2 * a*a + B3 * a*a*a + B4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 18748 - todo */
-double uranus_radius_vector(double a)
-{
-	double R0 = 0.0;
-	double R1 = 0.0;
-	double R2 = 0.0;
-	double R3 = 0.0;
-	double R4 = 0.0;
-	double res = 0.0;
-	
-	R0 += 1921264848 * cos(0 + a * 0);
-	R0 += 88784984 * cos(5.60377527 + a * 74.78159857);
-	R0 += 3440836 * cos(0.3283610 + a * 73.2971259);
-	R0 += 2055653 * cos(1.7829517 + a * 149.5631971);
-	R0 += 649322 * cos(4.522473 + a * 76.266071);
-	R0 += 602248 * cos(3.860038 + a * 63.735898);
-	R0 += 496404 * cos(1.401399 + a * 454.909367);
-	R0 += 338526 * cos(1.580027 + a * 138.517497);
-
-	R1 += 1479896 * cos(3.6720571 + a * 74.7815986);
-	R1 += 71212 * cos(6.22601 + a * 63.73590);
-	R1 += 68627 * cos(6.13411 + a * 149.56320);
-	R1 += 24060 * cos(3.14159 + a * 0);
-	R1 += 21468 * cos(2.60177 + a * 76.26607);
-	R1 += 20857 * cos(5.24625 + a * 11.04570);
-
-	R2 += 22440 * cos(0.69953 + a * 74.78160);
-	R2 += 4727 * cos(1.6990 + a * 63.7359);
-
-	res = (R0 + R1 * a + R2 * a*a + R3 * a*a*a + R4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 19118 - todo */
-double neptune_ecliptic_longitude(double a)
-{
-	double L0 = 0.0;
-	double L1 = 0.0;
-	double L2 = 0.0;
-	double L3 = 0.0;
-	double L4 = 0.0;
-	double res = 0.0;
-	
-	L0 += 531188633 * cos(0 + a * 0);
-	L0 += 1798476 * cos(2.9010127 + a * 38.1330356);
-	L0 += 1019728 * cos(0.4858092 + a * 1.4844727);
-	L0 += 124532 * cos(4.830081 + a * 36.648563);
-	L0 += 42064 * cos(5.41055 + a * 2.96895);
-	L0 += 37715 * cos(6.09222 + a * 35.16409);
-
-	L1 += 3837687717 * cos(0 + a * 0);
-
-	L2 += 53893 * cos(0 + a * 0);
-
-	res = (L0 + L1 * a + L2 * a*a + L3 * a*a*a + L4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 196cc - todo */
-double neptune_ecliptic_latitude(double a)
-{
-	double B0 = 0.0;
-	double B1 = 0.0;
-	double B2 = 0.0;
-	double B3 = 0.0;
-	double B4 = 0.0;
-	double res = 0.0;
-	
-	B0 += 3088623 * cos(1.4410437 + a * 38.1330356);
-	B0 += 27780 * cos(5.91272 + a * 76.26607);
-	B0 += 27624 * cos(0 + a * 0);
-	B0 += 15448 * cos(3.50877 + a * 39.61751);
-	B0 += 15355 * cos(2.52124 + a * 36.64856);
-
-	B1 += 227279 * cos(3.807931 + a * 38.133036);
-	
-//	B2 += 9691 * cos(5.5712 + a * 38.1330); 
-	B2 += 273 * cos(1.107 + a * 38.1330); //BUG!
-	
-	res = (B0 + B1 * a + B2 * a*a + B3 * a*a*a + B4 * a*a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 19c18 - todo */
-double neptune_radius_vector(double a)
-{
-	double R0 = 0.0;
-	double R1 = 0.0;
-	double R2 = 0.0;
-	double R3 = 0.0;
-	double res = 0.0;
-	
-	R0 += 3007013206 * cos(0 + a * 0); 
-	R0 += 27062259 * cos(1.32999459 + a * 38.13303364); //38.13303564); //BUG?
-	R0 += 1691764 * cos(3.2518614 + a * 36.6485629);
-	R0 += 807831 * cos(5.185928 + a * 1.484473 );
-	R0 += 537761 * cos(4.521139 + a * 35.164090);
-	R0 += 495726 * cos(1.571057 + a * 491.557929);
-	R0 += 274572 * cos(1.845523 + a * 175.166060);
-
-	R1 += 236339 * cos(0.704980 + a * 38.133036);
-	R1 += 13220 * cos(3.32015 + a * 1.48447);
-	R1 += 8622 * cos(6.2163 + a * 35.1641);
-
-	R2 += 4247 * cos(5.8991 + a * 38.1330);
-	
-	res = (R0 + R1 * a + R2 * a*a + R3 * a*a*a) / 100000000.0;
-		
-	return res;
-}
-
-/* 1a2d0 - todo */
-double func_1a2d0(double a)
-{
-	double sp120 = 0.0;
-	double sp112;
-	double sp104;
-	double sp96;
-	double sp88;
-	
-	sp112 = 34.35 + a * 3034.9057;
-	sp104 = 50.08 + a * 1222.1138;
-	sp96 = 238.96 + a * 144.96;
-	
-	#if 0
-	sp80 = 1.0 * sp96;
-	sp72 = sp80 / 180.0;
-	sp64 = sp72 * 3.1415927;
-	sp56 = cos(sp64);
-	sp48 = sp56 * 19848454;
-	
-	sp40 = 1.0 * sp96;
-	sp32 = sp40 / 180.0;
-	sp24 = sp32 * 3.1415927;
-	sp16 = sin(sp24);
-	sp8 = sp16 * -19798886;
-	sp = sp8 + sp48;
-	
-	sp120 += sp;
-	#else
-	sp120 += sin(1.0 * sp96 / 180.0 * 3.1415927) * -19798886 + 
-		cos(1.0 * sp96 / 180.0 * 3.1415927) * 19848454;
-	#endif
-	
-	#if 0
-	sp80 = 2.0 * sp96;
-	sp72 = sp80 / 180.0;
-	sp64 = sp72 * 3.1415927;
-	sp56 = cos(sp64);
-	sp48 = sp56 * 4955707;
-	
-	sp40 = 2.0 * sp96;
-	sp32 = sp40 / 180.0;
-	sp24 = sp32 * 3.1415927;
-	sp16 = sin(sp24);
-	sp8 = sp16 * 897499;
-	sp = sp8 - sp48;
-	sp120 += sp;
-	#else
-	sp120 += sin(2.0 * sp96 / 180.0 * 3.1415927) * 897499 - 
-		cos(2.0 * sp96 / 180.0 * 3.1415927) * 4955707;
-	#endif
-	
-	sp88 = a * 144.96 + 238.956785 + sp120 / 1000000;
-	
-	return sp88;
-}
-
-/* 1a680 - todo */
-double func_1a680(double a)
-{
-	double sp120 = 0.0;
-	double sp112;
-	double sp104;
-	double sp96;
-	double sp88;
-	
-	sp112 = 34.35 + a * 3034.9057;
-	sp104 = 50.08 + a * 1222.1138;
-	sp96 = 238.96 + a * 144.96;
-	
-	#if 0
-	sp80 = 1.0 * sp96;
-	sp72 = sp80 / 180.0;
-	sp64 = sp72 * 3.1415927;
-	sp56 = cos(sp64);
-	sp48 = sp56 * 14974876;
-	
-	sp40 = 1.0 * sp96;
-	sp32 = sp40 / 180.0;
-	sp24 = sp32 * 3.1415927;
-	sp16 = sin(sp24);
-	sp8 = sp16 * -5453098;
-	sp = sp8 - sp48;
-	sp120 += sp;
-	#else
-	sp120 += sin(1.0 * sp96 / 180.0 * 3.1415927) * -5453098 - 
-		cos(1.0 * sp96 / 180.0 * 3.1415927) * 14974876;
-	#endif
-	
-	#if 0
-	sp80 = 2.0 * sp96;
-	sp72 = sp80 / 180.0;
-	sp64 = sp72 * 3.1415927;
-	sp56 = cos(sp64);
-	sp48 = sp56 * 1672673;
-	
-	sp40 = 2.0 * sp96;
-	sp32 = sp40 / 180.0;
-	sp24 = sp32 * 3.1415927;
-	sp16 = sin(sp24);
-	sp8 = sp16 * 3527363;
-	sp = sp8 + sp48;
-	sp120 += sp;
-	#else
-	sp120 += sin(2.0 * sp96 / 180.0 * 3.1415927) * 3527363 + 
-		cos(2.0 * sp96 / 180.0 * 3.1415927) * 1672673;
-	#endif
-	
-	#if 0
-	sp80 = 3.0 * sp96;
-	sp72 = sp80 / 180.0;
-	sp64 = sp72 * 3.1415927;
-	sp56 = cos(sp64);
-	sp48 = sp56 * 327763;
-	
-	sp40 = 3.0 * sp96;
-	sp32 = sp40 / 180.0;
-	sp24 = sp32 * 3.1415927;
-	sp16 = sin(sp24);
-	sp8 = sp16 * -1050939;
-	sp = sp8 + sp48;
-	sp120 += sp;
-	#else
-	sp120 += sin(3.0 * sp96 / 180.0 * 3.1415927) * -1050939 + 
-		cos(3.0 * sp96 / 180.0 * 3.1415927) * 327763;
-	#endif
-	
-	sp88 = -3.908202 + sp120 / 1000000;
-	
-	return sp88;
-}
-
-/* 1aac4 - todo */
-double func_1aac4(double sp128)
-{
-	//See: https://github.com/engerim42/wmsolar/blob/master/Pluto.cpp
-	//See: home.mnet-online.de/reimay/Projects/pc/Astronomie/libaa/AAPluto.cpp
-	
-	double sp120 = 0.0;
-	double sp112;
-	double sp104;
-	double sp96;
-	double sp88;
-	
-	sp112 = sp128 * 3034.9057 + 34.35;
-	sp104 = sp128 * 1222.1138 + 50.08;
-	sp96 = sp128 * 144.96 + 238.96;
-	
-	#if 0
-	sp80 = 1.0 * sp96;
-	sp72 = sp80 / 180.0;
-	sp64 = sp72 * 3.1415927;
-	sp56 = cos(sp64);
-	sp48 = sp56 * 0x419070bb90000000;
-	sp40 = 1.0 * sp96;
-	sp32 = sp40 / 180.0;
-	sp24 = sp32 * 3.1415927;
-	sp16 = sin(sp24);
-	sp8 = sp16 * 0x418fe28430000000;
-	sp = sp8 + sp48;
-	sp120 = sp + sp120;
-	#else
-	sp120 += sin((1.0 * sp96) / 180.0 * 3.1415927) * 66867334.0 + 
-		cos((1.0 * sp96) / 180.0 * 3.1415927) * 68955876.0;
-	#endif
-
-	#if 0
-	sp80 = 2.0 * sp96;
-	sp72 = sp80 / 180.0;
-	sp64 = sp72 * 3.1415927;
-	sp56 = cos(sp64);
-	sp48 = sp56 * 333765;
-	sp40 = 2.0 * sp96;
-	sp32 = sp40 / 180.0;
-	sp24 = sp32 * 3.1415927;
-	sp16 = sin(sp24);
-	sp8 = sp16 * -11826086;
-	sp = sp8 - sp48;
-	sp120 = sp + sp120;
-	#else
-	sp120 += sin((2.0 * sp96) / 180.0 * 3.1415927) * -11826086 -
-		cos((2.0 * sp96) / 180.0 * 3.1415927) * 333765;
-	#endif
-	
-	#if 0
-	sp80 = 3.0 * sp96;
-	sp72 = sp80 / 180.0;
-	sp64 = sp72 * 3.1415927;
-	sp56 = cos(sp64);
-	sp48 = sp56 * 1439953;
-	
-	sp40 = 3.0 * sp96;
-	sp32 = sp40 / 180.0;
-	sp24 = sp32 * 3.1415927;
-	sp16 = sin(sp24);
-	sp8 = sp16 * 1593657;
-	sp = sp8 - sp48;
-	sp120 += sp;
-	#else
-	sp120 += sin(3.0 * sp96 / 180.0 * 3.1415927) * 1593657 -
-		cos(3.0 * sp96 / 180.0 * 3.1415927) * 1439953;
-	#endif
-	
-	sp88 = 40.7247248 + sp120 / 10000000;
-	
-	return sp88;
-}
+#include "earth.c"
+#include "mercury.c"
+#include "venus.c"
+#include "mars.c"
+#include "jupiter.c"
+#include "saturn.c"
+#include "uranus.c"
+#include "neptun.c"
+#include "pluto.c"
 
 /* 1af1c - todo */
 double func_1af1c(double a)
@@ -6082,111 +5126,111 @@ void transform_ecliptical_to_equatorial_coordinates(double Lambda, double Beta, 
 /* 1b528 - todo */
 void calculate_solar_system_object_equatorial_coordinates(int a, double* pAlpha, double* pDelta)
 {
-	double Tau/*sp536*/;
-	double T/*sp528*/;
-	double Lrad/*sp520*/ = 0.0; //Planet's Ecliptic Longitude in Radians
-	double Brad/*sp512*/ = 0.0; //Planet's Ecliptic Latitude in Radians
-	double R/*sp504*/ = 0.0; //Planet's Radius Vector
-	double L/*sp496*/; //Planet's Ecliptic Longitude in Degrees
-	double B/*sp488*/; //Planet's Ecliptic Latitude in Degrees
+	double Tau; //sp536
+	double T; //sp528
+	double Lrad = 0.0; /*sp520*/ //Planet's Ecliptic Longitude in Radians 
+	double Brad = 0.0; /*sp512*/ //Planet's Ecliptic Latitude in Radians 
+	double R = 0.0; /*sp504*/ //Planet's Radius Vector
+	double L; /*sp496*/ //Planet's Ecliptic Longitude in Degrees
+	double B; /*sp488*/ //Planet's Ecliptic Latitude in Degrees
 	double L0rad; //sp480; //Earth Ecliptic Longitude in Radians
 	double B0rad; //sp472; //Earth Ecliptic Latitude in Radians
 	double R0; //sp464; //Earth Radius Vector
 	double L0; //sp456; //Earth Ecliptic Longitude in Degrees
 	double B0; //sp448; //Earth Ecliptic Latitude in Degrees
-	double x/*sp440*/;
-	double y/*sp432*/;
-	double z/*sp424*/;
-	double Epsilon/*sp416*/; //Obliquity of the Ecliptic
-	double Lambda/*sp408*/ = 0.0;
-	double Beta/*sp400*/;
+	double x; /*sp440*/
+	double y; /*sp432*/
+	double z; /*sp424*/
+	double Epsilon; /*sp416*/ //Obliquity of the Ecliptic
+	double Lambda = 0.0; /*sp408*/
+	double Beta; ///*sp400*/
 	double Alpha; //sp392; //Right Ascension
 	double Delta; //sp384; //Declination
 	double JD; //sp376; //Julian Day
 	double sp368;
 	double sp360;
 	double sp352;
-	double sp344;
-	double sp336;
-	double sp328;
+	double x0; //sp344;
+	double y0; //sp336;
+	double z0; //sp328;
 	double sp320;
 	double AlphaPlutoRadians; //sp312;
 	double DeltaPlutoRadians; //sp304;
 	double AlphaPluto; //sp296;
 	double DeltaPluto; //sp288;
-	double sp280 = 0.0;
-	double sp272 = 0.0;
-	double sp264 = 0.0;
-	double sp256 = 0.0;
-	double sp248 = 0.0;
-	double sp240 = 0.0;
-	double sp232 = 0.0;
-	double sp224 = 0.0;
-	double sp216 = 0.0;
-	double sp208 = 0.0;
-	double sp200 = 0.0;
+	double lp = 0.0; /*sp280*/ //Moon mean longitude
+	double d = 0.0; /*sp272*/ //Moon mean elongation
+	double m = 0.0; /*sp264*/ //Sun mean anomaly
+	double mp = 0.0; /*sp256*/ //Moon mean anomaly
+	double f = 0.0; /*sp248*/ //Moon arg of latitude
+	double a1 = 0.0; /*sp240*/
+	double a2 = 0.0; /*sp232*/
+	double a3 = 0.0; /*sp224*/
+	double e = 0.0; /*sp216*/
+	double sl = 0.0; /*sp208*/
+	double sb = 0.0; /*sp200*/
 	
 	/*sp192 =*/ get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude);
 	
 	JD/*sp376*/ = Data_40004128.dJulianDay;
-	Tau/*sp536*/ = (JD - 2451545.0) / 365250.0;
-	T/*sp528*/ = 10.0 * Tau/*sp536*/;
+	Tau = (JD - 2451545.0) / 365250.0;
+	T = 10.0 * Tau;
 	
 	switch (a - 2)
 	{
 		case 0: //Mercury
 			//0x1b6dc
-			Lrad/*sp520*/ = mercury_ecliptic_longitude(Tau/*sp536*/);
-			Brad/*sp512*/ = mercury_ecliptic_latitude(Tau/*sp536*/);
-			R/*sp504*/ = mercury_radius_vector(Tau/*sp536*/);
+			Lrad = mercury_ecliptic_longitude(Tau);
+			Brad = mercury_ecliptic_latitude(Tau);
+			R = mercury_radius_vector(Tau);
 			//->0x1b8c0
 			break;
 		
 		case 1: //Venus
 			//0x1b720
-			Lrad/*sp520*/ = venus_ecliptic_longitude(Tau/*sp536*/);
-			Brad/*sp512*/ = venus_ecliptic_latitude(Tau/*sp536*/);
-			R/*sp504*/ = venus_radius_vector(Tau/*sp536*/);
+			Lrad = venus_ecliptic_longitude(Tau);
+			Brad = venus_ecliptic_latitude(Tau);
+			R = venus_radius_vector(Tau);
 			//->0x1b8c0
 			break;
 		
 		case 2: //Mars
 			//0x1b764
-			Lrad/*sp520*/ = mars_ecliptic_longitude(Tau/*sp536*/);
-			Brad/*sp512*/ = mars_ecliptic_latitude(Tau/*sp536*/);
-			R/*sp504*/ = mars_radius_vector(Tau/*sp536*/);
+			Lrad = mars_ecliptic_longitude(Tau);
+			Brad = mars_ecliptic_latitude(Tau);
+			R = mars_radius_vector(Tau);
 			//->0x1b8c0
 			break;
 		
 		case 3: //Jupiter
 			//0x1b7a8
-			Lrad/*sp520*/ = jupiter_ecliptic_longitude(Tau/*sp536*/);
-			Brad/*sp512*/ = jupiter_ecliptic_latitude(Tau/*sp536*/);
-			R/*sp504*/ = jupiter_radius_vector(Tau/*sp536*/);
+			Lrad = jupiter_ecliptic_longitude(Tau);
+			Brad = jupiter_ecliptic_latitude(Tau);
+			R = jupiter_radius_vector(Tau);
 			//->0x1b8c0
 			break;
 		
 		case 4: //Saturn
 			//0x1b7ec
-			Lrad/*sp520*/ = saturn_ecliptic_longitude(Tau/*sp536*/);
-			Brad/*sp512*/ = saturn_ecliptic_latitude(Tau/*sp536*/);
-			R/*sp504*/ = saturn_radius_vector(Tau/*sp536*/);
+			Lrad = saturn_ecliptic_longitude(Tau);
+			Brad = saturn_ecliptic_latitude(Tau);
+			R = saturn_radius_vector(Tau);
 			//->0x1b8c0
 			break;
 		
 		case 5: //Uranus
 			//0x1b830
-			Lrad/*sp520*/ = uranus_ecliptic_longitude(Tau/*sp536*/);
-			Brad/*sp512*/ = uranus_ecliptic_latitude(Tau/*sp536*/);
-			R/*sp504*/ = uranus_radius_vector(Tau/*sp536*/);
+			Lrad = uranus_ecliptic_longitude(Tau);
+			Brad = uranus_ecliptic_latitude(Tau);
+			R = uranus_radius_vector(Tau);
 			//->0x1b8c0
 			break;
 		
 		case 6: //Neptune
 			//0x1b874
-			Lrad/*sp520*/ = neptune_ecliptic_longitude(Tau/*sp536*/);
-			Brad/*sp512*/ = neptune_ecliptic_latitude(Tau/*sp536*/);
-			R/*sp504*/ = neptune_radius_vector(Tau/*sp536*/);
+			Lrad = neptune_ecliptic_longitude(Tau);
+			Brad = neptune_ecliptic_latitude(Tau);
+			R = neptune_radius_vector(Tau);
 			//->0x1b8c0
 			break;
 		
@@ -6195,29 +5239,29 @@ void calculate_solar_system_object_equatorial_coordinates(int a, double* pAlpha,
 			break;
 	}
 	//1b8c4: Radians to Degrees
-	L/*sp496*/ = Lrad/*sp520*/ / 3.1415927 * 180.0;
-	B/*sp488*/ = Brad/*sp512*/ / 3.1415927 * 180.0;
+	L = Lrad / 3.1415927 * 180.0;
+	B = Brad / 3.1415927 * 180.0;
 	
-	L0rad/*sp480*/ = earth_heliocentric_longitude(Tau/*sp536*/);
-	B0rad/*sp472*/ = earth_heliocentric_latitude(Tau/*sp536*/);
-	R0/*sp464*/ = earth_radius_vector(Tau/*sp536*/);
+	L0rad/*sp480*/ = earth_heliocentric_longitude(Tau);
+	B0rad/*sp472*/ = earth_heliocentric_latitude(Tau);
+	R0 = earth_radius_vector(Tau);
 	
 	//Radians to Degrees
-	L0/*sp456*/ = L0rad/*sp480*/ * 57.295779513; 
-	B0/*sp448*/ = B0rad/*sp472*/ * 57.295779513;
+	L0 = L0rad/*sp480*/ * 57.295779513; 
+	B0 = B0rad/*sp472*/ * 57.295779513;
 	//->0x1ba40
 	while (1)
 	{
 		//0x1b9cc
-		if (L/*sp496*/ < 0.0)
+		if (L < 0.0)
 		{
-			L/*sp496*/ += 360.0;
+			L += 360.0;
 			//->0x1ba40
 		}
 		//0x1ba04
-		else if (L/*sp496*/ > 360.0)
+		else if (L > 360.0)
 		{
-			L/*sp496*/ -= 360.0;
+			L -= 360.0;
 			//->0x1ba40
 		}
 		else
@@ -6230,15 +5274,15 @@ void calculate_solar_system_object_equatorial_coordinates(int a, double* pAlpha,
 	while (1)
 	{
 		//0x1ba4c
-		if (L0/*sp456*/ < 0.0)
+		if (L0 < 0.0)
 		{
-			L0/*sp456*/ += 360.0;
+			L0 += 360.0;
 			//->0x1bac0
 		}
 		//0x1ba84
-		else if (L0/*sp456*/ > 360.0)
+		else if (L0 > 360.0)
 		{
-			L0/*sp456*/ -= 360.0;
+			L0 -= 360.0;
 			//->0x1bac0
 		}
 		else
@@ -6248,39 +5292,39 @@ void calculate_solar_system_object_equatorial_coordinates(int a, double* pAlpha,
 		}
 	}
 	//1bac8: get rectangular coords of planets
-	x/*sp440*/ = R/*sp504*/ * cos(B/*sp488*/ / 180.0 * 3.1415927) * cos(L/*sp496*/ / 180.0 * 3.1415927) - 
-		R0/*sp464*/ * cos(B0/*sp448*/ / 180.0 * 3.1415927) * cos(L0/*sp456*/ / 180.0 * 3.1415927);
+	x = R * cos(B / 180.0 * 3.1415927) * cos(L / 180.0 * 3.1415927) - 
+		R0 * cos(B0 / 180.0 * 3.1415927) * cos(L0 / 180.0 * 3.1415927);
 	//1bc2c
-	y/*sp432*/ = R/*sp504*/ * cos(B/*sp488*/ / 180.0 * 3.1415927) * sin(L/*sp496*/ / 180.0 * 3.1415927) - 
-		R0/*sp464*/ * cos(B0/*sp448*/ / 180.0 * 3.1415927) * sin(L0/*sp456*/ / 180.0 * 3.1415927);
+	y = R * cos(B / 180.0 * 3.1415927) * sin(L / 180.0 * 3.1415927) - 
+		R0 * cos(B0 / 180.0 * 3.1415927) * sin(L0 / 180.0 * 3.1415927);
 	//1bd90: get geocentric longitude lambda
-	z/*sp424*/ = R/*sp504*/ * sin(B/*sp488*/ / 180.0 * 3.1415927) - 
-		R0/*sp464*/ * sin(B0/*sp448*/ / 180.0 * 3.1415927);
+	z = R * sin(B / 180.0 * 3.1415927) - 
+		R0 * sin(B0 / 180.0 * 3.1415927);
 	//1be4c
-	Lambda/*sp408*/ = atan(y/*sp432*/ / x/*sp440*/); //???
+	Lambda = atan(y / x); //???
 	
-	if (x/*sp440*/ < 0)
+	if (x < 0)
 	{
 		//1be84
-		Lambda/*sp408*/ += 3.1415927;
+		Lambda += 3.1415927;
 	}
 	//0x1bea0: get geocentric latitude, beta
-	Beta/*sp400*/ = atan(z/*sp424*/ / sqrt(x/*sp440*/ * x/*sp440*/ + y/*sp432*/ * y/*sp432*/));
+	Beta = atan(z / sqrt(x * x + y * y));
 	//1bf20
-	Lambda/*sp408*/ = Lambda/*sp408*/ / 3.1415927 * 180.0;
+	Lambda = Lambda / 3.1415927 * 180.0;
 	//1bf54 -> 0x1bfcc
 	while (1)
 	{
 		//0x1bf58
-		if (Lambda/*sp408*/ < 0.0)
+		if (Lambda < 0.0)
 		{
-			Lambda/*sp408*/ += 360.0;
+			Lambda += 360.0;
 			//->0x1bfcc
 		}
 		//0x1bf90
-		else if (Lambda/*sp408*/ > 360.0)
+		else if (Lambda > 360.0)
 		{
-			Lambda/*sp408*/ -= 360.0;
+			Lambda -= 360.0;
 			//->0x1bfcc
 		}
 		else
@@ -6290,9 +5334,9 @@ void calculate_solar_system_object_equatorial_coordinates(int a, double* pAlpha,
 		}
 	}
 	//1bfd4
-	Beta/*sp400*/ = Beta/*sp400*/ / 3.1415927 * 180.0;
+	Beta = Beta / 3.1415927 * 180.0;
 	//1c008
-	Epsilon/*sp416*/ = 23.4392911111111104105475533288 - 
+	Epsilon = 23.4392911111111104105475533288 - 
 		46.8150 * T / 3600.0 - 
 		0.00059 * T * T / 3600.0 + 
 		0.001813 * T * T * T / 3600.0;
@@ -6300,86 +5344,86 @@ void calculate_solar_system_object_equatorial_coordinates(int a, double* pAlpha,
 	if (a == 1) //Sun
 	{
 		//1c128
-		Lambda/*sp408*/ = L0/*sp456*/ + 180.0;
+		Lambda = L0 + 180.0;
 		//->0x1c164
-		while (Lambda/*sp408*/ >= 360.0)
+		while (Lambda >= 360.0)
 		{
 			//0x1c148
-			Lambda/*sp408*/ -= 360.0;
+			Lambda -= 360.0;
 		}
 		//1c17c
-		if (Lambda/*sp408*/ < 0)
+		if (Lambda < 0)
 		{
 			//1c194
-			Lambda/*sp408*/ += 360.0;
+			Lambda += 360.0;
 		}
 		//0x1c1b0
-		Beta/*sp400*/ = 1.0 * B0/*sp448*/;
+		Beta = 1.0 * B0;
 	}
 	//0x1c1cc
 	if (a == 9) //Pluto
 	{
 		//1c1d4
-		sp368 = func_1a2d0(T);
-		sp360 = func_1a680(T);
-		sp352 = func_1aac4(T);
+		sp368 = pluto_ecliptic_longitude(T);
+		sp360 = pluto_ecliptic_latitude(T);
+		sp352 = pluto_radius_vector(T);
 		
-		Lambda/*sp408*/ = L0/*sp456*/;
+		Lambda = L0;
 		//->0x1c240
-		while (Lambda/*sp408*/ >= 360.0)
+		while (Lambda >= 360.0)
 		{
 			//0x1c224
-			Lambda/*sp408*/ -= 360.0;
+			Lambda -= 360.0;
 		}
 		//1c258
-		if (Lambda/*sp408*/ < 0.0)
+		if (Lambda < 0.0)
 		{
-			Lambda/*sp408*/ += 360.0;
+			Lambda += 360.0;
 		}
 		//0x1c28c
-		Beta/*sp400*/ = -1.0 * B0/*sp448*/;
+		Beta = -1.0 * B0;
 		
-		sp344 = -1.0 * R0/*sp464*/ * cos(Beta/*sp400*/ / 180.0 * 3.1415927) * 
-			cos(Lambda/*sp408*/ / 180.0 * 3.1415927);
+		x0 = -1.0 * R0 * cos(Beta / 180.0 * 3.1415927) * 
+			cos(Lambda / 180.0 * 3.1415927);
 		
-		sp336 = -1.0 * R0/*sp464*/ * cos(Beta/*sp400*/ / 180.0 * 3.1415927) * 
-			sin(Lambda/*sp408*/ / 180.0 * 3.1415927);
+		y0 = -1.0 * R0 * cos(Beta / 180.0 * 3.1415927) * 
+			sin(Lambda / 180.0 * 3.1415927);
 
-		sp328 = -1.0 * R0/*sp464*/ * sin(Beta/*sp400*/ / 180.0 * 3.1415927);
+		z0 = -1.0 * R0 * sin(Beta / 180.0 * 3.1415927);
 		
-		sp344 = 0.00000044036 * sp336/*y*/ + sp344/*x*/ - 0.000000190919 * sp328/*z*/;		
+		x0 = 0.00000044036 * y0 + x0 - 0.000000190919 * z0;
 
-		sp336 = -0.000000479965999999999971489545586012 * sp344 + 
-			0.917482137086999993691449617472 * sp336 - 
-			0.397777698290199988040427570013 * sp328;
+		y0 = -0.000000479966 * x0 + 
+			0.917482137087 * y0 - 
+			0.3977776982902/*BUG?*/ * z0;
 		
-		sp328 = 0.397776982901999975883455817893 * sp336 + 0.917482137086999993691449617472 * sp328;
+		z0 = 0.397776982902 * y0 + 0.917482137087 * z0;
 
-		x/*sp440*/ = cos(sp368 / 180.0 * 3.1415927) * sp352 * 
+		x = cos(sp368 / 180.0 * 3.1415927) * sp352 * 
 			cos(sp360 / 180.0 * 3.1415927);
 
-		y/*sp432*/ = (sin(sp368 / 180.0 * 3.1415927) * 
-			cos(sp360 / 180.0 * 3.1415927) * 0.917482062000000042623071294656 - 
-			sin(sp360 / 180.0 * 3.1415927) * 0.397777156000000020608098338926) * sp352;
+		y = (sin(sp368 / 180.0 * 3.1415927) * 
+			cos(sp360 / 180.0 * 3.1415927) * 0.917482062 - 
+			sin(sp360 / 180.0 * 3.1415927) * 0.397777156) * sp352;
 
-		z/*sp424*/ = (sin(sp368 / 180.0 * 3.1415927) * 
-			cos(sp360 / 180.0 * 3.1415927) * 0.397777156000000020608098338926 + 
-			sin(sp360 / 180.0 * 3.1415927) * 0.917482062000000042623071294656) * sp352;
+		z = (sin(sp368 / 180.0 * 3.1415927) * 
+			cos(sp360 / 180.0 * 3.1415927) * 0.397777156 + 
+			sin(sp360 / 180.0 * 3.1415927) * 0.917482062) * sp352;
 
-		sp320 = sqrt((sp344 + x/*sp440*/) * (sp344 + x/*sp440*/) + 
-			(sp336 + y/*sp432*/) * (sp336 + y/*sp432*/) + 
-			(sp328 + z/*sp424*/) * (sp328 + z/*sp424*/));
+		sp320 = sqrt((x0 + x) * (x0 + x) + 
+			(y0 + y) * (y0 + y) + 
+			(z0 + z) * (z0 + z));
 
-		AlphaPlutoRadians = atan((sp336 + y/*sp432*/) / (sp344 + x/*sp440*/));
+		AlphaPlutoRadians = atan((y0 + y) / (x0 + x));
 
-		if ((sp344 + x/*sp440*/) > 0)
+		if ((x0 + x) > 0)
 		{
 			//1cadc
 			AlphaPlutoRadians += 3.1415927;
 		}
 		//0x1caf8
 
-		DeltaPlutoRadians = asin((sp328 + z/*sp424*/) / sp320);
+		DeltaPlutoRadians = asin((z0 + z) / sp320);
 
 		AlphaPluto = AlphaPlutoRadians / 3.1415927 * 180.0;
 
@@ -6392,83 +5436,83 @@ void calculate_solar_system_object_equatorial_coordinates(int a, double* pAlpha,
 			AlphaPluto -= 360.0;
 		}
 		//0x1cbec
-	}
+	} //if (a == 9) //Pluto
 	//0x1cbec
 	if (a == 10) //Moon
 	{
 		//See: https://github.com/openhab/openhab1-addons/blob/master/bundles/binding/org.openhab.binding.astro/src/main/java/org/openhab/binding/astro/internal/calc/MoonCalc.java
 		
 		//1cbf4
-		sp280 = 218.3164591 + 481267.88134236 * T - 
+		lp = 218.3164591 + 481267.88134236 * T - 
 			0.0013268 * T * T + T * T * T / 538841.0 - T * T * T * T / 65194000.0;
-		sp280 = func_1af1c(sp280);
+		lp = func_1af1c(lp);
 		
-		sp272 = 297.8502042 + 445267.1115168 * T - 
+		d = 297.8502042 + 445267.1115168 * T - 
 			0.00163 * T * T + T * T * T / 545868.0 - T * T * T * T / 113065000.0;
-		sp272 = func_1af1c(sp272);
+		d = func_1af1c(d);
 		
-		sp264 = 357.5291092 + 35999.0502909 * T - 
+		m = 357.5291092 + 35999.0502909 * T - 
 			0.0001536 * T * T + T * T * T / 24490000.0;
-		sp264 = func_1af1c(sp264);
+		m = func_1af1c(m);
 		
-		sp256 = 134.9634114 + 477198.8676313 * T - 
+		mp = 134.9634114 + 477198.8676313 * T - 
 			0.008997 * T * T + T * T * T / 69699.0 - T * T * T * T / 14712000.0;
-		sp256 = func_1af1c(sp256);
+		mp = func_1af1c(mp);
 		//1d164		
-		sp248 = 93.2720993 + 483202.0175273 * T - 
+		f = 93.2720993 + 483202.0175273 * T - 
 			0.0034029 * T * T - T * T * T / 3526000 + T * T * T * T / 863310000;
-		sp248 = func_1af1c(sp248);
+		f = func_1af1c(f);
 		//1d2bc
-		sp240 = 119.75 + 131.849 * T;
-		sp240 = func_1af1c(sp240);
+		a1 = 119.75 + 131.849 * T;
+		a1 = func_1af1c(a1);
 		
-		sp232 = 53.09 + 479264.29 * T;
-		sp232 = func_1af1c(sp232);
+		a2 = 53.09 + 479264.29 * T;
+		a2 = func_1af1c(a2);
 
-		sp224 = 313.45 + 481266.484 * T;
-		sp224 = func_1af1c(sp224);
+		a3 = 313.45 + 481266.484 * T;
+		a3 = func_1af1c(a3);
 		//1d394
-		sp216 = 1.0 - 0.002516 * T - 0.0000074 * T * T;
+		e = 1.0 - 0.002516 * T - 0.0000074 * T * T;
 		
-		sp208 = sin(/*0 * sp272*/ sp256 * 0.01745329252) * 6288774.0 + 
-			sin((2 * sp272 - sp256) * 0.01745329252) * 1274027.0 + 
-			sin(2 * sp272 * /*0 * sp256*/ 0.01745329252) * 658314.0 + 
-			sin(/*0 * sp272*/ 2 * sp256 * 0.01745329252) * 213628.0;
+		sl = sin(/*0 * d*/ mp * 0.01745329252) * 6288774.0 + 
+			sin((2 * d - mp) * 0.01745329252) * 1274027.0 + 
+			sin(2 * d * /*0 * mp*/ 0.01745329252) * 658314.0 + 
+			sin(/*0 * d*/ 2 * mp * 0.01745329252) * 213628.0;
 			
-		sp208 += sin(sp264 * 0.01745329252) * -185116.0 - 
-			sin(2 * sp248 * 0.01745329252) * 114332.0 + 
-			sin((2 * sp272 - 2 * sp256) * 0.01745329252) * 58793.0 + 
-			sin((2 * sp272 - sp264 - sp256) * 0.01745329252) * 57066.0;
+		sl += sin(m * 0.01745329252) * -185116.0 - 
+			sin(2 * f * 0.01745329252) * 114332.0 + 
+			sin((2 * d - 2 * mp) * 0.01745329252) * 58793.0 + 
+			sin((2 * d - m - mp) * 0.01745329252) * 57066.0;
 
-		sp208 += sin((2 * sp272 + sp256) * 0.01745329252) * 53322.0 + 
-			sin((2 * sp272 - sp264) * 0.01745329252) * 45758.0 - 
-			sin((sp264 - sp256) * 0.01745329252) * 40923.0 - 
-			sin(sp272 * 0.01745329252) * 34720.0;
+		sl += sin((2 * d + mp) * 0.01745329252) * 53322.0 + 
+			sin((2 * d - m) * 0.01745329252) * 45758.0 - 
+			sin((m - mp) * 0.01745329252) * 40923.0 - 
+			sin(d * 0.01745329252) * 34720.0;
 
-		sp208 += sin((sp264 + sp256) * 0.01745329252) * -30383.0 + 
-			sin((2 * sp272 - 2 * sp248) * 0.01745329252) * 15327.0 - 
-			sin((2 * sp248 + sp256) * 0.01745329252) * 12528.0 + 
-			//sin((2 * sp248 - sp256) * 0.01745329252) * 10980.0; 
-			sin((sp256 - 2 * sp248) * 0.01745329252) * 10980.0; //->BUG?
+		sl += sin((m + mp) * 0.01745329252) * -30383.0 + 
+			sin((2 * d - 2 * f) * 0.01745329252) * 15327.0 - 
+			sin((2 * f + mp) * 0.01745329252) * 12528.0 + 
+			//sin((2 * f - mp) * 0.01745329252) * 10980.0; 
+			sin((mp - 2 * f) * 0.01745329252) * 10980.0; //->BUG?
 
-		sp200 = sin(sp248 * 0.01745329252) * 5128122.0 + 
-			sin((sp256 + sp248) * 0.01745329252) * 280602.0 + 
-			sin((sp256 - sp248) * 0.01745329252) * 277693.0 + 
-			sin((2 * sp272 - sp248) * 0.01745329252) * 173237.0;
+		sb = sin(f * 0.01745329252) * 5128122.0 + 
+			sin((mp + f) * 0.01745329252) * 280602.0 + 
+			sin((mp - f) * 0.01745329252) * 277693.0 + 
+			sin((2 * d - f) * 0.01745329252) * 173237.0;
 
-		sp200 += sin((2 * sp272 - sp256 + sp248) * 0.01745329252) * 55413.0 + 
-			sin((2 * sp272 - sp256 - sp248) * 0.01745329252) * 46271.0 + 
-			sin((2 * sp272 + sp248) * 0.01745329252) * 32573.0 + 
-			sin((2 * sp256 + sp248) * 0.01745329252) * 17198.0;
+		sb += sin((2 * d - mp + f) * 0.01745329252) * 55413.0 + 
+			sin((2 * d - mp - f) * 0.01745329252) * 46271.0 + 
+			sin((2 * d + f) * 0.01745329252) * 32573.0 + 
+			sin((2 * mp + f) * 0.01745329252) * 17198.0;
 
-		Lambda/*sp408*/ = sp208 / 1000000 + sp280;
-		Lambda/*sp408*/ = func_1af1c(Lambda/*sp408*/);
+		Lambda = sl / 1000000 + lp;
+		Lambda = func_1af1c(Lambda);
 		
-		Beta/*sp400*/ = sp200 / 1000000;
-		Beta/*sp400*/ = func_1af1c(Beta/*sp400*/);
-	}
+		Beta = sb / 1000000;
+		Beta = func_1af1c(Beta);
+	} //if (a == 10) //Moon
 	//0x1e0bc
-	transform_ecliptical_to_equatorial_coordinates(Lambda/*sp408*/, Beta/*sp400*/, Epsilon/*sp416*/, &Alpha, &Delta);
+	transform_ecliptical_to_equatorial_coordinates(Lambda, Beta, Epsilon, &Alpha, &Delta);
 	
 	*pAlpha = Alpha;
 	*pDelta = Delta;

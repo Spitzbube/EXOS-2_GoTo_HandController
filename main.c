@@ -23,22 +23,22 @@ void HandleStarKey(void)
 	{
 		case 0:
 			//0x4ee08
-			IO0SET = 0x2000;
-			IO0CLR = 0x10000;
+			IO0SET = (1 << 13);
+			IO0CLR = (1 << 16);
 			bData_40003195 = 1;
 			break;
 		
 		case 1:
 			//0x4ee30
-			IO0SET = 0x2000;
-			IO0SET = 0x10000;
+			IO0SET = (1 << 13);
+			IO0SET = (1 << 16);
 			bData_40003195 = 2;
 			break;
 		
 		case 2:
 			//0x4ee58
-			IO0CLR = 0x2000;
-			IO0SET = 0x10000;
+			IO0CLR = (1 << 13);
+			IO0SET = (1 << 16);
 			bData_40003195 = 0;
 			break;
 		
@@ -3841,7 +3841,7 @@ double func_6ab74(int a)
 }
 
 /* 6ae24 - todo */
-double func_6ae24(int a)
+double InquireMotorData(int a)
 {
 	unsigned char r5;
 	double sp8;
@@ -3851,7 +3851,7 @@ double func_6ae24(int a)
 	uart1_write_byte(0x55);
 	uart1_write_byte(0xaa);
 	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	uart1_write_byte(1);
 
 	switch (a)
 	{
@@ -3920,7 +3920,7 @@ double func_6ae24(int a)
 				//0x6afd0
 				if (Data_40003592_uart1ReceiveDataBuffer[0] == 0x24)
 				{
-					//6af64
+					//6af64: DEC Inquire response?
 					Data_400031a0.bData[3] = Data_40003592_uart1ReceiveDataBuffer[2];
 					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
 					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
@@ -3972,7 +3972,7 @@ double func_6ae24(int a)
 		}
 		//6b160
 		bData_40002c13_uart1ReceiveComplete = 0;
-	}
+	} //if (bData_40002c13_uart1ReceiveComplete == 1)
 	//0x6b16c
 }
 
@@ -4892,7 +4892,8 @@ int main(void)
 #ifdef USE_USB
 	usb_init();
 #endif
-	
+
+#if 0	
 	if (0)
 	{
 		int res = mmcInitMedia();
@@ -4900,6 +4901,7 @@ int main(void)
 		snprintf(buf, sizeof(buf)-1, "mmcInitMedia res = 0x%x\n\r", res);
 		uart0_send(buf, strlen(buf));
 	}
+#endif
 
 	func_7590();
 	func_d2cc();
@@ -5180,7 +5182,7 @@ int main(void)
 				Data_40002d44 = -1;
 			}
 			//6db4c
-			func_6ae24(1);
+			InquireMotorData(1); //RA Inquire?
 			
 			Data_40004128.dData_208 = dData_40002d80;
 			dData_400034e8 = dData_40002d80;
@@ -5188,7 +5190,7 @@ int main(void)
 			dData_40002d78 = dData_40002d80;
 			
 			func_659c(5);
-			func_6ae24(2);
+			InquireMotorData(2); //DEC Inquire?
 			//6dbbc
 			Data_40004128.dData_216 = dData_40002da0;
 			dData_400034f8 = dData_40002da0;
@@ -5242,7 +5244,7 @@ int main(void)
 					dData_40002d78 += 360;
 				}
 				//->0x6dfc4
-			}
+			} //if (Data_40004128.geographicLatitude >= 0)
 			else
 			{
 				//0x6de4c
@@ -5436,7 +5438,7 @@ int main(void)
 				Data_40002d4c = (dData_40002d58 - Data_40002d48) * 60.0;
 				fData_40002d50 = (dData_40002d58 - Data_40002d48 - Data_40002d4c / 60.0) * 3600.0;
 				
-				func_6ae24(3);
+				InquireMotorData(3);
 				
 				Data_40004128.dData_208 = dData_40002db8;
 				dData_40002dc0_Azimuth = Data_40004128.dData_208;
@@ -5478,7 +5480,7 @@ int main(void)
 				}
 				//0x6ead0
 				func_659c(2);
-				func_6ae24(4);
+				InquireMotorData(4);
 				//6eae8
 				Data_40004128.dData_216 = dData_40002df0;
 				dData_40002df8 = Data_40004128.dData_216;
@@ -5543,7 +5545,7 @@ int main(void)
 					Data_40002d44 = -1;
 				}
 				//0x6f0d4
-				func_6ae24(3);
+				InquireMotorData(3);
 			
 				Data_40004128.dData_208 = dData_40002db8;
 				dData_40002dc0_Azimuth = Data_40004128.dData_208;
@@ -5561,7 +5563,7 @@ int main(void)
 				dData_40002d78 = dData_40002dc0_Azimuth;
 				
 				func_659c(2);
-				func_6ae24(4);
+				InquireMotorData(4);
 				
 				Data_40004128.dData_216 = dData_40002df0;
 				dData_40002df8 = fabs(Data_40004128.dData_216);
@@ -6314,7 +6316,7 @@ int main(void)
 			{
 				case 0:
 					//0x72110
-					func_6ae24(3);
+					InquireMotorData(3);
 				
 					Data_40004128.dData_208 = dData_40002db8;
 					dData_40002dc0_Azimuth = Data_40004128.dData_208;
@@ -6323,7 +6325,7 @@ int main(void)
 				
 				case 1:
 					//0x72150
-					func_6ae24(4);
+					InquireMotorData(4);
 				
 					Data_40004128.dData_216 = dData_40002da0;
 					dData_40002df8 = fabs(Data_40004128.dData_216);
@@ -6332,7 +6334,7 @@ int main(void)
 				
 				case 2:
 					//0x72194
-					func_6ae24(1);
+					InquireMotorData(1);
 				
 					Data_40004128.dData_208 = dData_40002d80;
 					dData_40002dc0_Azimuth = Data_40004128.dData_208;
@@ -6340,7 +6342,7 @@ int main(void)
 				
 				case 3:
 					//0x721d4
-					func_6ae24(2);
+					InquireMotorData(2);
 				
 					Data_40004128.dData_216 = dData_40002da0;
 					dData_40002df8 = Data_40004128.dData_216;
@@ -6358,7 +6360,7 @@ int main(void)
 			{
 				case 0:
 					//0x72258
-					func_6ae24(3);
+					InquireMotorData(3);
 				
 					Data_40004128.dData_208 = dData_40002db8;
 					dData_40002dc0_Azimuth = Data_40004128.dData_208;
@@ -6367,7 +6369,7 @@ int main(void)
 				
 				case 1:
 					//0x72298
-					func_6ae24(4);
+					InquireMotorData(4);
 				
 					Data_40004128.dData_216 = dData_40002da0;
 					dData_40002df8 = fabs(Data_40004128.dData_216);
@@ -6376,7 +6378,7 @@ int main(void)
 				
 				case 2:
 					//0x722dc
-					func_6ae24(1);
+					InquireMotorData(1);
 				
 					Data_40004128.dData_208 = dData_40002d80;
 					dData_40002dc0_Azimuth = Data_40004128.dData_208;
@@ -6384,7 +6386,7 @@ int main(void)
 				
 				case 3:
 					//0x7231c
-					func_6ae24(2);
+					InquireMotorData(2);
 				
 					Data_40004128.dData_216 = dData_40002da0;
 					dData_40002df8 = Data_40004128.dData_216;
@@ -6399,7 +6401,7 @@ int main(void)
 			{
 				case 0:
 					//0x72394
-					func_6ae24(3);
+					InquireMotorData(3);
 				
 					Data_40004128.dData_208 = dData_40002db8;
 					dData_40002dc0_Azimuth = Data_40004128.dData_208;
@@ -6433,7 +6435,7 @@ int main(void)
 						}
 						//724a4
 						func_659c(10);
-						func_6ae24(3);
+						InquireMotorData(3);
 						func_659c(10);
 						//724c4
 						Data_40004128.dData_208 = dData_40002db8;
@@ -6457,7 +6459,7 @@ int main(void)
 				
 				case 1:
 					//0x725bc
-					func_6ae24(4);
+					InquireMotorData(4);
 				
 					Data_40004128.dData_216 = dData_40002df0;
 					dData_40002df8 = Data_40004128.dData_216;
@@ -6479,7 +6481,7 @@ int main(void)
 						}
 						//72658
 						func_659c(10);
-						func_6ae24(4);
+						InquireMotorData(4);
 						func_659c(10);
 						//72678
 						Data_40004128.dData_216 = dData_40002df0;
@@ -6491,7 +6493,7 @@ int main(void)
 				
 				case 2:
 					//0x726fc
-					func_6ae24(1);
+					InquireMotorData(1);
 				
 					Data_40004128.dData_208 = dData_40002d80;
 					dData_40002dc0_Azimuth = Data_40004128.dData_208;
@@ -6510,7 +6512,7 @@ int main(void)
 						}
 						
 						func_659c(10);
-						func_6ae24(1);
+						InquireMotorData(1);
 						func_659c(10);
 						
 						Data_40004128.dData_208 = dData_40002d80;
@@ -6521,7 +6523,7 @@ int main(void)
 				
 				case 3:
 					//0x72804
-					func_6ae24(2);
+					InquireMotorData(2);
 				
 					Data_40004128.dData_216 = dData_40002da0;
 					dData_40002df8 = fabs(Data_40004128.dData_216);
@@ -6540,7 +6542,7 @@ int main(void)
 						}
 						
 						func_659c(10);
-						func_6ae24(2);
+						InquireMotorData(2);
 						func_659c(10);
 						
 						Data_40004128.dData_216 = dData_40002da0;
