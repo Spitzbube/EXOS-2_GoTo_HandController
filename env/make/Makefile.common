@@ -1,0 +1,38 @@
+################################################################################
+################################################################################
+##
+## Makefile -- tool chain independend settings
+##
+## This include makefile defines internal make variables to support
+## various tool chains.
+##
+## required variables:
+##
+##  - TOPDIR          the toplevel directory
+##  - SOURCES         the list of source files to compile, etc.
+##  - TARGET         the machine qualifier to generate code for
+##
+## required variables:
+##
+##  - OBJECT_EXT      extension for object files
+##  - LIBRARY_EXT     extension for library files
+##  - PROGRAM_EXT     extension for executable files
+##  - TARGET_SUBDIR  sub directory where to store machine depending objects
+##  - HEADER_SUBDIR   extension for object files ie. ".o" or ".obj"
+##
+################################################################################
+################################################################################
+
+DOLLAR@ = $(subst \,/,$@)
+DOLLAR< = $(subst \,/,$<)
+DOLLAR* = $(subst \,/,$*)
+DOLLAR^ = $(subst \,/,$^)
+
+ifndef REPORT
+  ATSIGN = @
+else
+  ifeq ($(REPORT),0)
+    ATSIGN = @
+  endif
+endif
+

@@ -1,0 +1,14 @@
+################################################################################
+################################################################################
+##
+## Makefile -- common includes
+##
+## This include makefile includes all required sub makefiles.
+##
+################################################################################
+################################################################################
+
+include $(TOPDIR)/env/make/Makefile.target.$(TARGET)
+include $(TOPDIR)/env/make/Makefile.host.$(HOST)
+include $(TOPDIR)/env/make/Makefile.common
+

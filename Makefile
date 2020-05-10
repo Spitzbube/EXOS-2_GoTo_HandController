@@ -1,59 +1,82 @@
-NAME   = lpc2148
+################################################################################
+################################################################################
+##
+## Makefile -- makefile for top level modules.
+##
+## Mandatory settings:
+##
+## o TOPDIR      = the toplevel directory (using slashes as path separator)
+## o TARGET      = the machine qualifier to generate code for
+## o DIRECTORIES = the list of sub directories to build
+##
+################################################################################
+################################################################################
 
-CC      = $(CROSS_COMPILE)gcc
-LD      = $(CROSS_COMPILE)gcc
-AS      = $(CROSS_COMPILE)as
-CP      = $(CROSS_COMPILE)objcopy
-DUMP    = $(CROSS_COMPILE)objdump
+  TOPDIR = .
+  SUBDIR = .
 
-CFLAGS  = -I./ -c -Os -g -mcpu=arm7tdmi -Wall
-#CFLAGS += -nostdlib -ffreestanding -fno-common
-CFLAGS += -DOLIMEX_LPC2148
-CFLAGS += -DUART0_DEBUG
-AFLAGS  = -ahls -mapcs-32 -mcpu=arm7tdmi
-LFLAGS  = -Tlpc2148.ld -nostartfiles
-CPFLAGS = -O binary
-HEXFLAGS = -O ihex
-DUMPFLAGS = -hds
+include $(TOPDIR)/env/make/Makefile.config
 
-all: test
+  DIRECTORIES += env
+  
+################################################################################
+# define user targets
+################################################################################
 
-clean:
-	-rm crt0.lst crt0.o data.o main.o usbinit.o usbhw_lpc.o usbcontrol.o usbstdreq.o main.elf main.hex main.bin
+default: headers build install
 
-test: main.elf
-	@echo "...building hex"
-	$(CP) $(HEXFLAGS) main.elf main.hex
-	@echo "...building bin"
-	$(CP) $(CPFLAGS) main.elf main.bin
-	@echo "...dumping elf"
-	$(DUMP) $(DUMPFLAGS) main.elf > main.dump
+clean: $(DIRECTORIES:%=subdir-clean-%)
 
-main.elf: crt0.o main.o data.o usbinit.o usbhw_lpc.o usbcontrol.o usbstdreq.o
-	@ echo "..linking"
-	$(LD) $(LFLAGS) -o main.elf crt0.o main.o usbinit.o usbhw_lpc.o usbcontrol.o usbstdreq.o data.o -lm winarm_lib/libc.a
+build: $(DIRECTORIES:%=subdir-build-%)
 
-crt0.o: crt0.s
-	@ echo ".assembling"
-	$(AS) $(AFLAGS) crt0.s -o crt0.o > crt0.lst
+headers: $(DIRECTORIES:%=subdir-headers-%)
 
-main.o: main.c
-	@ echo ".compiling"
-	$(CC) $(CFLAGS) main.c
+install: $(DIRECTORIES:%=subdir-install-%)
 
-data.o: data.c
-	@ echo ".compiling"
-	$(CC) $(CFLAGS) data.c
-	
-usbinit.o: LPCUSB/usbinit.c	
-	$(CC) $(CFLAGS) LPCUSB/usbinit.c
-		
-usbhw_lpc.o: LPCUSB/usbhw_lpc.c	
-	$(CC) $(CFLAGS) LPCUSB/usbhw_lpc.c
-	
-usbcontrol.o: LPCUSB/usbcontrol.c
-	$(CC) $(CFLAGS) LPCUSB/usbcontrol.c
-	
-usbstdreq.o: LPCUSB/usbstdreq.c
-	$(CC) $(CFLAGS) LPCUSB/usbstdreq.c
+all: clean headers install
+
+################################################################################
+# include internal definitions and rules
+################################################################################
+
+include $(TOPDIR)/env/make/Makefile.rules
+
+################################################################################
+# local directory specific rules
+################################################################################
+
+subdir-clean-%:
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Submaking clean [$(SUBDIR)/$(@:subdir-clean-%=%)] for target [$(TARGET)]
+	@$(SUBMAKE) -C $(@:subdir-clean-%=%) clean TARGET=$(TARGET)
+
+subdir-depend-%:
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Submaking depend [$(SUBDIR)/$(@:subdir-depend-%=%)] for target [$(TARGET)]
+	@$(SUBMAKE) -C $(@:subdir-depend-%=%) depend TARGET=$(TARGET)
+
+subdir-headers-%:
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Submaking headers [$(SUBDIR)/$(@:subdir-headers-%=%)] for target [$(TARGET)]
+	@$(SUBMAKE) -C $(@:subdir-headers-%=%) headers TARGET=$(TARGET)
+
+subdir-build-%:
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Submaking build [$(SUBDIR)/$(@:subdir-build-%=%)] for target [$(TARGET)]
+	@$(SUBMAKE) -C $(@:subdir-build-%=%) build TARGET=$(TARGET)
+
+subdir-install-%:
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Submaking install [$(SUBDIR)/$(@:subdir-install-%=%)] for target [$(TARGET)]
+	@$(SUBMAKE) -C $(@:subdir-install-%=%) install TARGET=$(TARGET)
+
+subdir-release-%:
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Submaking release [$(SUBDIR)/$(@:subdir-release-%=%)] for target [$(TARGET)]
+	@$(SUBMAKE) -C $(@:subdir-release-%=%) release TARGET=$(TARGET)
+
+subdir-doc-%:
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Submaking doc [$(SUBDIR)/$(@:subdir-doc-%=%)] for target [$(TARGET)]
+	@$(SUBMAKE) -C $(@:subdir-doc-%=%) doc TARGET=$(TARGET)
 

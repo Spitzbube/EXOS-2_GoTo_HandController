@@ -1,0 +1,21 @@
+################################################################################
+################################################################################
+##
+## Makefile -- Win32 host specific settings
+##
+## This include makefile defines internal make variables to support
+## Win32 based host systems.
+##
+################################################################################
+################################################################################
+
+TOOL_EXT       ?= .exe
+MAKE            = make
+MAKEFLAGS      ?=
+MAKEFLAGS_USER  =
+SUBMAKE         = $(MAKE) --no-print-directory TARGET=$(TARGET) REPORT=$(REPORT) MISRA=$(MISRA) DEPEND=$(DEPEND)
+
+
+ECHO       = echo
+NEWLINE    = $(ECHO) ""
+ECHOPREFIX = "\#\#\#"
