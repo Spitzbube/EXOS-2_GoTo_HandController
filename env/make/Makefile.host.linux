@@ -15,6 +15,18 @@ MAKEFLAGS      ?=
 MAKEFLAGS_USER  =
 SUBMAKE         = $(MAKE) --no-print-directory TARGET=$(TARGET) REPORT=$(REPORT) MISRA=$(MISRA) DEPEND=$(DEPEND)
 
+MKDIR            = mkdir$(TOOL_EXT)
+MKDIRFLAGS       = -p
+MKDIRFLAGS_USER ?=
+
+DELETE            = rm$(TOOL_EXT)
+DELETEFLAGS       = -rf
+DELETEFLAGS_USER ?=
+
+COPY            = cp$(TOOL_EXT)
+COPYFLAGS       =
+COPYFLAGS_USER ?=
+
 ECHO       = echo
 NEWLINE    = $(ECHO) ""
 ECHOPREFIX = "\#\#\#"

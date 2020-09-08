@@ -18,7 +18,8 @@
 include $(TOPDIR)/env/make/Makefile.config
 
   DIRECTORIES += env
-  
+  DIRECTORIES += applications
+    
 ################################################################################
 # define user targets
 ################################################################################

@@ -11,4 +11,210 @@
 
 include $(TOPDIR)/env/make/Makefile.include
 
+clean-objects: force
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Deleting object files
+	-$(ATSIGN)$(DELETE) $(DELETEFLAGS) \
+	    $(BUILD_OBJECTS) \
+	    $(BUILD_DEBUG_OBJECTS) \
+	    $(BUILD_PROFILE_OBJECTS) 
 
+clean-program: force
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Deleting program files
+	-$(ATSIGN)$(DELETE) $(DELETEFLAGS) \
+	    $(BUILD_PROGRAM) \
+	    $(BUILD_DEBUG_PROGRAM) \
+	    $(BUILD_ELFDUMP_PROGRAM) \
+	    $(BUILD_DEBUG_ELFDUMP_PROGRAM) \
+	    $(BUILD_PROFILE_PROGRAM) \
+	    $(BUILD_PROFILE_ELFDUMP_PROGRAM) \
+	    $(BUILD_INTELHEX_PROGRAM) \
+	    $(BUILD_INFO)
+	    
+clean-all: force
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Deleting generated files
+	-$(ATSIGN)$(DELETE) $(DELETEFLAGS) $(BUILD_OBJECT_SUBDIR)/*
+#	-$(ATSIGN)$(DELETE) $(DELETEFLAGS) $(BUILD_LIBRARY_SUBDIR)/*
+#	-$(ATSIGN)$(DELETE) $(DELETEFLAGS) $(BUILD_PROGRAM_SUBDIR)/*
+
+
+################################################################################
+#
+# building rules
+#
+################################################################################
+
+ifdef PROFILE
+  build-objects: $(BUILD_OBJECTS) $(BUILD_DEBUG_OBJECTS) $(BUILD_PROFILE_OBJECTS)
+  build-library: $(BUILD_LIBRARY) $(BUILD_DEBUG_LIBRARY) $(BUILD_PROFILE_LIBRARY)
+  build-program: $(BUILD_PROFILE_PROGRAM) $(BUILD_PROFILE_ELFDUMP_PROGRAM) build-debugger-script
+  build-dll:     $(BUILD_DLL) $(BUILD_DEBUG_DLL)
+else
+  ifndef NODEBUG
+    build-objects: $(BUILD_OBJECTS)
+    build-library: $(BUILD_LIBRARY) $(BUILD_DEBUG_LIBRARY)
+
+#   ifndef NOELFDUMP
+#     build-program: $(BUILD_PROGRAM) $(BUILD_DEBUG_PROGRAM) $(BUILD_ELFDUMP_PROGRAM) $(BUILD_DEBUG_ELFDUMP_PROGRAM) build-debugger-script
+#     build-dll:     $(BUILD_DLL)     $(BUILD_DEBUG_DLL)
+#   else
+      build-program: $(BUILD_PROGRAM)
+      build-dll:     $(BUILD_DLL)     $(BUILD_DEBUG_DLL)
+#   endif
+  else
+    build-objects: $(BUILD_OBJECTS)
+    build-library: $(BUILD_LIBRARY)
+    ifndef NOELFDUMP
+      build-program: $(BUILD_PROGRAM) $(BUILD_ELFDUMP_PROGRAM)
+    else
+      build-program: $(BUILD_PROGRAM)
+    endif
+    build-dll:     $(BUILD_DLL)
+  endif
+endif
+ 
+build-elfdump-library: $(BUILD_ELFDUMP_LIBRARY)
+ifdef PROFILE
+  build-elfdump-program: $(BUILD_ELFDUMP_PROGRAM) $(BUILD_PROFILE_ELFDUMP_PROGRAM)
+else
+  build-elfdump-program: $(BUILD_ELFDUMP_PROGRAM)
+endif
+build-debug-elfdump-program: $(BUILD_DEBUG_ELFDUMP_PROGRAM)
+build-profile-elfdump-program: $(BUILD_PROFILE_ELFDUMP_PROGRAM)
+ 
+$(BUILD_OBJECT_SUBDIR)/%$(OBJECT_EXT) : %.c
+ifeq ($(MISRA),1)
+  ifndef NOMISRA
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Checking MISRA rules [$(word 1,$(DOLLAR^))]
+	@$(ECHO) $(ECHOPREFIX) "-->" [$@]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	-$(ATSIGN)$(LINT) $(LINTFLAGS) $(LINTFLAGS_USER) $(word 1,$(DOLLAR^))
+  endif
+endif
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Compiling 'C' [$(word 1,$(DOLLAR^))]
+	@$(ECHO) $(ECHOPREFIX) "-->" [$@]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(CCACHE)$(CC) $(CCFLAGS) $(CCFLAGS_C) $(CCFLAGS_USER) $(CCFLAGS_NODBG) $(CC_out)$(DOLLAR@) -c $(word 1,$(DOLLAR^))
+
+$(BUILD_OBJECT_SUBDIR)/%$(OBJECT_DEBUG_EXT) : %.c
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Compiling/debug 'C' [$(word 1,$(DOLLAR^))]
+	@$(ECHO) $(ECHOPREFIX) "-->" [$@]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(CCACHE)$(CC) $(CCFLAGS) $(CCFLAGS_C) $(CCDEBUG) -D__DEBUG__=1 $(CCFLAGS_USER) $(CC_out)$(DOLLAR@) -c $(word 1,$(DOLLAR^))
+
+$(BUILD_OBJECT_SUBDIR)/%$(OBJECT_PROFILE_EXT) : %.c
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Compiling/profile 'C' [$(word 1,$(DOLLAR^))]
+	@$(ECHO) $(ECHOPREFIX) "-->" [$@]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(CCACHE)$(CC) $(CCFLAGS) $(CCFLAGS_C) $(CCGPROF) -D__GPROF__=1 -D__DEBUG__=1 $(CCFLAGS_USER) $(CC_out)$(DOLLAR@) -c $(word 1,$(DOLLAR^))
+
+$(BUILD_OBJECT_SUBDIR)/%$(OBJECT_EXT) : %.s
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Compiling 'ASM' [$(word 1,$(DOLLAR^))]
+	@$(ECHO) $(ECHOPREFIX) "-->" [$@]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(CC) $(CCFLAGS) $(CCFLAGS_USER) $(CCFLAGS_AS) $(CCFLAGS_NODBG) $(CC_out)$(DOLLAR@) -c $(word 1,$(DOLLAR^))
+
+$(BUILD_OBJECT_SUBDIR)/%$(OBJECT_DEBUG_EXT) : %.s
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Compiling/debug 'ASM' [$(word 1,$(DOLLAR^))]
+	@$(ECHO) $(ECHOPREFIX) "-->" [$@]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(CC) $(CCFLAGS) $(CCFLAGS_USER) $(CCFLAGS_AS) $(CCDEBUG) -D__DEBUG__=1 $(CC_out)$(DOLLAR@) -c $(word 1,$(DOLLAR^))
+
+$(BUILD_OBJECT_SUBDIR)/%$(OBJECT_PROFILE_EXT) : %.s
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Compiling/profile 'ASM' [$(word 1,$(DOLLAR^))]
+	@$(ECHO) $(ECHOPREFIX) "-->" [$@]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(CC) $(CCFLAGS) $(CCFLAGS_USER) $(CCFLAGS_AS) $(CCGPROF) -D__GPROF__=1 -D__DEBUG__=1 $(CC_out)$(DOLLAR@) -c $(word 1,$(DOLLAR^))
+ 
+$(BUILD_PROGRAM) : $(BUILD_PROGRAM_OBJECTS) $(BUILD_PROGRAM_LIBRARIES) $(BUILD_PROGRAM_STARTUP_OBJECT)
+#	@$(SUBMAKE) $(BUILD_INFO)
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Linking [$(DOLLAR@)]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(LD) $(LDFLAGS) $(LD_out)$(DOLLAR@) $(LD_crt) $(BUILD_PROGRAM_OBJECTS) $(LD_group) $(BUILD_PROGRAM_LIBRARIES) $(LDFLAGS_USER) $(LD_grend) $(BUILD_PROGRAM_SPECIAL_LIBRARIES) $(LD_brk)
+
+$(BUILD_DEBUG_PROGRAM) : $(BUILD_DEBUG_PROGRAM_OBJECTS) $(BUILD_DEBUG_PROGRAM_LIBRARIES) $(BUILD_PROGRAM_STARTUP_OBJECT)
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Linking/debug [$(DOLLAR@)]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(LD) $(LDFLAGS) $(LDDEBUG) $(LD_out)$(DOLLAR@) $(BUILD_DEBUG_PROGRAM_OBJECTS) $(LD_crt) $(LD_group) $(BUILD_DEBUG_PROGRAM_LIBRARIES) $(LDFLAGS_USER) $(LD_grend) $(BUILD_DEBUG_PROGRAM_SPECIAL_LIBRARIES) $(LD_brk)
+
+$(BUILD_PROFILE_PROGRAM) : $(BUILD_PROFILE_PROGRAM_OBJECTS) $(BUILD_PROFILE_PROGRAM_LIBRARIES) $(BUILD_PROGRAM_STARTUP_OBJECT)
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Linking/profile [$(DOLLAR@)]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(LD) $(LDFLAGS) $(LDGPROF) $(LDFLAGS_USER) $(LD_out)$(DOLLAR@) $(BUILD_PROFILE_PROGRAM_OBJECTS) $(LD_crt) $(LD_group) $(BUILD_PROFILE_PROGRAM_LIBRARIES) $(LD_grend) $(BUILD_PROFILE_PROGRAM_SPECIAL_LIBRARIES) $(LD_brk)
+
+$(BUILD_ELFDUMP_PROGRAM) : $(BUILD_PROGRAM)
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Creating ELF dump [$(DOLLAR@)]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	-$(ATSIGN)$(ELFDUMP) $(ELFDUMPFLAGS) $(ELFDUMPFLAGS_USER) $(DOLLAR^) $(ELFDUMP_out)$(DOLLAR@)
+
+$(BUILD_DEBUG_ELFDUMP_PROGRAM) : $(BUILD_DEBUG_PROGRAM)
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Creating/debug ELF dump [$(DOLLAR@)]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	-$(ATSIGN)$(ELFDUMP) $(ELFDUMPFLAGS) $(ELFDUMPFLAGS_USER) $(DOLLAR^) $(ELFDUMP_out)$(DOLLAR@)
+
+$(BUILD_PROFILE_ELFDUMP_PROGRAM) : $(BUILD_PROFILE_PROGRAM)
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Creating/profile ELF dump [$(DOLLAR@)]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	-$(ATSIGN)$(ELFDUMP) $(ELFDUMPFLAGS) $(ELFDUMPFLAGS_USER) $(DOLLAR^) $(ELFDUMP_out)$(DOLLAR@)
+
+build-intelhex-program:
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Creating INTELHEX format [$(BUILD_INTELHEX_PROGRAM)]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(ELF2HEX) $(ELF2HEXFLAGS) $(BUILD_PROGRAM) --output $(BUILD_INTELHEX_PROGRAM) $(ELF2HEXFLAGS_USER) $(ELF2HEXFLAGS_INTELHEX)
+
+	
+################################################################################
+#
+# installation rules
+#
+################################################################################
+
+ifdef PROFILE
+  install-objects: $(INSTALL_OBJECTS) $(INSTALL_DEBUG_OBJECTS) $(INSTALL_PROFILE_OBJECTS)
+  install-library: $(INSTALL_LIBRARY) $(INSTALL_DEBUG_LIBRARY) $(INSTALL_PROFILE_LIBRARY)
+  install-program: $(INSTALL_PROGRAM)
+else
+    ifndef NODEBUG
+      install-objects: $(INSTALL_OBJECTS)
+      install-library: $(INSTALL_LIBRARY) $(INSTALL_DEBUG_LIBRARY)
+      install-program: $(INSTALL_PROGRAM)
+    else
+      install-objects: $(INSTALL_OBJECTS)
+      install-library: $(INSTALL_LIBRARY)
+      install-program: $(INSTALL_PROGRAM)
+    endif
+endif
+
+install-intelhex-program: $(INSTALL_INTELHEX_PROGRAM)
+
+
+$(INSTALL_PROGRAM_DIR)/%: $(BUILD_PROGRAM_SUBDIR)/% force
+	@$(NEWLINE)
+	@$(ECHO) $(ECHOPREFIX) Installing program [$(word 1,$^)]
+	@$(ECHO) $(ECHOPREFIX) "-->" [$@]
+	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(dir $@)
+	$(ATSIGN)$(COPY) $(COPYFLAGS) $(word 1,$^) $@
+#	@$(ECHO) $(ECHOPREFIX) "-->" [$(INSTALL_BIN_DIR)/$(notdir $@)]
+#	$(ATSIGN)$(MKDIR) $(MKDIRFLAGS) $(INSTALL_BIN_DIR)
+#	$(ATSIGN)$(COPY) $(COPYFLAGS) $(word 1,$^) $(INSTALL_BIN_DIR)
+
+
+
+.PHONY: force
+force: 

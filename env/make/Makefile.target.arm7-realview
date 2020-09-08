@@ -1,0 +1,61 @@
+################################################################################
+################################################################################
+##
+## Makefile -- RealView specific ARM7 settings
+##
+## This include makefile defines internal make variables to support
+## the cross tool chain for ARM7 RealView running under win32.
+##
+################################################################################
+################################################################################
+
+SDKHOME-arm7-realview  ?= SDKHOME-arm7-realview-UNDEFINED
+SDKHOME                  = $(SDKHOME-arm7-realview)
+SDKHOME3-arm7-rvheader ?= SDKHOME-arm7-rvheader-UNDEFINED
+SDKHOME3                 = $(SDKHOME-arm7-rvheader)
+
+CCTARGET   ?= arm-none-eabi
+CCTARGET   ?= arm-elf
+SDKHOME-arm7-gcc	 ?= SDKHOME-arm7-gcc-UNDEFINED
+
+TARGET_SUBDIR         = M-$(TARGET)
+
+
+OBJECT_EXT  = .o
+LIBRARY_EXT = .a
+PROGRAM_EXT = .axf
+
+CPU_MODEL = --cpu ARM7TDMI
+
+
+CC         = $(SDKHOME)/armcc.exe
+CCFLAGS   += $(CPU_MODEL)
+CCFLAGS   += --apcs=interwork
+CCFLAGS   += --signed_chars
+CCFLAGS   += -g -O0 
+CCFLAGS   += -I$(SDKHOME3)
+CC_out     = -o$(SPACE)
+
+
+LD         = $(SDKHOME)/armlink.exe
+LDFLAGS   += $(CPU_MODEL)
+LDFLAGS   += --strict
+LDFLAGS   += --libpath $(SDKHOME-arm7-rvheader)/../../lib
+LDFLAGS   += --scatter $(TOPDIR)/env/make/rvds-rocode.scat
+LDFLAGS   += --summary_stderr --info summarysizes
+LD_out     = --output $(SPACE)
+
+
+#ELFDUMP      = $(SDKHOME)/fromelf.exe
+#ELFDUMPFLAGS = --text -v -c -d -e -g -r -s -t -y -z
+#ELFDUMP_out  = --output $(SPACE)
+
+ELFDUMP      = $(SDKHOME-arm7-gcc)/bin/$(CCTARGET)-objdump$(TOOL_EXT)
+ELFDUMPFLAGS = --all -D
+ELFDUMP_out  = >$(SPACE)
+
+
+ELF2HEX      = $(SDKHOME)/fromelf.exe
+ELF2HEXFLAGS_INTELHEX = --i32
+
+

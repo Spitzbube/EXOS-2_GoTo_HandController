@@ -36,3 +36,91 @@ else
   endif
 endif
 
+################################################################################
+#
+# common file extension settings
+#
+################################################################################
+
+DEBUG_EXT    = -g
+PROFILE_EXT  = -p
+ELFDUMP_EXT  = .elfdump
+INTELHEX_EXT = .hex
+
+OBJECT_DEBUG_EXT          = $(DEBUG_EXT)$(OBJECT_EXT)
+OBJECT_PROFILE_EXT        = $(PROFILE_EXT)$(OBJECT_EXT)
+PROGRAM_DEBUG_EXT         = $(DEBUG_EXT)$(PROGRAM_EXT)
+PROGRAM_PROFILE_EXT       = $(PROFILE_EXT)$(PROGRAM_EXT)
+PROGRAM_ELFDUMP_EXT       = $(PROGRAM_EXT)$(ELFDUMP_EXT)
+PROGRAM_DEBUG_ELFDUMP_EXT = $(PROGRAM_DEBUG_EXT)$(ELFDUMP_EXT)
+PROGRAM_PROFILE_ELFDUMP_EXT = $(PROGRAM_PROFILE_EXT)$(ELFDUMP_EXT)
+PROGRAM_INTELHEX_EXT      = $(INTELHEX_EXT)
+
+
+################################################################################
+#
+# common directory settings
+#
+################################################################################
+
+INSTALL_DIR ?= $(TOPDIR)/install
+
+BUILD_OBJECT_SUBDIR     = build/$(TARGET_SUBDIR)
+BUILD_LIBRARY_SUBDIR    = build/$(TARGET_SUBDIR)
+BUILD_PROGRAM_SUBDIR    = build/$(TARGET_SUBDIR)
+BUILD_DLL_SUBDIR        = build/$(TARGET_SUBDIR)
+BUILD_INFO_SUBDIR       = build/$(TARGET_SUBDIR)
+BUILD_FIRMWARE_SUBDIR   = build/firmware
+
+INSTALL_OBJECT_SUBDIR   = lib/$(TARGET_SUBDIR)
+INSTALL_LIBRARY_SUBDIR  = lib/$(TARGET_SUBDIR)
+INSTALL_INCLUDE_SUBDIR  = include/$(HEADER_SUBDIR)
+INSTALL_PROGRAM_SUBDIR  = bin/$(TARGET_SUBDIR)
+
+INSTALL_OBJECT_DIR      = $(INSTALL_DIR)/$(INSTALL_OBJECT_SUBDIR)
+INSTALL_LIBRARY_DIR     = $(INSTALL_DIR)/$(INSTALL_LIBRARY_SUBDIR)
+INSTALL_INCLUDE_DIR     = $(INSTALL_DIR)/$(INSTALL_INCLUDE_SUBDIR)
+INSTALL_PROGRAM_DIR     = $(INSTALL_DIR)/$(INSTALL_PROGRAM_SUBDIR)
+
+################################################################################
+#
+# common build, install and release specific settings
+#
+################################################################################
+
+SOURCES_c   = $(filter %.c,$(SOURCES))
+SOURCES_C   = $(filter %.C,$(SOURCES))
+SOURCES_cpp = $(filter %.cpp,$(SOURCES))
+SOURCES_CPP = $(filter %.CPP,$(SOURCES))
+SOURCES_s   = $(filter %.s,$(SOURCES))
+SOURCES_S   = $(filter %.S,$(SOURCES))
+SOURCES_asm = $(filter %.asm,$(SOURCES))
+SOURCES_ASM = $(filter %.ASM,$(SOURCES))
+SOURCES_BC  = $(SOURCES_c:%.c=%.c$(BEAUTIFY_EXT)) $(SOURCES_C:%.C=%.C$(BEAUTIFY_EXT))
+OBJECTS     = $(subst \,/,$(SOURCES_s:%.s=%$(OBJECT_EXT)))
+OBJECTS    += $(subst \,/,$(SOURCES_S:%.S=%$(OBJECT_EXT)))
+OBJECTS    += $(subst \,/,$(SOURCES_asm:%.asm=%$(OBJECT_EXT)))
+OBJECTS    += $(subst \,/,$(SOURCES_ASM:%.ASM=%$(OBJECT_EXT)))
+OBJECTS    += $(subst \,/,$(SOURCES_c:%.c=%$(OBJECT_EXT)))
+OBJECTS    += $(subst \,/,$(SOURCES_C:%.C=%$(OBJECT_EXT)))
+OBJECTS    += $(subst \,/,$(SOURCES_cpp:%.cpp=%$(OBJECT_EXT)))
+OBJECTS    += $(subst \,/,$(SOURCES_CPP:%.CPP=%$(OBJECT_EXT)))
+
+BUILD_OBJECTS                   = $(OBJECTS:%$(OBJECT_EXT)=$(BUILD_OBJECT_SUBDIR)/%$(OBJECT_EXT))
+BUILD_DEBUG_OBJECTS             = $(OBJECTS:%$(OBJECT_EXT)=$(BUILD_OBJECT_SUBDIR)/%$(OBJECT_DEBUG_EXT))
+BUILD_PROFILE_OBJECTS           = $(OBJECTS:%$(OBJECT_EXT)=$(BUILD_OBJECT_SUBDIR)/%$(OBJECT_PROFILE_EXT))
+
+BUILD_PROGRAM                   = $(BUILD_PROGRAM_SUBDIR)/$(PROGRAM)$(PROGRAM_EXT)
+BUILD_PROGRAM_OBJECTS           = $(BUILD_OBJECTS)
+BUILD_DEBUG_PROGRAM             = $(BUILD_PROGRAM_SUBDIR)/$(PROGRAM)$(PROGRAM_DEBUG_EXT)
+BUILD_DEBUG_PROGRAM_OBJECTS     = $(BUILD_DEBUG_OBJECTS)
+BUILD_PROFILE_PROGRAM_OBJECTS   = $(BUILD_PROFILE_OBJECTS)
+BUILD_PROFILE_PROGRAM           = $(BUILD_PROGRAM_SUBDIR)/$(PROGRAM)$(PROGRAM_PROFILE_EXT)
+BUILD_ELFDUMP_PROGRAM           = $(BUILD_PROGRAM_SUBDIR)/$(PROGRAM)$(PROGRAM_ELFDUMP_EXT)
+BUILD_DEBUG_ELFDUMP_PROGRAM     = $(BUILD_PROGRAM_SUBDIR)/$(PROGRAM)$(PROGRAM_DEBUG_ELFDUMP_EXT)
+BUILD_PROFILE_ELFDUMP_PROGRAM   = $(BUILD_PROGRAM_SUBDIR)/$(PROGRAM)$(PROGRAM_PROFILE_ELFDUMP_EXT)
+BUILD_INTELHEX_PROGRAM          = $(BUILD_PROGRAM_SUBDIR)/$(PROGRAM)$(PROGRAM_INTELHEX_EXT)
+
+INSTALL_PROGRAM                   = $(INSTALL_DIR)/$(BUILD_PROGRAM:$(BUILD_PROGRAM_SUBDIR)/%=$(INSTALL_PROGRAM_SUBDIR)/%)
+INSTALL_INTELHEX_PROGRAM          = $(INSTALL_DIR)/$(BUILD_INTELHEX_PROGRAM:$(BUILD_PROGRAM_SUBDIR)/%=$(INSTALL_PROGRAM_SUBDIR)/%)
+
