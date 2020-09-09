@@ -49,11 +49,11 @@
 #  -D CFG_AUTO_DHCP     to automatically to DHCP for an address at start (ignored if not CFG_UIP, CFG_DHCP and CFG_AUTO_UIP)
 #  -D CFG_AUTO_SNTP     to automatically to set the time via SNTP (ignored if not CFG_UIP and CFG_AUTO_UIP)
 #
-export LPC2148DEMO_OPTS=-D CFG_CONSOLE_USB \
+export LPC2148DEMO_OPTS=-D CFG_CONSOLE_UART0 \
                         -D CFG_USB -D CFG_USB_SER \
                         -D CFG_I2C -D CFG_SPI -D CFG_RTC -D CFG_IAP -D CFG_WDT -D CFG_FIQ -D CFG_SWI -D CFG_PWM -D CFG_ABORT -D CFG_RAM_INTS \
 												-D CFG_MD -D CFG_MEM -D CFG_BEEP -D CFG_MISC \
-												-D CFG_LED -D CFG_GPS -D CFG_SENSORS -D CFG_LCD -D CFG_KBD \
+												-D CFG_LED -D CFG_GPS -D CFG_SENSORS \
 												-D CFG_FATFS \
 	                      -D CFG_UIP -D CFG_TELNETD -D CFG_HTTPD -D CFG_SNTP -D CFG_DHCP \
 	                      -D CFG_AT24C1024 -D CFG_LM75 -D CFG_M25LC512 \
@@ -80,14 +80,14 @@ export STARTEDATTOP=true
 #
 #  Project sub-directories
 #
-SUBDIRS=FreeRTOS adc cpu dac eints fatfs fiq gps i2c iap kbd lcd leds mmc monitor newlib pwm rtc sensors spi swi timer uart uip usb usbmass usbser
+SUBDIRS=FreeRTOS adc cpu dac eints fatfs fiq gps i2c iap leds mmc monitor newlib pwm rtc sensors spi swi timer uart uip usb usbmass usbser
 
 SRC_FILES = main.c
 
 ARM_OBJ = $(SRC_FILES:.c=.o)
 
 .PHONY: all
-all : subdirs lpc2148.hex
+all : subdirs lpc2148.hex lpc2148.bin
 
 .PHONY: subdirs $(SUBDIRS)
 
@@ -96,12 +96,16 @@ subdirs: $(SUBDIRS)
 $(SUBDIRS):
 	$(MAKE) -C $@
 
+lpc2148.bin : .depend Makefile lpc2148.elf
+	$(OBJCOPY) lpc2148.elf -O binary lpc2148.bin
+	@echo "Length is " `grep __"end_of_text__ = ." *.map | cut -b 17-35` "bytes"
+
 lpc2148.hex : .depend Makefile lpc2148.elf
 	$(OBJCOPY) lpc2148.elf -O ihex lpc2148.hex
 	@echo "Length is " `grep __"end_of_text__ = ." *.map | cut -b 17-35` "bytes"
 
 lpc2148.elf : .depend Makefile $(ARM_OBJ) $(COMMON)/common.a $(CRT0) $(LDSCRIPT)
-	$(CC) $(CFLAGS) $(ARM_OBJ) -nostartfiles $(CRT0) $(LINKER_FLAGS)
+	$(CC) $(CFLAGS) $(ARM_OBJ) -nostartfiles $(CRT0) $(LINKER_FLAGS) winarm_lib/libc.a
 	$(OBJDUMP) -d -S lpc2148.elf >lpc2148.lst
 
 $(ARM_OBJ) : %.o : %.c Makefile .depend
@@ -128,7 +132,7 @@ tags :
 clean :
 	find . -name \*.o -exec rm -f {} \;
 	find . -name .depend -exec rm -f {} \;
-	rm -f *.map *.lst *.elf *.hex .depend $(COMMON)/common.a sizes.csv tags
+	rm -f *.map *.lst *.elf *.hex *.bin .depend $(COMMON)/common.a sizes.csv tags
 
 .PHONY: svncheck
 svncheck :

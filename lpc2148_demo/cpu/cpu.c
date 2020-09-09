@@ -58,6 +58,7 @@ void cpuSetupHardware (void)
   //
   SCB_SCS = SCB_SCS_GPIO0M | SCB_SCS_GPIO1M;
 
+#if 0
   //
   //  Configure pin functions.  All pins are set to GPIO, including the Debug
   //  port (P1.26) and the Trace port (P1.25..P1.16).
@@ -72,6 +73,7 @@ void cpuSetupHardware (void)
   //
   GPIO0_FIODIR = ~GPIO_IO_ALL;
   GPIO1_FIODIR = ~GPIO_IO_JTAG;
+#endif
 
   //
   //  Setup the PLL to multiply the 12Mhz XTAL input by 4, divide by 1
