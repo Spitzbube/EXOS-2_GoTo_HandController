@@ -74,10 +74,14 @@ xTaskHandle taskHandles [TASKHANDLE_LAST];
 int main (void)
 {
   cpuSetupHardware ();
+
 #ifdef CFG_LED
   ledsInit ();
 #endif
+
   uart0Init (BAUD_UART0, 64);
+
+#if 0
   uart1Init (BAUD_UART1, 64);
 #ifdef CFG_CONSOLE_USB
   usbserInit ();
@@ -104,6 +108,8 @@ int main (void)
   eint2Init ();
 #ifdef CFG_FIQ
   fiqInit ();
+#endif
+
 #endif
 
   memset (taskHandles, 0, sizeof (taskHandles));

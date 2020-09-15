@@ -744,6 +744,8 @@ static FRESULT scan_files (char *path, int *total_size, int *total_files, int *t
   return scan_files_ex (path, total_size, total_files, total_dirs);
 }
 
+#endif
+
 //
 //  These two really ought to be in the FatFS code
 //
@@ -766,6 +768,8 @@ U32 get_fattime ()
 
   return tmr;
 }
+
+#ifdef CFG_FATFS
 
 //
 //  Functions newlib doesn't know about (but should)
@@ -3741,7 +3745,8 @@ static int monitorWDTClear (int argc __attribute__ ((unused)), portCHAR **argv _
 //
 static int monitorVersion (int argc __attribute__ ((unused)), portCHAR **argv __attribute__ ((unused)))
 {
-  printf ("LPC-P2148 Demo, Version " __VERSION ", " __DATE__ " " __TIME__ "\n");
+  printf ("SkyVision LPC2148 Demo, Version " __VERSION ", " __DATE__ " " __TIME__ "\n");
+  printf ("Copyright (c) 2020, T. Schmidt\n");
   printf ("Copyright (c) 2008, J.C. Wren\n");
 
   return 0;

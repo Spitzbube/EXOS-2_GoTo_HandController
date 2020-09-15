@@ -36,10 +36,14 @@ ledDutyCycles_t;
 
 static ledDutyCycles_t ledDutyCycles [] = 
 {
+#ifdef SKYVISION_JOC
+  { (500 / portTICK_RATE_MS), (500 / portTICK_RATE_MS) },
+#else
   { (200 / portTICK_RATE_MS), (800 / portTICK_RATE_MS) },
   { (400 / portTICK_RATE_MS), (600 / portTICK_RATE_MS) },
   { (600 / portTICK_RATE_MS), (400 / portTICK_RATE_MS) },
   { (800 / portTICK_RATE_MS), (200 / portTICK_RATE_MS) },
+#endif
 };
 
 static xQueueHandle xLEDQueue = NULL;
@@ -49,18 +53,31 @@ static xQueueHandle xLEDQueue = NULL;
 //
 void ledsInit (void)
 {
+#ifdef SKYVISION_JOC
+  GPIO0_FIODIR |= (GPIO_IO_P16 | GPIO_IO_P13);
+  GPIO0_FIOSET  = (GPIO_IO_P16 | GPIO_IO_P13);
+#else
   GPIO0_FIODIR |= (GPIO_IO_P10 | GPIO_IO_P11);
   GPIO0_FIOSET  = (GPIO_IO_P10 | GPIO_IO_P11);
+#endif
 }
 
 void ledsLED1On (void)
 {
+#ifdef SKYVISION_JOC
+  GPIO0_FIOCLR = GPIO_IO_P16;
+#else
   GPIO0_FIOCLR = GPIO_IO_P10;
+#endif
 }
 
 void ledsLED1Off (void)
 {
+#ifdef SKYVISION_JOC
+  GPIO0_FIOSET = GPIO_IO_P16;
+#else
   GPIO0_FIOSET = GPIO_IO_P10;
+#endif
 }
 
 //
