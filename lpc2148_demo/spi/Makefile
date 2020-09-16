@@ -6,7 +6,7 @@
 #  $HeadURL: http://tinymicros.com/svn_public/arm/lpc2148_demo/trunk/spi/Makefile $
 #
 
-SRC_FILES=m25lc512.c spi.c
+SRC_FILES=spi.c
 
 #
 # Define all object files.

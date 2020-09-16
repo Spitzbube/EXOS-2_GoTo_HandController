@@ -6,7 +6,7 @@
 #  $HeadURL: http://tinymicros.com/svn_public/arm/lpc2148_demo/trunk/lcd/Makefile $
 #
 
-SRC_FILES=lcd_4bit.c
+SRC_FILES=st7565.c
 
 #
 # Define all object files.

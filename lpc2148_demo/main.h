@@ -34,7 +34,7 @@ typedef enum
 #ifdef CFG_KBD
   TASKHANDLE_KBD,
 #endif
-#ifdef CFG_KBD
+#ifdef CFG_LCD
   TASKHANDLE_LCD,
 #endif
 #ifdef CFG_UIP

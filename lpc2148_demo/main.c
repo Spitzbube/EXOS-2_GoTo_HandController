@@ -101,9 +101,15 @@ int main (void)
 #ifdef CFG_I2C
   i2cInit ();
 #endif
+
+#endif
+
 #ifdef CFG_SPI
   spiInit ();
 #endif
+
+#if 0
+
   eint0Init ();
   eint2Init ();
 #ifdef CFG_FIQ
