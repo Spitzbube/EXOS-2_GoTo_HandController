@@ -13,7 +13,7 @@
 //
 //
 //
-static int pwmPulseWidth = 20000;
+static int pwmPulseWidth = 100;
 static int pwmPercentage = 50;
 
 //

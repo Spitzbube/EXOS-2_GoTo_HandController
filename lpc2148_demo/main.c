@@ -95,13 +95,15 @@ int main (void)
   timerInit ();
   adcInit ();
   dacInit ();
+
+#endif
+
 #ifdef CFG_PWM
   pwmInit ();
 #endif
+
 #ifdef CFG_I2C
   i2cInit ();
-#endif
-
 #endif
 
 #ifdef CFG_SPI
