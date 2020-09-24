@@ -24,10 +24,10 @@ void PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 2:
+		case MENU_CONTEXT_NO_TELESCOPE: //2:
 			//0x28054
-			Data_40003364 = Data_400030c0;
-			Data_4000336c = Data_400030c4;
+			Data_40003364 = strThereIsNoTele;
+			Data_4000336c = strScopeToConnectThis;
 			Data_40003374 = strControlTerminal;
 		
 			AdaptDisplayLinesPerMenuLine();

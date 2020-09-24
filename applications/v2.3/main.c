@@ -6287,7 +6287,7 @@ int main(void)
 			if (bData_40002c1a == 0)
 			{
 				//7208c
-				Data_40002c64_MenuContextId = 2;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_NO_TELESCOPE; //2;
 				Data_40004128.bData_357 = 0;
 				Data_40004128.bData_364 = 1;
 			}

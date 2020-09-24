@@ -27,6 +27,22 @@
 #define ENABLE_FONTROM_CS (IO1CLR = GPIO_FONTROM_CS)
 #define DISABLE_FONTROM_CS (IO1SET = GPIO_FONTROM_CS)
 
+#define GPIO_LCD_CS (1 << 10) //P0.10
+#define ENABLE_LCD_CS (IOCLR0 |= GPIO_LCD_CS)
+#define DISABLE_LCD_CS (IOSET0 |= GPIO_LCD_CS)
+
+#define GPIO_LCD_SCLK (1 << 12) //P0.12
+#define LCD_SCLK_LO (IO0CLR |= GPIO_LCD_SCLK)
+#define LCD_SCLK_HI (IO0SET |= GPIO_LCD_SCLK)
+
+#define GPIO_LCD_SID (1 << 15) //P0.15
+#define LCD_SID_LO (IO0CLR |= GPIO_LCD_SID)
+#define LCD_SID_HI (IO0SET |= GPIO_LCD_SID)
+
+#define GPIO_LCD_RS (1 << 23) //P1.23
+#define LCD_RS_CONTROL (IO1CLR |= GPIO_LCD_RS)
+#define LCD_RS_DATA (IO1SET |= GPIO_LCD_RS)
+
 // LCD Display commands
 #define ST7565_CMD_DISPLAY_ON             0xAF
 #define ST7565_CMD_SET_PAGE               0xB0
@@ -45,27 +61,27 @@ void lcd_write_data(unsigned char a)
 {
 	unsigned char i;
 	
-	IOCLR0 |= 0x400;
-	IOSET1 |= (1 << 23); // A0 = 1 -> Display Data
+	ENABLE_LCD_CS;
+	LCD_RS_DATA;
 
 	for (i = 0; i < 8; i++)
 	{	
-		IOCLR0 |= (1 << 12);
+		LCD_SCLK_LO;
 		if (a & 0x80)
 		{
-			IOSET0 |= (1 << 15);
+			LCD_SID_HI;
 		}
 		else
 		{
-			IOCLR0 |= (1 << 15);
+			LCD_SID_LO;
 		}
 		
 		a <<= 1;
 		
-		IOSET0 |= (1 << 12);
+		LCD_SCLK_HI;
 	}
 	
-	IOSET0 |= 0x400;
+	DISABLE_LCD_CS;
 }
 	
 /* 2dc - complete */
@@ -73,27 +89,27 @@ void lcd_write_command(unsigned char a)
 {
 	unsigned char i;
 	
-	IOCLR0 |= 0x400;
-	IOCLR1 |= (1 << 23); // A0 = 0 -> Control Data
+	ENABLE_LCD_CS;
+	LCD_RS_CONTROL;
 
 	for (i = 0; i < 8; i++)
 	{	
-		IOCLR0 |= (1 << 12);
+		LCD_SCLK_LO;
 		if (a & 0x80)
 		{
-			IOSET0 |= (1 << 15);
+			LCD_SID_HI;
 		}
 		else
 		{
-			IOCLR0 |= (1 << 15);
+			LCD_SID_LO;
 		}
 		
 		a <<= 1;
 		
-		IOSET0 |= (1 << 12);
+		LCD_SCLK_HI;
 	}
 	
-	IOSET0 |= 0x400;
+	DISABLE_LCD_CS;
 }
 
 /* 394 - complete */
@@ -130,16 +146,16 @@ void lcd_display_configure(void)
 	
 	lcd_display_clear();
 
-	//Backlight?
-	PWMPR = 0;
-	PWMMCR = 2;
-	PWMPCR = 0x2000;
-	PWMMR0 = 0x00002b33;
+	//LED Backlight
+	PWMPR = 0; //Prescaler
+	PWMMCR = 2; //Match Control: Reset on PWMMR0
+	PWMPCR = (1 << 13); //PWM5 output enabled
+	PWMMR0 = 11059; //Match Register 0 -> 1000Hz
 	PWMMR5 = 0;
 	PWMMR2 = 0;
-	PWMLER = 0x21;
-	PWMTCR = 0x02;
-	PWMTCR = 0x09;
+	PWMLER = (1 << 5) | (1 << 0);
+	PWMTCR = 0x02; //Timer Counter Reset
+	PWMTCR = 0x01 | 0x08; //Timer Counter Enable & PWM Enable
 }
 
 /* 49c - complete */
@@ -154,7 +170,7 @@ void setDisplayPWM(int a)
 		PWMMR5 = (PWMMR0 * a) / 0xFF;
 	}
 	
-	PWMLER = 0x21;
+	PWMLER = (1 << 5) | (1 << 0);
 }
 	
 /* 4ec - complete */
@@ -169,7 +185,7 @@ void func_4ec(int a)
 		PWMMR2 = (PWMMR0 * a) / 0xFF;
 	}
 	
-	PWMLER = 0x21;
+	PWMLER = (1 << 5) | (1 << 0);
 }
 	
 /* 53c - complete */
@@ -1050,7 +1066,7 @@ void lpc_interrupt_init(void)
 	// Match Control Register
 	T0MCR = 3;
 	// Match Register 0
-	T0MR0 = 0x1b000;
+	T0MR0 = 110592;
 	// Timer Control Register
 	T0TCR = 3;
 	T0TCR = 1;
@@ -1138,22 +1154,22 @@ void lpc_hw_init(void)
 		(1 << 8) | // P0.4 = SCK0 (SPI0)
 		(1 <<10) | // P0.5 = MISO0 (SPI0)
 		(1 <<12) | // P0.6 = MOSI0 (SPI0)
-		(2 <<14) | // P0.7 = PWM2
+		(2 <<14) | // P0.7 = PWM2 -> EXTLIGHT (Handset Pin 6: AUXO)
 		(1 <<16) | // P0.8 = TXD (UART1)
 		(1 <<18) | // P0.9 = RxD (UART1)
-		(0 <<20) | // P0.10 = GPIO Port 0.10
+		(0 <<20) | // P0.10 = GPIO Port 0.10 -> LCD CS
 		(0 <<22) | // P0.11 = GPIO Port 0.11
-		(0 <<24) | // P0.12 = GPIO Port 0.12 -> LCD Data Latch ?
+		(0 <<24) | // P0.12 = GPIO Port 0.12 -> LCD SCLK
 		(0 <<26) | // P0.13 = GPIO Port 0.13
 		(0 <<28) | // P0.14 = GPIO Port 0.14
-		(0 <<30);  // P0.15 = GPIO Port 0.15 -> LCD D7-D0 ?
+		(0 <<30);  // P0.15 = GPIO Port 0.15 -> LCD Data (on DB7)
 	PINSEL1 = //0x800046a8 = 10 00 00 00 00 00 00 00 01 00 01 10 10 10 10 00
 		(0 << 0) | // P0.16 = GPIO Port 0.16
 		(2 << 2) | // P0.17 = SCK1 (SSP)
 		(2 << 4) | // P0.18 = MISO1 (SSP)
 		(2 << 6) | // P0.19 = MOSI1 (SSP)
 		(2 << 8) | // P0.20 = SSEL1 (SSP)
-		(1 <<10) | // P0.21 = PWM5
+		(1 <<10) | // P0.21 = PWM5 -> LCD Light
 		(0 <<12) | // P0.22 = GPIO Port 0.22
 		(1 <<14) | // P0.23 = VBUS
 		(0 <<16) | // P0.24 = Reserved
@@ -1177,28 +1193,28 @@ void lpc_hw_init(void)
 		(1 <<10) | // P0.10 = Out -> LED1
 		(1 <<11) | // P0.11 = Out -> LED2
 #else
-		(1 <<10) | // P0.10 = Out
+		(1 <<10) | // P0.10 = Out -> LCD CS
 		(0 <<11) | // P0.11 = In
 #endif
-		(1 <<12) | // P0.12 = Out -> LCD Data Latch ?
-		(1 <<13) | // P0.13 = Out -> LED torch?
+		(1 <<12) | // P0.12 = Out -> LCD SCLK
+		(1 <<13) | // P0.13 = Out -> double LED torch
 		(0 <<14) | // P0.14 = In
-		(1 <<15) | // P0.15 = Out -> LCD D7-D0 ?
-		(1 <<16) | // P0.16 = Out -> LED torch?
+		(1 <<15) | // P0.15 = Out -> LCD Data (on DB7)
+		(1 <<16) | // P0.16 = Out -> single LED torch
 		(0 <<22) | // P0.22 = In -> Key Matrix Row 1
 		(0 <<25) | // P0.25 = In -> Key Matrix Row 2
 		(0 <<28) | // P0.28 = In -> Key Matrix Row 3
 		(0 <<29) | // P0.29 = In -> Key Matrix Row 4
 		(0 <<30);  // P0.30 = In -> Key Matrix Row 5
 	IO1DIR = //0x03cf0000 = 00 00 00 11 11 00 11 11 00 00 00 00 00 00 00 00
-		(1 <<16) | // P1.16 = Out -> Key Matrix Column 3
-		(1 <<17) | // P1.17 = Out -> Key Matrix Column 2
-		(1 <<18) | // P1.18 = Out -> Key Matrix Column 1
-		(1 <<19) | // P1.19 = Out -> Key Matrix Column 0
+		(1 <<16) | // P1.16 = Out -> Key Matrix Column D
+		(1 <<17) | // P1.17 = Out -> Key Matrix Column C
+		(1 <<18) | // P1.18 = Out -> Key Matrix Column B
+		(1 <<19) | // P1.19 = Out -> Key Matrix Column A
 		(0 <<20) | // P1.20 = In
-		(0 <<21) | // P1.21 = In
-		(1 <<22) | // P1.22 = Out -> Buzzer???
-		(1 <<23) | // P1.23 = Out -> LCD A0 Pin (Command/Data) ?
+		(0 <<21) | // P1.21 = In -> EXTINT (Handset Pin 3: AUXI)
+		(1 <<22) | // P1.22 = Out -> Buzzer
+		(1 <<23) | // P1.23 = Out -> LCD RS (A0 Pin Command/Data)
 		(1 <<24) | // P1.24 = Out -> Chip Select for SPI Flash
 		(1 <<25);  // P1.25 = Out -> Chip Select for SPI Font ROM
 	IO1SET = 1 << 22; //0x00400000; P1.22 = High

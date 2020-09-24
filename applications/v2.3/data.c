@@ -319,8 +319,8 @@ char* Data_400030b0;
 char* Data_400030b4;
 char* Data_400030b8;
 char* Data_400030bc;
-char* Data_400030c0; //400030c0
-char* Data_400030c4; //400030c4
+char* strThereIsNoTele; //400030c0
+char* strScopeToConnectThis; //400030c4
 char* strControlTerminal; //400030c8
 char* strPleaseAimAtThe; //400030cc
 char* strTelescopeToDistant; //400030d0

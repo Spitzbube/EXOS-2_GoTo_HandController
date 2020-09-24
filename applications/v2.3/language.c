@@ -105,8 +105,8 @@ char strEngMeanBklash[] = "The mean backlash is:"; //40000de3
 char Data_40000df9[17] = "press UP or DOWN";
 char Data_40000e0a[22] = "key to start Dec(Alt)";
 char Data_40000e20[1] = "";
-char Data_40000e21[23] = "   There is no teles- ";
-char Data_40000e38[22] = "-cope to connect this";
+char strEngThereIsNoTele[23] = "   There is no teles- "; //40000e21
+char strEngScopeToConnectThis[22] = "-cope to connect this"; //40000e38
 char strEngControlTerminal[20] = "control terminal!!!"; //40000e4e
 
 //German
@@ -504,8 +504,8 @@ void SwapLanguageStrings(void)
 			Data_40003110 = Data_40000e0a;
 			Data_40003114 = Data_40000e20;
 
-			Data_400030c0 = Data_40000e21;
-			Data_400030c4 = Data_40000e38;
+			strThereIsNoTele = strEngThereIsNoTele;
+			strScopeToConnectThis = strEngScopeToConnectThis;
 			strControlTerminal = strEngControlTerminal;
 			//25df4 ->0x2783c
 			break;
@@ -615,8 +615,8 @@ void SwapLanguageStrings(void)
 			Data_40003110 = Data_40000e0a;
 			Data_40003114 = Data_40000e20;
 
-			Data_400030c0 = Data_40000e21;
-			Data_400030c4 = Data_40000e38;
+			strThereIsNoTele = strEngThereIsNoTele;
+			strScopeToConnectThis = strEngScopeToConnectThis;
 			strControlTerminal = strEngControlTerminal;
 			//264d0 ->0x2783c
 			break;
@@ -725,8 +725,8 @@ void SwapLanguageStrings(void)
 			Data_40003110 = Data_40000e0a;
 			Data_40003114 = Data_40000e20;
 
-			Data_400030c0 = Data_40000e21;
-			Data_400030c4 = Data_40000e38;
+			strThereIsNoTele = strEngThereIsNoTele;
+			strScopeToConnectThis = strEngScopeToConnectThis;
 			strControlTerminal = strEngControlTerminal;
 			//26994 ->0x2783c
 			break;
@@ -835,8 +835,8 @@ void SwapLanguageStrings(void)
 			Data_40003110 = Data_40000e0a;
 			Data_40003114 = Data_40000e20;
 
-			Data_400030c0 = Data_40000e21;
-			Data_400030c4 = Data_40000e38;
+			strThereIsNoTele = strEngThereIsNoTele;
+			strScopeToConnectThis = strEngScopeToConnectThis;
 			strControlTerminal = strEngControlTerminal;
 			//26fa0 ->0x2783c
 			break;
@@ -945,8 +945,8 @@ void SwapLanguageStrings(void)
 			Data_40003110 = Data_40000e0a;
 			Data_40003114 = Data_40000e20;
 
-			Data_400030c0 = Data_40000e21;
-			Data_400030c4 = Data_40000e38;
+			strThereIsNoTele = strEngThereIsNoTele;
+			strScopeToConnectThis = strEngScopeToConnectThis;
 			strControlTerminal = strEngControlTerminal;
 			//27590 ->0x2783c
 			break;

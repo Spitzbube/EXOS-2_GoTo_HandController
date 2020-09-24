@@ -508,8 +508,8 @@ extern char* Data_400030b0;
 extern char* Data_400030b4;
 extern char* Data_400030b8;
 extern char* Data_400030bc;
-extern char* Data_400030c0; //400030c0
-extern char* Data_400030c4; //400030c4
+extern char* strThereIsNoTele; //400030c0
+extern char* strScopeToConnectThis; //400030c4
 extern char* strControlTerminal; //400030c8
 extern char* strPleaseAimAtThe; //400030cc
 extern char* strTelescopeToDistant; //400030d0
