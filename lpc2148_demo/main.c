@@ -48,12 +48,7 @@
 //
 //
 #define BAUD_UART0 115200
-#define BAUD_UART1 4800
-
-#ifdef CFG_CONSOLE_UART1
-#undef BAUD_UART1
 #define BAUD_UART1 115200
-#endif
 
 #if defined CFG_CONSOLE_USB && defined CFG_USB_MSC
 #error "Cannot have USB console and MSC defined at the same time"
@@ -80,9 +75,10 @@ int main (void)
 #endif
 
   uart0Init (BAUD_UART0, 64);
+  uart1Init (BAUD_UART1, 64);
 
 #if 0
-  uart1Init (BAUD_UART1, 64);
+
 #ifdef CFG_CONSOLE_USB
   usbserInit ();
 #endif

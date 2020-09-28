@@ -49,7 +49,7 @@
 #  -D CFG_AUTO_DHCP     to automatically to DHCP for an address at start (ignored if not CFG_UIP, CFG_DHCP and CFG_AUTO_UIP)
 #  -D CFG_AUTO_SNTP     to automatically to set the time via SNTP (ignored if not CFG_UIP and CFG_AUTO_UIP)
 #
-export LPC2148DEMO_OPTS=-D SKYVISION_JOC  -D CFG_CONSOLE_UART0  -D CFG_LED   -D CFG_LCD  -D CFG_SPI  -D CFG_PWM
+export LPC2148DEMO_OPTS=-D SKYVISION_JOC  -D CFG_CONSOLE_UART1  -D CFG_LED   -D CFG_LCD  -D CFG_SPI  -D CFG_PWM  -D CFG_KBD
 
 #
 #  These shouldn't need to be changed
@@ -71,7 +71,7 @@ export STARTEDATTOP=true
 #
 #  Project sub-directories
 #
-SUBDIRS=FreeRTOS cpu fiq swi leds uart monitor lcd spi pwm newlib fatfs mmc
+SUBDIRS=FreeRTOS cpu fiq swi leds uart monitor lcd spi pwm kbd newlib fatfs mmc
 
 SRC_FILES = main.c
 
