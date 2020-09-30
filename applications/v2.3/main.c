@@ -3727,14 +3727,14 @@ void UserInterfaceCycle(void)
 		//6aad4
 	}
 	//6aad4
-	if (bData_40002c58 == 0)
+	if (bHelpActive == 0)
 	{
 		DisplayScreenItems();
 	}
 	else
 	{
 		//0x6aaec
-		func_1e228();
+		DisplayHelpScreen();
 	}
 	//6aaf0
 	if ((bData_4000322c == 1) && 

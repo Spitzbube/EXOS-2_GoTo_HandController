@@ -40,7 +40,7 @@ int fill_40002c48; //40002c48
 int fill_40002c4c; //40002c4c
 int fill_40002c50; //40002c50
 int fill_40002c54; //40002c54
-char bData_40002c58; //40002c58
+char bHelpActive; //40002c58
 unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
 char bData_40002c5a; //40002c5a
 int Data_40002c5c_AlignmentStarCount; //40002c5c

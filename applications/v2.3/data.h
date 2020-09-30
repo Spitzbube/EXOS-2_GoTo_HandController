@@ -250,7 +250,7 @@ extern int Data_40002c1c; //40002c1c
 extern int Data_40002c20; //40002c20
 extern Union_40002c24 Data_40002c24; //40002c24
 extern Union_40002c28 Data_40002c28; //40002c28
-extern char bData_40002c58; //40002c58
+extern char bHelpActive; //40002c58
 extern unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
 extern char bData_40002c5a; //40002c5a
 extern int Data_40002c5c_AlignmentStarCount; //40002c5c
