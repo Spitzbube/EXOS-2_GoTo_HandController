@@ -44,7 +44,9 @@
 #include "usbser/usbser.h"
 #include "usbmass/usbmass.h"
 
+#ifdef CFG_UGFX
 #include "gfx.h"
+#endif
 
 //
 //

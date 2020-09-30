@@ -126,10 +126,14 @@ gBool gfxSemWait(gSem* psem, gDelay ms)
 
 gBool gfxSemWaitI(gSem* psem)
 {
+#if 0
 	portBASE_TYPE xHigherPriorityTaskWoken = pdFALSE;
 
 	if (xSemaphoreTakeFromISR(*psem, &xHigherPriorityTaskWoken) == pdTRUE)
 		return gTrue;
+#else
+#warning "xSemaphoreTakeFromISR not available!"
+#endif
 	return gFalse;
 }
 

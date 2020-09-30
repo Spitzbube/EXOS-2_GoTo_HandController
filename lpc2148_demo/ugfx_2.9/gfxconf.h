@@ -59,13 +59,13 @@
 //    #define GFX_CPU_NO_ALIGNMENT_FAULTS              GFXOFF
 //    #define GFX_CPU_ENDIAN                           GFX_CPU_ENDIAN_UNKNOWN
 //    #define GFX_OS_HEAP_SIZE                         0
-//    #define GFX_OS_NO_INIT                           GFXOFF
+    #define GFX_OS_NO_INIT                           GFXOFF
 //    #define GFX_OS_INIT_NO_WARNING                   GFXOFF
 //    #define GFX_OS_PRE_INIT_FUNCTION                 myHardwareInitRoutine
 //    #define GFX_OS_EXTRA_INIT_FUNCTION               myOSInitRoutine
 //    #define GFX_OS_EXTRA_DEINIT_FUNCTION             myOSDeInitRoutine
     #define GFX_OS_CALL_UGFXMAIN                     GFXON
-    #define GFX_OS_UGFXMAIN_STACKSIZE                1024
+    #define GFX_OS_UGFXMAIN_STACKSIZE                2048
 //    #define GFX_EMULATE_MALLOC                       GFXOFF
 //    #define GFX_MEM_LT64K                            GFXOFF
 

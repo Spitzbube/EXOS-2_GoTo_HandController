@@ -24,4 +24,4 @@ GFXSRC +=   $(GFXLIB)/src/gwin/gwin.c \
 			$(GFXLIB)/src/gwin/gwin_keyboard_layout.c \
 			$(GFXLIB)/src/gwin/gwin_textedit.c
 
-GFXINC +=	$(GFXLIB)/3rdparty/tinygl-0.4-ugfx/include	
+#GFXINC +=	$(GFXLIB)/3rdparty/tinygl-0.4-ugfx/include	
