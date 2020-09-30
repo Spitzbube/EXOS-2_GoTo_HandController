@@ -44,6 +44,8 @@
 #include "usbser/usbser.h"
 #include "usbmass/usbmass.h"
 
+#include "gfx.h"
+
 //
 //
 //
@@ -129,7 +131,30 @@ int main (void)
   gpsTaskStart ();
 #endif
 
+#ifdef CFG_UGFX
+  gfxInit();
+#else
   vTaskStartScheduler ();
+#endif
 
   return 0;
 }
+
+#ifdef CFG_UGFX
+
+void uGFXMain(void)
+{
+	portTickType xLastWakeTime;
+
+	xLastWakeTime = xTaskGetTickCount ();
+
+	for (; ; )
+	{
+
+		printf("uGFXMain: xLastWakeTime=%d\n", xLastWakeTime);
+	    vTaskDelayUntil (&xLastWakeTime, 1000 / portTICK_RATE_MS);
+	}
+}
+
+#endif
+

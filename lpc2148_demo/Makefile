@@ -73,7 +73,12 @@ export STARTEDATTOP=true
 #
 SUBDIRS=FreeRTOS cpu fiq swi leds uart monitor lcd spi pwm kbd newlib fatfs mmc
 
-SRC_FILES = main.c
+LPC2148DEMO_OPTS += -D CFG_UGFX
+GFXLIB = $(ROOT)/ugfx_2.9
+include ugfx_2.9/gfx.mk
+CFLAGS += -I$(GFXINC)
+
+SRC_FILES = main.c $(GFXSRC)
 
 ARM_OBJ = $(SRC_FILES:.c=.o)
 

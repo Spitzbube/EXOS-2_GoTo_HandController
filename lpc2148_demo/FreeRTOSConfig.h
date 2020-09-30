@@ -66,6 +66,13 @@
 #define configUSE_16_BIT_TICKS		0
 #define configIDLE_SHOULD_YIELD		1
 
+#define configUSE_MUTEXES             1
+#define configUSE_COUNTING_SEMAPHORES 1
+#define configUSE_TIMERS              1
+#define portTICK_PERIOD_MS            portTICK_RATE_MS
+#define INCLUDE_xTaskGetSchedulerState 1
+typedef unsigned int StackType_t;
+
 //
 //  Co-routine definitions
 //
