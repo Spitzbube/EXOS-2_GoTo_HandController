@@ -53,19 +53,19 @@
 
 // Options that (should where relevant) apply to all operating systems
 //    #define GFX_NO_INLINE                            GFXOFF
-//    #define GFX_COMPILER                             GFX_COMPILER_UNKNOWN
+    #define GFX_COMPILER                             GFX_COMPILER_GCC
 //    #define GFX_SHOW_COMPILER                        GFXOFF
 //    #define GFX_CPU                                  GFX_CPU_UNKNOWN
 //    #define GFX_CPU_NO_ALIGNMENT_FAULTS              GFXOFF
 //    #define GFX_CPU_ENDIAN                           GFX_CPU_ENDIAN_UNKNOWN
 //    #define GFX_OS_HEAP_SIZE                         0
-    #define GFX_OS_NO_INIT                           GFXOFF
+    #define GFX_OS_NO_INIT                           GFXON
 //    #define GFX_OS_INIT_NO_WARNING                   GFXOFF
 //    #define GFX_OS_PRE_INIT_FUNCTION                 myHardwareInitRoutine
 //    #define GFX_OS_EXTRA_INIT_FUNCTION               myOSInitRoutine
 //    #define GFX_OS_EXTRA_DEINIT_FUNCTION             myOSDeInitRoutine
-    #define GFX_OS_CALL_UGFXMAIN                     GFXON
-    #define GFX_OS_UGFXMAIN_STACKSIZE                2048
+    #define GFX_OS_CALL_UGFXMAIN                     GFXOFF
+    #define GFX_OS_UGFXMAIN_STACKSIZE                4096
 //    #define GFX_EMULATE_MALLOC                       GFXOFF
 //    #define GFX_MEM_LT64K                            GFXOFF
 
@@ -73,12 +73,12 @@
 ///////////////////////////////////////////////////////////////////////////
 // GDISP                                                                 //
 ///////////////////////////////////////////////////////////////////////////
-//#define GFX_USE_GDISP                                GFXOFF
+#define GFX_USE_GDISP                                GFXON
 
-//#define GDISP_NEED_AUTOFLUSH                         GFXOFF
+#define GDISP_NEED_AUTOFLUSH                         GFXON
 //#define GDISP_NEED_TIMERFLUSH                        GFXOFF
-//#define GDISP_NEED_VALIDATION                        GFXON
-//#define GDISP_NEED_CLIP                              GFXON
+#define GDISP_NEED_VALIDATION                        GFXON
+#define GDISP_NEED_CLIP                              GFXON
 //#define GDISP_NEED_CIRCLE                            GFXOFF
 //#define GDISP_NEED_DUALCIRCLE                        GFXOFF
 //#define GDISP_NEED_ELLIPSE                           GFXOFF
@@ -91,7 +91,7 @@
 //#define GDISP_NEED_QUERY                             GFXOFF
 //#define GDISP_NEED_MULTITHREAD                       GFXOFF
 //#define GDISP_NEED_STREAMING                         GFXOFF
-//#define GDISP_NEED_TEXT                              GFXOFF
+#define GDISP_NEED_TEXT                              GFXON
 //    #define GDISP_NEED_TEXT_WORDWRAP                 GFXOFF
 //    #define GDISP_NEED_TEXT_BOXPADLR                 1
 //    #define GDISP_NEED_TEXT_BOXPADTB                 1
@@ -99,7 +99,7 @@
 //    #define GDISP_NEED_UTF8                          GFXOFF
 //    #define GDISP_NEED_TEXT_KERNING                  GFXOFF
 //    #define GDISP_INCLUDE_FONT_UI1                   GFXOFF
-//    #define GDISP_INCLUDE_FONT_UI2                   GFXOFF		// The smallest preferred font.
+    #define GDISP_INCLUDE_FONT_UI2                   GFXON		// The smallest preferred font.
 //    #define GDISP_INCLUDE_FONT_LARGENUMBERS          GFXOFF
 //    #define GDISP_INCLUDE_FONT_DEJAVUSANS10          GFXOFF
 //    #define GDISP_INCLUDE_FONT_DEJAVUSANS12          GFXOFF
@@ -161,12 +161,12 @@
 //#define GDISP_DEFAULT_ORIENTATION                    gOrientationLandscape    // If not defined the native hardware orientation is used.
 //#define GDISP_LINEBUF_SIZE                           128
 //#define GDISP_STARTUP_COLOR                          GFX_BLACK
-//#define GDISP_NEED_STARTUP_LOGO                      GFXON
+#define GDISP_NEED_STARTUP_LOGO                      GFXOFF
 
-//#define GDISP_TOTAL_DISPLAYS                         1
+#define GDISP_TOTAL_DISPLAYS                         1
 
-//#define GDISP_DRIVER_LIST                            GDISPVMT_Win32, GDISPVMT_Win32
-//    #ifdef GDISP_DRIVER_LIST
+#define GDISP_DRIVER_LIST                            GDISPVMT_ST7565
+    #ifdef GDISP_DRIVER_LIST
 //        // For code and speed optimization define as GFXON or GFXOFF if all controllers have the same capability
 //        #define GDISP_HARDWARE_STREAM_WRITE          GFXOFF
 //        #define GDISP_HARDWARE_STREAM_READ           GFXOFF
@@ -181,8 +181,9 @@
 //        #define GDISP_HARDWARE_QUERY                 GFXOFF
 //        #define GDISP_HARDWARE_CLIP                  GFXOFF
 
-//        #define GDISP_PIXELFORMAT                    GDISP_PIXELFORMAT_RGB888
-//    #endif
+        #define GDISP_PIXELFORMAT                    GDISP_PIXELFORMAT_MONO
+//GDISP_PIXELFORMAT_RGB888
+    #endif
 
 //#define GDISP_USE_GFXNET                             GFXOFF
 //    #define GDISP_GFXNET_PORT                        13001

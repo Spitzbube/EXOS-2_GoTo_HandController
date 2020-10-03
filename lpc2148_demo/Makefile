@@ -75,8 +75,9 @@ SUBDIRS=FreeRTOS cpu fiq swi leds uart monitor lcd spi pwm kbd newlib fatfs mmc
 
 LPC2148DEMO_OPTS += -D CFG_UGFX
 GFXLIB = $(ROOT)/ugfx_2.9
-include ugfx_2.9/gfx.mk
-CFLAGS += -I$(GFXINC)
+include $(GFXLIB)/gfx.mk
+include $(GFXLIB)/drivers/gdisp/ST7565/driver.mk
+CFLAGS += -I$(GFXINC) -I$(GFXLIB)/drivers/gdisp/ST7565
 
 SRC_FILES = main.c $(GFXSRC)
 

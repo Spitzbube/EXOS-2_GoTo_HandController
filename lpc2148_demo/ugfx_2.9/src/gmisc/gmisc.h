@@ -26,7 +26,7 @@
 /*===========================================================================*/
 
 // Forward definition
-typedef struct gPoint gPoint;
+//typedef struct gPoint gPoint;
 
 /**
  * @brief	Sample data formats

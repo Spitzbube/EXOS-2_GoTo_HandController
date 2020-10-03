@@ -67,6 +67,36 @@
 //
 xTaskHandle taskHandles [TASKHANDLE_LAST];
 
+
+#ifdef CFG_UGFX
+
+static GFX_THREAD_FUNCTION(uGFXMain, p)
+{
+	portTickType xLastWakeTime;
+	coord_t width, height;
+	gFont		font1;
+	(void) p;
+
+	gfxInit();
+
+	width = gdispGetWidth();
+	height = gdispGetHeight();
+
+	gdispDrawBox(10, 10, width / 2, height / 2, GFX_WHITE);
+
+	font1 = gdispOpenFont("UI2*");
+	gdispDrawStringBox(5, 5, width,  20, "Hello World", font1, GFX_WHITE, gJustifyCenter);
+
+	for (xLastWakeTime = xTaskGetTickCount (); ; )
+	{
+//		printf("uGFXMain: xLastWakeTime=%d\n", xLastWakeTime);
+	    vTaskDelayUntil (&xLastWakeTime, 1000 / portTICK_RATE_MS);
+	}
+}
+
+#endif
+
+
 //
 //
 //
@@ -134,29 +164,11 @@ int main (void)
 #endif
 
 #ifdef CFG_UGFX
-  gfxInit();
-#else
-  vTaskStartScheduler ();
+  gfxThreadCreate(0, GFX_OS_UGFXMAIN_STACKSIZE, gThreadpriorityNormal, uGFXMain, 0);
 #endif
+
+  vTaskStartScheduler ();
 
   return 0;
 }
-
-#ifdef CFG_UGFX
-
-void uGFXMain(void)
-{
-	portTickType xLastWakeTime;
-
-	xLastWakeTime = xTaskGetTickCount ();
-
-	for (; ; )
-	{
-
-		printf("uGFXMain: xLastWakeTime=%d\n", xLastWakeTime);
-	    vTaskDelayUntil (&xLastWakeTime, 1000 / portTICK_RATE_MS);
-	}
-}
-
-#endif
 
