@@ -49,7 +49,8 @@
 #  -D CFG_AUTO_DHCP     to automatically to DHCP for an address at start (ignored if not CFG_UIP, CFG_DHCP and CFG_AUTO_UIP)
 #  -D CFG_AUTO_SNTP     to automatically to set the time via SNTP (ignored if not CFG_UIP and CFG_AUTO_UIP)
 #
-export LPC2148DEMO_OPTS=-D SKYVISION_JOC  -D CFG_CONSOLE_UART1  -D CFG_LED   -D CFG_LCD  -D CFG_SPI  -D CFG_PWM  -D CFG_KBD
+export LPC2148DEMO_OPTS= -D CFG_CONSOLE_UART1  -D CFG_LED   -D CFG_LCD  -D CFG_SPI  -D CFG_KBD
+##-D CFG_PWM  
 
 #
 #  These shouldn't need to be changed
@@ -73,11 +74,16 @@ export STARTEDATTOP=true
 #
 SUBDIRS=FreeRTOS cpu fiq swi leds uart monitor lcd spi pwm kbd newlib fatfs mmc
 
+#LPC2148DEMO_OPTS += -D SKYVISION_JOC  
 LPC2148DEMO_OPTS += -D CFG_UGFX
 GFXLIB = $(ROOT)/ugfx_2.9
 include $(GFXLIB)/gfx.mk
 include $(GFXLIB)/drivers/gdisp/ST7565/driver.mk
-CFLAGS += -I$(GFXINC) -I$(GFXLIB)/drivers/gdisp/ST7565
+include $(GFXLIB)/drivers/gdisp/ILI9341/driver.mk
+include $(GFXLIB)/drivers/ginput/keyboard/driver.mk
+CFLAGS += -I$(GFXINC) 
+CFLAGS += -I$(GFXLIB)/drivers/gdisp/ST7565
+CFLAGS += -I$(GFXLIB)/drivers/gdisp/ILI9341
 
 SRC_FILES = main.c $(GFXSRC)
 

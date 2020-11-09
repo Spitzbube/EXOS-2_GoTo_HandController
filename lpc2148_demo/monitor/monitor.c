@@ -49,6 +49,11 @@
 #include "monitor.h"
 #include "argsdispatch.h"
 
+
+#ifdef CFG_UGFX
+#include "gfx.h"
+#endif
+
 //
 //
 //
@@ -2619,7 +2624,21 @@ static int monitorLCDMessage (int argc __attribute__ ((unused)), portCHAR **argv
 int monitorLEDStart (int argc __attribute__ ((unused)), portCHAR **argv __attribute__ ((unused)))
 {
   if (taskHandles [TASKHANDLE_LED])
+  {
+		gFont		font1;
+		coord_t width, height;
+		width = gdispGetWidth();
+		height = gdispGetHeight();
+
+#if 0
+		gdispDrawBox(10, 10, width / 2, height / 2, GFX_WHITE);
+#else
+		font1 = gdispOpenFont("UI2*");
+		gdispDrawStringBox(5, 5, width,  20, "Hello World", font1, GFX_WHITE, gJustifyCenter);
+#endif
+
     printf ("LED task is already running.  Use 'led stop' to stop it\n");
+  }
   else
     ledsTaskStart ();
 
@@ -3784,7 +3803,7 @@ static portTASK_FUNCTION (vMonitorTask, pvParameters __attribute__ ((unused)))
   monitorReassignFD (stdout, fd);
 #endif
 
-  monitorVersion (0, NULL);
+//  monitorVersion (0, NULL);
 
 #ifdef CFG_FATFS
   //

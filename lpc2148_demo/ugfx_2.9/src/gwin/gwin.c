@@ -86,6 +86,7 @@ void _gwinDeinit(void)
 // Initialise a window creating it dynamically if required.
 GHandle _gwindowCreate(GDisplay *g, GWindowObject *pgw, const GWindowInit *pInit, const gwinVMT *vmt, gU32 flags) {
 	// Allocate the structure if necessary
+
 	if (!pgw) {
 		if (!(pgw = gfxAlloc(vmt->size)))
 			return 0;
@@ -107,6 +108,7 @@ GHandle _gwindowCreate(GDisplay *g, GWindowObject *pgw, const GWindowInit *pInit
 		memset(pgw+1, 0, vmt->size - sizeof(GWindowObject));
 
 	if (!_gwinWMAdd(pgw, pInit)) {
+		uart1_write_byte('2');
 		if ((pgw->flags & GWIN_FLG_DYNAMIC))
 			gfxFree(pgw);
 		return 0;

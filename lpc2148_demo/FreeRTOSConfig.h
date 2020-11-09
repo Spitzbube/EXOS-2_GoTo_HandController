@@ -53,14 +53,14 @@
 #define configUSE_IDLE_HOOK			  0
 #define configUSE_TICK_HOOK			  0
 #ifdef SKYVISION_JOC
-#define configCPU_CLOCK_HZ			  ((unsigned portLONG) 44236800)	// =11.0592MHz xtal multiplied by 4 using the PLL.
+#define configCPU_CLOCK_HZ			  ((unsigned portLONG) 48000000) //44236800)	// =11.0592MHz xtal multiplied by 4 using the PLL.
 #else
 #define configCPU_CLOCK_HZ			  ((unsigned portLONG) 48000000)	// =12.0000MHz xtal multiplied by 4 using the PLL.
 #endif
 #define configTICK_RATE_HZ			  ((portTickType) 100)
 #define configMAX_PRIORITIES		  ((unsigned portBASE_TYPE) 4)
 #define configMINIMAL_STACK_SIZE	((unsigned portSHORT) 128)
-#define configTOTAL_HEAP_SIZE		  ((size_t) (20 * 1024))
+#define configTOTAL_HEAP_SIZE		  ((size_t) (25 * 1024))
 #define configMAX_TASK_NAME_LEN		(8)
 #define configUSE_TRACE_FACILITY	1
 #define configUSE_16_BIT_TICKS		0

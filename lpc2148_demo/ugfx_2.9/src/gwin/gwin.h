@@ -57,7 +57,7 @@ typedef struct GWindowObject {
 	#if GWIN_NEED_CONTAINERS
 		GHandle				parent;				/**< The parent window */
 	#endif
-} GWindowObject, * GHandle;
+} GWindowObject; //, * GHandle;
 /** @} */
 
 /**

@@ -97,6 +97,7 @@
 	}
 
 	void gwinSetVisible(GHandle gh, gBool visible) {
+
 		if (visible) {
 			if (!(gh->flags & GWIN_FLG_VISIBLE)) {
 				gh->flags |= (GWIN_FLG_VISIBLE|GWIN_FLG_SYSVISIBLE|GWIN_FLG_BGREDRAW);

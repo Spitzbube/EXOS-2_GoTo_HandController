@@ -450,6 +450,8 @@ static void KeyboardPoll(void *param) {
 	int			sz, i;
 	(void) 		param;
 
+	uart1_write_byte('!');
+
 	for(k = (GKeyboard *)gdriverGetNext(GDRIVER_TYPE_KEYBOARD, 0); k; k = (GKeyboard *)gdriverGetNext(GDRIVER_TYPE_KEYBOARD, (GDriver *)k)) {
 		if (!(gkvmt(k)->d.flags & GKEYBOARD_VFLG_NOPOLL) || (k->flags & GKEYBOARD_FLG_NEEDREAD)) {
 			k->flags &= ~GKEYBOARD_FLG_NEEDREAD;

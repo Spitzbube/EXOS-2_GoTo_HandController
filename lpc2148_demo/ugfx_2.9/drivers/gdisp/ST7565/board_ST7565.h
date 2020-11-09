@@ -70,7 +70,7 @@ static GFXINLINE void write_cmd(GDisplay *g, gU8 cmd) {
 	  unsigned char i;
 
 //	uart1_write_byte('6');
-	printf("write_cmd(cmd=0x%x)\n", cmd);
+//	printf("write_cmd(cmd=0x%x)\n", cmd);
 
 	  GPIO1_FIOCLR |= LCD_RS;
 
@@ -97,7 +97,7 @@ static GFXINLINE void write_data(GDisplay *g, gU8* data, gU16 length) {
 	  unsigned char i;
 
 //	uart1_write_byte('7');
-	printf("write_data(length=%d)\n", length);
+//	printf("write_data(length=%d)\n", length);
 
 	  GPIO1_FIOSET |= LCD_RS;
 

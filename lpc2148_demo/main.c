@@ -70,29 +70,123 @@ xTaskHandle taskHandles [TASKHANDLE_LAST];
 
 #ifdef CFG_UGFX
 
+
+void vSemaphoreDelete(void)
+{
+
+}
+
+#if 1//def SKYVISION_JOC
+
+static GFX_THREAD_FUNCTION(uGFXMain, p)
+{
+	int bytesFree, bytesUsed, blocksFree;
+	portTickType xLastWakeTime;
+	coord_t width, height;
+	gFont		font1, font2;
+	GHandle		ghList1;
+	GWidgetInit	wi;
+	int activeItem = 0;
+
+	(void) p;
+
+	vPortUsedMem(&bytesFree, &bytesUsed, &blocksFree);
+	printf("F:%d U:%d, B:%d\n", bytesFree, bytesUsed, blocksFree);
+
+	gfxInit();
+
+
+#if 0
+	gdispDrawBox(0, 0, width, height, GFX_WHITE);
+
+	font1 = gdispOpenFont("UI2*");
+	gdispDrawStringBox(5, 5, width,  20, "Hello World", font1, GFX_WHITE, gJustifyCenter);
+
+	font2 = gdispOpenFont("fixed_5x8");
+	gdispDrawStringBox(0, 5+20, width,  20, "Links ä", font2, GFX_WHITE, gJustifyLeft);
+#endif
+
+	vPortUsedMem(&bytesFree, &bytesUsed, &blocksFree);
+	printf("F:%d U:%d, B:%d\n", bytesFree, bytesUsed, blocksFree);
+
+#if 1
+	gwinSetDefaultFont(gdispOpenFont("fixed_5x8"));
+	gwinSetDefaultStyle(&BlackWidgetStyle, gFalse);
+//	gdispClear(GFX_WHITE);
+
+		// Apply some default values for GWIN
+		gwinWidgetClearInit(&wi);
+		wi.g.show = gTrue;
+
+		wi.g.width = width/2;
+		wi.g.height = height/2 + 20;
+		wi.g.y = 10;
+		wi.g.x = 10;
+		wi.text = "Name of list 1";
+
+		vPortUsedMem(&bytesFree, &bytesUsed, &blocksFree);
+		printf("F:%d U:%d, B:%d\n", bytesFree, bytesUsed, blocksFree);
+
+		ghList1 = gwinListCreate(0, &wi, gFalse);
+#endif
+
+		vPortUsedMem(&bytesFree, &bytesUsed, &blocksFree);
+		printf("F:%d U:%d, B:%d\n", bytesFree, bytesUsed, blocksFree);
+
+		gwinListAddItem(ghList1, "Item 0", gFalse);
+
+		vPortUsedMem(&bytesFree, &bytesUsed, &blocksFree);
+		printf("F:%d U:%d, B:%d\n", bytesFree, bytesUsed, blocksFree);
+
+		gwinListAddItem(ghList1, "Item 1", gFalse);
+		gwinListAddItem(ghList1, "Item 2", gFalse);
+		gwinListAddItem(ghList1, "Item 3", gFalse);
+		gwinListAddItem(ghList1, "Item 4", gFalse);
+		gwinListAddItem(ghList1, "Item 5", gFalse);
+		gwinListAddItem(ghList1, "Item 6", gFalse);
+		gwinListAddItem(ghList1, "Item 7", gFalse);
+
+		vPortUsedMem(&bytesFree, &bytesUsed, &blocksFree);
+		printf("F:%d U:%d, B:%d\n", bytesFree, bytesUsed, blocksFree);
+
+	for (xLastWakeTime = xTaskGetTickCount (); ; )
+	{
+		printf("activeItem: %d\n", activeItem);
+		gwinListSetSelected(ghList1, activeItem, gTrue);
+
+		activeItem++;
+		if (activeItem > gwinListItemCount(ghList1)) activeItem = 0;
+
+//		printf("uGFXMain: xLastWakeTime=%d\n", xLastWakeTime);
+	    vTaskDelayUntil (&xLastWakeTime, 1000 / portTICK_RATE_MS);
+	}
+}
+
+#else // !SKYVISION_JOC
+
 static GFX_THREAD_FUNCTION(uGFXMain, p)
 {
 	portTickType xLastWakeTime;
 	coord_t width, height;
-	gFont		font1;
-	(void) p;
 
 	gfxInit();
 
 	width = gdispGetWidth();
 	height = gdispGetHeight();
 
-	gdispDrawBox(10, 10, width / 2, height / 2, GFX_WHITE);
+	gdispDrawBox(0, 0, width, height, GFX_WHITE);
 
-	font1 = gdispOpenFont("UI2*");
-	gdispDrawStringBox(5, 5, width,  20, "Hello World", font1, GFX_WHITE, gJustifyCenter);
+	printf("w: %d, h: %d\n", width, height);
 
 	for (xLastWakeTime = xTaskGetTickCount (); ; )
 	{
-//		printf("uGFXMain: xLastWakeTime=%d\n", xLastWakeTime);
+		printf("uGFXMain: xLastWakeTime=%d\n", xLastWakeTime);
+
 	    vTaskDelayUntil (&xLastWakeTime, 1000 / portTICK_RATE_MS);
 	}
 }
+
+#endif
 
 #endif
 

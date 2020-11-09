@@ -42,6 +42,7 @@ static GFX_THREAD_FUNCTION(GTimerThreadHandler, arg) {
 	lastTime = 0;
 	while(1) {
 		/* Wait for work to do. */
+
 		gfxYield();					// Give someone else a go no matter how busy we are
 		gfxSemWait(&waitsem, nxtTimeout);
 		
@@ -184,6 +185,7 @@ void gtimerStart(GTimer *pt, GTimerFunction fn, void *param, gBool periodic, gDe
 	// Bump the thread
 	if (!(pt->flags & GTIMER_FLG_INFINITE))
 		gfxSemSignal(&waitsem);
+
 	gfxMutexExit(&mutex);
 }
 

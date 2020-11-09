@@ -555,6 +555,18 @@ static void line_clip(GDisplay *g) {
 /* Driver exported functions.                                                */
 /*===========================================================================*/
 
+#if 1
+	void uart1_write_byte(unsigned char a)
+	{
+#if 0
+#define UART1_THR       (*((volatile unsigned int*) (0xe0010000)))
+#define UART1_LSR       (*((volatile unsigned int*) (0xe0010014)))
+#endif
+		UART1_THR = a;
+		while (!(UART1_LSR & 0x40)) {}
+	}
+#endif
+
 void _gdispInit(void)
 {
 	// GDISP_DRIVER_LIST is defined - create each driver instance

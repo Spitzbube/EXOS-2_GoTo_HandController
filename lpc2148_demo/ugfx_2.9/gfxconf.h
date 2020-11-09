@@ -110,7 +110,7 @@
 //    #define GDISP_INCLUDE_FONT_DEJAVUSANSBOLD12      GFXOFF
 //    #define GDISP_INCLUDE_FONT_FIXED_10X20           GFXOFF
 //    #define GDISP_INCLUDE_FONT_FIXED_7X14            GFXOFF
-//    #define GDISP_INCLUDE_FONT_FIXED_5X8             GFXOFF
+    #define GDISP_INCLUDE_FONT_FIXED_5X8             GFXON
 //    #define GDISP_INCLUDE_FONT_DEJAVUSANS12_AA       GFXOFF
 //    #define GDISP_INCLUDE_FONT_DEJAVUSANS16_AA       GFXOFF
 //    #define GDISP_INCLUDE_FONT_DEJAVUSANS20_AA       GFXOFF
@@ -165,7 +165,11 @@
 
 #define GDISP_TOTAL_DISPLAYS                         1
 
+#ifdef SKYVISION_JOC
 #define GDISP_DRIVER_LIST                            GDISPVMT_ST7565
+#else
+#define GDISP_DRIVER_LIST                            GDISPVMT_ILI9341
+#endif
     #ifdef GDISP_DRIVER_LIST
 //        // For code and speed optimization define as GFXON or GFXOFF if all controllers have the same capability
 //        #define GDISP_HARDWARE_STREAM_WRITE          GFXOFF
@@ -195,10 +199,10 @@
 ///////////////////////////////////////////////////////////////////////////
 // GWIN                                                                  //
 ///////////////////////////////////////////////////////////////////////////
-//#define GFX_USE_GWIN                                 GFXOFF
+#define GFX_USE_GWIN                                 GFXON
 
-//#define GWIN_NEED_WINDOWMANAGER                      GFXOFF
-//    #define GWIN_REDRAW_IMMEDIATE                    GFXOFF
+#define GWIN_NEED_WINDOWMANAGER                      GFXON
+    #define GWIN_REDRAW_IMMEDIATE                    GFXON
 //    #define GWIN_REDRAW_SINGLEOP                     GFXOFF
 //    #define GWIN_NEED_FLASHING                       GFXOFF
 //        #define GWIN_FLASHING_PERIOD                 250
@@ -213,7 +217,7 @@
 //#define GWIN_NEED_GRAPH                              GFXOFF
 //#define GWIN_NEED_GL3D                               GFXOFF
 
-//#define GWIN_NEED_WIDGET                             GFXOFF
+#define GWIN_NEED_WIDGET                             GFXON
 //#define GWIN_FOCUS_HIGHLIGHT_WIDTH                   1
 //    #define GWIN_NEED_LABEL                          GFXOFF
 //        #define GWIN_LABEL_ATTRIBUTE                 GFXOFF
@@ -227,7 +231,7 @@
 //    #define GWIN_NEED_IMAGE                          GFXOFF
 //        #define GWIN_NEED_IMAGE_ANIMATION            GFXOFF
 //    #define GWIN_NEED_RADIO                          GFXOFF
-//    #define GWIN_NEED_LIST                           GFXOFF
+    #define GWIN_NEED_LIST                           GFXON
 //        #define GWIN_NEED_LIST_IMAGES                GFXOFF
 //    #define GWIN_NEED_PROGRESSBAR                    GFXOFF
 //        #define GWIN_PROGRESSBAR_AUTO                GFXOFF
@@ -264,10 +268,10 @@
 ///////////////////////////////////////////////////////////////////////////
 // GTIMER                                                                //
 ///////////////////////////////////////////////////////////////////////////
-//#define GFX_USE_GTIMER                               GFXOFF
+#define GFX_USE_GTIMER                               GFXON
 
-//#define GTIMER_THREAD_PRIORITY                       gThreadpriorityHigh
-//#define GTIMER_THREAD_WORKAREA_SIZE                  2048
+#define GTIMER_THREAD_PRIORITY                       gThreadpriorityNormal
+#define GTIMER_THREAD_WORKAREA_SIZE                  2048
 
 
 ///////////////////////////////////////////////////////////////////////////
@@ -283,7 +287,7 @@
 ///////////////////////////////////////////////////////////////////////////
 // GINPUT                                                                //
 ///////////////////////////////////////////////////////////////////////////
-//#define GFX_USE_GINPUT                               GFXOFF
+#define GFX_USE_GINPUT                               GFXON
 
 //#define GINPUT_NEED_MOUSE                            GFXOFF
 //    #define GINPUT_TOUCH_STARTRAW                    GFXOFF
@@ -300,9 +304,10 @@
 //    #define GINPUT_TOUCH_CALIBRATION_FONT2           "* Narrow"
 //    #define GINPUT_TOUCH_CALIBRATION_TITLE           "Calibration"
 //    #define GINPUT_TOUCH_CALIBRATION_ERROR           "Calibration Failed!"
-//#define GINPUT_NEED_KEYBOARD                         GFXOFF
+#define GINPUT_NEED_KEYBOARD                         GFXON
 //    #define GINPUT_KEYBOARD_POLL_PERIOD              200
-//    #define GKEYBOARD_DRIVER_LIST                    GKEYBOARDVMT_Win32, GKEYBOARDVMT_Win32
+    #define GKEYBOARD_DRIVER_LIST                    GKEYBOARDVMT_My //GKEYBOARDVMT_Win32, GKEYBOARDVMT_Win32
+//#define GINPUT_KEYBOARD_DRIVER_LIST                  GKEYBOARDVMT_My
 //    #define GKEYBOARD_LAYOUT_OFF                     GFXOFF
 //        #define GKEYBOARD_LAYOUT_SCANCODE2_US        GFXOFF
 //#define GINPUT_NEED_TOGGLE                           GFXOFF

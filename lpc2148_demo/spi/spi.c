@@ -36,6 +36,7 @@ void spiInit (void)
   //    MSB out first
   //    No interrupts
   //
+//  SPI_SPCR = SPI_SPCR_MSTR | SPI_SPCR_CPHA1ST | /*SPI_SPCR_CPOLACTLOW*/SPI_SPCR_CPOLACTHIGH | SPI_SPCR_MSBF;
   SPI_SPCR = SPI_SPCR_MSTR | SPI_SPCR_CPHA1ST | SPI_SPCR_CPOLACTHIGH | SPI_SPCR_MSBF;
   
   //
@@ -58,6 +59,13 @@ U8 spiPut (U8 valueIn)
 
   while (!(SPI_SPSR & SPI_SPSR_SPIF))
     ;
+
+#if 0
+  SPI_SPDR;
+
+  while (!(SPI_SPSR & SPI_SPSR_SPIF))
+    ;
+#endif
 
   return SPI_SPDR;
 }

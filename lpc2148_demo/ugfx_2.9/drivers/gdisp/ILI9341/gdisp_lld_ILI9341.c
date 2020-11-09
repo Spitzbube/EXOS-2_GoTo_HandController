@@ -89,12 +89,25 @@ LLDSPEC gBool gdisp_lld_init(GDisplay *g) {
 	// Get the bus for the following initialisation commands
 	acquire_bus(g);
 
+#if 1
 	write_index(g, 0x01); //software reset
 	gfxSleepMilliseconds(5);
 	write_index(g, 0x28);
 	// display off
+#endif
+
+#if 0
+	gfxSleepMilliseconds(5);
+	write_index(g, 0x04);
+	write_data(g, 0xff);
+	write_data(g, 0xff);
+	write_data(g, 0xff);
+	write_data(g, 0xff);
+#endif
+
 	//---------------------------------------------------------
 	// magic?
+#if 1
 	write_index(g, 0xcf);
 	write_data(g, 0x00);
 	write_data(g, 0x83);
@@ -214,6 +227,7 @@ LLDSPEC gBool gdisp_lld_init(GDisplay *g) {
 	gfxSleepMilliseconds(100);
 	write_index(g, 0x29); // display on
 	gfxSleepMilliseconds(100);
+#endif
 
     // Finish Init
     post_init_board(g);
@@ -247,6 +261,8 @@ LLDSPEC gBool gdisp_lld_init(GDisplay *g) {
 		release_bus(g);
 	}
 #endif
+
+#if 0
 
 #if GDISP_HARDWARE_STREAM_READ
 	LLDSPEC	void gdisp_lld_read_start(GDisplay *g) {
@@ -343,6 +359,8 @@ LLDSPEC gBool gdisp_lld_init(GDisplay *g) {
             return;
 		}
 	}
+#endif
+
 #endif
 
 #endif /* GFX_USE_GDISP */
