@@ -11,56 +11,38 @@
 ################################################################################
 ################################################################################
 
-TOPDIR = ../..
-SUBDIR = applications/v2.3
+TOPDIR = ../../../..
+SUBDIR = FreeRTOS/portable/RVDS/ARM7_LPC21xx
 
 include $(TOPDIR)/env/make/Makefile.config
+
+################################################################################
+# project specific settings
+################################################################################
+
+LIBRARY = libFreeRTOS_portable
 
 ################################################################################
 # source files
 ################################################################################
 
-SOURCES += main.c
-SOURCES += data.c
-SOURCES += Startup.s
-
-################################################################################
-# define define user cc flags
-################################################################################
-
-
-
-################################################################################
-# define define user ld flags
-################################################################################
-
-
-
-################################################################################
-# define library used
-################################################################################
-
-LIBRARIES  = FreeRTOS FreeRTOS_portable
-
-################################################################################
-# define target name
-################################################################################
-
-PROGRAM = v2.3
+HEADERS += portmacro.h
+SOURCES += portASM.s
+SOURCES += port.c
 
 ################################################################################
 # define user targets
 ################################################################################
 
-default: install
+default: build
 
-clean: clean-objects clean-program
+clean: clean-objects clean-library
 
-build:  build-objects build-program build-elfdump-program build-intelhex-program
+build:  build-objects build-library
 
-install: build install-program install-intelhex-program
+headers: install-headers
 
-headers:
+install: build install-library
 
 all: clean build install
 

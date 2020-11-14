@@ -16,6 +16,9 @@
 
 include $(TOPDIR)/env/make/Makefile.config
 
+  HEADERS += LPC214x.h
+  HEADERS += FreeRTOSConfig.h
+
 ################################################################################
 # define user targets
 ################################################################################
@@ -28,7 +31,7 @@ build:
 
 install: 
 
-headers:
+headers: install-headers
 
 all: 
 

@@ -57,22 +57,22 @@ F_Bit           EQU     0x40            ; when F bit is set, FIQ is disabled
 ;//   <o5> User/System Mode    <0x0-0xFFFFFFFF:8>
 ;// </h>
 
-UND_Stack_Size  EQU     0x00000000
-SVC_Stack_Size  EQU     0x00000008
-ABT_Stack_Size  EQU     0x00000000
-FIQ_Stack_Size  EQU     0x00000000
-IRQ_Stack_Size  EQU     0x00000080
-USR_Stack_Size  EQU     0x00000400
+UND_Stack_Size  EQU     0x00000008
+SVC_Stack_Size  EQU     0x00000300
+ABT_Stack_Size  EQU     0x00000008
+FIQ_Stack_Size  EQU     0x00000008
+IRQ_Stack_Size  EQU     0x00000300
+USR_Stack_Size	EQU		0x00000008
 
-ISR_Stack_Size  EQU     (UND_Stack_Size + SVC_Stack_Size + ABT_Stack_Size + \
-                         FIQ_Stack_Size + IRQ_Stack_Size)
+Stack_Size   	EQU     (UND_Stack_Size + SVC_Stack_Size + ABT_Stack_Size + \
+                         FIQ_Stack_Size + IRQ_Stack_Size + USR_Stack_Size )
 
                 AREA    STACK, NOINIT, READWRITE, ALIGN=3
+Stack_Mem       SPACE   Stack_Size
 
-Stack_Mem       SPACE   USR_Stack_Size
-__initial_sp    SPACE   ISR_Stack_Size
+;__initial_sp    SPACE   ISR_Stack_Size
 
-Stack_Top
+Stack_Top		EQU  Stack_Mem + Stack_Size
 
 
 ;// <h> Heap Configuration
@@ -101,8 +101,8 @@ VPBDIV          EQU     0xE01FC100      ; VPBDIV Address
 ;//               <1=> XCLK Pin = CPU Clock
 ;//               <2=> XCLK Pin = CPU Clock / 2
 ;// </e>
-VPBDIV_SETUP    EQU     1
-VPBDIV_Val      EQU     0x00000001
+VPBDIV_SETUP    EQU     0
+VPBDIV_Val      EQU     0x00000000
 
 
 ; Phase Locked Loop (PLL) definitions
@@ -235,6 +235,7 @@ PINSEL2_Val     EQU     0x0E6149E4      ; CS0..3, OE, WE, BLS0..3,
 ;  Mapped to Address 0.
 ;  Absolute addressing mode must be used.
 ;  Dummy Handlers are implemented as infinite loops which can be modified.
+				IMPORT	vPortYieldProcessor
 
 Vectors         LDR     PC, Reset_Addr         
                 LDR     PC, Undef_Addr
@@ -248,7 +249,7 @@ Vectors         LDR     PC, Reset_Addr
 
 Reset_Addr      DCD     Reset_Handler
 Undef_Addr      DCD     Undef_Handler
-SWI_Addr        DCD     SWI_Handler
+SWI_Addr        DCD     vPortYieldProcessor
 PAbt_Addr       DCD     PAbt_Handler
 DAbt_Addr       DCD     DAbt_Handler
                 DCD     0                      ; Reserved Address 
@@ -397,20 +398,6 @@ MEMMAP          EQU     0xE01FC040      ; Memory Mapping Control
                 MOV     SP, R0
                 SUB     R0, R0, #SVC_Stack_Size
 
-;  Enter User Mode and set its Stack Pointer
-                MSR     CPSR_c, #Mode_USR
-                IF      :DEF:__MICROLIB
-
-                EXPORT __initial_sp
-
-                ELSE
-
-                MOV     SP, R0
-                SUB     SL, SP, #USR_Stack_Size
-
-                ENDIF
-
-
 ; Enter the C code
 
                 IMPORT  __main
@@ -425,15 +412,15 @@ MEMMAP          EQU     0xE01FC040      ; Memory Mapping Control
 
                 ELSE
 ; User Initial Stack & Heap
-                AREA    |.my_text|, CODE, READONLY
+                AREA    |.text|, CODE, READONLY
 
                 IMPORT  __use_two_region_memory
                 EXPORT  __user_initial_stackheap
 __user_initial_stackheap
 
                 LDR     R0, =  Heap_Mem
-                LDR     R1, =(Stack_Mem + USR_Stack_Size)
-                LDR     R2, = (Heap_Mem +      Heap_Size)
+                LDR     R1, = (Stack_Mem + IRQ_Stack_Size + USR_Stack_Size)
+                LDR     R2, = (Heap_Mem + Heap_Size)
                 LDR     R3, = Stack_Mem
                 BX      LR
                 ENDIF

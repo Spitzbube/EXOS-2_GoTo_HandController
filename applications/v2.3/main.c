@@ -9,6 +9,9 @@
 #include "menu.h"
 #endif
 
+#include "FreeRTOS.h"
+#include "task.h"
+
 //#define UART0_DEBUG
 #define V2_3
 
@@ -937,9 +940,7 @@ void HandleOTAZeroData(void)
 	}
 }
 
-
 #include "file_5099c.c"
-
 
 /* 50b40 - todo */
 void HandleReset(void)
@@ -3004,6 +3005,7 @@ void HandleCustomSiteInputChar(int key)
 #include "Handle3Key.c"
 #include "Handle2Key.c"
 
+
 /* 68394 - todo */
 void func_68394(int a)
 {
@@ -4882,30 +4884,115 @@ void func_6cb38(void)
 	}
 }
 
-/* 6d054 - todo */
-int main(void)
-{
-	lpc_hw_init();
-	uart0_init(360);
-	uart1_init(360);
 
-#ifdef USE_USB
-	usb_init();
+static void vLEDTask( void *pvParameters )
+{
+	int off = 1;
+
+	//OFF
+	IO0SET = (1 << 16);
+
+	for( ;; )
+	{
+		vTaskDelay( ( TickType_t ) 1000 / portTICK_PERIOD_MS );
+
+		if (off)
+		{
+			//ON
+			IO0CLR = (1 << 16);
+			off = 0;
+		}
+		else
+		{
+			//OFF
+			IO0SET = (1 << 16);
+			off = 1;
+		}
+	}
+}
+
+static void vUART0Task( void *pvParameters )
+{
+#if 0
+	uart0_init(360);
+
+	VICVectCntl1 = (1 << 5) | 6; // UART0 -> Slot 1
+	VICIntEnable = (1 << 6); // Enable UART0
 #endif
 
-#if 0	
-	if (0)
+	for( ;; )
 	{
-		int res = mmcInitMedia();
-		static char buf[100];
-		snprintf(buf, sizeof(buf)-1, "mmcInitMedia res = 0x%x\n\r", res);
-		uart0_send(buf, strlen(buf));
+		vTaskDelay( ( TickType_t ) 1000 / portTICK_PERIOD_MS );
+#if 0
+		{
+			static char buf[105];
+			portTickType xtick = xTaskGetTickCount();
+
+			snprintf(buf, 100, "vUART0Task=%u\n\r", (unsigned int)xtick);
+			uart1_send((unsigned char*)buf, strlen(buf));
+		}
+#endif
+	}
+}
+
+static void vUART1Task( void *pvParameters )
+{
+#if 0
+	uart1_init(360);
+
+	VICVectCntl2 = (1 << 5) | 7; // UART1 -> Slot 2
+	VICIntEnable = (1 << 7); // Enable UART1
+#endif
+
+	for( ;; )
+	{
+		vTaskDelay( ( TickType_t ) 1000 / portTICK_PERIOD_MS );
+#if 0
+		{
+			static char buf[105];
+			portTickType xtick = xTaskGetTickCount();
+
+			snprintf(buf, 100, "vUART1Task=%u\n\r", (unsigned int)xtick);
+			uart1_send((unsigned char*)buf, strlen(buf));
+		}
+#endif
+	}
+}
+
+static void vTimerTask( void *pvParameters )
+{
+	for( ;; )
+	{
+		vTaskDelay( ( TickType_t ) 10 / portTICK_PERIOD_MS );
+		timer_isr();
+#if 0
+		{
+			static char buf[105];
+			portTickType xtick = xTaskGetTickCount();
+
+			snprintf(buf, 100, "vTimerTask=%u\n\r", (unsigned int)xtick);
+			uart1_send((unsigned char*)buf, strlen(buf));
+		}
+#endif
+	}
+}
+
+/* 6d054 - todo */
+static void vMainTask(void *pvParameters)
+{
+#if 0
+	{
+		static char buf[105];
+
+		snprintf(buf, 100, "vMainTask\n\r");
+		uart1_send((unsigned char*)buf, strlen(buf));
 	}
 #endif
 
-	func_7590();
-	func_d2cc();
-	func_5099c();
+	func_7590(); //Send Stop on Uart1?
+	func_d2cc(); //Initialize variables
+	func_5099c(); //Initialize variables
+
 	flash_read(0xdcb, 0, 10, Data_40004c58);
 	bData_40003196_CurrentLanguage = Data_40004c58[0];
 	if (Data_40004c58[1] == 1)
@@ -4941,15 +5028,15 @@ int main(void)
 	uart1_write_byte(1);
 	uart1_write_byte(0x24);
 	
-	func_659c(10);
+	func_659c(10); //delay
 	
-	fData_40002e98 = func_6ab74(1);
+	fData_40002e98 = func_6ab74(1); //receive data
 
-	func_659c(50);
+	func_659c(50); //delay
 	
-	fData_40002ea8 = func_6ab74(2);
+	fData_40002ea8 = func_6ab74(2); //receive data
 
-	func_659c(50);
+	func_659c(50); //delay
 
 	if (bData_40002c1a == 1)
 	{
@@ -5033,6 +5120,7 @@ int main(void)
 		sprintf(strCustomSiteTimezone, " Zone:W%02d", abs(iInitialCustomSiteTimezone));
 	}
 	//6d630
+
 	func_659c(2000);
 	lcd_display_clear();
 	
@@ -5077,6 +5165,14 @@ int main(void)
 	//##########################################################################
 	while (1) 
 	{
+#if 0
+		{
+			static char buf[100];
+			snprintf(buf, sizeof(buf)-1, "Main Loop (Context: %d)\n\r", Data_40002c64_MenuContextId);
+			uart1_send(buf, strlen(buf));
+		}
+#endif
+
 		#if 0 //def UART0_DEBUG
 		{
 			static char buf[100];
@@ -5097,9 +5193,9 @@ int main(void)
 		//6d898		
 		fData_40002efc = dData_40002dc0_Azimuth;
 		fData_40002f00 = dData_40002df8;
-		
-		func_6cb38();
-		
+
+		func_6cb38(); //check data from uart0
+
 #if 0 //OLIMEX_LPC2148
 		volatile int j;
 		//for (j = 0; j < 500000; j++ );		// wait 500 msec
@@ -5112,7 +5208,6 @@ int main(void)
 //		IOCLR0 = 0x00000800;
 #endif
 
-#ifndef OLIMEX_LPC2148
 		if (bData_40002c1a == 1)
 		{
 			//6d8d4
@@ -6580,12 +6675,42 @@ int main(void)
 		{
 			func_659c(100);
 		}
-#if 1
-		//Workaround
-		if (Data_40004128.bData_357) ;
-#endif		
 		//729ec -> 6d898
-#endif //OLIMEX_LPC2148
 	} //while (1)	
+}
+
+
+/* 6d054 - todo */
+int main(void)
+{
+	lpc_hw_init();
+	uart0_init(360);
+	uart1_init(360);
+
+	VICVectCntl1 = (1 << 5) | 6; // UART0 -> Slot 1
+	VICIntEnable = (1 << 6); // Enable UART0
+
+	VICVectCntl2 = (1 << 5) | 7; // UART1 -> Slot 2
+	VICIntEnable = (1 << 7); // Enable UART1
+
+	//ON
+	IO0CLR = (1 << 16);
+
+	xTaskCreate( vLEDTask, "LEDTask", /*configMINIMAL_STACK_SIZE*/100, NULL, tskIDLE_PRIORITY+1, NULL );
+	xTaskCreate( vMainTask, "MainTask", /*configMINIMAL_STACK_SIZE*/1000, NULL, tskIDLE_PRIORITY+1, NULL );
+	xTaskCreate( vTimerTask, "TimerTask", /*configMINIMAL_STACK_SIZE*/100, NULL, tskIDLE_PRIORITY+2, NULL );
+	xTaskCreate( vUART0Task, "UART0Task", /*configMINIMAL_STACK_SIZE*/100, NULL, tskIDLE_PRIORITY+3, NULL );
+	xTaskCreate( vUART1Task, "UART1Task", /*configMINIMAL_STACK_SIZE*/100, NULL, tskIDLE_PRIORITY+3, NULL );
+
+#if 0
+	{
+		static char buf[105];
+
+		snprintf(buf, 100, "vTaskStartScheduler\n\r");
+		uart1_send((unsigned char*)buf, strlen(buf));
+	}
+#endif
+
+	vTaskStartScheduler();
 }
 

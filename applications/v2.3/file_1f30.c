@@ -898,11 +898,15 @@ void func_17d0(void)
 }
 
 /* 17f8 - complete */
+#if 0
 #ifdef __GNUC__
 void timer_isr(void) __attribute__ ((interrupt ("IRQ")));
 void timer_isr(void)
 #else
 void timer_isr(void) __irq
+#endif
+#else
+void timer_isr(void)
 #endif
 {
 	read_key_matrix();
@@ -981,8 +985,10 @@ void timer_isr(void) __irq
 		}
 	}
 
+#if 0
 	T0IR = 1; //Reset MR0 Interrupt
 	VICVectAddr = 0;
+#endif
 }
 
 /* 19cc - complete */
@@ -1075,7 +1081,6 @@ void lpc_interrupt_init(void)
 	
 	// Slot 0 has the highest priority and slot 15 the lowest
 
-	#if 1
 	VICVectCntl0 = (1 << 5) | 4; // TIMER0 -> Slot 0
 	VICVectAddr0 = (unsigned int) timer_isr;
 	VICIntEnable = (1 << 4); // Enable TIMER0
@@ -1083,15 +1088,6 @@ void lpc_interrupt_init(void)
 	VICVectCntl3 = (1 << 5) | 13; // RTC -> Slot 3
 	VICVectAddr3 = (unsigned int) rtc_isr;
 	VICIntEnable = (1 << 13); // Enable RTC
-	#else
-	VICVectCntl1 = (1 << 5) | 4; // TIMER0 -> Slot 1
-	VICVectAddr1 = (unsigned int) timer_isr;
-	VICIntEnable = (1 << 4); // Enable TIMER0
-	
-	VICVectCntl4 = (1 << 5) | 13; // RTC -> Slot 4
-	VICVectAddr4 = (unsigned int) rtc_isr;
-	VICIntEnable = (1 << 13); // Enable RTC
-	#endif
 	
 	// Counter Increment Interrupt Register
 	CIIR = (1 << 0); //an increment of the Second value generates an interrupt
@@ -1102,16 +1098,14 @@ void lpc_interrupt_init(void)
 	
 	// Clock Control Register
 	CCR = (1 << 4) | (1 << 0); //CLKEN + CLKSRC (from Oscillator)
-	
-	#if 1
+
+#if 0
 	VICVectCntl1 = (1 << 5) | 6; // UART0 -> Slot 1
 	VICVectCntl2 = (1 << 5) | 7; // UART1 -> Slot 2
-	#else
-	VICVectCntl2 = (1 << 5) | 6; // UART0 -> Slot 2
-	VICVectCntl3 = (1 << 5) | 7; // UART1 -> Slot 3
-	#endif
+
 	VICIntEnable = (1 << 7); // Enable UART1
 	VICIntEnable = (1 << 6); // Enable UART0
+#endif
 }
 
 /* 2328 - complete */
@@ -1239,8 +1233,11 @@ void lpc_hw_init(void)
 	bData_40002c09 = 0x10;
 	bData_40002c07 = 0x00;
 
+#if 0
 	lpc_interrupt_init();
+#endif
 }
+
 
 /* 243c - complete */
 void flash_read(unsigned int PageAdr, int b, int Count, unsigned char* Data)
@@ -4565,6 +4562,7 @@ void func_d2bc(Struct_d2bc a, int b)
 {
 }
 
+
 /* d2cc - todo */
 void func_d2cc(void)
 {
@@ -6449,8 +6447,7 @@ void PrepareMainScreenItems(void)
 }
 
 #include "language.c"
-
 #include "func_27844.c"
-
 #include "func_3d72c.c"
+
 

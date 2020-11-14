@@ -109,6 +109,8 @@ char strEngThereIsNoTele[23] = "   There is no teles- "; //40000e21
 char strEngScopeToConnectThis[22] = "-cope to connect this"; //40000e38
 char strEngControlTerminal[20] = "control terminal!!!"; //40000e4e
 
+#if 0
+
 //German
 char strGerTelescopeAlign[32] = "A\x00u\x00s\x00r\x00i\x00c\x00h\x00t\x00u\x00n\x00g\x00"; //40000e62
 char strGerNavigation[32] = "N\x00a\x00v\x00i\x00g\x00a\x00t\x00i\x00o\x00n\x00";
@@ -281,6 +283,8 @@ char Data_40002282[32] = "V\x00e\x00l\x00o\x00.\x00d\x00e\x00 \x00s\x00e\x00g\x0
 char Data_400022a2[32] = "I\x00d\x00i\x00o\x00m\x00a\x00";
 char Data_400022c2[48] = "R\x00e\x00i\x00n\x00i\x00c\x00i\x00a\x00r\x00";
 
+#endif
+
 //Misc
 char strCustomerObjectRaAziInputForTracking[16] = "R.a: 12h32m48.2s"; //400022f2
 char Data_40002302[16] = "Dec:+14 26 53.3 "; //40002302
@@ -397,7 +401,8 @@ void SwapLanguageStrings(void)
 {
 	switch (bData_40003196_CurrentLanguage)
 	{
-		case MENU_LANGUAGE_ENGLISH: //1:
+		default:
+		//case MENU_LANGUAGE_ENGLISH: //1:
 			//0x25788
 			strTelescopeAlign = strEngTelescopeAlign;
 			strNavigation = strEngNavigation;
@@ -510,6 +515,7 @@ void SwapLanguageStrings(void)
 			//25df4 ->0x2783c
 			break;
 
+#if 0
 		case MENU_LANGUAGE_GERMAN: //2:
 			//0x26010
 			strTelescopeAlign = strGerTelescopeAlign;
@@ -954,6 +960,7 @@ void SwapLanguageStrings(void)
 		default:
 			//0x27834
 			break;
+#endif
 	}
 }
 
