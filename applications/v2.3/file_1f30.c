@@ -1025,7 +1025,7 @@ void rtc_isr(void) __irq
 	VICVectAddr = 0;
 }
 
-#include "uart.c"
+//#include "uart.c"
 
 #ifdef __GNUC__
 //void delay_loop(unsigned int a) __attribute__((optimize(-O0)));

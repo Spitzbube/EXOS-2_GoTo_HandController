@@ -38,6 +38,7 @@ HEADERS += include/projdefs.h
 HEADERS += include/stack_macros.h
 HEADERS += include/task.h
 HEADERS += include/timers.h
+HEADERS += include/queue.h
 
 SOURCES += portable/MemMang/heap_1.c
 SOURCES += portable/MemMang/heap_2.c
@@ -46,6 +47,7 @@ SOURCES += portable/MemMang/heap_4.c
 SOURCES += portable/MemMang/heap_5.c
 
 SOURCES += list.c
+SOURCES += queue.c
 SOURCES += tasks.c
 
 ################################################################################

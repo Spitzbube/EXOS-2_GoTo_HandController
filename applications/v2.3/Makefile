@@ -21,6 +21,7 @@ include $(TOPDIR)/env/make/Makefile.config
 ################################################################################
 
 SOURCES += main.c
+SOURCES += uart.c
 SOURCES += data.c
 SOURCES += Startup.s
 

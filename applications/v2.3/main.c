@@ -11,6 +11,7 @@
 
 #include "FreeRTOS.h"
 #include "task.h"
+#include "queue.h"
 
 //#define UART0_DEBUG
 #define V2_3
@@ -4946,7 +4947,18 @@ static void vUART1Task( void *pvParameters )
 
 	for( ;; )
 	{
-		vTaskDelay( ( TickType_t ) 1000 / portTICK_PERIOD_MS );
+		extern QueueHandle_t xQueueUart1;
+		unsigned char uart1ReceiveDataBuffer[10];
+		if (xQueueReceive(xQueueUart1, &uart1ReceiveDataBuffer, 100))
+		{
+			static char buf[35];
+			portTickType xtick = xTaskGetTickCount();
+
+			snprintf(buf, 30, "vUART1Task=%u\n\r", (unsigned int)xtick);
+			uart0_send((unsigned char*)buf, strlen(buf));
+		}
+
+//		vTaskDelay( ( TickType_t ) 1000 / portTICK_PERIOD_MS );
 #if 0
 		{
 			static char buf[105];
@@ -5030,11 +5042,11 @@ static void vMainTask(void *pvParameters)
 	
 	func_659c(10); //delay
 	
-	fData_40002e98 = func_6ab74(1); //receive data
+	fData_40002e98 = func_6ab74(1); //receive data for Cmd=0x10
 
 	func_659c(50); //delay
 	
-	fData_40002ea8 = func_6ab74(2); //receive data
+	fData_40002ea8 = func_6ab74(2); //receive data for Cmd=0x30
 
 	func_659c(50); //delay
 

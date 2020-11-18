@@ -1,4 +1,16 @@
 
+#include "my_types.h"
+#include "data.h"
+#include "FreeRTOS.h"
+#include "queue.h"
+
+
+void uart0_send(unsigned char* a, unsigned char b);
+
+
+QueueHandle_t xQueueUart1;
+
+
 
 /* 19f0 - complete */
 #ifdef __GNUC__
@@ -12,6 +24,7 @@ void uart1_isr(void) __irq
 	
 	if (bData_40002c1a == 0)
 	{
+		//First Response from Mount
 		bData_40002c1a = 3;
 	}
 	
@@ -72,21 +85,45 @@ void uart1_isr(void) __irq
 					bData_40002c12_uart1ReceiveDataCount++;
 					if (bData_40002c12_uart1ReceiveDataCount == bData_40002c15_uart1ReceiveHeader[3])
 					{
+#if 1
+						BaseType_t xHigherPriorityTaskWokenByPost = pdFALSE;
+
+						xQueueSendFromISR(xQueueUart1,
+								&Data_40003592_uart1ReceiveDataBuffer[0],
+								&xHigherPriorityTaskWokenByPost);
+
+						if (xHigherPriorityTaskWokenByPost)
+						{
+							//portYIELD_FROM_ISR();
+						}
+#else
+						int i;
+						for (i = 0; i < bData_40002c12_uart1ReceiveDataCount; i++)
+						{
+							char buf[20];
+							snprintf(buf, sizeof(buf)-1, "Rx%d=0x%02x\n\r", i,
+									Data_40003592_uart1ReceiveDataBuffer[i]);
+							uart0_send(buf, strlen(buf));
+						}
+#endif
 						bData_40002c13_uart1ReceiveComplete = 1;
 						bData_40002c14_uart1ReceiveStep = 0;
 						bData_40002c12_uart1ReceiveDataCount = 0;
 						
 						if (!((bData_40002c1a == 1) && (bData_40002c1a == 2)))
 						{
+							//First Response from Mount
 							switch (Data_40003592_uart1ReceiveDataBuffer[0])
 							{
 								case 0x04:
 								case 0x24:
+									//EQU
 									bData_40002c1a = 1;
 									break;
 								
 								case 0x44:
 								case 0x64:
+									//AZ
 									bData_40002c1a = 2;
 									break;
 								
@@ -329,6 +366,8 @@ void uart1_init(int a)
 	bData_40002c15_uart1ReceiveHeader[1] = 0xaa;
 	bData_40002c15_uart1ReceiveHeader[2] = 0x01;
 	bData_40002c15_uart1ReceiveHeader[3] = 0x00;
+
+	xQueueUart1 = xQueueCreate(2, 10);
 }
 
 /* 219c - complete */
@@ -355,6 +394,13 @@ void uart1_write_byte(unsigned char a)
 {
 	U1THR = a;
 	while (!(U1LSR & 0x40)) {}
+#if 1
+	{
+		char buf[20];
+		snprintf(buf, sizeof(buf)-1, "Tx=0x%02x\n\r", a);
+		uart0_send(buf, strlen(buf));
+	}
+#endif
 }
 
 #ifdef OLIMEX_LPC2148
