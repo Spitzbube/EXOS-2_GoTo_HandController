@@ -116,7 +116,7 @@ void uart0_isr(void) __irq
 {
 	uart0_bRxData = U0RBR;
 	
-	if (bData_40002c0b_uart0ReceiveComplete == 0)
+	if (uart0ReceiveFlag == 0)
 	{
 		switch (bData_40002c0c_uart0ReceiveStep)
 		{
@@ -169,34 +169,34 @@ void uart0_isr(void) __irq
 				//Store payload data
 				if (Data_40002c0d_uart0ReceiveHeader[3] > bData_40002c0a_uart0ReceiveDataCount)
 				{
-					Data_40003588_uart0ReceiveDataBuffer[bData_40002c0a_uart0ReceiveDataCount] = uart0_bRxData;
+					uart0ReceiveDataBuffer[bData_40002c0a_uart0ReceiveDataCount] = uart0_bRxData;
 					bData_40002c0a_uart0ReceiveDataCount++;
 					if (Data_40002c0d_uart0ReceiveHeader[3] == bData_40002c0a_uart0ReceiveDataCount)
 					{
-						bData_40002c0b_uart0ReceiveComplete = 1;
+						uart0ReceiveFlag = 1;
 						bData_40002c0c_uart0ReceiveStep = 0;
 						bData_40002c0a_uart0ReceiveDataCount = 0;
 						
-						switch (Data_40003588_uart0ReceiveDataBuffer[0])
+						switch (uart0ReceiveDataBuffer[0])
 						{
 							case 1:
 								Data_40002c1c = -1;
-								bData_40002c0b_uart0ReceiveComplete = 0;
+								uart0ReceiveFlag = 0;
 								break;
 							
 							case 2:
 								Data_40002c1c = 1;
-								bData_40002c0b_uart0ReceiveComplete = 0;
+								uart0ReceiveFlag = 0;
 								break;
 							
 							case 4:
 								Data_40002c20 = -1;
-								bData_40002c0b_uart0ReceiveComplete = 0;
+								uart0ReceiveFlag = 0;
 								break;
 							
 							case 8:
 								Data_40002c20 = 1;
-								bData_40002c0b_uart0ReceiveComplete = 0;
+								uart0ReceiveFlag = 0;
 								break;
 							
 							default:
@@ -239,7 +239,7 @@ void uart0_init(int a)
 	#endif
 	
 	bData_40002c0a_uart0ReceiveDataCount = 0;
-	bData_40002c0b_uart0ReceiveComplete = 0;
+	uart0ReceiveFlag = 0;
 	bData_40002c0c_uart0ReceiveStep = 0;
 	Data_40002c0d_uart0ReceiveHeader[0] = 0x55;
 	Data_40002c0d_uart0ReceiveHeader[1] = 0xaa;

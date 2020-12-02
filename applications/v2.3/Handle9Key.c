@@ -8,7 +8,7 @@ void Handle9Key(void)
 		case MENU_CONTEXT_MAIN: //0:
 			//0x62ea4
 			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_MAX; //9;
-			if (bData_40002e89 == 0)
+			if (g_bSlewingStop == 0)
 			{
 				bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_512; //8;
 			}
@@ -27,7 +27,7 @@ void Handle9Key(void)
 		case 5000:
 			//0x62ef0
 			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_MAX; //9;
-			if (bData_40002e89 == 0)
+			if (g_bSlewingStop == 0)
 			{
 				bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_512; //8;
 			}
@@ -44,7 +44,7 @@ void Handle9Key(void)
 		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//0x62f34
 			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_MAX; //9;
-			if (bData_40002e89 == 0)
+			if (g_bSlewingStop == 0)
 			{
 				bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_512; //8;
 			}
@@ -249,26 +249,26 @@ void Handle9Key(void)
 			strCustomerObjectNameInput[bCharacterInputPosition - 1] = bCustomerObjectNameChar;
 			break;
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//0x6355c
 			if (bCharacterInputPosition != 1)
 			{
 				//63570
-				Data_400037cc[bCharacterInputPosition - 1] = '9';
-				Data_400037dc[bCharacterInputPosition - 1] = '9';
+				strTrackingRateCustInput[bCharacterInputPosition - 1] = '9';
+				strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '9';
 			}
 			else
 			{
 				//0x635a0
-				if (Data_400037cc[bCharacterInputPosition - 1] == '+')
+				if (strTrackingRateCustInput[bCharacterInputPosition - 1] == '+')
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '-';
-					Data_400037dc[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '+';
-					Data_400037dc[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '+';
 				}
 			}
 			//0x63618

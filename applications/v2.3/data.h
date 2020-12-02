@@ -1,4 +1,8 @@
 
+
+#define _PI_180 0.0174532925199444438613127772442
+
+
 typedef union
 {
 	unsigned char bData[4];
@@ -21,6 +25,7 @@ typedef union
 {
 	unsigned char bData[4]; 
 	int Data;
+	float fData;
 } Union_40002c28;
 
 typedef union
@@ -48,27 +53,27 @@ typedef struct
 	double geographicLatitude; //56
 	int timeZone; //64
 	int Data_68; //68
-	double dData_72; //72
-	double dData_80; //80
+	double dObjRectascension; //72
+	double dObjDeclination; //80
 	double dData_88; //88
 	double dJulianDay; //96
 	double dFractionalDay; //104
 	double dData_112; //112
 	double dData_120; //120
-	double dData_128; //128
-	double dData_136; //136
-	double dData_144; //144
-	double dData_152; //152
-	double dData_160; //160
-	double dData_168; //168
+	double dObjPositionRaAxis; //128
+	double dObjPositionDecAxis; //136
+	double dObjHourAngleDisplay; //144
+	double dObjDeclinationDisplay; //152
+	double dTargetPositionRaAxis; //160
+	double dTargetPositionDecAxis; //168
 	double dData_176; //176
 	double dData_184; //184
 	double dData_192; //192
 	double dData_200; //200
-	double dData_208; //208
-	double dData_216; //216
-	double dData_224; //224
-	double dData_232; //232
+	double dMotorPositionRaAxis; //208
+	double dMotorPositionDecAxis; //216
+	double dRaPositionDelta; //224
+	double dDecPositionDelta; //232
 	double dData_240; //240
 	double dData_248; //248
 	double dData_256; //256
@@ -80,26 +85,26 @@ typedef struct
 	double dData_304; //304
 	double dData_312; //312
 	int fill_320[2]; //320
-	double dData_328; //328
-	double dData_336; //336
+	double dOffsetRa; //328
+	double dOffsetDec; //336
 	char bData_344; //344
 	char bData_345; //345
 	int Data_348; //348
-	int Data_352; //352
-	char bData_356; //356
-	char bData_357; //357
-	char bData_358; //358
-	int Data_360; //360
-	char bData_364; //364
+	int alignmentPause; //352
+	unsigned char bTrackingActive; //356
+	unsigned char bTrackingRequest; //357
+	unsigned char bData_358; //358
+	int numAlignmentStars; //360
+	unsigned char bAlignmentComplete; //364
 	char bData_365; //365
 	int Data_368; //368
-	int Data_372; //372
-	double dData_376; //376
-	double dData_384; //384
-	double dData_392; //392
-	double dData_400; //400
-	double dData_408; //408
-	double dData_416; //416
+	int alignmentStarIndex; //372
+	double dFirstAlignmentStarRa; //376
+	double dFirstAlignmentStarDec; //384
+	double dSecondAlignmentStarRa; //392
+	double dSecondAlignmentStarDec; //400
+	double dThirdAlignmentStarRa; //408
+	double dThirdAlignmentStarDec; //416
 	double dData_424; //424
 	double dData_432; //432
 	double dData_440; //440
@@ -120,8 +125,8 @@ typedef struct
 	double dData_560; //560
 	double dData_568; //568
 	double dData_576; //576
-	double dData_584; //584
-	double dData_592; //592
+	double dAutoguideRa; //584
+	double dAutoguideDec; //592
 	
 } Struct_40004128;
 
@@ -180,8 +185,8 @@ extern unsigned char strCustomSiteLongitude[]; //40002837
 extern unsigned char strCustomSiteLatitude[]; //40002847
 extern unsigned char strCustomSiteTimezone[]; //40002856
 extern unsigned char strCustomSiteAltitude[]; //40002861
-extern char Data_4000288e[]; //4000288e
-extern char Data_40002899[]; //40002899
+extern char strSkyTarget[]; //4000288e
+extern char strLandTarget[]; //40002899
 extern char Data_400028a5[]; //400028a5
 extern char Data_400028b3[]; //400028b3
 extern char strEngPleaseSetupOtaZero[]; //400028c1
@@ -231,12 +236,12 @@ extern unsigned char bData_40002c02; //40002c02
 extern unsigned char bData_40002c03; //40002c03
 extern unsigned char bHwKeyCode; //40002c04
 extern unsigned char bData_40002c05; //40002c05
-extern unsigned char bData_40002c06; //40002c06
+extern unsigned char bTimer10msCounter; //40002c06
 extern unsigned char bData_40002c07; //40002c07
 extern unsigned char bData_40002c08; //40002c08
 extern unsigned char bData_40002c09; //40002c09
 extern unsigned char bData_40002c0a_uart0ReceiveDataCount; //40002c0a
-extern char bData_40002c0b_uart0ReceiveComplete; //40002c0b
+extern char uart0ReceiveFlag; //40002c0b
 extern unsigned char bData_40002c0c_uart0ReceiveStep; //40002c0c
 extern unsigned char Data_40002c0d_uart0ReceiveHeader[4]; //40002c0d
 extern unsigned char uart0_bRxData; //40002c11
@@ -245,7 +250,7 @@ extern char bData_40002c13_uart1ReceiveComplete; //40002c13
 extern unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
 extern unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
 extern unsigned char uart1_bRxData; //40002c19
-extern char bData_40002c1a; //40002c1a // V2.2: 40002c1e
+extern unsigned char bData_40002c1a; //40002c1a // V2.2: 40002c1e
 extern int Data_40002c1c; //40002c1c
 extern int Data_40002c20; //40002c20
 extern Union_40002c24 Data_40002c24; //40002c24
@@ -256,7 +261,7 @@ extern char bData_40002c5a; //40002c5a
 extern int Data_40002c5c_AlignmentStarCount; //40002c5c
 extern unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
 extern unsigned char bData_40002c61; //40002c61
-extern char bData_40002c62_AlignmentStarMode; //40002c62
+extern unsigned char bData_40002c62_AlignmentStarMode; //40002c62
 extern int Data_40002c64_MenuContextId; //40002c64
 extern char bData_40002c68; //40002c68
 extern unsigned char bData_40002c69_KeyCode; //40002c69
@@ -266,10 +271,10 @@ extern double dObjectTransitTime; //40002c78
 extern double dObjectSetTime; //40002c80
 extern double dData_40002c88; //40002c88
 extern double dData_40002c90; //40002c90
-extern double dData_40002c98; //40002c98
-extern double dData_40002ca0; //40002ca0
-extern double dData_40002ca8; //40002ca8
-extern double dData_40002cb0; //40002cb0
+extern double dTrackingRate; //40002c98
+extern double dGuidingSpeed; //40002ca0
+extern double g_dPoleAxisDevEastWest; //40002ca8
+extern double g_dPoleAxisDevNorthSouth; //40002cb0
 extern int Data_40002cb8; //40002cb8
 extern int Data_40002cbc; //40002cbc
 extern float fData_40002cc0; //40002cc0
@@ -278,7 +283,7 @@ extern float fData_40002cd0_ObjectRightAscension; //40002cd0
 extern int Data_40002cd8_ObjectRightAscensionHours; //40002cd8
 extern int Data_40002cdc_ObjectRightAscensionMinutes; //40002cdc
 extern float fData_40002ce0_ObjectRightAscensionSeconds; //40002ce0
-extern double dData_40002ce8; //40002ce8
+extern double g_dObjectRightAcension; //40002ce8
 extern int Data_40002cf4; //40002cf4
 extern int Data_40002cf8; //40002cf8
 extern float fData_40002cfc; //40002cfc
@@ -292,7 +297,7 @@ extern int Data_40002d24; //40002d24
 extern float fData_40002d28; //40002d28
 extern double dData_40002d30; //40002d30
 extern int Data_40002d40; //40002d40
-extern int Data_40002d44; //40002d44
+extern int g_iObjectDeclinationSign; //40002d44
 extern int Data_40002d48; //40002d48
 extern int Data_40002d4c; //40002d4c
 extern float fData_40002d50; //40002d50
@@ -301,25 +306,25 @@ extern int Data_40002d68_OTARightAscensionHours; //40002d68
 extern int Data_40002d6c_OTARightAscensionMinutes; //40002d6c
 extern float fData_40002d70_OTARightAscensionSeconds; //40002d70
 extern double dData_40002d78; //40002d78
-extern double dData_40002d80; //40002d80
+extern double g_dMotorPositionRaAxis; //40002d80
 extern char bData_40002d88; //40002d88
 extern int Data_40002d8c_OTADeclinationDegrees; //40002d8c
 extern int Data_40002d90_OTADeclinationMinutes; //40002d90
 extern float fData_40002d94_OTADeclinationSeconds; //40002d94
 extern double dData_40002d98; //40002d98
-extern double dData_40002da0; //40002da0
+extern double g_dMotorPositionDecAxis; //40002da0
 extern char bData_40002da8; //40002da8
 extern int Data_40002dac; //40002dac
 extern int Data_40002db0; //40002db0
 extern float fData_40002db4; //40002db4
-extern double dData_40002db8; //40002db8
+extern double g_dMotorPositionAziAxis; //40002db8
 extern double dData_40002dc0_Azimuth; //40002dc0
 extern double dRaBklashCorrStartAzimuth; //40002dc8
 extern double dData_40002dd0; //40002dd0
 extern int Data_40002de0; //40002de0
 extern int Data_40002de4; //40002de4
 extern float fData_40002de8; //40002de8
-extern double dData_40002df0; //40002df0
+extern double g_dMotorPositionAltAxis; //40002df0
 extern double dData_40002df8; //40002df8
 extern double dData_40002e00; //40002e00
 extern double dData_40002e08; //40002e08
@@ -343,7 +348,7 @@ extern unsigned char bData_40002e61_Day; //40002e61
 extern unsigned char bData_40002e62_Hours; //40002e62
 extern unsigned char bData_40002e63_Minutes; //40002e63
 extern unsigned char bData_40002e64_Seconds; //40002e64
-extern unsigned short wData_40002e66; //40002e66
+extern unsigned short wRtcMilliSeconds; //40002e66
 extern unsigned char bDateTimeInputMode; //40002e78
 extern unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79
 extern unsigned char bData_40002e7a_MountType; //40002e7a
@@ -353,9 +358,9 @@ extern unsigned char bData_40002e7d_RotatingSpeed; //40002e7d
 extern char bData_40002e7e; //40002e7e
 extern int Data_40002e80; //40002e80
 extern int Data_40002e84; //40002e84
-extern unsigned char bData_40002e88; //40002e88
-extern char bData_40002e89; //40002e89
-extern unsigned char bData_40002e8a; //40002e8a
+extern unsigned char bTrackingMode; //40002e88
+extern char g_bSlewingStop; //40002e89
+extern unsigned char bTrackingModeMenu; //40002e8a
 extern char bData_40002e8b; //40002e8b
 extern char bData_40002e8c; //40002e8c
 extern float fData_40002e90; //40002e90
@@ -386,7 +391,7 @@ extern unsigned short wData_40002ed6; //40002ed6
 extern unsigned short wData_40002ed8; //40002ed8
 extern unsigned short wData_40002eda; //40002eda
 extern unsigned char bData_40002edc; //40002edc
-extern char bData_40002edd; //40002edd
+extern unsigned char bData_40002edd; //40002edd
 extern char bData_40002ede; //40002ede
 extern char bData_40002edf; //40002edf
 extern char bData_40002ef6; //40002ef6
@@ -447,7 +452,7 @@ extern char* Data_40002fbc; //40002fbc
 extern char* Data_40002fc0; //40002fc0
 extern char* Data_40002fc4; //40002fc4
 extern char* strTelescopeMount; //40002fc8
-extern char* Data_40002fcc; //40002fcc
+extern char* strTrackingRate; //40002fcc
 extern char* Data_40002fd0; //40002fd0
 extern char* strReset; //40002fd4
 extern char* Data_40002fd8; //40002fd8
@@ -499,7 +504,7 @@ extern char* strSolarSpeed; //4000308c
 extern char* strMoonSpeed; //40003090
 extern char* Data_40003094;
 extern char* Data_40003098;
-extern char* Data_4000309c;
+extern char* strListAlignStars; //4000309c
 extern char* strSlewingTo; //400030a0
 extern char* strAutoloadAlignStars; //400030a4
 extern char* Data_400030a8;
@@ -597,7 +602,7 @@ extern char bData_400031e1; //400031e1
 extern int Data_400031e4; //400031e4
 extern unsigned char bCustomerObjectNameChar; //400031e8
 extern char bData_400031e9; //400031e9
-extern char bData_400031ea; //400031ea
+extern char g_bTargetSyncOpen; //400031ea
 extern char bData_400031eb; //400031eb
 extern char bData_400031ec; //400031ec
 extern char bSystemInitialized; //400031ed
@@ -605,8 +610,8 @@ extern double dData_400031f0; //400031f0
 extern double dData_400031f8; //400031f8
 extern char bData_40003200; //40003200
 extern char bData_40003201; //40003201
-extern int Data_40003204; //40003204
-extern int Data_40003208; //40003208
+extern int iMountAutoguideRa; //40003204
+extern int iMountAutoguideDec; //40003208
 extern char bData_40003210; //40003210
 extern char bData_40003211; //40003211
 extern int Data_40003214_UserTimerSeconds; //40003214
@@ -690,16 +695,16 @@ extern double dData_400033d8; //400033d8
 extern double dData_400033e0; //400033e0
 extern double dData_400033e8; //400033e8
 extern double dData_400033f0; //400033f0
-extern double dData_400033f8; //400033f8
-extern double dData_40003400; //40003400
-extern int Data_40003408; //40003408
-extern int Data_4000340c; //4000340c
+extern double g_dSlewRateRaAxis; //400033f8
+extern double g_dSlewRateDecAxis; //40003400
+extern int g_iSlewStepRaAxis; //40003408
+extern int g_iSlewStepDecAxis; //4000340c
 extern double dData_40003410; //40003410
 extern double dData_40003418; //40003418
 extern double dData_40003420; //40003420
 extern double dData_40003428; //40003428
 extern char bData_40003430; //40003430
-extern char bData_40003431; //40003431
+extern char bGotoParkPosition; //40003431
 extern char bData_40003432; //40003432
 extern double dData_40003448; //40003448
 extern double dData_40003450; //40003450
@@ -710,8 +715,8 @@ extern int Data_4000348c; //4000348c
 extern double dData_40003490; //40003490
 extern char bData_40003498; //40003498
 extern double dData_400034a0_SiderealTimeGreenwich0UT; //400034a0
-extern unsigned char bData_400034a8_CurrentAlignStarCount; //400034a8
-extern char bData_400034a9; //400034a9
+extern unsigned char numVisibleAlignmentStars; //400034a8
+extern char g_bLandTarget; //400034a9
 extern char bData_400034aa; //400034aa
 extern float fData_400034ac; //400034ac
 extern float fData_400034b0; //400034b0
@@ -746,21 +751,21 @@ extern unsigned char bData_40003529_ReceiveExternalDay; //40003529
 extern unsigned char bData_4000352a_ReceiveExternalHours; //4000352a
 extern unsigned char bData_4000352b_ReceiveExternalMinutes; //4000352b
 extern unsigned char bData_4000352c_ReceiveExternalSeconds; //4000352c
-extern unsigned char bData_4000352d; //4000352d
+extern unsigned char bAscomCmd; //4000352d
 extern unsigned char bData_4000352e; //4000352e
 extern float fInitialCustomSiteLongitude; //40003540
 extern float fInitialCustomSiteLatitude; //40003544
 extern int iInitialCustomSiteTimezone; //40003548
-extern unsigned char Data_40003588_uart0ReceiveDataBuffer[]; //40003588
+extern unsigned char uart0ReceiveDataBuffer[]; //40003588
 extern unsigned char Data_40003592_uart1ReceiveDataBuffer[]; //40003592
 extern int Data_4000359c_RecentTargetIdArray[]; //4000359c
 extern unsigned char Data_400035bc[]; //400035bc
-extern char Data_400037cc[]; //400037cc
-extern char Data_400037dc[]; //400037dc
+extern char strTrackingRateCustInput[]; //400037cc
+extern char strTrackingRateCustDisplay[]; //400037dc
 extern char Data_400037ec[]; //400037ec
 extern float Data_400037f8[]; //400037f8
 extern unsigned char Data_400038e8[][10]; //400038e8
-extern unsigned char Data_40003a14[][10]; //40003a14, size??
+extern unsigned char arAlignmentStarNames[][10]; //40003a14, size??
 extern unsigned char Data_40003b2c[][22]; //40003b2c, size??
 extern Struct_FamousStarData Data_40003d94_FlashFamousStarData; //40003d94
 extern Struct_ConstellationData Data_40003dd4_FlashConstellationData; //40003dd4

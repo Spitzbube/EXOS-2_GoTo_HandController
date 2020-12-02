@@ -928,12 +928,12 @@ void HandleLeftKey(void)
 			//0x59950
 		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
 			//0x59954
-			if (bData_400034a9 == 0)
+			if (g_bLandTarget == 0)
 			{
-				if ((Data_40004128.bData_356 != 0) && (bData_40002e89 != 1))
+				if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
 				{
 					//59984
-					Data_40003408 = -1;
+					g_iSlewStepRaAxis = -1;
 					bData_40003200 = 0;
 					//->0x59a1c
 				}
@@ -976,7 +976,7 @@ void HandleLeftKey(void)
 			if (bData_40002c62_AlignmentStarMode != 0)
 			{
 				//59a34
-				Data_40003408 = -1;
+				g_iSlewStepRaAxis = -1;
 				bData_40003200 = 0;
 			}
 			//0x59a4c -> 0x59dc4
@@ -1025,7 +1025,7 @@ void HandleLeftKey(void)
 			//0x59b28 -> 0x59dc4
 			break;
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//0x59b2c
 			func_5939c();
 			break;

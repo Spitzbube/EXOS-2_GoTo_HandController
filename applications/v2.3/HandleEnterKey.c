@@ -7,10 +7,10 @@ void HandleEnterKey(void)
 	{
 		case MENU_CONTEXT_MAIN: //0:
 			//0x52e68
-			if (Data_40004128.bData_364 == 0)
+			if (Data_40004128.bAlignmentComplete == 0)
 			{
 				//52e7c
-				func_c8f4();
+				ProcessNextAlignmentStar();
 			}
 			else
 			{
@@ -46,9 +46,9 @@ void HandleEnterKey(void)
 						//52f14
 						dData_40002cc8 = Data_40003f50.fData_12;
 						dData_40002d10 = Data_40003f50.fData_16;
-						bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+						bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 						
-						func_b64c(dData_40002cc8, dData_40002d10);
+						GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 						
 						bData_40002f0d_RecentTargetType = 10;
 						bData_40002f10_RecentTargetId = bData_4000319a_SkyLandTargetId;
@@ -71,9 +71,9 @@ void HandleEnterKey(void)
 					if (Data_40003f64.fData_16 >= -15)
 					{
 						//53080
-						bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+						bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 						
-						func_b64c(dData_40002cc8, dData_40002d10);
+						GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 						
 						bData_400034aa = 1;
 						bData_40002f0d_RecentTargetType = 12;
@@ -261,9 +261,9 @@ void HandleEnterKey(void)
 						//535d4
 						dData_40002cc8 = Data_40003f50.fData_12;
 						dData_40002d10 = Data_40003f50.fData_16;
-						bData_40002e88 = 1;
+						bTrackingMode = 1;
 						
-						func_b64c(dData_40002cc8, dData_40002d10);						
+						GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 					}
 					//0x5361c
 					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
@@ -379,9 +379,9 @@ void HandleEnterKey(void)
 			bData_40002c61 = 1;
 			bData_40002c62_AlignmentStarMode = 0; //Alignment Star Selection
 		
-			bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude), 
+			numVisibleAlignmentStars = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude),
 				Data_40004128.geographicLatitude,
-				Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c); 
+				Data_40004a68_CurrentAlignStarEquatorialCoord, arAlignmentStarNames, Data_40003b2c);
 		
 				Data_40002c64_MenuContextId = MENU_CONTEXT_ALIGNMENT_STAR_CONTROL; //12001;
 			//->0x563b8
@@ -394,9 +394,9 @@ void HandleEnterKey(void)
 			bData_40002c61 = 1;
 			bData_40002c62_AlignmentStarMode = 0;
 		
-			bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude), 
+			numVisibleAlignmentStars = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude),
 				Data_40004128.geographicLatitude,
-				Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c); 
+				Data_40004a68_CurrentAlignStarEquatorialCoord, arAlignmentStarNames, Data_40003b2c);
 		
 				Data_40002c64_MenuContextId = MENU_CONTEXT_ALIGNMENT_STAR_CONTROL; //12001;
 			//->0x563b8
@@ -409,9 +409,9 @@ void HandleEnterKey(void)
 			bData_40002c61 = 1;
 			bData_40002c62_AlignmentStarMode = 0;
 		
-			bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude), 
+			numVisibleAlignmentStars = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude),
 				Data_40004128.geographicLatitude,
-				Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c); 
+				Data_40004a68_CurrentAlignStarEquatorialCoord, arAlignmentStarNames, Data_40003b2c);
 		
 				Data_40002c64_MenuContextId = MENU_CONTEXT_ALIGNMENT_STAR_CONTROL; //12001;
 			//->0x563b8
@@ -429,30 +429,30 @@ void HandleEnterKey(void)
 				{
 					case 1:
 						//0x53bb8
-						bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude), 
+						numVisibleAlignmentStars = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude),
 							Data_40004128.geographicLatitude,
-							Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c);
+							Data_40004a68_CurrentAlignStarEquatorialCoord, arAlignmentStarNames, Data_40003b2c);
 					
-						Data_40004128.dData_376 = 
+						Data_40004128.dFirstAlignmentStarRa =
 							Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2];
-						Data_40004128.dData_384 = 
+						Data_40004128.dFirstAlignmentStarDec =
 							Data_40004a68_CurrentAlignStarEquatorialCoord[1 + (bData_40002c60_CurrentAlignStarIndex - 1)*2];
-						
+
 						switch (Data_40002c5c_AlignmentStarCount)
 						{
 							case 1:
 								//0x53c90
-								func_cf8c();
+								StartOneStarAlignment();
 								break;
 							
 							case 2:
 								//0x53c9c
-								func_d07c();
+								StartTwoStarAlignment();
 								break;
 							
 							case 3:
 								//0x53ca8
-								func_d16c();
+								StartThreeStarAlignment();
 								break;
 							
 							default:
@@ -462,59 +462,59 @@ void HandleEnterKey(void)
 						bData_40002c61++;
 						Data_40002c5c_AlignmentStarCount--;
 						bData_40002c62_AlignmentStarMode = 1; //"Slewing to Target"
-						bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
+						bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 						//->0x53f44
 						break;
 					
 					case 2:
 						//0x53d04
-						if (bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)
+						if (bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)
 						{
 							//53d18
-							bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude), 
+							numVisibleAlignmentStars = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude),
 								Data_40004128.geographicLatitude,
-								Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c);
+								Data_40004a68_CurrentAlignStarEquatorialCoord, arAlignmentStarNames, Data_40003b2c);
 							
-							Data_40004128.dData_392 = 
+							Data_40004128.dSecondAlignmentStarRa =
 								Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2];
-							Data_40004128.dData_400 = 
+							Data_40004128.dSecondAlignmentStarDec =
 								Data_40004a68_CurrentAlignStarEquatorialCoord[1 + (bData_40002c60_CurrentAlignStarIndex - 1)*2];
 							
-							if (Data_40004128.bData_364 == 0)
+							if (Data_40004128.bAlignmentComplete == 0)
 							{
-								func_c8f4();
+								ProcessNextAlignmentStar();
 							}
 							//0x53ddc
 							bData_40002c61++;
 							Data_40002c5c_AlignmentStarCount--;
 							bData_40002c62_AlignmentStarMode = 1; //"Slewing to Target"
-							bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
+							bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 						}
 						//0x53e1c -> 0x53f44
 						break;
 					
 					case 3:
 						//0x53e20
-						if (bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)
+						if (bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)
 						{
-							bData_400034a8_CurrentAlignStarCount = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude), 
+							numVisibleAlignmentStars = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude),
 								Data_40004128.geographicLatitude,
-								Data_40004a68_CurrentAlignStarEquatorialCoord, Data_40003a14, Data_40003b2c);
+								Data_40004a68_CurrentAlignStarEquatorialCoord, arAlignmentStarNames, Data_40003b2c);
 							
-							Data_40004128.dData_408 = 
+							Data_40004128.dThirdAlignmentStarRa =
 								Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2];
-							Data_40004128.dData_416 = 
+							Data_40004128.dThirdAlignmentStarDec =
 								Data_40004a68_CurrentAlignStarEquatorialCoord[1 + (bData_40002c60_CurrentAlignStarIndex - 1)*2];
 							
-							if (Data_40004128.bData_364 == 0)
+							if (Data_40004128.bAlignmentComplete == 0)
 							{
-								func_c8f4();
+								ProcessNextAlignmentStar();
 							}
 							//0x53ef8
 							bData_40002c61++;
 							Data_40002c5c_AlignmentStarCount--;
 							bData_40002c62_AlignmentStarMode = 1; //"Slewing to Target"
-							bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
+							bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 						}
 						//0x53f38 -> 0x53f44
 						break;
@@ -546,40 +546,40 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_TARGET_SYNC: //1400:
 			//0x53f94: Target Sync
 			bData_400031eb = 0;
-			if (bData_400031ea == 0)
+			if (g_bTargetSyncOpen == FALSE)
 			{
-				Data_40002c64_MenuContextId = 1401;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_SYNC_OPEN; //1401;
 			}
 			else
 			{
-				Data_40002c64_MenuContextId = 1402;
+				Data_40002c64_MenuContextId = MENU_CONTEXT_SYNC_ENSURE; //1402;
 			}
 			break;
 		
-		case 1401:
+		case MENU_CONTEXT_SYNC_OPEN: //1401:
 			//0x53fd4
-			bData_400031ea = 1;
+			g_bTargetSyncOpen = TRUE;
 			Data_40002c64_MenuContextId = 0;
 			
 			beep1(2);
 			break;
 		
-		case 1402:
+		case MENU_CONTEXT_SYNC_ENSURE: //1402:
 			//0x53ffc
 			dData_40003410 = dData_400033d8;
 			dData_40003418 = -dData_400033e0;
 			dData_40003420 = dData_400033d8;
 			dData_40003428 = dData_400033e0;
 		
-			Data_40002c64_MenuContextId = 0;
-			bData_400031ea = 0;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
+			g_bTargetSyncOpen = 0;
 			
 			beep1(2);
 			break;
 		
-		case 1403:
+		case MENU_CONTEXT_SYNC_CANCEL: //1403:
 			//0x54064
-			bData_400031ea = 0;
+			g_bTargetSyncOpen = 0;
 			Data_40002c64_MenuContextId = 0;
 			break;
 		
@@ -697,9 +697,9 @@ void HandleEnterKey(void)
 				
 				dData_40002cc8 = fData_40002cd0_ObjectRightAscension;
 				dData_40002d10 = fData_40002d18_ObjectDeclination;
-				bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+				bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 				
-				func_b64c(dData_40002cc8, dData_40002d10);
+				GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 				
 				bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_SOLAR_SYSTEM; //1;
 				bData_40002f10_RecentTargetId = bData_40002eb5_SolarSystemObjectNr;
@@ -720,9 +720,9 @@ void HandleEnterKey(void)
 			
 			dData_40002cc8 = fData_40002cd0_ObjectRightAscension;
 			dData_40002d10 = fData_40002d18_ObjectDeclination;
-			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+			bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 			
-			func_b64c(dData_40002cc8, dData_40002d10);
+			GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 			
 			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_SOLAR_SYSTEM; //1;
 			bData_40002f10_RecentTargetId = bData_40002eb5_SolarSystemObjectNr;
@@ -748,9 +748,9 @@ void HandleEnterKey(void)
 		
 			dData_40002cc8 = Data_40003dd4_FlashConstellationData.fRightAscension;
 			dData_40002d10 = Data_40003dd4_FlashConstellationData.fDeclination;
-			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+			bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 		
-			func_b64c(dData_40002cc8, dData_40002d10);
+			GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 		
 			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_CONSTELLATION; //2;
 			bData_40002f10_RecentTargetId = bData_40002ece_ConstellationNr;
@@ -776,9 +776,9 @@ void HandleEnterKey(void)
 		
 			dData_40002cc8 = Data_40003d94_FlashFamousStarData.fRightAscension;
 			dData_40002d10 = Data_40003d94_FlashFamousStarData.fDeclination;
-			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+			bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 		
-			func_b64c(dData_40002cc8, dData_40002d10);
+			GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 
 			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_FAMOUS_STAR; //3;
 			bData_40002f10_RecentTargetId = bData_40002ed2_FamousStarNr;
@@ -811,9 +811,9 @@ void HandleEnterKey(void)
 		
 			dData_40002cc8 = Data_40003e08_FlashMessierData.fRightAscension;
 			dData_40002d10 = Data_40003e08_FlashMessierData.fDeclination;
-			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+			bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 		
-			func_b64c(dData_40002cc8, dData_40002d10);
+			GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 
 			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_MESSIER; //4;
 			bData_40002f10_RecentTargetId = wData_40002eb8_MessierNr;
@@ -839,9 +839,9 @@ void HandleEnterKey(void)
 		
 			dData_40002cc8 = Data_40003ee0_FlashNGCData.fRightAscension;
 			dData_40002d10 = Data_40003ee0_FlashNGCData.fDeclination;
-			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+			bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 		
-			func_b64c(dData_40002cc8, dData_40002d10);
+			GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 
 			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_NGC; //5;
 			bData_40002f10_RecentTargetId = wData_40002eba_NGCNr;
@@ -867,9 +867,9 @@ void HandleEnterKey(void)
 		
 			dData_40002cc8 = Data_40003ec0_FlashICData.fRightAscension;
 			dData_40002d10 = Data_40003ec0_FlashICData.fDeclination;
-			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+			bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 		
-			func_b64c(dData_40002cc8, dData_40002d10);
+			GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 
 			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_IC; //6;
 			bData_40002f10_RecentTargetId = wData_40002ebc_ICNr;
@@ -895,9 +895,9 @@ void HandleEnterKey(void)
 		
 			dData_40002cc8 = Data_40003350_FlashSh2Data.fRightAscension;
 			dData_40002d10 = Data_40003350_FlashSh2Data.fDeclination;
-			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+			bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 		
-			func_b64c(dData_40002cc8, dData_40002d10);
+			GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 
 			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_SH2; //7;
 			bData_40002f10_RecentTargetId = wData_40002ebe_ShNr;
@@ -923,9 +923,9 @@ void HandleEnterKey(void)
 		
 			dData_40002cc8 = Data_40003ea0_FlashBrightStarData.fRightAscension;
 			dData_40002d10 = Data_40003ea0_FlashBrightStarData.fDeclination;
-			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+			bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 		
-			func_b64c(dData_40002cc8, dData_40002d10);
+			GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 
 			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_BRIGHT_STAR; //8;
 			bData_40002f10_RecentTargetId = wData_40002ec0_BrightStarNr;
@@ -951,9 +951,9 @@ void HandleEnterKey(void)
 
 			dData_40002cc8 = Data_40003358_SAORecord.ra;
 			dData_40002d10 = Data_40003358_SAORecord.dec;
-			bData_40002e88 = MENU_TRACKING_MODE_POINTING; //1;
+			bTrackingMode = MENU_TRACKING_MODE_POINTING; //1;
 			
-			func_b64c(dData_40002cc8, dData_40002d10);
+			GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 			
 			bData_40002f0d_RecentTargetType = MENU_RECENT_TARGET_SAO_CAT; //9;
 			bData_40002f10_RecentTargetId = Data_40002ec4_SAONr;
@@ -1033,17 +1033,17 @@ void HandleEnterKey(void)
 #ifdef V2_3
 			Data_40002c64_MenuContextId = MENU_CONTEXT_SKY_LAND; //4400;
 #else
-			Data_40002c64_MenuContextId = 45001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SKY_TARGET; //45001;
 #endif
 			break;
 		
-		case 45001:
+		case MENU_CONTEXT_SKY_TARGET: //45001:
 			//0x54e38
 			bData_40002e79_SkyLandTargetSeletion = 0;
-			bData_400034a9 = 0;
+			g_bLandTarget = 0;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_SKY_LAND; //4400;
 		
-			Data_40003500.dwData = fabs((int) ((6.0 * dData_40002c98) / 15.04));
+			Data_40003500.dwData = fabs((int) ((6.0 * dTrackingRate) / 15.04));
 		
 			uart1_write_byte(0x55);
 			uart1_write_byte(0xaa);
@@ -1051,7 +1051,7 @@ void HandleEnterKey(void)
 			uart1_write_byte(0x04);
 			uart1_write_byte(0x41);
 		
-			if (dData_40002c98 > 0)
+			if (dTrackingRate > 0)
 			{
 				//54efc
 				uart1_write_byte(0x01);
@@ -1071,7 +1071,7 @@ void HandleEnterKey(void)
 			uart1_write_byte(0x04);
 			uart1_write_byte(0x01);
 			
-			if (dData_40002c98 > 0)
+			if (dTrackingRate > 0)
 			{
 				//54f68
 				uart1_write_byte(0x00);
@@ -1086,12 +1086,12 @@ void HandleEnterKey(void)
 			uart1_write_byte(Data_40003500.bData[0]);
 			break;
 		
-		case 45002:
+		case MENU_CONTEXT_LAND_TARGET: //45002:
 			//0x54f98
 			bData_40002e79_SkyLandTargetSeletion = 1;
-			bData_400034a9 = 1;
+			g_bLandTarget = 1;
 			func_b4d0();
-			Data_40002c64_MenuContextId = 4400;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SKY_LAND; //4400;
 			break;
 		
 		case MENU_CONTEXT_AZ_EQU: //4500:
@@ -1167,7 +1167,7 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_TRACKING_RATE_STAR_SPEED: //4801:
 			//0x551e4: Tracking Rate -> "Star Speed"
-			dData_40002c98 = 0;
+			dTrackingRate = 0;
 			bData_40002e7c_TrackingRateType = MENU_TRACKING_RATE_STAR_SPEED; //0;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
@@ -1175,7 +1175,7 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_TRACKING_RATE_SOLAR_SPEED: //4802:
 			//0x5521c: Tracking Rate -> "Solar Speed"
-			dData_40002c98 = 0.000000298199444444444492059666153988;
+			dTrackingRate = 0.000000298199444444444492059666153988;
 			bData_40002e7c_TrackingRateType = MENU_TRACKING_RATE_SOLAR_SPEED; //1;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
@@ -1183,7 +1183,7 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_TRACKING_RATE_MOON_SPEED: //4803:
 			//0x55254: "Moon Speed"
-			dData_40002c98 = 0.00000376886111111111134081550801123;
+			dTrackingRate = 0.00000376886111111111134081550801123;
 			bData_40002e7c_TrackingRateType = MENU_TRACKING_RATE_MOON_SPEED; //2;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
@@ -1192,9 +1192,9 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_TRACKING_RATE_CUSTOM_SPEED: //4804:
 			//0x55288: "Customize Speed"
 			bCharacterInputPosition = 1;
-			sprintf(Data_400037cc, "+0%.2f            ", 1.0); //String???
-			sprintf(Data_400037dc, "+0%.2f  starspeed", 1.0);
-			Data_40002c64_MenuContextId = 48001;
+			sprintf(strTrackingRateCustInput, "+0%.2f\272\343\320\307\313\331      ", 1.0);
+			sprintf(strTrackingRateCustDisplay, "+0%.2f  starspeed", 1.0);
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE_INPUT; //48001;
 			break;
 		
 		case MENU_CONTEXT_TRACKING_RATE_GUIDING_SPEED: //4805:
@@ -1202,10 +1202,10 @@ void HandleEnterKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_GUIDING_SPEED1; //48051;
 			break;
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//0x552e4
-			bData_40002e7c_TrackingRateType = 3;
-			dData_40002c98 = (1 - atof(Data_400037cc)) * 0.37 / 3600.0;
+			bData_40002e7c_TrackingRateType = MENU_TRACKING_RATE_CUST_SPEED; //3;
+			dTrackingRate = (1 - atof(strTrackingRateCustInput)) * 0.37 / 3600.0;
 		
 			beep1(2);
 		
@@ -1214,56 +1214,56 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_GUIDING_SPEED1: //48051:
 			//0x55364
-			dData_40002ca0 = 0.125;
+			dGuidingSpeed = 0.125;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_GUIDING_SPEED2: //48052:
 			//0x55490
-			dData_40002ca0 = 0.25;
+			dGuidingSpeed = 0.25;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_GUIDING_SPEED3: //48053:
 			//0x554bc
-			dData_40002ca0 = 0.375;
+			dGuidingSpeed = 0.375;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_GUIDING_SPEED4: //48054:
 			//0x554e8
-			dData_40002ca0 = 0.5;
+			dGuidingSpeed = 0.5;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_GUIDING_SPEED5: //48055:
 			//0x55514
-			dData_40002ca0 = 0.625;
+			dGuidingSpeed = 0.625;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_GUIDING_SPEED6: //48056:
 			//0x55540
-			dData_40002ca0 = 0.75;
+			dGuidingSpeed = 0.75;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_GUIDING_SPEED7: //48057:
 			//0x5556c
-			dData_40002ca0 = 0.875;
+			dGuidingSpeed = 0.875;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		
 		case MENU_CONTEXT_GUIDING_SPEED8: //48058:
 			//0x55598
-			dData_40002ca0 = 1.0;
+			dGuidingSpeed = 1.0;
 			beep1(2);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
@@ -1271,7 +1271,7 @@ void HandleEnterKey(void)
 		case MENU_CONTEXT_PARK_POSITION: //3900:
 			//0x555c4: Parkposition
 			func_75c4();
-			bData_40003431 = 1;
+			bGotoParkPosition = 1;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 			break;
 		

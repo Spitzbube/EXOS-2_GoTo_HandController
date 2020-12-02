@@ -54,8 +54,7 @@ ELFDUMP      = $(SDKHOME-arm7-gcc)/bin/$(CCTARGET)-objdump$(TOOL_EXT)
 ELFDUMPFLAGS = --all -D
 ELFDUMP_out  = >$(SPACE)
 
-
 ELF2HEX      = $(SDKHOME)/fromelf.exe
 ELF2HEXFLAGS_INTELHEX = --i32
-
+ELF2HEXFLAGS_BIN = --bin
 

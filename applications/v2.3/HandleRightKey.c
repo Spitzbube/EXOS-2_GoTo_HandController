@@ -982,63 +982,63 @@ void func_57414(int a, int b, int speed)
 					//0x576a8
 					sp12[6] = 0;
 					sp12[7] = 0;
-					bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
+					bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 					break;
 				
 				case MENU_ROTATING_SPEED_1: //1:
 					//0x576c4
 					sp12[6] = 0;
 					sp12[7] = 5;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 				
 				case MENU_ROTATING_SPEED_2: //2:
 					//0x576e8
 					sp12[6] = 0;
 					sp12[7] = 10;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 				
 				case MENU_ROTATING_SPEED_8: //3:
 					//0x57708
 					sp12[6] = 0;
 					sp12[7] = 40;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 				
 				case MENU_ROTATING_SPEED_16: //4:
 					//0x5772c
 					sp12[6] = 0;
 					sp12[7] = 160;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 				
 				case MENU_ROTATING_SPEED_64: //5:
 					//0x57750
 					sp12[6] = 1;
 					sp12[7] = 64;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 				
 				case MENU_ROTATING_SPEED_128: //6:
 					//0x57774
 					sp12[6] = 2;
 					sp12[7] = 128;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 				
 				case MENU_ROTATING_SPEED_256: //7:
 					//0x57798
 					sp12[6] = 5;
 					sp12[7] = 0;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 				
 				case MENU_ROTATING_SPEED_512: //8:
 					//0x577bc
 					sp12[6] = 10;
 					sp12[7] = 0;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 				
 				case MENU_ROTATING_SPEED_MAX: //9:
@@ -1054,7 +1054,7 @@ void func_57414(int a, int b, int speed)
 					bData_400031bb = sp12[4];
 					bData_400031bd = sp12[5];
 					Data_400031a8 = 0;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 				#if 0				
 				default:
@@ -1073,70 +1073,70 @@ void func_57414(int a, int b, int speed)
 					//0x578b8
 					sp12[6] = 0;
 					sp12[7] = 0;
-					bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
+					bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 					break;
 				
 				case MENU_ROTATING_SPEED_1: //1:
 					//0x578d4
 					sp12[6] = 0;
 					sp12[7] = 6;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 
 				case MENU_ROTATING_SPEED_2: //2:
 					//0x578f8
 					sp12[6] = 0;
 					sp12[7] = 12;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 
 				case MENU_ROTATING_SPEED_8: //3:
 					//0x5791c
 					sp12[6] = 0;
 					sp12[7] = 48;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 
 				case MENU_ROTATING_SPEED_16: //4:
 					//0x57940
 					sp12[6] = 0;
 					sp12[7] = 96;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 
 				case MENU_ROTATING_SPEED_64: //5:
 					//0x57964
 					sp12[6] = 0;
 					sp12[7] = 192;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 
 				case MENU_ROTATING_SPEED_128: //6:
 					//0x57988
 					sp12[6] = 1;
 					sp12[7] = 128;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 
 				case MENU_ROTATING_SPEED_256: //7:
 					//0x579ac
 					sp12[6] = 2;
 					sp12[7] = 28;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 
 				case MENU_ROTATING_SPEED_512: //8:
 					//0x579d0
 					sp12[6] = 3;
 					sp12[7] = 56;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 
 				case MENU_ROTATING_SPEED_MAX: //9:
 					//0x579f4
 					sp12[6] = 3;
 					sp12[7] = 212;
-					bData_40002e88 = 10;
+					bTrackingMode = 10;
 					break;
 				#if 0
 				default:
@@ -1311,13 +1311,13 @@ void HandleRightKey(void)
 			//0x57ecc
 		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
 			//0x57ed0
-			if (bData_400034a9 == 0)
+			if (g_bLandTarget == 0)
 			{
 				//57ee0
-				if ((Data_40004128.bData_356 != 0) && (bData_40002e89 != 1))
+				if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
 				{
 					//57f00
-					Data_40003408 = 1;
+					g_iSlewStepRaAxis = 1;
 					bData_40003200 = 0;
 				}
 				else
@@ -1357,7 +1357,7 @@ void HandleRightKey(void)
 			if (bData_40002c62_AlignmentStarMode != 0)
 			{
 				//57fb0
-				Data_40003408 = 1;
+				g_iSlewStepRaAxis = 1;
 				bData_40003200 = 0;
 			}
 			break;
@@ -1404,7 +1404,7 @@ void HandleRightKey(void)
 			//0x58134
 			//break; //BUG: Fall through?
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//0x58138
 			func_57370();
 			break;

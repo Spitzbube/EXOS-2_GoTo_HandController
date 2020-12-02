@@ -289,14 +289,14 @@ void HandleDownKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TIME_DATE; //4100;
 			break;
 		
-		case 1402:
+		case MENU_CONTEXT_SYNC_ENSURE: //1402:
 			//0x5b850
-			Data_40002c64_MenuContextId = 1403;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SYNC_CANCEL; //1403;
 			break;
 		
-		case 1403:
+		case MENU_CONTEXT_SYNC_CANCEL: //1403:
 			//0x5b864
-			Data_40002c64_MenuContextId = 1402;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SYNC_ENSURE; //1402;
 			break;
 		
 		case 22011:
@@ -524,14 +524,14 @@ void HandleDownKey(void)
 			//0x5bd18
 		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
 			//0x5bd1c
-			if (bData_400034a9 == 0)
+			if (g_bLandTarget == 0)
 			{
 				//5bd2c
-				if ((Data_40004128.bData_356 != 0) &&
-					(bData_40002e89 != 1))
+				if ((Data_40004128.bTrackingActive != 0) &&
+					(g_bSlewingStop != 1))
 				{
 					//5bd4c
-					Data_4000340c = -1;
+					g_iSlewStepDecAxis = -1;
 					bData_40003201 = 0;
 				}
 				else
@@ -604,14 +604,14 @@ void HandleDownKey(void)
 			//5beb4 -> 0x5ca8c
 			break;
 		
-		case 45001:
+		case MENU_CONTEXT_SKY_TARGET: //45001:
 			//0x5beb8
-			Data_40002c64_MenuContextId = 45002;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_LAND_TARGET; //45002;
 			break;
 		
-		case 45002:
+		case MENU_CONTEXT_LAND_TARGET: //45002:
 			//0x5becc
-			Data_40002c64_MenuContextId = 45001;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SKY_TARGET; //45001;
 			break;
 		
 		case MENU_CONTEXT_MOUNT_AZ: //46001:
@@ -948,13 +948,13 @@ void HandleDownKey(void)
 			//0x5c674
 			if (bData_40002c62_AlignmentStarMode != 0)
 			{
-				Data_4000340c = -1;
+				g_iSlewStepDecAxis = -1;
 				bData_40003201 = 0;
 			}
 			else
 			{
 				//0x5c6a4
-				if (bData_40002c60_CurrentAlignStarIndex == bData_400034a8_CurrentAlignStarCount)
+				if (bData_40002c60_CurrentAlignStarIndex == numVisibleAlignmentStars)
 				{
 					bData_40002c60_CurrentAlignStarIndex = 1;
 				}

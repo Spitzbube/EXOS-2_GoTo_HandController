@@ -216,25 +216,25 @@ void Handle4Key(void)
 			strCustomerObjectNameInput[bCharacterInputPosition - 1] = bCustomerObjectNameChar;
 			break;
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//66b68
 			if (bCharacterInputPosition != 1)
 			{
-				Data_400037cc[bCharacterInputPosition - 1] = '4';
-				Data_400037dc[bCharacterInputPosition - 1] = '4';
+				strTrackingRateCustInput[bCharacterInputPosition - 1] = '4';
+				strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '4';
 			}
 			else
 			{
 				//0x66bac
-				if (Data_400037cc[bCharacterInputPosition - 1] == '+')
+				if (strTrackingRateCustInput[bCharacterInputPosition - 1] == '+')
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '-';
-					Data_400037dc[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '+';
-					Data_400037dc[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '+';
 				}
 			}
 			//0x66c24

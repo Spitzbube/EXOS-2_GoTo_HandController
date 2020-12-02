@@ -204,7 +204,7 @@ void func_2245c(int a, int b)
 					Data_4000336c = Data_40002fc0;
 					Data_40003370 = Data_40002fc4;
 					Data_40003374 = strTelescopeMount;
-					Data_40003378 = Data_40002fcc;
+					Data_40003378 = strTrackingRate;
 					Data_4000337c = Data_40002fd0;
 					//->0x22e1c
 					break;
@@ -216,7 +216,7 @@ void func_2245c(int a, int b)
 					Data_40003368 = Data_40002fc0;
 					Data_4000336c = Data_40002fc4;
 					Data_40003370 = strTelescopeMount;
-					Data_40003374 = Data_40002fcc;
+					Data_40003374 = strTrackingRate;
 					Data_40003378 = Data_40002fd0;
 					Data_4000337c = strReset;
 					//->0x22e1c
@@ -228,7 +228,7 @@ void func_2245c(int a, int b)
 					Data_40003364 = Data_40002fc0;
 					Data_40003368 = Data_40002fc4;
 					Data_4000336c = strTelescopeMount;
-					Data_40003370 = Data_40002fcc;
+					Data_40003370 = strTrackingRate;
 					Data_40003374 = Data_40002fd0;
 					Data_40003378 = strReset;
 					Data_4000337c = Data_40002fd8;
@@ -628,28 +628,28 @@ void func_231d0(int a, int b)
 					Data_400033a8 = Data_40002fc0;
 					Data_400033ac = Data_40002fc4;
 					Data_400033b0 = strTelescopeMount;
-					Data_400033b4 = Data_40002fcc;
+					Data_400033b4 = strTrackingRate;
 					break;
 				
 				case 5:
 					//0x23bcc
 					Data_400033a8 = Data_40002fc4;
 					Data_400033ac = strTelescopeMount;
-					Data_400033b0 = Data_40002fcc;
+					Data_400033b0 = strTrackingRate;
 					Data_400033b4 = Data_40002fd0;
 					break;
 				
 				case 6:
 					//0x23c14
 					Data_400033a8 = strTelescopeMount;
-					Data_400033ac = Data_40002fcc;
+					Data_400033ac = strTrackingRate;
 					Data_400033b0 = Data_40002fd0;
 					Data_400033b4 = strReset;
 					break;
 				
 				case 7:
 					//0x23c5c
-					Data_400033a8 = Data_40002fcc;
+					Data_400033a8 = strTrackingRate;
 					Data_400033ac = Data_40002fd0;
 					Data_400033b0 = strReset;
 					Data_400033b4 = Data_40002fd8;

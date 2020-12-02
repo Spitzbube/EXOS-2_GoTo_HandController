@@ -1,4 +1,7 @@
 
+#define FALSE 0
+#define TRUE  1
+
 typedef struct
 {
 	unsigned char bData_0[12]; //0
@@ -121,8 +124,8 @@ typedef struct
 	unsigned char bHours; //4
 	unsigned char bMinutes; //5
 	unsigned char bSeconds; //6
-	unsigned short wData_8; //8
-} Struct_7d1c;
+	unsigned short wMilliSeconds; //8
+} Struct_DateTime;
 
 typedef struct
 {
@@ -136,7 +139,7 @@ typedef struct
 
 typedef struct
 {
-	double dData_0; //0
+	double dLongitude; //0
 	double dLatitude; //8
 	
 } Struct_GeographicCoordinates;
@@ -144,7 +147,7 @@ typedef struct
 typedef struct
 {
 	double dRA; //0
-	double dData_8; //8
+	double dDec; //8
 	double fill1; //16
 	double fill2;	//24
 } Struct_EquatorialCoordinates;

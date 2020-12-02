@@ -215,24 +215,24 @@ void Handle2Key(void)
 			strCustomerObjectNameInput[bCharacterInputPosition - 1] = bCustomerObjectNameChar;
 			break;
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//68108
 			if (bCharacterInputPosition != 1)
 			{
-				Data_400037cc[bCharacterInputPosition - 1] = '2';
-				Data_400037dc[bCharacterInputPosition - 1] = '2';
+				strTrackingRateCustInput[bCharacterInputPosition - 1] = '2';
+				strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '2';
 			}
 			else
 			{
-				if (Data_400037cc[bCharacterInputPosition - 1] == '+')
+				if (strTrackingRateCustInput[bCharacterInputPosition - 1] == '+')
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '-';
-					Data_400037dc[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '+';
-					Data_400037dc[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '+';
 				}
 			}
 
