@@ -461,7 +461,7 @@ void HandleMinusKey(void)
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT: //11101:
 			//0x60204
-			func_5f0c0();
+			SlewStop();
 		
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11102;
 			iBacklashCorrectionSlewing = 0;
@@ -474,7 +474,7 @@ void HandleMinusKey(void)
 		
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_START_UP_DOWN: //11201:
 			//0x6023c
-			func_5f0c0();
+			SlewStop();
 		
 			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11202;
 			iBacklashCorrectionSlewing = 0;

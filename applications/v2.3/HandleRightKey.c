@@ -840,320 +840,7 @@ void func_57370(void)
 	}
 }
 
-/* 57414 - todo */
-void func_57414(int a, int b, int speed)
-{
-	unsigned char i;
-	char sp12[12];
-	char sp[12];
-	
-	bData_40003430 = 1;
-	bData_40003200 = 0;
-	bData_40003201 = 0;
-	
-	sp[0] = 0x55;
-	sp[1] = 0xaa;
-	sp[2] = 0x01;
-	sp[3] = 0x04;
-	
-	switch (a)
-	{
-		case 1:
-			//0x57488
-			sp[4] = 0x21;
-			break;
-		
-		case 2:
-			//0x57498
-			sp[4] = 0x01;
-			break;
-		
-		case 3:
-			//0x574a8
-			sp[4] = 0x61;
-			break;
-		
-		case 4:
-			//0x574b8
-			sp[4] = 0x41;
-			break;
-		
-		default:
-			//0x574c8
-			break;
-	}
-
-	switch (b)
-	{
-		case 3:
-			//0x574f8
-		case 1:
-			//0x57500
-			sp[5] = 0;
-			break;
-		
-		case 4:
-			//0x5750c
-		case 2:
-			//0x57514
-			sp[5] = 1;
-			break;
-		
-		default:
-			//0x57520
-			break;
-	}
-	
-	sp[6] = 0;
-	sp[7] = 0;
-	
-	for (i = 0; i < 8; i++)
-	{
-		//0x57540
-		uart1_write_byte(sp[i]);
-	}
-	
-	if (bData_4000319c == 0)
-	{
-		//5756c
-		bData_4000319c = 1;
-		
-		func_7590();
-		
-		sp12[0] = 0x55;
-		sp12[1] = 0xaa;
-		sp12[2] = 0x01;
-		sp12[3] = 0x04;
-		
-		switch (a)
-		{
-			case 1:
-				//0x575c0
-				sp12[4] = 0x01;
-				break;
-			
-			case 2:
-				//0x575d0
-				sp12[4] = 0x21;
-				break;
-			
-			case 3:
-				//0x575e0
-				sp12[4] = 0x41;
-				break;
-			
-			case 4:
-				//0x575f0
-				sp12[4] = 0x61;
-				break;
-			
-			default:
-				//0x57600
-				break;
-		}
-		
-		switch (b)
-		{
-			case 3:
-				//0x57630
-			case 1:
-				//0x57638
-				sp12[5] = 0;
-				break;
-			
-			case 4:
-				//0x57644
-			case 2:
-				//0x5764c
-				sp12[5] = 1;
-				break;
-			
-			default:
-				//0x57658
-				break;
-		}
-		
-		if (bData_40002c1a == 1)
-		{
-			//57674
-			switch (speed)
-			{
-				case 0:
-					//0x576a8
-					sp12[6] = 0;
-					sp12[7] = 0;
-					bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
-					break;
-				
-				case MENU_ROTATING_SPEED_1: //1:
-					//0x576c4
-					sp12[6] = 0;
-					sp12[7] = 5;
-					bTrackingMode = 10;
-					break;
-				
-				case MENU_ROTATING_SPEED_2: //2:
-					//0x576e8
-					sp12[6] = 0;
-					sp12[7] = 10;
-					bTrackingMode = 10;
-					break;
-				
-				case MENU_ROTATING_SPEED_8: //3:
-					//0x57708
-					sp12[6] = 0;
-					sp12[7] = 40;
-					bTrackingMode = 10;
-					break;
-				
-				case MENU_ROTATING_SPEED_16: //4:
-					//0x5772c
-					sp12[6] = 0;
-					sp12[7] = 160;
-					bTrackingMode = 10;
-					break;
-				
-				case MENU_ROTATING_SPEED_64: //5:
-					//0x57750
-					sp12[6] = 1;
-					sp12[7] = 64;
-					bTrackingMode = 10;
-					break;
-				
-				case MENU_ROTATING_SPEED_128: //6:
-					//0x57774
-					sp12[6] = 2;
-					sp12[7] = 128;
-					bTrackingMode = 10;
-					break;
-				
-				case MENU_ROTATING_SPEED_256: //7:
-					//0x57798
-					sp12[6] = 5;
-					sp12[7] = 0;
-					bTrackingMode = 10;
-					break;
-				
-				case MENU_ROTATING_SPEED_512: //8:
-					//0x577bc
-					sp12[6] = 10;
-					sp12[7] = 0;
-					bTrackingMode = 10;
-					break;
-				
-				case MENU_ROTATING_SPEED_MAX: //9:
-					//0x577e0
-					sp12[6] = 10;
-					sp12[7] = 0;
-					Data_400031a4.Data = 2560;
-					bData_400031b8 = 1;
-					bData_400031ba = sp12[4];
-					bData_400031bc = sp12[5];
-					Data_400031b4 = 1;
-					bData_400031b9 = 0;
-					bData_400031bb = sp12[4];
-					bData_400031bd = sp12[5];
-					Data_400031a8 = 0;
-					bTrackingMode = 10;
-					break;
-				#if 0				
-				default:
-					//0x57870
-					break;
-				#endif
-			}
-		} //if (bData_40002c1a == 1)
-		//0x57874
-		if (bData_40002c1a == 2)
-		{
-			//57884
-			switch (speed)
-			{
-				case 0:
-					//0x578b8
-					sp12[6] = 0;
-					sp12[7] = 0;
-					bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
-					break;
-				
-				case MENU_ROTATING_SPEED_1: //1:
-					//0x578d4
-					sp12[6] = 0;
-					sp12[7] = 6;
-					bTrackingMode = 10;
-					break;
-
-				case MENU_ROTATING_SPEED_2: //2:
-					//0x578f8
-					sp12[6] = 0;
-					sp12[7] = 12;
-					bTrackingMode = 10;
-					break;
-
-				case MENU_ROTATING_SPEED_8: //3:
-					//0x5791c
-					sp12[6] = 0;
-					sp12[7] = 48;
-					bTrackingMode = 10;
-					break;
-
-				case MENU_ROTATING_SPEED_16: //4:
-					//0x57940
-					sp12[6] = 0;
-					sp12[7] = 96;
-					bTrackingMode = 10;
-					break;
-
-				case MENU_ROTATING_SPEED_64: //5:
-					//0x57964
-					sp12[6] = 0;
-					sp12[7] = 192;
-					bTrackingMode = 10;
-					break;
-
-				case MENU_ROTATING_SPEED_128: //6:
-					//0x57988
-					sp12[6] = 1;
-					sp12[7] = 128;
-					bTrackingMode = 10;
-					break;
-
-				case MENU_ROTATING_SPEED_256: //7:
-					//0x579ac
-					sp12[6] = 2;
-					sp12[7] = 28;
-					bTrackingMode = 10;
-					break;
-
-				case MENU_ROTATING_SPEED_512: //8:
-					//0x579d0
-					sp12[6] = 3;
-					sp12[7] = 56;
-					bTrackingMode = 10;
-					break;
-
-				case MENU_ROTATING_SPEED_MAX: //9:
-					//0x579f4
-					sp12[6] = 3;
-					sp12[7] = 212;
-					bTrackingMode = 10;
-					break;
-				#if 0
-				default:
-					//0x57a18
-					break;
-				#endif
-			}
-		} //if (bData_40002c1a == 2)
-		//0x57a1c
-		for (i = 0; i < 8; i++)
-		{
-			//0x57a24
-			uart1_write_byte(sp12[i]);
-		}
-	} //if (bData_4000319c == 0)
-	//0x57a40
-}
+#include "slew1.c"
 
 /* 57a4c - complete */
 void func_57a4c(void)
@@ -1326,12 +1013,12 @@ void HandleRightKey(void)
 					if (bData_40002c1a == 1)
 					{
 						//57f2c
-						func_57414(1, 4, bData_40002e7d_RotatingSpeed);
+						SlewRaw(1, 4, g_eSlewRateIndex);
 					}
 					else
 					{
 						//0x57f44
-						func_57414(3, 4, bData_40002e7d_RotatingSpeed);
+						SlewRaw(3, 4, g_eSlewRateIndex);
 					}
 				}
 			}
@@ -1341,12 +1028,12 @@ void HandleRightKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//57f6c
-					func_57414(1, 4, bData_40002e7d_RotatingSpeed);
+					SlewRaw(1, 4, g_eSlewRateIndex);
 				}
 				else
 				{
 					//0x57f84
-					func_57414(3, 4, bData_40002e7d_RotatingSpeed);
+					SlewRaw(3, 4, g_eSlewRateIndex);
 				}
 			}
 			//0x57f98 -> 0x583d0
@@ -1368,14 +1055,14 @@ void HandleRightKey(void)
 			if (bData_40002c1a == 1)
 			{
 				//57ff0
-				func_57414(1, 4, MENU_ROTATING_SPEED_8); //3);
+				SlewRaw(1, 4, SLEW_RATE_8X); //3);
 				
 				bData_40002edd = 2;
 			}
 			else
 			{
 				//0x58010
-				func_57414(3, 4, MENU_ROTATING_SPEED_8); //3);
+				SlewRaw(3, 4, SLEW_RATE_8X); //3);
 				
 				bData_40002edd = 0;
 			}
@@ -1393,12 +1080,12 @@ void HandleRightKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//58074
-					func_57414(1, 4, bData_40002e7d_RotatingSpeed);
+					SlewRaw(1, 4, g_eSlewRateIndex);
 				}
 				else
 				{
 					//0x58120
-					func_57414(3, 4, bData_40002e7d_RotatingSpeed);
+					SlewRaw(3, 4, g_eSlewRateIndex);
 				}
 			}
 			//0x58134

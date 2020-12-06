@@ -7,7 +7,7 @@ void Handle6Key(void)
 	{
 		case MENU_CONTEXT_MAIN: //0:
 			//0x64fdc
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_128; //6;
+			g_eSlewRateIndex = SLEW_RATE_128X; //6;
 			//->0x65888
 			break;
 		
@@ -20,7 +20,7 @@ void Handle6Key(void)
 		
 		case 5000:
 			//6500c
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_128; //6;
+			g_eSlewRateIndex = SLEW_RATE_128X; //6;
 			break;
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
@@ -29,7 +29,7 @@ void Handle6Key(void)
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203:
 		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//65034
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_128; //6;
+			g_eSlewRateIndex = SLEW_RATE_128X; //6;
 			break;
 		
 		case MENU_CONTEXT_MESSIER_OBJECT_DETAILS: //23012:

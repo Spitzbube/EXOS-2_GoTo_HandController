@@ -820,12 +820,12 @@ void HandleUpKey(void)
 					if (bData_40002c1a == 1)
 					{
 						//5e3d4
-						func_57414(2, 1, bData_40002e7d_RotatingSpeed);
+						SlewRaw(2, 1, g_eSlewRateIndex);
 					}
 					else
 					{
 						//0x5e3ec
-						func_57414(4, 1, bData_40002e7d_RotatingSpeed);
+						SlewRaw(4, 1, g_eSlewRateIndex);
 					}
 				}
 			}
@@ -835,12 +835,12 @@ void HandleUpKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//5e414
-					func_57414(2, 1, bData_40002e7d_RotatingSpeed);
+					SlewRaw(2, 1, g_eSlewRateIndex);
 				}
 				else
 				{
 					//0x5e42c
-					func_57414(4, 1, bData_40002e7d_RotatingSpeed);
+					SlewRaw(4, 1, g_eSlewRateIndex);
 				}
 			}
 			//0x5e440 -> 0x5f0b4
@@ -853,14 +853,14 @@ void HandleUpKey(void)
 			if (bData_40002c1a == 1)
 			{
 				//5e468
-				func_57414(2, 1, MENU_ROTATING_SPEED_8);
+				SlewRaw(2, 1, SLEW_RATE_8X);
 				
 				bData_40002edd = 3;
 			}
 			else
 			{
 				//0x5e488
-				func_57414(4, 1, MENU_ROTATING_SPEED_8);
+				SlewRaw(4, 1, SLEW_RATE_8X);
 				
 				bData_40002edd = 1;
 			}
@@ -878,12 +878,12 @@ void HandleUpKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//5e414
-					func_57414(2, 1, MENU_ROTATING_SPEED_8);
+					SlewRaw(2, 1, SLEW_RATE_8X);
 				}
 				else
 				{
 					//0x5e504
-					func_57414(4, 1, MENU_ROTATING_SPEED_8);
+					SlewRaw(4, 1, SLEW_RATE_8X);
 				}
 			}
 			//0x5e514

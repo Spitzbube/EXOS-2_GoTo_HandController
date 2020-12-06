@@ -7,10 +7,10 @@ void Handle9Key(void)
 	{		
 		case MENU_CONTEXT_MAIN: //0:
 			//0x62ea4
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_MAX; //9;
+			g_eSlewRateIndex = SLEW_RATE_MAX; //9;
 			if (g_bSlewingStop == 0)
 			{
-				bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_512; //8;
+				g_eSlewRateIndex = SLEW_RATE_512X; //8;
 			}
 			//0x62ed0 -> 0x637dc
 			break;
@@ -26,10 +26,10 @@ void Handle9Key(void)
 		
 		case 5000:
 			//0x62ef0
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_MAX; //9;
+			g_eSlewRateIndex = SLEW_RATE_MAX; //9;
 			if (g_bSlewingStop == 0)
 			{
-				bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_512; //8;
+				g_eSlewRateIndex = SLEW_RATE_512X; //8;
 			}
 			break;
 		
@@ -43,10 +43,10 @@ void Handle9Key(void)
 			//0x62f30
 		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//0x62f34
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_MAX; //9;
+			g_eSlewRateIndex = SLEW_RATE_MAX; //9;
 			if (g_bSlewingStop == 0)
 			{
-				bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_512; //8;
+				g_eSlewRateIndex = SLEW_RATE_512X; //8;
 			}
 			break;
 		

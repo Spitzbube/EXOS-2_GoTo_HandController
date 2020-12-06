@@ -19,8 +19,8 @@ void func_5099c(void)
 	Data_40003190 = 1;
 	bData_40003194 = 0;
 	bData_40003196_CurrentLanguage = MENU_LANGUAGE_ENGLISH; //1;
-	bData_4000319c = 0;
-	bData_4000319d = 0;
+	g_bSingleSlewActive = 0;
+	g_bCombinedSlewActive = 0;
 	bCapsLock = 0;
 	bMapKeyToCharIndex = 0;
 	bData_40002c1a = 0;

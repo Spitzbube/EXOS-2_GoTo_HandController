@@ -127,7 +127,7 @@ void Handle0Key(void)
 		
 		case 5000:
 			//0x69834
-			bData_40002e7d_RotatingSpeed = 0;
+			g_eSlewRateIndex = 0;
 			break;
 		
 		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:

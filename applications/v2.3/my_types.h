@@ -214,4 +214,19 @@ typedef struct
 } Struct_40003296;
 
 
+typedef enum
+{
+	SLEW_STOP = 0,
+	SLEW_RATE_1X = 1,
+	SLEW_RATE_2X = 2,
+	SLEW_RATE_8X = 3,
+	SLEW_RATE_16X = 4,
+	SLEW_RATE_64X = 5,
+	SLEW_RATE_128X = 6,
+	SLEW_RATE_256X = 7,
+	SLEW_RATE_512X = 8,
+	SLEW_RATE_MAX = 9,
+
+} eSlewRate;
+
 

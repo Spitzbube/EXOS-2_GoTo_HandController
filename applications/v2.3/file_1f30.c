@@ -2024,7 +2024,7 @@ void initialize_variables(void)
 	bData_40002e79_SkyLandTargetSeletion = 0;
 	bData_40002e7a_MountType = MENU_MOUNT_TYPE_AZ; //0;
 	bData_40002e7b_GpsAvailable = 0;
-	bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_64; //5;
+	g_eSlewRateIndex = SLEW_RATE_64X; //5;
 	bData_40002e7e = 0;
 	bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 	g_bSlewingStop = 1;
@@ -2213,39 +2213,39 @@ void func_65d4(double sp40, double sp48)
 			//6b68
 			if (g_iSlewStepRaAxis != 0)
 			{
-				switch (bData_40002e7d_RotatingSpeed)
+				switch (g_eSlewRateIndex)
 				{
-					case MENU_ROTATING_SPEED_1: //1:
+					case SLEW_RATE_1X: //1:
 						//->6bb4
 						Data_400033cc.dwData = 2*g_iSlewStepRaAxis + 6;
 						break;
 					
-					case MENU_ROTATING_SPEED_2: //2:
+					case SLEW_RATE_2X: //2:
 						//->6bd4
 						Data_400033cc.dwData = 16;
 						break;
 					
-					case MENU_ROTATING_SPEED_8: //3:
+					case SLEW_RATE_8X: //3:
 						//->6be8
 						Data_400033cc.dwData = 60;
 						break;
 					
-					case MENU_ROTATING_SPEED_16: //4:
+					case SLEW_RATE_16X: //4:
 						//->6bfc
 						Data_400033cc.dwData = 240;
 						break;
 					
-					case MENU_ROTATING_SPEED_64: //5:
+					case SLEW_RATE_64X: //5:
 						//->6c10
 						Data_400033cc.dwData = 460;
 						break;
 					
-					case MENU_ROTATING_SPEED_128: //6:
+					case SLEW_RATE_128X: //6:
 						//->6c24
 						Data_400033cc.dwData = 640;
 						break;
 					
-					case MENU_ROTATING_SPEED_256: //7:
+					case SLEW_RATE_256X: //7:
 						//->6c38
 						Data_400033cc.dwData = 2000;
 					
@@ -2260,7 +2260,7 @@ void func_65d4(double sp40, double sp48)
 						Data_400033cc.dwData = Data_40002e80;
 						break;
 					
-					case MENU_ROTATING_SPEED_512: //8:
+					case SLEW_RATE_512X: //8:
 						//->6c9c
 						Data_400033cc.dwData = 3200;
 					
@@ -2275,7 +2275,7 @@ void func_65d4(double sp40, double sp48)
 						Data_400033cc.dwData = Data_40002e80;
 						break;
 					
-					case MENU_ROTATING_SPEED_MAX: //9:
+					case SLEW_RATE_MAX: //9:
 						//->6d00
 						Data_400033cc.dwData = 4800;
 					
@@ -2316,49 +2316,49 @@ void func_65d4(double sp40, double sp48)
 			//6dec
 			if (g_iSlewStepRaAxis != 0)
 			{
-				switch (bData_40002e7d_RotatingSpeed)
+				switch (g_eSlewRateIndex)
 				{
-					case MENU_ROTATING_SPEED_1: //1:
+					case SLEW_RATE_1X: //1:
 						//->6e38
 						Data_400033cc.dwData = 8;
 						break;
 					
-					case MENU_ROTATING_SPEED_2: //2:
+					case SLEW_RATE_2X: //2:
 						//->6e4c
 						Data_400033cc.dwData = 16;
 						break;
 					
-					case MENU_ROTATING_SPEED_8: //3:
+					case SLEW_RATE_8X: //3:
 						//->6e60
 						Data_400033cc.dwData = 32;
 						break;
 					
-					case MENU_ROTATING_SPEED_16: //4:
+					case SLEW_RATE_16X: //4:
 						//->6e74
 						Data_400033cc.dwData = 64;
 						break;
 					
-					case MENU_ROTATING_SPEED_64: //5:
+					case SLEW_RATE_64X: //5:
 						//->6e88
 						Data_400033cc.dwData = 100;
 						break;
 					
-					case MENU_ROTATING_SPEED_128: //6:
+					case SLEW_RATE_128X: //6:
 						//->6e9c
 						Data_400033cc.dwData = 200;
 						break;
 					
-					case MENU_ROTATING_SPEED_256: //7:
+					case SLEW_RATE_256X: //7:
 						//->6eb0
 						Data_400033cc.dwData = 400;
 						break;
 					
-					case MENU_ROTATING_SPEED_512: //8:
+					case SLEW_RATE_512X: //8:
 						//->6ec4
 						Data_400033cc.dwData = 600;
 						//break; //-> BUG??
 					
-					case MENU_ROTATING_SPEED_MAX: //9:
+					case SLEW_RATE_MAX: //9:
 						//->6ed8
 						Data_400033cc.dwData = 980;
 						break;
@@ -2436,39 +2436,39 @@ void func_65d4(double sp40, double sp48)
 			//719c
 			if (g_iSlewStepDecAxis != 0)
 			{
-				switch (bData_40002e7d_RotatingSpeed)
+				switch (g_eSlewRateIndex)
 				{
-					case MENU_ROTATING_SPEED_1: //1:
+					case SLEW_RATE_1X: //1:
 						//->71e8
 						Data_400033cc.dwData = 4;
 						break;
 					
-					case MENU_ROTATING_SPEED_2: //2:
+					case SLEW_RATE_2X: //2:
 						//->71fc
 						Data_400033cc.dwData = 16;
 						break;
 					
-					case MENU_ROTATING_SPEED_8: //3:
+					case SLEW_RATE_8X: //3:
 						//->7210
 						Data_400033cc.dwData = 60;
 						break;
 					
-					case MENU_ROTATING_SPEED_16: //4:
+					case SLEW_RATE_16X: //4:
 						//->7224
 						Data_400033cc.dwData = 240;
 						break;
 					
-					case MENU_ROTATING_SPEED_64: //5:
+					case SLEW_RATE_64X: //5:
 						//->7238
 						Data_400033cc.dwData = 460;
 						break;
 					
-					case MENU_ROTATING_SPEED_128: //6:
+					case SLEW_RATE_128X: //6:
 						//->724c
 						Data_400033cc.dwData = 640;
 						break;
 					
-					case MENU_ROTATING_SPEED_256: //7:
+					case SLEW_RATE_256X: //7:
 						//->7260
 						Data_400033cc.dwData = 2000;
 					
@@ -2483,7 +2483,7 @@ void func_65d4(double sp40, double sp48)
 						Data_400033cc.dwData = Data_40002e84;
 						break;
 					
-					case MENU_ROTATING_SPEED_512: //8:
+					case SLEW_RATE_512X: //8:
 						//->72c4
 						Data_400033cc.dwData = 3200;
 					
@@ -2498,7 +2498,7 @@ void func_65d4(double sp40, double sp48)
 						Data_400033cc.dwData = Data_40002e84;
 						break;
 					
-					case MENU_ROTATING_SPEED_MAX: //9:
+					case SLEW_RATE_MAX: //9:
 						//->7328
 						Data_400033cc.dwData = 4800;
 					
@@ -2538,49 +2538,49 @@ void func_65d4(double sp40, double sp48)
 			//73f8
 			if (g_iSlewStepDecAxis != 0)
 			{
-				switch (bData_40002e7d_RotatingSpeed)
+				switch (g_eSlewRateIndex)
 				{
-					case MENU_ROTATING_SPEED_1: //1:
+					case SLEW_RATE_1X: //1:
 						//->7444
 						Data_400033cc.dwData = 5;
 						break;
 					
-					case MENU_ROTATING_SPEED_2: //2:
+					case SLEW_RATE_2X: //2:
 						//->0x7458
 						Data_400033cc.dwData = 13;
 						break;
 					
-					case MENU_ROTATING_SPEED_8: //3:
+					case SLEW_RATE_8X: //3:
 						//->0x746c
 						Data_400033cc.dwData = 50;
 						break;
 					
-					case MENU_ROTATING_SPEED_16: //4:
+					case SLEW_RATE_16X: //4:
 						//->0x7480
 						Data_400033cc.dwData = 85;
 						break;
 					
-					case MENU_ROTATING_SPEED_64: //5:
+					case SLEW_RATE_64X: //5:
 						//->0x7494
 						Data_400033cc.dwData = 150;
 						break;
 					
-					case MENU_ROTATING_SPEED_128: //6:
+					case SLEW_RATE_128X: //6:
 						//->74a8
 						Data_400033cc.dwData = 220;
 						break;
 					
-					case MENU_ROTATING_SPEED_256: //7:
+					case SLEW_RATE_256X: //7:
 						//->0x74bc
 						Data_400033cc.dwData = 500;
 						break;
 					
-					case MENU_ROTATING_SPEED_512: //8:
+					case SLEW_RATE_512X: //8:
 						//->0x74d0
 						Data_400033cc.dwData = 800;
 						break;
 					
-					case MENU_ROTATING_SPEED_MAX: //9:
+					case SLEW_RATE_MAX: //9:
 						//->0x74e4
 						Data_400033cc.dwData = 980;
 						break;
@@ -3401,7 +3401,7 @@ void func_9178(void)
 		Data_40004128.dRaPositionDelta = Data_40004128.dTargetPositionRaAxis - Data_40004128.dMotorPositionRaAxis;
 		Data_40004128.dDecPositionDelta = Data_40004128.dTargetPositionDecAxis - Data_40004128.dMotorPositionDecAxis;
 		
-#if 1//def UART0_DEBUG
+#if 0//def UART0_DEBUG
 		{
 			static char buf[100];
 
@@ -3486,7 +3486,7 @@ void func_9178(void)
 			{
 				Data_40004128.dData_304 = 0;
 				
-				if (bData_40002e7d_RotatingSpeed > MENU_ROTATING_SPEED_128/*6*/)
+				if (g_eSlewRateIndex > SLEW_RATE_128X/*6*/)
 				{
 					bData_40003498 = 1;
 				}
@@ -3499,7 +3499,7 @@ void func_9178(void)
 			{
 				Data_40004128.dData_312 = 0;
 				
-				if (bData_40002e7d_RotatingSpeed > MENU_ROTATING_SPEED_128/*6*/)
+				if (g_eSlewRateIndex > SLEW_RATE_128X/*6*/)
 				{
 					bData_40003498 = 1;
 				}
@@ -4033,7 +4033,7 @@ void ResumeSlewing(void)
 	Data_40004128.dData_264 = 0.0;
 	Data_40004128.dData_256 = 0.0;
 	
-	bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_8; //3;
+	g_eSlewRateIndex = SLEW_RATE_8X; //3;
 	bData_40003200 = 1;
 	bData_40003201 = 1;
 	
@@ -4065,7 +4065,7 @@ void GotoEQCoordinates(double ra, double dec)
 	func_75c4();
 	
 	bData_400034cc = 0;
-	bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_8; //3;
+	g_eSlewRateIndex = SLEW_RATE_8X; //3;
 	bData_40003200 = 1;
 	bData_40003201 = 1;
 	
@@ -5819,49 +5819,49 @@ void PrepareMainScreenItems(void)
 	//2504c
 	Data_4000338c = Data_40004090;
 	//25058
-	switch (bData_40002e7d_RotatingSpeed)
+	switch (g_eSlewRateIndex)
 	{
-		case MENU_ROTATING_SPEED_1: //1:
+		case SLEW_RATE_1X: //1:
 			//0x25158
 			Data_40003390 = "1X   ";
 			break;
 		
-		case MENU_ROTATING_SPEED_2: //2:
+		case SLEW_RATE_2X: //2:
 			//0x2516c
 			Data_40003390 = "2X   ";
 			break;
 		
-		case MENU_ROTATING_SPEED_8: //3:
+		case SLEW_RATE_8X: //3:
 			//0x25180
 			Data_40003390 = "8X   ";
 			break;
 		
-		case MENU_ROTATING_SPEED_16: //4:
+		case SLEW_RATE_16X: //4:
 			//0x25194
 			Data_40003390 = "16X  ";
 			break;
 		
-		case MENU_ROTATING_SPEED_64: //5:
+		case SLEW_RATE_64X: //5:
 			//0x251a8
 			Data_40003390 = "64X  ";
 			break;
 		
-		case MENU_ROTATING_SPEED_128: //6:
+		case SLEW_RATE_128X: //6:
 			//0x251bc
 			Data_40003390 = "128X";
 			break;
 		
-		case MENU_ROTATING_SPEED_256: //7:
+		case SLEW_RATE_256X: //7:
 			//0x251d0
 			Data_40003390 = "256X";
 			break;
 		
-		case MENU_ROTATING_SPEED_512: //8:
+		case SLEW_RATE_512X: //8:
 			//0x251e4
 			Data_40003390 = "512X";
 			break;
 		
-		case MENU_ROTATING_SPEED_MAX: //9:
+		case SLEW_RATE_MAX: //9:
 			//0x251f8
 			Data_40003390 = "Max ";
 			break;

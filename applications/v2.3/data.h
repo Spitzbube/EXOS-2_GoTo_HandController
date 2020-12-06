@@ -354,7 +354,7 @@ extern unsigned char bData_40002e79_SkyLandTargetSeletion; //40002e79
 extern unsigned char bData_40002e7a_MountType; //40002e7a
 extern unsigned char bData_40002e7b_GpsAvailable; //40002e7b
 extern unsigned char bData_40002e7c_TrackingRateType; //40002e7c
-extern unsigned char bData_40002e7d_RotatingSpeed; //40002e7d
+extern unsigned char g_eSlewRateIndex; //40002e7d
 extern char bData_40002e7e; //40002e7e
 extern int Data_40002e80; //40002e80
 extern int Data_40002e84; //40002e84
@@ -580,8 +580,8 @@ extern char bCapsLock; //40003198
 extern unsigned char bMapKeyToCharIndex; //40003199
 extern unsigned char bData_4000319a_SkyLandTargetId; //4000319a
 extern char bData_4000319b; //4000319b
-extern char bData_4000319c; //4000319c
-extern char bData_4000319d; //4000319d
+extern char g_bSingleSlewActive; //4000319c
+extern char g_bCombinedSlewActive; //4000319d
 extern Union_400031a0 Data_400031a0; //400031a0
 extern Union_400031a0 Data_400031a4; //400031a4
 extern int Data_400031a8; //400031a8
