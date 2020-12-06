@@ -540,12 +540,12 @@ void HandleDownKey(void)
 					if (bData_40002c1a == 1)
 					{
 						//5bd78
-						SlewRaw(2, 2, g_eSlewRateIndex);
+						SlewAxis(2, 2, g_eSlewRateIndex);
 					}
 					else
 					{
 						//0x5bd90
-						SlewRaw(4, 2, g_eSlewRateIndex);
+						SlewAxis(4, 2, g_eSlewRateIndex);
 					}
 				}
 			}
@@ -555,12 +555,12 @@ void HandleDownKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//5bdb8
-					SlewRaw(2, 2, g_eSlewRateIndex);
+					SlewAxis(2, 2, g_eSlewRateIndex);
 				}
 				else
 				{
 					//0x5bdd0
-					SlewRaw(4, 2, g_eSlewRateIndex);
+					SlewAxis(4, 2, g_eSlewRateIndex);
 				}
 			}
 			//->0x5ca8c
@@ -572,13 +572,13 @@ void HandleDownKey(void)
 			if (bData_40002c1a == 1)
 			{
 				//5be0c
-				SlewRaw(2, 2, 3);
+				SlewAxis(2, 2, SLEW_RATE_8X);
 				bData_40002edd = 3;
 			}
 			else
 			{
 				//0x5be2c
-				SlewRaw(4, 2, 3);
+				SlewAxis(4, 2, SLEW_RATE_8X);
 				bData_40002edd = 1;
 			}
 			iBacklashCorrectionSlewing = 1;
@@ -593,12 +593,12 @@ void HandleDownKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//5be90
-					SlewRaw(2, 2, 3);
+					SlewAxis(2, 2, SLEW_RATE_8X);
 				}
 				else
 				{
 					//0x5bea4
-					SlewRaw(4, 2, 3);
+					SlewAxis(4, 2, SLEW_RATE_8X);
 				}
 			}
 			//5beb4 -> 0x5ca8c

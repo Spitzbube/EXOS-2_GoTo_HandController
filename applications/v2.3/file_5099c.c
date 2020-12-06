@@ -39,7 +39,7 @@ void func_5099c(void)
 	bData_400032a4_OTAZeroDataErrorCount = 0;
 	bData_4000319b = 0;
 	bData_400031e9 = 0;
-	bData_400031b8 = 0;
+	g_bMaxSlewRampActive = 0;
 	bData_400031b9 = 0;
 	Data_40002e80 = 0;
 	Data_40002e84 = 0;

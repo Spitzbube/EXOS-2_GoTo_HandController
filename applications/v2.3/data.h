@@ -583,11 +583,11 @@ extern char bData_4000319b; //4000319b
 extern char g_bSingleSlewActive; //4000319c
 extern char g_bCombinedSlewActive; //4000319d
 extern Union_400031a0 Data_400031a0; //400031a0
-extern Union_400031a0 Data_400031a4; //400031a4
+extern Union_400031a0 g_stCurrentSlewRampValue; //400031a4
 extern int Data_400031a8; //400031a8
 extern Union_400031a0 Data_400031ac; //400031ac
-extern int Data_400031b4; //400031b4
-extern char bData_400031b8; //400031b8
+extern int g_iCurrentSlewRampIndex; //400031b4
+extern char g_bMaxSlewRampActive; //400031b8
 extern char bData_400031b9; //400031b9
 extern char bData_400031ba; //400031ba
 extern char bData_400031bb; //400031bb

@@ -1568,16 +1568,16 @@ void SlewStop(void)
 					uart1_write_byte(0);
 					
 					bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
-				}
+				} //if (g_eSlewRateIndex != SLEW_RATE_MAX) //9)
 				else
 				{
 					//0x5f1c8
-					if (Data_400031a4.Data >= 4800)
+					if (g_stCurrentSlewRampValue.Data >= 4800)
 					{
-						Data_400031a4.Data = 4700;
+						g_stCurrentSlewRampValue.Data = 4700;
 					}
 					//0x5f1e4
-					Data_400031b4 = -4;					
+					g_iCurrentSlewRampIndex = -4;	// Ramp down (-1200)
 				}
 			}
 		}
@@ -4610,24 +4610,24 @@ int main(void)
 			bData_400034cc = 0;
 		}
 		//6f970
-		if ((bData_400031b8 != 0) && (Data_400031a4.Data <= 4800))
+		if ((g_bMaxSlewRampActive != 0) && (g_stCurrentSlewRampValue.Data <= 4800))
 		{
 			//6f990
-			if (Data_400031a4.Data < 4800)
+			if (g_stCurrentSlewRampValue.Data < 4800)
 			{
-				if (Data_400031b4 == 1)
+				if (g_iCurrentSlewRampIndex == 1)
 				{
-					//6f9b0
-					Data_400031a4.Data = Data_400031a4.Data + Data_400031b4 * 100;
+					//6f9b0: Ramp up (+100)
+					g_stCurrentSlewRampValue.Data += g_iCurrentSlewRampIndex * 100;
 				}
 				else
 				{
 					//0x6f9d8
-					Data_400031a4.Data = Data_400031a4.Data + Data_400031b4 * 300;
+					g_stCurrentSlewRampValue.Data += g_iCurrentSlewRampIndex * 300;
 				}
 			}
 			//0x6f9fc
-			if (Data_400031a4.Data >= 2560)
+			if (g_stCurrentSlewRampValue.Data >= 2560)
 			{
 				//6fa0c
 				if (bData_400031bc == 1)
@@ -4661,14 +4661,14 @@ int main(void)
 						uart1_write_byte(0x22); //Send DEC?
 					}
 					//0x6faa8
-					uart1_write_byte(Data_400031a4.bData[1]);
-					uart1_write_byte(Data_400031a4.bData[0]);
+					uart1_write_byte(g_stCurrentSlewRampValue.bData[1]);
+					uart1_write_byte(g_stCurrentSlewRampValue.bData[0]);
 					uart1_write_byte(Data_400031ac.bData[3]);
 					uart1_write_byte(Data_400031ac.bData[2]);
 					uart1_write_byte(Data_400031ac.bData[1]);
 				}
 				//0x6fb24
-			} //if (Data_400031a4.Data >= 2560)
+			} //if (g_stCurrentSlewRampValue.Data >= 2560)
 			else
 			{
 				//0x6fae8
@@ -4679,9 +4679,9 @@ int main(void)
 				uart1_write_byte(0x00);
 				
 				bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
-				bData_400031b8 = 0;
+				g_bMaxSlewRampActive = 0;
 			}
-		} //if ((bData_400031b8 != 0) && (Data_400031a4.Data <= 4800))
+		} //if ((g_bMaxSlewRampActive != 0) && (g_stCurrentSlewRampValue.Data <= 4800))
 		//6fb24
 		if (bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)
 		{
@@ -5342,13 +5342,13 @@ int main(void)
 						if (bRaBacklashCorrectionDirection == 2)
 						{
 							//72474
-							SlewRaw(3, 4, 1);
+							SlewAxis(3, 4, SLEW_RATE_1X);
 						}
 						//72484
 						if (bRaBacklashCorrectionDirection == 1)
 						{
 							//72494
-							SlewRaw(3, 3, 1);
+							SlewAxis(3, 3, SLEW_RATE_1X);
 						}
 						//724a4
 						func_659c(10);
@@ -5388,13 +5388,13 @@ int main(void)
 						if (bDecBacklashCorrectionDirection == 2)
 						{
 							//72628
-							SlewRaw(4, 2, 1);
+							SlewAxis(4, 2, SLEW_RATE_1X);
 						}
 						//72638
 						if (bDecBacklashCorrectionDirection == 1)
 						{
 							//72648
-							SlewRaw(4, 1, 1);
+							SlewAxis(4, 1, SLEW_RATE_1X);
 						}
 						//72658
 						func_659c(10);
@@ -5420,12 +5420,12 @@ int main(void)
 						//7273c
 						if (bRaBacklashCorrectionDirection == 2)
 						{
-							SlewRaw(1, 4, 2);
+							SlewAxis(1, 4, SLEW_RATE_2X);
 						}
 						
 						if (bRaBacklashCorrectionDirection == 1)
 						{
-							SlewRaw(1, 3, 2);
+							SlewAxis(1, 3, SLEW_RATE_2X);
 						}
 						
 						func_659c(10);
@@ -5450,12 +5450,12 @@ int main(void)
 						//728a0
 						if (bDecBacklashCorrectionDirection == 2)
 						{
-							SlewRaw(2, 2, 2);
+							SlewAxis(2, 2, SLEW_RATE_2X);
 						}
 						
 						if (bDecBacklashCorrectionDirection == 1)
 						{
-							SlewRaw(2, 1, 2);
+							SlewAxis(2, 1, SLEW_RATE_2X);
 						}
 						
 						func_659c(10);

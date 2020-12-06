@@ -1,7 +1,7 @@
 
 
 /* 57414 - todo */
-void SlewRaw(int axis, int direction, int speed)
+void SlewAxis(int axis, int direction, int speed)
 {
 	unsigned char i;
 	char sp12[12];
@@ -196,11 +196,13 @@ void SlewRaw(int axis, int direction, int speed)
 					//0x577e0
 					sp12[6] = 0x0a; sp12[7] = 0x00; //2560
 
-					Data_400031a4.Data = 2560;
-					bData_400031b8 = 1;
+					g_stCurrentSlewRampValue.Data = 2560;
+
+					g_bMaxSlewRampActive = 1;
 					bData_400031ba = sp12[4];
 					bData_400031bc = sp12[5];
-					Data_400031b4 = 1;
+					g_iCurrentSlewRampIndex = 1; //Ramp up (+100)
+
 					bData_400031b9 = 0;
 					bData_400031bb = sp12[4];
 					bData_400031bd = sp12[5];

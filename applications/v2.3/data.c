@@ -406,12 +406,12 @@ char bData_4000319b; //4000319b
 char g_bSingleSlewActive; //4000319c
 char g_bCombinedSlewActive; //4000319d
 Union_400031a0 Data_400031a0; //400031a0
-Union_400031a0 Data_400031a4; //400031a4
+Union_400031a0 g_stCurrentSlewRampValue; //400031a4
 int Data_400031a8; //400031a8
 Union_400031a0 Data_400031ac; //400031ac
 int fill_400031b0; //400031b0
-int Data_400031b4; //400031b4
-char bData_400031b8; //400031b8
+int g_iCurrentSlewRampIndex; //400031b4
+char g_bMaxSlewRampActive; //400031b8
 char bData_400031b9; //400031b9
 char bData_400031ba; //400031ba
 char bData_400031bb; //400031bb
