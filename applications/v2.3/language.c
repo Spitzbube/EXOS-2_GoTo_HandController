@@ -340,8 +340,8 @@ unsigned char strCustomSiteAltitude[] = "\x00tAlt:1880m "; //40002861
 char Data_4000286e[] = "Tmpt:+25C"; //4000286e
 char Data_40002878[] = "Hmdt:82RH"; //40002878
 char Data_40002882[] = "APrs:0680Pa"; //40002882
-char Data_4000288e[11] = "Sky Target"; //4000288e
-char Data_40002899[12] = "Land Target"; //40002899, size???
+char strSkyTarget[11] = "Sky Target"; //4000288e
+char strLandTarget[12] = "Land Target"; //40002899, size???
 char Data_400028a5[14] = "Alt Telescope"; //400028a5
 char Data_400028b3[14] = "Equ Telescope"; //400028b3, size???
 char strEngPleaseSetupOtaZero[22] = "Please setup OTA zero"; //400028c1
@@ -446,7 +446,7 @@ void SwapLanguageStrings(void)
 			Data_40002fc0 = strEngSkyLand;
 			Data_40002fc4 = strEngAzEqu;
 			strTelescopeMount = strEngTelescopeMount;
-			Data_40002fcc = strEngTrackingRate;
+			strTrackingRate = strEngTrackingRate;
 			Data_40002fd0 = strEngLanguage;
 			strReset = strEngReset;
 
@@ -479,7 +479,7 @@ void SwapLanguageStrings(void)
 			strMoonSpeed = strEngMoonSpeed;
 			Data_40003094 = strEngCustomizeSpeed;
 			Data_40003098 = strEngGuidingSpeed;
-			Data_4000309c = strEngListAlignStars;
+			strListAlignStars = strEngListAlignStars;
 			strSlewingTo = strEngSlewingTo;
 			strAutoloadAlignStars = strEngAutoloadAlignStars;
 			Data_400030a8 = Data_40000c35;
@@ -558,7 +558,7 @@ void SwapLanguageStrings(void)
 			Data_40002fc0 = Data_400012c2;
 			Data_40002fc4 = Data_400012e2;
 			strTelescopeMount = Data_40001302;
-			Data_40002fcc = Data_40001322;
+			strTrackingRate = Data_40001322;
 			Data_40002fd0 = Data_40001342;
 			strReset = strGerReset;
 
@@ -591,7 +591,7 @@ void SwapLanguageStrings(void)
 			strMoonSpeed = strEngMoonSpeed;
 			Data_40003094 = strEngCustomizeSpeed;
 			Data_40003098 = strEngGuidingSpeed;
-			Data_4000309c = strEngListAlignStars;
+			strListAlignStars = strEngListAlignStars;
 			strSlewingTo = strEngSlewingTo;
 			strAutoloadAlignStars = strEngAutoloadAlignStars;
 			Data_400030a8 = Data_40000c35;
@@ -668,7 +668,7 @@ void SwapLanguageStrings(void)
 			Data_40002fc0 = Data_400017e2;
 			Data_40002fc4 = Data_40001802;
 			strTelescopeMount = Data_40001822;
-			Data_40002fcc = Data_40001842;
+			strTrackingRate = Data_40001842;
 			Data_40002fd0 = strFreLanguage;
 			strReset = strFreReset;
 
@@ -701,7 +701,7 @@ void SwapLanguageStrings(void)
 			strMoonSpeed = strEngMoonSpeed;
 			Data_40003094 = strEngCustomizeSpeed;
 			Data_40003098 = strEngGuidingSpeed;
-			Data_4000309c = strEngListAlignStars;
+			strListAlignStars = strEngListAlignStars;
 			strSlewingTo = strEngSlewingTo;
 			strAutoloadAlignStars = strEngAutoloadAlignStars;
 			Data_400030a8 = Data_40000c35;
@@ -778,7 +778,7 @@ void SwapLanguageStrings(void)
 			Data_40002fc0 = Data_40001d02;
 			Data_40002fc4 = Data_40001d22;
 			strTelescopeMount = Data_40001d42;
-			Data_40002fcc = Data_40001d62;
+			strTrackingRate = Data_40001d62;
 			Data_40002fd0 = Data_40001d82;
 			strReset = Data_40001da2;
 
@@ -811,7 +811,7 @@ void SwapLanguageStrings(void)
 			strMoonSpeed = strEngMoonSpeed;
 			Data_40003094 = strEngCustomizeSpeed;
 			Data_40003098 = strEngGuidingSpeed;
-			Data_4000309c = strEngListAlignStars;
+			strListAlignStars = strEngListAlignStars;
 			strSlewingTo = strEngSlewingTo;
 			strAutoloadAlignStars = strEngAutoloadAlignStars;
 			Data_400030a8 = Data_40000c35;
@@ -888,7 +888,7 @@ void SwapLanguageStrings(void)
 			Data_40002fc0 = Data_40002222;
 			Data_40002fc4 = Data_40002242;
 			strTelescopeMount = strSpaTelescopeMount;
-			Data_40002fcc = Data_40002282;
+			strTrackingRate = Data_40002282;
 			Data_40002fd0 = Data_400022a2;
 			strReset = Data_400022c2;
 
@@ -921,7 +921,7 @@ void SwapLanguageStrings(void)
 			strMoonSpeed = strEngMoonSpeed;
 			Data_40003094 = strEngCustomizeSpeed;
 			Data_40003098 = strEngGuidingSpeed;
-			Data_4000309c = strEngListAlignStars;
+			strListAlignStars = strEngListAlignStars;
 			strSlewingTo = strEngSlewingTo;
 			strAutoloadAlignStars = strEngAutoloadAlignStars;
 			Data_400030a8 = Data_40000c35;

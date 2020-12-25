@@ -342,7 +342,7 @@ void DisplayScreenItems(void)
 							}
 							//0x3f9dc
 							bData_400031e9 = 5;
-							func_c8f4();
+							ProcessNextAlignmentStar();
 							beep1(3);
 							
 							Data_40003364 = Data_400030b4; //"The telescope has be"
@@ -397,7 +397,7 @@ void DisplayScreenItems(void)
 					else
 					{
 						//0x3fdac: "Slewing to Target" / "Please center this star to the field of view"
-						if ((bData_40002e88 == MENU_TRACKING_MODE_POINTING/*1*/) && (bData_400034cd == 0))
+						if ((bTrackingMode == MENU_TRACKING_MODE_POINTING/*1*/) && (bData_400034cd == 0))
 						{
 							//3fdcc
 							if (bData_400031e9 != 7)
@@ -409,7 +409,7 @@ void DisplayScreenItems(void)
 							Data_40003360 = strSlewingTo;
 							Data_40003364 = strAutoloadAlignStars;
 							
-							if (Data_40004128.Data_352 == 0)
+							if (Data_40004128.alignmentPause == 0)
 							{
 								//3fe1c
 								lcd_display_string(0, 1, 1, 21, "Slewing to Target   ");
@@ -444,7 +444,7 @@ void DisplayScreenItems(void)
 							
 							lcd_display_string(0, 6, 1, 4, "    ");
 							//->0x402d8
-						} //if ((bData_40002e88 == MENU_TRACKING_MODE_POINTING) && (bData_400034cd == 0))
+						} //if ((bTrackingMode == MENU_TRACKING_MODE_POINTING) && (bData_400034cd == 0))
 						else
 						{
 							//0x4015c
@@ -472,7 +472,7 @@ void DisplayScreenItems(void)
 							}
 						}
 						//0x402d8
-						if (bData_40002e88 == 2)
+						if (bTrackingMode == 2)
 						{
 							//402e8
 							bData_400034cd = 1;
@@ -696,7 +696,7 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
 					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 					
-					if (bData_40002e8a == 2)
+					if (bTrackingModeMenu == 2)
 					{
 						//415e4
 						func_659c(2000);
@@ -739,7 +739,7 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
 					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 				
-					if (bData_40002e8a == 2)
+					if (bTrackingModeMenu == 2)
 					{
 						//418c4
 						func_659c(2000);
@@ -1122,7 +1122,7 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
-				case 48001:
+				case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 					//0x43a04
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);
@@ -1958,7 +1958,7 @@ void DisplayScreenItems(void)
 							}
 							//0x48ac0
 							bData_400031e9 = 5;
-							func_c8f4();
+							ProcessNextAlignmentStar();
 							beep1(3);
 							
 							Data_40003364 = Data_400030b4; //"The telescope has be"
@@ -2013,7 +2013,7 @@ void DisplayScreenItems(void)
 					else
 					{
 						//0x48e90: "Slewing to Target" / "Please center this star to the field of view"
-						if ((bData_40002e88 == MENU_TRACKING_MODE_POINTING/*1*/) && (bData_400034cd == 0))
+						if ((bTrackingMode == MENU_TRACKING_MODE_POINTING/*1*/) && (bData_400034cd == 0))
 						{
 							//48eb0
 							if (bData_400031e9 != 7)
@@ -2025,7 +2025,7 @@ void DisplayScreenItems(void)
 							Data_40003360 = strSlewingTo;
 							Data_40003364 = strAutoloadAlignStars;
 							
-							if (Data_40004128.Data_352 == 0)
+							if (Data_40004128.alignmentPause == 0)
 							{
 								//48f00
 								lcd_display_string(0, 1, 1, 21, "Slewing to Target   ");
@@ -2060,7 +2060,7 @@ void DisplayScreenItems(void)
 							
 							lcd_display_string(0, 6, 1, 4, "    ");
 							//->0x493a4
-						} //if ((bData_40002e88 == MENU_TRACKING_MODE_POINTING) && (bData_400034cd == 0))
+						} //if ((bTrackingMode == MENU_TRACKING_MODE_POINTING) && (bData_400034cd == 0))
 						else
 						{
 							//0x4918c
@@ -2088,7 +2088,7 @@ void DisplayScreenItems(void)
 							}
 						}
 						//0x493a4
-						if (bData_40002e88 == 2)
+						if (bTrackingMode == 2)
 						{
 							//493b4
 							bData_400034cd = 1;
@@ -2310,7 +2310,7 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
 					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 					
-					if (bData_40002e8a == 2)
+					if (bTrackingModeMenu == 2)
 					{
 						//4a644
 						func_659c(2000);
@@ -2352,7 +2352,7 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
 					lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
 				
-					if (bData_40002e8a == 2)
+					if (bTrackingModeMenu == 2)
 					{
 						//4a96c
 						func_659c(2000);
@@ -2733,7 +2733,7 @@ void DisplayScreenItems(void)
 					lcd_display_bitmap(0, 5, 16, (unsigned char*)cBitmapSecond);
 					break;
 				
-				case 48001:
+				case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 					//0x4ca9c
 					lcd_display_string(0, 1, 1, (char)strlen(Data_40003360), (unsigned char*)Data_40003360);
 					lcd_display_string(0, 2, 1, (char)strlen(Data_40003364), (unsigned char*)Data_40003364);

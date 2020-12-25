@@ -7,7 +7,7 @@ void Handle3Key(void)
 	{
 		case MENU_CONTEXT_MAIN: //0:
 			//0x67000
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_8; //3;
+			g_eSlewRateIndex = SLEW_RATE_8X; //3;
 			//->0x678ac
 			break;
 		
@@ -20,7 +20,7 @@ void Handle3Key(void)
 		
 		case 5000:
 			//67030
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_8; //3;
+			g_eSlewRateIndex = SLEW_RATE_8X; //3;
 			break;
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
@@ -29,7 +29,7 @@ void Handle3Key(void)
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203:
 		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//67058
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_8; //3;
+			g_eSlewRateIndex = SLEW_RATE_8X; //3;
 			break;
 		
 		case MENU_CONTEXT_MESSIER_OBJECT_DETAILS: //23012:
@@ -216,25 +216,25 @@ void Handle3Key(void)
 			strCustomerObjectNameInput[bCharacterInputPosition - 1] = bCustomerObjectNameChar;
 			break;
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//6762c
 			if (bCharacterInputPosition != 1)
 			{
-				Data_400037cc[bCharacterInputPosition - 1] = '3';
-				Data_400037dc[bCharacterInputPosition - 1] = '3';
+				strTrackingRateCustInput[bCharacterInputPosition - 1] = '3';
+				strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '3';
 			}
 			else
 			{
 				//0x67670
-				if (Data_400037cc[bCharacterInputPosition - 1] == '+')
+				if (strTrackingRateCustInput[bCharacterInputPosition - 1] == '+')
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '-';
-					Data_400037dc[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '+';
-					Data_400037dc[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '+';
 				}
 			}
 			//0x676e8

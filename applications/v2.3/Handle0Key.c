@@ -7,48 +7,48 @@ void Handle0Key(void)
 	{
 		case MENU_CONTEXT_MAIN: //0:
 			//0x6958c
-			if (bData_400034a9 == 0)
+			if (g_bLandTarget == 0)
 			{
 				if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 				{
-					if (bData_40002e89 == 0)
+					if (g_bSlewingStop == 0)
 					{
-						bData_40002e89 = 1;
+						g_bSlewingStop = 1;
 						
-						func_b4f0();
+						StopSlewing();
 						//->0x69780
 					}
 					else
 					{
 						//0x695d4
-						bData_40002e89 = 0;
+						g_bSlewingStop = 0;
 
-						func_acdc(dData_40002dc0_Azimuth + dData_400033e8,
+						convert_horizontal_to_equatorial(dData_40002dc0_Azimuth + dData_400033e8,
 							dData_40002df8 + dData_400033f0,
 							&dData_40002c88, &dData_40002c90);
 						
-						func_b64c(dData_40002c88, dData_40002c90);
+						GotoEQCoordinates(dData_40002c88, dData_40002c90);
 						
 						bData_400034cc = 1;
 						
-						func_b594();
+						ResumeSlewing();
 						//->0x69780
 					}
 				} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 				else
 				{
 					//0x69658
-					if (bData_40002e89 == 0)
+					if (g_bSlewingStop == 0)
 					{
-						bData_40002e89 = 1;
+						g_bSlewingStop = 1;
 						
-						func_b4f0();
+						StopSlewing();
 						//->0x69780
 					}
 					else
 					{
 						//0x6967c
-						bData_40002e89 = 0;
+						g_bSlewingStop = 0;
 						dData_40002c90 = dData_40002d98;
 						
 						dData_40002c88 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude) - 
@@ -66,14 +66,14 @@ void Handle0Key(void)
 							dData_40002c88 += 24;
 						}
 						
-						func_b64c(dData_40002c88, dData_40002c90);
+						GotoEQCoordinates(dData_40002c88, dData_40002c90);
 						
 						bData_400034cc = 1;
 						
-						func_b594();
+						ResumeSlewing();
 					}
 				}
-			} //if (bData_400034a9 == 0)
+			} //if (g_bLandTarget == 0)
 			//0x69780 -> 0x6a0d4
 			break;
 		
@@ -85,31 +85,31 @@ void Handle0Key(void)
 			//0x69790
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203:
 			//0x69794
-			if (bData_40002e89 == 0)
+			if (g_bSlewingStop == 0)
 			{
-				bData_40002e89 = 1;
+				g_bSlewingStop = 1;
 				
-				func_b4f0();
+				StopSlewing();
 			}
 			else
 			{
 				//0x697b8
-				bData_40002e89 = 0;
+				g_bSlewingStop = 0;
 				
-				func_b594();
+				ResumeSlewing();
 			}
 			//->0x6a0d4
 			break;
 		
 		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//0x697cc
-			if (Data_40004128.Data_352 == 0)
+			if (Data_40004128.alignmentPause == 0)
 			{
-				Data_40004128.Data_352 = 1;
+				Data_40004128.alignmentPause = 1;
 			}
 			else
 			{
-				Data_40004128.Data_352 = 0;
+				Data_40004128.alignmentPause = 0;
 			}
 			break;
 		
@@ -127,7 +127,7 @@ void Handle0Key(void)
 		
 		case 5000:
 			//0x69834
-			bData_40002e7d_RotatingSpeed = 0;
+			g_eSlewRateIndex = 0;
 			break;
 		
 		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
@@ -148,16 +148,17 @@ void Handle0Key(void)
 			//0x69868
 		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
 			//0x6986c
-			if (bData_40002e8a == 4)
+			if (bTrackingModeMenu == MENU_TRACKING_MODE_PAUSE) //4)
 			{
-				func_b594();
+				ResumeSlewing();
 			}
 			
-			if ((bData_40002e8a == 1) || (bData_40002e8a == 2))
+			if ((bTrackingModeMenu == MENU_TRACKING_MODE_POINTING/*1*/) ||
+					(bTrackingModeMenu == MENU_TRACKING_MODE_TRACKING/*2*/))
 			{
-				bData_40002e8a = 4;
+				bTrackingModeMenu = MENU_TRACKING_MODE_PAUSE; //4;
 				
-				func_b4f0();
+				StopSlewing();
 			}
 			break;
 		
@@ -324,24 +325,24 @@ void Handle0Key(void)
 			strCustomerObjectNameInput[bCharacterInputPosition - 1] = bCustomerObjectNameChar;			
 			break;
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//0x69e54
 			if (bCharacterInputPosition != 1)
 			{
-				Data_400037cc[bCharacterInputPosition - 1] = '0';
-				Data_400037dc[bCharacterInputPosition - 1] = '0';
+				strTrackingRateCustInput[bCharacterInputPosition - 1] = '0';
+				strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '0';
 			}
 			else
 			{
-				if (Data_400037cc[bCharacterInputPosition - 1] == '+')
+				if (strTrackingRateCustInput[bCharacterInputPosition - 1] == '+')
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '-';
-					Data_400037dc[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '+';
-					Data_400037dc[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '+';
 				}
 			}
 

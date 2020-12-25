@@ -1,4 +1,7 @@
 
+#define FALSE 0
+#define TRUE  1
+
 typedef struct
 {
 	unsigned char bData_0[12]; //0
@@ -121,8 +124,8 @@ typedef struct
 	unsigned char bHours; //4
 	unsigned char bMinutes; //5
 	unsigned char bSeconds; //6
-	unsigned short wData_8; //8
-} Struct_7d1c;
+	unsigned short wMilliSeconds; //8
+} Struct_DateTime;
 
 typedef struct
 {
@@ -136,7 +139,7 @@ typedef struct
 
 typedef struct
 {
-	double dData_0; //0
+	double dLongitude; //0
 	double dLatitude; //8
 	
 } Struct_GeographicCoordinates;
@@ -144,7 +147,7 @@ typedef struct
 typedef struct
 {
 	double dRA; //0
-	double dData_8; //8
+	double dDec; //8
 	double fill1; //16
 	double fill2;	//24
 } Struct_EquatorialCoordinates;
@@ -210,5 +213,20 @@ typedef struct
 	
 } Struct_40003296;
 
+
+typedef enum
+{
+	SLEW_STOP = 0,
+	SLEW_RATE_1X = 1,
+	SLEW_RATE_2X = 2,
+	SLEW_RATE_8X = 3,
+	SLEW_RATE_16X = 4,
+	SLEW_RATE_64X = 5,
+	SLEW_RATE_128X = 6,
+	SLEW_RATE_256X = 7,
+	SLEW_RATE_512X = 8,
+	SLEW_RATE_MAX = 9,
+
+} eSlewRate;
 
 

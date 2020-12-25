@@ -7,7 +7,7 @@ void Handle6Key(void)
 	{
 		case MENU_CONTEXT_MAIN: //0:
 			//0x64fdc
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_128; //6;
+			g_eSlewRateIndex = SLEW_RATE_128X; //6;
 			//->0x65888
 			break;
 		
@@ -20,7 +20,7 @@ void Handle6Key(void)
 		
 		case 5000:
 			//6500c
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_128; //6;
+			g_eSlewRateIndex = SLEW_RATE_128X; //6;
 			break;
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
@@ -29,7 +29,7 @@ void Handle6Key(void)
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203:
 		case MENU_CONTEXT_ALIGNMENT_STAR_CONTROL: //12001:
 			//65034
-			bData_40002e7d_RotatingSpeed = MENU_ROTATING_SPEED_128; //6;
+			g_eSlewRateIndex = SLEW_RATE_128X; //6;
 			break;
 		
 		case MENU_CONTEXT_MESSIER_OBJECT_DETAILS: //23012:
@@ -215,26 +215,26 @@ void Handle6Key(void)
 			strCustomerObjectNameInput[bCharacterInputPosition - 1] = bCustomerObjectNameChar;
 			break;
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//65608
 			if (bCharacterInputPosition != 1)
 			{
 				//6561c
-				Data_400037cc[bCharacterInputPosition - 1] = '6';
-				Data_400037dc[bCharacterInputPosition - 1] = '6';
+				strTrackingRateCustInput[bCharacterInputPosition - 1] = '6';
+				strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '6';
 			}
 			else
 			{
 				//0x6564c
-				if (Data_400037cc[bCharacterInputPosition - 1] == '+')
+				if (strTrackingRateCustInput[bCharacterInputPosition - 1] == '+')
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '-';
-					Data_400037dc[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '-';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '-';
 				}
 				else
 				{
-					Data_400037cc[bCharacterInputPosition - 1] = '+';
-					Data_400037dc[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustInput[bCharacterInputPosition - 1] = '+';
+					strTrackingRateCustDisplay[bCharacterInputPosition - 1] = '+';
 				}
 			}
 			//0x656c4

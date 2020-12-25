@@ -38,9 +38,9 @@ void HandleMinusKey(void)
 			if (bData_40002c62_AlignmentStarMode != 0)
 			{
 				//5fa6c
-				Data_40004128.bData_364 = 1;
+				Data_40004128.bAlignmentComplete = 1;
 				
-				func_b4f0();
+				StopSlewing();
 				
 				bData_40002e8c = 0;
 				
@@ -293,14 +293,14 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 4000;
 			break;
 		
-		case 1401:
+		case MENU_CONTEXT_SYNC_OPEN: //1401:
 			//0x5ff7c
-			bData_400031ea = 0;
-		case 1402:
+			g_bTargetSyncOpen = FALSE;
+		case MENU_CONTEXT_SYNC_ENSURE: //1402:
 			//0x5ff90
-		case 1403:
+		case MENU_CONTEXT_SYNC_CANCEL: //1403:
 			//0x5ff94
-			Data_40002c64_MenuContextId = 1400; //->Target Sync
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TARGET_SYNC; //1400;
 			break;
 		
 		case 2801:
@@ -461,7 +461,7 @@ void HandleMinusKey(void)
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT: //11101:
 			//0x60204
-			func_5f0c0();
+			SlewStop();
 		
 			Data_40002c64_MenuContextId = MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11102;
 			iBacklashCorrectionSlewing = 0;
@@ -474,7 +474,7 @@ void HandleMinusKey(void)
 		
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_START_UP_DOWN: //11201:
 			//0x6023c
-			func_5f0c0();
+			SlewStop();
 		
 			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET; //11202;
 			iBacklashCorrectionSlewing = 0;
@@ -504,20 +504,21 @@ void HandleMinusKey(void)
 			//0x602b0
 			bData_40003432 = 0;
 		
-			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
+			if ((bTrackingModeMenu == MENU_TRACKING_MODE_CANCEL/*5*/) ||
+					(bTrackingModeMenu == 3))
 			{
 				//0x602e0
 				lcd_display_clear();
 				
-				Data_40004128.bData_357 = 0;
+				Data_40004128.bTrackingRequest = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_SELECTION; //22001;
 			}
 			else
 			{
 				//0x60300
-				bData_40002e8a = 5;
+				bTrackingModeMenu = MENU_TRACKING_MODE_CANCEL; //5;
 				
-				func_b4f0();
+				StopSlewing();
 				
 				bData_40002e8c = 0;
 				
@@ -540,20 +541,21 @@ void HandleMinusKey(void)
 			//0x60350
 			bData_40003432 = 0;
 		
-			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
+			if ((bTrackingModeMenu == MENU_TRACKING_MODE_CANCEL/*5*/) ||
+					(bTrackingModeMenu == 3))
 			{
 				//60380
 				lcd_display_clear();
 				
-				Data_40004128.bData_357 = 0;
+				Data_40004128.bTrackingRequest = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_CONSTELLATION_SELECTION; //24001;
 			}
 			else
 			{
 				//0x603a0
-				bData_40002e8a = 5;
+				bTrackingModeMenu = MENU_TRACKING_MODE_CANCEL; //5;
 				
-				func_b4f0();
+				StopSlewing();
 				
 				bData_40002e8c = 0;
 				
@@ -571,20 +573,21 @@ void HandleMinusKey(void)
 			//0x603dc
 			bData_40003432 = 0;
 		
-			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
+			if ((bTrackingModeMenu == MENU_TRACKING_MODE_CANCEL/*5*/) ||
+					(bTrackingModeMenu == 3))
 			{
 				//0x6040c
 				lcd_display_clear();
 				
-				Data_40004128.bData_357 = 0;
+				Data_40004128.bTrackingRequest = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_FAMOUS_STAR_SELECTION; //25001;
 			}
 			else
 			{
 				//6042c
-				bData_40002e8a = 5;
+				bTrackingModeMenu = MENU_TRACKING_MODE_CANCEL; //5;
 				
-				func_b4f0();
+				StopSlewing();
 				
 				bData_40002e8c = 0;
 				
@@ -609,20 +612,21 @@ void HandleMinusKey(void)
 			//0x60480
 			bData_40003432 = 0;
 		
-			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
+			if ((bTrackingModeMenu == MENU_TRACKING_MODE_CANCEL/*5*/) ||
+					(bTrackingModeMenu == 3))
 			{
 				//0x604b0
 				lcd_display_clear();
 				
-				Data_40004128.bData_357 = 0;
+				Data_40004128.bTrackingRequest = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_MESSIER_OBJECT_SELECTION; //23002;
 			}
 			else
 			{
 				//0x604d0
-				bData_40002e8a = 5;
+				bTrackingModeMenu = MENU_TRACKING_MODE_CANCEL; //5;
 				
-				func_b4f0();
+				StopSlewing();
 				
 				bData_40002e8c = 0;
 				
@@ -640,20 +644,21 @@ void HandleMinusKey(void)
 			//0x6050c
 			bData_40003432 = 0;
 		
-			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
+			if ((bTrackingModeMenu == MENU_TRACKING_MODE_CANCEL/*5*/) ||
+					(bTrackingModeMenu == 3))
 			{
 				//0x6053c
 				lcd_display_clear();
 				
-				Data_40004128.bData_357 = 0;
+				Data_40004128.bTrackingRequest = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_NGC_OBJECT_SELECTION; //23003;
 			}
 			else
 			{
 				//0x6055c
-				bData_40002e8a = 5;
+				bTrackingModeMenu = MENU_TRACKING_MODE_CANCEL; //5;
 				
-				func_b4f0();
+				StopSlewing();
 				
 				bData_40002e8c = 0;
 				
@@ -671,20 +676,21 @@ void HandleMinusKey(void)
 			//0x60598
 			bData_40003432 = 0;
 		
-			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
+			if ((bTrackingModeMenu == MENU_TRACKING_MODE_CANCEL/*5*/) ||
+					(bTrackingModeMenu == 3))
 			{
 				//0x605c8
 				lcd_display_clear();
 				
-				Data_40004128.bData_357 = 0;
+				Data_40004128.bTrackingRequest = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_IC_OBJECT_SELECTION; //23004;
 			}
 			else
 			{
 				//0x605e8
-				bData_40002e8a = 5;
+				bTrackingModeMenu = MENU_TRACKING_MODE_CANCEL; //5;
 				
-				func_b4f0();
+				StopSlewing();
 				
 				bData_40002e8c = 0;
 				
@@ -702,20 +708,21 @@ void HandleMinusKey(void)
 			//0x60624
 			bData_40003432 = 0;
 		
-			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
+			if ((bTrackingModeMenu == MENU_TRACKING_MODE_CANCEL/*5*/) ||
+					(bTrackingModeMenu == 3))
 			{
 				//0x60654
 				lcd_display_clear();
 				
-				Data_40004128.bData_357 = 0;
+				Data_40004128.bTrackingRequest = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_SH2_OBJECT_SELECTION; //23005;
 			}
 			else
 			{
 				//0x60674
-				bData_40002e8a = 5;
+				bTrackingModeMenu = MENU_TRACKING_MODE_CANCEL; //5;
 				
-				func_b4f0();
+				StopSlewing();
 				
 				bData_40002e8c = 0;
 				
@@ -733,20 +740,21 @@ void HandleMinusKey(void)
 			//0x606b0
 			bData_40003432 = 0;
 		
-			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
+			if ((bTrackingModeMenu == MENU_TRACKING_MODE_CANCEL/*5*/) ||
+					(bTrackingModeMenu == 3))
 			{
 				//0x606e0
 				lcd_display_clear();
 				
-				Data_40004128.bData_357 = 0;
+				Data_40004128.bTrackingRequest = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_BRIGHT_STAR_SELECTION; //23006;
 			}
 			else
 			{
 				//0x60700
-				bData_40002e8a = 5;
+				bTrackingModeMenu = MENU_TRACKING_MODE_CANCEL; //5;
 				
-				func_b4f0();
+				StopSlewing();
 				
 				bData_40002e8c = 0;
 				
@@ -764,20 +772,21 @@ void HandleMinusKey(void)
 			//0x6073c
 			bData_40003432 = 0;
 		
-			if ((bData_40002e8a == 5) || (bData_40002e8a == 3))
+			if ((bTrackingModeMenu == MENU_TRACKING_MODE_CANCEL/*5*/) ||
+					(bTrackingModeMenu == 3))
 			{
 				//0x6076c
 				lcd_display_clear();
 				
-				Data_40004128.bData_357 = 0;
+				Data_40004128.bTrackingRequest = 0;
 				Data_40002c64_MenuContextId = MENU_CONTEXT_SAO_OBJECT_SELECTION; //23007;
 			}
 			else
 			{
 				//0x6078c
-				bData_40002e8a = 5;
+				bTrackingModeMenu = MENU_TRACKING_MODE_CANCEL; //5;
 				
-				func_b4f0();
+				StopSlewing();
 				
 				bData_40002e8c = 0;
 				
@@ -972,28 +981,28 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 4800;
 			break;
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//0x60c28
-			Data_40002c64_MenuContextId = 4804;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE_CUSTOM_SPEED; //4804;
 			break;
 		
-		case 48051:
+		case MENU_CONTEXT_GUIDING_SPEED1: //48051:
 			//0x60c3c
-		case 48052:
+		case MENU_CONTEXT_GUIDING_SPEED2: //48052:
 			//0x60c44
-		case 48053:
+		case MENU_CONTEXT_GUIDING_SPEED3: //48053:
 			//0x60c48
-		case 48054:
+		case MENU_CONTEXT_GUIDING_SPEED4: //48054:
 			//0x60c4c
-		case 48055:
+		case MENU_CONTEXT_GUIDING_SPEED5: //48055:
 			//0x60c50
-		case 48056:
+		case MENU_CONTEXT_GUIDING_SPEED6: //48056:
 			//0x60c54
-		case 48057:
+		case MENU_CONTEXT_GUIDING_SPEED7: //48057:
 			//0x60c58
-		case 48058:
+		case MENU_CONTEXT_GUIDING_SPEED8: //48058:
 			//0x60c5c
-			Data_40002c64_MenuContextId = 4805;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TRACKING_RATE_GUIDING_SPEED; //4805;
 			break;
 		
 		case 360011: //???

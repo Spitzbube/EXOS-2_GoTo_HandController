@@ -19,12 +19,12 @@ void func_5099c(void)
 	Data_40003190 = 1;
 	bData_40003194 = 0;
 	bData_40003196_CurrentLanguage = MENU_LANGUAGE_ENGLISH; //1;
-	bData_4000319c = 0;
-	bData_4000319d = 0;
+	g_bSingleSlewActive = 0;
+	g_bCombinedSlewActive = 0;
 	bCapsLock = 0;
 	bMapKeyToCharIndex = 0;
 	bData_40002c1a = 0;
-	bData_40003431 = 0;
+	bGotoParkPosition = 0;
 	bData_40003210 = 0;
 	bData_40003211 = 0;
 	bData_400031bf = 0x42;
@@ -39,12 +39,12 @@ void func_5099c(void)
 	bData_400032a4_OTAZeroDataErrorCount = 0;
 	bData_4000319b = 0;
 	bData_400031e9 = 0;
-	bData_400031b8 = 0;
+	g_bMaxSlewRampActive = 0;
 	bData_400031b9 = 0;
 	Data_40002e80 = 0;
 	Data_40002e84 = 0;
 	bData_4000322d_AlarmTimeElapsed = 0;
-	bData_400031ea = 0;
+	g_bTargetSyncOpen = 0;
 	bData_400031eb = 0;
 	bData_400031ec = 1;
 	bSystemInitialized = 1;
@@ -52,8 +52,8 @@ void func_5099c(void)
 	dData_400031f8 = 0.0;
 	bData_40003200 = 0;
 	bData_40003201 = 0;
-	Data_40003204 = 0;
-	Data_40003208 = 0;
+	iMountAutoguideRa = 0;
+	iMountAutoguideDec = 0;
 	bData_40002d88 = 0;
 	bData_40002da8 = 0;
 }

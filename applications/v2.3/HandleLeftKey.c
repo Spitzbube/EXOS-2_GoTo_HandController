@@ -928,12 +928,12 @@ void HandleLeftKey(void)
 			//0x59950
 		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
 			//0x59954
-			if (bData_400034a9 == 0)
+			if (g_bLandTarget == 0)
 			{
-				if ((Data_40004128.bData_356 != 0) && (bData_40002e89 != 1))
+				if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
 				{
 					//59984
-					Data_40003408 = -1;
+					g_iSlewStepRaAxis = -1;
 					bData_40003200 = 0;
 					//->0x59a1c
 				}
@@ -943,13 +943,13 @@ void HandleLeftKey(void)
 					if (bData_40002c1a == 1)
 					{
 						//599b0
-						func_57414(1, 3, bData_40002e7d_RotatingSpeed);
+						SlewAxis(1, 3, g_eSlewRateIndex);
 						//->0x59a1c
 					}
 					else
 					{
 						//0x599c8
-						func_57414(3, 3, bData_40002e7d_RotatingSpeed);
+						SlewAxis(3, 3, g_eSlewRateIndex);
 						//->0x59a1c
 					}
 				}
@@ -960,12 +960,12 @@ void HandleLeftKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//599f0
-					func_57414(1, 3, bData_40002e7d_RotatingSpeed);
+					SlewAxis(1, 3, g_eSlewRateIndex);
 				}
 				else
 				{
 					//0x59a08
-					func_57414(3, 3, bData_40002e7d_RotatingSpeed);
+					SlewAxis(3, 3, g_eSlewRateIndex);
 				}
 			}
 			//-> 0x59dc4
@@ -976,7 +976,7 @@ void HandleLeftKey(void)
 			if (bData_40002c62_AlignmentStarMode != 0)
 			{
 				//59a34
-				Data_40003408 = -1;
+				g_iSlewStepRaAxis = -1;
 				bData_40003200 = 0;
 			}
 			//0x59a4c -> 0x59dc4
@@ -989,14 +989,14 @@ void HandleLeftKey(void)
 			if (bData_40002c1a == 1)
 			{
 				//59a74
-				func_57414(1, 3, MENU_ROTATING_SPEED_8); //3);
+				SlewAxis(1, 3, SLEW_RATE_8X); //3);
 				
 				bData_40002edd = 2;
 			}
 			else
 			{
 				//0x59a94
-				func_57414(3, 3, MENU_ROTATING_SPEED_8); //3);
+				SlewAxis(3, 3, SLEW_RATE_8X); //3);
 				
 				bData_40002edd = 0;
 			}
@@ -1014,18 +1014,18 @@ void HandleLeftKey(void)
 				if (bData_40002c1a == 1)
 				{
 					//59afc
-					func_57414(1, 3, bData_40002e7d_RotatingSpeed);
+					SlewAxis(1, 3, g_eSlewRateIndex);
 				}
 				else
 				{
 					//0x59b14
-					func_57414(3, 3, bData_40002e7d_RotatingSpeed);
+					SlewAxis(3, 3, g_eSlewRateIndex);
 				}
 			}
 			//0x59b28 -> 0x59dc4
 			break;
 		
-		case 48001:
+		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001:
 			//0x59b2c
 			func_5939c();
 			break;

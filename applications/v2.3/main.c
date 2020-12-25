@@ -51,720 +51,7 @@ void HandleStarKey(void)
 	}		
 }
 
-/* 4ee90 - todo */
-void func_4ee90(int a, int b, int c, int d, int e, int f)
-{
-	unsigned char sp[12];
-	unsigned char i;
-	
-	bData_40003430 = 1;
-	bData_40003200 = 0;
-	bData_40003201 = 0;
-	
-	if (bData_4000319d == 1)
-	{
-		//4eed4
-		sp[0] = 0x55;
-		sp[1] = 0xaa;
-		sp[2] = 0x01;
-		sp[3] = 0x04;
-		
-		switch (a)
-		{
-			case 1:
-				//0x4ef18
-				sp[4] = 0x01;
-				break;
-			
-			case 2:
-				//0x4ef28
-				sp[4] = 0x21;
-				break;
-			
-			case 3:
-				//0x4ef38
-				sp[4] = 0x41;
-				break;
-			
-			case 4:
-				//0x4ef48
-				sp[4] = 0x61;
-				break;
-			
-			default:
-				//0x4ef58
-				break;
-		}
-		
-		switch (b)
-		{
-			case 3:
-				//0x4ef88
-			case 1:
-				//0x4ef90
-				sp[5] = 0x00;
-				break;
-			
-			case 4:
-				//0x4ef9c
-			case 2:
-				//0x4efa4
-				sp[5] = 0x01;
-				break;
-						
-			default:
-				//0x4efb0
-				break;
-		}
-		
-		if (bData_40002c1a == 1)
-		{
-			//4efcc
-			switch (c)
-			{
-				case 0:
-					//0x4f000
-					sp[6] = 0x00;
-					sp[7] = 0x00;
-					bData_40002e88 = 0;
-					break;
-				
-				case 1:
-					//0x4f06c
-					sp[6] = 0;
-					sp[7] = 5;
-					bData_40002e88 = 10;
-					break;
-				
-				case 2:
-					//0x4f090
-					sp[6] = 0;
-					sp[7] = 10;
-					bData_40002e88 = 10;
-					break;
-				
-				case 3:
-					//0x4f0b0
-					sp[6] = 0;
-					sp[7] = 40;
-					bData_40002e88 = 10;
-					break;
-				
-				case 4:
-					//0x4f0d4
-					sp[6] = 0;
-					sp[7] = 160;
-					bData_40002e88 = 10;
-					break;
-				
-				case 5:
-					//0x4f0f8
-					sp[6] = 1;
-					sp[7] = 64;
-					bData_40002e88 = 10;
-					break;
-				
-				case 6:
-					//0x4f11c
-					sp[6] = 2;
-					sp[7] = 128;
-					bData_40002e88 = 10;
-					break;
-				
-				case 7:
-					//0x4f140
-					sp[6] = 5;
-					sp[7] = 0;
-					bData_40002e88 = 10;
-					break;
-				
-				case 8:
-					//0x4f164
-					sp[6] = 10;
-					sp[7] = 0;
-					bData_40002e88 = 10;
-					break;
-				
-				case 9:
-					//0x4f188
-					sp[6] = 10;
-					sp[7] = 0;
-					bData_40002e88 = 10;
-					break;
-				#if 0
-				default:
-					//0x4f1ac
-					break;
-				#endif
-			} //switch (c)			
-		} //if (bData_40002c1a == 1)
-		//0x4f1b0
-		if (bData_40002c1a == 2)
-		{
-			//4f1c0
-			switch (c)
-			{
-				case 0:
-					//0x4f1f4
-					sp[6] = 0;
-					sp[7] = 0;
-					bData_40002e88 = 0;
-					break;
-				
-				case 1:
-					//0x4f210
-					sp[6] = 0;
-					sp[7] = 6;
-					bData_40002e88 = 10;
-					break;
-				
-				case 2:
-					//0x4f234
-					sp[6] = 0;
-					sp[7] = 12;
-					bData_40002e88 = 10;
-					break;
-				
-				case 3:
-					//0x4f258
-					sp[6] = 0;
-					sp[7] = 48;
-					bData_40002e88 = 10;
-					break;
-				
-				case 4:
-					//0x4f27c
-					sp[6] = 0;
-					sp[7] = 96;
-					bData_40002e88 = 10;
-					break;
-				
-				case 5:
-					//0x4f2a0
-					sp[6] = 0;
-					sp[7] = 192;
-					bData_40002e88 = 10;
-					break;
-				
-				case 6:
-					//0x4f2c4
-					sp[6] = 1;
-					sp[7] = 128;
-					bData_40002e88 = 10;
-					break;
-				
-				case 7:
-					//0x4f2e8
-					sp[6] = 2;
-					sp[7] = 28;
-					bData_40002e88 = 10;
-					break;
-				
-				case 8:
-					//0x4f30c
-					sp[6] = 3;
-					sp[7] = 56;
-					bData_40002e88 = 10;
-					break;
-				
-				case 9:
-					//0x4f330
-					sp[6] = 3;
-					sp[7] = 212;
-					bData_40002e88 = 10;
-					break;
-				#if 0
-				default:
-					//0x4f354
-					break;
-				#endif
-			} //switch (c)			
-		}
-		//0x4f358
-		for (i = 0; i < 8; i++)
-		{
-			//0x4f360
-			uart1_write_byte(sp[i]);
-		}
-		
-		switch (d)
-		{
-			case 1:
-				//0x4f3a0
-				sp[4] = 0x01;
-				break;
-			
-			case 2:
-				//0x4f3b0
-				sp[4] = 0x21;
-				break;
-			
-			case 3:
-				//0x4f3c0
-				sp[4] = 0x41;
-				break;
-			
-			case 4:
-				//0x4f3d0
-				sp[4] = 0x61;
-				break;
-			
-			default:
-				//0x4f3e0
-				break;
-		}
-		
-		switch (e)
-		{
-			case 3:
-				//0x4f410
-			case 1:
-				//0x4f418
-				sp[5] = 0x00;
-				break;
-			
-			case 4:
-				//0x4f424
-			case 2:
-				//0x4f42c
-				sp[5] = 0x01;
-				break;
-						
-			default:
-				//0x4f438
-				break;
-		}
-		//0x4f440
-		if (bData_40002c1a == 1)
-		{
-			//4f454
-			switch (f)
-			{
-				case 0:
-					//0x4f488
-					sp[6] = 0x00;
-					sp[7] = 0x00;
-					bData_40002e88 = 0;
-					break;
-				
-				case 1:
-					//0x4f4a4
-					sp[6] = 0;
-					sp[7] = 5;
-					bData_40002e88 = 10;
-					break;
-				
-				case 2:
-					//0x4f4c8
-					sp[6] = 0;
-					sp[7] = 10;
-					bData_40002e88 = 10;
-					break;
-				
-				case 3:
-					//0x4f4e8
-					sp[6] = 0;
-					sp[7] = 40;
-					bData_40002e88 = 10;
-					break;
-				
-				case 4:
-					//0x4f50c
-					sp[6] = 0;
-					sp[7] = 160;
-					bData_40002e88 = 10;
-					break;
-				
-				case 5:
-					//0x4f530
-					sp[6] = 1;
-					sp[7] = 64;
-					bData_40002e88 = 10;
-					break;
-				
-				case 6:
-					//0x4f554
-					sp[6] = 2;
-					sp[7] = 128;
-					bData_40002e88 = 10;
-					break;
-				
-				case 7:
-					//0x4f578
-					sp[6] = 5;
-					sp[7] = 0;
-					bData_40002e88 = 10;
-					break;
-				
-				case 8:
-					//0x4f59c
-					sp[6] = 10;
-					sp[7] = 0;
-					bData_40002e88 = 10;
-					break;
-				
-				case 9:
-					//0x4f5c0
-					sp[6] = 10;
-					sp[7] = 0;
-					bData_40002e88 = 10;
-					break;
-				#if 0
-				default:
-					//0x4f5e4
-					break;
-				#endif
-			} //switch (f)			
-		}
-		//0x4f5e8
-		if (bData_40002c1a == 2)
-		{
-			//4f5f8
-			switch (f)
-			{
-				case 0:
-					//0x4f62c
-					sp[6] = 0;
-					sp[7] = 0;
-					bData_40002e88 = 0;
-					break;
-				
-				case 1:
-					//0x4f648
-					sp[6] = 0;
-					sp[7] = 6;
-					bData_40002e88 = 10;
-					break;
-				
-				case 2:
-					//0x4f66c
-					sp[6] = 0;
-					sp[7] = 12;
-					bData_40002e88 = 10;
-					break;
-				
-				case 3:
-					//0x4f690
-					sp[6] = 0;
-					sp[7] = 48;
-					bData_40002e88 = 10;
-					break;
-				
-				case 4:
-					//0x4f6b4
-					sp[6] = 0;
-					sp[7] = 96;
-					bData_40002e88 = 10;
-					break;
-				
-				case 5:
-					//0x4f6d8
-					sp[6] = 0;
-					sp[7] = 192;
-					bData_40002e88 = 10;
-					break;
-				
-				case 6:
-					//0x4f6fc
-					sp[6] = 1;
-					sp[7] = 128;
-					bData_40002e88 = 10;
-					break;
-				
-				case 7:
-					//0x4f720
-					sp[6] = 2;
-					sp[7] = 28;
-					bData_40002e88 = 10;
-					break;
-				
-				case 8:
-					//0x4f744
-					sp[6] = 3;
-					sp[7] = 56;
-					bData_40002e88 = 10;
-					break;
-				
-				case 9:
-					//0x4f768
-					sp[6] = 3;
-					sp[7] = 212;
-					bData_40002e88 = 10;
-					break;
-				#if 0
-				default:
-					//0x4f78c
-					break;
-				#endif
-			} //switch (f)			
-		} //if (bData_40002c1a == 2)
-		//0x4f790
-		for (i = 0; i < 8; i++)
-		{
-			//0x4f798
-			uart1_write_byte(sp[i]);
-		}
-	} //if (bData_4000319d == 1)
-	else
-	{
-		//0x4f7b8
-		bData_4000319d = 1;
-		
-		if (bData_4000319c == 0)
-		{
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0xff);
-		}
-	}
-}
-
-/* 4f804 - todo */
-void func_4f804(void)
-{
-	switch (Data_40002c64_MenuContextId)
-	{
-		case MENU_CONTEXT_MAIN: //0:
-			//0x4f88c
-		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
-			//0x4f894
-		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
-			//0x4f898
-		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
-			//0x4f89c
-		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
-			//0x4f8a0
-		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
-			//0x4f8a4
-		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
-			//0x4f8a8
-		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
-			//0x4f8ac
-		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
-			//0x4f8b0
-		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
-			//0x4f8b4
-			if (bData_400034a9 == 0)
-			{
-				//4f8c4
-				if ((Data_40004128.bData_356 != 0) &&
-					(bData_40002e89 != 1))
-				{
-					//4f8e4
-					Data_40003408 = 1;
-					Data_4000340c = 1;
-					bData_40003201 = 0;
-					bData_40003200 = 0;
-					//->4f9cc
-				}
-				//4f910
-				else if (bData_40002c1a == 1)
-				{
-					//4f920
-					//40002e7d
-					func_4ee90(1, 4, bData_40002e7d_RotatingSpeed, 2, 1, bData_40002e7d_RotatingSpeed);
-					//->4f9cc
-				}
-				else
-				{
-					//0x4f948
-					func_4ee90(3, 4, bData_40002e7d_RotatingSpeed, 4, 1, bData_40002e7d_RotatingSpeed);
-					//->4f9cc
-				}
-			}
-			else
-			{
-				//0x4f970
-				if (bData_40002c1a == 1)
-				{
-					//4f980
-					func_4ee90(1, 4, bData_40002e7d_RotatingSpeed, 2, 1, bData_40002e7d_RotatingSpeed);
-					//->4f9cc
-				}
-				else
-				{
-					//4f9a8
-					func_4ee90(3, 4, bData_40002e7d_RotatingSpeed, 4, 1, bData_40002e7d_RotatingSpeed);
-					//->4f9cc
-				}
-			}			
-			break;
-		
-		default:
-			//0x4f9d0
-			break;
-	}	
-}
-
-/* 4f9e4 - todo */
-void func_4f9e4(void)
-{
-	switch (Data_40002c64_MenuContextId)
-	{
-		case MENU_CONTEXT_MAIN: //0:
-		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
-		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
-		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
-		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
-		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
-		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
-		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
-		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
-		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
-			if (bData_400034a9 == 0)
-			{
-				//4faa4
-				if ((Data_40004128.bData_356 != 0) &&
-					(bData_40002e89 != 1))
-				{
-					Data_40003408 = 1;
-					Data_4000340c = -1;
-					bData_40003201 = 0;
-					bData_40003200 = 0;
-				}
-				//0x4faf4
-				else if (bData_40002c1a == 1)
-				{
-					func_4ee90(1, 4, bData_40002e7d_RotatingSpeed, 2, 2, bData_40002e7d_RotatingSpeed);
-				}
-				else
-				{
-					//0x4fb2c
-					func_4ee90(3, 4, bData_40002e7d_RotatingSpeed, 4, 2, bData_40002e7d_RotatingSpeed);
-				}
-			}
-			else
-			{
-				//0x4fb54
-				if (bData_40002c1a == 1)
-				{
-					func_4ee90(1, 4, bData_40002e7d_RotatingSpeed, 2, 2, bData_40002e7d_RotatingSpeed);
-				}
-				else
-				{
-					func_4ee90(3, 4, bData_40002e7d_RotatingSpeed, 4, 2, bData_40002e7d_RotatingSpeed);
-				}
-			}			
-			break;
-		
-		default:
-			break;
-	}	
-}
-
-/* 4fbc8 - todo */
-void func_4fbc8(void)
-{
-	switch (Data_40002c64_MenuContextId)
-	{
-		case MENU_CONTEXT_MAIN: //0:
-		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
-		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
-		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
-		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
-		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
-		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
-		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
-		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
-		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
-			if (bData_400034a9 == 0)
-			{
-				//4fc88
-				if ((Data_40004128.bData_356 != 0) &&
-					(bData_40002e89 != 1))
-				{
-					Data_40003408 = -1;
-					Data_4000340c = -1;
-					bData_40003201 = 0;
-					bData_40003200 = 0;
-				}
-				//0x4fcd4
-				else if (bData_40002c1a == 1)
-				{
-					func_4ee90(1, 3, bData_40002e7d_RotatingSpeed, 2, 2, bData_40002e7d_RotatingSpeed);
-				}
-				else
-				{
-					//0x4fd0c
-					func_4ee90(3, 3, bData_40002e7d_RotatingSpeed, 4, 2, bData_40002e7d_RotatingSpeed);
-				}
-			}
-			else
-			{
-				//0x4fd34
-				if (bData_40002c1a == 1)
-				{
-					func_4ee90(1, 3, bData_40002e7d_RotatingSpeed, 2, 2, bData_40002e7d_RotatingSpeed);
-				}
-				else
-				{
-					func_4ee90(3, 3, bData_40002e7d_RotatingSpeed, 4, 2, bData_40002e7d_RotatingSpeed);
-				}
-			}			
-			break;
-		
-		default:
-			break;
-	}	
-}
-
-/* 4fda8 - todo */
-void func_4fda8(void)
-{
-	switch (Data_40002c64_MenuContextId)
-	{
-		case MENU_CONTEXT_MAIN: //0:
-		case MENU_CONTEXT_SOLAR_SYSTEM_OBJECT_TRACKING: //22111:
-		case MENU_CONTEXT_CONSTELLATION_TRACKING: //24002:
-		case MENU_CONTEXT_FAMOUS_STAR_TRACKING: //25002:
-		case MENU_CONTEXT_MESSIER_OBJECT_TRACKING: //23022:
-		case MENU_CONTEXT_NGC_OBJECT_TRACKING: //23013:
-		case MENU_CONTEXT_IC_OBJECT_TRACKING: //23014:
-		case MENU_CONTEXT_SH2_OBJECT_TRACKING: //23015:
-		case MENU_CONTEXT_BRIGHT_STAR_TRACKING: //23016:
-		case MENU_CONTEXT_SAO_OBJECT_TRACKING: //23017:
-			if (bData_400034a9 == 0)
-			{
-				//4fe68
-				if ((Data_40004128.bData_356 != 0) &&
-					(bData_40002e89 != 1))
-				{
-					Data_40003408 = -1;
-					Data_4000340c = 1;
-					bData_40003201 = 0;
-					//bData_40003200 = 0; //Bug??
-				}
-				//0x4feb0
-				else if (bData_40002c1a == 1)
-				{
-					func_4ee90(1, 3, bData_40002e7d_RotatingSpeed, 2, 1, bData_40002e7d_RotatingSpeed);
-				}
-				else
-				{
-					//0x4fee8
-					func_4ee90(3, 3, bData_40002e7d_RotatingSpeed, 4, 1, bData_40002e7d_RotatingSpeed);
-				}
-			}
-			else
-			{
-				//0x4ff10
-				if (bData_40002c1a == 1)
-				{
-					func_4ee90(1, 3, bData_40002e7d_RotatingSpeed, 2, 1, bData_40002e7d_RotatingSpeed);
-				}
-				else
-				{
-					func_4ee90(3, 3, bData_40002e7d_RotatingSpeed, 4, 1, bData_40002e7d_RotatingSpeed);
-				}
-			}			
-			break;
-		
-		default:
-			break;
-	}	
-}
+#include "slew2.c"
 
 /* 4ff84 - todo */
 void HandleAlarmInputData(void)
@@ -805,7 +92,7 @@ void PrepareCustomerSkyObjectInputData(void)
 	if (bData_40002e7a_MountType == 0)
 	{
 		//50060
-		func_acdc(dData_40002dc0_Azimuth, dData_40002df8, &dData_40002c88, &dData_40002c90);
+		convert_horizontal_to_equatorial(dData_40002dc0_Azimuth, dData_40002df8, &dData_40002c88, &dData_40002c90);
 		//->0x5013c
 	}
 	else
@@ -1428,9 +715,9 @@ void HandleRectascensionDeclinationInput(void)
 			dData_40002d10 = Data_40002cf4 + Data_40002cf8 / 60.0 + fData_40002cfc / 3600.0;
 			dData_40002d10 = Data_40002d40 * dData_40002d10;
 			
-			bData_40002e88 = 1;
+			bTrackingMode = 1;
 			
-			func_b64c(dData_40002cc8, dData_40002d10);
+			GotoEQCoordinates(dData_40002cc8, dData_40002d10);
 			
 			bData_40002f0d_RecentTargetType = 11;
 			bData_40002f10_RecentTargetId = 10;
@@ -2243,12 +1530,12 @@ void HandleLongListScroll(int upDown, int b)
 #include "HandleUpKey.c"
 
 /* 5f0c0 - complete */
-void func_5f0c0(void)
+void SlewStop(void)
 {
-	if ((bData_4000319c == 1) || (bData_4000319d == 1))
+	if ((g_bSingleSlewActive == 1) || (g_bCombinedSlewActive == 1))
 	{
 		//0x5f0e4
-		if (bData_4000319d == 1)
+		if (g_bCombinedSlewActive == 1)
 		{
 			uart1_write_byte(0x55);
 			uart1_write_byte(0xaa);
@@ -2256,10 +1543,10 @@ void func_5f0c0(void)
 			uart1_write_byte(1);
 			uart1_write_byte(0);
 			
-			bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
+			bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 		}
 		//0x5f128
-		if (bData_4000319c == 1)
+		if (g_bSingleSlewActive == 1)
 		{
 			if (bData_40002c1a == 2)
 			{
@@ -2269,12 +1556,12 @@ void func_5f0c0(void)
 				uart1_write_byte(1);
 				uart1_write_byte(0);
 				
-				bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
+				bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 			}
 			else
 			{
 				//0x5f180
-				if (bData_40002e7d_RotatingSpeed != MENU_ROTATING_SPEED_MAX) //9)
+				if (g_eSlewRateIndex != SLEW_RATE_MAX) //9)
 				{
 					uart1_write_byte(0x55);
 					uart1_write_byte(0xaa);
@@ -2282,31 +1569,31 @@ void func_5f0c0(void)
 					uart1_write_byte(1);
 					uart1_write_byte(0);
 					
-					bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
-				}
+					bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
+				} //if (g_eSlewRateIndex != SLEW_RATE_MAX) //9)
 				else
 				{
 					//0x5f1c8
-					if (Data_400031a4.Data >= 4800)
+					if (g_stCurrentSlewRampValue.Data >= 4800)
 					{
-						Data_400031a4.Data = 4700;
+						g_stCurrentSlewRampValue.Data = 4700;
 					}
 					//0x5f1e4
-					Data_400031b4 = -4;					
+					g_iCurrentSlewRampIndex = -4;	// Ramp down (-1200)
 				}
 			}
 		}
 		//0x5f1f0
-		if (bData_4000319c == 1)
+		if (g_bSingleSlewActive == 1)
 		{
-			bData_4000319c = 0;
+			g_bSingleSlewActive = 0;
 		}
 		//0x5f20c
-		if (bData_4000319d == 1)
+		if (g_bCombinedSlewActive == 1)
 		{
-			bData_4000319d = 0;
+			g_bCombinedSlewActive = 0;
 		}
-	}
+	} //if ((g_bSingleSlewActive == 1) || (g_bCombinedSlewActive == 1))
 	//0x5f228
 }
 
@@ -3388,8 +2675,8 @@ unsigned char ConvertKeyCode(void)
 
 		default:
 			//6a2ac
-			func_5f0c0();
-			func_5f0c0();
+			SlewStop();
+			SlewStop();
 			break;
 	}
 	
@@ -3436,9 +2723,9 @@ void UserInterfaceCycle(void)
 			
 			case 1:
 				//0x6a3d8: "1"
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a40c
 					Handle1Key();
@@ -3448,9 +2735,9 @@ void UserInterfaceCycle(void)
 				
 			case 2:
 				//0x6a420
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a454
 					Handle2Key();
@@ -3460,9 +2747,9 @@ void UserInterfaceCycle(void)
 			
 			case 3:
 				//0x6a468
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a49c
 					Handle3Key();
@@ -3472,9 +2759,9 @@ void UserInterfaceCycle(void)
 			
 			case 4:
 				//0x6a4b0
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a4e4
 					Handle4Key();
@@ -3484,9 +2771,9 @@ void UserInterfaceCycle(void)
 			
 			case 5:
 				//0x6a4f8
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a52c
 					Handle5Key();
@@ -3496,9 +2783,9 @@ void UserInterfaceCycle(void)
 						
 			case 6:
 				//0x6a540
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a574
 					Handle6Key();
@@ -3514,9 +2801,9 @@ void UserInterfaceCycle(void)
 			
 			case 8:
 				//0x6a5a0
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a5d4
 					Handle8Key();
@@ -3526,9 +2813,9 @@ void UserInterfaceCycle(void)
 			
 			case 9:
 				//0x6a5e8
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a61c
 					Handle9Key();
@@ -3562,9 +2849,9 @@ void UserInterfaceCycle(void)
 			
 			case 14:
 				//0x6a690: "Up"
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a6c4
 					HandleUpKey();
@@ -3574,9 +2861,9 @@ void UserInterfaceCycle(void)
 			
 			case 15:
 				//0x6a6d8: "Down"
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a70c
 					HandleDownKey();
@@ -3586,9 +2873,9 @@ void UserInterfaceCycle(void)
 			
 			case 16:
 				//0x6a720: "Left"
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a754
 					HandleLeftKey();
@@ -3598,9 +2885,9 @@ void UserInterfaceCycle(void)
 			
 			case 17:
 				//0x6a768: "Right"
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a79c
 					HandleRightKey();
@@ -3621,9 +2908,9 @@ void UserInterfaceCycle(void)
 			
 			case 22:
 				//0x6a7c8
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a7fc
 					func_4fda8();
@@ -3633,9 +2920,9 @@ void UserInterfaceCycle(void)
 			
 			case 21:
 				//0x6a810
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a844
 					func_4fbc8();
@@ -3645,9 +2932,9 @@ void UserInterfaceCycle(void)
 			
 			case 23:
 				//0x6a858
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a88c
 					func_4f9e4();
@@ -3657,9 +2944,9 @@ void UserInterfaceCycle(void)
 			
 			case 24:
 				//0x6a8a0
-				if (((Data_40004128.bData_357 != 0) && 
-					(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
-					(Data_40004128.bData_357 == 0))
+				if (((Data_40004128.bTrackingRequest != 0) &&
+					(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)) ||
+					(Data_40004128.bTrackingRequest == 0))
 				{
 					//6a8d4
 					func_4f804();
@@ -3685,8 +2972,8 @@ void UserInterfaceCycle(void)
 	{
 		//6a91c
 		bData_40003505 = 0;
-		Data_40003408 = 0;
-		Data_4000340c = 0;
+		g_iSlewStepRaAxis = 0;
+		g_iSlewStepDecAxis = 0;
 		Data_40002e80 = 0;
 		Data_40002e84 = 0;
 	}
@@ -3843,11 +3130,11 @@ double func_6ab74(int a)
 	return d;
 }
 
-/* 6ae24 - todo */
+/* 6ae24 - complete */
 double InquireMotorData(int a)
 {
-	unsigned char r5;
-	double sp8;
+	unsigned char wait;
+	double dValue;
 	
 	bData_40002c13_uart1ReceiveComplete = 0;
 	
@@ -3887,15 +3174,15 @@ double InquireMotorData(int a)
 	
 	delay_loop(2);
 	
-	r5 = 20;
+	wait = 20;
 	
 	if (bData_40002c1a != 0)
 	{
-		while ((bData_40002c13_uart1ReceiveComplete == 0) && (r5 > 2))
+		while ((bData_40002c13_uart1ReceiveComplete == 0) && (wait > 2))
 		{
 			//0x6aef4
 			func_659c(5);
-			r5--;
+			wait--;
 		}
 	}
 	//0x6af1c
@@ -3913,8 +3200,8 @@ double InquireMotorData(int a)
 					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
 					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
 					
-					sp8 = Data_400031a0.Data;
-					dData_40002d80 = sp8 * 360.0 / 841763108.524032;
+					dValue = Data_400031a0.Data;
+					g_dMotorPositionRaAxis = dValue * 360.0 / 841763108.524032;
 				}
 				//0x6afcc -> 0x6b15c
 				break;
@@ -3928,8 +3215,8 @@ double InquireMotorData(int a)
 					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
 					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
 					
-					sp8 = Data_400031a0.Data;
-					dData_40002da0 = sp8 * 360.0 / 841763108.524032;
+					dValue = Data_400031a0.Data;
+					g_dMotorPositionDecAxis = dValue * 360.0 / 841763108.524032;
 				}
 				//0x6b04c -> 0x6b15c
 				break;
@@ -3943,8 +3230,8 @@ double InquireMotorData(int a)
 					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
 					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
 					
-					sp8 = Data_400031a0.Data;
-					dData_40002db8 = sp8 * 360.0 / 278879846.40000004;
+					dValue = Data_400031a0.Data;
+					g_dMotorPositionAziAxis = dValue * 360.0 / 278879846.40000004;
 					#if 1
 					if (Data_400031a0.Data == 0)
 					{
@@ -3963,8 +3250,8 @@ double InquireMotorData(int a)
 					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
 					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
 					
-					sp8 = Data_400031a0.Data;
-					dData_40002df0 = sp8 * 360.0 / 383201280.0;
+					dValue = Data_400031a0.Data;
+					g_dMotorPositionAltAxis = dValue * 360.0 / 383201280.0;
 				}
 				//0x6b150 -> 0x6b15c
 				break;
@@ -3979,13 +3266,13 @@ double InquireMotorData(int a)
 	//0x6b16c
 }
 
-/* 6b17c - todo */
-void func_6b17c(void)
+/* 6b17c - complete */
+void ReceiveMountAutoguideValues(void)
 {
-	unsigned char r3;
+	unsigned char wait;
 	
-	Data_40003204 = 0;
-	Data_40003208 = 0;
+	iMountAutoguideRa = 0;
+	iMountAutoguideDec = 0;
 	bData_40002c13_uart1ReceiveComplete = 0;
 	
 	uart1_write_byte(0x55);
@@ -3996,13 +3283,13 @@ void func_6b17c(void)
 	
 	bData_40002c13_uart1ReceiveComplete = 0;
 	
-	r3 = 10;
+	wait = 10;
 	while ((bData_40002c13_uart1ReceiveComplete == 0) &&
 		(bData_40002c13_uart1ReceiveComplete == 0))
 	{
 		//0x6b1d8
 		delay_loop(1);
-		r3--;
+		wait--;
 	}
 	//0x6b208
 	if (bData_40002c13_uart1ReceiveComplete == 1)
@@ -4017,25 +3304,25 @@ void func_6b17c(void)
 			if ((Data_40003592_uart1ReceiveDataBuffer[1] & 1) == 1)
 			{
 				//6b250
-				Data_40003204 = 1;
+				iMountAutoguideRa = 1;
 			}
 			//0x6b25c
 			if ((Data_40003592_uart1ReceiveDataBuffer[1] & 8) == 8)
 			{
 				//6b270
-				Data_40003204 = -1;
+				iMountAutoguideRa = -1;
 			}
 			//0x6b27c
 			if ((Data_40003592_uart1ReceiveDataBuffer[1] & 2) == 2)
 			{
 				//6b290
-				Data_40003208 = 1;
+				iMountAutoguideDec = 1;
 			}
 			//0x6b29c
 			if ((Data_40003592_uart1ReceiveDataBuffer[1] & 4) == 4)
 			{
 				//6b290
-				Data_40003208 = -1;
+				iMountAutoguideDec = -1;
 			}
 			#if 1			
 			if ((Data_40003592_uart1ReceiveDataBuffer[1] & 16) == 16)
@@ -4597,293 +3884,7 @@ void ShowStartupScreen(void)
 	#endif
 }
 
-/* 6c848 - todo */
-int func_6c848(void)
-{
-	if (bData_40002c0b_uart0ReceiveComplete == 1)
-	{
-		bData_4000352d = Data_40003588_uart0ReceiveDataBuffer[0];
-		
-#ifdef OLIMEX_LPC2148
-		{
-			static char buf[105];
-
-			snprintf(buf, 100, "func_6c848: bData_4000352d: 0x%x\n\r", bData_4000352d);
-			uart1_send((unsigned char*)buf, strlen(buf));
-		}
-#endif
-
-		switch (bData_4000352d)
-		{
-			case 35:
-				//6c898
-			case 36:
-				//6c8a0
-				Data_40002c28.bData[0] = Data_40003588_uart0ReceiveDataBuffer[1];
-				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[2];
-				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[3];
-				Data_40002c28.bData[3] = Data_40003588_uart0ReceiveDataBuffer[4];
-				fData_40003510 = *((float*)&Data_40002c28);
-			
-				Data_40002c28.bData[0] = Data_40003588_uart0ReceiveDataBuffer[5];
-				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[6];
-				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[7];
-				Data_40002c28.bData[3] = Data_40003588_uart0ReceiveDataBuffer[8];
-				fData_40003514 = *((float*)&Data_40002c28);
-				//->6ca60
-				break;
-			
-			case 37:
-				//6c92c: "Standort einstellen"
-				Data_40002c28.bData[0] = Data_40003588_uart0ReceiveDataBuffer[1];
-				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[2];
-				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[3];
-				Data_40002c28.bData[3] = Data_40003588_uart0ReceiveDataBuffer[4];
-				fData_40003518_ReceiveExternalSiteLongitude = *((float*)&Data_40002c28);
-			
-				Data_40002c28.bData[0] = Data_40003588_uart0ReceiveDataBuffer[5];
-				Data_40002c28.bData[1] = Data_40003588_uart0ReceiveDataBuffer[6];
-				Data_40002c28.bData[2] = Data_40003588_uart0ReceiveDataBuffer[7];
-				Data_40002c28.bData[3] = Data_40003588_uart0ReceiveDataBuffer[8];
-				fData_4000351c_ReceiveExternalSiteLatitude = *((float*)&Data_40002c28);
-				//->6ca60
-				break;
-			
-			case 38:
-				//6c9bc: "Zeit einstellen"
-				Data_40003524_ReceiveExternalYear = Data_40003588_uart0ReceiveDataBuffer[1] * 100 + 
-												Data_40003588_uart0ReceiveDataBuffer[2];
-				bData_40003528_ReceiveExternalMonth = Data_40003588_uart0ReceiveDataBuffer[3];
-				bData_40003529_ReceiveExternalDay = Data_40003588_uart0ReceiveDataBuffer[4];
-				bData_4000352a_ReceiveExternalHours = Data_40003588_uart0ReceiveDataBuffer[5];
-				bData_4000352b_ReceiveExternalMinutes = Data_40003588_uart0ReceiveDataBuffer[6];
-				bData_4000352c_ReceiveExternalSeconds = Data_40003588_uart0ReceiveDataBuffer[7];
-				fData_40003520 = (float)Data_40003588_uart0ReceiveDataBuffer[8] - 12;
-#ifdef OLIMEX_LPC2148
-				{
-					static char buf[105];
-
-					snprintf(buf, 100, "Date: %u-%u-%u\n\r",
-							Data_40003524_ReceiveExternalYear,
-							bData_40003528_ReceiveExternalMonth,
-							bData_40003529_ReceiveExternalDay);
-					uart1_send((unsigned char*)buf, strlen(buf));
-
-					snprintf(buf, 100, "Time: %u:%u:%u\n\r",
-							bData_4000352a_ReceiveExternalHours,
-							bData_4000352b_ReceiveExternalMinutes,
-							bData_4000352c_ReceiveExternalSeconds);
-					uart1_send((unsigned char*)buf, strlen(buf));
-
-					snprintf(buf, 100, "%d.%d\n\r",
-							(int)fData_40003520,
-							(fData_40003520 - (int)fData_40003520) * 1000);
-					uart1_send((unsigned char*)buf, strlen(buf));
-				}
-#endif
-				//->6ca60
-				break;
-			
-			default:
-				//6ca58
-				break;
-		}
-		
-		bData_40002c0b_uart0ReceiveComplete = 0;
-	}
-	//6ca70
-	return bData_4000352d;
-}
-
-/* 6cb38 - todo */
-void func_6cb38(void)
-{
-	union 
-	{
-		unsigned char bData[4];
-		float fData;
-	} sp60, sp56;
-	unsigned char sp40[13];
-	
-	sp40[0] = 0x55;
-	sp40[1] = 0xaa;
-	sp40[2] = 0x01;
-	sp40[3] = 0x09;
-	
-	bData_4000352d = func_6c848();
-	
-	switch (bData_4000352d)
-	{
-		case 29:
-			//6cbd8: "Schwenk abbrechen"
-			func_b4f0();
-		
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 30:
-			//6cbf0: "Park Scope"?
-			func_75c4();
-		
-			bData_40003431 = 1;
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 31:
-			//6cc10: "Teleskop verbinden"?
-			sp60.fData = dData_40002e28_SiteLongitude;
-			sp56.fData = dData_40002e48_SiteLatitude;
-		
-			sp40[4] = 0xfe;
-			sp40[5] = sp60.bData[0];
-			sp40[6] = sp60.bData[1];
-			sp40[7] = sp60.bData[2];
-			sp40[8] = sp60.bData[3];
-			sp40[9] = sp56.bData[0];
-			sp40[10] = sp56.bData[1];
-			sp40[11] = sp56.bData[2];
-			sp40[12] = sp56.bData[3];
-			
-			uart0_send(sp40, 13);
-		
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 32:
-			//6cc98
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 33:
-			//6ccac
-			if (bData_40002c1a == 1)
-			{
-				sp40[4] = 0x50;
-			}
-			else if (bData_40002c1a == 2)
-			{
-				sp40[4] = 0x41;
-			}
-			
-			uart0_send(sp40, 13);
-			
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 34:
-			//6cd00
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 35:
-			//6cd14
-			func_b64c(fData_40003510, fData_40003514);
-		
-			dData_400031f0 = 0;
-			dData_400031f8 = 0;
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 36:
-			//6cd7c
-			dData_40003410 = dData_400033d8;
-			dData_40003418 = -dData_400033e0;
-			dData_40003420 = dData_400033d8;
-			dData_40003428 = dData_400033e0;
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 37:
-			//6cdd4: "Standort einstellen"
-			bData_40002e89 = 1;
-		
-			func_b4f0();
-		
-			dData_40002e28_SiteLongitude = fData_40003518_ReceiveExternalSiteLongitude;
-			dData_40002e48_SiteLatitude = fData_4000351c_ReceiveExternalSiteLatitude;
-			Data_40004128.geographicLongitude = fData_40003518_ReceiveExternalSiteLongitude;
-			Data_40004128.geographicLatitude = fData_4000351c_ReceiveExternalSiteLatitude;
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 38:
-			//6ce50 - Set Clock
-			bData_40002e89 = 1;
-		
-			func_b4f0();
-		
-			Data_40002e54_Zone = fData_40003520;
-			Data_40004128.timeZone = fData_40003520;
-		
-			CCR = (1 << 4); //clock from the 32 kHz oscillator that�s connected to the RTCX1 and RTCX2 pins
-			YEAR = Data_40003524_ReceiveExternalYear;
-			MONTH = bData_40003528_ReceiveExternalMonth; 
-			DOM = bData_40003529_ReceiveExternalDay;
-			HOUR = bData_4000352a_ReceiveExternalHours;
-			MIN = bData_4000352b_ReceiveExternalMinutes;
-			SEC = bData_4000352c_ReceiveExternalSeconds;
-			CCR = (1 << 4) | (1 << 0); //CLKEN = 1
-		
-			bData_4000352d = 1;
-			//->6d044
-			break;
-		
-		case 1:
-			//6cef8
-			if (bData_4000352e > 2)
-			{
-				//6cf0c
-				if (bData_40002c1a == 2)
-				{
-					//6cf1c
-					double sp32, sp24;
-					func_acdc(fData_40003508, fData_4000350c, &sp32, &sp24);					
-					fData_40003508 = sp32;
-					fData_4000350c = sp24;
-					dData_40003448 = sp32;
-					dData_40003450 = sp24;
-				}
-				//6cfa8
-				sp60.fData = fData_40003508;
-				sp56.fData = fData_4000350c;
-				
-				sp40[4] = 0xff;
-				sp40[5] = sp60.bData[0];
-				sp40[6] = sp60.bData[1];
-				sp40[7] = sp60.bData[2];
-				sp40[8] = sp60.bData[3];
-				sp40[9] = sp56.bData[0];
-				sp40[10] = sp56.bData[1];
-				sp40[11] = sp56.bData[2];
-				sp40[12] = sp56.bData[3];
-				
-				uart0_send(sp40, 13);
-				
-				bData_4000352e = 0;
-				//->6d038
-			}
-			else
-			{
-				//6d024
-				bData_4000352e++;
-			}
-			//6d038 -> 6d044
-			break;
-		
-		default:
-			//6d03c
-			break;
-	}
-}
+#include "ascom.c"
 
 
 static void vLEDTask( void *pvParameters )
@@ -5075,6 +4076,7 @@ static void vMainTask(void *pvParameters)
 	Data_40004128.dData_112 = -180.0;
 	Data_40004128.dData_120 = 90.0;
 	
+	//6d2ac
 	flash_get_custom_site_data(arInitialCustomSiteName, 
 		&fInitialCustomSiteLongitude, 
 		&fInitialCustomSiteLatitude, 
@@ -5132,7 +4134,6 @@ static void vMainTask(void *pvParameters)
 		sprintf(strCustomSiteTimezone, " Zone:W%02d", abs(iInitialCustomSiteTimezone));
 	}
 	//6d630
-
 	func_659c(2000);
 	lcd_display_clear();
 	
@@ -5165,7 +4166,7 @@ static void vMainTask(void *pvParameters)
 	else
 	{
 		//6d874
-		Data_40002c64_MenuContextId = 0;
+		Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 	}
 	//6d880
 	Data_40002c1c = 0;
@@ -5206,7 +4207,7 @@ static void vMainTask(void *pvParameters)
 		fData_40002efc = dData_40002dc0_Azimuth;
 		fData_40002f00 = dData_40002df8;
 
-		func_6cb38(); //check data from uart0
+		ProcessAscomCommands();
 
 #if 0 //OLIMEX_LPC2148
 		volatile int j;
@@ -5225,84 +4226,46 @@ static void vMainTask(void *pvParameters)
 			//6d8d4
 			bData_40002e7a_MountType = MENU_MOUNT_TYPE_EQU; //1;
 			//6d8e0
-			dData_40002ce8 = Data_40004128.dData_144 - 0.00083333333333/* 1/1200 */;
-			Data_40002cd8_ObjectRightAscensionHours = dData_40002ce8;
+			g_dObjectRightAcension = Data_40004128.dObjHourAngleDisplay - 0.00083333333333/* 1/1200 */;
+			Data_40002cd8_ObjectRightAscensionHours = g_dObjectRightAcension;
+			Data_40002cdc_ObjectRightAscensionMinutes = (g_dObjectRightAcension - Data_40002cd8_ObjectRightAscensionHours) * 60.0;
+			fData_40002ce0_ObjectRightAscensionSeconds = (g_dObjectRightAcension - Data_40002cd8_ObjectRightAscensionHours -
+					Data_40002cdc_ObjectRightAscensionMinutes / 60.0) * 3600.0;
 			
-			#if 0
-			sp64 = Data_40002cd8;
-			sp56 = dData_40002ce8 - sp64;
-			sp48 = sp56 * 60.0;
-			Data_40002cdc = sp48;
-			#else
-			Data_40002cdc_ObjectRightAscensionMinutes = (dData_40002ce8 - Data_40002cd8_ObjectRightAscensionHours) * 60.0;
-			#endif
-			
-			#if 0
-			sp64 = Data_40002cdc;
-			sp56 = sp64 / 60.0;
-			sp48 = Data_40002cd8;
-			sp40 = dData_40002ce8 - sp48;
-			sp32 = sp40 - sp56;
-			sp24 = sp32 * 3600.0;
-			fData_40002ce0 = sp24;
-			#else
-			fData_40002ce0_ObjectRightAscensionSeconds = (dData_40002ce8 - Data_40002cd8_ObjectRightAscensionHours - Data_40002cdc_ObjectRightAscensionMinutes / 60.0) * 3600.0;
-			#endif
-			
-			fData_40002d18_ObjectDeclination = fabs(Data_40004128.dData_152);
+			fData_40002d18_ObjectDeclination = fabs(Data_40004128.dObjDeclinationDisplay);
 			Data_40002d00_ObjectDeclinationDegrees = fData_40002d18_ObjectDeclination;
-			
-			#if 0
-			float r5 = Data_40002d00;
-			float r4 = fData_40002d18_ObjectDeclination - r5;
-			sp64 = r4;
-			sp56 = sp64 * 60.0;
-			Data_40002d04_ObjectDeclinationMinutes = sp56;
-			#else
 			Data_40002d04_ObjectDeclinationMinutes = (fData_40002d18_ObjectDeclination - 
 				(float)Data_40002d00_ObjectDeclinationDegrees) * 60.0;
-			#endif
-			
-			#if 0
-			sp64 = Data_40002d04_ObjectDeclinationMinutes;
-			sp56 = sp64 / 60.0;
-			r5 = Data_40002d00;
-			r4 = fData_40002d18_ObjectDeclination - r5;
-			sp48 = r4;
-			sp40 = sp48 - sp56;
-			sp32 = sp40 * 3600.0;
-			fData_40002d08_ObjectDeclinationSeconds = sp32;
-			#else
 			fData_40002d08_ObjectDeclinationSeconds = (fData_40002d18_ObjectDeclination - 
 				(float)Data_40002d00_ObjectDeclinationDegrees - Data_40002d04_ObjectDeclinationMinutes / 60.0) * 3600.0;
-			#endif
 			
 			//6db14
-			if (Data_40004128.dData_80 >= 0.0)
+			if (Data_40004128.dObjDeclination >= 0.0)
 			{
 				//6db30
-				Data_40002d44 = 1;
+				g_iObjectDeclinationSign = 1;
 			}
 			else
 			{
 				//0x6db40
-				Data_40002d44 = -1;
+				g_iObjectDeclinationSign = -1;
 			}
 			//6db4c
 			InquireMotorData(1); //RA Inquire?
 			
-			Data_40004128.dData_208 = dData_40002d80;
-			dData_400034e8 = dData_40002d80;
-			dData_40002dc0_Azimuth = Data_40004128.dData_208;
-			dData_40002d78 = dData_40002d80;
+			Data_40004128.dMotorPositionRaAxis = g_dMotorPositionRaAxis;
+			dData_400034e8 = g_dMotorPositionRaAxis;
+			dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
+			dData_40002d78 = g_dMotorPositionRaAxis;
 			
 			func_659c(5);
 			InquireMotorData(2); //DEC Inquire?
 			//6dbbc
-			Data_40004128.dData_216 = dData_40002da0;
-			dData_400034f8 = dData_40002da0;
-			dData_40002df8 = fabs(Data_40004128.dData_216);
-			dData_40002d98 = dData_40002df8; // = fabs(Data_40004128.dData_216);
+			Data_40004128.dMotorPositionDecAxis = g_dMotorPositionDecAxis;
+			dData_400034f8 = g_dMotorPositionDecAxis;
+			dData_40002df8 = fabs(Data_40004128.dMotorPositionDecAxis);
+			dData_40002d98 = dData_40002df8; // = fabs(Data_40004128.dMotorPositionDecAxis);
+			//6dc04
 			dData_40002d98 = fabs(dData_40002d98);
 			//->0x6dc9c
 			while (dData_40002d98 > 360.0)
@@ -5327,13 +4290,13 @@ static void vMainTask(void *pvParameters)
 				//0x6dd24
 				dData_40002d78 += 90.0;
 				
-				if ((dData_40002da0 > 0) && (dData_40002da0 < 180))
+				if ((g_dMotorPositionDecAxis > 0) && (g_dMotorPositionDecAxis < 180))
 				{
 					//6dd70
 					dData_40002d78 += 180;
 				}
 				//0x6dd8c
-				if ((dData_40002da0 < 0) && (dData_40002da0 < -180))
+				if ((g_dMotorPositionDecAxis < 0) && (g_dMotorPositionDecAxis < -180))
 				{
 					//6ddbc
 					dData_40002d78 += 90;
@@ -5369,16 +4332,16 @@ static void vMainTask(void *pvParameters)
 				//0x6dea0
 				dData_40002d78 = 270.0 - dData_40002d78;
 				
-				if ((dData_40002da0 > 0) && (dData_40002da0 < 180))
+				if ((g_dMotorPositionDecAxis > 0) && (g_dMotorPositionDecAxis < 180))
 				{
 					//6deec
 					dData_40002d78 -= 180;
 				}
 				//0x6df08
-				if ((dData_40002da0 < 0) && (dData_40002da0 < -180))
+				if ((g_dMotorPositionDecAxis < 0) && (g_dMotorPositionDecAxis < -180))
 				{
 					//6df38
-					dData_40002d78 -= 90;
+					dData_40002d78 -= 180;
 				}
 				//0x6df54 -> 0x6df74
 				while (dData_40002d78 >= 360)
@@ -5463,7 +4426,7 @@ static void vMainTask(void *pvParameters)
 			if ((bData_40003200 == 1) && (Data_40004128.dData_304 == 2.0))
 			{
 				//6e2c0
-				dData_400033e8 = dData_40002ce8 - dData_40002d78;
+				dData_400033e8 = g_dObjectRightAcension - dData_40002d78;
 				Data_40002d68_OTARightAscensionHours = Data_40002cd8_ObjectRightAscensionHours;
 				Data_40002d6c_OTARightAscensionMinutes = Data_40002cdc_ObjectRightAscensionMinutes;
 				fData_40002d70_OTARightAscensionSeconds = fData_40002ce0_ObjectRightAscensionSeconds;
@@ -5535,20 +4498,20 @@ static void vMainTask(void *pvParameters)
 			if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 			{
 				//6e578
-				dData_40002d30 = Data_40004128.dData_144 + 180.0;
+				dData_40002d30 = Data_40004128.dObjHourAngleDisplay + 180.0;
 				Data_40002d20 = dData_40002d30;
 				Data_40002d24 = (dData_40002d30 - Data_40002d20) * 60.0;
 				fData_40002d28 = (dData_40002d30 - Data_40002d20 - Data_40002d24 / 60.0) * 3600.0;
 				//6e68c
-				dData_40002d58 = 90.0 - Data_40004128.dData_152;
+				dData_40002d58 = 90.0 - Data_40004128.dObjDeclinationDisplay;
 				Data_40002d48 = dData_40002d58;
 				Data_40002d4c = (dData_40002d58 - Data_40002d48) * 60.0;
 				fData_40002d50 = (dData_40002d58 - Data_40002d48 - Data_40002d4c / 60.0) * 3600.0;
 				
 				InquireMotorData(3);
 				
-				Data_40004128.dData_208 = dData_40002db8;
-				dData_40002dc0_Azimuth = Data_40004128.dData_208;
+				Data_40004128.dMotorPositionRaAxis = g_dMotorPositionAziAxis;
+				dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
 				
 				if (bData_40003430 == 0)
 				{
@@ -5589,8 +4552,8 @@ static void vMainTask(void *pvParameters)
 				func_659c(2);
 				InquireMotorData(4);
 				//6eae8
-				Data_40004128.dData_216 = dData_40002df0;
-				dData_40002df8 = Data_40004128.dData_216;
+				Data_40004128.dMotorPositionDecAxis = g_dMotorPositionAltAxis;
+				dData_40002df8 = Data_40004128.dMotorPositionDecAxis;
 				
 				if (bData_40003430 == 0)
 				{
@@ -5627,15 +4590,15 @@ static void vMainTask(void *pvParameters)
 			else
 			{
 				//6ee78
-				dData_40002ce8 = Data_40004128.dData_88;
-				Data_40002cd8_ObjectRightAscensionHours = dData_40002ce8;
+				g_dObjectRightAcension = Data_40004128.dData_88;
+				Data_40002cd8_ObjectRightAscensionHours = g_dObjectRightAcension;
 				Data_40002cdc_ObjectRightAscensionMinutes =
-					(dData_40002ce8 - Data_40002cd8_ObjectRightAscensionHours) * 60.0;
+					(g_dObjectRightAcension - Data_40002cd8_ObjectRightAscensionHours) * 60.0;
 				fData_40002ce0_ObjectRightAscensionSeconds = 
-					((dData_40002ce8 - Data_40002cd8_ObjectRightAscensionHours) - 
+					((g_dObjectRightAcension - Data_40002cd8_ObjectRightAscensionHours) -
 						Data_40002cdc_ObjectRightAscensionMinutes / 60.0) * 3600.0;
 				//6ef7c
-				fData_40002d18_ObjectDeclination = fabs(Data_40004128.dData_80);
+				fData_40002d18_ObjectDeclination = fabs(Data_40004128.dObjDeclination);
 				Data_40002d00_ObjectDeclinationDegrees = fData_40002d18_ObjectDeclination;
 				Data_40002d04_ObjectDeclinationMinutes = 
 					(fData_40002d18_ObjectDeclination - Data_40002d00_ObjectDeclinationDegrees) * 60.0;
@@ -5643,19 +4606,19 @@ static void vMainTask(void *pvParameters)
 					((fData_40002d18_ObjectDeclination - Data_40002d00_ObjectDeclinationDegrees) - 
 						Data_40002d04_ObjectDeclinationMinutes / 60.0) * 3600.0;
 				
-				if (Data_40004128.dData_80 > 0)
+				if (Data_40004128.dObjDeclination > 0)
 				{
-					Data_40002d44 = 1;
+					g_iObjectDeclinationSign = 1;
 				}
 				else
 				{
-					Data_40002d44 = -1;
+					g_iObjectDeclinationSign = -1;
 				}
 				//0x6f0d4
 				InquireMotorData(3);
 			
-				Data_40004128.dData_208 = dData_40002db8;
-				dData_40002dc0_Azimuth = Data_40004128.dData_208;
+				Data_40004128.dMotorPositionRaAxis = g_dMotorPositionAziAxis;
+				dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
 				//->0x6f12c
 				while (dData_40002dc0_Azimuth >= 360)
 				{
@@ -5672,8 +4635,8 @@ static void vMainTask(void *pvParameters)
 				func_659c(2);
 				InquireMotorData(4);
 				
-				Data_40004128.dData_216 = dData_40002df0;
-				dData_40002df8 = fabs(Data_40004128.dData_216);
+				Data_40004128.dMotorPositionDecAxis = g_dMotorPositionAltAxis;
+				dData_40002df8 = fabs(Data_40004128.dMotorPositionDecAxis);
 				dData_40002d98 = dData_40002df8;
 				
 				if (Data_40004128.geographicLatitude >= 0)
@@ -5735,7 +4698,7 @@ static void vMainTask(void *pvParameters)
 				if ((bData_40003200 == 1) && (Data_40004128.dData_304 == 2))
 				{
 					//6f624
-					dData_400033e8 = dData_40002ce8 - dData_40002d78;
+					dData_400033e8 = g_dObjectRightAcension - dData_40002d78;
 					Data_40002d68_OTARightAscensionHours = Data_40002cd8_ObjectRightAscensionHours;
 					Data_40002d6c_OTARightAscensionMinutes = Data_40002cdc_ObjectRightAscensionMinutes;
 					fData_40002d70_OTARightAscensionSeconds = fData_40002ce0_ObjectRightAscensionSeconds;
@@ -5779,7 +4742,7 @@ static void vMainTask(void *pvParameters)
 		//6f94c
 		UserInterfaceCycle();
 		//6f950
-		if (Data_40004128.bData_364 == 0)
+		if (Data_40004128.bAlignmentComplete == 0)
 		{
 			//6f960
 			func_c57c();
@@ -5787,24 +4750,24 @@ static void vMainTask(void *pvParameters)
 			bData_400034cc = 0;
 		}
 		//6f970
-		if ((bData_400031b8 != 0) && (Data_400031a4.Data <= 4800))
+		if ((g_bMaxSlewRampActive != 0) && (g_stCurrentSlewRampValue.Data <= 4800))
 		{
 			//6f990
-			if (Data_400031a4.Data < 4800)
+			if (g_stCurrentSlewRampValue.Data < 4800)
 			{
-				if (Data_400031b4 == 1)
+				if (g_iCurrentSlewRampIndex == 1)
 				{
-					//6f9b0
-					Data_400031a4.Data = Data_400031a4.Data + Data_400031b4 * 100;
+					//6f9b0: Ramp up (+100)
+					g_stCurrentSlewRampValue.Data += g_iCurrentSlewRampIndex * 100;
 				}
 				else
 				{
 					//0x6f9d8
-					Data_400031a4.Data = Data_400031a4.Data + Data_400031b4 * 300;
+					g_stCurrentSlewRampValue.Data += g_iCurrentSlewRampIndex * 300;
 				}
 			}
 			//0x6f9fc
-			if (Data_400031a4.Data >= 2560)
+			if (g_stCurrentSlewRampValue.Data >= 2560)
 			{
 				//6fa0c
 				if (bData_400031bc == 1)
@@ -5818,7 +4781,7 @@ static void vMainTask(void *pvParameters)
 					Data_400031ac.Data = -2514862080.0;
 				}
 				//0x6fa48
-				if (bData_4000319d != 1)
+				if (g_bCombinedSlewActive != 1)
 				{
 					//6fa58
 					uart1_write_byte(0x55);
@@ -5838,14 +4801,14 @@ static void vMainTask(void *pvParameters)
 						uart1_write_byte(0x22); //Send DEC?
 					}
 					//0x6faa8
-					uart1_write_byte(Data_400031a4.bData[1]);
-					uart1_write_byte(Data_400031a4.bData[0]);
+					uart1_write_byte(g_stCurrentSlewRampValue.bData[1]);
+					uart1_write_byte(g_stCurrentSlewRampValue.bData[0]);
 					uart1_write_byte(Data_400031ac.bData[3]);
 					uart1_write_byte(Data_400031ac.bData[2]);
 					uart1_write_byte(Data_400031ac.bData[1]);
 				}
 				//0x6fb24
-			} //if (Data_400031a4.Data >= 2560)
+			} //if (g_stCurrentSlewRampValue.Data >= 2560)
 			else
 			{
 				//0x6fae8
@@ -5855,45 +4818,32 @@ static void vMainTask(void *pvParameters)
 				uart1_write_byte(1);
 				uart1_write_byte(0x00);
 				
-				bData_400031b8 = 0;
-				bData_40002e88 = MENU_TRACKING_MODE_STOP; //0;
+				bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
+				g_bMaxSlewRampActive = 0;
 			}
-		} //if ((bData_400031b8 != 0) && (Data_400031a4.Data <= 4800))
+		} //if ((g_bMaxSlewRampActive != 0) && (g_stCurrentSlewRampValue.Data <= 4800))
 		//6fb24
-		if (bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/)
+		if (bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)
 		{
-			//6fb34: Receive guiding value?
-			func_6b17c();
+			//6fb34
+			ReceiveMountAutoguideValues();
 			
 			Data_40003488 = Data_40002c1c;
 			Data_4000348c = Data_40002c20;
-			#if 0
-			sp64 = 2 * Data_40003488 + Data_40003204;
-			sp56 = sp64 * dData_40002ca0;
-			sp48 = sp56 * 0.00153;
-			Data_40004128.dData_584 = sp48 + Data_40004128.dData_584;
-			#else
-			Data_40004128.dData_584 = (2 * Data_40003488 + Data_40003204) * 
-				dData_40002ca0 * 0.00153 + Data_40004128.dData_584;
-			#endif
 
-			#if 0
-			sp64 = 4 * Data_4000348c + Data_40003208;
-			sp56 = sp64 * dData_40002ca0;
-			sp48 = sp56 * 0.00153;
-			Data_40004128.dData_592 = sp48 + Data_40004128.dData_592;
-			#else
-			Data_40004128.dData_592 = (4 * Data_4000348c + Data_40003208) * 
-				dData_40002ca0 * 0.00153 + Data_40004128.dData_592;
-			#endif
+			Data_40004128.dAutoguideRa += (2 * Data_40003488 + iMountAutoguideRa) *
+				dGuidingSpeed * 0.00153;
+
+			Data_40004128.dAutoguideDec += (4 * Data_4000348c + iMountAutoguideDec) *
+				dGuidingSpeed * 0.00153;
 			
 			Data_40002c1c = 0;
 			Data_40002c20 = 0;
 		}
 		//6fd3c
 		if ((bData_40003211 == 0) && 
-			(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/) &&
-			(dData_40002ce8 < 23.99999))
+			(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/) &&
+			(g_dObjectRightAcension < 23.99999))
 		{
 			//6fd4c
 			bData_40003211 = 1;
@@ -5901,9 +4851,9 @@ static void vMainTask(void *pvParameters)
 		//6fd80
 		if ((bData_40003211 != 0) && 
 				(bData_40003210 == 0) && 
-				(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/) &&
-				(dData_40002ce8 >= 23.83) &&
-				(dData_40002ce8 < 23.99717))
+				(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/) &&
+				(g_dObjectRightAcension >= 23.83) &&
+				(g_dObjectRightAcension < 23.99717))
 		{
 			//6fde0
 			bData_40003210 = 1;
@@ -5911,492 +4861,492 @@ static void vMainTask(void *pvParameters)
 		}
 		//6fdf8
 		if ((bData_40003210 != 0) &&
-				(bData_40002e88 == MENU_TRACKING_MODE_TRACKING/*2*/) &&
-				(dData_40002ce8 >= 23.99717))
+				(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/) &&
+				(g_dObjectRightAcension >= 23.99717))
 		{
 			//6fe30
-			bData_40002e89 = 1;
+			g_bSlewingStop = 1;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN;
 			bData_40003210 = 0;
 			bData_40003211 = 0;
 			
 			beep1(3);
-			func_b4f0();
+			StopSlewing();
 		}
 		//6fe64
 		if (bData_40002c1a == 1)
 		{
 			//6fe74
-			if ((Data_40004128.bData_356 != 0) && (bData_40002e89 != 1))
+			if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
 			{
 				//6fe94
 				if (Data_40002c64_MenuContextId != MENU_CONTEXT_ALIGNMENT_STAR_CONTROL) //12001)
 				{
 					//6fea8
-					switch (bData_40002e7d_RotatingSpeed)
+					switch (g_eSlewRateIndex)
 					{
 						case 0:
 							//0x6fee4
-							dData_400033f8 = 0;
-							dData_40003400 = 0;
+							g_dSlewRateRaAxis = 0;
+							g_dSlewRateDecAxis = 0;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
 						
 						case 1:
 							//0x6ff94
-							dData_400033f8 = 0.00153;
-							dData_40003400 = 0.0012;
+							g_dSlewRateRaAxis = 0.00153;
+							g_dSlewRateDecAxis = 0.0012;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
 						
 						case 2:
 							//0x70098
-							dData_400033f8 = 0.0031;
-							dData_40003400 = 0.0031;
+							g_dSlewRateRaAxis = 0.0031;
+							g_dSlewRateDecAxis = 0.0031;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
 						
 						case 3:
 							//0x70148
-							dData_400033f8 = 0.0148;
-							dData_40003400 = 0.0148;
+							g_dSlewRateRaAxis = 0.0148;
+							g_dSlewRateDecAxis = 0.0148;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
 						
 						case 4:
 							//0x701f8
-							dData_400033f8 = 0.0602;
-							dData_40003400 = 0.0602;
+							g_dSlewRateRaAxis = 0.0602;
+							g_dSlewRateDecAxis = 0.0602;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
 						
 						case 5:
 							//0x702a8
-							dData_400033f8 = 0.11;
-							dData_40003400 = 0.11;
+							g_dSlewRateRaAxis = 0.11;
+							g_dSlewRateDecAxis = 0.11;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
 						
 						case 6:
 							//0x70358
-							dData_400033f8 = 0.16;
-							dData_40003400 = 0.16;
+							g_dSlewRateRaAxis = 0.16;
+							g_dSlewRateDecAxis = 0.16;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
 						
 						case 7:
 							//0x7042c						
-							dData_400033f8 = 0.481;
-							dData_40003400 = 0.481;
+							g_dSlewRateRaAxis = 0.481;
+							g_dSlewRateDecAxis = 0.481;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
 						
 						case 8:
 							//0x704dc
-							dData_400033f8 = 0.765;
-							dData_40003400 = 0.765;
+							g_dSlewRateRaAxis = 0.765;
+							g_dSlewRateDecAxis = 0.765;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
 						
 						case 9:
 							//0x7058c
-							dData_400033f8 = 1.56;
-							dData_40003400 = 1.56;
+							g_dSlewRateRaAxis = 1.56;
+							g_dSlewRateDecAxis = 1.56;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
 						
 						default:
 							//0x7063c
-							dData_400033f8 = 0;
-							dData_40003400 = 0;
+							g_dSlewRateRaAxis = 0;
+							g_dSlewRateDecAxis = 0;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x706ec
 							break;
-					} //switch (bData_40002e7d_RotatingSpeed)
+					} //switch (g_eSlewRateIndex)
 					//706ec -> 0x72040
 				} //if (Data_40002c64_MenuContextId != MENU_CONTEXT_ALIGNMENT_STAR_CONTROL)
 				else
 				{
 					//0x706f0
-					switch (bData_40002e7d_RotatingSpeed)
+					switch (g_eSlewRateIndex)
 					{
 						case 0:
 							//0x70744
-							dData_400033f8 = 0;
-							dData_40003400 = 0;
+							g_dSlewRateRaAxis = 0;
+							g_dSlewRateDecAxis = 0;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
 						case 1:
 							//0x707f4
-							dData_400033f8 = 0.00154;
-							dData_40003400 = 0.00154;
+							g_dSlewRateRaAxis = 0.00154;
+							g_dSlewRateDecAxis = 0.00154;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
 						case 2:
 							//0x708a4
-							dData_400033f8 = 0.0031;
-							dData_40003400 = 0.0031;
+							g_dSlewRateRaAxis = 0.0031;
+							g_dSlewRateDecAxis = 0.0031;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
 						case 3:
 							//0x70954
-							dData_400033f8 = 0.026;
-							dData_40003400 = 0.0236;
+							g_dSlewRateRaAxis = 0.026;
+							g_dSlewRateDecAxis = 0.0236;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
 						case 4:
 							//0x70a04
-							dData_400033f8 = 0.084;
-							dData_40003400 = 0.084;
+							g_dSlewRateRaAxis = 0.084;
+							g_dSlewRateDecAxis = 0.084;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
 						case 5:
 							//0x70ab4
-							dData_400033f8 = 0.154;
-							dData_40003400 = 0.142;
+							g_dSlewRateRaAxis = 0.154;
+							g_dSlewRateDecAxis = 0.142;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
 						case 6:
 							//0x70b98
-							dData_400033f8 = 0.2423;
-							dData_40003400 = 0.2187;
+							g_dSlewRateRaAxis = 0.2423;
+							g_dSlewRateDecAxis = 0.2187;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
 						case 7:
 							//0x70c48						
-							dData_400033f8 = 0.6305;
-							dData_40003400 = 0.6305;
+							g_dSlewRateRaAxis = 0.6305;
+							g_dSlewRateDecAxis = 0.6305;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
 						case 8:
 							//0x70cf8
-							dData_400033f8 = 1.031;
-							dData_40003400 = 1.031;
+							g_dSlewRateRaAxis = 1.031;
+							g_dSlewRateDecAxis = 1.031;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
 						case 9:
 							//0x70da8
-							dData_400033f8 = 2.15;
-							dData_40003400 = 2.15;
+							g_dSlewRateRaAxis = 2.15;
+							g_dSlewRateDecAxis = 2.15;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x70f08
 							break;
 						
 						default:
 							//0x70e58
-							dData_400033f8 = 0;
-							dData_40003400 = 0;
+							g_dSlewRateRaAxis = 0;
+							g_dSlewRateDecAxis = 0;
 						
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
-					} //switch (bData_40002e7d_RotatingSpeed)
+					} //switch (g_eSlewRateIndex)
 					//0x70f08 -> 0x72040
 				}
-			} //if ((Data_40004128.bData_356 != 0) && (bData_40002e89 != 1))
+			} //if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
 			//->0x72040
 		} //if (bData_40002c1a == 1)
 		else
 		{
 			//70f38
-			if ((Data_40004128.bData_356 != 0) && (bData_40002e89 != 1))
+			if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
 			{
 				//70f58
 				if (Data_40002c64_MenuContextId != MENU_CONTEXT_ALIGNMENT_STAR_CONTROL) //12001)
 				{
 					//70f6c
-					switch (bData_40002e7d_RotatingSpeed)
+					switch (g_eSlewRateIndex)
 					{
 						case 0:
 							//0x70fa8
-							dData_400033f8 = 0.0007;
-							dData_40003400 = 0.0007;
+							g_dSlewRateRaAxis = 0.0007;
+							g_dSlewRateDecAxis = 0.0007;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x717d4
 							break;
 						
-						case MENU_ROTATING_SPEED_1: //1:
+						case SLEW_RATE_1X: //1:
 							//0x71058
-							dData_400033f8 = 0.0015;
-							dData_40003400 = 0.0015;
+							g_dSlewRateRaAxis = 0.0015;
+							g_dSlewRateDecAxis = 0.0015;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_2: //2:
+						case SLEW_RATE_2X: //2:
 							//0x71108
-							dData_400033f8 = 0.0083;
-							dData_40003400 = 0.0083;
+							g_dSlewRateRaAxis = 0.0083;
+							g_dSlewRateDecAxis = 0.0083;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_8: //3:
+						case SLEW_RATE_8X: //3:
 							//0x711b8
-							dData_400033f8 = 0.0234;
-							dData_40003400 = 0.0235;
+							g_dSlewRateRaAxis = 0.0234;
+							g_dSlewRateDecAxis = 0.0235;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_16: //4:
+						case SLEW_RATE_16X: //4:
 							//0x71268
-							dData_400033f8 = 0.042;
-							dData_40003400 = 0.041;
+							g_dSlewRateRaAxis = 0.042;
+							g_dSlewRateDecAxis = 0.041;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_64: //5:
+						case SLEW_RATE_64X: //5:
 							//0x71368
-							dData_400033f8 = 0.071;
-							dData_40003400 = 0.0708;
+							g_dSlewRateRaAxis = 0.071;
+							g_dSlewRateDecAxis = 0.0708;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_128: //6:
+						case SLEW_RATE_128X: //6:
 							//0x71418
-							dData_400033f8 = 0.142;
-							dData_40003400 = 0.106;
+							g_dSlewRateRaAxis = 0.142;
+							g_dSlewRateDecAxis = 0.106;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_256: //7:
+						case SLEW_RATE_256X: //7:
 							//0x714c8
-							dData_400033f8 = 0.26;
-							dData_40003400 = 0.236;
+							g_dSlewRateRaAxis = 0.26;
+							g_dSlewRateDecAxis = 0.236;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_512: //8:
+						case SLEW_RATE_512X: //8:
 							//0x71578
-							dData_400033f8 = 0.634;
-							dData_40003400 = 0.39;
+							g_dSlewRateRaAxis = 0.634;
+							g_dSlewRateDecAxis = 0.39;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_MAX: //9:
+						case SLEW_RATE_MAX: //9:
 							//0x71628
-							dData_400033f8 = 0.98;
-							dData_40003400 = 0.45;
+							g_dSlewRateRaAxis = 0.98;
+							g_dSlewRateDecAxis = 0.45;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x717d4
 							break;
 						
 						default:
 							//0x71724
-							dData_400033f8 = 0.0;
-							dData_40003400 = 0.0;
+							g_dSlewRateRaAxis = 0.0;
+							g_dSlewRateDecAxis = 0.0;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
-					} //switch (bData_40002e7d_RotatingSpeed)
+					} //switch (g_eSlewRateIndex)
 					//0x717d4 -> 0x72040
 					
 				} //if (Data_40002c64_MenuContextId != MENU_CONTEXT_ALIGNMENT_STAR_CONTROL)
 				else
 				{
 					//0x717d8
-					switch (bData_40002e7d_RotatingSpeed)
+					switch (g_eSlewRateIndex)
 					{
 						case 0:
 							//0x71814
-							dData_400033f8 = 0.0011;
-							dData_40003400 = 0.0007;
+							g_dSlewRateRaAxis = 0.0011;
+							g_dSlewRateDecAxis = 0.0007;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x717d4
 							break;
 						
-						case MENU_ROTATING_SPEED_1: //1:
+						case SLEW_RATE_1X: //1:
 							//0x718c4
-							dData_400033f8 = 0.0024;
-							dData_40003400 = 0.0019;
+							g_dSlewRateRaAxis = 0.0024;
+							g_dSlewRateDecAxis = 0.0019;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_2: //2:
+						case SLEW_RATE_2X: //2:
 							//0x71974
-							dData_400033f8 = 0.015;
-							dData_40003400 = 0.0076;
+							g_dSlewRateRaAxis = 0.015;
+							g_dSlewRateDecAxis = 0.0076;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_8: //3:
+						case SLEW_RATE_8X: //3:
 							//0x71a24
-							dData_400033f8 = 0.035;
-							dData_40003400 = 0.035;
+							g_dSlewRateRaAxis = 0.035;
+							g_dSlewRateDecAxis = 0.035;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_16: //4:
+						case SLEW_RATE_16X: //4:
 							//0x71ad4
-							dData_400033f8 = 0.062;
-							dData_40003400 = 0.06;
+							g_dSlewRateRaAxis = 0.062;
+							g_dSlewRateDecAxis = 0.06;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_64: //5:
+						case SLEW_RATE_64X: //5:
 							//0x71bcc
-							dData_400033f8 = 0.093;
-							dData_40003400 = 0.09;
+							g_dSlewRateRaAxis = 0.093;
+							g_dSlewRateDecAxis = 0.09;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_128: //6:
+						case SLEW_RATE_128X: //6:
 							//0x71c7c
-							dData_400033f8 = 0.178;
-							dData_40003400 = 0.13;
+							g_dSlewRateRaAxis = 0.178;
+							g_dSlewRateDecAxis = 0.13;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_256: //7:
+						case SLEW_RATE_256X: //7:
 							//0x71d2c
-							dData_400033f8 = 0.335;
-							dData_40003400 = 0.3;
+							g_dSlewRateRaAxis = 0.335;
+							g_dSlewRateDecAxis = 0.3;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_512: //8:
+						case SLEW_RATE_512X: //8:
 							//0x71ddc
-							dData_400033f8 = 0.805;
-							dData_40003400 = 0.485;
+							g_dSlewRateRaAxis = 0.805;
+							g_dSlewRateDecAxis = 0.485;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
 						
-						case MENU_ROTATING_SPEED_MAX: //9:
+						case SLEW_RATE_MAX: //9:
 							//0x71e8c
-							dData_400033f8 = 1.005;
-							dData_40003400 = 0.69;
+							g_dSlewRateRaAxis = 1.005;
+							g_dSlewRateDecAxis = 0.69;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							//->0x7203c
 							break;
 						
 						default:
 							//0x71f8c
-							dData_400033f8 = 0.0;
-							dData_40003400 = 0.0;
+							g_dSlewRateRaAxis = 0.0;
+							g_dSlewRateDecAxis = 0.0;
 
-							dData_400033d8 = Data_40003408 * dData_400033f8 + dData_400033d8;
-							dData_400033e0 = Data_4000340c * dData_40003400 + dData_400033e0;
+							dData_400033d8 += g_iSlewStepRaAxis * g_dSlewRateRaAxis;
+							dData_400033e0 += g_iSlewStepDecAxis * g_dSlewRateDecAxis;
 							break;
-					} //switch (bData_40002e7d_RotatingSpeed)
+					} //switch (g_eSlewRateIndex)
 				}
-			} //if ((Data_40004128.bData_356 != 0) && (bData_40002e89 != 1))
-		}
+			} //if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
+		} //if (bData_40002c1a != 1)
 		//72040
-		if ((Data_4000340c != 0) || (Data_40003408 != 0))
+		if ((g_iSlewStepDecAxis != 0) || (g_iSlewStepRaAxis != 0))
 		{
 			//72060
 			bData_400034b4 = 0;
 		}
 		//7206c
-		if (Data_40004128.bData_357 != 0)
+		if (Data_40004128.bTrackingRequest != 0)
 		{
 			//7207c
 			if (bData_40002c1a == 0)
 			{
 				//7208c
 				Data_40002c64_MenuContextId = MENU_CONTEXT_NO_TELESCOPE; //2;
-				Data_40004128.bData_357 = 0;
-				Data_40004128.bData_364 = 1;
+				Data_40004128.bTrackingRequest = 0;
+				Data_40004128.bAlignmentComplete = 1;
 			}
 			else
 			{
@@ -6425,8 +5375,8 @@ static void vMainTask(void *pvParameters)
 					//0x72110
 					InquireMotorData(3);
 				
-					Data_40004128.dData_208 = dData_40002db8;
-					dData_40002dc0_Azimuth = Data_40004128.dData_208;
+					Data_40004128.dMotorPositionRaAxis = g_dMotorPositionAziAxis;
+					dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
 					//->7221c
 					break;
 				
@@ -6434,8 +5384,8 @@ static void vMainTask(void *pvParameters)
 					//0x72150
 					InquireMotorData(4);
 				
-					Data_40004128.dData_216 = dData_40002da0;
-					dData_40002df8 = fabs(Data_40004128.dData_216);
+					Data_40004128.dMotorPositionDecAxis = g_dMotorPositionDecAxis;
+					dData_40002df8 = fabs(Data_40004128.dMotorPositionDecAxis);
 					//->7221c
 					break;
 				
@@ -6443,16 +5393,16 @@ static void vMainTask(void *pvParameters)
 					//0x72194
 					InquireMotorData(1);
 				
-					Data_40004128.dData_208 = dData_40002d80;
-					dData_40002dc0_Azimuth = Data_40004128.dData_208;
+					Data_40004128.dMotorPositionRaAxis = g_dMotorPositionRaAxis;
+					dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
 					break;
 				
 				case 3:
 					//0x721d4
 					InquireMotorData(2);
 				
-					Data_40004128.dData_216 = dData_40002da0;
-					dData_40002df8 = Data_40004128.dData_216;
+					Data_40004128.dMotorPositionDecAxis = g_dMotorPositionDecAxis;
+					dData_40002df8 = Data_40004128.dMotorPositionDecAxis;
 					break;
 				
 				default:
@@ -6460,7 +5410,7 @@ static void vMainTask(void *pvParameters)
 					break;
 			}
 			//7221c
-			func_5f0c0();			
+			SlewStop();
 			func_659c(100);
 			
 			switch (bData_40002edd)
@@ -6469,8 +5419,8 @@ static void vMainTask(void *pvParameters)
 					//0x72258
 					InquireMotorData(3);
 				
-					Data_40004128.dData_208 = dData_40002db8;
-					dData_40002dc0_Azimuth = Data_40004128.dData_208;
+					Data_40004128.dMotorPositionRaAxis = g_dMotorPositionAziAxis;
+					dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
 					//->0x72364
 					break;
 				
@@ -6478,8 +5428,8 @@ static void vMainTask(void *pvParameters)
 					//0x72298
 					InquireMotorData(4);
 				
-					Data_40004128.dData_216 = dData_40002da0;
-					dData_40002df8 = fabs(Data_40004128.dData_216);
+					Data_40004128.dMotorPositionDecAxis = g_dMotorPositionDecAxis;
+					dData_40002df8 = fabs(Data_40004128.dMotorPositionDecAxis);
 					//->0x72364
 					break;
 				
@@ -6487,16 +5437,16 @@ static void vMainTask(void *pvParameters)
 					//0x722dc
 					InquireMotorData(1);
 				
-					Data_40004128.dData_208 = dData_40002d80;
-					dData_40002dc0_Azimuth = Data_40004128.dData_208;
+					Data_40004128.dMotorPositionRaAxis = g_dMotorPositionRaAxis;
+					dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
 					break;
 				
 				case 3:
 					//0x7231c
 					InquireMotorData(2);
 				
-					Data_40004128.dData_216 = dData_40002da0;
-					dData_40002df8 = Data_40004128.dData_216;
+					Data_40004128.dMotorPositionDecAxis = g_dMotorPositionDecAxis;
+					dData_40002df8 = Data_40004128.dMotorPositionDecAxis;
 					break;
 				
 				default:
@@ -6510,8 +5460,8 @@ static void vMainTask(void *pvParameters)
 					//0x72394
 					InquireMotorData(3);
 				
-					Data_40004128.dData_208 = dData_40002db8;
-					dData_40002dc0_Azimuth = Data_40004128.dData_208;
+					Data_40004128.dMotorPositionRaAxis = g_dMotorPositionAziAxis;
+					dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
 					dData_40002dc0_Azimuth += Data_40004128.dData_192;
 					//->72410
 					while (dData_40002dc0_Azimuth >= 360.0)
@@ -6532,21 +5482,21 @@ static void vMainTask(void *pvParameters)
 						if (bRaBacklashCorrectionDirection == 2)
 						{
 							//72474
-							func_57414(3, 4, 1);
+							SlewAxis(3, 4, SLEW_RATE_1X);
 						}
 						//72484
 						if (bRaBacklashCorrectionDirection == 1)
 						{
 							//72494
-							func_57414(3, 3, 1);
+							SlewAxis(3, 3, SLEW_RATE_1X);
 						}
 						//724a4
 						func_659c(10);
 						InquireMotorData(3);
 						func_659c(10);
 						//724c4
-						Data_40004128.dData_208 = dData_40002db8;
-						dData_40002dc0_Azimuth = Data_40004128.dData_208;
+						Data_40004128.dMotorPositionRaAxis = g_dMotorPositionAziAxis;
+						dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
 						dData_40002dc0_Azimuth += Data_40004128.dData_192;
 						//->7252c
 						while (dData_40002dc0_Azimuth >= 360.0)
@@ -6568,8 +5518,8 @@ static void vMainTask(void *pvParameters)
 					//0x725bc
 					InquireMotorData(4);
 				
-					Data_40004128.dData_216 = dData_40002df0;
-					dData_40002df8 = Data_40004128.dData_216;
+					Data_40004128.dMotorPositionDecAxis = g_dMotorPositionAltAxis;
+					dData_40002df8 = Data_40004128.dMotorPositionDecAxis;
 					dData_40002df8 = Data_40004128.dData_200 - dData_40002df8;
 					//->0x726bc
 					while (fabs(dData_40002df8 - dData_40002e00) > 0.0014)
@@ -6578,21 +5528,21 @@ static void vMainTask(void *pvParameters)
 						if (bDecBacklashCorrectionDirection == 2)
 						{
 							//72628
-							func_57414(4, 2, 1);
+							SlewAxis(4, 2, SLEW_RATE_1X);
 						}
 						//72638
 						if (bDecBacklashCorrectionDirection == 1)
 						{
 							//72648
-							func_57414(4, 1, 1);
+							SlewAxis(4, 1, SLEW_RATE_1X);
 						}
 						//72658
 						func_659c(10);
 						InquireMotorData(4);
 						func_659c(10);
 						//72678
-						Data_40004128.dData_216 = dData_40002df0;
-						dData_40002df8 = Data_40004128.dData_216;
+						Data_40004128.dMotorPositionDecAxis = g_dMotorPositionAltAxis;
+						dData_40002df8 = Data_40004128.dMotorPositionDecAxis;
 						dData_40002df8 = Data_40004128.dData_200 - dData_40002df8;
 					}
 					//->72968
@@ -6602,28 +5552,28 @@ static void vMainTask(void *pvParameters)
 					//0x726fc
 					InquireMotorData(1);
 				
-					Data_40004128.dData_208 = dData_40002d80;
-					dData_40002dc0_Azimuth = Data_40004128.dData_208;
+					Data_40004128.dMotorPositionRaAxis = g_dMotorPositionRaAxis;
+					dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
 					//->727c4
 					while (fabs(dData_40002dc0_Azimuth - dRaBklashCorrStartAzimuth) > 0.0014)
 					{
 						//7273c
 						if (bRaBacklashCorrectionDirection == 2)
 						{
-							func_57414(1, 4, 2);
+							SlewAxis(1, 4, SLEW_RATE_2X);
 						}
 						
 						if (bRaBacklashCorrectionDirection == 1)
 						{
-							func_57414(1, 3, 2);
+							SlewAxis(1, 3, SLEW_RATE_2X);
 						}
 						
 						func_659c(10);
 						InquireMotorData(1);
 						func_659c(10);
 						
-						Data_40004128.dData_208 = dData_40002d80;
-						dData_40002dc0_Azimuth = Data_40004128.dData_208;
+						Data_40004128.dMotorPositionRaAxis = g_dMotorPositionRaAxis;
+						dData_40002dc0_Azimuth = Data_40004128.dMotorPositionRaAxis;
 					}
 					//->72968
 					break;
@@ -6632,28 +5582,28 @@ static void vMainTask(void *pvParameters)
 					//0x72804
 					InquireMotorData(2);
 				
-					Data_40004128.dData_216 = dData_40002da0;
-					dData_40002df8 = fabs(Data_40004128.dData_216);
+					Data_40004128.dMotorPositionDecAxis = g_dMotorPositionDecAxis;
+					dData_40002df8 = fabs(Data_40004128.dMotorPositionDecAxis);
 					//->72928
 					while (fabs(dData_40002df8 - dData_40002e00) > 0.0014)
 					{
 						//728a0
 						if (bDecBacklashCorrectionDirection == 2)
 						{
-							func_57414(2, 2, 2);
+							SlewAxis(2, 2, SLEW_RATE_2X);
 						}
 						
 						if (bDecBacklashCorrectionDirection == 1)
 						{
-							func_57414(1, 1, 2);
+							SlewAxis(2, 1, SLEW_RATE_2X);
 						}
 						
 						func_659c(10);
 						InquireMotorData(2);
 						func_659c(10);
 						
-						Data_40004128.dData_216 = dData_40002da0;
-						dData_40002df8 = fabs(Data_40004128.dData_216);
+						Data_40004128.dMotorPositionDecAxis = g_dMotorPositionDecAxis;
+						dData_40002df8 = fabs(Data_40004128.dMotorPositionDecAxis);
 					}				
 					#if 0
 					break;
@@ -6666,15 +5616,15 @@ static void vMainTask(void *pvParameters)
 				#endif
 			}
 			//7296c
-			func_5f0c0();			
+			SlewStop();
 			func_659c(100);
 			beep1(2);		
 			//72980
 			iBacklashCorrectionSlewing = 0;
 		} //if (iBacklashCorrectionSlewing == 1)
 		//7298c
-		dData_40002ca8 = Data_40004380.dData_24;
-		dData_40002cb0 = Data_40004380.dData_16;
+		g_dPoleAxisDevEastWest = Data_40004380.dData_24;
+		g_dPoleAxisDevNorthSouth = Data_40004380.dData_16;
 		
 		func_659c(2);
 		//729bc
@@ -6683,7 +5633,7 @@ static void vMainTask(void *pvParameters)
 			func_659c(50);
 		}
 		//729d4
-		if (Data_40004128.bData_357 == 0)
+		if (Data_40004128.bTrackingRequest == 0)
 		{
 			func_659c(100);
 		}
