@@ -33,9 +33,13 @@ CCFLAGS   += $(CPU_MODEL)
 CCFLAGS   += --apcs=interwork
 CCFLAGS   += --signed_chars
 CCFLAGS   += -g -O0 
+CCFLAGS   += $(INSTALL_INCLUDE_DIRECTORIES:%=-I%)
 CCFLAGS   += -I$(SDKHOME3)
 CC_out     = -o$(SPACE)
 
+AR       = $(SDKHOME)/armar.exe
+ARFLAGS  = --create -r -c -s -v
+AR_out   = $(SPACE)
 
 LD         = $(SDKHOME)/armlink.exe
 LDFLAGS   += $(CPU_MODEL)
@@ -54,7 +58,9 @@ ELFDUMP      = $(SDKHOME-arm7-gcc)/bin/$(CCTARGET)-objdump$(TOOL_EXT)
 ELFDUMPFLAGS = --all -D
 ELFDUMP_out  = >$(SPACE)
 
+
 ELF2HEX      = $(SDKHOME)/fromelf.exe
 ELF2HEXFLAGS_INTELHEX = --i32
 ELF2HEXFLAGS_BIN = --bin
+
 

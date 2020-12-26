@@ -1,7 +1,7 @@
 ################################################################################
 ################################################################################
 ##
-## Makefile -- makefile for application modules.
+## Makefile -- makefile for FreeRTOS modules.
 ##
 ## Mandatory settings:
 ##
@@ -12,8 +12,8 @@
 ################################################################################
 ################################################################################
 
-  TOPDIR = ..
-  SUBDIR = applications
+  TOPDIR = ../../..
+  SUBDIR = FreeRTOS/portable/RVDS
 
 include $(TOPDIR)/env/make/Makefile.config
 
@@ -21,8 +21,7 @@ include $(TOPDIR)/env/make/Makefile.config
 # project specific settings
 ################################################################################
 
-   DIRECTORIES += v2.3
-   DIRECTORIES += freertos_app
+   DIRECTORIES += ARM7_LPC21xx
 
 ################################################################################
 # define user targets

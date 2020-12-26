@@ -1,7 +1,7 @@
 ################################################################################
 ################################################################################
 ##
-## Makefile -- makefile for application modules.
+## Makefile -- makefile for FreeRTOS modules.
 ##
 ## Mandatory settings:
 ##
@@ -13,7 +13,7 @@
 ################################################################################
 
   TOPDIR = ..
-  SUBDIR = applications
+  SUBDIR = FreeRTOS
 
 include $(TOPDIR)/env/make/Makefile.config
 
@@ -21,8 +21,34 @@ include $(TOPDIR)/env/make/Makefile.config
 # project specific settings
 ################################################################################
 
-   DIRECTORIES += v2.3
-   DIRECTORIES += freertos_app
+   DIRECTORIES += portable
+   
+   LIBRARY = libFreeRTOS
+
+################################################################################
+# source files
+################################################################################
+
+HEADERS += include/FreeRTOS.h
+HEADERS += include/deprecated_definitions.h
+HEADERS += include/list.h
+HEADERS += include/mpu_wrappers.h
+HEADERS += include/portable.h
+HEADERS += include/projdefs.h
+HEADERS += include/stack_macros.h
+HEADERS += include/task.h
+HEADERS += include/timers.h
+HEADERS += include/queue.h
+
+SOURCES += portable/MemMang/heap_1.c
+SOURCES += portable/MemMang/heap_2.c
+SOURCES += portable/MemMang/heap_3.c
+SOURCES += portable/MemMang/heap_4.c
+SOURCES += portable/MemMang/heap_5.c
+
+SOURCES += list.c
+SOURCES += queue.c
+SOURCES += tasks.c
 
 ################################################################################
 # define user targets
@@ -30,13 +56,13 @@ include $(TOPDIR)/env/make/Makefile.config
 
 default: all
 
-clean: $(DIRECTORIES:%=subdir-clean-%)
+clean: clean-objects clean-library $(DIRECTORIES:%=subdir-clean-%)
 
-build: $(DIRECTORIES:%=subdir-build-%)
+build: build-objects build-library $(DIRECTORIES:%=subdir-build-%)
 
-headers: $(DIRECTORIES:%=subdir-headers-%)
+headers: install-headers $(DIRECTORIES:%=subdir-headers-%)
 
-install: $(DIRECTORIES:%=subdir-install-%)
+install: build install-library $(DIRECTORIES:%=subdir-install-%)
 
 depend: $(DIRECTORIES:%=subdir-depend-%)
 

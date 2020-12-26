@@ -12,7 +12,7 @@
 ################################################################################
 
 TOPDIR = ../..
-SUBDIR = applications/v2.3
+SUBDIR = applications/freertos_app
 
 include $(TOPDIR)/env/make/Makefile.config
 
@@ -21,6 +21,7 @@ include $(TOPDIR)/env/make/Makefile.config
 ################################################################################
 
 SOURCES += main.c
+SOURCES += uart.c
 SOURCES += data.c
 SOURCES += Startup.s
 
@@ -40,13 +41,13 @@ SOURCES += Startup.s
 # define library used
 ################################################################################
 
-#LIBRARIES  = adi image
+LIBRARIES  = FreeRTOS FreeRTOS_portable
 
 ################################################################################
 # define target name
 ################################################################################
 
-PROGRAM = v2.3
+PROGRAM = freertos_app
 
 ################################################################################
 # define user targets
