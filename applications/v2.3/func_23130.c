@@ -1,7 +1,7 @@
 
 
 /* 2245c - todo */
-void func_2245c(int a, int b)
+void PrepareEightLineMenuScroll(int a, int b)
 {
 	switch (a)
 	{
@@ -18,7 +18,7 @@ void func_2245c(int a, int b)
 					Data_40003370 = strPoleAxisDev;
 					Data_40003374 = strRaBklashCorr;
 					Data_40003378 = strDecBklashCorr;
-					Data_4000337c = Data_40002f4c;
+					Data_4000337c = strAlignmentSpare1;
 					//->0x227ac
 					break;
 				
@@ -30,8 +30,8 @@ void func_2245c(int a, int b)
 					Data_4000336c = strPoleAxisDev;
 					Data_40003370 = strRaBklashCorr;
 					Data_40003374 = strDecBklashCorr;
-					Data_40003378 = Data_40002f4c;
-					Data_4000337c = Data_40002f50;
+					Data_40003378 = strAlignmentSpare1;
+					Data_4000337c = strAlignmentSpare2;
 					//->0x227ac
 					break;
 				
@@ -42,9 +42,9 @@ void func_2245c(int a, int b)
 					Data_40003368 = strPoleAxisDev;
 					Data_4000336c = strRaBklashCorr;
 					Data_40003370 = strDecBklashCorr;
-					Data_40003374 = Data_40002f4c;
-					Data_40003378 = Data_40002f50;
-					Data_4000337c = Data_40002f54;
+					Data_40003374 = strAlignmentSpare1;
+					Data_40003378 = strAlignmentSpare2;
+					Data_4000337c = strAlignmentSpare3;
 					//->0x227ac
 					break;
 				
@@ -54,10 +54,10 @@ void func_2245c(int a, int b)
 					Data_40003364 = strPoleAxisDev;
 					Data_40003368 = strRaBklashCorr;
 					Data_4000336c = strDecBklashCorr;
-					Data_40003370 = Data_40002f4c;
-					Data_40003374 = Data_40002f50;
-					Data_40003378 = Data_40002f54;
-					Data_4000337c = Data_40002f58;
+					Data_40003370 = strAlignmentSpare1;
+					Data_40003374 = strAlignmentSpare2;
+					Data_40003378 = strAlignmentSpare3;
+					Data_4000337c = strAlignmentSpare4;
 					//->0x227ac
 					break;
 				
@@ -77,11 +77,11 @@ void func_2245c(int a, int b)
 					Data_40003360 = strSolarSystem;
 					Data_40003364 = strConstellation;
 					Data_40003368 = strFamousStar;
-					Data_4000336c = Data_40002f68;
-					Data_40003370 = Data_40002f6c;
-					Data_40003374 = Data_40002f70;
-					Data_40003378 = Data_40002f74;
-					Data_4000337c = Data_40002f78;
+					Data_4000336c = g_pcstrMessierCatalogue;
+					Data_40003370 = g_pcstrNGCCatalogue;
+					Data_40003374 = g_pcstrICCatalogue;
+					Data_40003378 = g_pcstrSh2Catalogue;
+					Data_4000337c = g_pcstrBrightStarCatalogue;
 					//->0x22a8c
 					break;
 				
@@ -89,51 +89,51 @@ void func_2245c(int a, int b)
 					//0x22864
 					Data_40003360 = strConstellation;
 					Data_40003364 = strFamousStar;
-					Data_40003368 = Data_40002f68;
-					Data_4000336c = Data_40002f6c;
-					Data_40003370 = Data_40002f70;
-					Data_40003374 = Data_40002f74;
-					Data_40003378 = Data_40002f78;
-					Data_4000337c = Data_40002f7c;
+					Data_40003368 = g_pcstrMessierCatalogue;
+					Data_4000336c = g_pcstrNGCCatalogue;
+					Data_40003370 = g_pcstrICCatalogue;
+					Data_40003374 = g_pcstrSh2Catalogue;
+					Data_40003378 = g_pcstrBrightStarCatalogue;
+					Data_4000337c = g_pcstrSAOStarCatalogue;
 					//->0x22a8c
 					break;
 				
 				case 3:
 					//0x228ec
 					Data_40003360 = strFamousStar;
-					Data_40003364 = Data_40002f68;
-					Data_40003368 = Data_40002f6c;
-					Data_4000336c = Data_40002f70;
-					Data_40003370 = Data_40002f74;
-					Data_40003374 = Data_40002f78;
-					Data_40003378 = Data_40002f7c;
-					Data_4000337c = Data_40002f80;
+					Data_40003364 = g_pcstrMessierCatalogue;
+					Data_40003368 = g_pcstrNGCCatalogue;
+					Data_4000336c = g_pcstrICCatalogue;
+					Data_40003370 = g_pcstrSh2Catalogue;
+					Data_40003374 = g_pcstrBrightStarCatalogue;
+					Data_40003378 = g_pcstrSAOStarCatalogue;
+					Data_4000337c = g_pcstrCustomerObjects;
 					//->0x22a8c
 					break;
 				
 				case 4:
 					//0x22974
-					Data_40003360 = Data_40002f68;
-					Data_40003364 = Data_40002f6c;
-					Data_40003368 = Data_40002f70;
-					Data_4000336c = Data_40002f74;
-					Data_40003370 = Data_40002f78;
-					Data_40003374 = Data_40002f7c;
-					Data_40003378 = Data_40002f80;
-					Data_4000337c = Data_40002f84;
+					Data_40003360 = g_pcstrMessierCatalogue;
+					Data_40003364 = g_pcstrNGCCatalogue;
+					Data_40003368 = g_pcstrICCatalogue;
+					Data_4000336c = g_pcstrSh2Catalogue;
+					Data_40003370 = g_pcstrBrightStarCatalogue;
+					Data_40003374 = g_pcstrSAOStarCatalogue;
+					Data_40003378 = g_pcstrCustomerObjects;
+					Data_4000337c = g_pcstrInputRAandDEC;
 					//->0x22a8c
 					break;
 				
 				case 5:
 					//0x229fc
-					Data_40003360 = Data_40002f6c;
-					Data_40003364 = Data_40002f70;
-					Data_40003368 = Data_40002f74;
-					Data_4000336c = Data_40002f78;
-					Data_40003370 = Data_40002f7c;
-					Data_40003374 = Data_40002f80;
-					Data_40003378 = Data_40002f84;
-					Data_4000337c = Data_40002f88;
+					Data_40003360 = g_pcstrNGCCatalogue;
+					Data_40003364 = g_pcstrICCatalogue;
+					Data_40003368 = g_pcstrSh2Catalogue;
+					Data_4000336c = g_pcstrBrightStarCatalogue;
+					Data_40003370 = g_pcstrSAOStarCatalogue;
+					Data_40003374 = g_pcstrCustomerObjects;
+					Data_40003378 = g_pcstrInputRAandDEC;
+					Data_4000337c = g_pcstrCustomLandGoal;
 					//->0x22a8c
 					break;
 				
@@ -369,76 +369,76 @@ void AdaptDisplayLinesPerMenuLine(void)
 }
 
 /* 231d0 - todo */
-void func_231d0(int a, int b)
+void PrepareFourLineMenuScroll(int a, int b)
 {
 	switch (a)
 	{
 		case 11:
-			//0x2320c
+			//0x2320c: Telescope Align
 			switch (b)
 			{
 				case 1:
 					//0x23240
-					Data_400033a8 = strOneStarAlign;
-					Data_400033ac = strTwoStarAlign;
-					Data_400033b0 = strThreeStarAlign;
-					Data_400033b4 = strTargetSync;
+					g_pcstrFourLineMenu1 = strOneStarAlign;
+					g_pcstrFourLineMenu2 = strTwoStarAlign;
+					g_pcstrFourLineMenu3 = strThreeStarAlign;
+					g_pcstrFourLineMenu4 = strTargetSync;
 					break;
 
 				case 2:
 					//0x23288
-					Data_400033a8 = strTwoStarAlign;
-					Data_400033ac = strThreeStarAlign;
-					Data_400033b0 = strTargetSync;
-					Data_400033b4 = strPoleAxisDev;
+					g_pcstrFourLineMenu1 = strTwoStarAlign;
+					g_pcstrFourLineMenu2 = strThreeStarAlign;
+					g_pcstrFourLineMenu3 = strTargetSync;
+					g_pcstrFourLineMenu4 = strPoleAxisDev;
 					break;
 				
 				case 3:
 					//0x232d0
-					Data_400033a8 = strThreeStarAlign;
-					Data_400033ac = strTargetSync;
-					Data_400033b0 = strPoleAxisDev;
-					Data_400033b4 = strRaBklashCorr;
+					g_pcstrFourLineMenu1 = strThreeStarAlign;
+					g_pcstrFourLineMenu2 = strTargetSync;
+					g_pcstrFourLineMenu3 = strPoleAxisDev;
+					g_pcstrFourLineMenu4 = strRaBklashCorr;
 					break;
 				
 				case 4:
 					//0x23318
-					Data_400033a8 = strTargetSync;
-					Data_400033ac = strPoleAxisDev;
-					Data_400033b0 = strRaBklashCorr;
-					Data_400033b4 = strDecBklashCorr;
+					g_pcstrFourLineMenu1 = strTargetSync;
+					g_pcstrFourLineMenu2 = strPoleAxisDev;
+					g_pcstrFourLineMenu3 = strRaBklashCorr;
+					g_pcstrFourLineMenu4 = strDecBklashCorr;
 					break;
 				
 				case 5:
 					//0x23360
-					Data_400033a8 = strPoleAxisDev;
-					Data_400033ac = strRaBklashCorr;
-					Data_400033b0 = strDecBklashCorr;
-					Data_400033b4 = Data_40002f4c;
+					g_pcstrFourLineMenu1 = strPoleAxisDev;
+					g_pcstrFourLineMenu2 = strRaBklashCorr;
+					g_pcstrFourLineMenu3 = strDecBklashCorr;
+					g_pcstrFourLineMenu4 = strAlignmentSpare1;
 					break;
 				
 				case 6:
 					//0x233a8
-					Data_400033a8 = strRaBklashCorr;
-					Data_400033ac = strDecBklashCorr;
-					Data_400033b0 = Data_40002f4c;
-					Data_400033b4 = Data_40002f50;
+					g_pcstrFourLineMenu1 = strRaBklashCorr;
+					g_pcstrFourLineMenu2 = strDecBklashCorr;
+					g_pcstrFourLineMenu3 = strAlignmentSpare1;
+					g_pcstrFourLineMenu4 = strAlignmentSpare2;
 					break;
 				
 				case 7:
 					//0x233f0
-					Data_400033a8 = strDecBklashCorr;
-					Data_400033ac = Data_40002f4c;
-					Data_400033b0 = Data_40002f50;
-					Data_400033b4 = Data_40002f54;
+					g_pcstrFourLineMenu1 = strDecBklashCorr;
+					g_pcstrFourLineMenu2 = strAlignmentSpare1;
+					g_pcstrFourLineMenu3 = strAlignmentSpare2;
+					g_pcstrFourLineMenu4 = strAlignmentSpare3;
 					break;
 				
 				case 8:
 					//0x23438
-					Data_400033a8 = Data_40002f4c;
-					Data_400033ac = Data_40002f50;
-					Data_400033b0 = Data_40002f54;
-					Data_400033b4 = Data_40002f58;
+					g_pcstrFourLineMenu1 = strAlignmentSpare1;
+					g_pcstrFourLineMenu2 = strAlignmentSpare2;
+					g_pcstrFourLineMenu3 = strAlignmentSpare3;
+					g_pcstrFourLineMenu4 = strAlignmentSpare4;
 					break;
 				
 				default:
@@ -448,79 +448,79 @@ void func_231d0(int a, int b)
 			break;
 		
 		case 12:
-			//0x23490
+			//0x23490: Navigation
 			switch (b)
 			{
 				case 1:
 					//0x234c8
-					Data_400033a8 = strSolarSystem;
-					Data_400033ac = strConstellation;
-					Data_400033b0 = strFamousStar;
-					Data_400033b4 = Data_40002f68;
+					g_pcstrFourLineMenu1 = strSolarSystem;
+					g_pcstrFourLineMenu2 = strConstellation;
+					g_pcstrFourLineMenu3 = strFamousStar;
+					g_pcstrFourLineMenu4 = g_pcstrMessierCatalogue;
 					break;
 
 				case 2:
 					//0x23510
-					Data_400033a8 = strConstellation;
-					Data_400033ac = strFamousStar;
-					Data_400033b0 = Data_40002f68;
-					Data_400033b4 = Data_40002f6c;
+					g_pcstrFourLineMenu1 = strConstellation;
+					g_pcstrFourLineMenu2 = strFamousStar;
+					g_pcstrFourLineMenu3 = g_pcstrMessierCatalogue;
+					g_pcstrFourLineMenu4 = g_pcstrNGCCatalogue;
 					break;
 				
 				case 3:
 					//0x23558
-					Data_400033a8 = strFamousStar;
-					Data_400033ac = Data_40002f68;
-					Data_400033b0 = Data_40002f6c;
-					Data_400033b4 = Data_40002f70;
+					g_pcstrFourLineMenu1 = strFamousStar;
+					g_pcstrFourLineMenu2 = g_pcstrMessierCatalogue;
+					g_pcstrFourLineMenu3 = g_pcstrNGCCatalogue;
+					g_pcstrFourLineMenu4 = g_pcstrICCatalogue;
 					break;
 				
 				case 4:
 					//0x235a0
-					Data_400033a8 = Data_40002f68;
-					Data_400033ac = Data_40002f6c;
-					Data_400033b0 = Data_40002f70;
-					Data_400033b4 = Data_40002f74;
+					g_pcstrFourLineMenu1 = g_pcstrMessierCatalogue;
+					g_pcstrFourLineMenu2 = g_pcstrNGCCatalogue;
+					g_pcstrFourLineMenu3 = g_pcstrICCatalogue;
+					g_pcstrFourLineMenu4 = g_pcstrSh2Catalogue;
 					break;
 				
 				case 5:
 					//0x235e8
-					Data_400033a8 = Data_40002f6c;
-					Data_400033ac = Data_40002f70;
-					Data_400033b0 = Data_40002f74;
-					Data_400033b4 = Data_40002f78;
+					g_pcstrFourLineMenu1 = g_pcstrNGCCatalogue;
+					g_pcstrFourLineMenu2 = g_pcstrICCatalogue;
+					g_pcstrFourLineMenu3 = g_pcstrSh2Catalogue;
+					g_pcstrFourLineMenu4 = g_pcstrBrightStarCatalogue;
 					break;
 				
 				case 6:
 					//0x23630
-					Data_400033a8 = Data_40002f70;
-					Data_400033ac = Data_40002f74;
-					Data_400033b0 = Data_40002f78;
-					Data_400033b4 = Data_40002f7c;
+					g_pcstrFourLineMenu1 = g_pcstrICCatalogue;
+					g_pcstrFourLineMenu2 = g_pcstrSh2Catalogue;
+					g_pcstrFourLineMenu3 = g_pcstrBrightStarCatalogue;
+					g_pcstrFourLineMenu4 = g_pcstrSAOStarCatalogue;
 					break;
 				
 				case 7:
 					//0x23678
-					Data_400033a8 = Data_40002f74;
-					Data_400033ac = Data_40002f78;
-					Data_400033b0 = Data_40002f7c;
-					Data_400033b4 = Data_40002f80;
+					g_pcstrFourLineMenu1 = g_pcstrSh2Catalogue;
+					g_pcstrFourLineMenu2 = g_pcstrBrightStarCatalogue;
+					g_pcstrFourLineMenu3 = g_pcstrSAOStarCatalogue;
+					g_pcstrFourLineMenu4 = g_pcstrCustomerObjects;
 					break;
 				
 				case 8:
 					//0x237a4
-					Data_400033a8 = Data_40002f78;
-					Data_400033ac = Data_40002f7c;
-					Data_400033b0 = Data_40002f80;
-					Data_400033b4 = Data_40002f84;
+					g_pcstrFourLineMenu1 = g_pcstrBrightStarCatalogue;
+					g_pcstrFourLineMenu2 = g_pcstrSAOStarCatalogue;
+					g_pcstrFourLineMenu3 = g_pcstrCustomerObjects;
+					g_pcstrFourLineMenu4 = g_pcstrInputRAandDEC;
 					break;
 
 				case 9:
 					//0x237ec
-					Data_400033a8 = Data_40002f7c;
-					Data_400033ac = Data_40002f80;
-					Data_400033b0 = Data_40002f84;
-					Data_400033b4 = Data_40002f88;
+					g_pcstrFourLineMenu1 = g_pcstrSAOStarCatalogue;
+					g_pcstrFourLineMenu2 = g_pcstrCustomerObjects;
+					g_pcstrFourLineMenu3 = g_pcstrInputRAandDEC;
+					g_pcstrFourLineMenu4 = g_pcstrCustomLandGoal;
 					break;
 				
 				default:
@@ -535,58 +535,58 @@ void func_231d0(int a, int b)
 			{
 				case 1:
 					//0x23874
-					Data_400033a8 = strCurrentObjects;
-					Data_400033ac = Data_40002f90;
-					Data_400033b0 = Data_40002f94;
-					Data_400033b4 = Data_40002f98;
+					g_pcstrFourLineMenu1 = strCurrentObjects;
+					g_pcstrFourLineMenu2 = Data_40002f90;
+					g_pcstrFourLineMenu3 = Data_40002f94;
+					g_pcstrFourLineMenu4 = Data_40002f98;
 					break;
 
 				case 2:
 					//0x238bc
-					Data_400033a8 = Data_40002f90;
-					Data_400033ac = Data_40002f94;
-					Data_400033b0 = Data_40002f98;
-					Data_400033b4 = Data_40002f9c;
+					g_pcstrFourLineMenu1 = Data_40002f90;
+					g_pcstrFourLineMenu2 = Data_40002f94;
+					g_pcstrFourLineMenu3 = Data_40002f98;
+					g_pcstrFourLineMenu4 = Data_40002f9c;
 					break;
 				
 				case 3:
 					//0x23904
-					Data_400033a8 = Data_40002f94;
-					Data_400033ac = Data_40002f98;
-					Data_400033b0 = Data_40002f9c;
-					Data_400033b4 = Data_40002fa0;
+					g_pcstrFourLineMenu1 = Data_40002f94;
+					g_pcstrFourLineMenu2 = Data_40002f98;
+					g_pcstrFourLineMenu3 = Data_40002f9c;
+					g_pcstrFourLineMenu4 = Data_40002fa0;
 					break;
 				
 				case 4:
 					//0x2394c
-					Data_400033a8 = Data_40002f98;
-					Data_400033ac = Data_40002f9c;
-					Data_400033b0 = Data_40002fa0;
-					Data_400033b4 = Data_40002fa4;
+					g_pcstrFourLineMenu1 = Data_40002f98;
+					g_pcstrFourLineMenu2 = Data_40002f9c;
+					g_pcstrFourLineMenu3 = Data_40002fa0;
+					g_pcstrFourLineMenu4 = Data_40002fa4;
 					break;
 				
 				case 5:
 					//0x23994
-					Data_400033a8 = Data_40002f9c;
-					Data_400033ac = Data_40002fa0;
-					Data_400033b0 = Data_40002fa4;
-					Data_400033b4 = Data_40002fa8;
+					g_pcstrFourLineMenu1 = Data_40002f9c;
+					g_pcstrFourLineMenu2 = Data_40002fa0;
+					g_pcstrFourLineMenu3 = Data_40002fa4;
+					g_pcstrFourLineMenu4 = Data_40002fa8;
 					break;
 				
 				case 6:
 					//0x239dc
-					Data_400033a8 = Data_40002fa0;
-					Data_400033ac = Data_40002fa4;
-					Data_400033b0 = Data_40002fa8;
-					Data_400033b4 = strParkposition;
+					g_pcstrFourLineMenu1 = Data_40002fa0;
+					g_pcstrFourLineMenu2 = Data_40002fa4;
+					g_pcstrFourLineMenu3 = Data_40002fa8;
+					g_pcstrFourLineMenu4 = strParkposition;
 					break;
 				
 				case 7:
 					//0x23a24
-					Data_400033a8 = Data_40002fa4;
-					Data_400033ac = Data_40002fa8;
-					Data_400033b0 = strParkposition;
-					Data_400033b4 = Data_40002fb0;
+					g_pcstrFourLineMenu1 = Data_40002fa4;
+					g_pcstrFourLineMenu2 = Data_40002fa8;
+					g_pcstrFourLineMenu3 = strParkposition;
+					g_pcstrFourLineMenu4 = Data_40002fb0;
 					break;
 				
 				default:
@@ -601,58 +601,58 @@ void func_231d0(int a, int b)
 			{
 				case 1:
 					//0x23aac
-					Data_400033a8 = strTimeAndDate;
-					Data_400033ac = Data_40002fb8;
-					Data_400033b0 = Data_40002fbc;
-					Data_400033b4 = Data_40002fc0;
+					g_pcstrFourLineMenu1 = strTimeAndDate;
+					g_pcstrFourLineMenu2 = Data_40002fb8;
+					g_pcstrFourLineMenu3 = Data_40002fbc;
+					g_pcstrFourLineMenu4 = Data_40002fc0;
 					break;
 
 				case 2:
 					//0x23af4
-					Data_400033a8 = Data_40002fb8;
-					Data_400033ac = Data_40002fbc;
-					Data_400033b0 = Data_40002fc0;
-					Data_400033b4 = Data_40002fc4;
+					g_pcstrFourLineMenu1 = Data_40002fb8;
+					g_pcstrFourLineMenu2 = Data_40002fbc;
+					g_pcstrFourLineMenu3 = Data_40002fc0;
+					g_pcstrFourLineMenu4 = Data_40002fc4;
 					break;
 				
 				case 3:
 					//0x23b3c
-					Data_400033a8 = Data_40002fbc;
-					Data_400033ac = Data_40002fc0;
-					Data_400033b0 = Data_40002fc4;
-					Data_400033b4 = strTelescopeMount;
+					g_pcstrFourLineMenu1 = Data_40002fbc;
+					g_pcstrFourLineMenu2 = Data_40002fc0;
+					g_pcstrFourLineMenu3 = Data_40002fc4;
+					g_pcstrFourLineMenu4 = strTelescopeMount;
 					break;
 				
 				case 4:
 					//0x23b84
-					Data_400033a8 = Data_40002fc0;
-					Data_400033ac = Data_40002fc4;
-					Data_400033b0 = strTelescopeMount;
-					Data_400033b4 = strTrackingRate;
+					g_pcstrFourLineMenu1 = Data_40002fc0;
+					g_pcstrFourLineMenu2 = Data_40002fc4;
+					g_pcstrFourLineMenu3 = strTelescopeMount;
+					g_pcstrFourLineMenu4 = strTrackingRate;
 					break;
 				
 				case 5:
 					//0x23bcc
-					Data_400033a8 = Data_40002fc4;
-					Data_400033ac = strTelescopeMount;
-					Data_400033b0 = strTrackingRate;
-					Data_400033b4 = Data_40002fd0;
+					g_pcstrFourLineMenu1 = Data_40002fc4;
+					g_pcstrFourLineMenu2 = strTelescopeMount;
+					g_pcstrFourLineMenu3 = strTrackingRate;
+					g_pcstrFourLineMenu4 = Data_40002fd0;
 					break;
 				
 				case 6:
 					//0x23c14
-					Data_400033a8 = strTelescopeMount;
-					Data_400033ac = strTrackingRate;
-					Data_400033b0 = Data_40002fd0;
-					Data_400033b4 = strReset;
+					g_pcstrFourLineMenu1 = strTelescopeMount;
+					g_pcstrFourLineMenu2 = strTrackingRate;
+					g_pcstrFourLineMenu3 = Data_40002fd0;
+					g_pcstrFourLineMenu4 = strReset;
 					break;
 				
 				case 7:
 					//0x23c5c
-					Data_400033a8 = strTrackingRate;
-					Data_400033ac = Data_40002fd0;
-					Data_400033b0 = strReset;
-					Data_400033b4 = Data_40002fd8;
+					g_pcstrFourLineMenu1 = strTrackingRate;
+					g_pcstrFourLineMenu2 = Data_40002fd0;
+					g_pcstrFourLineMenu3 = strReset;
+					g_pcstrFourLineMenu4 = Data_40002fd8;
 					break;
 				
 				default:
@@ -667,66 +667,66 @@ void func_231d0(int a, int b)
 			{
 				case 1:
 					//0x23ce8
-					Data_400033a8 = Data_40002fdc;
-					Data_400033ac = Data_40002fe0;
-					Data_400033b0 = Data_40002fe4;
-					Data_400033b4 = Data_40002fe8;
+					g_pcstrFourLineMenu1 = Data_40002fdc;
+					g_pcstrFourLineMenu2 = Data_40002fe0;
+					g_pcstrFourLineMenu3 = Data_40002fe4;
+					g_pcstrFourLineMenu4 = Data_40002fe8;
 					break;
 
 				case 2:
 					//0x23d30
-					Data_400033a8 = Data_40002fe0;
-					Data_400033ac = Data_40002fe4;
-					Data_400033b0 = Data_40002fe8;
-					Data_400033b4 = Data_40002fec;
+					g_pcstrFourLineMenu1 = Data_40002fe0;
+					g_pcstrFourLineMenu2 = Data_40002fe4;
+					g_pcstrFourLineMenu3 = Data_40002fe8;
+					g_pcstrFourLineMenu4 = Data_40002fec;
 					break;
 				
 				case 3:
 					//0x23d78
-					Data_400033a8 = Data_40002fe4;
-					Data_400033ac = Data_40002fe8;
-					Data_400033b0 = Data_40002fec;
-					Data_400033b4 = Data_40002ff0;
+					g_pcstrFourLineMenu1 = Data_40002fe4;
+					g_pcstrFourLineMenu2 = Data_40002fe8;
+					g_pcstrFourLineMenu3 = Data_40002fec;
+					g_pcstrFourLineMenu4 = Data_40002ff0;
 					break;
 				
 				case 4:
 					//0x23dc0
-					Data_400033a8 = Data_40002fe8;
-					Data_400033ac = Data_40002fec;
-					Data_400033b0 = Data_40002ff0;
-					Data_400033b4 = Data_40002ff4;
+					g_pcstrFourLineMenu1 = Data_40002fe8;
+					g_pcstrFourLineMenu2 = Data_40002fec;
+					g_pcstrFourLineMenu3 = Data_40002ff0;
+					g_pcstrFourLineMenu4 = Data_40002ff4;
 					break;
 				
 				case 5:
 					//0x23e08
-					Data_400033a8 = Data_40002fec;
-					Data_400033ac = Data_40002ff0;
-					Data_400033b0 = Data_40002ff4;
-					Data_400033b4 = Data_40002ff8;
+					g_pcstrFourLineMenu1 = Data_40002fec;
+					g_pcstrFourLineMenu2 = Data_40002ff0;
+					g_pcstrFourLineMenu3 = Data_40002ff4;
+					g_pcstrFourLineMenu4 = Data_40002ff8;
 					break;
 				
 				case 6:
 					//0x23e50
-					Data_400033a8 = Data_40002ff0;
-					Data_400033ac = Data_40002ff4;
-					Data_400033b0 = Data_40002ff8;
-					Data_400033b4 = Data_40002ffc;
+					g_pcstrFourLineMenu1 = Data_40002ff0;
+					g_pcstrFourLineMenu2 = Data_40002ff4;
+					g_pcstrFourLineMenu3 = Data_40002ff8;
+					g_pcstrFourLineMenu4 = Data_40002ffc;
 					break;
 				
 				case 7:
 					//0x23e98
-					Data_400033a8 = Data_40002ff4;
-					Data_400033ac = Data_40002ff8;
-					Data_400033b0 = Data_40002ffc;
-					Data_400033b4 = Data_40003000;
+					g_pcstrFourLineMenu1 = Data_40002ff4;
+					g_pcstrFourLineMenu2 = Data_40002ff8;
+					g_pcstrFourLineMenu3 = Data_40002ffc;
+					g_pcstrFourLineMenu4 = Data_40003000;
 					break;
 
 				case 8:
 					//0x23ee0
-					Data_400033a8 = Data_40002ff8;
-					Data_400033ac = Data_40002ffc;
-					Data_400033b0 = Data_40003000;
-					Data_400033b4 = Data_40003004;
+					g_pcstrFourLineMenu1 = Data_40002ff8;
+					g_pcstrFourLineMenu2 = Data_40002ffc;
+					g_pcstrFourLineMenu3 = Data_40003000;
+					g_pcstrFourLineMenu4 = Data_40003004;
 					break;
 				
 				default:
@@ -741,42 +741,42 @@ void func_231d0(int a, int b)
 			{
 				case 1:
 					//0x23f60
-					Data_400033a8 = Data_40003008;
-					Data_400033ac = Data_4000300c;
-					Data_400033b0 = Data_40003010;
-					Data_400033b4 = Data_40003014;
+					g_pcstrFourLineMenu1 = Data_40003008;
+					g_pcstrFourLineMenu2 = Data_4000300c;
+					g_pcstrFourLineMenu3 = Data_40003010;
+					g_pcstrFourLineMenu4 = Data_40003014;
 					break;
 
 				case 2:
 					//0x23fa8
-					Data_400033a8 = Data_4000300c;
-					Data_400033ac = Data_40003010;
-					Data_400033b0 = Data_40003014;
-					Data_400033b4 = Data_40003018;
+					g_pcstrFourLineMenu1 = Data_4000300c;
+					g_pcstrFourLineMenu2 = Data_40003010;
+					g_pcstrFourLineMenu3 = Data_40003014;
+					g_pcstrFourLineMenu4 = Data_40003018;
 					break;
 				
 				case 3:
 					//0x23ff0
-					Data_400033a8 = Data_40003010;
-					Data_400033ac = Data_40003014;
-					Data_400033b0 = Data_40003018;
-					Data_400033b4 = Data_4000301c;
+					g_pcstrFourLineMenu1 = Data_40003010;
+					g_pcstrFourLineMenu2 = Data_40003014;
+					g_pcstrFourLineMenu3 = Data_40003018;
+					g_pcstrFourLineMenu4 = Data_4000301c;
 					break;
 				
 				case 4:
 					//0x24038
-					Data_400033a8 = Data_40003014;
-					Data_400033ac = Data_40003018;
-					Data_400033b0 = Data_4000301c;
-					Data_400033b4 = Data_40003020;
+					g_pcstrFourLineMenu1 = Data_40003014;
+					g_pcstrFourLineMenu2 = Data_40003018;
+					g_pcstrFourLineMenu3 = Data_4000301c;
+					g_pcstrFourLineMenu4 = Data_40003020;
 					break;
 				
 				case 5:
 					//0x24080
-					Data_400033a8 = Data_40003018;
-					Data_400033ac = Data_4000301c;
-					Data_400033b0 = Data_40003020;
-					Data_400033b4 = Data_40003024;
+					g_pcstrFourLineMenu1 = Data_40003018;
+					g_pcstrFourLineMenu2 = Data_4000301c;
+					g_pcstrFourLineMenu3 = Data_40003020;
+					g_pcstrFourLineMenu4 = Data_40003024;
 					break;
 				
 				default:

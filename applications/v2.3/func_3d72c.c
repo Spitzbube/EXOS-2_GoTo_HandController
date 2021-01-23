@@ -3107,55 +3107,55 @@ void DisplayScreenItems(void)
 					{
 						case 0: 
 							//0x4ea88
-							func_91c(0, 1, 1, 136, Data_400033a8);
-							func_91c(0, 2, 1, 136, Data_400033ac);
-							func_91c(0, 3, 1, 136, Data_400033b0);
-							func_91c(0, 4, 1, 136, Data_400033b4);
+							func_91c(0, 1, 1, 136, g_pcstrFourLineMenu1);
+							func_91c(0, 2, 1, 136, g_pcstrFourLineMenu2);
+							func_91c(0, 3, 1, 136, g_pcstrFourLineMenu3);
+							func_91c(0, 4, 1, 136, g_pcstrFourLineMenu4);
 							//->0x4edc0
 							break;
 						
 						case 1: 
 							//0x4eb10
-							func_91c(1, 1, 1, 136, Data_400033a8);
-							func_91c(0, 2, 1, 136, Data_400033ac);
-							func_91c(0, 3, 1, 136, Data_400033b0);
-							func_91c(0, 4, 1, 136, Data_400033b4);
+							func_91c(1, 1, 1, 136, g_pcstrFourLineMenu1);
+							func_91c(0, 2, 1, 136, g_pcstrFourLineMenu2);
+							func_91c(0, 3, 1, 136, g_pcstrFourLineMenu3);
+							func_91c(0, 4, 1, 136, g_pcstrFourLineMenu4);
 							//->0x4edc0
 							break;
 						
 						case 2: 
 							//0x4eb98
-							func_91c(0, 1, 1, 136, Data_400033a8);
-							func_91c(1, 2, 1, 136, Data_400033ac);
-							func_91c(0, 3, 1, 136, Data_400033b0);
-							func_91c(0, 4, 1, 136, Data_400033b4);
+							func_91c(0, 1, 1, 136, g_pcstrFourLineMenu1);
+							func_91c(1, 2, 1, 136, g_pcstrFourLineMenu2);
+							func_91c(0, 3, 1, 136, g_pcstrFourLineMenu3);
+							func_91c(0, 4, 1, 136, g_pcstrFourLineMenu4);
 							//->0x4edc0
 							break;
 						
 						case 3: 
 							//0x4ec20
-							func_91c(0, 1, 1, 136, Data_400033a8);
-							func_91c(0, 2, 1, 136, Data_400033ac);
-							func_91c(1, 3, 1, 136, Data_400033b0);
-							func_91c(0, 4, 1, 136, Data_400033b4);
+							func_91c(0, 1, 1, 136, g_pcstrFourLineMenu1);
+							func_91c(0, 2, 1, 136, g_pcstrFourLineMenu2);
+							func_91c(1, 3, 1, 136, g_pcstrFourLineMenu3);
+							func_91c(0, 4, 1, 136, g_pcstrFourLineMenu4);
 							//->0x4edc0
 							break;
 						
 						case 4:
 							//0x4eca8
-							func_91c(0, 1, 1, 136, Data_400033a8);
-							func_91c(0, 2, 1, 136, Data_400033ac);
-							func_91c(0, 3, 1, 136, Data_400033b0);
-							func_91c(1, 4, 1, 136, Data_400033b4);
+							func_91c(0, 1, 1, 136, g_pcstrFourLineMenu1);
+							func_91c(0, 2, 1, 136, g_pcstrFourLineMenu2);
+							func_91c(0, 3, 1, 136, g_pcstrFourLineMenu3);
+							func_91c(1, 4, 1, 136, g_pcstrFourLineMenu4);
 							//->0x4edc0
 							break;
 						
 						case 5:
 							//0x4ed30
-							func_91c(1, 1, 1, 136, Data_400033a8);
-							func_91c(1, 2, 1, 136, Data_400033ac);
-							func_91c(1, 3, 1, 136, Data_400033b0);
-							func_91c(1, 4, 1, 136, Data_400033b4);
+							func_91c(1, 1, 1, 136, g_pcstrFourLineMenu1);
+							func_91c(1, 2, 1, 136, g_pcstrFourLineMenu2);
+							func_91c(1, 3, 1, 136, g_pcstrFourLineMenu3);
+							func_91c(1, 4, 1, 136, g_pcstrFourLineMenu4);
 							//->0x4edc0
 							break;
 						

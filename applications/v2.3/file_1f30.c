@@ -2199,9 +2199,9 @@ void func_65d4(double sp40, double sp48)
 					Data_400033cc.dwData = 5;
 				}
 				//6af4
-				if ((iMountAutoguideRa != 0) || (Data_40003488 != 0))
+				if ((iMountAutoguideRa != 0) || (g_iAscomGuideValueRa != 0))
 				{
-					Data_400033cc.dwData = abs(2*((iMountAutoguideRa + 6 * Data_40003488)) + 6);
+					Data_400033cc.dwData = abs(2*((iMountAutoguideRa + 6 * g_iAscomGuideValueRa)) + 6);
 					
 					if (iMountAutoguideRa == 1)
 					{
@@ -2299,10 +2299,7 @@ void func_65d4(double sp40, double sp48)
 				//6d64
 			} //if (g_iSlewStepRaAxis != 0)
 			//6d68
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(1 + 2 + 3);
+			UART1_WRITE_HEADER(1 + 2 + 3);
 			uart1_write_byte(0x02); //Send RA?
 			uart1_write_byte(Data_400033cc.bData[1]);
 			uart1_write_byte(Data_400033cc.bData[0]);
@@ -2376,10 +2373,7 @@ void func_65d4(double sp40, double sp48)
 				Data_400033cc.dwData = 980;
 			}
 			//6f08
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0x06);
+			UART1_WRITE_HEADER(6);
 			uart1_write_byte(0x42);
 			uart1_write_byte(Data_400033cc.bData[1]);
 			uart1_write_byte(Data_400033cc.bData[0]);
@@ -2429,7 +2423,7 @@ void func_65d4(double sp40, double sp48)
 		if (bData_40002c1a == 1)
 		{
 			//7164
-			if ((Data_40004128.dData_312 == 2) && (Data_4000348c != 0))
+			if ((Data_40004128.dData_312 == 2) && (g_iAscomGuideValueDec != 0))
 			{
 				Data_400033cc.dwData = 32;
 			}
@@ -2521,10 +2515,7 @@ void func_65d4(double sp40, double sp48)
 				}
 			}
 			//7390
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(1 + 2 + 3);
+			UART1_WRITE_HEADER(1 + 2 + 3);
 			uart1_write_byte(0x22); //Send DEC?
 			uart1_write_byte(Data_400033cc.bData[1]);
 			uart1_write_byte(Data_400033cc.bData[0]);
@@ -2598,10 +2589,7 @@ void func_65d4(double sp40, double sp48)
 				Data_400033cc.dwData = 980;
 			}
 			
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0x06);
+			UART1_WRITE_HEADER(6);
 			uart1_write_byte(0x62);
 			uart1_write_byte(Data_400033cc.bData[1]);
 			uart1_write_byte(Data_400033cc.bData[0]);
@@ -2617,10 +2605,7 @@ void func_65d4(double sp40, double sp48)
 /* 7590 - complete */
 void func_7590(void)
 {
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0xff);
 }
 
@@ -4007,10 +3992,7 @@ void StopSlewing(void)
 	Data_40004128.dData_304 = 0.0;
 	bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x00);
 	
 	Data_40004128.alignmentPause = 1;
@@ -4023,10 +4005,7 @@ void ResumeSlewing(void)
 {
 	Data_40004128.bTrackingRequest = 1;
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0xFF);
 	
 	Data_40004128.alignmentPause = 0;
@@ -4186,8 +4165,8 @@ void func_d2cc(void)
 	Data_40004128.dAutoguideRa = 0.0;
 	Data_40004128.dAutoguideDec = 0.0;
 	
-	Data_40003488 = 0;
-	Data_4000348c = 0;
+	g_iAscomGuideValueRa = 0;
+	g_iAscomGuideValueDec = 0;
 }
 
 /* d784 - todo */
@@ -5513,7 +5492,7 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 {
 	switch (a)
 	{
-		case 0:
+		case MENU_SOLAR_SYSTEM_MERCURY: //0:
 			//0x220a4
 			*pRightAscension = dData_400032d0;
 			*pDeclination = dData_400032d8;
@@ -5522,7 +5501,7 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 			//->0x22450
 			break;
 		
-		case 1:
+		case MENU_SOLAR_SYSTEM_VENUS: //1:
 			//0x220e4
 			*pRightAscension = dData_400032e0;
 			*pDeclination = dData_400032e8;
@@ -5531,7 +5510,7 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 			//->0x22450
 			break;
 		
-		case 2:
+		case MENU_SOLAR_SYSTEM_MARS: //2:
 			//0x22124
 			*pRightAscension = dData_400032f0;
 			*pDeclination = dData_400032f8;
@@ -5540,7 +5519,7 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 			//->0x22450
 			break;
 		
-		case 3:
+		case MENU_SOLAR_SYSTEM_JUPITER: //3:
 			//0x22164
 			*pRightAscension = dData_40003300;
 			*pDeclination = dData_40003308;
@@ -5549,7 +5528,7 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 			//->0x22450
 			break;
 		
-		case 4:
+		case MENU_SOLAR_SYSTEM_SATURN: //4:
 			//0x221a4
 			*pRightAscension = dData_40003310;
 			*pDeclination = dData_40003318;
@@ -5558,7 +5537,7 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 			//->0x22450
 			break;
 		
-		case 5:
+		case MENU_SOLAR_SYSTEM_URANUS: //5:
 			//0x221e4
 			*pRightAscension = dData_40003320;
 			*pDeclination = dData_40003328;
@@ -5567,7 +5546,7 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 			//->0x22450
 			break;
 		
-		case 6:
+		case MENU_SOLAR_SYSTEM_NEPTUNE: //6:
 			//0x22224
 			*pRightAscension = dData_40003330;
 			*pDeclination = dData_40003338;
@@ -5576,7 +5555,7 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 			//->0x22450
 			break;
 		
-		case 7:
+		case MENU_SOLAR_SYSTEM_PLUTO: //7:
 			//0x22388
 			*pRightAscension = dData_40003340;
 			*pDeclination = dData_40003348;
@@ -5585,7 +5564,7 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 			//->0x22450
 			break;
 		
-		case 8:
+		case MENU_SOLAR_SYSTEM_SUN: //8:
 			//0x223c8
 			*pRightAscension = dData_400032b0_SunRightAscension;
 			*pDeclination = dData_400032b8_SunDeclination;
@@ -5594,7 +5573,7 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 			//->0x22450
 			break;
 		
-		case 9:
+		case MENU_SOLAR_SYSTEM_MOON: //9:
 			//0x22408
 			*pRightAscension = dData_400032c0_MoonRightAscension;
 			*pDeclination = dData_400032c8_MoonDeclination;

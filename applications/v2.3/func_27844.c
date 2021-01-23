@@ -395,7 +395,7 @@ void PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 1:
+		case MENU_CONTEXT_RECENT_TARGETS: //1:
 			//0x29994: Recent Targets
 			bData_40002f14_RecentTargetCount = flash_get_recent_targets(Data_40002f15_RecentTargetTypeArray, 
 				Data_4000359c_RecentTargetIdArray, Data_400035bc);
@@ -595,10 +595,10 @@ void PrepareScreenItems(void)
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 		
-			Data_400033a8 = strTelescopeAlign;
-			Data_400033ac = strNavigation;
-			Data_400033b0 = strUtilities;
-			Data_400033b4 = strSetup;
+			g_pcstrFourLineMenu1 = strTelescopeAlign;
+			g_pcstrFourLineMenu2 = strNavigation;
+			g_pcstrFourLineMenu3 = strUtilities;
+			g_pcstrFourLineMenu4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 1;
 		
@@ -619,10 +619,10 @@ void PrepareScreenItems(void)
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 		
-			Data_400033a8 = strTelescopeAlign;
-			Data_400033ac = strNavigation;
-			Data_400033b0 = strUtilities;
-			Data_400033b4 = strSetup;
+			g_pcstrFourLineMenu1 = strTelescopeAlign;
+			g_pcstrFourLineMenu2 = strNavigation;
+			g_pcstrFourLineMenu3 = strUtilities;
+			g_pcstrFourLineMenu4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 2;
 		
@@ -643,10 +643,10 @@ void PrepareScreenItems(void)
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 		
-			Data_400033a8 = strTelescopeAlign;
-			Data_400033ac = strNavigation;
-			Data_400033b0 = strUtilities;
-			Data_400033b4 = strSetup;
+			g_pcstrFourLineMenu1 = strTelescopeAlign;
+			g_pcstrFourLineMenu2 = strNavigation;
+			g_pcstrFourLineMenu3 = strUtilities;
+			g_pcstrFourLineMenu4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 3;
 		
@@ -667,10 +667,10 @@ void PrepareScreenItems(void)
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
 		
-			Data_400033a8 = strTelescopeAlign;
-			Data_400033ac = strNavigation;
-			Data_400033b0 = strUtilities;
-			Data_400033b4 = strSetup;
+			g_pcstrFourLineMenu1 = strTelescopeAlign;
+			g_pcstrFourLineMenu2 = strNavigation;
+			g_pcstrFourLineMenu3 = strUtilities;
+			g_pcstrFourLineMenu4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 4;
 		
@@ -692,13 +692,13 @@ void PrepareScreenItems(void)
 			//0x2a4b4: RA Bklash Corr.
 		case MENU_CONTEXT_DEC_BKLASH_CORR: //1700:
 			//0x2a4b8: DEC Bklash Corr.
-			func_2245c(11, bData_40003170);
+			PrepareEightLineMenuScroll(11, g_bAlignmentEightLineMenuTopItem);
 		
-			bData_4000316e_FocusLineOn8LineDisplay = bData_40003172;
+			bData_4000316e_FocusLineOn8LineDisplay = g_bAlignmentEightLineMenuFocusItem;
 		
-			func_231d0(11, bData_40003171);
+			PrepareFourLineMenuScroll(11, g_bAlignmentFourLineMenuTopItem);
 		
-			bData_4000316f_FocusLineOn4LineDisplay = bData_40003173;
+			bData_4000316f_FocusLineOn4LineDisplay = g_bAlignmentFourLineMenuFocusItem;
 		
 			AdaptDisplayLinesPerMenuLine();
 			//->3d71c
@@ -728,11 +728,11 @@ void PrepareScreenItems(void)
 			//0x2a52c: Input RA and DEC
 		case MENU_CONTEXT_NAVIGATION_CUST_LAND: //2130:
 			//0x2a530: Custom Land Goal
-			func_2245c(12, bData_40003174);
+			PrepareEightLineMenuScroll(12, bData_40003174);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_40003176;
 		
-			func_231d0(12, bData_40003175);
+			PrepareFourLineMenuScroll(12, bData_40003175);
 		
 			bData_4000316f_FocusLineOn4LineDisplay = bData_40003177;
 		
@@ -758,11 +758,11 @@ void PrepareScreenItems(void)
 			//0x2a598: Display Illumin.
 		case MENU_CONTEXT_PARK_POSITION: //3900:
 			//0x2a59c: Parkposition
-			func_2245c(13, bData_40003178);
+			PrepareEightLineMenuScroll(13, bData_40003178);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_4000317a;
 		
-			func_231d0(13, bData_40003179);
+			PrepareFourLineMenuScroll(13, bData_40003179);
 		
 			bData_4000316f_FocusLineOn4LineDisplay = bData_4000317b;
 		
@@ -788,11 +788,11 @@ void PrepareScreenItems(void)
 			//0x2a604
 		case MENU_CONTEXT_RESET: //4900:
 			//0x2a608
-			func_2245c(14, bData_4000317c);
+			PrepareEightLineMenuScroll(14, bData_4000317c);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_4000317e;
 		
-			func_231d0(14, bData_4000317d);
+			PrepareFourLineMenuScroll(14, bData_4000317d);
 		
 			bData_4000316f_FocusLineOn4LineDisplay = bData_4000317f;
 		
@@ -820,7 +820,7 @@ void PrepareScreenItems(void)
 			//0x2a674
 		case 0x55FC: //22012
 			//0x2a678
-			func_2245c(22, bData_40003180);
+			PrepareEightLineMenuScroll(22, bData_40003180);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_40003182;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -843,7 +843,7 @@ void PrepareScreenItems(void)
 			//0x2a6c4
 		case 2308:
 			//0x2a6c8
-			func_2245c(23, bData_40003184);
+			PrepareEightLineMenuScroll(23, bData_40003184);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_40003186;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -964,11 +964,11 @@ void PrepareScreenItems(void)
 		
 		case 0x526D: //21101
 			//0x2ab4c
-			Data_40003360 = Data_40003044;
+			Data_40003360 = Data_40003044; //"Select"
 			Data_40003364 = "";
-			Data_40003368 = Data_40003048;
+			Data_40003368 = Data_40003048; //"Add"
 			Data_4000336c = "";
-			Data_40003370 = Data_4000304c;
+			Data_40003370 = Data_4000304c; //"Delete"
 			Data_40003374 = "";
 			Data_40003378 = "";
 			Data_4000337c = "";
@@ -1108,10 +1108,10 @@ void PrepareScreenItems(void)
 
 		case 0xA80D: //43021
 			//0x2b010
-			Data_40003360 = Data_40003068;
+			Data_40003360 = Data_40003068; //"Select"
 			Data_40003368 = Data_4000306c;
 			Data_40003370 = Data_40003070;
-			Data_40003378 = Data_40003074;
+			Data_40003378 = Data_40003074; //"Modify"
 			Data_40003364 = "";
 			Data_4000336c = "";
 			Data_40003374 = "";
@@ -1657,12 +1657,12 @@ void PrepareScreenItems(void)
 		
 			if (bRaBacklashCorrectionDirection == 2)
 			{
-				Data_40003368 = Data_400030fc;
+				Data_40003368 = Data_400030fc; //"Positive backlash is:"
 			}
 			//0x2cce4
 			if (bRaBacklashCorrectionDirection == 1)
 			{
-				Data_40003368 = Data_40003100;
+				Data_40003368 = Data_40003100; //"Negative backlash is: "
 			}
 			//0x2cd04
 			Data_4000336c = "                      ";
@@ -1751,12 +1751,12 @@ void PrepareScreenItems(void)
 		
 			if (bDecBacklashCorrectionDirection == 2)
 			{
-				Data_40003368 = Data_400030fc;
+				Data_40003368 = Data_400030fc; //"Positive backlash is:"
 			}
 			//0x2d084
 			if (bDecBacklashCorrectionDirection == 1)
 			{
-				Data_40003368 = Data_40003100;
+				Data_40003368 = Data_40003100; //"Negative backlash is: "
 			}
 			//0x2d0a4
 			Data_4000336c = "                      ";

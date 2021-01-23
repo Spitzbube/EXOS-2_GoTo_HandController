@@ -421,10 +421,7 @@ void SlewBothAxes(int a, int b, int speed1, int d, int e, int speed2)
 
 		if (g_bSingleSlewActive == 0)
 		{
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0x01);
+			UART1_WRITE_HEADER(1);
 			uart1_write_byte(0xff);
 		}
 	}

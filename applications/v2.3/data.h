@@ -251,8 +251,8 @@ extern unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
 extern unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
 extern unsigned char uart1_bRxData; //40002c19
 extern unsigned char bData_40002c1a; //40002c1a // V2.2: 40002c1e
-extern int Data_40002c1c; //40002c1c
-extern int Data_40002c20; //40002c20
+extern int g_iUart0GuideValueRa; //40002c1c
+extern int g_iUart0GuideValueDec; //40002c20
 extern Union_40002c24 Data_40002c24; //40002c24
 extern Union_40002c28 Data_40002c28; //40002c28
 extern char bHelpActive; //40002c58
@@ -413,6 +413,7 @@ extern char* strTelescopeAlign; //40002f20
 extern char* strNavigation; //40002f24
 extern char* strUtilities; //40002f28
 extern char* strSetup; //40002f2c
+
 extern char* strOneStarAlign; //40002f30
 extern char* strTwoStarAlign; //40002f34
 extern char* strThreeStarAlign; //40002f38
@@ -420,22 +421,24 @@ extern char* strTargetSync; //40002f3c
 extern char* strPoleAxisDev; //40002f40
 extern char* strRaBklashCorr; //40002f44
 extern char* strDecBklashCorr; //40002f48
-extern char* Data_40002f4c; //40002f4c
-extern char* Data_40002f50; //40002f50
-extern char* Data_40002f54; //40002f54
-extern char* Data_40002f58; //40002f58
+extern char* strAlignmentSpare1; //40002f4c
+extern char* strAlignmentSpare2; //40002f50
+extern char* strAlignmentSpare3; //40002f54
+extern char* strAlignmentSpare4; //40002f58
+
 extern char* strSolarSystem; //40002f5c
 extern char* strConstellation; //40002f60
 extern char* strFamousStar; //40002f64
-extern char* Data_40002f68; //40002f68
-extern char* Data_40002f6c; //40002f6c
-extern char* Data_40002f70; //40002f70
-extern char* Data_40002f74; //40002f74
-extern char* Data_40002f78; //40002f78
-extern char* Data_40002f7c; //40002f7c
-extern char* Data_40002f80; //40002f80
-extern char* Data_40002f84; //40002f84
-extern char* Data_40002f88; //40002f88
+extern char* g_pcstrMessierCatalogue; //40002f68
+extern char* g_pcstrNGCCatalogue; //40002f6c
+extern char* g_pcstrICCatalogue; //40002f70
+extern char* g_pcstrSh2Catalogue; //40002f74
+extern char* g_pcstrBrightStarCatalogue; //40002f78
+extern char* g_pcstrSAOStarCatalogue; //40002f7c
+extern char* g_pcstrCustomerObjects; //40002f80
+extern char* g_pcstrInputRAandDEC; //40002f84
+extern char* g_pcstrCustomLandGoal; //40002f88
+
 extern char* strCurrentObjects; //40002f8c
 extern char* Data_40002f90; //40002f90
 extern char* Data_40002f94; //40002f94
@@ -547,10 +550,10 @@ extern int Data_40003168_LunarPhaseMonth; //40003168
 extern unsigned char bData_4000316d; //4000316d
 extern unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 extern unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
-extern unsigned char bData_40003170; //40003170
-extern unsigned char bData_40003171; //40003171
-extern unsigned char bData_40003172; //40003172
-extern unsigned char bData_40003173; //40003173
+extern unsigned char g_bAlignmentEightLineMenuTopItem; //40003170
+extern unsigned char g_bAlignmentFourLineMenuTopItem; //40003171
+extern unsigned char g_bAlignmentEightLineMenuFocusItem; //40003172
+extern unsigned char g_bAlignmentFourLineMenuFocusItem; //40003173
 extern unsigned char bData_40003174; //40003174
 extern unsigned char bData_40003175; //40003175
 extern unsigned char bData_40003176; //40003176
@@ -685,10 +688,12 @@ extern char* Data_40003398; //40003398
 extern char* Data_4000339c; //4000339c
 extern char* Data_400033a0; //400033a0
 extern char* Data_400033a4; //400033a4
-extern char* Data_400033a8; //400033a8
-extern char* Data_400033ac; //400033ac
-extern char* Data_400033b0; //400033b0
-extern char* Data_400033b4; //400033b4
+
+extern char* g_pcstrFourLineMenu1; //400033a8
+extern char* g_pcstrFourLineMenu2; //400033ac
+extern char* g_pcstrFourLineMenu3; //400033b0
+extern char* g_pcstrFourLineMenu4; //400033b4
+
 extern Union_400033c8 Data_400033c8; //400033c8
 extern Union_400033cc Data_400033cc; //400033cc
 extern double dData_400033d8; //400033d8
@@ -710,8 +715,8 @@ extern double dData_40003448; //40003448
 extern double dData_40003450; //40003450
 extern double dData_40003458; //40003458
 extern double dData_40003460; //40003460
-extern int Data_40003488; //40003488
-extern int Data_4000348c; //4000348c
+extern int g_iAscomGuideValueRa; //40003488
+extern int g_iAscomGuideValueDec; //4000348c
 extern double dData_40003490; //40003490
 extern char bData_40003498; //40003498
 extern double dData_400034a0_SiderealTimeGreenwich0UT; //400034a0

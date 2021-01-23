@@ -179,23 +179,23 @@ void uart0_isr(void) __irq
 						
 						switch (uart0ReceiveDataBuffer[0])
 						{
-							case 1:
-								Data_40002c1c = -1;
+							case 1: //Move east
+								g_iUart0GuideValueRa = -1;
 								uart0ReceiveFlag = 0;
 								break;
 							
-							case 2:
-								Data_40002c1c = 1;
+							case 2: //Move west
+								g_iUart0GuideValueRa = 1;
 								uart0ReceiveFlag = 0;
 								break;
 							
-							case 4:
-								Data_40002c20 = -1;
+							case 4: //Move north
+								g_iUart0GuideValueDec = -1;
 								uart0ReceiveFlag = 0;
 								break;
 							
-							case 8:
-								Data_40002c20 = 1;
+							case 8: //Move south
+								g_iUart0GuideValueDec = 1;
 								uart0ReceiveFlag = 0;
 								break;
 							

@@ -25,8 +25,8 @@ unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
 unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
 unsigned char uart1_bRxData; //40002c19
 unsigned char bData_40002c1a; //40002c1a // V2.2: 40002c1e
-int Data_40002c1c; //40002c1c
-int Data_40002c20; //40002c20
+int g_iUart0GuideValueRa; //40002c1c
+int g_iUart0GuideValueDec; //40002c20
 Union_40002c24 Data_40002c24; //40002c24
 Union_40002c28 Data_40002c28; //40002c28
 int fill_40002c2c; //40002c2c
@@ -219,6 +219,7 @@ char* strTelescopeAlign; //40002f20
 char* strNavigation; //40002f24
 char* strUtilities; //40002f28
 char* strSetup; //40002f2c
+
 char* strOneStarAlign; //40002f30
 char* strTwoStarAlign; //40002f34
 char* strThreeStarAlign; //40002f38
@@ -226,22 +227,24 @@ char* strTargetSync; //40002f3c
 char* strPoleAxisDev; //40002f40
 char* strRaBklashCorr; //40002f44
 char* strDecBklashCorr; //40002f48
-char* Data_40002f4c; //40002f4c
-char* Data_40002f50; //40002f50
-char* Data_40002f54; //40002f54
-char* Data_40002f58; //40002f58
+char* strAlignmentSpare1; //40002f4c
+char* strAlignmentSpare2; //40002f50
+char* strAlignmentSpare3; //40002f54
+char* strAlignmentSpare4; //40002f58
+
 char* strSolarSystem; //40002f5c
 char* strConstellation; //40002f60
 char* strFamousStar; //40002f64
-char* Data_40002f68; //40002f68
-char* Data_40002f6c; //40002f6c
-char* Data_40002f70; //40002f70
-char* Data_40002f74; //40002f74
-char* Data_40002f78; //40002f78
-char* Data_40002f7c; //40002f7c
-char* Data_40002f80; //40002f80
-char* Data_40002f84; //40002f84
-char* Data_40002f88; //40002f88
+char* g_pcstrMessierCatalogue; //40002f68
+char* g_pcstrNGCCatalogue; //40002f6c
+char* g_pcstrICCatalogue; //40002f70
+char* g_pcstrSh2Catalogue; //40002f74
+char* g_pcstrBrightStarCatalogue; //40002f78
+char* g_pcstrSAOStarCatalogue; //40002f7c
+char* g_pcstrCustomerObjects; //40002f80
+char* g_pcstrInputRAandDEC; //40002f84
+char* g_pcstrCustomLandGoal; //40002f88
+
 char* strCurrentObjects; //40002f8c
 char* Data_40002f90; //40002f90
 char* Data_40002f94; //40002f94
@@ -366,10 +369,10 @@ char fill_4000316c; //4000316c
 unsigned char bData_4000316d; //4000316d
 unsigned char bData_4000316e_FocusLineOn8LineDisplay; //4000316e
 unsigned char bData_4000316f_FocusLineOn4LineDisplay; //4000316f
-unsigned char bData_40003170; //40003170
-unsigned char bData_40003171; //40003171
-unsigned char bData_40003172; //40003172
-unsigned char bData_40003173; //40003173
+unsigned char g_bAlignmentEightLineMenuTopItem; //40003170
+unsigned char g_bAlignmentFourLineMenuTopItem; //40003171
+unsigned char g_bAlignmentEightLineMenuFocusItem; //40003172
+unsigned char g_bAlignmentFourLineMenuFocusItem; //40003173
 unsigned char bData_40003174; //40003174
 unsigned char bData_40003175; //40003175
 unsigned char bData_40003176; //40003176
@@ -533,10 +536,12 @@ char* Data_40003398; //40003398
 char* Data_4000339c; //4000339c
 char* Data_400033a0; //400033a0
 char* Data_400033a4; //400033a4
-char* Data_400033a8; //400033a8
-char* Data_400033ac; //400033ac
-char* Data_400033b0; //400033b0
-char* Data_400033b4; //400033b4
+
+char* g_pcstrFourLineMenu1; //400033a8
+char* g_pcstrFourLineMenu2; //400033ac
+char* g_pcstrFourLineMenu3; //400033b0
+char* g_pcstrFourLineMenu4; //400033b4
+
 int fill_400033b8; //400033b8
 int fill_400033bc; //400033bc
 int fill_400033c0; //400033c0
@@ -569,8 +574,8 @@ double fill_40003468; //40003468
 double fill_40003470; //40003470
 double fill_40003478; //40003478
 double fill_40003480; //40003480
-int Data_40003488; //40003488
-int Data_4000348c; //4000348c
+int g_iAscomGuideValueRa; //40003488
+int g_iAscomGuideValueDec; //4000348c
 double dData_40003490; //40003490
 char bData_40003498; //40003498
 double dData_400034a0_SiderealTimeGreenwich0UT; //400034a0

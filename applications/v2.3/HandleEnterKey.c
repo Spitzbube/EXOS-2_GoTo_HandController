@@ -113,7 +113,7 @@ void HandleEnterKey(void)
 		
 			switch (Data_40002f15_RecentTargetTypeArray[bData_4000316e_FocusLineOn8LineDisplay - 1])
 			{
-				case 1:
+				case MENU_RECENT_TARGET_SOLAR_SYSTEM: //1:
 					//0x531d4
 					bData_40003176 = 1;
 					bData_40003174 = 1;				
@@ -126,7 +126,7 @@ void HandleEnterKey(void)
 					//->0x53690
 					break;
 				
-				case 2:
+				case MENU_RECENT_TARGET_CONSTELLATION: //2:
 					//0x5321c
 					bData_40003176 = 2;
 					bData_40003174 = 1;				
@@ -139,7 +139,7 @@ void HandleEnterKey(void)
 					//->0x53690
 					break;
 				
-				case 3:
+				case MENU_RECENT_TARGET_FAMOUS_STAR: //3:
 					//0x53268
 					bData_40003176 = 3;
 					bData_40003174 = 1;				
@@ -152,7 +152,7 @@ void HandleEnterKey(void)
 					//->0x53690
 					break;
 				
-				case 4:
+				case MENU_RECENT_TARGET_MESSIER: //4:
 					//0x532b4
 					bData_40003176 = 4;
 					bData_40003174 = 1;				
@@ -166,7 +166,7 @@ void HandleEnterKey(void)
 					//->0x53690
 					break;
 				
-				case 5:
+				case MENU_RECENT_TARGET_NGC: //5:
 					//0x5330c
 					bData_40003176 = 5;
 					bData_40003174 = 1;				
@@ -180,7 +180,7 @@ void HandleEnterKey(void)
 					//->0x53690
 					break;
 				
-				case 6:
+				case MENU_RECENT_TARGET_IC: //6:
 					//0x53364
 					bData_40003176 = 6;
 					bData_40003174 = 1;				
@@ -194,7 +194,7 @@ void HandleEnterKey(void)
 					//->0x53690
 					break;
 				
-				case 7:
+				case MENU_RECENT_TARGET_SH2: //7:
 					//0x5345c
 					bData_40003176 = 7;
 					bData_40003174 = 1;				
@@ -208,7 +208,7 @@ void HandleEnterKey(void)
 					//->0x53690
 					break;
 				
-				case 8:
+				case MENU_RECENT_TARGET_BRIGHT_STAR: //8:
 					//0x534b4
 					bData_40003176 = 8;
 					bData_40003174 = 1;				
@@ -222,7 +222,7 @@ void HandleEnterKey(void)
 					//->0x53690
 					break;
 				
-				case 9:
+				case MENU_RECENT_TARGET_SAO_CAT: //9:
 					//0x5350c
 					bData_40003176 = 8;
 					bData_40003174 = 2;				
@@ -295,10 +295,10 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_ALIGNMENT: //1000:
 			//0x53698
-			bData_40003173 = 1;
-			bData_40003171 = 1;
-			bData_40003172 = 1;
-			bData_40003170 = 1;
+			g_bAlignmentFourLineMenuFocusItem = 1;
+			g_bAlignmentFourLineMenuTopItem = 1;
+			g_bAlignmentEightLineMenuFocusItem = 1;
+			g_bAlignmentEightLineMenuTopItem = 1;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_ONE_STAR_ALIGN; //1100;
 			break;
 		
@@ -1045,10 +1045,7 @@ void HandleEnterKey(void)
 		
 			Data_40003500.dwData = fabs((int) ((6.0 * dTrackingRate) / 15.04));
 		
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0x04);
+			UART1_WRITE_HEADER(4);
 			uart1_write_byte(0x41);
 		
 			if (dTrackingRate > 0)
@@ -1065,10 +1062,7 @@ void HandleEnterKey(void)
 			uart1_write_byte(Data_40003500.bData[1]);
 			uart1_write_byte(Data_40003500.bData[0]);
 
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0x04);
+			UART1_WRITE_HEADER(4);
 			uart1_write_byte(0x01);
 			
 			if (dTrackingRate > 0)

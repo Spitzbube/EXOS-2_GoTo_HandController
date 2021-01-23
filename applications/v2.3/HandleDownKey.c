@@ -93,10 +93,10 @@ void HandleDownKey(void)
 		
 		case MENU_CONTEXT_DEC_BKLASH_CORR: //1700:
 			//0x5b410: DEC Bklash Correction
-			bData_40003173 = 1;
-			bData_40003171 = 1;
-			bData_40003172 = 1;
-			bData_40003170 = 1;
+			g_bAlignmentFourLineMenuFocusItem = 1;
+			g_bAlignmentFourLineMenuTopItem = 1;
+			g_bAlignmentEightLineMenuFocusItem = 1;
+			g_bAlignmentEightLineMenuTopItem = 1;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_ONE_STAR_ALIGN; //1100;
 			break;
 		
@@ -235,10 +235,10 @@ void HandleDownKey(void)
 		case MENU_CONTEXT_TIME_DATE: //4100:
 			//0x5b718
 			HandleLongListScroll(1, 14);
-			Data_40002c64_MenuContextId = 4200;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING; //4200;
 			break;
 		
-		case 4200:
+		case MENU_CONTEXT_DAYLIGHT_SAVING: //4200:
 			//0x5b738
 			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_SITE_SETTING; //4300;
@@ -247,10 +247,10 @@ void HandleDownKey(void)
 		case MENU_CONTEXT_SITE_SETTING: //4300:
 			//0x5b758
 			HandleLongListScroll(1, 14);
-			Data_40002c64_MenuContextId = 4400;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SKY_LAND; //4400;
 			break;
 		
-		case 4400:
+		case MENU_CONTEXT_SKY_LAND: //4400:
 			//0x5b778
 			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_AZ_EQU; //4500;

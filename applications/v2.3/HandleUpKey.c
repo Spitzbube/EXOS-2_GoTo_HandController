@@ -344,10 +344,10 @@ void HandleUpKey(void)
 		
 		case MENU_CONTEXT_ONE_STAR_ALIGN: //1100:
 			//0x5d9a4	
-			bData_40003173 = 4;
-			bData_40003171 = 4;
-			bData_40003172 = 7;
-			bData_40003170 = 8;
+			g_bAlignmentFourLineMenuFocusItem = 4;
+			g_bAlignmentFourLineMenuTopItem = 4;
+			g_bAlignmentEightLineMenuFocusItem = 7;
+			g_bAlignmentEightLineMenuTopItem = 8;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_DEC_BKLASH_CORR;
 			break;
 			

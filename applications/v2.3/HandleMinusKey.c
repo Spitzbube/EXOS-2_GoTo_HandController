@@ -228,17 +228,17 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = 3000;
 			break;
 		
-		case 3600:
+		case MENU_CONTEXT_EYEPIECE_FOV: //3600:
 			//0x5fe78
 			Data_40002c64_MenuContextId = 3000;
 			break;
 		
-		case 3700:
+		case MENU_CONTEXT_EYEPIECE_MAGN: //3700:
 			//0x5fe8c
 			Data_40002c64_MenuContextId = 3000;
 			break;
 		
-		case 3800:
+		case MENU_CONTEXT_DISPLAY_ILLUMINATION: //3800:
 			//0x5fea0
 			Data_40002c64_MenuContextId = 3000;
 			break;
@@ -362,7 +362,7 @@ void HandleMinusKey(void)
 			//0x60080
 		case 360022:
 			//0x60088
-			Data_40002c64_MenuContextId = 3700;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_MAGN; //3700;
 			break;
 		
 		case 370021:
@@ -371,22 +371,22 @@ void HandleMinusKey(void)
 			//0x600a0
 		case 370023:
 			//0x600a4
-			Data_40002c64_MenuContextId = 3600;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_FOV; //3600;
 			break;
 		
 		case 3602:
 			//0x600b4
-			Data_40002c64_MenuContextId = 3600;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_EYEPIECE_FOV; //3600;
 			break;
 		
 		case 3801:
 			//0x600c8
-			Data_40002c64_MenuContextId = 3800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DISPLAY_ILLUMINATION; //3800;
 			break;
 		
 		case 3802:
 			//0x600dc
-			Data_40002c64_MenuContextId = 3800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DISPLAY_ILLUMINATION; //3800;
 			break;
 		
 		case 4301:

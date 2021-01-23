@@ -252,28 +252,16 @@ void HandleReset(void)
 	func_d2cc();
 	func_5099c();
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x44);
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x64);
 
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x04);
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x24);
 	
 	func_659c(10);
@@ -867,10 +855,7 @@ double func_52720(int a)
 		char b[4];
 	} sp8;
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x03);
+	UART1_WRITE_HEADER(3);
 	
 	switch (a)
 	{
@@ -1278,26 +1263,26 @@ void HandleLongListScroll(int upDown, int b)
 			{
 				case 11:
 					//0x5a5d0
-					if (bData_40003173 > 1)
+					if (g_bAlignmentFourLineMenuFocusItem > 1)
 					{
 						//5a5e4
-						bData_40003173--;
+						g_bAlignmentFourLineMenuFocusItem--;
 					}
 					else
 					{
 						//0x5a5fc
-						bData_40003171--;
+						g_bAlignmentFourLineMenuTopItem--;
 					}
 					//0x5a610
-					if (bData_40003172 > 1)
+					if (g_bAlignmentEightLineMenuFocusItem > 1)
 					{
 						//5a620
-						bData_40003172--;
+						g_bAlignmentEightLineMenuFocusItem--;
 					}
 					else
 					{
 						//0x5a638
-						bData_40003170--;
+						g_bAlignmentEightLineMenuTopItem--;
 					}
 					//0x5a64c -> 0x5a860
 					break;
@@ -1402,22 +1387,22 @@ void HandleLongListScroll(int upDown, int b)
 			{
 				case 11:
 					//0x5a8a8: Alignment items
-					if (bData_40003173 < 4)
+					if (g_bAlignmentFourLineMenuFocusItem < 4)
 					{
-						bData_40003173++;
+						g_bAlignmentFourLineMenuFocusItem++;
 					}
 					else
 					{
-						bData_40003171++;
+						g_bAlignmentFourLineMenuTopItem++;
 					}
 
-					if (bData_40003172 < 8)
+					if (g_bAlignmentEightLineMenuFocusItem < 8)
 					{
-						bData_40003172++;
+						g_bAlignmentEightLineMenuFocusItem++;
 					}
 					else
 					{
-						bData_40003170++;
+						g_bAlignmentEightLineMenuTopItem++;
 					}
 					break;
 				
@@ -1535,10 +1520,7 @@ void SlewStop(void)
 		//0x5f0e4
 		if (g_bCombinedSlewActive == 1)
 		{
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(1);
-			uart1_write_byte(1);
+			UART1_WRITE_HEADER(1);
 			uart1_write_byte(0);
 			
 			bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
@@ -1548,10 +1530,7 @@ void SlewStop(void)
 		{
 			if (bData_40002c1a == 2)
 			{
-				uart1_write_byte(0x55);
-				uart1_write_byte(0xaa);
-				uart1_write_byte(1);
-				uart1_write_byte(1);
+				UART1_WRITE_HEADER(1);
 				uart1_write_byte(0);
 				
 				bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
@@ -1561,10 +1540,7 @@ void SlewStop(void)
 				//0x5f180
 				if (g_eSlewRateIndex != SLEW_RATE_MAX) //9)
 				{
-					uart1_write_byte(0x55);
-					uart1_write_byte(0xaa);
-					uart1_write_byte(1);
-					uart1_write_byte(1);
+					UART1_WRITE_HEADER(1);
 					uart1_write_byte(0);
 					
 					bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
@@ -3051,10 +3027,7 @@ double func_6ab74(int a)
 
 	bData_40002c13_uart1ReceiveComplete = 0;
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	
 	switch (a)
 	{
@@ -3135,10 +3108,7 @@ double InquireMotorData(int a)
 	
 	bData_40002c13_uart1ReceiveComplete = 0;
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(1);
+	UART1_WRITE_HEADER(1);
 
 	switch (a)
 	{
@@ -3271,11 +3241,8 @@ void ReceiveMountAutoguideValues(void)
 	iMountAutoguideRa = 0;
 	iMountAutoguideDec = 0;
 	bData_40002c13_uart1ReceiveComplete = 0;
-	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x81);
 	
 	bData_40002c13_uart1ReceiveComplete = 0;
@@ -3380,41 +3347,41 @@ void func_6b3a4(void)
 }
 
 /* 6b3a8 - todo */
-int func_6b3a8(double a, double b, double c, double d)
+int CheckObjectVisibility(double dRA, double dDec, double dLatitude, double dLST)
 {
 	float r6;
 	float r7;
 	float r4;
 	float r5;
 	
-	if ((d >= 4) || (d <= 20))
+	if ((dLST >= 4) || (dLST <= 20))
 	{
 		//0x6b3e0
-		r6 = d - 4;
-		r7 = d + 4;
+		r6 = dLST - 4;
+		r7 = dLST + 4;
 	}
 	else
 	{
 		//0x6b42c
-		if (d < 4)
+		if (dLST < 4)
 		{
 			//6b444
-			r6 = d + 24 - 4;
-			r7 = d + 4;
+			r6 = dLST + 24 - 4;
+			r7 = dLST + 4;
 		}
 		else
 		{
 			//0x6b4a4
-			r6 = d - 4;
-			r7 = d - 24 + 4;
+			r6 = dLST - 4;
+			r7 = dLST - 24 + 4;
 		}
 	}
 	//0x6b500
-	if (c >= 0)
+	if (dLatitude >= 0)
 	{
 		//6b518
-		r4 = c - 60;
-		r5 = c + 60;
+		r4 = dLatitude - 60;
+		r5 = dLatitude + 60;
 		
 		if (r5 > 90)
 		{
@@ -3424,8 +3391,8 @@ int func_6b3a8(double a, double b, double c, double d)
 	else
 	{
 		//0x6b578
-		r4 = c - 60;
-		r5 = c + 60;
+		r4 = dLatitude - 60;
+		r5 = dLatitude + 60;
 		
 		if (r4 < -90)
 		{
@@ -3433,12 +3400,12 @@ int func_6b3a8(double a, double b, double c, double d)
 		}
 	}
 	//0x6b5d4
-	if ((d >= 4) || (d <= 20))
+	if ((dLST >= 4) || (dLST <= 20))
 	{
 		//0x6b604
-		if ((a >= r6) && (a <= r7))
+		if ((dRA >= r6) && (dRA <= r7))
 		{
-			if ((b >= r4) && (b <= r5))
+			if ((dDec >= r4) && (dDec <= r5))
 			{
 				return 1;
 			}
@@ -3448,12 +3415,12 @@ int func_6b3a8(double a, double b, double c, double d)
 	else
 	{
 		//0x6b68c
-		if ((d <= 4) || (d >= 20))
+		if ((dLST <= 4) || (dLST >= 20))
 		{
 			//0x6b6bc
-			if (((a >= r6) && (a <= 24)) || ((a >= 0) && (a <= r7)))
+			if (((dRA >= r6) && (dRA <= 24)) || ((dRA >= 0) && (dRA <= r7)))
 			{
-				if ((b >= r4) && (b <= r5))
+				if ((dDec >= r4) && (dDec <= r5))
 				{
 					return 1;
 				}
@@ -3471,12 +3438,12 @@ int func_6b3a8(double a, double b, double c, double d)
 /* 6b778 - todo */
 void func_6b778(void)
 {
-	double sp456;
-	float sp452;
-	float sp448;
+	double dLST; //sp456;
+	float fRA; //sp452;
+	float fDec; //sp448;
 	unsigned char strStarNames[10][10]; //sp348
 	unsigned char sp128[10][22]; 
-	unsigned char sp36[9][10] = 
+	unsigned char strSolarObjNames[9][10] = //sp36
 	{
 		"Moon     ",
 		"Mercury  ",
@@ -3492,147 +3459,147 @@ void func_6b778(void)
 	unsigned char r4 = 0;
 	unsigned char r5;
 	
-	sp456 = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude);
+	dLST = get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude);
 	
-	bData_40003161 = GetCurrentAlignStars(sp456,
+	bData_40003161 = GetCurrentAlignStars(dLST,
 		Data_40004128.geographicLatitude, 
 		Data_40004a68_CurrentAlignStarEquatorialCoord,
 		strStarNames, sp128);
 	
-	get_solar_system_object_data(8, &sp452, &sp448);
+	get_solar_system_object_data(MENU_SOLAR_SYSTEM_SUN/*8*/, &fRA, &fDec);
 	
-	if (1 == func_6b3a8(sp452, sp448, Data_40004128.geographicLatitude, sp456))
+	if (1 == CheckObjectVisibility(fRA, fDec, Data_40004128.geographicLatitude, dLST))
 	{
 		r4++;
 		
-		Data_400037f8[2*(r4 - 1)] = sp452;
-		Data_400037f8[2*(r4 - 1) + 1] = sp448;
+		Data_400037f8[2*(r4 - 1)] = fRA;
+		Data_400037f8[2*(r4 - 1) + 1] = fDec;
 		
 		for (r5 = 0; r5 < 10; r5++)
 		{
 			//0x6b894
-			Data_400038e8[r4 - 1][r5] = sp36[0][r5];
+			Data_400038e8[r4 - 1][r5] = strSolarObjNames[0][r5];
 		}
 	}
 	//0x6b8c0
-	get_solar_system_object_data(0, &sp452, &sp448);
+	get_solar_system_object_data(MENU_SOLAR_SYSTEM_MERCURY/*0*/, &fRA, &fDec);
 	
-	if (1 == func_6b3a8(sp452, sp448, Data_40004128.geographicLatitude, sp456))
+	if (1 == CheckObjectVisibility(fRA, fDec, Data_40004128.geographicLatitude, dLST))
 	{
 		r4++;
 		
-		Data_400037f8[2*(r4 - 1)] = sp452;
-		Data_400037f8[2*(r4 - 1) + 1] = sp448;
+		Data_400037f8[2*(r4 - 1)] = fRA;
+		Data_400037f8[2*(r4 - 1) + 1] = fDec;
 		
 		for (r5 = 0; r5 < 10; r5++)
 		{
 			//0x6b95c
-			Data_400038e8[r4 - 1][r5] = sp36[1][r5];
+			Data_400038e8[r4 - 1][r5] = strSolarObjNames[1][r5];
 		}
 	}
 	//6b988
-	get_solar_system_object_data(1, &sp452, &sp448);
+	get_solar_system_object_data(MENU_SOLAR_SYSTEM_VENUS/*1*/, &fRA, &fDec);
 	
-	if (1 == func_6b3a8(sp452, sp448, Data_40004128.geographicLatitude, sp456))
+	if (1 == CheckObjectVisibility(fRA, fDec, Data_40004128.geographicLatitude, dLST))
 	{
 		r4++;
 		
-		Data_400037f8[2*(r4 - 1)] = sp452;
-		Data_400037f8[2*(r4 - 1) + 1] = sp448;
+		Data_400037f8[2*(r4 - 1)] = fRA;
+		Data_400037f8[2*(r4 - 1) + 1] = fDec;
 		
 		for (r5 = 0; r5 < 10; r5++)
 		{
-			Data_400038e8[r4 - 1][r5] = sp36[2][r5];
+			Data_400038e8[r4 - 1][r5] = strSolarObjNames[2][r5];
 		}
 	}
 	//6ba50
-	get_solar_system_object_data(2, &sp452, &sp448);
+	get_solar_system_object_data(MENU_SOLAR_SYSTEM_MARS/*2*/, &fRA, &fDec);
 	
-	if (1 == func_6b3a8(sp452, sp448, Data_40004128.geographicLatitude, sp456))
+	if (1 == CheckObjectVisibility(fRA, fDec, Data_40004128.geographicLatitude, dLST))
 	{
 		r4++;
 		
-		Data_400037f8[2*(r4 - 1)] = sp452;
-		Data_400037f8[2*(r4 - 1) + 1] = sp448;
+		Data_400037f8[2*(r4 - 1)] = fRA;
+		Data_400037f8[2*(r4 - 1) + 1] = fDec;
 		
 		for (r5 = 0; r5 < 10; r5++)
 		{
-			Data_400038e8[r4 - 1][r5] = sp36[3][r5];
+			Data_400038e8[r4 - 1][r5] = strSolarObjNames[3][r5];
 		}
 	}
 	//6bb18
-	get_solar_system_object_data(3, &sp452, &sp448);
+	get_solar_system_object_data(MENU_SOLAR_SYSTEM_JUPITER/*3*/, &fRA, &fDec);
 	
-	if (1 == func_6b3a8(sp452, sp448, Data_40004128.geographicLatitude, sp456))
+	if (1 == CheckObjectVisibility(fRA, fDec, Data_40004128.geographicLatitude, dLST))
 	{
 		r4++;
 		
-		Data_400037f8[2*(r4 - 1)] = sp452;
-		Data_400037f8[2*(r4 - 1) + 1] = sp448;
+		Data_400037f8[2*(r4 - 1)] = fRA;
+		Data_400037f8[2*(r4 - 1) + 1] = fDec;
 		
 		for (r5 = 0; r5 < 10; r5++)
 		{
-			Data_400038e8[r4 - 1][r5] = sp36[4][r5];
+			Data_400038e8[r4 - 1][r5] = strSolarObjNames[4][r5];
 		}
 	}
 	//6bbe0
-	get_solar_system_object_data(4, &sp452, &sp448);
+	get_solar_system_object_data(MENU_SOLAR_SYSTEM_SATURN/*4*/, &fRA, &fDec);
 	
-	if (1 == func_6b3a8(sp452, sp448, Data_40004128.geographicLatitude, sp456))
+	if (1 == CheckObjectVisibility(fRA, fDec, Data_40004128.geographicLatitude, dLST))
 	{
 		r4++;
 		
-		Data_400037f8[2*(r4 - 1)] = sp452;
-		Data_400037f8[2*(r4 - 1) + 1] = sp448;
+		Data_400037f8[2*(r4 - 1)] = fRA;
+		Data_400037f8[2*(r4 - 1) + 1] = fDec;
 		
 		for (r5 = 0; r5 < 10; r5++)
 		{
-			Data_400038e8[r4 - 1][r5] = sp36[5][r5];
+			Data_400038e8[r4 - 1][r5] = strSolarObjNames[5][r5];
 		}
 	}
 	//6bca8
-	get_solar_system_object_data(5, &sp452, &sp448);
+	get_solar_system_object_data(MENU_SOLAR_SYSTEM_URANUS/*5*/, &fRA, &fDec);
 	
-	if (1 == func_6b3a8(sp452, sp448, Data_40004128.geographicLatitude, sp456))
+	if (1 == CheckObjectVisibility(fRA, fDec, Data_40004128.geographicLatitude, dLST))
 	{
 		r4++;
 		
-		Data_400037f8[2*(r4 - 1)] = sp452;
-		Data_400037f8[2*(r4 - 1) + 1] = sp448;
+		Data_400037f8[2*(r4 - 1)] = fRA;
+		Data_400037f8[2*(r4 - 1) + 1] = fDec;
 		
 		for (r5 = 0; r5 < 10; r5++)
 		{
-			Data_400038e8[r4 - 1][r5] = sp36[6][r5];
+			Data_400038e8[r4 - 1][r5] = strSolarObjNames[6][r5];
 		}
 	}
 	//6bd70
-	get_solar_system_object_data(6, &sp452, &sp448);
+	get_solar_system_object_data(MENU_SOLAR_SYSTEM_NEPTUNE/*6*/, &fRA, &fDec);
 	
-	if (1 == func_6b3a8(sp452, sp448, Data_40004128.geographicLatitude, sp456))
+	if (1 == CheckObjectVisibility(fRA, fDec, Data_40004128.geographicLatitude, dLST))
 	{
 		r4++;
 		
-		Data_400037f8[2*(r4 - 1)] = sp452;
-		Data_400037f8[2*(r4 - 1) + 1] = sp448;
+		Data_400037f8[2*(r4 - 1)] = fRA;
+		Data_400037f8[2*(r4 - 1) + 1] = fDec;
 		
 		for (r5 = 0; r5 < 10; r5++)
 		{
-			Data_400038e8[r4 - 1][r5] = sp36[7][r5];
+			Data_400038e8[r4 - 1][r5] = strSolarObjNames[7][r5];
 		}
 	}
 	//6be38
-	get_solar_system_object_data(7, &sp452, &sp448);
+	get_solar_system_object_data(MENU_SOLAR_SYSTEM_PLUTO/*7*/, &fRA, &fDec);
 	
-	if (1 == func_6b3a8(sp452, sp448, Data_40004128.geographicLatitude, sp456))
+	if (1 == CheckObjectVisibility(fRA, fDec, Data_40004128.geographicLatitude, dLST))
 	{
 		r4++;
 		
-		Data_400037f8[2*(r4 - 1)] = sp452;
-		Data_400037f8[2*(r4 - 1) + 1] = sp448;
+		Data_400037f8[2*(r4 - 1)] = fRA;
+		Data_400037f8[2*(r4 - 1) + 1] = fDec;
 		
 		for (r5 = 0; r5 < 10; r5++)
 		{
-			Data_400038e8[r4 - 1][r5] = sp36[8][r5];
+			Data_400038e8[r4 - 1][r5] = strSolarObjNames[8][r5];
 		}
 	}
 	//6bf00
@@ -3856,7 +3823,7 @@ void func_6c5e8(void)
 		{
 			case 1:
 				//6c7cc
-				func_3230(Data_4000327f, &fData_40003288, &fData_4000328c);
+				func_3230(Data_4000327f, &fData_40003288, &fData_4000328c); //Not implemented
 			
 				Data_40002c64_MenuContextId = 21102;
 				break;
@@ -3897,28 +3864,16 @@ int main(void)
 
 	ShowStartupScreen();
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(1);
-	uart1_write_byte(1);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x44);
 
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(1);
-	uart1_write_byte(1);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x64);
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(1);
-	uart1_write_byte(1);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x04);
 
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(1);
-	uart1_write_byte(1);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x24);
 	
 	func_659c(10);
@@ -4049,8 +4004,8 @@ int main(void)
 		Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 	}
 	//6d880
-	Data_40002c1c = 0;
-	Data_40002c20 = 0;
+	g_iUart0GuideValueRa = 0;
+	g_iUart0GuideValueDec = 0;
 	//6d894 -> 729ec
 	
 	//##########################################################################
@@ -4218,18 +4173,10 @@ int main(void)
 			}
 			//0x6dfc4
 			dData_40002d78 /= 15.0;
-			#if 0
-			sp64 = dData_400031f0 / 15.0;
-			sp56 = dData_40003420 / 15.0;
-			sp48 = dData_40002d78 - sp56;
-			sp40 = sp48 - sp64;
-			sp32 = fData_400034c8;
-			sp24 = sp32 - sp40;
-			fData_40003508 = sp24;
-			#else
+
 			fData_40003508 = fData_400034c8 - 
 				((dData_40002d78 - dData_40003420 / 15.0) - dData_400031f0 / 15.0);
-			#endif
+
 			if (fData_40003508 < 0)
 			{
 				//6e08c
@@ -4242,46 +4189,15 @@ int main(void)
 				fData_40003508 -= 24;
 			}
 			//0x6e0d0
-			#if 0
-			sp64 = dData_40003420 / 15.0;
-			sp56 = dData_40002d78 - sp64;
-			sp48 = sp56 + dData_400033e8;
-			Data_40002d68_OTARightAscensionHours = sp48;
-			#else
 			Data_40002d68_OTARightAscensionHours = dData_40002d78 - 
 				dData_40003420 / 15.0 + dData_400033e8;
-			#endif
-			
-			#if 0
-			sp64 = Data_40002d68_OTARightAscensionHours;
-			sp56 = dData_40003420 / 15.0;
-			sp48 = dData_40002d78 - sp56;
-			sp40 = sp48 + dData_400033e8;
-			sp32 = sp40 - sp64;
-			sp24 = sp32 * 60.0;
-			40002d6c = sp24;
-			#else
 			Data_40002d6c_OTARightAscensionMinutes = 60 *
 				(dData_40002d78 - dData_40003420 / 15.0 + dData_400033e8 - 
 					Data_40002d68_OTARightAscensionHours);
-			#endif
-			
-			#if 0
-			sp64 = Data_40002d6c_OTARightAscensionMinutes;
-			sp56 = sp64 / 60.0;
-			sp48 = Data_40002d68_OTARightAscensionHours;
-			sp40 = dData_40003420 / 15.0;
-			sp32 = dData_40002d78 - sp40;
-			sp24 = sp32 + dData_400033e8;
-			sp16 = sp24 - sp48;
-			sp8 = sp16 - sp56;
-			sp = sp8 * 3600.0;
-			#else
 			fData_40002d70_OTARightAscensionSeconds = 3600.0 *
 				((dData_40002d78 - dData_40003420 / 15.0 + dData_400033e8 - 
 					Data_40002d68_OTARightAscensionHours) - 
 					Data_40002d6c_OTARightAscensionMinutes / 60.0);
-			#endif
 			
 			if ((bData_40003200 == 1) && (Data_40004128.dData_304 == 2.0))
 			{
@@ -4292,58 +4208,19 @@ int main(void)
 				fData_40002d70_OTARightAscensionSeconds = fData_40002ce0_ObjectRightAscensionSeconds;
 			}
 			//0x6e30c
-			#if 0
-			sp64 = dData_40002d98 - dData_40003428;
-			sp56 = sp64 - dData_400031f8;
-			fData_4000350c = sp56;
-			#else
 			fData_4000350c = dData_40002d98 - dData_40003428 - dData_400031f8;
-			#endif
 
-			#if 0
-			sp64 = dData_40002d98 - dData_40003428;
-			sp56 = sp64 + dData_400033f0;
-			Data_40002d8c_OTADeclinationDegrees = sp56;
-			#else
 			Data_40002d8c_OTADeclinationDegrees = dData_40002d98 - dData_40003428 + dData_400033f0;
-			#endif
-			
-			#if 0
-			sp64 = Data_40002d8c_OTADeclinationDegrees;
-			sp56 = dData_40002d98 - dData_40003428;
-			sp48 = sp56 + dData_400033f0;
-			sp40 = sp48 - sp64;
-			sp32 = sp40 * 60.0;
-			Data_40002d90_OTADeclinationMinutes = sp32;
-			#else
 			Data_40002d90_OTADeclinationMinutes = 60.0 *
 				(dData_40002d98 - dData_40003428 + dData_400033f0 - Data_40002d8c_OTADeclinationDegrees);
-			#endif
-			
-			#if 0
-			sp64 = Data_40002d90_OTADeclinationMinutes;
-			sp56 = sp64 / 60.0;
-			sp48 = Data_40002d8c_OTADeclinationDegrees;
-			sp40 = dData_40002d98 - dData_40003428;
-			sp32 = sp40 + dData_400033f0;
-			sp24 = sp32 - sp48;
-			sp16 = sp24 - sp56;
-			sp8 = sp16 * 3600.0;
-			#else
 			fData_40002d94_OTADeclinationSeconds = 3600.0 *
 				(dData_40002d98 - dData_40003428 + dData_400033f0 - Data_40002d8c_OTADeclinationDegrees - 
 					Data_40002d90_OTADeclinationMinutes / 60.0);
-			#endif
 			
 			if ((bData_40003201 == 1) && (Data_40004128.dData_312 == 2.0))
 			{
 				//6e4f8
-				#if 0
-				sp64 = fData_40002d18_ObjectDeclination;
-				dData_400033f0 = sp64 - dData_40002d98;
-				#else
 				dData_400033f0 = fData_40002d18_ObjectDeclination - dData_40002d98;
-				#endif
 				
 				Data_40002d8c_OTADeclinationDegrees = Data_40002d00_ObjectDeclinationDegrees;
 				Data_40002d90_OTADeclinationMinutes = Data_40002d04_ObjectDeclinationMinutes;
@@ -4644,10 +4521,7 @@ int main(void)
 				if (g_bCombinedSlewActive != 1)
 				{
 					//6fa58
-					uart1_write_byte(0x55);
-					uart1_write_byte(0xaa);
-					uart1_write_byte(0x01);
-					uart1_write_byte(1 + 2 + 3);
+					UART1_WRITE_HEADER(1 + 2 + 3);
 					
 					if (bData_400031ba == 0x01)
 					{
@@ -4672,35 +4546,36 @@ int main(void)
 			else
 			{
 				//0x6fae8
-				uart1_write_byte(0x55);
-				uart1_write_byte(0xaa);
-				uart1_write_byte(0x01);
-				uart1_write_byte(1);
+				UART1_WRITE_HEADER(1);
 				uart1_write_byte(0x00);
 				
 				bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 				g_bMaxSlewRampActive = 0;
 			}
 		} //if ((g_bMaxSlewRampActive != 0) && (g_stCurrentSlewRampValue.Data <= 4800))
-		//6fb24
+
+		//6fb24: Handle Autoguide values from Ascom/Mount ST4 port during object tracking
+
 		if (bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)
 		{
 			//6fb34
 			ReceiveMountAutoguideValues();
 			
-			Data_40003488 = Data_40002c1c;
-			Data_4000348c = Data_40002c20;
+			g_iAscomGuideValueRa = g_iUart0GuideValueRa;
+			g_iAscomGuideValueDec = g_iUart0GuideValueDec;
 
-			Data_40004128.dAutoguideRa += (2 * Data_40003488 + iMountAutoguideRa) *
+			Data_40004128.dAutoguideRa += (2 * g_iAscomGuideValueRa + iMountAutoguideRa) *
 				dGuidingSpeed * 0.00153;
 
-			Data_40004128.dAutoguideDec += (4 * Data_4000348c + iMountAutoguideDec) *
+			Data_40004128.dAutoguideDec += (4 * g_iAscomGuideValueDec + iMountAutoguideDec) *
 				dGuidingSpeed * 0.00153;
 			
-			Data_40002c1c = 0;
-			Data_40002c20 = 0;
+			g_iUart0GuideValueRa = 0;
+			g_iUart0GuideValueDec = 0;
 		}
-		//6fd3c
+
+		//6fd3c: Handle Meridian Flip
+
 		if ((bData_40003211 == 0) && 
 			(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/) &&
 			(g_dObjectRightAcension < 23.99999))
