@@ -2296,10 +2296,7 @@ void func_65d4(double sp40, double sp48)
 				//6d64
 			} //if (g_iSlewStepRaAxis != 0)
 			//6d68
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(1 + 2 + 3);
+			UART1_WRITE_HEADER(1 + 2 + 3);
 			uart1_write_byte(0x02); //Send RA?
 			uart1_write_byte(Data_400033cc.bData[1]);
 			uart1_write_byte(Data_400033cc.bData[0]);
@@ -2373,10 +2370,7 @@ void func_65d4(double sp40, double sp48)
 				Data_400033cc.dwData = 980;
 			}
 			//6f08
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0x06);
+			UART1_WRITE_HEADER(6);
 			uart1_write_byte(0x42);
 			uart1_write_byte(Data_400033cc.bData[1]);
 			uart1_write_byte(Data_400033cc.bData[0]);
@@ -2518,10 +2512,7 @@ void func_65d4(double sp40, double sp48)
 				}
 			}
 			//7390
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(1 + 2 + 3);
+			UART1_WRITE_HEADER(1 + 2 + 3);
 			uart1_write_byte(0x22); //Send DEC?
 			uart1_write_byte(Data_400033cc.bData[1]);
 			uart1_write_byte(Data_400033cc.bData[0]);
@@ -2595,10 +2586,7 @@ void func_65d4(double sp40, double sp48)
 				Data_400033cc.dwData = 980;
 			}
 			
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0x06);
+			UART1_WRITE_HEADER(6);
 			uart1_write_byte(0x62);
 			uart1_write_byte(Data_400033cc.bData[1]);
 			uart1_write_byte(Data_400033cc.bData[0]);
@@ -2614,10 +2602,7 @@ void func_65d4(double sp40, double sp48)
 /* 7590 - complete */
 void func_7590(void)
 {
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0xff);
 }
 
@@ -4004,10 +3989,7 @@ void StopSlewing(void)
 	Data_40004128.dData_304 = 0.0;
 	bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x00);
 	
 	Data_40004128.alignmentPause = 1;
@@ -4020,10 +4002,7 @@ void ResumeSlewing(void)
 {
 	Data_40004128.bTrackingRequest = 1;
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0xFF);
 	
 	Data_40004128.alignmentPause = 0;

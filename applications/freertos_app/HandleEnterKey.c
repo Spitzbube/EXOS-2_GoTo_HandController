@@ -1045,10 +1045,7 @@ void HandleEnterKey(void)
 		
 			Data_40003500.dwData = fabs((int) ((6.0 * dTrackingRate) / 15.04));
 		
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0x04);
+			UART1_WRITE_HEADER(4);
 			uart1_write_byte(0x41);
 		
 			if (dTrackingRate > 0)
@@ -1065,10 +1062,7 @@ void HandleEnterKey(void)
 			uart1_write_byte(Data_40003500.bData[1]);
 			uart1_write_byte(Data_40003500.bData[0]);
 
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(0x01);
-			uart1_write_byte(0x04);
+			UART1_WRITE_HEADER(4);
 			uart1_write_byte(0x01);
 			
 			if (dTrackingRate > 0)

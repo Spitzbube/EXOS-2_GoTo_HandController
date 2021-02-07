@@ -254,28 +254,16 @@ void HandleReset(void)
 	func_d2cc();
 	func_5099c();
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x44);
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x64);
 
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x04);
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x24);
 	
 	func_659c(10);
@@ -869,10 +857,7 @@ double func_52720(int a)
 		char b[4];
 	} sp8;
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x03);
+	UART1_WRITE_HEADER(3);
 	
 	switch (a)
 	{
@@ -1537,10 +1522,7 @@ void SlewStop(void)
 		//0x5f0e4
 		if (g_bCombinedSlewActive == 1)
 		{
-			uart1_write_byte(0x55);
-			uart1_write_byte(0xaa);
-			uart1_write_byte(1);
-			uart1_write_byte(1);
+			UART1_WRITE_HEADER(1);
 			uart1_write_byte(0);
 			
 			bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
@@ -1550,10 +1532,7 @@ void SlewStop(void)
 		{
 			if (bData_40002c1a == 2)
 			{
-				uart1_write_byte(0x55);
-				uart1_write_byte(0xaa);
-				uart1_write_byte(1);
-				uart1_write_byte(1);
+				UART1_WRITE_HEADER(1);
 				uart1_write_byte(0);
 				
 				bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
@@ -1563,10 +1542,7 @@ void SlewStop(void)
 				//0x5f180
 				if (g_eSlewRateIndex != SLEW_RATE_MAX) //9)
 				{
-					uart1_write_byte(0x55);
-					uart1_write_byte(0xaa);
-					uart1_write_byte(1);
-					uart1_write_byte(1);
+					UART1_WRITE_HEADER(1);
 					uart1_write_byte(0);
 					
 					bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
@@ -3054,10 +3030,7 @@ double func_6ab74(int a)
 
 	bData_40002c13_uart1ReceiveComplete = 0;
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	
 	switch (a)
 	{
@@ -3275,10 +3248,7 @@ void ReceiveMountAutoguideValues(void)
 	iMountAutoguideDec = 0;
 	bData_40002c13_uart1ReceiveComplete = 0;
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(0x01);
-	uart1_write_byte(0x01);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x81);
 	
 	bData_40002c13_uart1ReceiveComplete = 0;
@@ -4017,28 +3987,16 @@ static void vMainTask(void *pvParameters)
 
 	ShowStartupScreen();
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(1);
-	uart1_write_byte(1);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x44);
 
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(1);
-	uart1_write_byte(1);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x64);
 	
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(1);
-	uart1_write_byte(1);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x04);
 
-	uart1_write_byte(0x55);
-	uart1_write_byte(0xaa);
-	uart1_write_byte(1);
-	uart1_write_byte(1);
+	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x24);
 	
 	func_659c(10); //delay
@@ -4784,10 +4742,7 @@ static void vMainTask(void *pvParameters)
 				if (g_bCombinedSlewActive != 1)
 				{
 					//6fa58
-					uart1_write_byte(0x55);
-					uart1_write_byte(0xaa);
-					uart1_write_byte(0x01);
-					uart1_write_byte(1 + 2 + 3);
+					UART1_WRITE_HEADER(1 + 2 + 3);
 					
 					if (bData_400031ba == 0x01)
 					{
@@ -4812,10 +4767,7 @@ static void vMainTask(void *pvParameters)
 			else
 			{
 				//0x6fae8
-				uart1_write_byte(0x55);
-				uart1_write_byte(0xaa);
-				uart1_write_byte(0x01);
-				uart1_write_byte(1);
+				UART1_WRITE_HEADER(1);
 				uart1_write_byte(0x00);
 				
 				bTrackingMode = MENU_TRACKING_MODE_STOP; //0;
