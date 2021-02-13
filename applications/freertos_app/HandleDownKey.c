@@ -93,10 +93,10 @@ void HandleDownKey(void)
 		
 		case MENU_CONTEXT_DEC_BKLASH_CORR: //1700:
 			//0x5b410: DEC Bklash Correction
-			bData_40003173 = 1;
-			bData_40003171 = 1;
-			bData_40003172 = 1;
-			bData_40003170 = 1;
+			g_bAlignmentFourLineMenuFocusItem = 1;
+			g_bAlignmentFourLineMenuTopItem = 1;
+			g_bAlignmentEightLineMenuFocusItem = 1;
+			g_bAlignmentEightLineMenuTopItem = 1;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_ONE_STAR_ALIGN; //1100;
 			break;
 		
@@ -235,22 +235,23 @@ void HandleDownKey(void)
 		case MENU_CONTEXT_TIME_DATE: //4100:
 			//0x5b718
 			HandleLongListScroll(1, 14);
-			Data_40002c64_MenuContextId = 4200;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DAYLIGHT_SAVING; //4200;
 			break;
 		
-		case 4200:
+		case MENU_CONTEXT_DAYLIGHT_SAVING: //4200:
 			//0x5b738
 			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_SITE_SETTING; //4300;
 			break;
 		
+#if 0
 		case MENU_CONTEXT_SITE_SETTING: //4300:
 			//0x5b758
 			HandleLongListScroll(1, 14);
-			Data_40002c64_MenuContextId = 4400;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_SKY_LAND; //4400;
 			break;
 		
-		case 4400:
+		case MENU_CONTEXT_SKY_LAND: //4400:
 			//0x5b778
 			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_AZ_EQU; //4500;
@@ -261,6 +262,13 @@ void HandleDownKey(void)
 			HandleLongListScroll(1, 14);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TELESCOPE_MOUNT; //4600;
 			break;
+#else
+		case MENU_CONTEXT_SITE_SETTING: //4300:
+			//0x5b758
+			HandleLongListScroll(1, 14);
+			Data_40002c64_MenuContextId = MENU_CONTEXT_TELESCOPE_MOUNT;
+			break;
+#endif
 		
 		case MENU_CONTEXT_TELESCOPE_MOUNT: //4600:
 			//0x5b7b8
@@ -284,8 +292,8 @@ void HandleDownKey(void)
 			//0x5b818
 			bData_4000317f = 1;
 			bData_4000317d = 1;
-			bData_4000317e = 1;
-			bData_4000317c = 1;
+			g_bSetupEightLineMenuFocusItem = 1;
+			g_bSetupEightLineMenuTopItem = 1;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TIME_DATE; //4100;
 			break;
 		
@@ -544,8 +552,10 @@ void HandleDownKey(void)
 					}
 					else
 					{
+#if 0
 						//0x5bd90
 						SlewAxis(4, 2, g_eSlewRateIndex);
+#endif
 					}
 				}
 			}
@@ -559,8 +569,10 @@ void HandleDownKey(void)
 				}
 				else
 				{
+#if 0
 					//0x5bdd0
 					SlewAxis(4, 2, g_eSlewRateIndex);
+#endif
 				}
 			}
 			//->0x5ca8c
@@ -577,9 +589,11 @@ void HandleDownKey(void)
 			}
 			else
 			{
+#if 0
 				//0x5be2c
 				SlewAxis(4, 2, SLEW_RATE_8X);
 				bData_40002edd = 1;
+#endif
 			}
 			iBacklashCorrectionSlewing = 1;
 			bDecBacklashCorrectionDirection = 1;
@@ -597,8 +611,10 @@ void HandleDownKey(void)
 				}
 				else
 				{
+#if 0
 					//0x5bea4
 					SlewAxis(4, 2, SLEW_RATE_8X);
+#endif
 				}
 			}
 			//5beb4 -> 0x5ca8c
@@ -624,11 +640,19 @@ void HandleDownKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_MOUNT_AZ; //46001;
 			break;
 		
+#if 0
 		case MENU_CONTEXT_ENGLISH: //49001:
 			//0x5bf08: Language -> English
 			Data_40002c64_MenuContextId = MENU_CONTEXT_GERMAN; //49002;
 			break;
+#else
+		case MENU_CONTEXT_ENGLISH: //49001:
+			//0x5bf08: Language -> English
+			Data_40002c64_MenuContextId = MENU_CONTEXT_ENGLISH;
+			break;
+#endif
 		
+#if 0
 		case MENU_CONTEXT_GERMAN: //49002:
 			//0x5bf1c
 			Data_40002c64_MenuContextId = MENU_CONTEXT_FRENCH; //49003;
@@ -648,6 +672,7 @@ void HandleDownKey(void)
 			//0x5bf58
 			Data_40002c64_MenuContextId = MENU_CONTEXT_ENGLISH; //49001;
 			break;
+#endif
 		
 		case 21001:
 			//0x5bf6c

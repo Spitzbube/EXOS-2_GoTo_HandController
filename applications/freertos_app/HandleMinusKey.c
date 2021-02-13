@@ -203,49 +203,49 @@ void HandleMinusKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_NAVIGATION; //2000;
 			break;
 		
-		case 3100:
+		case MENU_CONTEXT_CURRENT_OBJECTS: //3100:
 			//0x5fe14
-			Data_40002c64_MenuContextId = 3000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_UTILITIES;
 			break;
 		
 		case MENU_CONTEXT_OBJECT_RISE_SET: //3200:
 			//0x5fe28
-			Data_40002c64_MenuContextId = 3000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_UTILITIES;
 			break;
 		
-		case 3300:
+		case MENU_CONTEXT_LUNAR_PHASE: //3300:
 			//0x5fe3c
-			Data_40002c64_MenuContextId = 3000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_UTILITIES;
 			break;
 		
 		case MENU_CONTEXT_TIMER: //3400:
 			//0x5fe50
-			Data_40002c64_MenuContextId = 3000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_UTILITIES;
 			break;
 		
-		case 3500:
+		case MENU_CONTEXT_ALARM: //3500:
 			//0x5fe64
-			Data_40002c64_MenuContextId = 3000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_UTILITIES;
 			break;
 		
-		case 3600:
+		case MENU_CONTEXT_EYEPIECE_FOV: //3600:
 			//0x5fe78
-			Data_40002c64_MenuContextId = 3000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_UTILITIES;
 			break;
 		
-		case 3700:
+		case MENU_CONTEXT_EYEPIECE_MAGN: //3700:
 			//0x5fe8c
-			Data_40002c64_MenuContextId = 3000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_UTILITIES;
 			break;
 		
-		case 3800:
+		case MENU_CONTEXT_DISPLAY_ILLUMINATION: //3800:
 			//0x5fea0
-			Data_40002c64_MenuContextId = 3000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_UTILITIES;
 			break;
 		
-		case 3900:
+		case MENU_CONTEXT_PARK_POSITION: //3900:
 			//0x5feb4
-			Data_40002c64_MenuContextId = 3000;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_UTILITIES;
 			break;
 		
 		case 4100:
@@ -381,12 +381,12 @@ void HandleMinusKey(void)
 		
 		case 3801:
 			//0x600c8
-			Data_40002c64_MenuContextId = 3800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DISPLAY_ILLUMINATION; //3800;
 			break;
 		
 		case 3802:
 			//0x600dc
-			Data_40002c64_MenuContextId = 3800;
+			Data_40002c64_MenuContextId = MENU_CONTEXT_DISPLAY_ILLUMINATION; //3800;
 			break;
 		
 		case 4301:

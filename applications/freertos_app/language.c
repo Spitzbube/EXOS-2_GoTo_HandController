@@ -1,6 +1,7 @@
 
-
+#if 0
 char fill_400003de[1231] = " "; //400003de?
+#endif
 
 //English
 char strEngTelescopeAlign[] = "Telescope Align"; //400008ad
@@ -47,11 +48,13 @@ char strEngReset[] = "Reset"; //40000ad2
 char strEngScientificName[] = "Scientific Name"; //40000ad8
 char strEngSAOCatalog[] = "SAO Catalog"; //40000ae8
 char strEngHRCatalog[] = "HR Catalog"; //40000af4
+
 char strEngSelect[] = "Select"; //40000aff
 char strEngAdd[] = "Add"; //40000b06
 char strEngDelete[] = "Delete"; //40000b0a
 char strEngModify[] = "Modify"; //40000b11
 char Data_40000b18[] = "Select";
+
 char Data_40000b1f[] = "Add";
 char Data_40000b23[] = "Delete";
 char Data_40000b2a[] = "Setup";
@@ -64,14 +67,17 @@ char strEngBackBoard[] = "BackBoard"; //40000b5b
 char strEngAccessory[] = "Accessory"; //40000b65
 char strEngCountryAndCity[] = "Country & City"; //40000b6f
 char strEngCustomSite[] = "Custom Site"; //40000b7e
+
 char Data_40000b8a[7] = "Select";
 char Data_40000b91[4] = "Add";
 char Data_40000b95[7] = "Delete";
 char Data_40000b9c[7] = "Modify";
+
 char Data_40000ba3[7] = "Select";
 char Data_40000baa[4] = "Add";
 char Data_40000bae[7] = "Delete";
 char Data_40000bb5[7] = "Modify";
+
 char strEngStarSpeed[] = "Star Speed"; //40000bbc
 char strEngSolarSpeed[] = "Solar Speed"; //40000bc7
 char strEngMoonSpeed[] = "Moon Speed"; //40000bd3
@@ -342,8 +348,8 @@ char Data_40002878[] = "Hmdt:82RH"; //40002878
 char Data_40002882[] = "APrs:0680Pa"; //40002882
 char strSkyTarget[11] = "Sky Target"; //4000288e
 char strLandTarget[12] = "Land Target"; //40002899, size???
-char Data_400028a5[14] = "Alt Telescope"; //400028a5
-char Data_400028b3[14] = "Equ Telescope"; //400028b3, size???
+char strAltTelescope[14] = "Alt Telescope"; //400028a5
+char strEquTelescope[14] = "Equ Telescope"; //400028b3, size???
 char strEngPleaseSetupOtaZero[22] = "Please setup OTA zero"; //400028c1
 unsigned char Data_400028d7[10] = "Azi:000d "; //400028d7
 unsigned char Data_400028e1[10] = "Alt: 00d "; //400028e1
@@ -415,20 +421,20 @@ void SwapLanguageStrings(void)
 			strPoleAxisDev = strEngPoleAxisDev;
 			strRaBklashCorr = strEngRaBklashCorr;
 			strDecBklashCorr = strEngDecBklashCorr;
-			Data_40002f4c = "                     ";
+			strAlignmentSpare1 = "                     ";
 		
 			strSolarSystem = strEngSolarSystem;
 			strConstellation = strEngConstellation;
 			strFamousStar = strEngFamousStar;
-			Data_40002f68 = strEngMessierCatal;
-			Data_40002f6c = strEngNGCCatalog;
-			Data_40002f70 = strEngICCatalogue;
-			Data_40002f74 = strEngSh2Catalog;
-			Data_40002f78 = strEngBrightStarCat;
-			Data_40002f7c = strEngSAOStarCatal;
-			Data_40002f80 = strEngCustomerObjects;
-			Data_40002f84 = strEngInputRAandDEC;
-			Data_40002f88 = strEngCustomLandGoal;
+			g_pcstrMessierCatalogue = strEngMessierCatal;
+			g_pcstrNGCCatalogue = strEngNGCCatalog;
+			g_pcstrICCatalogue = strEngICCatalogue;
+			g_pcstrSh2Catalogue = strEngSh2Catalog;
+			g_pcstrBrightStarCatalogue = strEngBrightStarCat;
+			g_pcstrSAOStarCatalogue = strEngSAOStarCatal;
+			g_pcstrCustomerObjects = strEngCustomerObjects;
+			g_pcstrInputRAandDEC = strEngInputRAandDEC;
+			g_pcstrCustomLandGoal = strEngCustomLandGoal;
 			
 			strCurrentObjects = strEngCurrentObjects;
 			Data_40002f90 = strEngObjectRiseSet;
@@ -441,14 +447,15 @@ void SwapLanguageStrings(void)
 			strParkposition = strEngParkposition;
 			
 			strTimeAndDate = strEngTimeAndDate;
-			Data_40002fb8 = strEngDaylightSaving;
-			Data_40002fbc = strEngSiteSetting;
-			Data_40002fc0 = strEngSkyLand;
-			Data_40002fc4 = strEngAzEqu;
+			g_pcstrDaylightSaving = strEngDaylightSaving;
+			g_pcstrEngSiteSetting = strEngSiteSetting;
+			g_pcstrSkyLand = strEngSkyLand;
+			g_pcstrAzEqu = strEngAzEqu;
 			strTelescopeMount = strEngTelescopeMount;
 			strTrackingRate = strEngTrackingRate;
-			Data_40002fd0 = strEngLanguage;
+			g_pcstrLanguage = strEngLanguage;
 			strReset = strEngReset;
+			g_pcstrSetupSpare1 = "                     ";
 
 			strScientificName = strEngScientificName;
 			strSAOCatalog = strEngSAOCatalog;
@@ -466,11 +473,11 @@ void SwapLanguageStrings(void)
 			strAccessory = strEngAccessory;
 			strCountryAndCity = strEngCountryAndCity;
 			strCustomSite = strEngCustomSite;
-			Data_40003068 = Data_40000b8a;
+			Data_40003068 = Data_40000b8a; //"Select"
 			Data_4000306c = Data_40000b91;
 			Data_40003070 = Data_40000b95;
 			Data_40003074 = Data_40000b9c;
-			Data_40003078 = Data_40000ba3;
+			Data_40003078 = Data_40000ba3; //"Select"
 			Data_4000307c = Data_40000baa;
 			Data_40003080 = Data_40000bae;
 			Data_40003084 = Data_40000bb5;
@@ -533,15 +540,15 @@ void SwapLanguageStrings(void)
 			strSolarSystem = Data_40000fc2;
 			strConstellation = Data_40000fe2;
 			strFamousStar = Data_40001002;
-			Data_40002f68 = Data_40001022;
-			Data_40002f6c = Data_40001042;
-			Data_40002f70 = Data_40001062;
-			Data_40002f74 = Data_40001082;
-			Data_40002f78 = Data_400010a2;
-			Data_40002f7c = Data_400010c2;
-			Data_40002f80 = Data_400010e2;
-			Data_40002f84 = Data_40001102;
-			Data_40002f88 = Data_40001122;
+			g_pcstrMessierCatalogue = Data_40001022;
+			g_pcstrNGCCatalogue = Data_40001042;
+			g_pcstrICCatalogue = Data_40001062;
+			g_pcstrSh2Catalogue = Data_40001082;
+			g_pcstrBrightStarCatalogue = Data_400010a2;
+			g_pcstrSAOStarCatalogue = Data_400010c2;
+			g_pcstrCustomerObjects = Data_400010e2;
+			g_pcstrInputRAandDEC = Data_40001102;
+			g_pcstrCustomLandGoal = Data_40001122;
 			strCurrentObjects = Data_40001142;
 			Data_40002f90 = Data_40001162;
 			Data_40002f94 = Data_40001182;
@@ -553,13 +560,13 @@ void SwapLanguageStrings(void)
 			strParkposition = Data_40001242;
 			
 			strTimeAndDate = Data_40001262;
-			Data_40002fb8 = Data_40001282;
-			Data_40002fbc = Data_400012a2;
-			Data_40002fc0 = Data_400012c2;
-			Data_40002fc4 = Data_400012e2;
+			g_pcstrDaylightSaving = Data_40001282;
+			g_pcstrEngSiteSetting = Data_400012a2;
+			g_pcstrSkyLand = Data_400012c2;
+			g_pcstrAzEqu = Data_400012e2;
 			strTelescopeMount = Data_40001302;
 			strTrackingRate = Data_40001322;
-			Data_40002fd0 = Data_40001342;
+			g_pcstrLanguage = Data_40001342;
 			strReset = strGerReset;
 
 			strScientificName = strEngScientificName;
@@ -644,15 +651,15 @@ void SwapLanguageStrings(void)
 			strSolarSystem = strFreSolarSystem;
 			strConstellation = strFreConstellation;
 			strFamousStar = Data_40001522;
-			Data_40002f68 = Data_40001542;
-			Data_40002f6c = Data_40001562;
-			Data_40002f70 = Data_40001582;
-			Data_40002f74 = Data_400015a2;
-			Data_40002f78 = Data_400015c2;
-			Data_40002f7c = Data_400015e2;
-			Data_40002f80 = Data_40001602;
-			Data_40002f84 = Data_40001622;
-			Data_40002f88 = Data_40001642;
+			g_pcstrMessierCatalogue = Data_40001542;
+			g_pcstrNGCCatalogue = Data_40001562;
+			g_pcstrICCatalogue = Data_40001582;
+			g_pcstrSh2Catalogue = Data_400015a2;
+			g_pcstrBrightStarCatalogue = Data_400015c2;
+			g_pcstrSAOStarCatalogue = Data_400015e2;
+			g_pcstrCustomerObjects = Data_40001602;
+			g_pcstrInputRAandDEC = Data_40001622;
+			g_pcstrCustomLandGoal = Data_40001642;
 			strCurrentObjects = Data_40001662;
 			Data_40002f90 = Data_40001682;
 			Data_40002f94 = Data_400016a2;
@@ -663,13 +670,13 @@ void SwapLanguageStrings(void)
 			Data_40002fa8 = Data_40001742;
 			strParkposition = Data_40001762;
 			strTimeAndDate = Data_40001782;
-			Data_40002fb8 = Data_400017a2;
-			Data_40002fbc = Data_400017c2;
-			Data_40002fc0 = Data_400017e2;
-			Data_40002fc4 = Data_40001802;
+			g_pcstrDaylightSaving = Data_400017a2;
+			g_pcstrEngSiteSetting = Data_400017c2;
+			g_pcstrSkyLand = Data_400017e2;
+			g_pcstrAzEqu = Data_40001802;
 			strTelescopeMount = Data_40001822;
 			strTrackingRate = Data_40001842;
-			Data_40002fd0 = strFreLanguage;
+			g_pcstrLanguage = strFreLanguage;
 			strReset = strFreReset;
 
 			strScientificName = strEngScientificName;
@@ -754,15 +761,15 @@ void SwapLanguageStrings(void)
 			strSolarSystem = Data_40001a02;
 			strConstellation = Data_40001a22;
 			strFamousStar = Data_40001a42;
-			Data_40002f68 = Data_40001a62;
-			Data_40002f6c = Data_40001a82;
-			Data_40002f70 = Data_40001aa2;
-			Data_40002f74 = Data_40001ac2;
-			Data_40002f78 = Data_40001ae2;
-			Data_40002f7c = Data_40001b02;
-			Data_40002f80 = Data_40001b22;
-			Data_40002f84 = Data_40001b42;
-			Data_40002f88 = Data_40001b62;
+			g_pcstrMessierCatalogue = Data_40001a62;
+			g_pcstrNGCCatalogue = Data_40001a82;
+			g_pcstrICCatalogue = Data_40001aa2;
+			g_pcstrSh2Catalogue = Data_40001ac2;
+			g_pcstrBrightStarCatalogue = Data_40001ae2;
+			g_pcstrSAOStarCatalogue = Data_40001b02;
+			g_pcstrCustomerObjects = Data_40001b22;
+			g_pcstrInputRAandDEC = Data_40001b42;
+			g_pcstrCustomLandGoal = Data_40001b62;
 			strCurrentObjects = Data_40001b82;
 			Data_40002f90 = Data_40001ba2;
 			Data_40002f94 = Data_40001bc2;
@@ -773,13 +780,13 @@ void SwapLanguageStrings(void)
 			Data_40002fa8 = Data_40001c62;
 			strParkposition = Data_40001c82;
 			strTimeAndDate = Data_40001ca2;
-			Data_40002fb8 = Data_40001cc2;
-			Data_40002fbc = Data_40001ce2;
-			Data_40002fc0 = Data_40001d02;
-			Data_40002fc4 = Data_40001d22;
+			g_pcstrDaylightSaving = Data_40001cc2;
+			g_pcstrEngSiteSetting = Data_40001ce2;
+			g_pcstrSkyLand = Data_40001d02;
+			g_pcstrAzEqu = Data_40001d22;
 			strTelescopeMount = Data_40001d42;
 			strTrackingRate = Data_40001d62;
-			Data_40002fd0 = Data_40001d82;
+			g_pcstrLanguage = Data_40001d82;
 			strReset = Data_40001da2;
 
 			strScientificName = strEngScientificName;
@@ -864,15 +871,15 @@ void SwapLanguageStrings(void)
 			strSolarSystem = Data_40001f22;
 			strConstellation = Data_40001f42;
 			strFamousStar = Data_40001f62;
-			Data_40002f68 = Data_40001f82;
-			Data_40002f6c = Data_40001fa2;
-			Data_40002f70 = Data_40001fc2;
-			Data_40002f74 = Data_40001fe2;
-			Data_40002f78 = Data_40002002;
-			Data_40002f7c = Data_40002022;
-			Data_40002f80 = Data_40002042;
-			Data_40002f84 = Data_40002062;
-			Data_40002f88 = Data_40002082;
+			g_pcstrMessierCatalogue = Data_40001f82;
+			g_pcstrNGCCatalogue = Data_40001fa2;
+			g_pcstrICCatalogue = Data_40001fc2;
+			g_pcstrSh2Catalogue = Data_40001fe2;
+			g_pcstrBrightStarCatalogue = Data_40002002;
+			g_pcstrSAOStarCatalogue = Data_40002022;
+			g_pcstrCustomerObjects = Data_40002042;
+			g_pcstrInputRAandDEC = Data_40002062;
+			g_pcstrCustomLandGoal = Data_40002082;
 			strCurrentObjects = Data_400020a2;
 			Data_40002f90 = Data_400020c2;
 			Data_40002f94 = Data_400020e2;
@@ -883,13 +890,13 @@ void SwapLanguageStrings(void)
 			Data_40002fa8 = Data_40002182;
 			strParkposition = Data_400021a2;
 			strTimeAndDate = Data_400021c2;
-			Data_40002fb8 = Data_400021e2;
-			Data_40002fbc = Data_40002202;
-			Data_40002fc0 = Data_40002222;
-			Data_40002fc4 = Data_40002242;
+			g_pcstrDaylightSaving = Data_400021e2;
+			g_pcstrEngSiteSetting = Data_40002202;
+			g_pcstrSkyLand = Data_40002222;
+			g_pcstrAzEqu = Data_40002242;
 			strTelescopeMount = strSpaTelescopeMount;
 			strTrackingRate = Data_40002282;
-			Data_40002fd0 = Data_400022a2;
+			g_pcstrLanguage = Data_400022a2;
 			strReset = Data_400022c2;
 
 			strScientificName = strEngScientificName;

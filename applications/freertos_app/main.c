@@ -9,6 +9,8 @@
 #include "menu.h"
 #endif
 
+#include "led.h"
+
 #include "FreeRTOS.h"
 #include "task.h"
 #include "queue.h"
@@ -18,40 +20,13 @@
 
 extern void uart0_send(unsigned char* a, unsigned char b);
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "file_1f30.c"
+#endif
 
-/* 4ede4 - todo */
-void HandleStarKey(void)
-{
-	switch (bData_40003195)
-	{
-		case 0:
-			//0x4ee08
-			IO0SET = (1 << 13);
-			IO0CLR = (1 << 16);
-			bData_40003195 = 1;
-			break;
-		
-		case 1:
-			//0x4ee30
-			IO0SET = (1 << 13);
-			IO0SET = (1 << 16);
-			bData_40003195 = 2;
-			break;
-		
-		case 2:
-			//0x4ee58
-			IO0CLR = (1 << 13);
-			IO0SET = (1 << 16);
-			bData_40003195 = 0;
-			break;
-		
-		default:
-			break;
-	}		
-}
-
+#ifdef INCLUDE_ALL_C_FILES
 #include "slew2.c"
+#endif
 
 /* 4ff84 - todo */
 void HandleAlarmInputData(void)
@@ -62,7 +37,7 @@ void HandleAlarmInputData(void)
 	
 	if ((h > 23) || (m > 59) || (s > 59))
 	{
-		Data_40002c64_MenuContextId = 35001;
+		Data_40002c64_MenuContextId = MENU_CONTEXT_ALARM_INPUT; //35001;
 		bCharacterInputPosition = 1;
 	}
 	else
@@ -195,17 +170,17 @@ void PrepareCustomerSkyObjectInputData(void)
 /* 50778 - todo */
 void HandleOTAZeroData(void)
 {
-	fData_4000329c = (unsigned short) atoi(&Data_400028d7[4]); //"Azi:%03d"
-	fData_400032a0 = (unsigned char) atoi(&Data_400028e1[5]); //"Alt: %02d"
+	g_fOtaZeroAzimuth = (unsigned short) atoi(&Data_400028d7[4]); //"Azi:%03d"
+	g_fOtaZeroAltitude = (unsigned char) atoi(&Data_400028e1[5]); //"Alt: %02d"
 	
-	if ((fData_4000329c >= 0) && (fData_4000329c <= 360) &&
-		(fData_400032a0 >= 0) && (fData_400032a0 <= 90))
+	if ((g_fOtaZeroAzimuth >= 0) && (g_fOtaZeroAzimuth <= 360) &&
+		(g_fOtaZeroAltitude >= 0) && (g_fOtaZeroAltitude <= 90))
 	{
 		//50808
-		Data_40004128.dData_192 = fData_4000329c;
-		Data_40004128.dData_200 = fData_400032a0;
+		Data_40004128.dData_192 = g_fOtaZeroAzimuth;
+		Data_40004128.dData_200 = g_fOtaZeroAltitude;
 		
-		flash_write_ota_zero_data((unsigned short) fData_4000329c, (unsigned short) fData_400032a0);
+		flash_write_ota_zero_data((unsigned short) g_fOtaZeroAzimuth, (unsigned short) g_fOtaZeroAltitude);
 		
 		if (bData_40002f1e_SetupLocalData == 1)
 		{
@@ -228,121 +203,9 @@ void HandleOTAZeroData(void)
 	}
 }
 
-#include "file_5099c.c"
-
-/* 50b40 - todo */
-void HandleReset(void)
-{
-	char sp40[528];
-	unsigned char customSiteName[20];
-	float lon;
-	float lat;
-	int zone;
-	unsigned short i;
-	
-	lcd_display_clear();
-	lcd_display_string(0, 4, 1, 21, "System resetting...    ");
-	
-	i = 0;
-	for (i = 0; i < 16; i++)
-	{
-		//0x50b74
-		flash_read((unsigned short)(0xddd + i), 0, sizeof(sp40), sp40);		
-		flash_write((unsigned short)(0xdc9 + i), 0, sizeof(sp40), sp40);
-	}
-	
-	func_d2cc();
-	func_5099c();
-	
-	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x44);
-	
-	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x64);
-
-	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x04);
-	
-	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x24);
-	
-	func_659c(10);
-	
-	if (bData_40002c1a == 1)
-	{
-		bData_40002e7a_MountType = MENU_MOUNT_TYPE_EQU; //1;
-	}
-	else
-	{
-		bData_40002e7a_MountType = MENU_MOUNT_TYPE_AZ; //0;
-	}
-	//50c98
-	Data_400034d0 = 0.05;
-	Data_400034d8 = 0.045;
-	
-	flash_get_ota_zero_data(&fData_4000329c, &fData_400032a0);
-	
-	Data_40004128.dData_192 = fData_4000329c;
-	Data_40004128.dData_200 = fData_400032a0;
-	
-	flash_get_custom_site_data(customSiteName, &lon, &lat, &zone);
-	
-	Data_40004128.geographicLongitude = lon;
-	Data_40004128.geographicLatitude = lat;
-	
-	Data_40002e54_Zone = zone;
-	
-	strCustomSiteName[6] = customSiteName[0];
-	strCustomSiteName[7] = customSiteName[1];
-	strCustomSiteName[8] = customSiteName[2];
-	strCustomSiteName[9] = customSiteName[3];
-	strCustomSiteName[10] = customSiteName[4];
-	strCustomSiteName[11] = customSiteName[5];
-	strCustomSiteName[12] = customSiteName[6];
-	strCustomSiteName[13] = customSiteName[7];
-	
-	if (lon > 0) //BUG? East is negative!
-	{
-		//50d90
-		sprintf(strCustomSiteLongitude, "  Lon:E%03dd%02df ",
-			DEGREES_MINUTES(lon));
-	}
-	else
-	{
-		//0x50edc
-		sprintf(strCustomSiteLongitude, "  Lon:W%03dd%02df ",
-			DEGREES_MINUTES(lon)); //Bug: abs()?
-	}
-	//0x50f30
-	if (lat > 0)
-	{
-		//50f40
-		sprintf(strCustomSiteLatitude, "  Lat:N%02dd%02df ",
-			DEGREES_MINUTES(lat));
-	}
-	else
-	{
-		//0x50f98
-		sprintf(strCustomSiteLatitude, "  Lat:S%02dd%02df ",
-			DEGREES_MINUTES(lat)); //Bug: abs()
-	}
-	//0x50fec
-	if (zone > 0)
-	{
-		sprintf(strCustomSiteTimezone, " Zone:E%02d", zone);
-	}
-	else
-	{
-		//0x5100c
-		sprintf(strCustomSiteTimezone, " Zone:W%02d", zone);
-	}
-	
-	func_659c(2000);
-	beep1(2);
-	func_659c(100);
-	
-	Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
-}
+#ifdef INCLUDE_ALL_C_FILES
+#include "HandleReset.c"
+#endif
 
 /* 5104c - todo */
 void HandleCustomSiteData(void)
@@ -922,11 +785,11 @@ double func_52720(int a)
 	}
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "HandleEnterKey.c"
-
 #include "HandleRightKey.c"
-
 #include "HandleLeftKey.c"
+#endif
 
 /* 59dd0 - todo */
 void func_59dd0(void)
@@ -1265,26 +1128,26 @@ void HandleLongListScroll(int upDown, int b)
 			{
 				case 11:
 					//0x5a5d0
-					if (bData_40003173 > 1)
+					if (g_bAlignmentFourLineMenuFocusItem > 1)
 					{
 						//5a5e4
-						bData_40003173--;
+						g_bAlignmentFourLineMenuFocusItem--;
 					}
 					else
 					{
 						//0x5a5fc
-						bData_40003171--;
+						g_bAlignmentFourLineMenuTopItem--;
 					}
 					//0x5a610
-					if (bData_40003172 > 1)
+					if (g_bAlignmentEightLineMenuFocusItem > 1)
 					{
 						//5a620
-						bData_40003172--;
+						g_bAlignmentEightLineMenuFocusItem--;
 					}
 					else
 					{
 						//0x5a638
-						bData_40003170--;
+						g_bAlignmentEightLineMenuTopItem--;
 					}
 					//0x5a64c -> 0x5a860
 					break;
@@ -1343,13 +1206,17 @@ void HandleLongListScroll(int upDown, int b)
 						bData_4000317d--;
 					}
 
-					if (bData_4000317e > 1)
+					if (g_bSetupEightLineMenuFocusItem > 1)
 					{
-						bData_4000317e--;
+						g_bSetupEightLineMenuFocusItem--;
 					}
 					else
 					{
-						bData_4000317c--;
+#if 0
+						g_bSetupEightLineMenuTopItem--;
+#else
+						g_bSetupEightLineMenuFocusItem = 7;
+#endif
 					}
 					break;
 				
@@ -1389,22 +1256,22 @@ void HandleLongListScroll(int upDown, int b)
 			{
 				case 11:
 					//0x5a8a8: Alignment items
-					if (bData_40003173 < 4)
+					if (g_bAlignmentFourLineMenuFocusItem < 4)
 					{
-						bData_40003173++;
+						g_bAlignmentFourLineMenuFocusItem++;
 					}
 					else
 					{
-						bData_40003171++;
+						g_bAlignmentFourLineMenuTopItem++;
 					}
 
-					if (bData_40003172 < 8)
+					if (g_bAlignmentEightLineMenuFocusItem < 8)
 					{
-						bData_40003172++;
+						g_bAlignmentEightLineMenuFocusItem++;
 					}
 					else
 					{
-						bData_40003170++;
+						g_bAlignmentEightLineMenuTopItem++;
 					}
 					break;
 				
@@ -1465,14 +1332,25 @@ void HandleLongListScroll(int upDown, int b)
 						bData_4000317d++;
 					}
 
-					if (bData_4000317e < 8)
+#if 0
+					if (g_bSetupEightLineMenuFocusItem < 8)
 					{
-						bData_4000317e++;
+						g_bSetupEightLineMenuFocusItem++;
 					}
 					else
 					{
-						bData_4000317c++;
+						g_bSetupEightLineMenuTopItem++;
 					}
+#else
+					if (g_bSetupEightLineMenuFocusItem < 7)
+					{
+						g_bSetupEightLineMenuFocusItem++;
+					}
+					else
+					{
+						g_bSetupEightLineMenuFocusItem = 1;
+					}
+#endif
 					break;
 				
 				case 22:
@@ -1510,9 +1388,10 @@ void HandleLongListScroll(int upDown, int b)
 	}
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "HandleDownKey.c"
-
 #include "HandleUpKey.c"
+#endif
 
 /* 5f0c0 - complete */
 void SlewStop(void)
@@ -1573,7 +1452,9 @@ void SlewStop(void)
 	//0x5f228
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "HandleMinusKey.c"
+#endif
 
 /* 60d54 - complete */
 void HandlePlusKey(void)
@@ -1647,7 +1528,9 @@ void HandleFKey(void)
 	}
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "HandleHelpKey.c"
+#endif
 
 /* 61ecc - todo */
 void func_61ecc(int a)
@@ -2260,6 +2143,7 @@ void HandleCustomSiteInputChar(int key)
 	} //switch (bData_40003262)
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "Handle9Key.c"
 #include "Handle8Key.c"
 #include "Handle7Key.c"
@@ -2268,7 +2152,7 @@ void HandleCustomSiteInputChar(int key)
 #include "Handle4Key.c"
 #include "Handle3Key.c"
 #include "Handle2Key.c"
-
+#endif
 
 /* 68394 - todo */
 void func_68394(int a)
@@ -2502,9 +2386,10 @@ void func_68394(int a)
 	} //switch (bData_40003262)
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "Handle1Key.c"
-
 #include "Handle0Key.c"
+#endif
 
 /* 6a0e4 - todo */
 unsigned char ConvertKeyCode(void)
@@ -2943,7 +2828,7 @@ void UserInterfaceCycle(void)
 		
 		bData_40002c68 = 1;
 		//->6a948
-	}
+	} //if (bData_40002c68 == 0)
 	else
 	{
 		//6a91c
@@ -3841,47 +3726,26 @@ void func_6c5e8(void)
 }
 
 /* 6c804 - complete */
-void ShowStartupScreen(void)
+void ShowStartupScreen(int a)
 {
-	#ifdef UART0_DEBUG
-	lcd_display_string(0, 1, 1, 22, "   OPEN GOTO SYSTEM   ");
-	lcd_display_string(0, 2, 1, 22, "based on EXOS EQ v2.3 ");
-	lcd_display_string(0, 4, 1, 22, "github.com/Spitzbube/ ");
-	lcd_display_string(0, 5, 1, 22, "Commit: 08ba598fa99635");
-	#else
-	lcd_display_string(0, 3, 1, 22, " BRESSER GOTO SYSTEM  ");
-	lcd_display_string(0, 5, 1, 22, "     EXOS EQ v2.3     ");
-	#endif
-}
-
-#include "ascom.c"
-
-
-static void vLEDTask( void *pvParameters )
-{
-	int off = 1;
-
-	//OFF
-	IO0SET = (1 << 16);
-
-	for( ;; )
+	if (a == 0)
 	{
-		vTaskDelay( ( TickType_t ) 1000 / portTICK_PERIOD_MS );
-
-		if (off)
-		{
-			//ON
-			IO0CLR = (1 << 16);
-			off = 0;
-		}
-		else
-		{
-			//OFF
-			IO0SET = (1 << 16);
-			off = 1;
-		}
+		lcd_display_string(0, 1, 1, 22, "   OPEN GOTO SYSTEM   ");
+		lcd_display_string(0, 2, 1, 22, "based on EXOS EQ v2.3 ");
+		lcd_display_string(0, 4, 1, 22, "github.com/Spitzbube/ ");
+		lcd_display_string(0, 5, 1, 22, "   Commit: d5e4963    ");
+	}
+	else
+	{
+		sprintf(g_MenuStringBuffer1, "Mount Type: %d", bData_40002c1a);
+		g_pcstrMenuLine1 = g_MenuStringBuffer1;
+		lcd_display_string(0, 7, 1, 22, g_pcstrMenuLine1);
 	}
 }
+
+#ifdef INCLUDE_ALL_C_FILES
+#include "ascom.c"
+#endif
 
 static void vUART0Task( void *pvParameters )
 {
@@ -3985,7 +3849,7 @@ static void vMainTask(void *pvParameters)
 		flash_write(0xdcb, 0, 2, Data_40004c58);
 	}
 
-	ShowStartupScreen();
+	ShowStartupScreen(0);
 	
 	UART1_WRITE_HEADER(1);
 	uart1_write_byte(0x44);
@@ -4018,6 +3882,8 @@ static void vMainTask(void *pvParameters)
 		bData_40002e7a_MountType = MENU_MOUNT_TYPE_AZ; //0;
 	}
 	
+	ShowStartupScreen(1);
+
 	bData_40003432 = 0;
 		
 	Data_400034d0 = 0.05;
@@ -4026,10 +3892,10 @@ static void vMainTask(void *pvParameters)
 	Data_40004128.dData_192 = 100.0; 
 	Data_40004128.dData_200 = 60.0;
 	
-	flash_get_ota_zero_data(&fData_4000329c, &fData_400032a0);
+	flash_get_ota_zero_data(&g_fOtaZeroAzimuth, &g_fOtaZeroAltitude);
 	
-	Data_40004128.dData_192 = fData_4000329c;
-	Data_40004128.dData_200 = fData_400032a0;
+	Data_40004128.dData_192 = g_fOtaZeroAzimuth;
+	Data_40004128.dData_200 = g_fOtaZeroAltitude;
 	
 	Data_40004128.dData_112 = -180.0;
 	Data_40004128.dData_120 = 90.0;
@@ -4127,8 +3993,8 @@ static void vMainTask(void *pvParameters)
 		Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
 	}
 	//6d880
-	Data_40002c1c = 0;
-	Data_40002c20 = 0;
+	g_iUart0GuideValueRa = 0;
+	g_iUart0GuideValueDec = 0;
 	//6d894 -> 729ec
 	
 	//##########################################################################
@@ -4154,9 +4020,6 @@ static void vMainTask(void *pvParameters)
 			uart0_send(buf, strlen(buf));
 			
 			snprintf(buf, sizeof(buf)-1, "dData_40002df8: %f\n\r", dData_40002df8);
-			uart0_send(buf, strlen(buf));
-			
-			snprintf(buf, sizeof(buf)-1, "bData_40002c1a: %d\n\r", bData_40002c1a);
 			uart0_send(buf, strlen(buf));
 		}
 		#endif 
@@ -4316,132 +4179,57 @@ static void vMainTask(void *pvParameters)
 			}
 			//0x6dfc4
 			dData_40002d78 /= 15.0;
-			#if 0
-			sp64 = dData_400031f0 / 15.0;
-			sp56 = dData_40003420 / 15.0;
-			sp48 = dData_40002d78 - sp56;
-			sp40 = sp48 - sp64;
-			sp32 = fData_400034c8;
-			sp24 = sp32 - sp40;
-			fData_40003508 = sp24;
-			#else
-			fData_40003508 = fData_400034c8 - 
+
+			g_fSendToExternalRightAscension = g_fLocalSiderealTimerDuringTracking -
 				((dData_40002d78 - dData_40003420 / 15.0) - dData_400031f0 / 15.0);
-			#endif
-			if (fData_40003508 < 0)
+
+			if (g_fSendToExternalRightAscension < 0)
 			{
 				//6e08c
-				fData_40003508 += 24;				
+				g_fSendToExternalRightAscension += 24;
 			}
 			//0x6e0a4
-			if (fData_40003508 > 24)
+			if (g_fSendToExternalRightAscension > 24)
 			{
 				//6e0b8
-				fData_40003508 -= 24;
+				g_fSendToExternalRightAscension -= 24;
 			}
 			//0x6e0d0
-			#if 0
-			sp64 = dData_40003420 / 15.0;
-			sp56 = dData_40002d78 - sp64;
-			sp48 = sp56 + dData_400033e8;
-			Data_40002d68_OTARightAscensionHours = sp48;
-			#else
 			Data_40002d68_OTARightAscensionHours = dData_40002d78 - 
 				dData_40003420 / 15.0 + dData_400033e8;
-			#endif
-			
-			#if 0
-			sp64 = Data_40002d68_OTARightAscensionHours;
-			sp56 = dData_40003420 / 15.0;
-			sp48 = dData_40002d78 - sp56;
-			sp40 = sp48 + dData_400033e8;
-			sp32 = sp40 - sp64;
-			sp24 = sp32 * 60.0;
-			40002d6c = sp24;
-			#else
+
 			Data_40002d6c_OTARightAscensionMinutes = 60 *
 				(dData_40002d78 - dData_40003420 / 15.0 + dData_400033e8 - 
 					Data_40002d68_OTARightAscensionHours);
-			#endif
-			
-			#if 0
-			sp64 = Data_40002d6c_OTARightAscensionMinutes;
-			sp56 = sp64 / 60.0;
-			sp48 = Data_40002d68_OTARightAscensionHours;
-			sp40 = dData_40003420 / 15.0;
-			sp32 = dData_40002d78 - sp40;
-			sp24 = sp32 + dData_400033e8;
-			sp16 = sp24 - sp48;
-			sp8 = sp16 - sp56;
-			sp = sp8 * 3600.0;
-			#else
+
 			fData_40002d70_OTARightAscensionSeconds = 3600.0 *
 				((dData_40002d78 - dData_40003420 / 15.0 + dData_400033e8 - 
 					Data_40002d68_OTARightAscensionHours) - 
 					Data_40002d6c_OTARightAscensionMinutes / 60.0);
-			#endif
 			
 			if ((bData_40003200 == 1) && (Data_40004128.dData_304 == 2.0))
 			{
 				//6e2c0
 				dData_400033e8 = g_dObjectRightAcension - dData_40002d78;
+
 				Data_40002d68_OTARightAscensionHours = Data_40002cd8_ObjectRightAscensionHours;
 				Data_40002d6c_OTARightAscensionMinutes = Data_40002cdc_ObjectRightAscensionMinutes;
 				fData_40002d70_OTARightAscensionSeconds = fData_40002ce0_ObjectRightAscensionSeconds;
 			}
 			//0x6e30c
-			#if 0
-			sp64 = dData_40002d98 - dData_40003428;
-			sp56 = sp64 - dData_400031f8;
-			fData_4000350c = sp56;
-			#else
-			fData_4000350c = dData_40002d98 - dData_40003428 - dData_400031f8;
-			#endif
+			g_fSendToExternalDeclination = dData_40002d98 - dData_40003428 - dData_400031f8;
 
-			#if 0
-			sp64 = dData_40002d98 - dData_40003428;
-			sp56 = sp64 + dData_400033f0;
-			Data_40002d8c_OTADeclinationDegrees = sp56;
-			#else
 			Data_40002d8c_OTADeclinationDegrees = dData_40002d98 - dData_40003428 + dData_400033f0;
-			#endif
-			
-			#if 0
-			sp64 = Data_40002d8c_OTADeclinationDegrees;
-			sp56 = dData_40002d98 - dData_40003428;
-			sp48 = sp56 + dData_400033f0;
-			sp40 = sp48 - sp64;
-			sp32 = sp40 * 60.0;
-			Data_40002d90_OTADeclinationMinutes = sp32;
-			#else
 			Data_40002d90_OTADeclinationMinutes = 60.0 *
 				(dData_40002d98 - dData_40003428 + dData_400033f0 - Data_40002d8c_OTADeclinationDegrees);
-			#endif
-			
-			#if 0
-			sp64 = Data_40002d90_OTADeclinationMinutes;
-			sp56 = sp64 / 60.0;
-			sp48 = Data_40002d8c_OTADeclinationDegrees;
-			sp40 = dData_40002d98 - dData_40003428;
-			sp32 = sp40 + dData_400033f0;
-			sp24 = sp32 - sp48;
-			sp16 = sp24 - sp56;
-			sp8 = sp16 * 3600.0;
-			#else
 			fData_40002d94_OTADeclinationSeconds = 3600.0 *
 				(dData_40002d98 - dData_40003428 + dData_400033f0 - Data_40002d8c_OTADeclinationDegrees - 
 					Data_40002d90_OTADeclinationMinutes / 60.0);
-			#endif
 			
 			if ((bData_40003201 == 1) && (Data_40004128.dData_312 == 2.0))
 			{
 				//6e4f8
-				#if 0
-				sp64 = fData_40002d18_ObjectDeclination;
-				dData_400033f0 = sp64 - dData_40002d98;
-				#else
 				dData_400033f0 = fData_40002d18_ObjectDeclination - dData_40002d98;
-				#endif
 				
 				Data_40002d8c_OTADeclinationDegrees = Data_40002d00_ObjectDeclinationDegrees;
 				Data_40002d90_OTADeclinationMinutes = Data_40002d04_ObjectDeclinationMinutes;
@@ -4452,6 +4240,7 @@ static void vMainTask(void *pvParameters)
 		//6e558
 		else if (bData_40002c1a == 2)
 		{
+#if 0
 			//6e568
 			if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 			{
@@ -4492,7 +4281,7 @@ static void vMainTask(void *pvParameters)
 					dData_40002dc0_Azimuth += 360;
 				}
 				//6e890
-				fData_40003508 = dData_40002dc0_Azimuth - dData_40003410 - dData_400031f0;
+				g_fSendToExternalRightAscension = dData_40002dc0_Azimuth - dData_40003410 - dData_400031f0;
 				Data_40002dac = dData_40002dc0_Azimuth - dData_40003410 + dData_400033e8;
 				Data_40002db0 = (dData_40002dc0_Azimuth - dData_40003410 + dData_400033e8 - Data_40002dac) * 60.0;
 				fData_40002db4 = (int)((dData_40002dc0_Azimuth - dData_40003410 + dData_400033e8 - 
@@ -4529,7 +4318,7 @@ static void vMainTask(void *pvParameters)
 					dData_40002df8 = 180 - dData_40002df8;
 				}
 				//0x6eb8c
-				fData_4000350c = dData_40002df8 - dData_40003418 - dData_400031f8;
+				g_fSendToExternalDeclination = dData_40002df8 - dData_40003418 - dData_400031f8;
 				Data_40002de0 = dData_40002df8 - dData_40003418 + dData_400033f0;
 				Data_40002de4 = (dData_40002df8 - dData_40003418 + dData_400033f0 - Data_40002de0) * 60.0;
 				fData_40002de8 = (int)((dData_40002df8 - dData_40003418 + dData_400033f0 - 
@@ -4635,17 +4424,17 @@ static void vMainTask(void *pvParameters)
 				//0x6f328
 				dData_40002d78 /= 15;
 
-				fData_40003508 = fData_400034c8 - 
+				g_fSendToExternalRightAscension = g_fLocalSiderealTimerDuringTracking -
 					(dData_40002d78 - dData_40003420 / 15 - dData_400031f0 / 15);
 				
-				if (fData_40003508 < 0)
+				if (g_fSendToExternalRightAscension < 0)
 				{
-					fData_40003508 += 24;
+					g_fSendToExternalRightAscension += 24;
 				}
 				//0x6f408
-				if (fData_40003508 > 24)
+				if (g_fSendToExternalRightAscension > 24)
 				{
-					fData_40003508 -= 24;
+					g_fSendToExternalRightAscension -= 24;
 				}
 				//0x6f434
 				Data_40002d68_OTARightAscensionHours = dData_40002d78 - dData_40003420 / 15 + dData_400033e8;
@@ -4663,7 +4452,7 @@ static void vMainTask(void *pvParameters)
 					bData_40002d88 = 1;
 				}
 				//0x6f67c
-				fData_4000350c = dData_40002d98 - dData_40003428 - dData_400031f8;
+				g_fSendToExternalDeclination = dData_40002d98 - dData_40003428 - dData_400031f8;
 				Data_40002d8c_OTADeclinationDegrees = dData_40002d98 - dData_40003428 + dData_400033f0;
 				Data_40002d90_OTADeclinationMinutes = (dData_40002d98 - dData_40003428 + dData_400033f0 - Data_40002d8c_OTADeclinationDegrees) * 60;
 				fData_40002d94_OTADeclinationSeconds = (dData_40002d98 - dData_40003428 + 
@@ -4680,6 +4469,7 @@ static void vMainTask(void *pvParameters)
 				}
 				//0x6f8d0
 			}
+#endif
 		} //else if (bData_40002c1a == 2)
 		//6f8d0
 		if (bSystemInitialized == 0)
@@ -4774,25 +4564,29 @@ static void vMainTask(void *pvParameters)
 				g_bMaxSlewRampActive = 0;
 			}
 		} //if ((g_bMaxSlewRampActive != 0) && (g_stCurrentSlewRampValue.Data <= 4800))
-		//6fb24
+
+		//6fb24: Handle External Guiding
+
 		if (bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/)
 		{
 			//6fb34
 			ReceiveMountAutoguideValues();
 			
-			Data_40003488 = Data_40002c1c;
-			Data_4000348c = Data_40002c20;
+			g_iAscomGuideValueRa = g_iUart0GuideValueRa;
+			g_iAscomGuideValueDec = g_iUart0GuideValueDec;
 
-			Data_40004128.dAutoguideRa += (2 * Data_40003488 + iMountAutoguideRa) *
+			Data_40004128.dAutoguideRa += (2 * g_iAscomGuideValueRa + iMountAutoguideRa) *
 				dGuidingSpeed * 0.00153;
 
-			Data_40004128.dAutoguideDec += (4 * Data_4000348c + iMountAutoguideDec) *
+			Data_40004128.dAutoguideDec += (4 * g_iAscomGuideValueDec + iMountAutoguideDec) *
 				dGuidingSpeed * 0.00153;
 			
-			Data_40002c1c = 0;
-			Data_40002c20 = 0;
+			g_iUart0GuideValueRa = 0;
+			g_iUart0GuideValueDec = 0;
 		}
-		//6fd3c
+
+		//6fd3c: Handle Meridian Flip
+
 		if ((bData_40003211 == 0) && 
 			(bTrackingMode == MENU_TRACKING_MODE_TRACKING/*2*/) &&
 			(g_dObjectRightAcension < 23.99999))
@@ -5061,6 +4855,7 @@ static void vMainTask(void *pvParameters)
 		} //if (bData_40002c1a == 1)
 		else
 		{
+#if 0
 			//70f38
 			if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
 			{
@@ -5282,6 +5077,7 @@ static void vMainTask(void *pvParameters)
 					} //switch (g_eSlewRateIndex)
 				}
 			} //if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
+#endif
 		} //if (bData_40002c1a != 1)
 		//72040
 		if ((g_iSlewStepDecAxis != 0) || (g_iSlewStepRaAxis != 0))
@@ -5306,7 +5102,7 @@ static void vMainTask(void *pvParameters)
 				if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
 				{
 					//720c0
-					func_acd8();
+					func_acd8(); //-> empty
 				}
 				else
 				{
@@ -5607,14 +5403,17 @@ int main(void)
 	VICVectCntl2 = (1 << 5) | 7; // UART1 -> Slot 2
 	VICIntEnable = (1 << 7); // Enable UART1
 
-	//ON
-	IO0CLR = (1 << 16);
-
+#ifdef LED_TASK
+	GPIO_LED2_OFF;
 	xTaskCreate( vLEDTask, "LEDTask", /*configMINIMAL_STACK_SIZE*/100, NULL, tskIDLE_PRIORITY+1, NULL );
-	xTaskCreate( vMainTask, "MainTask", /*configMINIMAL_STACK_SIZE*/1000, NULL, tskIDLE_PRIORITY+1, NULL );
+#endif
+
 	xTaskCreate( vTimerTask, "TimerTask", /*configMINIMAL_STACK_SIZE*/100, NULL, tskIDLE_PRIORITY+2, NULL );
+	xTaskCreate( vMainTask, "MainTask", /*configMINIMAL_STACK_SIZE*/1000, NULL, tskIDLE_PRIORITY+2, NULL );
+#if 0
 	xTaskCreate( vUART0Task, "UART0Task", /*configMINIMAL_STACK_SIZE*/100, NULL, tskIDLE_PRIORITY+3, NULL );
 	xTaskCreate( vUART1Task, "UART1Task", /*configMINIMAL_STACK_SIZE*/100, NULL, tskIDLE_PRIORITY+3, NULL );
+#endif
 
 #if 0
 	{

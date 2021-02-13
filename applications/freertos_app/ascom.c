@@ -25,13 +25,13 @@ unsigned char ProcessUart0ReceiverData(void)
 				Data_40002c28.bData[1] = uart0ReceiveDataBuffer[2];
 				Data_40002c28.bData[2] = uart0ReceiveDataBuffer[3];
 				Data_40002c28.bData[3] = uart0ReceiveDataBuffer[4];
-				fData_40003510 = Data_40002c28.fData;
+				g_fReceiveExternalRightAscension = Data_40002c28.fData;
 
 				Data_40002c28.bData[0] = uart0ReceiveDataBuffer[5];
 				Data_40002c28.bData[1] = uart0ReceiveDataBuffer[6];
 				Data_40002c28.bData[2] = uart0ReceiveDataBuffer[7];
 				Data_40002c28.bData[3] = uart0ReceiveDataBuffer[8];
-				fData_40003514 = Data_40002c28.fData;
+				g_fReceiveExternalDeclination = Data_40002c28.fData;
 				//->6ca60
 				break;
 
@@ -60,7 +60,7 @@ unsigned char ProcessUart0ReceiverData(void)
 				bData_4000352a_ReceiveExternalHours = uart0ReceiveDataBuffer[5];
 				bData_4000352b_ReceiveExternalMinutes = uart0ReceiveDataBuffer[6];
 				bData_4000352c_ReceiveExternalSeconds = uart0ReceiveDataBuffer[7];
-				fData_40003520 = (float)uart0ReceiveDataBuffer[8] - 12;
+				g_fReceiveExternalTimezone = (float)uart0ReceiveDataBuffer[8] - 12;
 #ifdef OLIMEX_LPC2148
 				{
 					static char buf[105];
@@ -78,8 +78,8 @@ unsigned char ProcessUart0ReceiverData(void)
 					uart1_send((unsigned char*)buf, strlen(buf));
 
 					snprintf(buf, 100, "%d.%d\n\r",
-							(int)fData_40003520,
-							(fData_40003520 - (int)fData_40003520) * 1000);
+							(int)g_fReceiveExternalTimezone,
+							(g_fReceiveExternalTimezone - (int)g_fReceiveExternalTimezone) * 1000);
 					uart1_send((unsigned char*)buf, strlen(buf));
 				}
 #endif
@@ -187,7 +187,7 @@ void ProcessAscomCommands(void)
 
 		case 35:
 			//6cd14: Goto
-			GotoEQCoordinates(fData_40003510, fData_40003514);
+			GotoEQCoordinates(g_fReceiveExternalRightAscension, g_fReceiveExternalDeclination);
 
 			dData_400031f0 = 0;
 			dData_400031f8 = 0;
@@ -225,8 +225,8 @@ void ProcessAscomCommands(void)
 
 			StopSlewing();
 
-			Data_40002e54_Zone = fData_40003520;
-			Data_40004128.timeZone = fData_40003520;
+			Data_40002e54_Zone = g_fReceiveExternalTimezone;
+			Data_40004128.timeZone = g_fReceiveExternalTimezone;
 
 			CCR = (1 << 4); //clock from the 32 kHz oscillator that�s connected to the RTCX1 and RTCX2 pins
 			YEAR = Data_40003524_ReceiveExternalYear;
@@ -243,22 +243,24 @@ void ProcessAscomCommands(void)
 
 		case 1:
 			//6cef8
-			if (bData_4000352e > 2)
+			if (g_bSendToExternalCoordCount > 2)
 			{
 				//6cf0c
 				if (bData_40002c1a == 2)
 				{
+#if 0
 					//6cf1c
 					double sp32, sp24;
-					convert_horizontal_to_equatorial(fData_40003508, fData_4000350c, &sp32, &sp24);
-					fData_40003508 = sp32;
-					fData_4000350c = sp24;
+					convert_horizontal_to_equatorial(g_fSendToExternalRightAscension, g_fSendToExternalDeclination, &sp32, &sp24);
+					g_fSendToExternalRightAscension = sp32;
+					g_fSendToExternalDeclination = sp24;
 					dData_40003448 = sp32;
 					dData_40003450 = sp24;
+#endif
 				}
 				//6cfa8
-				sp60.fData = fData_40003508;
-				sp56.fData = fData_4000350c;
+				sp60.fData = g_fSendToExternalRightAscension;
+				sp56.fData = g_fSendToExternalDeclination;
 
 				sp40[4] = 0xff; //Ra & Dec ---Tracked
 				sp40[5] = sp60.bData[0];
@@ -272,13 +274,13 @@ void ProcessAscomCommands(void)
 
 				uart0_send(sp40, 13);
 
-				bData_4000352e = 0;
+				g_bSendToExternalCoordCount = 0;
 				//->6d038
-			}
+			} //if (g_bSendToExternalCoordCount > 2)
 			else
 			{
 				//6d024
-				bData_4000352e++;
+				g_bSendToExternalCoordCount++;
 			}
 			//6d038 -> 6d044
 			break;

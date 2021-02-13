@@ -26,9 +26,9 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_NO_TELESCOPE: //2:
 			//0x28054
-			Data_40003364 = strThereIsNoTele;
-			Data_4000336c = strScopeToConnectThis;
-			Data_40003374 = strControlTerminal;
+			g_pcstrMenuLine2 = strThereIsNoTele;
+			g_pcstrMenuLine4 = strScopeToConnectThis;
+			g_pcstrMenuLine6 = strControlTerminal;
 		
 			AdaptDisplayLinesPerMenuLine();
 			//->3d71c
@@ -36,26 +36,26 @@ void PrepareScreenItems(void)
 		
 		case 0x65: //101
 			//0x28090
-			Data_40003360 = "F1";
-			Data_40003364 = "F2";
-			Data_40003368 = "F3";
-			Data_4000336c = "F4";
-			Data_40003370 = "F5";
-			Data_40003374 = "F6";
-			Data_40003378 = "F7";
-			Data_4000337c = "F8";
-			Data_40003380 = "F9";
+			g_pcstrMenuLine1 = "F1";
+			g_pcstrMenuLine2 = "F2";
+			g_pcstrMenuLine3 = "F3";
+			g_pcstrMenuLine4 = "F4";
+			g_pcstrMenuLine5 = "F5";
+			g_pcstrMenuLine6 = "F6";
+			g_pcstrMenuLine7 = "F7";
+			g_pcstrMenuLine8 = "F8";
+			g_pcstrMenuLine9 = "F9";
 
 			switch (bData_40002e79_SkyLandTargetSeletion)
 			{
 				case 0:
 					//0x2811c
-					Data_40003384 = "Select Sky Target No ";
+					g_pcstrMenuLine10 = "Select Sky Target No ";
 					break;
 				
 				case 1:
 					//0x28130
-					Data_40003384 = "Select Land Target No";
+					g_pcstrMenuLine10 = "Select Land Target No";
 					break;
 				
 				default:
@@ -88,27 +88,27 @@ void PrepareScreenItems(void)
 					((Data_40003f50.bData_0 != 1) && (bData_40002e79_SkyLandTargetSeletion == 0)))
 			{
 				//281f0
-				Data_40003360 = "                      ";
-				Data_40003364 = "Sorry                 ";
-				Data_40003368 = "                      ";
+				g_pcstrMenuLine1 = "                      ";
+				g_pcstrMenuLine2 = "Sorry                 ";
+				g_pcstrMenuLine3 = "                      ";
 				
 				if (bData_40002e79_SkyLandTargetSeletion == 0)
 				{
 					//28224
-					sprintf(Data_40003fe8, "Your Sky F%d is Blank  ", bData_4000319a_SkyLandTargetId);
+					sprintf(g_MenuStringBuffer4, "Your Sky F%d is Blank  ", bData_4000319a_SkyLandTargetId);
 				}
 				//28238
 				if (bData_40002e79_SkyLandTargetSeletion == 1)
 				{
 					//28248
-					sprintf(Data_40003fe8, "Your Land F%d is Blank  ", bData_4000319a_SkyLandTargetId);
+					sprintf(g_MenuStringBuffer4, "Your Land F%d is Blank  ", bData_4000319a_SkyLandTargetId);
 				}
 				//2825c
-				Data_4000336c = Data_40003fe8;
-				Data_40003370 = "                      ";
-				Data_40003374 = "Please Input Data    ";
-				Data_40003378 = "                      ";
-				Data_4000337c = "                      ";
+				g_pcstrMenuLine4 = g_MenuStringBuffer4;
+				g_pcstrMenuLine5 = "                      ";
+				g_pcstrMenuLine6 = "Please Input Data    ";
+				g_pcstrMenuLine7 = "                      ";
+				g_pcstrMenuLine8 = "                      ";
 				//->29978
 			}
 			else
@@ -117,12 +117,12 @@ void PrepareScreenItems(void)
 				if (bData_40002e79_SkyLandTargetSeletion == 0)
 				{					
 					//2840c
-					sprintf(Data_40003fa9, "My Sky Target %d   ", bData_4000319a_SkyLandTargetId);
+					sprintf(g_MenuStringBuffer1, "My Sky Target %d   ", bData_4000319a_SkyLandTargetId);
 					
-					Data_40003360 = Data_40003fa9;
-					Data_40003364 = "                      ";
-					Data_40003368 = Data_40003f50.bData_1;
-					Data_4000336c = "                      ";
+					g_pcstrMenuLine1 = g_MenuStringBuffer1;
+					g_pcstrMenuLine2 = "                      ";
+					g_pcstrMenuLine3 = Data_40003f50.bData_1;
+					g_pcstrMenuLine4 = "                      ";
 					
 					Data_40004ad8.dLongitude = Data_40004128.geographicLongitude;
 					Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -134,7 +134,7 @@ void PrepareScreenItems(void)
 					convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 						Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 					//284f8
-					sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+					sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 						(int)(Data_40004b08.dAzimuth), 
 						(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
 						(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -142,7 +142,7 @@ void PrepareScreenItems(void)
 					if (Data_40004b08.dAltitude >= 0)
 					{
 						//285d0
-						sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+						sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 							abs((int)Data_40004b08.dAltitude), 
 							abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 							abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -150,7 +150,7 @@ void PrepareScreenItems(void)
 					else
 					{
 						//286cc
-						sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+						sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 							abs((int)Data_40004b08.dAltitude), 
 							abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 							abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -158,68 +158,68 @@ void PrepareScreenItems(void)
 					//2885c
 					if ((int)(Data_40004b08.dAzimuth) < 100)
 					{
-						Data_40003ffd[11] = ' ';
+						g_MenuStringBuffer5[11] = ' ';
 					}
 					
 					if ((int)(Data_40004b08.dAzimuth) < 10)
 					{
-						Data_40003ffd[12] = ' ';
+						g_MenuStringBuffer5[12] = ' ';
 					}
 					//288a4
 					if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 					{
-						Data_40003ffd[15] = ' ';
+						g_MenuStringBuffer5[15] = ' ';
 					}
 					//28910
 					if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 					{
-						Data_40003ffd[18] = ' ';
+						g_MenuStringBuffer5[18] = ' ';
 					}
 					//28954
 					if (abs((int)Data_40004b08.dAltitude) < 10)
 					{
-						Data_40004012[5] = ' ';
+						g_MenuStringBuffer6[5] = ' ';
 					}
 					//2898c
 					if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 					{
-						Data_40004012[8] = ' ';
+						g_MenuStringBuffer6[8] = ' ';
 					}
 					//28a0c
 					if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 					{
-						Data_40004012[11] = ' ';
+						g_MenuStringBuffer6[11] = ' ';
 					}
 					//28a64
-					Data_40003370 = Data_40003ffd;
-					Data_40003374 = Data_40004012;
+					g_pcstrMenuLine5 = g_MenuStringBuffer5;
+					g_pcstrMenuLine6 = g_MenuStringBuffer6;
 					
-					sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+					sprintf(g_MenuStringBuffer7, "R.a: %02dh%02dm%02ds         ",
 						(int)fData_40002cd0_ObjectRightAscension,
 						(int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60),
 						(int)(fData_40002cd0_ObjectRightAscension * 3600) % 60);
 						
 					if ((int)fData_40002cd0_ObjectRightAscension < 10)
 					{
-						Data_40004027[5] = ' ';
+						g_MenuStringBuffer7[5] = ' ';
 					}
 					//28b2c
 					if (((int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60)) < 10)
 					{
-						Data_40004027[8] = ' ';
+						g_MenuStringBuffer7[8] = ' ';
 					}
 					//28b7c
 					if (((int)(fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
 					{
-						Data_40004027[11] = ' ';
+						g_MenuStringBuffer7[11] = ' ';
 					}
 					//28bb4
-					Data_40003378 = Data_40004027;
+					g_pcstrMenuLine7 = g_MenuStringBuffer7;
 					
 					if (fData_40002d18_ObjectDeclination >= 0)
 					{
 						//28bd4
-						sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+						sprintf(g_MenuStringBuffer8, "Dec:+%02d %02d %02d      ",
 							abs((int)fData_40002d18_ObjectDeclination),
 							abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 							abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -227,7 +227,7 @@ void PrepareScreenItems(void)
 					else
 					{
 						//28cf8
-						sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+						sprintf(g_MenuStringBuffer8, "Dec:-%02d %02d %02d        ",
 							abs((int)fData_40002d18_ObjectDeclination),
 							abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 							abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -235,36 +235,36 @@ void PrepareScreenItems(void)
 					//28dc4
 					if (abs((int)fData_40002d18_ObjectDeclination) < 10)
 					{
-						Data_4000403c[5] = ' ';
+						g_MenuStringBuffer8[5] = ' ';
 					}
 					//28df8
 					if (abs((int)((fData_40002d18_ObjectDeclination - (int)fData_40002d18_ObjectDeclination) * 60)) < 10)
 					{
-						Data_4000403c[8] = ' ';
+						g_MenuStringBuffer8[8] = ' ';
 					}
 					//28e5c
 					if (abs((int)(fData_40002d18_ObjectDeclination * 3600) % 60) < 10)
 					{
-						Data_4000403c[11] = ' ';
+						g_MenuStringBuffer8[11] = ' ';
 					}
 					//28ea8
-					Data_4000337c = Data_4000403c;
+					g_pcstrMenuLine8 = g_MenuStringBuffer8;
 					//->29978
 				}
 				else
 				{
 					//28eb8
-					sprintf(Data_40003fa9, "My Land Target %d", bData_4000319a_SkyLandTargetId);
+					sprintf(g_MenuStringBuffer1, "My Land Target %d", bData_4000319a_SkyLandTargetId);
 					
-					Data_40003360 = Data_40003fa9;
-					Data_40003364 = "                      ";
-					Data_40003368 = Data_40003f64.bData_1;
-					Data_4000336c = "                      ";
+					g_pcstrMenuLine1 = g_MenuStringBuffer1;
+					g_pcstrMenuLine2 = "                      ";
+					g_pcstrMenuLine3 = Data_40003f64.bData_1;
+					g_pcstrMenuLine4 = "                      ";
 
 					Data_40004b08.dAzimuth = Data_40003f64.fData_12;
 					Data_40004b08.dAltitude = Data_40003f64.fData_16;
 										
-					sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+					sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 						(int)Data_40004b08.dAzimuth,
 						(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 						(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -272,7 +272,7 @@ void PrepareScreenItems(void)
 					if (Data_40004b08.dAltitude >= 0)
 					{
 						//29004
-						sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+						sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 							abs((int)Data_40004b08.dAltitude),
 							abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)),
 							abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -280,7 +280,7 @@ void PrepareScreenItems(void)
 					else
 					{
 						//2915c
-						sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+						sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 							abs((int)Data_40004b08.dAltitude),
 							abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)),
 							abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -288,46 +288,46 @@ void PrepareScreenItems(void)
 					//29254
 					if ((int)Data_40004b08.dAzimuth < 100)
 					{
-						Data_40003ffd[11] = ' ';
+						g_MenuStringBuffer5[11] = ' ';
 					}
 					//29278
 					if ((int)Data_40004b08.dAzimuth < 10)
 					{
-						Data_40003ffd[12] = ' ';
+						g_MenuStringBuffer5[12] = ' ';
 					}
 					//2929c
 					if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 					{
-						Data_40003ffd[15] = ' ';
+						g_MenuStringBuffer5[15] = ' ';
 					}
 					//29308
 					if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 					{
-						Data_40003ffd[18] = ' ';
+						g_MenuStringBuffer5[18] = ' ';
 					}
 					//2934c
 					if (abs((int)Data_40004b08.dAltitude) < 10)
 					{
-						Data_40004012[5] = ' ';
+						g_MenuStringBuffer6[5] = ' ';
 					}
 					//29384
 					if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 					{
-						Data_40004012[8] = ' ';
+						g_MenuStringBuffer6[8] = ' ';
 					}
 					//29404
 					if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 					{
-						Data_40004012[11] = ' ';
+						g_MenuStringBuffer6[11] = ' ';
 					}
 					//2945c
-					Data_40003370 = Data_40003ffd;
-					Data_40003374 = Data_40004012;
+					g_pcstrMenuLine5 = g_MenuStringBuffer5;
+					g_pcstrMenuLine6 = g_MenuStringBuffer6;
 					
 					dData_40002dd0 = dData_40002dc0_Azimuth;
 					dData_40002e08 = dData_40002df8;
 					
-					sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
+					sprintf(g_MenuStringBuffer7, "OTA    Azi:%03d %02d %02d                ",
 						(int)dData_40002dd0,
 						(int)((dData_40002dd0 - (int)dData_40002dd0) * 60),
 						(int)(dData_40002dd0 * 3600) % 60);
@@ -335,7 +335,7 @@ void PrepareScreenItems(void)
 					if (dData_40002e08 >= 0)
 					{
 						//29558
-						sprintf(Data_4000403c, "Alt:+%02d %02d %02d               ",
+						sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d %02d               ",
 							abs((int)dData_40002e08),
 							abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 							abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -344,7 +344,7 @@ void PrepareScreenItems(void)
 					else
 					{
 						//29644
-						sprintf(Data_4000403c, "Alt:-%02d %02d %02d               ",
+						sprintf(g_MenuStringBuffer8, "Alt:-%02d %02d %02d               ",
 							abs((int)dData_40002e08),
 							abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 							abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -352,41 +352,41 @@ void PrepareScreenItems(void)
 					//2972c
 					if ((int)dData_40002dd0 < 100)
 					{
-						Data_40004027[11] = ' ';
+						g_MenuStringBuffer7[11] = ' ';
 					}
 					//2974c
 					if ((int)dData_40002dd0 < 10)
 					{
-						Data_40004027[12] = ' ';
+						g_MenuStringBuffer7[12] = ' ';
 					}
 					//2976c
 					if (((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)) < 10)
 					{
-						Data_40004027[15] = ' ';
+						g_MenuStringBuffer7[15] = ' ';
 					}
 					//297d0
 					if (((int)(dData_40002dd0 * 3600) % 60) < 10)
 					{
-						Data_40004027[18] = ' ';
+						g_MenuStringBuffer7[18] = ' ';
 					}
 					//29810
 					if (abs((int)dData_40002e08) < 10)
 					{
-						Data_4000403c[5] = ' ';
+						g_MenuStringBuffer8[5] = ' ';
 					}
 					//29894
 					if (abs((int)((dData_40002e08 - (int)dData_40002e08) * 60.0)) < 10)
 					{
-						Data_4000403c[8] = ' ';
+						g_MenuStringBuffer8[8] = ' ';
 					}
 					//2990c
 					if (abs(((int)(dData_40002e08 * 3600.0)) % 60) < 10)
 					{
-						Data_4000403c[11] = ' ';
+						g_MenuStringBuffer8[11] = ' ';
 					}
 					//29960
-					Data_40003378 = Data_40004027;
-					Data_4000337c = Data_4000403c;
+					g_pcstrMenuLine7 = g_MenuStringBuffer7;
+					g_pcstrMenuLine8 = g_MenuStringBuffer8;
 				}
 			}
 			//29978
@@ -395,47 +395,47 @@ void PrepareScreenItems(void)
 			//->3d71c
 			break;
 		
-		case 1:
+		case MENU_CONTEXT_RECENT_TARGETS: //1:
 			//0x29994: Recent Targets
 			bData_40002f14_RecentTargetCount = flash_get_recent_targets(Data_40002f15_RecentTargetTypeArray, 
 				Data_4000359c_RecentTargetIdArray, Data_400035bc);
 			
-			Data_40003360 = "                      ";
-			Data_40003364 = "                      ";
-			Data_40003368 = "                      ";
-			Data_4000336c = "                      ";
-			Data_40003370 = "                      ";
-			Data_40003374 = "                      ";
-			Data_40003378 = "                      ";
-			Data_4000337c = "                      ";
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = "                      ";
+			g_pcstrMenuLine3 = "                      ";
+			g_pcstrMenuLine4 = "                      ";
+			g_pcstrMenuLine5 = "                      ";
+			g_pcstrMenuLine6 = "                      ";
+			g_pcstrMenuLine7 = "                      ";
+			g_pcstrMenuLine8 = "                      ";
 		
-			Data_40003380 = "   ";
-			Data_40003384 = "   ";
-			Data_40003388 = "   ";
-			Data_4000338c = "   ";
-			Data_40003390 = "   ";
-			Data_40003394 = "   ";
-			Data_40003398 = "   ";
-			Data_4000339c = "   ";
+			g_pcstrMenuLine9 = "   ";
+			g_pcstrMenuLine10 = "   ";
+			g_pcstrMenuLine11 = "   ";
+			g_pcstrMenuLine12 = "   ";
+			g_pcstrMenuLine13 = "   ";
+			g_pcstrMenuLine14 = "   ";
+			g_pcstrMenuLine15 = "   ";
+			g_pcstrMenuLine16 = "   ";
 			//29a70
 			switch (bData_40002f14_RecentTargetCount)
 			{
 				case 0:
 					//0x29aa8
-					Data_40003360 = "                      ";
-					Data_40003364 = "                      ";
-					Data_40003368 = "Sorry                 ";
-					Data_4000336c = "                      ";
-					Data_40003370 = "No Recent Target     ";
-					Data_40003374 = "                      ";
-					Data_40003378 = "                      ";
-					Data_4000337c = "                      ";
+					g_pcstrMenuLine1 = "                      ";
+					g_pcstrMenuLine2 = "                      ";
+					g_pcstrMenuLine3 = "Sorry                 ";
+					g_pcstrMenuLine4 = "                      ";
+					g_pcstrMenuLine5 = "No Recent Target     ";
+					g_pcstrMenuLine6 = "                      ";
+					g_pcstrMenuLine7 = "                      ";
+					g_pcstrMenuLine8 = "                      ";
 					//->2a0f8
 					break;
 				
 				case 8:
 					//0x29b10
-					Data_4000339c = "8: ";
+					g_pcstrMenuLine16 = "8: ";
 					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[7];
 					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[7];
 				
@@ -444,15 +444,15 @@ void PrepareScreenItems(void)
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
 						//29b64
-						Data_4000403c[bData_40002f1d] = Data_4000410e[bData_40002f1d];
+						g_MenuStringBuffer8[bData_40002f1d] = Data_4000410e[bData_40002f1d];
 					}
 					
-					Data_4000337c = Data_4000403c;
+					g_pcstrMenuLine8 = g_MenuStringBuffer8;
 					//break; //fall through
 				
 				case 7:
 					//0x29bb8
-					Data_40003398 = "7: ";
+					g_pcstrMenuLine15 = "7: ";
 					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[6];
 					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[6];
 				
@@ -461,34 +461,36 @@ void PrepareScreenItems(void)
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
 						//29c08
-						Data_40004027[bData_40002f1d] = Data_4000410e[bData_40002f1d];
+						g_MenuStringBuffer7[bData_40002f1d] = Data_4000410e[bData_40002f1d];
 					}
 
-					Data_40003378 = Data_40004027;
+					g_pcstrMenuLine7 = g_MenuStringBuffer7;
 					//break; //fall through
 				
 				case 6:
 					//0x29c5c
-					Data_40003394 = "6: ";
+					g_pcstrMenuLine14 = "6: ";
 					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[5];
 					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[5];
 				
 					func_240e8(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				
-					Data_40003374 = Data_400033a4;
+#if 0
+					g_pcstrMenuLine6 = Data_400033a4;
+#endif
 
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
 						//29cbc
-						Data_40004012[bData_40002f1d] = Data_4000410e[bData_40002f1d];
+						g_MenuStringBuffer6[bData_40002f1d] = Data_4000410e[bData_40002f1d];
 					}
 				
-					Data_40003374 = Data_40004012;
+					g_pcstrMenuLine6 = g_MenuStringBuffer6;
 					//break; //fall through
 				
 				case 5:
 					//0x29d10
-					Data_40003390 = "5: ";
+					g_pcstrMenuLine13 = "5: ";
 					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[4];
 					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[4];
 				
@@ -497,15 +499,15 @@ void PrepareScreenItems(void)
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
 						//0x29e04
-						Data_40003ffd[bData_40002f1d] = Data_4000410e[bData_40002f1d];
+						g_MenuStringBuffer5[bData_40002f1d] = Data_4000410e[bData_40002f1d];
 					}
 				
-					Data_40003370 = Data_40003ffd;
+					g_pcstrMenuLine5 = g_MenuStringBuffer5;
 					//break; //fall through
 				
 				case 4:
 					//0x29e58
-					Data_4000338c = "4: ";
+					g_pcstrMenuLine12 = "4: ";
 					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[3];
 					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[3];
 				
@@ -514,15 +516,15 @@ void PrepareScreenItems(void)
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
 						//0x29ea8
-						Data_40003fe8[bData_40002f1d] = Data_4000410e[bData_40002f1d];
+						g_MenuStringBuffer4[bData_40002f1d] = Data_4000410e[bData_40002f1d];
 					}
 				
-					Data_4000336c = Data_40003fe8;
+					g_pcstrMenuLine4 = g_MenuStringBuffer4;
 					//break; //fall through
 				
 				case 3:
 					//0x29efc
-					Data_40003388 = "3: ";
+					g_pcstrMenuLine11 = "3: ";
 					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[2];
 					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[2];
 				
@@ -531,15 +533,15 @@ void PrepareScreenItems(void)
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
 						//0x29f4c
-						Data_40003fd3[bData_40002f1d] = Data_4000410e[bData_40002f1d];
+						g_MenuStringBuffer3[bData_40002f1d] = Data_4000410e[bData_40002f1d];
 					}
 				
-					Data_40003368 = Data_40003fd3;
+					g_pcstrMenuLine3 = g_MenuStringBuffer3;
 					//break; //fall through
 				
 				case 2:
 					//0x29fa0
-					Data_40003384 = "2: ";
+					g_pcstrMenuLine10 = "2: ";
 					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[1];
 					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[1];
 				
@@ -548,29 +550,31 @@ void PrepareScreenItems(void)
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
 						//0x29ff0
-						Data_40003fbe[bData_40002f1d] = Data_4000410e[bData_40002f1d];
+						g_MenuStringBuffer2[bData_40002f1d] = Data_4000410e[bData_40002f1d];
 					}
 				
-					Data_40003364 = Data_40003fbe;
+					g_pcstrMenuLine2 = g_MenuStringBuffer2;
 					//break; //fall through
 		
 				case 1:
 					//0x2a044
-					Data_40003380 = "1: ";
+					g_pcstrMenuLine9 = "1: ";
 					bData_40002f0d_RecentTargetType = Data_40002f15_RecentTargetTypeArray[0];
 					bData_40002f10_RecentTargetId = Data_4000359c_RecentTargetIdArray[0];
 				
 					func_240e8(bData_40002f0d_RecentTargetType, bData_40002f10_RecentTargetId);
 				
-					Data_40003360 = Data_400033a4;
+#if 0
+					g_pcstrMenuLine1 = Data_400033a4;
+#endif
 				
 					for (bData_40002f1d = 0; bData_40002f1d < 21; bData_40002f1d++)
 					{
 						//0x2a0a4
-						Data_40003fa9[bData_40002f1d] = Data_4000410e[bData_40002f1d];
+						g_MenuStringBuffer1[bData_40002f1d] = Data_4000410e[bData_40002f1d];
 					}
 				
-					Data_40003360 = Data_40003fa9;
+					g_pcstrMenuLine1 = g_MenuStringBuffer1;
 					//break; //fall through
 				
 				#if 0
@@ -584,21 +588,21 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_ALIGNMENT: //1000:
 			//0x2a100 - Telescope Align
-			Data_40003360 = strTelescopeAlign;
-			Data_40003364 = "";
-			Data_40003368 = strNavigation;
-			Data_4000336c = "";
-			Data_40003370 = strUtilities;
-			Data_40003374 = "";
-			Data_40003378 = strSetup;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strTelescopeAlign;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strNavigation;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strUtilities;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strSetup;
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 		
-			Data_400033a8 = strTelescopeAlign;
-			Data_400033ac = strNavigation;
-			Data_400033b0 = strUtilities;
-			Data_400033b4 = strSetup;
+			g_pcstrBigMenuLine1 = strTelescopeAlign;
+			g_pcstrBigMenuLine2 = strNavigation;
+			g_pcstrBigMenuLine3 = strUtilities;
+			g_pcstrBigMenuLine4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 1;
 		
@@ -608,21 +612,21 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_NAVIGATION: //2000:
 			//0x2a220 - Navigation
-			Data_40003360 = strTelescopeAlign;
-			Data_40003364 = "";
-			Data_40003368 = strNavigation;
-			Data_4000336c = "";
-			Data_40003370 = strUtilities;
-			Data_40003374 = "";
-			Data_40003378 = strSetup;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strTelescopeAlign;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strNavigation;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strUtilities;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strSetup;
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 		
-			Data_400033a8 = strTelescopeAlign;
-			Data_400033ac = strNavigation;
-			Data_400033b0 = strUtilities;
-			Data_400033b4 = strSetup;
+			g_pcstrBigMenuLine1 = strTelescopeAlign;
+			g_pcstrBigMenuLine2 = strNavigation;
+			g_pcstrBigMenuLine3 = strUtilities;
+			g_pcstrBigMenuLine4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 2;
 		
@@ -632,21 +636,21 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_UTILITIES: //3000:
 			//0x2a2f4 - Utilities
-			Data_40003360 = strTelescopeAlign;
-			Data_40003364 = "";
-			Data_40003368 = strNavigation;
-			Data_4000336c = "";
-			Data_40003370 = strUtilities;
-			Data_40003374 = "";
-			Data_40003378 = strSetup;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strTelescopeAlign;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strNavigation;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strUtilities;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strSetup;
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 		
-			Data_400033a8 = strTelescopeAlign;
-			Data_400033ac = strNavigation;
-			Data_400033b0 = strUtilities;
-			Data_400033b4 = strSetup;
+			g_pcstrBigMenuLine1 = strTelescopeAlign;
+			g_pcstrBigMenuLine2 = strNavigation;
+			g_pcstrBigMenuLine3 = strUtilities;
+			g_pcstrBigMenuLine4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 3;
 		
@@ -656,21 +660,21 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_SETUP: //4000:
 			//0x2a3c8 - Setup
-			Data_40003360 = strTelescopeAlign;
-			Data_40003364 = "";
-			Data_40003368 = strNavigation;
-			Data_4000336c = "";
-			Data_40003370 = strUtilities;
-			Data_40003374 = "";
-			Data_40003378 = strSetup;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strTelescopeAlign;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strNavigation;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strUtilities;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strSetup;
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
 		
-			Data_400033a8 = strTelescopeAlign;
-			Data_400033ac = strNavigation;
-			Data_400033b0 = strUtilities;
-			Data_400033b4 = strSetup;
+			g_pcstrBigMenuLine1 = strTelescopeAlign;
+			g_pcstrBigMenuLine2 = strNavigation;
+			g_pcstrBigMenuLine3 = strUtilities;
+			g_pcstrBigMenuLine4 = strSetup;
 		
 			bData_4000316f_FocusLineOn4LineDisplay = 4;
 		
@@ -692,13 +696,13 @@ void PrepareScreenItems(void)
 			//0x2a4b4: RA Bklash Corr.
 		case MENU_CONTEXT_DEC_BKLASH_CORR: //1700:
 			//0x2a4b8: DEC Bklash Corr.
-			func_2245c(11, bData_40003170);
+			PrepareEightLineMenuScroll(11, g_bAlignmentEightLineMenuTopItem);
 		
-			bData_4000316e_FocusLineOn8LineDisplay = bData_40003172;
+			bData_4000316e_FocusLineOn8LineDisplay = g_bAlignmentEightLineMenuFocusItem;
 		
-			func_231d0(11, bData_40003171);
+			PrepareFourLineMenuScroll(11, g_bAlignmentFourLineMenuTopItem);
 		
-			bData_4000316f_FocusLineOn4LineDisplay = bData_40003173;
+			bData_4000316f_FocusLineOn4LineDisplay = g_bAlignmentFourLineMenuFocusItem;
 		
 			AdaptDisplayLinesPerMenuLine();
 			//->3d71c
@@ -728,11 +732,11 @@ void PrepareScreenItems(void)
 			//0x2a52c: Input RA and DEC
 		case MENU_CONTEXT_NAVIGATION_CUST_LAND: //2130:
 			//0x2a530: Custom Land Goal
-			func_2245c(12, bData_40003174);
+			PrepareEightLineMenuScroll(12, bData_40003174);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_40003176;
 		
-			func_231d0(12, bData_40003175);
+			PrepareFourLineMenuScroll(12, bData_40003175);
 		
 			bData_4000316f_FocusLineOn4LineDisplay = bData_40003177;
 		
@@ -758,11 +762,11 @@ void PrepareScreenItems(void)
 			//0x2a598: Display Illumin.
 		case MENU_CONTEXT_PARK_POSITION: //3900:
 			//0x2a59c: Parkposition
-			func_2245c(13, bData_40003178);
+			PrepareEightLineMenuScroll(13, bData_40003178);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_4000317a;
 		
-			func_231d0(13, bData_40003179);
+			PrepareFourLineMenuScroll(13, bData_40003179);
 		
 			bData_4000316f_FocusLineOn4LineDisplay = bData_4000317b;
 		
@@ -788,11 +792,11 @@ void PrepareScreenItems(void)
 			//0x2a604
 		case MENU_CONTEXT_RESET: //4900:
 			//0x2a608
-			func_2245c(14, bData_4000317c);
+			PrepareEightLineMenuScroll(14, g_bSetupEightLineMenuTopItem);
 		
-			bData_4000316e_FocusLineOn8LineDisplay = bData_4000317e;
+			bData_4000316e_FocusLineOn8LineDisplay = g_bSetupEightLineMenuFocusItem;
 		
-			func_231d0(14, bData_4000317d);
+			PrepareFourLineMenuScroll(14, bData_4000317d);
 		
 			bData_4000316f_FocusLineOn4LineDisplay = bData_4000317f;
 		
@@ -820,7 +824,7 @@ void PrepareScreenItems(void)
 			//0x2a674
 		case 0x55FC: //22012
 			//0x2a678
-			func_2245c(22, bData_40003180);
+			PrepareEightLineMenuScroll(22, bData_40003180);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_40003182;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -843,7 +847,7 @@ void PrepareScreenItems(void)
 			//0x2a6c4
 		case 2308:
 			//0x2a6c8
-			func_2245c(23, bData_40003184);
+			PrepareEightLineMenuScroll(23, bData_40003184);
 		
 			bData_4000316e_FocusLineOn8LineDisplay = bData_40003186;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -852,14 +856,14 @@ void PrepareScreenItems(void)
 		
 		case 0x9c5: //2501
 			//0x2a6f8
-			Data_40003360 = strScientificName;
-			Data_40003364 = "";
-			Data_40003368 = strSAOCatalog;
-			Data_4000336c = "";
-			Data_40003370 = strHRCatalog;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strScientificName;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strSAOCatalog;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strHRCatalog;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -868,14 +872,14 @@ void PrepareScreenItems(void)
 
 		case 0x9c6: //2502
 			//0x2a780
-			Data_40003360 = strScientificName;
-			Data_40003364 = "";
-			Data_40003368 = strSAOCatalog;
-			Data_4000336c = "";
-			Data_40003370 = strHRCatalog;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strScientificName;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strSAOCatalog;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strHRCatalog;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -884,14 +888,14 @@ void PrepareScreenItems(void)
 		
 		case 0x9C7: //2503
 			//0x2a80c
-			Data_40003360 = strScientificName;
-			Data_40003364 = "";
-			Data_40003368 = strSAOCatalog;
-			Data_4000336c = "";
-			Data_40003370 = strHRCatalog;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strScientificName;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strSAOCatalog;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strHRCatalog;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -900,14 +904,14 @@ void PrepareScreenItems(void)
 
 		case 0xAF1: //2801
 			//0x2a898
-			Data_40003360 = strSelect;
-			Data_40003364 = "";
-			Data_40003368 = strAdd;
-			Data_4000336c = "";
-			Data_40003370 = strDelete;
-			Data_40003374 = "";
-			Data_40003378 = strModify;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strSelect;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strAdd;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strDelete;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strModify;
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -916,14 +920,14 @@ void PrepareScreenItems(void)
 		
 		case 0xAF2: //2802
 			//0x2a924
-			Data_40003360 = strSelect;
-			Data_40003364 = "";
-			Data_40003368 = strAdd;
-			Data_4000336c = "";
-			Data_40003370 = strDelete;
-			Data_40003374 = "";
-			Data_40003378 = strModify;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strSelect;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strAdd;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strDelete;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strModify;
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -932,14 +936,14 @@ void PrepareScreenItems(void)
 		
 		case 0xAF3: //2803
 			//0x2aa2c
-			Data_40003360 = strSelect;
-			Data_40003364 = "";
-			Data_40003368 = strAdd;
-			Data_4000336c = "";
-			Data_40003370 = strDelete;
-			Data_40003374 = "";
-			Data_40003378 = strModify;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strSelect;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strAdd;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strDelete;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strModify;
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -948,14 +952,14 @@ void PrepareScreenItems(void)
 		
 		case 0xAF4: //2804
 			//0x2aabc
-			Data_40003360 = strSelect;
-			Data_40003364 = "";
-			Data_40003368 = strAdd;
-			Data_4000336c = "";
-			Data_40003370 = strDelete;
-			Data_40003374 = "";
-			Data_40003378 = strModify;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strSelect;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strAdd;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strDelete;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strModify;
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -964,14 +968,14 @@ void PrepareScreenItems(void)
 		
 		case 0x526D: //21101
 			//0x2ab4c
-			Data_40003360 = Data_40003044;
-			Data_40003364 = "";
-			Data_40003368 = Data_40003048;
-			Data_4000336c = "";
-			Data_40003370 = Data_4000304c;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = Data_40003044;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = Data_40003048;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = Data_4000304c;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -980,14 +984,14 @@ void PrepareScreenItems(void)
 
 		case 0x526E: //21102
 			//0x2abd4
-			Data_40003360 = Data_40003044;
-			Data_40003364 = "";
-			Data_40003368 = Data_40003048;
-			Data_4000336c = "";
-			Data_40003370 = Data_4000304c;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = Data_40003044;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = Data_40003048;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = Data_4000304c;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -996,14 +1000,14 @@ void PrepareScreenItems(void)
 
 		case 0x526F: //21103
 			//0x2ac60
-			Data_40003360 = Data_40003044;
-			Data_40003364 = "";
-			Data_40003368 = Data_40003048;
-			Data_4000336c = "";
-			Data_40003370 = Data_4000304c;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = Data_40003044;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = Data_40003048;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = Data_4000304c;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1012,14 +1016,14 @@ void PrepareScreenItems(void)
 
 		case 0xE11: //3601
 			//0x2acec
-			Data_40003360 = strEyeshot;
-			Data_40003364 = strRatio;
-			Data_40003368 = "";
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEyeshot;
+			g_pcstrMenuLine2 = strRatio;
+			g_pcstrMenuLine3 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1028,14 +1032,14 @@ void PrepareScreenItems(void)
 
 		case 0xE12: //3602
 			//0x2ad70
-			Data_40003360 = strEyeshot;
-			Data_40003364 = strRatio;
-			Data_40003368 = "";
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEyeshot;
+			g_pcstrMenuLine2 = strRatio;
+			g_pcstrMenuLine3 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 2;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1044,14 +1048,14 @@ void PrepareScreenItems(void)
 		
 		case 0xED9: //3801
 			//0x2adf8
-			Data_40003360 = strBackBoard;
-			Data_40003364 = strAccessory;
-			Data_40003368 = "";
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strBackBoard;
+			g_pcstrMenuLine2 = strAccessory;
+			g_pcstrMenuLine3 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1060,14 +1064,14 @@ void PrepareScreenItems(void)
 		
 		case 0xEDA: //3802
 			//0x2ae7c
-			Data_40003360 = strBackBoard;
-			Data_40003364 = strAccessory;
-			Data_40003368 = "";
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strBackBoard;
+			g_pcstrMenuLine2 = strAccessory;
+			g_pcstrMenuLine3 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 2;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1076,14 +1080,14 @@ void PrepareScreenItems(void)
 
 		case MENU_CONTEXT_COUNTRY_CITY: //4301:
 			//0x2af04: Country & City
-			Data_40003360 = strCountryAndCity;
-			Data_40003368 = strCustomSite;
-			Data_40003364 = "";
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strCountryAndCity;
+			g_pcstrMenuLine3 = strCustomSite;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1092,14 +1096,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_CUSTOM_SITE: //4302:
 			//0x2af88: Custom Site
-			Data_40003360 = strCountryAndCity;
-			Data_40003368 = strCustomSite;
-			Data_40003364 = "";
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strCountryAndCity;
+			g_pcstrMenuLine3 = strCustomSite;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1108,14 +1112,14 @@ void PrepareScreenItems(void)
 
 		case 0xA80D: //43021
 			//0x2b010
-			Data_40003360 = Data_40003068;
-			Data_40003368 = Data_4000306c;
-			Data_40003370 = Data_40003070;
-			Data_40003378 = Data_40003074;
-			Data_40003364 = "";
-			Data_4000336c = "";
-			Data_40003374 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = Data_40003068;
+			g_pcstrMenuLine3 = Data_4000306c;
+			g_pcstrMenuLine5 = Data_40003070;
+			g_pcstrMenuLine7 = Data_40003074;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1124,14 +1128,14 @@ void PrepareScreenItems(void)
 		
 		case 0xA80E: //43022
 			//0x2b09c
-			Data_40003360 = Data_40003068;
-			Data_40003368 = Data_4000306c;
-			Data_40003370 = Data_40003070;
-			Data_40003378 = Data_40003074;
-			Data_40003364 = "";
-			Data_4000336c = "";
-			Data_40003374 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = Data_40003068;
+			g_pcstrMenuLine3 = Data_4000306c;
+			g_pcstrMenuLine5 = Data_40003070;
+			g_pcstrMenuLine7 = Data_40003074;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1140,14 +1144,14 @@ void PrepareScreenItems(void)
 		
 		case 0xA80F: //43023
 			//0x2b184
-			Data_40003360 = Data_40003068;
-			Data_40003368 = Data_4000306c;
-			Data_40003370 = Data_40003070;
-			Data_40003378 = Data_40003074;
-			Data_40003364 = "";
-			Data_4000336c = "";
-			Data_40003374 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = Data_40003068;
+			g_pcstrMenuLine3 = Data_4000306c;
+			g_pcstrMenuLine5 = Data_40003070;
+			g_pcstrMenuLine7 = Data_40003074;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1156,14 +1160,14 @@ void PrepareScreenItems(void)
 		
 		case 0xA810: //43024
 			//0x2b214
-			Data_40003360 = Data_40003068;
-			Data_40003368 = Data_4000306c;
-			Data_40003370 = Data_40003070;
-			Data_40003378 = Data_40003074;
-			Data_40003364 = "";
-			Data_4000336c = "";
-			Data_40003374 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = Data_40003068;
+			g_pcstrMenuLine3 = Data_4000306c;
+			g_pcstrMenuLine5 = Data_40003070;
+			g_pcstrMenuLine7 = Data_40003074;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1172,14 +1176,14 @@ void PrepareScreenItems(void)
 
 		case MENU_CONTEXT_TRACKING_RATE_STAR_SPEED: //4801:
 			//0x2b2a4
-			Data_40003360 = strStarSpeed;
-			Data_40003364 = strSolarSpeed;
-			Data_40003368 = strMoonSpeed;
-			Data_4000336c = Data_40003094; // "Customize Speed"
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = Data_40003098; // "Guiding Speed"
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strStarSpeed;
+			g_pcstrMenuLine2 = strSolarSpeed;
+			g_pcstrMenuLine3 = strMoonSpeed;
+			g_pcstrMenuLine4 = Data_40003094; // "Customize Speed"
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = Data_40003098; // "Guiding Speed"
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1188,14 +1192,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_TRACKING_RATE_SOLAR_SPEED: //4802:
 			//0x2b334
-			Data_40003360 = strStarSpeed;
-			Data_40003364 = strSolarSpeed;
-			Data_40003368 = strMoonSpeed;
-			Data_4000336c = Data_40003094;
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = Data_40003098;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strStarSpeed;
+			g_pcstrMenuLine2 = strSolarSpeed;
+			g_pcstrMenuLine3 = strMoonSpeed;
+			g_pcstrMenuLine4 = Data_40003094;
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = Data_40003098;
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 2;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1204,14 +1208,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_TRACKING_RATE_MOON_SPEED: //4803
 			//0x2b3c8
-			Data_40003360 = strStarSpeed;
-			Data_40003364 = strSolarSpeed;
-			Data_40003368 = strMoonSpeed;
-			Data_4000336c = Data_40003094;
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = Data_40003098;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strStarSpeed;
+			g_pcstrMenuLine2 = strSolarSpeed;
+			g_pcstrMenuLine3 = strMoonSpeed;
+			g_pcstrMenuLine4 = Data_40003094;
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = Data_40003098;
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1220,14 +1224,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_TRACKING_RATE_CUSTOM_SPEED: //4804
 			//0x2b45c
-			Data_40003360 = strStarSpeed;
-			Data_40003364 = strSolarSpeed;
-			Data_40003368 = strMoonSpeed;
-			Data_4000336c = Data_40003094;
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = Data_40003098;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strStarSpeed;
+			g_pcstrMenuLine2 = strSolarSpeed;
+			g_pcstrMenuLine3 = strMoonSpeed;
+			g_pcstrMenuLine4 = Data_40003094;
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = Data_40003098;
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 4;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1236,14 +1240,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_TRACKING_RATE_GUIDING_SPEED: //4805
 			//0x2b4f0
-			Data_40003360 = strStarSpeed;
-			Data_40003364 = strSolarSpeed;
-			Data_40003368 = strMoonSpeed;
-			Data_4000336c = Data_40003094;
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = Data_40003098;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strStarSpeed;
+			g_pcstrMenuLine2 = strSolarSpeed;
+			g_pcstrMenuLine3 = strMoonSpeed;
+			g_pcstrMenuLine4 = Data_40003094;
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = Data_40003098;
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 7;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1252,14 +1256,14 @@ void PrepareScreenItems(void)
 
 		case MENU_CONTEXT_GUIDING_SPEED1: //48051
 			//0x2b584: Setup -> Tracking Rate -> Guiding Speed
-			Data_40003360 = "speed1:   x 0.125";
-			Data_40003364 = "speed2:   x 0.250";
-			Data_40003368 = "speed3:   x 0.375";
-			Data_4000336c = "speed4:   x 0.500";
-			Data_40003370 = "speed5:   x 0.625";
-			Data_40003374 = "speed6:   x 0.750";
-			Data_40003378 = "speed7:   x 0.875";
-			Data_4000337c = "speed8:   x 1.000";
+			g_pcstrMenuLine1 = "speed1:   x 0.125";
+			g_pcstrMenuLine2 = "speed2:   x 0.250";
+			g_pcstrMenuLine3 = "speed3:   x 0.375";
+			g_pcstrMenuLine4 = "speed4:   x 0.500";
+			g_pcstrMenuLine5 = "speed5:   x 0.625";
+			g_pcstrMenuLine6 = "speed6:   x 0.750";
+			g_pcstrMenuLine7 = "speed7:   x 0.875";
+			g_pcstrMenuLine8 = "speed8:   x 1.000";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1313,43 +1317,43 @@ void PrepareScreenItems(void)
 			numVisibleAlignmentStars = GetCurrentAlignStars(get_local_sidereal_time(1, 0, Data_40004128.geographicLongitude), Data_40004128.geographicLatitude,
 				Data_40004a68_CurrentAlignStarEquatorialCoord, arAlignmentStarNames, Data_40003b2c);
 			
-			sprintf(Data_40003ffd, "R.a: %02dh%02dm                ",
+			sprintf(g_MenuStringBuffer5, "R.a: %02dh%02dm                ",
 				(int) Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2],
 				(int) ((Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2] - (int) Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2]) * 60));
 
 			if ((int) Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2] < 10)
 			{
-				Data_40003ffd[5] = ' ';
+				g_MenuStringBuffer5[5] = ' ';
 			}
 			
 			if ((int) ((Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2] - (int) Data_40004a68_CurrentAlignStarEquatorialCoord[(bData_40002c60_CurrentAlignStarIndex - 1)*2]) * 60) < 10)
 			{
-				Data_40003ffd[8] = ' ';
+				g_MenuStringBuffer5[8] = ' ';
 			}
 			
 			if (Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1] < 0)
 			{
 				//2b848
-				sprintf(Data_40004012, "Dec:-%02d %02d                 ",
+				sprintf(g_MenuStringBuffer6, "Dec:-%02d %02d                 ",
 					abs((int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1]),
 					abs((int) ((Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1] - (int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1]) * 60)));				
 			}
 			else
 			{
 				//0x2ba08
-				sprintf(Data_40004012, "Dec:+%02d %02d                 ",
+				sprintf(g_MenuStringBuffer6, "Dec:+%02d %02d                 ",
 					(int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1],
 					abs((int) ((Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1] - (int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1]) * 60)));				
 			}
 
 			if ((int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1] < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			
 			if ((int) (((Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) + 1] - (int) Data_40004a68_CurrentAlignStarEquatorialCoord[2*(bData_40002c60_CurrentAlignStarIndex - 1) /*+ 1*/])+1) * 60) < 10) //BUG!
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			//2bb70
 			if (bData_40002c62_AlignmentStarMode != 0)
@@ -1394,32 +1398,32 @@ void PrepareScreenItems(void)
 					
 					case 0:
 						//0x2bedc
-						sprintf(Data_40003ffd, "Azi:%03d %02d          ",
+						sprintf(g_MenuStringBuffer5, "Azi:%03d %02d          ",
 							abs(Data_40002dac), abs(Data_40002db0));
 					
 						if (abs(Data_40002dac) < 100)
 						{
-							Data_40003ffd[4] = ' ';
+							g_MenuStringBuffer5[4] = ' ';
 						}
 						if (abs(Data_40002dac) < 10)
 						{
-							Data_40003ffd[5] = ' ';
+							g_MenuStringBuffer5[5] = ' ';
 						}
 						if (abs(Data_40002db0) < 10)
 						{
-							Data_40003ffd[8] = ' ';
+							g_MenuStringBuffer5[8] = ' ';
 						}
 						
-						sprintf(Data_40004012, "Alt: %02d %02d          ", 
+						sprintf(g_MenuStringBuffer6, "Alt: %02d %02d          ",
 							abs(Data_40002de0), abs(Data_40002de4));
 
 						if (abs(Data_40002de0) < 10)
 						{
-							Data_40004012[5] = ' ';
+							g_MenuStringBuffer6[5] = ' ';
 						}
 						if (abs(Data_40002de4) < 10)
 						{
-							Data_40004012[8] = ' ';
+							g_MenuStringBuffer6[8] = ' ';
 						}						
 						break;
 					
@@ -1438,56 +1442,56 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 
-			sprintf(Data_40004027, "Azi:%03d %02d                ",
+			sprintf(g_MenuStringBuffer7, "Azi:%03d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60));
 				
-			sprintf(Data_4000403c, "Alt:+%02d %02d               ",
+			sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d               ",
 				abs((int)Data_40004b08.dAltitude),
 				abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)));
 			
 			if (bTrackingMode == 1)
 			{
 				//2c2cc
-				sprintf(Data_40004027, "Azi:%03d %02d                ",
+				sprintf(g_MenuStringBuffer7, "Azi:%03d %02d                ",
 					(int)Data_40004b08.dAzimuth,
 					(int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60));
 				
-				sprintf(Data_4000403c, "Alt:+%02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d               ",
 					abs((int)Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)));			
 			}
 			//0x2c3fc
 			if ((int)Data_40004b08.dAzimuth < 100)
 			{
-				Data_40004027[4] = ' ';
+				g_MenuStringBuffer7[4] = ' ';
 			}
 			if ((int)Data_40004b08.dAzimuth < 10)
 			{
-				Data_40004027[5] = ' ';
+				g_MenuStringBuffer7[5] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
-				Data_40004027[8] = ' ';
+				g_MenuStringBuffer7[8] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			
-			Data_40003360 = strListAlignStars; //"List align stars:"
-			Data_40003364 = "                     ";
-			Data_40003368 = arAlignmentStarNames[bData_40002c60_CurrentAlignStarIndex - 1];
-			Data_4000336c = "                        ";
-			Data_40003370 = Data_40004027; //"OBJ:      Azi:..."???
-			Data_40003374 = Data_4000403c;
-			Data_40003378 = Data_40003ffd;
-			Data_4000337c = Data_40004012;
+			g_pcstrMenuLine1 = strListAlignStars; //"List align stars:"
+			g_pcstrMenuLine2 = "                     ";
+			g_pcstrMenuLine3 = arAlignmentStarNames[bData_40002c60_CurrentAlignStarIndex - 1];
+			g_pcstrMenuLine4 = "                        ";
+			g_pcstrMenuLine5 = g_MenuStringBuffer7; //"OBJ:      Azi:..."???
+			g_pcstrMenuLine6 = g_MenuStringBuffer8;
+			g_pcstrMenuLine7 = g_MenuStringBuffer5;
+			g_pcstrMenuLine8 = g_MenuStringBuffer6;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1498,14 +1502,14 @@ void PrepareScreenItems(void)
 			//0x2c658
 			beep1(1);
 		
-			Data_40003360 = "Star move meridian";
-			Data_40003364 = "and telestope stop or";
-			Data_40003368 = "reverse after 10 mins";
-			Data_4000336c = "";
-			Data_40003370 = "ENTER:  Reverse";
-			Data_40003374 = "";
-			Data_40003378 = "CANCEL: Stop";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "Star move meridian";
+			g_pcstrMenuLine2 = "and telestope stop or";
+			g_pcstrMenuLine3 = "reverse after 10 mins";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "ENTER:  Reverse";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "CANCEL: Stop";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1514,14 +1518,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_SYNC_OPEN: //1401:
 			//0x2c6e0
-			Data_40003360 = "";
-			Data_40003364 = "Targers Sync. Open?";
-			Data_40003368 = "";
-			Data_4000336c = "";
-			Data_40003370 = "     ENTER:Yes";
-			Data_40003374 = "";
-			Data_40003378 = "     CANCEL:No";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "";
+			g_pcstrMenuLine2 = "Targers Sync. Open?";
+			g_pcstrMenuLine3 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "     ENTER:Yes";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "     CANCEL:No";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1530,14 +1534,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_SYNC_ENSURE: //1402:
 			//0x2c760
-			Data_40003360 = "Targers Sync. ensure!";
-			Data_40003364 = "";
-			Data_40003368 = "Targers Sync. cancel!";
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "Targers Sync. ensure!";
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = "Targers Sync. cancel!";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1546,14 +1550,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_SYNC_CANCEL: //1403
 			//0x2c7dc
-			Data_40003360 = "Targers Sync. ensure!";
-			Data_40003364 = "";
-			Data_40003368 = "Targers Sync. cancel!";
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "Targers Sync. ensure!";
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = "Targers Sync. cancel!";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1562,38 +1566,38 @@ void PrepareScreenItems(void)
 
 		case MENU_CONTEXT_POLE_AXIS_DEV_INPUT: //18001:
 			//0x2c85c
-			Data_40003360 = "Pole Axis Dev: ";
-			Data_40003364 = "";
+			g_pcstrMenuLine1 = "Pole Axis Dev: ";
+			g_pcstrMenuLine2 = "";
 		
 			if (g_dPoleAxisDevEastWest > 0)
 			{
 				//2c890
-				sprintf(Data_40003fa9, "ToE:%.5f\011Degree", fabs(g_dPoleAxisDevEastWest));
+				sprintf(g_MenuStringBuffer1, "ToE:%.5f\011Degree", fabs(g_dPoleAxisDevEastWest));
 			}
 			else
 			{
 				//0x2c8bc
-				sprintf(Data_40003fa9, "ToW:%.5f\011Degree", fabs(g_dPoleAxisDevEastWest));
+				sprintf(g_MenuStringBuffer1, "ToW:%.5f\011Degree", fabs(g_dPoleAxisDevEastWest));
 			}
 			//0x2c8e4
-			Data_40003368 = Data_40003fa9;
+			g_pcstrMenuLine3 = g_MenuStringBuffer1;
 			
 			if (g_dPoleAxisDevNorthSouth > 0)
 			{
 				//2c908
-				sprintf(Data_40003fbe, "ToN:%.5f\011Degree", fabs(g_dPoleAxisDevNorthSouth));
+				sprintf(g_MenuStringBuffer2, "ToN:%.5f\011Degree", fabs(g_dPoleAxisDevNorthSouth));
 			}
 			else
 			{
 				//0x2ca50
-				sprintf(Data_40003fbe, "ToS:%.5f\011Degree", fabs(g_dPoleAxisDevNorthSouth));
+				sprintf(g_MenuStringBuffer2, "ToS:%.5f\011Degree", fabs(g_dPoleAxisDevNorthSouth));
 			}
 			//0x2ca78
-			Data_4000336c = "";
-			Data_40003370 = Data_40003fbe;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = g_MenuStringBuffer2;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1602,14 +1606,14 @@ void PrepareScreenItems(void)
 
 		case MENU_CONTEXT_RA_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11102:
 			//0x2cad0: RA Bklash Corr. - 1st page
-			Data_40003360 = "                      ";
-			Data_40003364 = strPleaseAimAtThe;
-			Data_40003368 = "                      ";
-			Data_4000336c = strTelescopeToDistant;
-			Data_40003370 = "                      ";
-			Data_40003374 = strTargetThenPress;
-			Data_40003378 = "                      ";
-			Data_4000337c = strEnterKey;
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = strPleaseAimAtThe;
+			g_pcstrMenuLine3 = "                      ";
+			g_pcstrMenuLine4 = strTelescopeToDistant;
+			g_pcstrMenuLine5 = "                      ";
+			g_pcstrMenuLine6 = strTargetThenPress;
+			g_pcstrMenuLine7 = "                      ";
+			g_pcstrMenuLine8 = strEnterKey;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1618,14 +1622,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT: //11101:
 			//0x2cb60: RA Bklash Corr. - 2nd page
-			Data_40003360 = "                      ";
-			Data_40003364 = Data_400030dc; // "Press RIGHT or LEFT"
-			Data_40003368 = "                      ";
-			Data_4000336c = Data_400030e0; // "key to start Ra(Azi)"
-			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030e4; // "backlash align,press"
-			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030e8; // "ENTER key to finish!"
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = Data_400030dc; // "Press RIGHT or LEFT"
+			g_pcstrMenuLine3 = "                      ";
+			g_pcstrMenuLine4 = Data_400030e0; // "key to start Ra(Azi)"
+			g_pcstrMenuLine5 = "                      ";
+			g_pcstrMenuLine6 = Data_400030e4; // "backlash align,press"
+			g_pcstrMenuLine7 = "                      ";
+			g_pcstrMenuLine8 = Data_400030e8; // "ENTER key to finish!"
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1634,14 +1638,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR_3RD_STEP_MOVING_LEFT_RIGHT: //11103
 			//0x2cbf0
-			Data_40003360 = "                      ";
-			Data_40003364 = Data_400030ec; //"Slewing....."
-			Data_40003368 = "                      ";
-			Data_4000336c = Data_400030f0; //"After beep, turn tele"
-			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030f4; //"-cope back to target"
-			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030f8; //"then press,ENTER!"
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = Data_400030ec; //"Slewing....."
+			g_pcstrMenuLine3 = "                      ";
+			g_pcstrMenuLine4 = Data_400030f0; //"After beep, turn tele"
+			g_pcstrMenuLine5 = "                      ";
+			g_pcstrMenuLine6 = Data_400030f4; //"-cope back to target"
+			g_pcstrMenuLine7 = "                      ";
+			g_pcstrMenuLine8 = Data_400030f8; //"then press,ENTER!"
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1650,26 +1654,26 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_RA_BKBLASH_CORR_RESULT: //11104
 			//0x2cc80
-			sprintf(Data_40003fa9, "%.1f", fData_40002e90);
+			sprintf(g_MenuStringBuffer1, "%.1f", fData_40002e90);
 		
-			Data_40003360 = "                      ";
-			Data_40003364 = "                      ";
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = "                      ";
 		
 			if (bRaBacklashCorrectionDirection == 2)
 			{
-				Data_40003368 = Data_400030fc;
+				g_pcstrMenuLine3 = Data_400030fc;
 			}
 			//0x2cce4
 			if (bRaBacklashCorrectionDirection == 1)
 			{
-				Data_40003368 = Data_40003100;
+				g_pcstrMenuLine3 = Data_40003100;
 			}
 			//0x2cd04
-			Data_4000336c = "                      ";
-			Data_40003370 = Data_40003fa9;
-			Data_40003374 = "                      ";
-			Data_40003378 = Data_40003104; //"          arcsecond"
-			Data_4000337c = "                      ";
+			g_pcstrMenuLine4 = "                      ";
+			g_pcstrMenuLine5 = g_MenuStringBuffer1;
+			g_pcstrMenuLine6 = "                      ";
+			g_pcstrMenuLine7 = Data_40003104; //"          arcsecond"
+			g_pcstrMenuLine8 = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1678,16 +1682,16 @@ void PrepareScreenItems(void)
 		
 		case 11105:
 			//0x2cdc0
-			sprintf(Data_40003fa9, "%.1f", fData_40002e98);
+			sprintf(g_MenuStringBuffer1, "%.1f", fData_40002e98);
 		
-			Data_40003360 = "                      ";
-			Data_40003364 = "                      ";
-			Data_40003368 = Data_40003108; //"The mean backlash is:"
-			Data_4000336c = "                      ";
-			Data_40003370 = Data_40003fa9;
-			Data_40003374 = "                      ";
-			Data_40003378 = Data_40003104; //"          arcsecond"
-			Data_4000337c = "                      ";
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = "                      ";
+			g_pcstrMenuLine3 = Data_40003108; //"The mean backlash is:"
+			g_pcstrMenuLine4 = "                      ";
+			g_pcstrMenuLine5 = g_MenuStringBuffer1;
+			g_pcstrMenuLine6 = "                      ";
+			g_pcstrMenuLine7 = Data_40003104; //"          arcsecond"
+			g_pcstrMenuLine8 = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1696,14 +1700,14 @@ void PrepareScreenItems(void)
 
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_1ST_STEP_AIM_TARGET: //11202:
 			//0x2ce70
-			Data_40003360 = "                      ";
-			Data_40003364 = strPleaseAimAtThe;
-			Data_40003368 = "                      ";
-			Data_4000336c = strTelescopeToDistant;
-			Data_40003370 = "                      ";
-			Data_40003374 = strTargetThenPress;
-			Data_40003378 = "                      ";
-			Data_4000337c = strEnterKey;
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = strPleaseAimAtThe;
+			g_pcstrMenuLine3 = "                      ";
+			g_pcstrMenuLine4 = strTelescopeToDistant;
+			g_pcstrMenuLine5 = "                      ";
+			g_pcstrMenuLine6 = strTargetThenPress;
+			g_pcstrMenuLine7 = "                      ";
+			g_pcstrMenuLine8 = strEnterKey;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1712,14 +1716,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_START_UP_DOWN: //11201:
 			//0x2cf00
-			Data_40003360 = "                      ";
-			Data_40003364 = Data_4000310c; // "press UP or DOWN"
-			Data_40003368 = "                      ";
-			Data_4000336c = Data_40003110; // "key to start Dec(Alt)"
-			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030e4; // "backlash align,press"
-			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030e8; // "ENTER key to finish!"
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = Data_4000310c; // "press UP or DOWN"
+			g_pcstrMenuLine3 = "                      ";
+			g_pcstrMenuLine4 = Data_40003110; // "key to start Dec(Alt)"
+			g_pcstrMenuLine5 = "                      ";
+			g_pcstrMenuLine6 = Data_400030e4; // "backlash align,press"
+			g_pcstrMenuLine7 = "                      ";
+			g_pcstrMenuLine8 = Data_400030e8; // "ENTER key to finish!"
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1728,14 +1732,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_MOVING_UP_DOWN: //11203
 			//0x2cf90
-			Data_40003360 = "                      ";
-			Data_40003364 = Data_400030ec;
-			Data_40003368 = "                      ";
-			Data_4000336c = Data_400030f0;
-			Data_40003370 = "                      ";
-			Data_40003374 = Data_400030f4;
-			Data_40003378 = "                      ";
-			Data_4000337c = Data_400030f8;
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = Data_400030ec;
+			g_pcstrMenuLine3 = "                      ";
+			g_pcstrMenuLine4 = Data_400030f0;
+			g_pcstrMenuLine5 = "                      ";
+			g_pcstrMenuLine6 = Data_400030f4;
+			g_pcstrMenuLine7 = "                      ";
+			g_pcstrMenuLine8 = Data_400030f8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1744,26 +1748,26 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_RESULT: //11204
 			//0x2d020
-			sprintf(Data_40003fa9, "%.1f", fData_40002ea0);
+			sprintf(g_MenuStringBuffer1, "%.1f", fData_40002ea0);
 		
-			Data_40003360 = "                      ";
-			Data_40003364 = "                      ";
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = "                      ";
 		
 			if (bDecBacklashCorrectionDirection == 2)
 			{
-				Data_40003368 = Data_400030fc;
+				g_pcstrMenuLine3 = Data_400030fc;
 			}
 			//0x2d084
 			if (bDecBacklashCorrectionDirection == 1)
 			{
-				Data_40003368 = Data_40003100;
+				g_pcstrMenuLine3 = Data_40003100;
 			}
 			//0x2d0a4
-			Data_4000336c = "                      ";
-			Data_40003370 = Data_40003fa9;
-			Data_40003374 = "                      ";
-			Data_40003378 = Data_40003104;
-			Data_4000337c = "                      ";
+			g_pcstrMenuLine4 = "                      ";
+			g_pcstrMenuLine5 = g_MenuStringBuffer1;
+			g_pcstrMenuLine6 = "                      ";
+			g_pcstrMenuLine7 = Data_40003104;
+			g_pcstrMenuLine8 = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1772,16 +1776,16 @@ void PrepareScreenItems(void)
 
 		case 0x2BC5: //11205
 			//0x2d100
-			sprintf(Data_40003fa9, "%.1f", fData_40002ea8);
+			sprintf(g_MenuStringBuffer1, "%.1f", fData_40002ea8);
 		
-			Data_40003360 = "                      ";
-			Data_40003364 = "                      ";
-			Data_40003368 = Data_40003108; //"The mean backlash is:"
-			Data_4000336c = "                      ";
-			Data_40003370 = Data_40003fa9;
-			Data_40003374 = "                      ";
-			Data_40003378 = Data_40003104; //"          arcsecond"
-			Data_4000337c = "                      ";
+			g_pcstrMenuLine1 = "                      ";
+			g_pcstrMenuLine2 = "                      ";
+			g_pcstrMenuLine3 = Data_40003108; //"The mean backlash is:"
+			g_pcstrMenuLine4 = "                      ";
+			g_pcstrMenuLine5 = g_MenuStringBuffer1;
+			g_pcstrMenuLine6 = "                      ";
+			g_pcstrMenuLine7 = Data_40003104; //"          arcsecond"
+			g_pcstrMenuLine8 = "                      ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1793,10 +1797,10 @@ void PrepareScreenItems(void)
 			get_solar_system_object_data(bData_40002eb5_SolarSystemObjectNr, 
 				&fData_40002cd0_ObjectRightAscension, &fData_40002d18_ObjectDeclination);
 		
-			Data_40003360 = Data_4000314c_SolarSystemObjectName;
-			Data_40003364 = "                      ";
-			Data_40003368 = "                      ";
-			Data_4000336c = "                      ";
+			g_pcstrMenuLine1 = Data_4000314c_SolarSystemObjectName;
+			g_pcstrMenuLine2 = "                      ";
+			g_pcstrMenuLine3 = "                      ";
+			g_pcstrMenuLine4 = "                      ";
 		
 			Data_40004ad8.dLongitude = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -1807,7 +1811,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ", 
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int) Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60),
 				((int) (Data_40004b08.dAzimuth * 3600)) % 60);
@@ -1815,7 +1819,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//2d35c
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int) Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)),
 					abs(((int) (Data_40004b08.dAltitude * 3600)) % 60));
@@ -1823,7 +1827,7 @@ void PrepareScreenItems(void)
 			else				
 			{
 				//0x2d458
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int) Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)),
 					abs(((int) (Data_40004b08.dAltitude * 3600)) % 60));
@@ -1831,61 +1835,61 @@ void PrepareScreenItems(void)
 			//0x2d550
 			if ((int) Data_40004b08.dAzimuth < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}
 			if ((int) Data_40004b08.dAzimuth < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 			
 			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x2d758
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			//2d770
-			sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+			sprintf(g_MenuStringBuffer7, "R.a: %02dh%02dm%02ds         ",
 				(int) fData_40002cd0_ObjectRightAscension,
 				(int) ((fData_40002cd0_ObjectRightAscension - (int) fData_40002cd0_ObjectRightAscension) * 60),
 				(int) (fData_40002cd0_ObjectRightAscension * 3600) % 60);
 				
 			if ((int) fData_40002cd0_ObjectRightAscension < 10)
 			{
-				Data_40004027[5] = ' ';
+				g_MenuStringBuffer7[5] = ' ';
 			}
 			if ((int) ((fData_40002cd0_ObjectRightAscension - (int) fData_40002cd0_ObjectRightAscension) * 60) < 10)
 			{
-				Data_40004027[8] = ' ';
+				g_MenuStringBuffer7[8] = ' ';
 			}
 			if (((int) (fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			//2d8a8
-			Data_40003378 = Data_40004027;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
 			
 			if (fData_40002d18_ObjectDeclination >= 0)
 			{
 				//2d8c8
-				sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+				sprintf(g_MenuStringBuffer8, "Dec:+%02d %02d %02d      ",
 					abs((int) fData_40002d18_ObjectDeclination),
 					abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)),
 					abs((int) (fData_40002d18_ObjectDeclination * 3600) % 60));
@@ -1893,7 +1897,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x2d998
-				sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+				sprintf(g_MenuStringBuffer8, "Dec:-%02d %02d %02d        ",
 					abs((int) fData_40002d18_ObjectDeclination),
 					abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)),
 					abs((int) (fData_40002d18_ObjectDeclination * 3600) % 60));
@@ -1901,18 +1905,18 @@ void PrepareScreenItems(void)
 			//0x2da64
 			if (abs((int) fData_40002d18_ObjectDeclination) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int) (fData_40002d18_ObjectDeclination * 3600) % 60)) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x2db48
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1921,14 +1925,14 @@ void PrepareScreenItems(void)
 
 		case MENU_CONTEXT_SUN_WARNING: //22112:
 			//0x2db70: Sun Warning screen
-			Data_40003360 = "                     ";
-			Data_40003364 = "    DO NOT POINT     ";
-			Data_40003368 = "the telescope or its ";
-			Data_4000336c = "viewfinder at or near";
-			Data_40003370 = "the Sun!!!           ";
-			Data_40003374 = "                     ";
-			Data_40003378 = "ENTER:continue       ";
-			Data_4000337c = "    -:return         ";
+			g_pcstrMenuLine1 = "                     ";
+			g_pcstrMenuLine2 = "    DO NOT POINT     ";
+			g_pcstrMenuLine3 = "the telescope or its ";
+			g_pcstrMenuLine4 = "viewfinder at or near";
+			g_pcstrMenuLine5 = "the Sun!!!           ";
+			g_pcstrMenuLine6 = "                     ";
+			g_pcstrMenuLine7 = "ENTER:continue       ";
+			g_pcstrMenuLine8 = "    -:return         ";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -1949,7 +1953,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ", 
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int) Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60),
 				((int) (Data_40004b08.dAzimuth * 3600)) % 60);
@@ -1957,7 +1961,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//2de9c
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int) Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)),
 					abs(((int) (Data_40004b08.dAltitude * 3600)) % 60));
@@ -1965,7 +1969,7 @@ void PrepareScreenItems(void)
 			else				
 			{
 				//0x2df98
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int) Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)),
 					abs(((int) (Data_40004b08.dAltitude * 3600)) % 60));
@@ -1975,36 +1979,36 @@ void PrepareScreenItems(void)
 			//0x2e09c
 			if ((int) Data_40004b08.dAzimuth < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}
 			if ((int) Data_40004b08.dAzimuth < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 			
 			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x2e2a4
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
 			dData_40002dd0 = dData_40002dc0_Azimuth;
 			dData_40002e08 = dData_40002df8;
@@ -2037,7 +2041,7 @@ void PrepareScreenItems(void)
 				dData_40002e08 = Data_40004b70.dAltitude;
 			}
 			//0x2e44c
-			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer7, "OTA    Azi:%03d %02d %02d                ",
 				abs((int)dData_40002dd0),
 				abs((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)),
 				abs((int)(dData_40002dd0 * 3600) % 60));
@@ -2045,7 +2049,7 @@ void PrepareScreenItems(void)
 			if (dData_40002e08 >= 0)
 			{
 				//2e54c
-				sprintf(Data_4000403c, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -2054,7 +2058,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x2e638
-				sprintf(Data_4000403c, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:-%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -2062,36 +2066,36 @@ void PrepareScreenItems(void)
 			//2e720
 			if ((int)dData_40002dd0 < 100)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			if ((int)dData_40002dd0 < 10)
 			{
-				Data_40004027[12] = ' ';
+				g_MenuStringBuffer7[12] = ' ';
 			}
 			if (((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)) < 10)
 			{
-				Data_40004027[15] = ' ';
+				g_MenuStringBuffer7[15] = ' ';
 			}
 			if (((int)(dData_40002dd0 * 3600) % 60) < 10)
 			{
-				Data_40004027[18] = ' ';
+				g_MenuStringBuffer7[18] = ' ';
 			}
 
 			if (abs((int)dData_40002e08) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((dData_40002e08 - (int)dData_40002e08) * 60.0)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int)(dData_40002e08 * 3600.0)) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x2e904
-			Data_40003378 = Data_40004027;
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			if ((bTrackingMode == 1) || (bTrackingMode == 2))
 			{
@@ -2121,39 +2125,39 @@ void PrepareScreenItems(void)
 			{
 				case 1:
 					//0x2e9c0
-					Data_40003360 = "Slewing to Target       ";
+					g_pcstrMenuLine1 = "Slewing to Target       ";
 					break;
 				
 				case 2:
 					//0x2e9d4
-					Data_40003360 = "Find Target,Tracking    ";
+					g_pcstrMenuLine1 = "Find Target,Tracking    ";
 					break;
 				
 				case 3:
 					//0x2e9e8
-					Data_40003360 = "Target Under Horizon    ";
+					g_pcstrMenuLine1 = "Target Under Horizon    ";
 					bData_40003432 = 1;
 					break;
 				
 				case MENU_TRACKING_MODE_PAUSE: //4:
 					//0x2ea08
-					Data_40003360 = "Pause                 ";
+					g_pcstrMenuLine1 = "Pause                 ";
 					break;
 				
 				case MENU_TRACKING_MODE_CANCEL: //5:
 					//0x2ea1c
-					Data_40003360 = "Cancel Operation          ";
+					g_pcstrMenuLine1 = "Cancel Operation          ";
 					break;
 				
 				default:
 					//0x2ea30
-					Data_40003360 = "                              ";
+					g_pcstrMenuLine1 = "                              ";
 					break;
 			}
 			//0x2ea44
-			Data_40003364 = "                              ";
-			Data_40003368 = Data_4000314c_SolarSystemObjectName;
-			Data_4000336c = "                              ";
+			g_pcstrMenuLine2 = "                              ";
+			g_pcstrMenuLine3 = Data_4000314c_SolarSystemObjectName;
+			g_pcstrMenuLine4 = "                              ";
 
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -2168,21 +2172,21 @@ void PrepareScreenItems(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003dd4_FlashConstellationData.fRightAscension;
 			fData_40002d18_ObjectDeclination = Data_40003dd4_FlashConstellationData.fDeclination;
 		
-			Data_40003360 = Data_40003dd4_FlashConstellationData.bData_5;
-			Data_40003364 = "                      ";
+			g_pcstrMenuLine1 = Data_40003dd4_FlashConstellationData.bData_5;
+			g_pcstrMenuLine2 = "                      ";
 		
-			sprintf(Data_40003fd3, "    Area: %d SQ.Deg               ", 
+			sprintf(g_MenuStringBuffer3, "    Area: %d SQ.Deg               ",
 				Data_40003dd4_FlashConstellationData.wArea);
 		
-			Data_40003368 = Data_40003fd3;
-			Data_40003368[0] = Data_40003dd4_FlashConstellationData.bData_5[0];
-			Data_40003368[1] = Data_40003dd4_FlashConstellationData.bData_5[1];
-			Data_40003368[2] = Data_40003dd4_FlashConstellationData.bData_5[2];
+			g_pcstrMenuLine3 = g_MenuStringBuffer3;
+			g_pcstrMenuLine3[0] = Data_40003dd4_FlashConstellationData.bData_5[0];
+			g_pcstrMenuLine3[1] = Data_40003dd4_FlashConstellationData.bData_5[1];
+			g_pcstrMenuLine3[2] = Data_40003dd4_FlashConstellationData.bData_5[2];
 		
-			sprintf(Data_40003fe8, "Quantity: %d (>6Mag)             ",
+			sprintf(g_MenuStringBuffer4, "Quantity: %d (>6Mag)             ",
 				Data_40003dd4_FlashConstellationData.bQuantity);
 		
-			Data_4000336c = Data_40003fe8;
+			g_pcstrMenuLine4 = g_MenuStringBuffer4;
 			
 			Data_40004ad8.dLongitude = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -2193,7 +2197,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 				
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -2201,7 +2205,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//2ecb0
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
 					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
@@ -2209,7 +2213,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x2ef0c
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
 					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
@@ -2217,61 +2221,61 @@ void PrepareScreenItems(void)
 			//0x2f004
 			if ((int) Data_40004b08.dAzimuth < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}
 			if ((int) Data_40004b08.dAzimuth < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 			
 			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x2f20c
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
-			sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+			sprintf(g_MenuStringBuffer7, "R.a: %02dh%02dm%02ds         ",
 				(int) fData_40002cd0_ObjectRightAscension,
 				(int) ((fData_40002cd0_ObjectRightAscension - (int) fData_40002cd0_ObjectRightAscension) * 60),
 				(int) (fData_40002cd0_ObjectRightAscension * 3600) % 60);
 			
 			if ((int) fData_40002cd0_ObjectRightAscension < 10)
 			{
-				Data_40004027[5] = ' ';
+				g_MenuStringBuffer7[5] = ' ';
 			}
 			if ((int) ((fData_40002cd0_ObjectRightAscension - (int) fData_40002cd0_ObjectRightAscension) * 60) < 10)
 			{
-				Data_40004027[8] = ' ';
+				g_MenuStringBuffer7[8] = ' ';
 			}
 			if (((int) (fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			//0x2f35c
-			Data_40003378 = Data_40004027;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
 			
 			if (fData_40002d18_ObjectDeclination >= 0)
 			{
 				//2f37c
-				sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+				sprintf(g_MenuStringBuffer8, "Dec:+%02d %02d %02d      ",
 					abs((int) fData_40002d18_ObjectDeclination),
 					abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)),
 					abs((int) (fData_40002d18_ObjectDeclination * 3600) % 60));
@@ -2279,7 +2283,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x2f44c
-				sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+				sprintf(g_MenuStringBuffer8, "Dec:-%02d %02d %02d        ",
 					abs((int) fData_40002d18_ObjectDeclination),
 					abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)),
 					abs((int) (fData_40002d18_ObjectDeclination * 3600) % 60));
@@ -2287,18 +2291,18 @@ void PrepareScreenItems(void)
 			//0x2f518
 			if (abs((int) fData_40002d18_ObjectDeclination) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int) (fData_40002d18_ObjectDeclination * 3600) % 60)) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x2f5fc
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -2321,7 +2325,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -2329,7 +2333,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//2f7b8
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
 					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
@@ -2337,7 +2341,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x2f8b4
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
 					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
@@ -2347,36 +2351,36 @@ void PrepareScreenItems(void)
 			//0x2f9b8
 			if ((int) Data_40004b08.dAzimuth < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}
 			if ((int) Data_40004b08.dAzimuth < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 			
 			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x2fbc0
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
 			dData_40002dd0 = dData_40002dc0_Azimuth;
 			dData_40002e08 = dData_40002df8;
@@ -2409,7 +2413,7 @@ void PrepareScreenItems(void)
 				dData_40002e08 = Data_40004b70.dAltitude;
 			}
 			//0x2fd68
-			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer7, "OTA    Azi:%03d %02d %02d                ",
 				abs((int)dData_40002dd0),
 				abs((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)),
 				abs((int)(dData_40002dd0 * 3600) % 60));
@@ -2417,7 +2421,7 @@ void PrepareScreenItems(void)
 			if (dData_40002e08 >= 0)
 			{
 				//2fec8
-				sprintf(Data_4000403c, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -2425,7 +2429,7 @@ void PrepareScreenItems(void)
 			else
 			{	
 				//0x2ffb4
-				sprintf(Data_4000403c, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:-%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -2433,36 +2437,36 @@ void PrepareScreenItems(void)
 			//0x3009c
 			if ((int)dData_40002dd0 < 100)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			if ((int)dData_40002dd0 < 10)
 			{
-				Data_40004027[12] = ' ';
+				g_MenuStringBuffer7[12] = ' ';
 			}
 			if (((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)) < 10)
 			{
-				Data_40004027[15] = ' ';
+				g_MenuStringBuffer7[15] = ' ';
 			}
 			if (((int)(dData_40002dd0 * 3600) % 60) < 10)
 			{
-				Data_40004027[18] = ' ';
+				g_MenuStringBuffer7[18] = ' ';
 			}
 
 			if (abs((int)dData_40002e08) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((dData_40002e08 - (int)dData_40002e08) * 60.0)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int)(dData_40002e08 * 3600.0)) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x30280
-			Data_40003378 = Data_40004027;
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			if ((bTrackingMode == 1) || (bTrackingMode == 2))
 			{
@@ -2483,39 +2487,39 @@ void PrepareScreenItems(void)
 			{
 				case 1:
 					//0x3033c
-					Data_40003360 = "Slewing to Target       ";
+					g_pcstrMenuLine1 = "Slewing to Target       ";
 					break;
 				
 				case 2:
 					//0x30350
-					Data_40003360 = "Find Target,Tracking    ";
+					g_pcstrMenuLine1 = "Find Target,Tracking    ";
 					break;
 				
 				case 3:
 					//0x30364
-					Data_40003360 = "Target Under Horizon    ";
+					g_pcstrMenuLine1 = "Target Under Horizon    ";
 					bData_40003432 = 1;
 					break;
 				
 				case MENU_TRACKING_MODE_PAUSE: //4:
 					//0x30384
-					Data_40003360 = "Pause                 ";
+					g_pcstrMenuLine1 = "Pause                 ";
 					break;
 				
 				case MENU_TRACKING_MODE_CANCEL: //5:
 					//0x30398
-					Data_40003360 = "Cancel Operation          ";
+					g_pcstrMenuLine1 = "Cancel Operation          ";
 					break;
 				
 				default:
 					//0x303ac
-					Data_40003360 = "                              ";
+					g_pcstrMenuLine1 = "                              ";
 					break;
 			}
 			//303c4
-			Data_40003364 = "                              ";
-			Data_40003368 = Data_40003dd4_FlashConstellationData.bData_5;
-			Data_4000336c = "                              ";
+			g_pcstrMenuLine2 = "                              ";
+			g_pcstrMenuLine3 = Data_40003dd4_FlashConstellationData.bData_5;
+			g_pcstrMenuLine4 = "                              ";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -2529,14 +2533,14 @@ void PrepareScreenItems(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003d94_FlashFamousStarData.fRightAscension;
 			fData_40002d18_ObjectDeclination = Data_40003d94_FlashFamousStarData.fDeclination;
 		
-			Data_40003360 = Data_40003d94_FlashFamousStarData.bData_0;
-			Data_40003364 = "                                        ";
-			Data_40003368 = Data_40003d94_FlashFamousStarData.bData_28;
+			g_pcstrMenuLine1 = Data_40003d94_FlashFamousStarData.bData_0;
+			g_pcstrMenuLine2 = "                                        ";
+			g_pcstrMenuLine3 = Data_40003d94_FlashFamousStarData.bData_28;
 		
-			sprintf(Data_40003fe8, "SAO:%d  MEG:%.1f",
+			sprintf(g_MenuStringBuffer4, "SAO:%d  MEG:%.1f",
 				Data_40003d94_FlashFamousStarData.Data_24, Data_40003d94_FlashFamousStarData.fData_52);
 		
-			Data_4000336c = Data_40003fe8;
+			g_pcstrMenuLine4 = g_MenuStringBuffer4;
 		
 			Data_40004ad8.dLongitude = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -2547,7 +2551,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -2555,7 +2559,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//305f4
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
 					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
@@ -2563,7 +2567,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x30790
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
 					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
@@ -2571,61 +2575,61 @@ void PrepareScreenItems(void)
 			//0x30888
 			if ((int) Data_40004b08.dAzimuth < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}
 			if ((int) Data_40004b08.dAzimuth < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 			
 			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x30a90
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
-			sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+			sprintf(g_MenuStringBuffer7, "R.a: %02dh%02dm%02ds         ",
 				(int) fData_40002cd0_ObjectRightAscension,
 				(int) ((fData_40002cd0_ObjectRightAscension - (int) fData_40002cd0_ObjectRightAscension) * 60),
 				(int) (fData_40002cd0_ObjectRightAscension * 3600) % 60);
 
 			if ((int) fData_40002cd0_ObjectRightAscension < 10)
 			{
-				Data_40004027[5] = ' ';
+				g_MenuStringBuffer7[5] = ' ';
 			}
 			if ((int) ((fData_40002cd0_ObjectRightAscension - (int) fData_40002cd0_ObjectRightAscension) * 60) < 10)
 			{
-				Data_40004027[8] = ' ';
+				g_MenuStringBuffer7[8] = ' ';
 			}
 			if (((int) (fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			//0x30be0
-			Data_40003378 = Data_40004027;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
 			
 			if (fData_40002d18_ObjectDeclination >= 0)
 			{
 				//30c00
-				sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+				sprintf(g_MenuStringBuffer8, "Dec:+%02d %02d %02d      ",
 					abs((int) fData_40002d18_ObjectDeclination),
 					abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)),
 					abs((int) (fData_40002d18_ObjectDeclination * 3600) % 60));
@@ -2633,7 +2637,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x30cd0
-				sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+				sprintf(g_MenuStringBuffer8, "Dec:-%02d %02d %02d        ",
 					abs((int) fData_40002d18_ObjectDeclination),
 					abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)),
 					abs((int) (fData_40002d18_ObjectDeclination * 3600) % 60));
@@ -2641,18 +2645,18 @@ void PrepareScreenItems(void)
 			//0x30d9c
 			if (abs((int) fData_40002d18_ObjectDeclination) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int) ((fData_40002d18_ObjectDeclination - (int) fData_40002d18_ObjectDeclination) * 60)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int) (fData_40002d18_ObjectDeclination * 3600) % 60)) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x30e80
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 				
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -2675,7 +2679,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -2683,7 +2687,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//31040
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
 					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
@@ -2691,7 +2695,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x3113c
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude),
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60)),
 					abs(((int)(Data_40004b08.dAltitude * 3600) % 60)));
@@ -2701,36 +2705,36 @@ void PrepareScreenItems(void)
 			//0x31240
 			if ((int) Data_40004b08.dAzimuth < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}
 			if ((int) Data_40004b08.dAzimuth < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 			
 			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x31448
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			//31460
 			dData_40002dd0 = dData_40002dc0_Azimuth;
 			dData_40002e08 = dData_40002df8;
@@ -2763,7 +2767,7 @@ void PrepareScreenItems(void)
 				dData_40002e08 = Data_40004b70.dAltitude;
 			}
 			//0x315f4
-			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer7, "OTA    Azi:%03d %02d %02d                ",
 				abs((int)dData_40002dd0),
 				abs((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)),
 				abs((int)(dData_40002dd0 * 3600) % 60));
@@ -2771,7 +2775,7 @@ void PrepareScreenItems(void)
 			if (dData_40002e08 >= 0)
 			{
 				//316f4
-				sprintf(Data_4000403c, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -2779,7 +2783,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x317e0
-				sprintf(Data_4000403c, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:-%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -2787,36 +2791,36 @@ void PrepareScreenItems(void)
 			//0x318c8
 			if ((int)dData_40002dd0 < 100)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			if ((int)dData_40002dd0 < 10)
 			{
-				Data_40004027[12] = ' ';
+				g_MenuStringBuffer7[12] = ' ';
 			}
 			if (((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)) < 10)
 			{
-				Data_40004027[15] = ' ';
+				g_MenuStringBuffer7[15] = ' ';
 			}
 			if (((int)(dData_40002dd0 * 3600) % 60) < 10)
 			{
-				Data_40004027[18] = ' ';
+				g_MenuStringBuffer7[18] = ' ';
 			}
 			
 			if (abs((int)dData_40002e08) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((dData_40002e08 - (int)dData_40002e08) * 60.0)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int)(dData_40002e08 * 3600.0)) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x31aac
-			Data_40003378 = Data_40004027;
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			if ((bTrackingMode == 1) || (bTrackingMode == 2))
 			{
@@ -2834,42 +2838,42 @@ void PrepareScreenItems(void)
 			{
 				case 1:
 					//0x31b68
-					Data_40003360 = "Slewing to Target       ";
+					g_pcstrMenuLine1 = "Slewing to Target       ";
 					break;
 				
 				case 2:
 					//0x31b7c
-					Data_40003360 = "Find Target,Tracking    ";
+					g_pcstrMenuLine1 = "Find Target,Tracking    ";
 					break;
 				
 				case 3:
 					//0x31b90
-					Data_40003360 = "Target Under Horizon    ";
+					g_pcstrMenuLine1 = "Target Under Horizon    ";
 					bData_40003432 = 1;
 					break;
 				
 				case MENU_TRACKING_MODE_PAUSE: //4:
 					//0x31bb0
-					Data_40003360 = "Pause                 ";
+					g_pcstrMenuLine1 = "Pause                 ";
 					break;
 				
 				case MENU_TRACKING_MODE_CANCEL: //5:
 					//0x31bc4
-					Data_40003360 = "Cancel Operation          ";
+					g_pcstrMenuLine1 = "Cancel Operation          ";
 					break;
 				
 				default:
 					//0x31bd8
-					Data_40003360 = "                              ";
+					g_pcstrMenuLine1 = "                              ";
 					break;
 			}
 			//0x31bec
-			sprintf(Data_40003fbe, "Sao:%d                  ", 
+			sprintf(g_MenuStringBuffer2, "Sao:%d                  ",
 				Data_40003d94_FlashFamousStarData.Data_24);
 			
-			Data_40003364 = Data_40003fbe;
-			Data_40003368 = "                                        ";
-			Data_4000336c = Data_40003d94_FlashFamousStarData.bData_28;
+			g_pcstrMenuLine2 = g_MenuStringBuffer2;
+			g_pcstrMenuLine3 = "                                        ";
+			g_pcstrMenuLine4 = Data_40003d94_FlashFamousStarData.bData_28;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -2881,25 +2885,25 @@ void PrepareScreenItems(void)
 			flash_get_messier_data((unsigned char)wData_40002eb8_MessierNr, 
 					&Data_40003e08_FlashMessierData);
 		
-			sprintf(Data_40003fa9, "Messier:%d   NGC:%d                   ",
+			sprintf(g_MenuStringBuffer1, "Messier:%d   NGC:%d                   ",
 				wData_40002eb8_MessierNr, Data_40003e08_FlashMessierData.wData_0);
 			
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = Data_40003e08_FlashMessierData.bData_32;
-			Data_40003368 = Data_40003e08_FlashMessierData.bData_60;
-			Data_4000336c = Data_40003e08_FlashMessierData.bData_108;
-			Data_40003370 = "                                                   ";
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = Data_40003e08_FlashMessierData.bData_32;
+			g_pcstrMenuLine3 = Data_40003e08_FlashMessierData.bData_60;
+			g_pcstrMenuLine4 = Data_40003e08_FlashMessierData.bData_108;
+			g_pcstrMenuLine5 = "                                                   ";
 		
-			sprintf(Data_40004012, "Size:%.1f Arc Minute                  ",
+			sprintf(g_MenuStringBuffer6, "Size:%.1f Arc Minute                  ",
 				Data_40003e08_FlashMessierData.fData_12);
 		
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 		
-			sprintf(Data_40004027, "Distance:%.1f                         ",
+			sprintf(g_MenuStringBuffer7, "Distance:%.1f                         ",
 				Data_40003e08_FlashMessierData.dData_16);
 		
-			Data_40003378 = Data_40004027;
-			Data_4000337c = "         K Light-Years";
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
+			g_pcstrMenuLine8 = "         K Light-Years";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -2914,13 +2918,13 @@ void PrepareScreenItems(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003e08_FlashMessierData.fRightAscension;
 			fData_40002d18_ObjectDeclination = Data_40003e08_FlashMessierData.fDeclination;
 		
-			sprintf(Data_40003fa9, "Messier:%d                        ",
+			sprintf(g_MenuStringBuffer1, "Messier:%d                        ",
 				wData_40002eb8_MessierNr);
 		
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = Data_40003e08_FlashMessierData.bData_32;
-			Data_40003368 = Data_40003e08_FlashMessierData.bData_60;
-			Data_4000336c = "                                                ";
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = Data_40003e08_FlashMessierData.bData_32;
+			g_pcstrMenuLine3 = Data_40003e08_FlashMessierData.bData_60;
+			g_pcstrMenuLine4 = "                                                ";
 		
 			Data_40004ad8.dLongitude = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -2930,7 +2934,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -2938,7 +2942,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//320cc
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -2946,7 +2950,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x321c8
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -2954,61 +2958,61 @@ void PrepareScreenItems(void)
 			//0x32320
 			if ((int) Data_40004b08.dAzimuth < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}
 			if ((int) Data_40004b08.dAzimuth < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int) Data_40004b08.dAzimuth) * 60) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if ((((int) (Data_40004b08.dAzimuth * 3600)) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 			
 			if (abs((int) Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int) Data_40004b08.dAltitude) * 60)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int) (Data_40004b08.dAltitude * 3600)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x32528
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
-			sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+			sprintf(g_MenuStringBuffer7, "R.a: %02dh%02dm%02ds         ",
 				(int)fData_40002cd0_ObjectRightAscension,
 				(int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60),
 				(int)(fData_40002cd0_ObjectRightAscension * 3600) % 60);
 
 			if ((int) fData_40002cd0_ObjectRightAscension < 10)
 			{
-				Data_40004027[5] = ' ';
+				g_MenuStringBuffer7[5] = ' ';
 			}
 			if ((int) ((fData_40002cd0_ObjectRightAscension - (int) fData_40002cd0_ObjectRightAscension) * 60) < 10)
 			{
-				Data_40004027[8] = ' ';
+				g_MenuStringBuffer7[8] = ' ';
 			}
 			if (((int) (fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			//0x32678
-			Data_40003378 = Data_40004027;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
 				
 			if (fData_40002d18_ObjectDeclination >= 0)
 			{
 				//32698
-				sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+				sprintf(g_MenuStringBuffer8, "Dec:+%02d %02d %02d      ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -3016,7 +3020,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x32768
-				sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+				sprintf(g_MenuStringBuffer8, "Dec:-%02d %02d %02d        ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -3024,18 +3028,18 @@ void PrepareScreenItems(void)
 			//0x32834
 			if (abs((int)fData_40002d18_ObjectDeclination) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((fData_40002d18_ObjectDeclination - (int)fData_40002d18_ObjectDeclination) * 60)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs((int)(fData_40002d18_ObjectDeclination * 3600) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x32918
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 					
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -3059,7 +3063,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -3067,7 +3071,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//32adc
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -3075,7 +3079,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x32bd8
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -3085,36 +3089,36 @@ void PrepareScreenItems(void)
 			//0x32cdc
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}			
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x32ee4
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
 			dData_40002dd0 = dData_40002dc0_Azimuth;
 			dData_40002e08 = dData_40002df8;
@@ -3147,7 +3151,7 @@ void PrepareScreenItems(void)
 				dData_40002e08 = Data_40004b70.dAltitude;				
 			}
 			//0x33088
-			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer7, "OTA    Azi:%03d %02d %02d                ",
 				abs((int)dData_40002dd0),
 				abs((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)),
 				abs((int)(dData_40002dd0 * 3600) % 60));
@@ -3155,7 +3159,7 @@ void PrepareScreenItems(void)
 			if (dData_40002e08 >= 0)
 			{
 				//33188
-				sprintf(Data_4000403c, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -3163,7 +3167,7 @@ void PrepareScreenItems(void)
 			else
 			{	
 				//0x33274
-				sprintf(Data_4000403c, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:-%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -3171,36 +3175,36 @@ void PrepareScreenItems(void)
 			//0x3335c
 			if ((int)dData_40002dd0 < 100)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			if ((int)dData_40002dd0 < 10)
 			{
-				Data_40004027[12] = ' ';
+				g_MenuStringBuffer7[12] = ' ';
 			}
 			if (((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)) < 10)
 			{
-				Data_40004027[15] = ' ';
+				g_MenuStringBuffer7[15] = ' ';
 			}
 			if (((int)(dData_40002dd0 * 3600) % 60) < 10)
 			{
-				Data_40004027[18] = ' ';
+				g_MenuStringBuffer7[18] = ' ';
 			}
 
 			if (abs((int)dData_40002e08) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((dData_40002e08 - (int)dData_40002e08) * 60.0)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int)(dData_40002e08 * 3600.0)) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x335b8
-			Data_40003378 = Data_40004027;
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 
 			if ((bTrackingMode == 1) || (bTrackingMode == 2))
 			{
@@ -3219,42 +3223,42 @@ void PrepareScreenItems(void)
 			{
 				case 1:
 					//0x33674
-					Data_40003360 = "Slewing to Target       ";
+					g_pcstrMenuLine1 = "Slewing to Target       ";
 					break;
 				
 				case 2:
 					//0x33688
-					Data_40003360 = "Find Target,Tracking    ";
+					g_pcstrMenuLine1 = "Find Target,Tracking    ";
 					bData_40003432 = 1;
 					break;
 				
 				case 3:
 					//0x336a8
-					Data_40003360 = "Target Under Horizon    ";
+					g_pcstrMenuLine1 = "Target Under Horizon    ";
 					break;
 				
 				case MENU_TRACKING_MODE_PAUSE: //4:
 					//0x336bc
-					Data_40003360 = "Pause                 ";
+					g_pcstrMenuLine1 = "Pause                 ";
 					break;
 				
 				case MENU_TRACKING_MODE_CANCEL: //5:
 					//0x336d0
-					Data_40003360 = "Cancel Operation          ";
+					g_pcstrMenuLine1 = "Cancel Operation          ";
 					break;
 				
 				default:
 					//0x336e4
-					Data_40003360 = "                              ";
+					g_pcstrMenuLine1 = "                              ";
 					break;
 			}
 			//0x336f8
-			sprintf(Data_40003fbe, "Messier:%d                        ", 
+			sprintf(g_MenuStringBuffer2, "Messier:%d                        ",
 				wData_40002eb8_MessierNr);
 			
-			Data_40003364 = Data_40003fbe;
-			Data_40003368 = Data_40003e08_FlashMessierData.bData_32;
-			Data_4000336c = Data_40003e08_FlashMessierData.bData_60;
+			g_pcstrMenuLine2 = g_MenuStringBuffer2;
+			g_pcstrMenuLine3 = Data_40003e08_FlashMessierData.bData_32;
+			g_pcstrMenuLine4 = Data_40003e08_FlashMessierData.bData_60;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -3268,26 +3272,26 @@ void PrepareScreenItems(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003ee0_FlashNGCData.fRightAscension;
 			fData_40002d18_ObjectDeclination = Data_40003ee0_FlashNGCData.fDeclination;
 		
-			sprintf(Data_40003fa9, "NGC:%d                          ", 
+			sprintf(g_MenuStringBuffer1, "NGC:%d                          ",
 				wData_40002eba_NGCNr);
 		
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = Data_40003ee0_FlashNGCData.bData_0;
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = Data_40003ee0_FlashNGCData.bData_0;
 		
 			if (Data_40003ee0_FlashNGCData.fData_16 != 0)
 			{
 				//337c4
-				sprintf(Data_40003fd3, "MEG:%.1f                          ", 
+				sprintf(g_MenuStringBuffer3, "MEG:%.1f                          ",
 					Data_40003ee0_FlashNGCData.fData_16);
-				Data_40003368 = Data_40003fd3;
+				g_pcstrMenuLine3 = g_MenuStringBuffer3;
 			}
 			else
 			{
 				//0x337fc
-				Data_40003368 = "                                          ";
+				g_pcstrMenuLine3 = "                                          ";
 			}
 			//0x33808
-			Data_4000336c = Data_40003ee0_FlashNGCData.bData_20;
+			g_pcstrMenuLine4 = Data_40003ee0_FlashNGCData.bData_20;
 			
 			Data_40004ad8.dLongitude = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -3297,7 +3301,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 			//3389c
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)(Data_40004b08.dAzimuth), 
 				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -3305,7 +3309,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//33974
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -3313,7 +3317,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x33b60
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -3321,61 +3325,61 @@ void PrepareScreenItems(void)
 			//0x33c58
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}			
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x33e60
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
-			sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+			sprintf(g_MenuStringBuffer7, "R.a: %02dh%02dm%02ds         ",
 				(int)fData_40002cd0_ObjectRightAscension,
 				(int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60),
 				(int)(fData_40002cd0_ObjectRightAscension * 3600) % 60);
 				
 			if ((int)fData_40002cd0_ObjectRightAscension < 10)
 			{
-				Data_40004027[5] = ' ';
+				g_MenuStringBuffer7[5] = ' ';
 			}
 			if (((int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60)) < 10)
 			{
-				Data_40004027[8] = ' ';
+				g_MenuStringBuffer7[8] = ' ';
 			}
 			if (((int)(fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			
-			Data_40003378 = Data_40004027;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
 			
 			if (fData_40002d18_ObjectDeclination >= 0)
 			{
 				//33fd0
-				sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+				sprintf(g_MenuStringBuffer8, "Dec:+%02d %02d %02d      ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -3383,7 +3387,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x340a0
-				sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+				sprintf(g_MenuStringBuffer8, "Dec:-%02d %02d %02d        ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -3391,18 +3395,18 @@ void PrepareScreenItems(void)
 			//0x3416c
 			if (abs((int)fData_40002d18_ObjectDeclination) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((fData_40002d18_ObjectDeclination - (int)fData_40002d18_ObjectDeclination) * 60)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs((int)(fData_40002d18_ObjectDeclination * 3600) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x34250
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -3425,7 +3429,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -3433,7 +3437,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//3440c
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -3441,7 +3445,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x34508
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -3451,36 +3455,36 @@ void PrepareScreenItems(void)
 			//0x3460c
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}			
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x34814
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 
 			dData_40002dd0 = dData_40002dc0_Azimuth;
 			dData_40002e08 = dData_40002df8;
@@ -3513,7 +3517,7 @@ void PrepareScreenItems(void)
 				dData_40002e08 = Data_40004b70.dAltitude;				
 			}
 			//0x349b8
-			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer7, "OTA    Azi:%03d %02d %02d                ",
 				abs((int)dData_40002dd0),
 				abs((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)),
 				abs((int)(dData_40002dd0 * 3600) % 60));
@@ -3521,7 +3525,7 @@ void PrepareScreenItems(void)
 			if (dData_40002e08 >= 0)
 			{
 				//34ab8
-				sprintf(Data_4000403c, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -3529,7 +3533,7 @@ void PrepareScreenItems(void)
 			else
 			{	
 				//0x34ba4
-				sprintf(Data_4000403c, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:-%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -3537,36 +3541,36 @@ void PrepareScreenItems(void)
 			//0x34c8c
 			if ((int)dData_40002dd0 < 100)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			if ((int)dData_40002dd0 < 10)
 			{
-				Data_40004027[12] = ' ';
+				g_MenuStringBuffer7[12] = ' ';
 			}
 			if (((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)) < 10)
 			{
-				Data_40004027[15] = ' ';
+				g_MenuStringBuffer7[15] = ' ';
 			}
 			if (((int)(dData_40002dd0 * 3600) % 60) < 10)
 			{
-				Data_40004027[18] = ' ';
+				g_MenuStringBuffer7[18] = ' ';
 			}
 
 			if (abs((int)dData_40002e08) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((dData_40002e08 - (int)dData_40002e08) * 60.0)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int)(dData_40002e08 * 3600.0)) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x34edc
-			Data_40003378 = Data_40004027;
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 
 			if ((bTrackingMode == 1) || (bTrackingMode == 2))
 			{
@@ -3585,53 +3589,53 @@ void PrepareScreenItems(void)
 			{
 				case 1:
 					//0x34f98
-					Data_40003360 = "Slewing to Target       ";
+					g_pcstrMenuLine1 = "Slewing to Target       ";
 					break;
 				
 				case 2:
 					//0x34fac
-					Data_40003360 = "Find Target,Tracking    ";
+					g_pcstrMenuLine1 = "Find Target,Tracking    ";
 					break;
 				
 				case 3:
 					//0x34fc0
-					Data_40003360 = "Target Under Horizon    ";
+					g_pcstrMenuLine1 = "Target Under Horizon    ";
 					bData_40003432 = 1;
 					break;
 				
 				case MENU_TRACKING_MODE_PAUSE: //4:
 					//0x34fe0
-					Data_40003360 = "Pause                 ";
+					g_pcstrMenuLine1 = "Pause                 ";
 					break;
 				
 				case MENU_TRACKING_MODE_CANCEL: //5:
 					//0x34ff4
-					Data_40003360 = "Cancel Operation          ";
+					g_pcstrMenuLine1 = "Cancel Operation          ";
 					break;
 				
 				default:
 					//0x35008
-					Data_40003360 = "                     ";
+					g_pcstrMenuLine1 = "                     ";
 					break;
 			}
 			//0x336f8
-			sprintf(Data_40003fbe, "NGC:%d                          ", 
+			sprintf(g_MenuStringBuffer2, "NGC:%d                          ",
 				wData_40002eba_NGCNr);
 			
-			Data_40003364 = Data_40003fbe;
-			Data_40003368 = Data_40003ee0_FlashNGCData.bData_0;
+			g_pcstrMenuLine2 = g_MenuStringBuffer2;
+			g_pcstrMenuLine3 = Data_40003ee0_FlashNGCData.bData_0;
 			
 			if (Data_40003ee0_FlashNGCData.fData_16 != 0)
 			{
 				//35060
-				sprintf(Data_40003fe8, "MEG:%.1f          ", 
+				sprintf(g_MenuStringBuffer4, "MEG:%.1f          ",
 					Data_40003ee0_FlashNGCData.fData_16);
-				Data_4000336c = Data_40003fe8;
+				g_pcstrMenuLine4 = g_MenuStringBuffer4;
 			}
 			else
 			{
 				//0x35098
-				Data_4000336c = "                     ";
+				g_pcstrMenuLine4 = "                     ";
 			}
 			//0x350a4			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
@@ -3646,26 +3650,26 @@ void PrepareScreenItems(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003ec0_FlashICData.fRightAscension;
 			fData_40002d18_ObjectDeclination = Data_40003ec0_FlashICData.fDeclination;
 		
-			sprintf(Data_40003fa9, "IC:%d                          ", 
+			sprintf(g_MenuStringBuffer1, "IC:%d                          ",
 				wData_40002ebc_ICNr);
 		
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = Data_40003ec0_FlashICData.bData_0;
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = Data_40003ec0_FlashICData.bData_0;
 		
 			if (Data_40003ec0_FlashICData.fData_16 != 0)
 			{
 				//35134
-				sprintf(Data_40003fd3, "MEG:%.1f                          ", 
+				sprintf(g_MenuStringBuffer3, "MEG:%.1f                          ",
 					Data_40003ec0_FlashICData.fData_16);
-				Data_40003368 = Data_40003fd3;
+				g_pcstrMenuLine3 = g_MenuStringBuffer3;
 			}
 			else
 			{
 				//0x3516c
-				Data_40003368 = "                                          ";
+				g_pcstrMenuLine3 = "                                          ";
 			}
 			//0x35178
-			Data_4000336c = Data_40003ec0_FlashICData.bData_20;
+			g_pcstrMenuLine4 = Data_40003ec0_FlashICData.bData_20;
 		
 			Data_40004ad8.dLongitude = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -3675,7 +3679,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 			//3520c
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)(Data_40004b08.dAzimuth), 
 				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -3683,7 +3687,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//352e4
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -3691,7 +3695,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x3549c
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -3699,61 +3703,61 @@ void PrepareScreenItems(void)
 			//0x35594
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}			
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x3579c
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
-			sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+			sprintf(g_MenuStringBuffer7, "R.a: %02dh%02dm%02ds         ",
 				(int)fData_40002cd0_ObjectRightAscension,
 				(int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60),
 				(int)(fData_40002cd0_ObjectRightAscension * 3600) % 60);
 				
 			if ((int)fData_40002cd0_ObjectRightAscension < 10)
 			{
-				Data_40004027[5] = ' ';
+				g_MenuStringBuffer7[5] = ' ';
 			}
 			if (((int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60)) < 10)
 			{
-				Data_40004027[8] = ' ';
+				g_MenuStringBuffer7[8] = ' ';
 			}
 			if (((int)(fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			
-			Data_40003378 = Data_40004027;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
 			
 			if (fData_40002d18_ObjectDeclination >= 0)
 			{
 				//3590c
-				sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+				sprintf(g_MenuStringBuffer8, "Dec:+%02d %02d %02d      ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -3761,7 +3765,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x359dc
-				sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+				sprintf(g_MenuStringBuffer8, "Dec:-%02d %02d %02d        ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -3769,18 +3773,18 @@ void PrepareScreenItems(void)
 			//0x35aa8
 			if (abs((int)fData_40002d18_ObjectDeclination) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((fData_40002d18_ObjectDeclination - (int)fData_40002d18_ObjectDeclination) * 60)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs((int)(fData_40002d18_ObjectDeclination * 3600) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x35b8c
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -3803,7 +3807,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -3811,7 +3815,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//35d4c
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -3819,7 +3823,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x35e48
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -3829,36 +3833,36 @@ void PrepareScreenItems(void)
 			//0x35f4c
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}			
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x36154
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 
 			dData_40002dd0 = dData_40002dc0_Azimuth;
 			dData_40002e08 = dData_40002df8;
@@ -3891,7 +3895,7 @@ void PrepareScreenItems(void)
 				dData_40002e08 = Data_40004b70.dAltitude;				
 			}
 			//0x362fc
-			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer7, "OTA    Azi:%03d %02d %02d                ",
 				abs((int)dData_40002dd0),
 				abs((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)),
 				abs((int)(dData_40002dd0 * 3600) % 60));
@@ -3899,7 +3903,7 @@ void PrepareScreenItems(void)
 			if (dData_40002e08 >= 0)
 			{
 				//363fc
-				sprintf(Data_4000403c, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -3907,7 +3911,7 @@ void PrepareScreenItems(void)
 			else
 			{	
 				//0x364e8
-				sprintf(Data_4000403c, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:-%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -3915,36 +3919,36 @@ void PrepareScreenItems(void)
 			//0x365d0
 			if ((int)dData_40002dd0 < 100)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			if ((int)dData_40002dd0 < 10)
 			{
-				Data_40004027[12] = ' ';
+				g_MenuStringBuffer7[12] = ' ';
 			}
 			if (((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)) < 10)
 			{
-				Data_40004027[15] = ' ';
+				g_MenuStringBuffer7[15] = ' ';
 			}
 			if (((int)(dData_40002dd0 * 3600) % 60) < 10)
 			{
-				Data_40004027[18] = ' ';
+				g_MenuStringBuffer7[18] = ' ';
 			}
 
 			if (abs((int)dData_40002e08) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((dData_40002e08 - (int)dData_40002e08) * 60.0)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int)(dData_40002e08 * 3600.0)) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x3682c
-			Data_40003378 = Data_40004027;
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 
 			if ((bTrackingMode == 1) || (bTrackingMode == 2))
 			{
@@ -3963,53 +3967,53 @@ void PrepareScreenItems(void)
 			{
 				case 1:
 					//0x368e8
-					Data_40003360 = "Slewing to Target       ";
+					g_pcstrMenuLine1 = "Slewing to Target       ";
 					break;
 				
 				case 2:
 					//0x368fc
-					Data_40003360 = "Find Target,Tracking    ";
+					g_pcstrMenuLine1 = "Find Target,Tracking    ";
 					break;
 				
 				case 3:
 					//0x36910
-					Data_40003360 = "Target Under Horizon    ";
+					g_pcstrMenuLine1 = "Target Under Horizon    ";
 					bData_40003432 = 1;
 					break;
 				
 				case MENU_TRACKING_MODE_PAUSE: //4:
 					//0x36930
-					Data_40003360 = "Pause                 ";
+					g_pcstrMenuLine1 = "Pause                 ";
 					break;
 				
 				case MENU_TRACKING_MODE_CANCEL: //5:
 					//0x36944
-					Data_40003360 = "Cancel Operation          ";
+					g_pcstrMenuLine1 = "Cancel Operation          ";
 					break;
 				
 				default:
 					//0x36958
-					Data_40003360 = "                     ";
+					g_pcstrMenuLine1 = "                     ";
 					break;
 			}
 			//0x3696c
-			sprintf(Data_40003fbe, "IC:%d                          ", 
+			sprintf(g_MenuStringBuffer2, "IC:%d                          ",
 				wData_40002ebc_ICNr);
 			
-			Data_40003364 = Data_40003fbe;
-			Data_40003368 = Data_40003ec0_FlashICData.bData_0;
+			g_pcstrMenuLine2 = g_MenuStringBuffer2;
+			g_pcstrMenuLine3 = Data_40003ec0_FlashICData.bData_0;
 			
 			if (Data_40003ec0_FlashICData.fData_16 != 0)
 			{
 				//369b0
-				sprintf(Data_40003fe8, "MEG:%.1f          ", 
+				sprintf(g_MenuStringBuffer4, "MEG:%.1f          ",
 					Data_40003ec0_FlashICData.fData_16);
-				Data_4000336c = Data_40003fe8;
+				g_pcstrMenuLine4 = g_MenuStringBuffer4;
 			}
 			else
 			{
 				//0x369e8
-				Data_4000336c = "                     ";
+				g_pcstrMenuLine4 = "                     ";
 			}
 			//0x350a4			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
@@ -4024,13 +4028,13 @@ void PrepareScreenItems(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003350_FlashSh2Data.fRightAscension;
 			fData_40002d18_ObjectDeclination = Data_40003350_FlashSh2Data.fDeclination;
 		
-			sprintf(Data_40003fa9, "Sh2:%d                          ",
+			sprintf(g_MenuStringBuffer1, "Sh2:%d                          ",
 				wData_40002ebe_ShNr);
 		
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = "                                        ";
-			Data_40003368 = "                                        ";
-			Data_4000336c = "                                        ";
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = "                                        ";
+			g_pcstrMenuLine3 = "                                        ";
+			g_pcstrMenuLine4 = "                                        ";
 		
 			Data_40004ad8.dLongitude = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -4040,7 +4044,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 				
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)(Data_40004b08.dAzimuth), 
 				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -4048,7 +4052,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//36be8
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4056,7 +4060,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x36d88
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4064,61 +4068,61 @@ void PrepareScreenItems(void)
 			//0x36e80
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}			
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x37088
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
-			sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+			sprintf(g_MenuStringBuffer7, "R.a: %02dh%02dm%02ds         ",
 				(int)fData_40002cd0_ObjectRightAscension,
 				(int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60),
 				(int)(fData_40002cd0_ObjectRightAscension * 3600) % 60);
 				
 			if ((int)fData_40002cd0_ObjectRightAscension < 10)
 			{
-				Data_40004027[5] = ' ';
+				g_MenuStringBuffer7[5] = ' ';
 			}
 			if (((int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60)) < 10)
 			{
-				Data_40004027[8] = ' ';
+				g_MenuStringBuffer7[8] = ' ';
 			}
 			if (((int)(fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			
-			Data_40003378 = Data_40004027;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
 			
 			if (fData_40002d18_ObjectDeclination >= 0)
 			{
 				//371f8
-				sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+				sprintf(g_MenuStringBuffer8, "Dec:+%02d %02d %02d      ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -4126,7 +4130,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x372c8
-				sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+				sprintf(g_MenuStringBuffer8, "Dec:-%02d %02d %02d        ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -4134,18 +4138,18 @@ void PrepareScreenItems(void)
 			//0x37394
 			if (abs((int)fData_40002d18_ObjectDeclination) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((fData_40002d18_ObjectDeclination - (int)fData_40002d18_ObjectDeclination) * 60)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs((int)(fData_40002d18_ObjectDeclination * 3600) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x37478
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -4168,7 +4172,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -4176,7 +4180,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//37634
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4184,7 +4188,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x37730
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4194,36 +4198,36 @@ void PrepareScreenItems(void)
 			//0x37834
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}			
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x37a3c
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 
 			dData_40002dd0 = dData_40002dc0_Azimuth;
 			dData_40002e08 = dData_40002df8;
@@ -4256,7 +4260,7 @@ void PrepareScreenItems(void)
 				dData_40002e08 = Data_40004b70.dAltitude;				
 			}
 			//0x37be4
-			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer7, "OTA    Azi:%03d %02d %02d                ",
 				abs((int)dData_40002dd0),
 				abs((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)),
 				abs((int)(dData_40002dd0 * 3600) % 60));
@@ -4264,7 +4268,7 @@ void PrepareScreenItems(void)
 			if (dData_40002e08 >= 0)
 			{
 				//37ce4
-				sprintf(Data_4000403c, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -4272,7 +4276,7 @@ void PrepareScreenItems(void)
 			else
 			{	
 				//0x37dd0
-				sprintf(Data_4000403c, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:-%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -4280,36 +4284,36 @@ void PrepareScreenItems(void)
 			//0x37eb8
 			if ((int)dData_40002dd0 < 100)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			if ((int)dData_40002dd0 < 10)
 			{
-				Data_40004027[12] = ' ';
+				g_MenuStringBuffer7[12] = ' ';
 			}
 			if (((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)) < 10)
 			{
-				Data_40004027[15] = ' ';
+				g_MenuStringBuffer7[15] = ' ';
 			}
 			if (((int)(dData_40002dd0 * 3600) % 60) < 10)
 			{
-				Data_40004027[18] = ' ';
+				g_MenuStringBuffer7[18] = ' ';
 			}
 
 			if (abs((int)dData_40002e08) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((dData_40002e08 - (int)dData_40002e08) * 60.0)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int)(dData_40002e08 * 3600.0)) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x38108
-			Data_40003378 = Data_40004027;
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 
 			if ((bTrackingMode == 1) || (bTrackingMode == 2))
 			{
@@ -4328,42 +4332,42 @@ void PrepareScreenItems(void)
 			{
 				case 1:
 					//0x381c4
-					Data_40003360 = "Slewing to Target       ";
+					g_pcstrMenuLine1 = "Slewing to Target       ";
 					break;
 				
 				case 2:
 					//0x381d8
-					Data_40003360 = "Find Target,Tracking    ";
+					g_pcstrMenuLine1 = "Find Target,Tracking    ";
 					break;
 				
 				case 3:
 					//0x381ec
-					Data_40003360 = "Target Under Horizon    ";
+					g_pcstrMenuLine1 = "Target Under Horizon    ";
 					bData_40003432 = 1;
 					break;
 				
 				case MENU_TRACKING_MODE_PAUSE: //4:
 					//0x3820c
-					Data_40003360 = "Pause                 ";
+					g_pcstrMenuLine1 = "Pause                 ";
 					break;
 				
 				case MENU_TRACKING_MODE_CANCEL: //5:
 					//0x38220
-					Data_40003360 = "Cancel Operation          ";
+					g_pcstrMenuLine1 = "Cancel Operation          ";
 					break;
 				
 				default:
 					//0x38234
-					Data_40003360 = "                              ";
+					g_pcstrMenuLine1 = "                              ";
 					break;
 			}
 			//0x38248
-			sprintf(Data_40003fd3, "Sh2:%d                          ", 
+			sprintf(g_MenuStringBuffer3, "Sh2:%d                          ",
 				wData_40002ebe_ShNr);
 			
-			Data_40003368 = Data_40003fd3;
-			Data_40003364 = "                                        ";
-			Data_4000336c = "                                        ";
+			g_pcstrMenuLine3 = g_MenuStringBuffer3;
+			g_pcstrMenuLine2 = "                                        ";
+			g_pcstrMenuLine4 = "                                        ";
 
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -4377,26 +4381,26 @@ void PrepareScreenItems(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003ea0_FlashBrightStarData.fRightAscension;
 			fData_40002d18_ObjectDeclination = Data_40003ea0_FlashBrightStarData.fDeclination;
 		
-			sprintf(Data_40003fa9, "Bright:%d                          ",
+			sprintf(g_MenuStringBuffer1, "Bright:%d                          ",
 				wData_40002ec0_BrightStarNr);
 		
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = Data_40003ea0_FlashBrightStarData.bData_0;
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = Data_40003ea0_FlashBrightStarData.bData_0;
 		
 			if (Data_40003ea0_FlashBrightStarData.fData_28 != 0)
 			{
 				//38318
-				sprintf(Data_40003fd3, "MEG:%.1f                          ",
+				sprintf(g_MenuStringBuffer3, "MEG:%.1f                          ",
 					Data_40003ea0_FlashBrightStarData.fData_28);
-				Data_40003368 = Data_40003fd3;
+				g_pcstrMenuLine3 = g_MenuStringBuffer3;
 			}
 			else
 			{
 				//0x38350
-				Data_40003368 = "                                          ";
+				g_pcstrMenuLine3 = "                                          ";
 			}
 			//0x3835c
-			Data_4000336c = "                                          ";
+			g_pcstrMenuLine4 = "                                          ";
 		
 			Data_40004ad8.dLongitude = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -4406,7 +4410,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 				
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)(Data_40004b08.dAzimuth), 
 				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -4414,7 +4418,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//384cc
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4422,7 +4426,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x38668
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4430,61 +4434,61 @@ void PrepareScreenItems(void)
 			//0x38760
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}			
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x38968
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
-			sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+			sprintf(g_MenuStringBuffer7, "R.a: %02dh%02dm%02ds         ",
 				(int)fData_40002cd0_ObjectRightAscension,
 				(int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60),
 				(int)(fData_40002cd0_ObjectRightAscension * 3600) % 60);
 				
 			if ((int)fData_40002cd0_ObjectRightAscension < 10)
 			{
-				Data_40004027[5] = ' ';
+				g_MenuStringBuffer7[5] = ' ';
 			}
 			if (((int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60)) < 10)
 			{
-				Data_40004027[8] = ' ';
+				g_MenuStringBuffer7[8] = ' ';
 			}
 			if (((int)(fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			
-			Data_40003378 = Data_40004027;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
 			
 			if (fData_40002d18_ObjectDeclination >= 0)
 			{
 				//38ad8
-				sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+				sprintf(g_MenuStringBuffer8, "Dec:+%02d %02d %02d      ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -4492,7 +4496,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x38ba8
-				sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+				sprintf(g_MenuStringBuffer8, "Dec:-%02d %02d %02d        ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -4500,18 +4504,18 @@ void PrepareScreenItems(void)
 			//0x38c74
 			if (abs((int)fData_40002d18_ObjectDeclination) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((fData_40002d18_ObjectDeclination - (int)fData_40002d18_ObjectDeclination) * 60)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs((int)(fData_40002d18_ObjectDeclination * 3600) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x38d58
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -4534,7 +4538,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 		
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)Data_40004b08.dAzimuth,
 				(int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0),
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -4542,7 +4546,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//38f18
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4550,7 +4554,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x39014
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4560,36 +4564,36 @@ void PrepareScreenItems(void)
 			//0x39118
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}			
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x39320
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 
 			dData_40002dd0 = dData_40002dc0_Azimuth;
 			dData_40002e08 = dData_40002df8;
@@ -4622,7 +4626,7 @@ void PrepareScreenItems(void)
 				dData_40002e08 = Data_40004b70.dAltitude;				
 			}
 			//0x394c8
-			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer7, "OTA    Azi:%03d %02d %02d                ",
 				abs((int)dData_40002dd0),
 				abs((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)),
 				abs((int)(dData_40002dd0 * 3600) % 60));
@@ -4630,7 +4634,7 @@ void PrepareScreenItems(void)
 			if (dData_40002e08 >= 0)
 			{
 				//395c8
-				sprintf(Data_4000403c, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -4638,7 +4642,7 @@ void PrepareScreenItems(void)
 			else
 			{	
 				//0x396b4
-				sprintf(Data_4000403c, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:-%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -4646,36 +4650,36 @@ void PrepareScreenItems(void)
 			//0x3979c
 			if ((int)dData_40002dd0 < 100)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			if ((int)dData_40002dd0 < 10)
 			{
-				Data_40004027[12] = ' ';
+				g_MenuStringBuffer7[12] = ' ';
 			}
 			if (((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)) < 10)
 			{
-				Data_40004027[15] = ' ';
+				g_MenuStringBuffer7[15] = ' ';
 			}
 			if (((int)(dData_40002dd0 * 3600) % 60) < 10)
 			{
-				Data_40004027[18] = ' ';
+				g_MenuStringBuffer7[18] = ' ';
 			}
 
 			if (abs((int)dData_40002e08) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((dData_40002e08 - (int)dData_40002e08) * 60.0)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int)(dData_40002e08 * 3600.0)) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x399f8
-			Data_40003378 = Data_40004027;
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 
 			if ((bTrackingMode == 1) || (bTrackingMode == 2))
 			{
@@ -4694,42 +4698,42 @@ void PrepareScreenItems(void)
 			{
 				case 1:
 					//0x39ab4
-					Data_40003360 = "Slewing to Target       ";
+					g_pcstrMenuLine1 = "Slewing to Target       ";
 					break;
 				
 				case 2:
 					//0x39ac8
-					Data_40003360 = "Find Target,Tracking    ";
+					g_pcstrMenuLine1 = "Find Target,Tracking    ";
 					break;
 				
 				case 3:
 					//0x39adc
-					Data_40003360 = "Target Under Horizon    ";
+					g_pcstrMenuLine1 = "Target Under Horizon    ";
 					bData_40003432 = 1;
 					break;
 				
 				case MENU_TRACKING_MODE_PAUSE: //4:
 					//0x39afc
-					Data_40003360 = "Pause                 ";
+					g_pcstrMenuLine1 = "Pause                 ";
 					break;
 				
 				case MENU_TRACKING_MODE_CANCEL: //5:
 					//0x39b10
-					Data_40003360 = "Cancel Operation          ";
+					g_pcstrMenuLine1 = "Cancel Operation          ";
 					break;
 				
 				default:
 					//0x39b24
-					Data_40003360 = "                              ";
+					g_pcstrMenuLine1 = "                              ";
 					break;
 			}
 			//0x39b38
-			sprintf(Data_40003fbe, "Bright:%d                          ", 
+			sprintf(g_MenuStringBuffer2, "Bright:%d                          ",
 				wData_40002ec0_BrightStarNr);
 			
-			Data_40003364 = Data_40003fbe;
-			Data_40003368 = Data_40003ea0_FlashBrightStarData.bData_0;
-			Data_4000336c = "                              ";
+			g_pcstrMenuLine2 = g_MenuStringBuffer2;
+			g_pcstrMenuLine3 = Data_40003ea0_FlashBrightStarData.bData_0;
+			g_pcstrMenuLine4 = "                              ";
 
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -4743,13 +4747,13 @@ void PrepareScreenItems(void)
 			fData_40002cd0_ObjectRightAscension = Data_40003358_SAORecord.ra;
 			fData_40002d18_ObjectDeclination = Data_40003358_SAORecord.dec;
 		
-			sprintf(Data_40003fa9, "SAO:%d                          ",
+			sprintf(g_MenuStringBuffer1, "SAO:%d                          ",
 				Data_40002ec4_SAONr);
 		
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = "                                        ";
-			Data_40003368 = "                                        ";
-			Data_4000336c = "                                        ";
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = "                                        ";
+			g_pcstrMenuLine3 = "                                        ";
+			g_pcstrMenuLine4 = "                                        ";
 		
 			Data_40004ad8.dLongitude = Data_40004128.geographicLongitude;
 			Data_40004ad8.dLatitude = Data_40004128.geographicLatitude;
@@ -4759,7 +4763,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 				
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)(Data_40004b08.dAzimuth), 
 				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -4767,7 +4771,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//39d68
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4775,7 +4779,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x39f00
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4783,61 +4787,61 @@ void PrepareScreenItems(void)
 			//0x39ff8
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}			
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//0x3a200
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
-			sprintf(Data_40004027, "R.a: %02dh%02dm%02ds         ",
+			sprintf(g_MenuStringBuffer7, "R.a: %02dh%02dm%02ds         ",
 				(int)fData_40002cd0_ObjectRightAscension,
 				(int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60),
 				(int)(fData_40002cd0_ObjectRightAscension * 3600) % 60);
 				
 			if ((int)fData_40002cd0_ObjectRightAscension < 10)
 			{
-				Data_40004027[5] = ' ';
+				g_MenuStringBuffer7[5] = ' ';
 			}
 			if (((int)((fData_40002cd0_ObjectRightAscension - (int)fData_40002cd0_ObjectRightAscension) * 60)) < 10)
 			{
-				Data_40004027[8] = ' ';
+				g_MenuStringBuffer7[8] = ' ';
 			}
 			if (((int)(fData_40002cd0_ObjectRightAscension * 3600) % 60) < 10)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			
-			Data_40003378 = Data_40004027;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
 			
 			if (fData_40002d18_ObjectDeclination >= 0)
 			{
 				//3a370
-				sprintf(Data_4000403c, "Dec:+%02d %02d %02d      ",
+				sprintf(g_MenuStringBuffer8, "Dec:+%02d %02d %02d      ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -4845,7 +4849,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x3a440
-				sprintf(Data_4000403c, "Dec:-%02d %02d %02d        ",
+				sprintf(g_MenuStringBuffer8, "Dec:-%02d %02d %02d        ",
 					abs((int)fData_40002d18_ObjectDeclination),
 					abs((int)((fData_40002d18_ObjectDeclination - (int)(fData_40002d18_ObjectDeclination)) * 60)),
 					abs(((int)(fData_40002d18_ObjectDeclination * 3600) % 60)));
@@ -4853,18 +4857,18 @@ void PrepareScreenItems(void)
 			//0x3a50c
 			if (abs((int)fData_40002d18_ObjectDeclination) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((fData_40002d18_ObjectDeclination - (int)fData_40002d18_ObjectDeclination) * 60)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs((int)(fData_40002d18_ObjectDeclination * 3600) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x3a5f0
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -4886,7 +4890,7 @@ void PrepareScreenItems(void)
 			convert_equatorial_to_horizontal(Data_40004ad8, Data_40004ae8, 
 				Data_40004128.Data_40, Data_40004128.bData_44, &Data_40004b08);
 
-			sprintf(Data_40003ffd, "OBJ    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer5, "OBJ    Azi:%03d %02d %02d                ",
 				(int)(Data_40004b08.dAzimuth), 
 				(int)((Data_40004b08.dAzimuth - (int)(Data_40004b08.dAzimuth)) * 60.0), 
 				(int)(Data_40004b08.dAzimuth * 3600.0) % 60);
@@ -4894,7 +4898,7 @@ void PrepareScreenItems(void)
 			if (Data_40004b08.dAltitude >= 0)
 			{
 				//3a7ac
-				sprintf(Data_40004012, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:+%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4902,7 +4906,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//3a8a8
-				sprintf(Data_40004012, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer6, "Alt:-%02d %02d %02d               ",
 					abs((int)Data_40004b08.dAltitude), 
 					abs((int)((Data_40004b08.dAltitude - (int)(Data_40004b08.dAltitude)) * 60.0)), 
 					abs((int)(Data_40004b08.dAltitude * 3600.0) % 60));
@@ -4912,41 +4916,41 @@ void PrepareScreenItems(void)
 			//3a9ac
 			if ((int)(Data_40004b08.dAzimuth) < 100)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}
 			//3a9d0
 			if ((int)(Data_40004b08.dAzimuth) < 10)
 			{
-				Data_40003ffd[12] = ' ';
+				g_MenuStringBuffer5[12] = ' ';
 			}
 			//3a9f4
 			if ((int)((Data_40004b08.dAzimuth - (int)Data_40004b08.dAzimuth) * 60.0) < 10)
 			{
-				Data_40003ffd[15] = ' ';
+				g_MenuStringBuffer5[15] = ' ';
 			}
 			//3aa60
 			if (((int)(Data_40004b08.dAzimuth * 3600.0) % 60) < 10)
 			{
-				Data_40003ffd[18] = ' ';
+				g_MenuStringBuffer5[18] = ' ';
 			}
 			//3aaa4
 			if (abs((int)Data_40004b08.dAltitude) < 10)
 			{
-				Data_40004012[5] = ' ';
+				g_MenuStringBuffer6[5] = ' ';
 			}
 			//3aadc
 			if (abs((int)((Data_40004b08.dAltitude - (int)Data_40004b08.dAltitude) * 60.0)) < 10)
 			{
-				Data_40004012[8] = ' ';
+				g_MenuStringBuffer6[8] = ' ';
 			}
 			//3ab5c
 			if (abs(((int)(Data_40004b08.dAltitude * 3600.0)) % 60) < 10)
 			{
-				Data_40004012[11] = ' ';
+				g_MenuStringBuffer6[11] = ' ';
 			}
 			//3abb4
-			Data_40003370 = Data_40003ffd;
-			Data_40003374 = Data_40004012;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
+			g_pcstrMenuLine6 = g_MenuStringBuffer6;
 			
 			dData_40002dd0 = dData_40002dc0_Azimuth;
 			dData_40002e08 = dData_40002df8;
@@ -4979,7 +4983,7 @@ void PrepareScreenItems(void)
 				dData_40002e08 = Data_40004b70.dAltitude;
 			}
 			//0x3ad58
-			sprintf(Data_40004027, "OTA    Azi:%03d %02d %02d                ",
+			sprintf(g_MenuStringBuffer7, "OTA    Azi:%03d %02d %02d                ",
 				abs((int)dData_40002dd0),
 				abs((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)),
 				abs((int)(dData_40002dd0 * 3600) % 60));
@@ -4987,7 +4991,7 @@ void PrepareScreenItems(void)
 			if (dData_40002e08 >= 0)
 			{
 				//3ae58
-				sprintf(Data_4000403c, "Alt:+%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:+%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -4995,7 +4999,7 @@ void PrepareScreenItems(void)
 			else
 			{
 				//0x3af44
-				sprintf(Data_4000403c, "Alt:-%02d %02d %02d               ",
+				sprintf(g_MenuStringBuffer8, "Alt:-%02d %02d %02d               ",
 					abs((int)dData_40002e08),
 					abs((int)((dData_40002e08 - (int)(dData_40002e08)) * 60)),
 					abs(((int)(dData_40002e08 * 3600) % 60)));
@@ -5003,36 +5007,36 @@ void PrepareScreenItems(void)
 			//0x3b02c
 			if ((int)dData_40002dd0 < 100)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			if ((int)dData_40002dd0 < 10)
 			{
-				Data_40004027[12] = ' ';
+				g_MenuStringBuffer7[12] = ' ';
 			}
 			if (((int)((dData_40002dd0 - (int)dData_40002dd0) * 60)) < 10)
 			{
-				Data_40004027[15] = ' ';
+				g_MenuStringBuffer7[15] = ' ';
 			}
 			if (((int)(dData_40002dd0 * 3600) % 60) < 10)
 			{
-				Data_40004027[18] = ' ';
+				g_MenuStringBuffer7[18] = ' ';
 			}
 
 			if (abs((int)dData_40002e08) < 10)
 			{
-				Data_4000403c[5] = ' ';
+				g_MenuStringBuffer8[5] = ' ';
 			}
 			if (abs((int)((dData_40002e08 - (int)dData_40002e08) * 60.0)) < 10)
 			{
-				Data_4000403c[8] = ' ';
+				g_MenuStringBuffer8[8] = ' ';
 			}
 			if (abs(((int)(dData_40002e08 * 3600.0)) % 60) < 10)
 			{
-				Data_4000403c[11] = ' ';
+				g_MenuStringBuffer8[11] = ' ';
 			}
 			//0x3b27c
-			Data_40003378 = Data_40004027;
-			Data_4000337c = Data_4000403c;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
+			g_pcstrMenuLine8 = g_MenuStringBuffer8;
 			
 			if ((bTrackingMode == 1) || (bTrackingMode == 2))
 			{
@@ -5051,43 +5055,43 @@ void PrepareScreenItems(void)
 			{
 				case 1:
 					//0x3b338
-					Data_40003360 = "Slewing to Target       ";
+					g_pcstrMenuLine1 = "Slewing to Target       ";
 					break;
 				
 				case 2:
 					//0x3b34c
-					Data_40003360 = "Find Target,Tracking    ";
+					g_pcstrMenuLine1 = "Find Target,Tracking    ";
 					break;
 				
 				case 3:
 					//0x3b360
-					Data_40003360 = "Target Under Horizon    ";
+					g_pcstrMenuLine1 = "Target Under Horizon    ";
 					bData_40003432 = 1;
 					break;
 				
 				case MENU_TRACKING_MODE_PAUSE: //4:
 					//0x3b380
-					Data_40003360 = "Pause                 ";
+					g_pcstrMenuLine1 = "Pause                 ";
 					break;
 				
 				case MENU_TRACKING_MODE_CANCEL: //5:
 					//0x3b394
-					Data_40003360 = "Cancel Operation          ";
+					g_pcstrMenuLine1 = "Cancel Operation          ";
 					break;
 				
 				default:
 					//0x3b3a8
-					Data_40003360 = "                              ";
+					g_pcstrMenuLine1 = "                              ";
 					break;
 			}
 			//0x3b3bc
-			Data_40003364 = "                              ";
+			g_pcstrMenuLine2 = "                              ";
 			
-			sprintf(Data_40003fd3, "SAO:%d                          ",
+			sprintf(g_MenuStringBuffer3, "SAO:%d                          ",
 				Data_40002ec4_SAONr);
 			
-			Data_40003368 = Data_40003fd3;
-			Data_4000336c = "                              ";
+			g_pcstrMenuLine3 = g_MenuStringBuffer3;
+			g_pcstrMenuLine4 = "                              ";
 
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5096,16 +5100,16 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_SELECTION: //201:
 			//0x3b414
-			Data_40003360 = "F1";
-			Data_40003364 = "F2";
-			Data_40003368 = "F3";
-			Data_4000336c = "F4";
-			Data_40003370 = "F5";
-			Data_40003374 = "F6";
-			Data_40003378 = "F7";
-			Data_4000337c = "F8";
-			Data_40003380 = "F9";
-			Data_40003384 = "Select F? For Target ";
+			g_pcstrMenuLine1 = "F1";
+			g_pcstrMenuLine2 = "F2";
+			g_pcstrMenuLine3 = "F3";
+			g_pcstrMenuLine4 = "F4";
+			g_pcstrMenuLine5 = "F5";
+			g_pcstrMenuLine6 = "F6";
+			g_pcstrMenuLine7 = "F7";
+			g_pcstrMenuLine8 = "F8";
+			g_pcstrMenuLine9 = "F9";
+			g_pcstrMenuLine10 = "Select F? For Target ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5114,16 +5118,16 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_NAME_INPUT: //203:
 			//0x3b4ac
-			sprintf(Data_40003fa9, "F%d                 ",
+			sprintf(g_MenuStringBuffer1, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = "                    ";
-			Data_40003368 = "  Please Save Current";
-			Data_4000336c = "Target & Input Target";
-			Data_40003370 = "                    ";
-			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = strCustomerObjectRaAziInputForStoring;
-			Data_4000337c = strCustomerObjectDecAltInputForStoring;
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = "                    ";
+			g_pcstrMenuLine3 = "  Please Save Current";
+			g_pcstrMenuLine4 = "Target & Input Target";
+			g_pcstrMenuLine5 = "                    ";
+			g_pcstrMenuLine6 = strCustomerObjectNameInput;
+			g_pcstrMenuLine7 = strCustomerObjectRaAziInputForStoring;
+			g_pcstrMenuLine8 = strCustomerObjectDecAltInputForStoring;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5131,16 +5135,16 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_RA_INPUT: //204:
 			//0x3b540
-			sprintf(Data_40003fa9, "F%d                 ",
+			sprintf(g_MenuStringBuffer1, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = "                    ";
-			Data_40003368 = "  Please Save Current";
-			Data_4000336c = "Target & Input Target";
-			Data_40003370 = "                    ";
-			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = strCustomerObjectRaAziInputForStoring;
-			Data_4000337c = strCustomerObjectDecAltInputForStoring;
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = "                    ";
+			g_pcstrMenuLine3 = "  Please Save Current";
+			g_pcstrMenuLine4 = "Target & Input Target";
+			g_pcstrMenuLine5 = "                    ";
+			g_pcstrMenuLine6 = strCustomerObjectNameInput;
+			g_pcstrMenuLine7 = strCustomerObjectRaAziInputForStoring;
+			g_pcstrMenuLine8 = strCustomerObjectDecAltInputForStoring;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5148,16 +5152,16 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_CUSTOMER_OBJECT_DEC_INPUT: //205:
 			//0x3b5d4
-			sprintf(Data_40003fa9, "F%d                 ",
+			sprintf(g_MenuStringBuffer1, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = "                    ";
-			Data_40003368 = "  Please Save Current";
-			Data_4000336c = "Target & Input Target";
-			Data_40003370 = "                    ";
-			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = strCustomerObjectRaAziInputForStoring;
-			Data_4000337c = strCustomerObjectDecAltInputForStoring;
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = "                    ";
+			g_pcstrMenuLine3 = "  Please Save Current";
+			g_pcstrMenuLine4 = "Target & Input Target";
+			g_pcstrMenuLine5 = "                    ";
+			g_pcstrMenuLine6 = strCustomerObjectNameInput;
+			g_pcstrMenuLine7 = strCustomerObjectRaAziInputForStoring;
+			g_pcstrMenuLine8 = strCustomerObjectDecAltInputForStoring;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5165,14 +5169,14 @@ void PrepareScreenItems(void)
 
 		case MENU_CONTEXT_RA_INPUT: //29001: // "Object Rise/Set" -> "Input Ra Dec:"
 			//0x3b668
-			Data_40003360 = strInputRaDec; // "Input Ra Dec:"?
-			Data_40003364 = "";
-			Data_40003368 = strCustomerObjectRaAziInputForStoring; // "R.a: 19h52m12.0s"?
-			Data_4000336c = "";
-			Data_40003370 = strCustomerObjectDecAltInputForStoring; // "Dec:+90 00 00.0 "?
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strInputRaDec; // "Input Ra Dec:"?
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strCustomerObjectRaAziInputForStoring; // "R.a: 19h52m12.0s"?
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strCustomerObjectDecAltInputForStoring; // "Dec:+90 00 00.0 "?
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5180,14 +5184,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_DEC_INPUT: //29002
 			//0x3b7d0
-			Data_40003360 = strInputRaDec;
-			Data_40003364 = "";
-			Data_40003368 = strCustomerObjectRaAziInputForStoring;
-			Data_4000336c = "";
-			Data_40003370 = strCustomerObjectDecAltInputForStoring;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strInputRaDec;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strCustomerObjectRaAziInputForStoring;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strCustomerObjectDecAltInputForStoring;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5195,16 +5199,16 @@ void PrepareScreenItems(void)
 				
 		case MENU_CONTEXT_CUST_LAND_OBJ_SELECTION: //202:
 			//0x3b850
-			Data_40003360 = "F1";
-			Data_40003364 = "F2";
-			Data_40003368 = "F3";
-			Data_4000336c = "F4";
-			Data_40003370 = "F5";
-			Data_40003374 = "F6";
-			Data_40003378 = "F7";
-			Data_4000337c = "F8";
-			Data_40003380 = "F9";
-			Data_40003384 = "Select F? For Target ";
+			g_pcstrMenuLine1 = "F1";
+			g_pcstrMenuLine2 = "F2";
+			g_pcstrMenuLine3 = "F3";
+			g_pcstrMenuLine4 = "F4";
+			g_pcstrMenuLine5 = "F5";
+			g_pcstrMenuLine6 = "F6";
+			g_pcstrMenuLine7 = "F7";
+			g_pcstrMenuLine8 = "F8";
+			g_pcstrMenuLine9 = "F9";
+			g_pcstrMenuLine10 = "Select F? For Target ";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5212,16 +5216,16 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_CUST_LAND_OBJ_NAME_INPUT: //206:
 			//0x3b8e8
-			sprintf(Data_40003fa9, "F%d                 ",
+			sprintf(g_MenuStringBuffer1, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = "                    ";
-			Data_40003368 = "  Please Save Current";
-			Data_4000336c = "Target & Input Target";
-			Data_40003370 = "                    ";
-			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = strCustomerObjectRaAziInputForStoring;
-			Data_4000337c = strCustomerObjectDecAltInputForStoring;
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = "                    ";
+			g_pcstrMenuLine3 = "  Please Save Current";
+			g_pcstrMenuLine4 = "Target & Input Target";
+			g_pcstrMenuLine5 = "                    ";
+			g_pcstrMenuLine6 = strCustomerObjectNameInput;
+			g_pcstrMenuLine7 = strCustomerObjectRaAziInputForStoring;
+			g_pcstrMenuLine8 = strCustomerObjectDecAltInputForStoring;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5229,16 +5233,16 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_CUST_LAND_OBJ_AZI_INPUT: //207:
 			//0x3b97c
-			sprintf(Data_40003fa9, "F%d                 ",
+			sprintf(g_MenuStringBuffer1, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = "                    ";
-			Data_40003368 = "  Please Save Current";
-			Data_4000336c = "Target & Input Target";
-			Data_40003370 = "                    ";
-			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = strCustomerObjectRaAziInputForStoring;
-			Data_4000337c = strCustomerObjectDecAltInputForStoring;
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = "                    ";
+			g_pcstrMenuLine3 = "  Please Save Current";
+			g_pcstrMenuLine4 = "Target & Input Target";
+			g_pcstrMenuLine5 = "                    ";
+			g_pcstrMenuLine6 = strCustomerObjectNameInput;
+			g_pcstrMenuLine7 = strCustomerObjectRaAziInputForStoring;
+			g_pcstrMenuLine8 = strCustomerObjectDecAltInputForStoring;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5246,16 +5250,16 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_CUST_LAND_OBJ_ALT_INPUT: //208:
 			//0x3ba10
-			sprintf(Data_40003fa9, "F%d                 ",
+			sprintf(g_MenuStringBuffer1, "F%d                 ",
 				bData_4000319a_SkyLandTargetId);
-			Data_40003360 = Data_40003fa9;
-			Data_40003364 = "                    ";
-			Data_40003368 = "  Please Save Current";
-			Data_4000336c = "Target & Input Target";
-			Data_40003370 = "                    ";
-			Data_40003374 = strCustomerObjectNameInput;
-			Data_40003378 = strCustomerObjectRaAziInputForStoring;
-			Data_4000337c = strCustomerObjectDecAltInputForStoring;
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
+			g_pcstrMenuLine2 = "                    ";
+			g_pcstrMenuLine3 = "  Please Save Current";
+			g_pcstrMenuLine4 = "Target & Input Target";
+			g_pcstrMenuLine5 = "                    ";
+			g_pcstrMenuLine6 = strCustomerObjectNameInput;
+			g_pcstrMenuLine7 = strCustomerObjectRaAziInputForStoring;
+			g_pcstrMenuLine8 = strCustomerObjectDecAltInputForStoring;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5266,7 +5270,7 @@ void PrepareScreenItems(void)
 			get_solar_system_object_data(bData_40002eb5_SolarSystemObjectNr, 
 				&fData_40002cd0_ObjectRightAscension, &fData_40002d18_ObjectDeclination);
 		
-			Data_40003360 = Data_4000314c_SolarSystemObjectName;
+			g_pcstrMenuLine1 = Data_4000314c_SolarSystemObjectName;
 		
 			dObjectRiseTime = get_object_visibility_time(1, 
 				fData_40002cd0_ObjectRightAscension, 
@@ -5289,25 +5293,25 @@ void PrepareScreenItems(void)
 				Data_40004128.geographicLatitude, 
 				(unsigned char)Data_40004128.timeZone);
 				
-			sprintf(Data_40003fd3, "RiseTime:   %02dh%02dm",
+			sprintf(g_MenuStringBuffer3, "RiseTime:   %02dh%02dm",
 				(int)dObjectRiseTime,
 				(int)((dObjectRiseTime - (int)dObjectRiseTime) * 60));
-			Data_40003368 = Data_40003fd3;
+			g_pcstrMenuLine3 = g_MenuStringBuffer3;
 
-			sprintf(Data_40003ffd, "TransitTime:%02dh%02dm",
+			sprintf(g_MenuStringBuffer5, "TransitTime:%02dh%02dm",
 				(int)dObjectTransitTime,
 				(int)((dObjectTransitTime - (int)dObjectTransitTime) * 60));
-			Data_40003370 = Data_40003ffd;
+			g_pcstrMenuLine5 = g_MenuStringBuffer5;
 				
-			sprintf(Data_40004027, "SetTime:    %02dh%02dm",
+			sprintf(g_MenuStringBuffer7, "SetTime:    %02dh%02dm",
 				(int)dObjectSetTime,
 				(int)((dObjectSetTime - (int)dObjectSetTime) * 60));
-			Data_40003378 = Data_40004027;
+			g_pcstrMenuLine7 = g_MenuStringBuffer7;
 				
-			Data_40003364 = "                    ";
-			Data_4000336c = "                    ";
-			Data_40003374 = "                    ";
-			Data_4000337c = "                    ";
+			g_pcstrMenuLine2 = "                    ";
+			g_pcstrMenuLine4 = "                    ";
+			g_pcstrMenuLine6 = "                    ";
+			g_pcstrMenuLine8 = "                    ";
 				
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5315,26 +5319,26 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_RISE_SET_TIMES: //32001
 			//0x3be30
-			sprintf(Data_40003fa9, "RiseTime:   %02dh%02dm", 
+			sprintf(g_MenuStringBuffer1, "RiseTime:   %02dh%02dm",
 				(int)dObjectRiseTime,
 				(int)((dObjectRiseTime - (int)dObjectRiseTime) * 60));		
-			Data_40003360 = Data_40003fa9;
+			g_pcstrMenuLine1 = g_MenuStringBuffer1;
 		
-			sprintf(Data_40003fbe, "TransitTime:%02dh%02dm",
+			sprintf(g_MenuStringBuffer2, "TransitTime:%02dh%02dm",
 				(int)dObjectTransitTime,
 				(int)((dObjectTransitTime - (int)dObjectTransitTime) * 60));
-			Data_40003368 = Data_40003fbe;
+			g_pcstrMenuLine3 = g_MenuStringBuffer2;
 				
-			sprintf(Data_40003fd3, "SetTime:    %02dh%02dm",
+			sprintf(g_MenuStringBuffer3, "SetTime:    %02dh%02dm",
 				(int)dObjectSetTime,
 				(int)((dObjectSetTime - (int)dObjectSetTime) * 60));
-			Data_40003370 = Data_40003fd3;
+			g_pcstrMenuLine5 = g_MenuStringBuffer3;
 				
-			Data_40003364 = "";
-			Data_4000336c = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 				
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5350,14 +5354,14 @@ void PrepareScreenItems(void)
 			//0x3c0a8
 			sprintf(strEngTimeRemain00000s, "%5lds", Data_40003214_UserTimerSeconds);
 		
-			Data_40003360 = strEngCountingDown; // "Counting down:"?
-			Data_40003364 = "";
-			Data_40003368 = strEngTimeRemain; // "Time remain:"
-			Data_4000336c = "";
-			Data_40003370 = strEngTimeRemain00000s; // "00000s"
-			Data_40003374 = "";
-			Data_4000337c = "";
-			Data_40003378 = strEngStopBack; // "       Stop      Back"?
+			g_pcstrMenuLine1 = strEngCountingDown; // "Counting down:"?
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strEngTimeRemain; // "Time remain:"
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strEngTimeRemain00000s; // "00000s"
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine8 = "";
+			g_pcstrMenuLine7 = strEngStopBack; // "       Stop      Back"?
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5365,14 +5369,14 @@ void PrepareScreenItems(void)
 				
 		case MENU_CONTEXT_TIMER_SET: //34001:
 			//0x3c13c
-			Data_40003360 = strEngSetTimer; // "Set timer:"?
-			Data_40003364 = "";
-			Data_40003368 = strEng00000s; // "00000s"?
-			Data_4000336c = "";
-			Data_40003370 = Data_400029b3;
-			Data_40003374 = "";
-			Data_40003378 = strEngStartBack; // "      Start      Back"?
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEngSetTimer; // "Set timer:"?
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strEng00000s; // "00000s"?
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = Data_400029b3;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strEngStartBack; // "      Start      Back"?
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5380,14 +5384,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_ALARM_INPUT: //35001:
 			//0x3c1bc: Alarm start
-			Data_40003360 = strEngInputTime;
-			Data_40003364 = "";
-			Data_40003368 = strEngAlarm21h34m23s;
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_4000337c = "";
-			Data_40003378 = strEngAlarmOnBack;
+			g_pcstrMenuLine1 = strEngInputTime;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strEngAlarm21h34m23s;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine8 = "";
+			g_pcstrMenuLine7 = strEngAlarmOnBack;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5395,14 +5399,14 @@ void PrepareScreenItems(void)
 		
 		case 35002:
 			//0x3c23c: Alarm stop
-			Data_40003360 = "";
-			Data_40003364 = strEngCloseAlarm;
-			Data_40003368 = "";
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_4000337c = "";
-			Data_40003378 = strEngAlarmCloseBack;
+			g_pcstrMenuLine1 = "";
+			g_pcstrMenuLine2 = strEngCloseAlarm;
+			g_pcstrMenuLine3 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine8 = "";
+			g_pcstrMenuLine7 = strEngAlarmCloseBack;
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5410,14 +5414,14 @@ void PrepareScreenItems(void)
 		
 		case 0x57E4B: //360011
 			//0x3c2bc
-			Data_40003360 = strEngTelescopeOneMX51;
-			Data_40003364 = "";
-			Data_40003368 = Data_4000239a; //"Scope:3'.3'"
-			Data_4000336c = "";
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEngTelescopeOneMX51;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = Data_4000239a; //"Scope:3'.3'"
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5425,14 +5429,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_EYEPIECE_MAGN_MF_INPUT: //360021
 			//0x3c33c		
-			Data_40003360 = strEyepieceMagnCaption; //->"Eyep. focal length:"?
-			Data_40003364 = "";
-			Data_40003368 = strEyepieceFovMfInput;
-			Data_4000336c = "";
-			Data_40003370 = strEyepieceFovSfInput;
-			Data_40003374 = "";
-			Data_40003378 = strEyepieceMagnification;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEyepieceMagnCaption; //->"Eyep. focal length:"?
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strEyepieceFovMfInput;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strEyepieceFovSfInput;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strEyepieceMagnification;
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5440,14 +5444,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_EYEPIECE_MAGN_SF_INPUT: //360022
 			//0x3c41c
-			Data_40003360 = strEyepieceMagnCaption;
-			Data_40003364 = "";
-			Data_40003368 = strEyepieceFovMfInput;
-			Data_4000336c = "";
-			Data_40003370 = strEyepieceFovSfInput;
-			Data_40003374 = "";
-			Data_40003378 = strEyepieceMagnification;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEyepieceMagnCaption;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strEyepieceFovMfInput;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strEyepieceFovSfInput;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strEyepieceMagnification;
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5459,14 +5463,14 @@ void PrepareScreenItems(void)
 			//0x3c4a4
 		case MENU_CONTEXT_EYEPIECE_FOV_INPUT: //370023
 			//0x3c4a8
-			Data_40003360 = strEyepieceFovCaption; // "Eyep. focal length:"
-			Data_40003364 = "";
-			Data_40003368 = strEyepieceFovMfInput; // "MF:1893mm"
-			Data_4000336c = "";
-			Data_40003370 = strEyepieceFovSfInput; // "SF:43mm"
-			Data_40003374 = "";
-			Data_40003378 = strEyepieceFovInput; // "E-FOV:001°00'"
-			Data_4000337c = strEyepieceFOV; // "         FOV:0.02272°"
+			g_pcstrMenuLine1 = strEyepieceFovCaption; // "Eyep. focal length:"
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strEyepieceFovMfInput; // "MF:1893mm"
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strEyepieceFovSfInput; // "SF:43mm"
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strEyepieceFovInput; // "E-FOV:001°00'"
+			g_pcstrMenuLine8 = strEyepieceFOV; // "         FOV:0.02272°"
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5476,14 +5480,14 @@ void PrepareScreenItems(void)
 			//0x3c524
 			sprintf(Data_4000248c, "MultiplyM:%d", fEyepieceMagnification);
 		
-			Data_40003360 = strEyepieceMagnCaption;
-			Data_40003364 = "";
-			Data_40003368 = strEyepieceFovMfInput;
-			Data_4000336c = "";
-			Data_40003370 = strEyepieceFovSfInput;
-			Data_40003374 = "";
-			Data_40003378 = strEyepieceMagnification;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEyepieceMagnCaption;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strEyepieceFovMfInput;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strEyepieceFovSfInput;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = strEyepieceMagnification;
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5491,14 +5495,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_DISPLAY_ILLUMINATION_CONTROL: //380011:
 			//0x3c5cc
-			Data_40003360 = strEngBackgroundLight;
-			Data_40003364 = "";
-			Data_40003368 = strEngPressUpDownKey;
-			Data_4000336c = "";
-			Data_40003370 = Data_40002aee;
-			Data_40003374 = "";
-			Data_40003378 = Data_40002aef;
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEngBackgroundLight;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strEngPressUpDownKey;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = Data_40002aee;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = Data_40002aef;
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5506,14 +5510,14 @@ void PrepareScreenItems(void)
 				
 		case MENU_CONTEXT_TIME_DATE_INPUT: //41001:
 			//0x3c64c
-			Data_40003360 = "Date and Time Set: ";
-			Data_40003364 = "";
-			Data_40003368 = Data_400037ec;
-			Data_4000336c = "           YYYY-MM-DD";
-			Data_40003370 = Data_40003150;
-			Data_40003374 = "         HH:MM:SS";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "Date and Time Set: ";
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = Data_400037ec;
+			g_pcstrMenuLine4 = "           YYYY-MM-DD";
+			g_pcstrMenuLine5 = Data_40003150;
+			g_pcstrMenuLine6 = "         HH:MM:SS";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5521,22 +5525,22 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_DAYLIGHT_SAVING_ON: //42001:
 			//0x3c6cc
-			Data_40003360 = Data_40002b70; //"daylight saving"
-			Data_40003364 = "";
-			Data_40003368 = Data_40002b80; //"status:on"
-			Data_4000336c = "";
-			Data_40003370 = Data_40002b8a;
+			g_pcstrMenuLine1 = Data_40002b70; //"daylight saving"
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = Data_40002b80; //"status:on"
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = Data_40002b8a;
 		
 			if (bData_40002f1e_SetupLocalData == 1)
 			{
-				Data_40003374 = "hit direction key!";
+				g_pcstrMenuLine6 = "hit direction key!";
 			}
 			else
 			{
-				Data_40003374 = "Restart & Change!";
+				g_pcstrMenuLine6 = "Restart & Change!";
 			}
-			Data_40003378 = Data_40002b8b;
-			Data_4000337c = "";
+			g_pcstrMenuLine7 = Data_40002b8b;
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5544,22 +5548,22 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_DAYLIGHT_SAVING_OFF: //42002:
 			//3c76c
-			Data_40003360 = Data_40002ba5; //"Daylight saving"
-			Data_40003364 = "";
-			Data_40003368 = Data_40002bb5; //"status:off"
-			Data_4000336c = "";
-			Data_40003370 = Data_40002bc0;
+			g_pcstrMenuLine1 = Data_40002ba5; //"Daylight saving"
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = Data_40002bb5; //"status:off"
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = Data_40002bc0;
 		
 			if (bData_40002f1e_SetupLocalData == 1)
 			{
-				Data_40003374 = "hit direction key!";
+				g_pcstrMenuLine6 = "hit direction key!";
 			}
 			else
 			{
-				Data_40003374 = "Restart & Change!";
+				g_pcstrMenuLine6 = "Restart & Change!";
 			}
-			Data_40003378 = Data_40002bc1;
-			Data_4000337c = "";
+			g_pcstrMenuLine7 = Data_40002bc1;
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5572,82 +5576,82 @@ void PrepareScreenItems(void)
 			if (Data_40003f1c_FlashSiteData.fLongitude >= 0)
 			{
 				//3c92c
-				sprintf(Data_40003ffd, "     Lon:E%03d %02d          ",
+				sprintf(g_MenuStringBuffer5, "     Lon:E%03d %02d          ",
 					abs((int)Data_40003f1c_FlashSiteData.fLongitude),
 					abs((int)((Data_40003f1c_FlashSiteData.fLongitude - (int)Data_40003f1c_FlashSiteData.fLongitude) * 60)));
 			}
 			else
 			{
 				//0x3c9bc
-				sprintf(Data_40003ffd, "     Lon:W%03d %02d         ",
+				sprintf(g_MenuStringBuffer5, "     Lon:W%03d %02d         ",
 					abs((int)Data_40003f1c_FlashSiteData.fLongitude),
 					abs((int)((Data_40003f1c_FlashSiteData.fLongitude - (int)Data_40003f1c_FlashSiteData.fLongitude) * 60)));
 			}
 			//0x3ca48
 			if (abs((int)Data_40003f1c_FlashSiteData.fLongitude) < 100)
 			{
-				Data_40003ffd[10] = ' ';
+				g_MenuStringBuffer5[10] = ' ';
 			}
 			if (abs((int)Data_40003f1c_FlashSiteData.fLongitude) < 10)
 			{
-				Data_40003ffd[11] = ' ';
+				g_MenuStringBuffer5[11] = ' ';
 			}
 			if (abs((int)((Data_40003f1c_FlashSiteData.fLongitude - (int)Data_40003f1c_FlashSiteData.fLongitude) * 60)) < 10)
 			{
-				Data_40003ffd[14] = ' ';
+				g_MenuStringBuffer5[14] = ' ';
 			}
 			//0x3cb14
 			if (Data_40003f1c_FlashSiteData.fLatitude >= 0)
 			{
 				//3cb28
-				sprintf(Data_40004027, "     Lat:N %02d %02d          ",
+				sprintf(g_MenuStringBuffer7, "     Lat:N %02d %02d          ",
 					abs((int)Data_40003f1c_FlashSiteData.fLatitude),
 					abs((int)((Data_40003f1c_FlashSiteData.fLatitude - (int)Data_40003f1c_FlashSiteData.fLatitude) * 60)));
 			}
 			else
 			{
 				//0x3cbb8
-				sprintf(Data_40004027, "     Lat:S %02d %02d         ",
+				sprintf(g_MenuStringBuffer7, "     Lat:S %02d %02d         ",
 					abs((int)Data_40003f1c_FlashSiteData.fLatitude),
 					abs((int)((Data_40003f1c_FlashSiteData.fLatitude - (int)Data_40003f1c_FlashSiteData.fLatitude) * 60)));
 			}
 			//0x3cc44
 			if (abs((int)Data_40003f1c_FlashSiteData.fLatitude) < 10)
 			{
-				Data_40004027[11] = ' ';
+				g_MenuStringBuffer7[11] = ' ';
 			}
 			if (abs((int)((Data_40003f1c_FlashSiteData.fLatitude - (int)Data_40003f1c_FlashSiteData.fLatitude) * 60)) < 10)
 			{
-				Data_40004027[14] = ' ';
+				g_MenuStringBuffer7[14] = ' ';
 			}
 			//0x3cd74
 			if (Data_40003f1c_FlashSiteData.Zone > 0)
 			{
 				//3cd84
-				sprintf(Data_4000403c, "    Zone:E%d   ",
+				sprintf(g_MenuStringBuffer8, "    Zone:E%d   ",
 					abs(Data_40003f1c_FlashSiteData.Zone));
 			}
 			else if (Data_40003f1c_FlashSiteData.Zone < 0)
 			{
 				//0x3cdb4
-				sprintf(Data_4000403c, "    Zone:W%d    ",
+				sprintf(g_MenuStringBuffer8, "    Zone:W%d    ",
 					abs(Data_40003f1c_FlashSiteData.Zone));
 			}
 			else
 			{
 				//0x3cdf4
-				sprintf(Data_4000403c, "    Zone:%d    ",
+				sprintf(g_MenuStringBuffer8, "    Zone:%d    ",
 					abs(Data_40003f1c_FlashSiteData.Zone));
 			}
 			//0x3ce20
-			Data_40003360 = Data_40003f1c_FlashSiteData.cCountry;
-			Data_40003364 = Data_40003f1c_FlashSiteData.cCity;
-			Data_40003368 = Data_40003ffd;
-			Data_4000336c = Data_40004027;
-			Data_40003370 = Data_4000403c;
-			Data_40003374 = "                     ";
-			Data_40003378 = "up&down key: country!";
-			Data_4000337c = "left&right key: city!";
+			g_pcstrMenuLine1 = Data_40003f1c_FlashSiteData.cCountry;
+			g_pcstrMenuLine2 = Data_40003f1c_FlashSiteData.cCity;
+			g_pcstrMenuLine3 = g_MenuStringBuffer5;
+			g_pcstrMenuLine4 = g_MenuStringBuffer7;
+			g_pcstrMenuLine5 = g_MenuStringBuffer8;
+			g_pcstrMenuLine6 = "                     ";
+			g_pcstrMenuLine7 = "up&down key: country!";
+			g_pcstrMenuLine8 = "left&right key: city!";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 0;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5655,14 +5659,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_CUSTOM_SITE_INPUT: //43002:
 			//0x3ce9c: "Custom Site"
-			Data_40003360 = "Please Input Data: ";
-			//Data_40003364 = ""; //?????
-			Data_40003368 = strCustomSiteName; //" Name:"
-			Data_4000336c = strCustomSiteLongitude; //"  Lon:"
-			Data_40003370 = strCustomSiteLatitude; //"  Lat:"
-			Data_40003374 = strCustomSiteTimezone; //" Zone:"
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "Please Input Data: ";
+			//g_pcstrMenuLine2 = ""; //?????
+			g_pcstrMenuLine3 = strCustomSiteName; //" Name:"
+			g_pcstrMenuLine4 = strCustomSiteLongitude; //"  Lon:"
+			g_pcstrMenuLine5 = strCustomSiteLatitude; //"  Lat:"
+			g_pcstrMenuLine6 = strCustomSiteTimezone; //" Zone:"
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5670,14 +5674,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_SKY_TARGET: //45001
 			//0x3cf10
-			Data_40003360 = "Object Mode:";
-			Data_40003364 = "";
-			Data_40003368 = strSkyTarget;
-			Data_4000336c = "";
-			Data_40003370 = strLandTarget;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "Object Mode:";
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strSkyTarget;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strLandTarget;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5685,14 +5689,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_LAND_TARGET: //45002
 			//0x3cf90
-			Data_40003360 = "Object Mode:";
-			Data_40003364 = "";
-			Data_40003368 = strSkyTarget;
-			Data_4000336c = "";
-			Data_40003370 = strLandTarget;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "Object Mode:";
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strSkyTarget;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strLandTarget;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5700,14 +5704,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_MOUNT_AZ: //46001:
 			//0x3d010
-			Data_40003360 = "Telescope Mount:";
-			Data_40003364 = "";
-			Data_40003368 = Data_400028a5;
-			Data_4000336c = "";
-			Data_40003370 = Data_400028b3;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "Telescope Mount:";
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strAltTelescope;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strEquTelescope;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5715,14 +5719,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_MOUNT_EQU: //46002:
 			//0x3d154
-			Data_40003360 = "Telescope Mount:";
-			Data_40003364 = "";
-			Data_40003368 = Data_400028a5;
-			Data_4000336c = "";
-			Data_40003370 = Data_400028b3;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "Telescope Mount:";
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = strAltTelescope;
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = strEquTelescope;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5730,29 +5734,29 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_OTA_ZERO_SETUP: //47011: // "Telescope Mount" -> "Please setup OTA zero"
 			//0x3d1d4
-			Data_40003360 = strEngPleaseSetupOtaZero; // "Please setup OTA zero"
-			Data_40003368 = Data_400028d7; // "Azi:000°"
-			Data_40003370 = Data_400028e1; // "Alt: 00°"
-			Data_4000336c = "        Range:0-360";
-			Data_40003374 = "        Range:0-90";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEngPleaseSetupOtaZero; // "Please setup OTA zero"
+			g_pcstrMenuLine3 = Data_400028d7; // "Azi:000°"
+			g_pcstrMenuLine5 = Data_400028e1; // "Alt: 00°"
+			g_pcstrMenuLine4 = "        Range:0-360";
+			g_pcstrMenuLine6 = "        Range:0-90";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			if (bData_400032a4_OTAZeroDataErrorCount > 0)
 			{
 				bData_400032a4_OTAZeroDataErrorCount--;
-				Data_40003374 = "                                ";
-				Data_40003378 = Data_400028eb;
+				g_pcstrMenuLine6 = "                                ";
+				g_pcstrMenuLine7 = Data_400028eb;
 			}
 			else
 			{
-				Data_40003374 = "                                        ";
-				Data_40003378 = "                                      ";
+				g_pcstrMenuLine6 = "                                        ";
+				g_pcstrMenuLine7 = "                                      ";
 			}
 
-			Data_40003364	= "                              ";
-			Data_4000336c = "          Range:0-360";
-			Data_40003374 = "          Range:0-90";
+			g_pcstrMenuLine2	= "                              ";
+			g_pcstrMenuLine4 = "          Range:0-360";
+			g_pcstrMenuLine6 = "          Range:0-90";
 			
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5760,44 +5764,62 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_OTA_ZERO_SETUP_RESTART: //47041:
 			//0x3d2c4
-			Data_40003360 = strEngPleaseSetupOtaZero; // "Please setup OTA zero"
-			Data_40003368 = Data_400028d7;
-			Data_40003370 = Data_400028e1;
-			Data_40003378 = Data_40002901;
-			Data_40003364 = "";
-			Data_4000336c = "";
-			Data_40003374 = "                                                       ";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEngPleaseSetupOtaZero; // "Please setup OTA zero"
+			g_pcstrMenuLine3 = Data_400028d7;
+			g_pcstrMenuLine5 = Data_400028e1;
+			g_pcstrMenuLine7 = Data_40002901;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine6 = "                                                       ";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
-		
+
+#if 0
 		case MENU_CONTEXT_ENGLISH: //49001
 			//0x3d344
-			Data_40003360 = strEngEnglish;
-			Data_40003364 = strEngGerman;
-			Data_40003368 = strEngFrench;
-			Data_4000336c = strEngItalian;
-			Data_40003370 = strEngSpanish;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEngEnglish;
+			g_pcstrMenuLine2 = strEngGerman;
+			g_pcstrMenuLine3 = strEngFrench;
+			g_pcstrMenuLine4 = strEngItalian;
+			g_pcstrMenuLine5 = strEngSpanish;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 1;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
+#else
+		case MENU_CONTEXT_ENGLISH: //49001
+			//0x3d344
+			g_pcstrMenuLine1 = strEngEnglish;
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = "";
+			g_pcstrMenuLine4 = "";
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
+
+			bData_4000316e_FocusLineOn8LineDisplay = 1;
+			bData_40003197_DisplayLinesPerMenuLine = 1;
+			break;
+#endif
 		
+#if 0
 		case MENU_CONTEXT_GERMAN: //49002
 			//0x3d3c0
-			Data_40003360 = strEngEnglish;
-			Data_40003364 = strEngGerman;
-			Data_40003368 = strEngFrench;
-			Data_4000336c = strEngItalian;
-			Data_40003370 = strEngSpanish;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEngEnglish;
+			g_pcstrMenuLine2 = strEngGerman;
+			g_pcstrMenuLine3 = strEngFrench;
+			g_pcstrMenuLine4 = strEngItalian;
+			g_pcstrMenuLine5 = strEngSpanish;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 2;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5805,14 +5827,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_FRENCH: //49003
 			//0x3d440
-			Data_40003360 = strEngEnglish;
-			Data_40003364 = strEngGerman;
-			Data_40003368 = strEngFrench;
-			Data_4000336c = strEngItalian;
-			Data_40003370 = strEngSpanish;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEngEnglish;
+			g_pcstrMenuLine2 = strEngGerman;
+			g_pcstrMenuLine3 = strEngFrench;
+			g_pcstrMenuLine4 = strEngItalian;
+			g_pcstrMenuLine5 = strEngSpanish;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 3;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5820,14 +5842,14 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_ITALIAN: //49004
 			//0x3d594
-			Data_40003360 = strEngEnglish;
-			Data_40003364 = strEngGerman;
-			Data_40003368 = strEngFrench;
-			Data_4000336c = strEngItalian;
-			Data_40003370 = strEngSpanish;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEngEnglish;
+			g_pcstrMenuLine2 = strEngGerman;
+			g_pcstrMenuLine3 = strEngFrench;
+			g_pcstrMenuLine4 = strEngItalian;
+			g_pcstrMenuLine5 = strEngSpanish;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 4;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
@@ -5835,29 +5857,30 @@ void PrepareScreenItems(void)
 		
 		case MENU_CONTEXT_SPANISH: //49005
 			//0x3d614
-			Data_40003360 = strEngEnglish;
-			Data_40003364 = strEngGerman;
-			Data_40003368 = strEngFrench;
-			Data_4000336c = strEngItalian;
-			Data_40003370 = strEngSpanish;
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = strEngEnglish;
+			g_pcstrMenuLine2 = strEngGerman;
+			g_pcstrMenuLine3 = strEngFrench;
+			g_pcstrMenuLine4 = strEngItalian;
+			g_pcstrMenuLine5 = strEngSpanish;
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 5;
 			bData_40003197_DisplayLinesPerMenuLine = 1;
 			break;
+#endif
 		
 		case MENU_CONTEXT_TRACKING_RATE_INPUT: //48001
 			//0x3d694
-			Data_40003360 = "Input Treaking Speed:";
-			Data_40003364 = "";
-			Data_40003368 = "";
-			Data_4000336c = strTrackingRateCustDisplay;
-			Data_40003370 = "";
-			Data_40003374 = "";
-			Data_40003378 = "";
-			Data_4000337c = "";
+			g_pcstrMenuLine1 = "Input Treaking Speed:";
+			g_pcstrMenuLine2 = "";
+			g_pcstrMenuLine3 = "";
+			g_pcstrMenuLine4 = strTrackingRateCustDisplay;
+			g_pcstrMenuLine5 = "";
+			g_pcstrMenuLine6 = "";
+			g_pcstrMenuLine7 = "";
+			g_pcstrMenuLine8 = "";
 		
 			bData_4000316e_FocusLineOn8LineDisplay = 10;
 			bData_40003197_DisplayLinesPerMenuLine = 1;

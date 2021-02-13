@@ -86,6 +86,7 @@ void uart1_isr(void) __irq
 					if (bData_40002c12_uart1ReceiveDataCount == bData_40002c15_uart1ReceiveHeader[3])
 					{
 #if 1
+#if 0
 						BaseType_t xHigherPriorityTaskWokenByPost = pdFALSE;
 
 						xQueueSendFromISR(xQueueUart1,
@@ -96,6 +97,7 @@ void uart1_isr(void) __irq
 						{
 							//portYIELD_FROM_ISR();
 						}
+#endif
 #else
 						int i;
 						for (i = 0; i < bData_40002c12_uart1ReceiveDataCount; i++)
@@ -217,22 +219,22 @@ void uart0_isr(void) __irq
 						switch (uart0ReceiveDataBuffer[0])
 						{
 							case 1:
-								Data_40002c1c = -1;
+								g_iUart0GuideValueRa = -1;
 								uart0ReceiveFlag = 0;
 								break;
 							
 							case 2:
-								Data_40002c1c = 1;
+								g_iUart0GuideValueRa = 1;
 								uart0ReceiveFlag = 0;
 								break;
 							
 							case 4:
-								Data_40002c20 = -1;
+								g_iUart0GuideValueDec = -1;
 								uart0ReceiveFlag = 0;
 								break;
 							
 							case 8:
-								Data_40002c20 = 1;
+								g_iUart0GuideValueDec = 1;
 								uart0ReceiveFlag = 0;
 								break;
 							
@@ -394,7 +396,7 @@ void uart1_write_byte(unsigned char a)
 {
 	U1THR = a;
 	while (!(U1LSR & 0x40)) {}
-#if 1
+#if 0
 	{
 		char buf[20];
 		snprintf(buf, sizeof(buf)-1, "Tx=0x%02x\n\r", a);

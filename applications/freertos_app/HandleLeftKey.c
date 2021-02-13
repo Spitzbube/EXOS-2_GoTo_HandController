@@ -948,9 +948,11 @@ void HandleLeftKey(void)
 					}
 					else
 					{
+#if 0
 						//0x599c8
 						SlewAxis(3, 3, g_eSlewRateIndex);
 						//->0x59a1c
+#endif
 					}
 				}
 			}
@@ -964,8 +966,10 @@ void HandleLeftKey(void)
 				}
 				else
 				{
+#if 0
 					//0x59a08
 					SlewAxis(3, 3, g_eSlewRateIndex);
+#endif
 				}
 			}
 			//-> 0x59dc4
@@ -995,10 +999,12 @@ void HandleLeftKey(void)
 			}
 			else
 			{
+#if 0
 				//0x59a94
 				SlewAxis(3, 3, SLEW_RATE_8X); //3);
 				
 				bData_40002edd = 0;
+#endif
 			}
 			//0x59ab0
 			iBacklashCorrectionSlewing = 1;
@@ -1018,8 +1024,10 @@ void HandleLeftKey(void)
 				}
 				else
 				{
+#if 0
 					//0x59b14
 					SlewAxis(3, 3, g_eSlewRateIndex);
+#endif
 				}
 			}
 			//0x59b28 -> 0x59dc4

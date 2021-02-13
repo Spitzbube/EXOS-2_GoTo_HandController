@@ -9,6 +9,7 @@
 #include "menu.h"
 #include "file_79080.c"
 #include "macros.h"
+#include "periph.h"
 
 // configuration for the Atmel AT45DB161D device
 #define FLASH_PAGE_BITS 10
@@ -18,30 +19,6 @@
 #define FLASH_CMD_BUF1_TO_MEM 0x83
 #define FLASH_CMD_BUF1_WRITE 0x84
 #define FLASH_CMD_CONT_ARRAY_READ 0xE8
-
-#define GPIO_FLASH_CS (1 << 24) //P1.24
-#define ENABLE_FLASH_CS (IO1CLR = GPIO_FLASH_CS)
-#define DISABLE_FLASH_CS (IO1SET = GPIO_FLASH_CS)
-
-#define GPIO_FONTROM_CS (1 << 25) //P1.25
-#define ENABLE_FONTROM_CS (IO1CLR = GPIO_FONTROM_CS)
-#define DISABLE_FONTROM_CS (IO1SET = GPIO_FONTROM_CS)
-
-#define GPIO_LCD_CS (1 << 10) //P0.10
-#define ENABLE_LCD_CS (IOCLR0 |= GPIO_LCD_CS)
-#define DISABLE_LCD_CS (IOSET0 |= GPIO_LCD_CS)
-
-#define GPIO_LCD_SCLK (1 << 12) //P0.12
-#define LCD_SCLK_LO (IO0CLR |= GPIO_LCD_SCLK)
-#define LCD_SCLK_HI (IO0SET |= GPIO_LCD_SCLK)
-
-#define GPIO_LCD_SID (1 << 15) //P0.15
-#define LCD_SID_LO (IO0CLR |= GPIO_LCD_SID)
-#define LCD_SID_HI (IO0SET |= GPIO_LCD_SID)
-
-#define GPIO_LCD_RS (1 << 23) //P1.23
-#define LCD_RS_CONTROL (IO1CLR |= GPIO_LCD_RS)
-#define LCD_RS_DATA (IO1SET |= GPIO_LCD_RS)
 
 // LCD Display commands
 #define ST7565_CMD_DISPLAY_ON             0xAF
@@ -913,52 +890,27 @@ void timer_isr(void)
 	
 	if (bData_40002c08 == 0)
 	{
-		IO1SET = (1 << 22);
-#ifdef OLIMEX_LPC2148
-		// Set LED1
-		IOSET0 = (1 << 10);
-#endif
-				
+		BUZZER_HI;
 		bData_40002c07 = 0;
 	}
 	else if (bData_40002c09 == 0)
 	{
-		IO1CLR = (1 << 22);
-#ifdef OLIMEX_LPC2148
-		// Clear LED1
-		IOCLR0 = (1 << 10);
-#endif
-		
+		BUZZER_LO;
 		bData_40002c07 = 0;
 	}
 	else if (bData_40002c07 <= bData_40002c08)
 	{
-		IO1CLR = (1 << 22);
-#ifdef OLIMEX_LPC2148
-		// Clear LED1
-		IOCLR0 = (1 << 10);
-#endif
-		
+		BUZZER_LO;
 		bData_40002c07++;
 	}
 	else if (bData_40002c07 <= bData_40002c09)
 	{
-		IO1SET = (1 << 22);
-#ifdef OLIMEX_LPC2148
-		// Set LED1
-		IOSET0 = (1 << 10);
-#endif
-		
+		BUZZER_HI;
 		bData_40002c07++;
 	}
 	else if (bData_40002c08 >= bData_40002c09)
 	{
-		IO1SET = (1 << 22);
-#ifdef OLIMEX_LPC2148
-		// Set LED1
-		IOSET0 = (1 << 10);
-#endif
-		
+		BUZZER_HI;
 		bData_40002c07 = 0;
 		bData_40002c08 = 0;
 	}
@@ -979,8 +931,10 @@ void timer_isr(void)
 			Data_40003214_UserTimerSeconds--;
 			if (Data_40003214_UserTimerSeconds == 0)
 			{
+#if 1 //Beep
 				bData_40002c08 = 160;
-				bData_40002c09 = bData_40002c08 - 1;				
+				bData_40002c09 = bData_40002c08 - 1;
+#endif
 			}
 		}
 	}
@@ -1025,7 +979,6 @@ void rtc_isr(void) __irq
 	VICVectAddr = 0;
 }
 
-//#include "uart.c"
 
 #ifdef __GNUC__
 //void delay_loop(unsigned int a) __attribute__((optimize(-O0)));
@@ -1066,6 +1019,7 @@ void delay_loop(unsigned int a)
 /* 227c - complete */
 void lpc_interrupt_init(void)
 {
+#if 0 //See: FreeRTOS::prvSetupTimerInterrupt
 	//Timer0
 	// Prescale Register
 	T0PR = 0;
@@ -1084,6 +1038,7 @@ void lpc_interrupt_init(void)
 	VICVectCntl0 = (1 << 5) | 4; // TIMER0 -> Slot 0
 	VICVectAddr0 = (unsigned int) timer_isr;
 	VICIntEnable = (1 << 4); // Enable TIMER0
+#endif
 	
 	VICVectCntl3 = (1 << 5) | 13; // RTC -> Slot 3
 	VICVectAddr3 = (unsigned int) rtc_isr;
@@ -1212,8 +1167,8 @@ void lpc_hw_init(void)
 		(1 <<24) | // P1.24 = Out -> Chip Select for SPI Flash
 		(1 <<25);  // P1.25 = Out -> Chip Select for SPI Font ROM
 	IO1SET = 1 << 22; //0x00400000; P1.22 = High
-	IO0SET = 1 << 13; //0x00002000; P0.13 = High
-	IO0CLR = 1 << 16; //0x00010000; P0.16 = Low
+	GPIO_LED1_3_OFF; //0x00002000; P0.13 = High
+	GPIO_LED2_OFF; //0x00010000; P0.16 = Low
 	IO1SET = 1 << 24; //0x01000000; P1.24 = High
 	IO1SET = 1 << 25; //0x02000000; P1.25 = High
 	
@@ -1229,13 +1184,16 @@ void lpc_hw_init(void)
 	
 	func_17d0();
 	
+#if 0
 	bData_40002c08 = 0x10;
 	bData_40002c09 = 0x10;
+#else
+	bData_40002c08 = 0x00;
+	bData_40002c09 = 0x00;
+#endif
 	bData_40002c07 = 0x00;
 
-#if 0
 	lpc_interrupt_init();
-#endif
 }
 
 
@@ -1734,7 +1692,9 @@ int func_33cc(unsigned short a, int* b, int* c)
 	return 1;
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "object_database.c"
+#endif
 
 /* 4dd0 - todo */
 int func_4dd0(int a, Struct_4dd0* b)
@@ -1954,7 +1914,9 @@ unsigned char flash_get_recent_targets(unsigned char* targetTypes, int* targetId
 	return buf[0];
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "align_stars.c"
+#endif
 
 /* 5f40 - todo */
 void initialize_variables(void)
@@ -1983,6 +1945,7 @@ void initialize_variables(void)
 	Data_40002cf8 = 11;
 	fData_40002cfc = 1.9;
 	
+#if 0 //(bData_40002c1a == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 	Data_40002d20 = 1;
 	Data_40002d24 = 3;
 	fData_40002d28 = 5.9;
@@ -1990,6 +1953,7 @@ void initialize_variables(void)
 	Data_40002d48 = 6;
 	Data_40002d4c = 3;
 	fData_40002d50 = 5.8;
+#endif
 	
 	Data_40002d68_OTARightAscensionHours = 2;
 	Data_40002d6c_OTARightAscensionMinutes = 3;
@@ -2134,9 +2098,11 @@ void func_65d4(double sp40, double sp48)
 			}
 			else
 			{
+#if 0
 				//6788
 				Data_400033c8.dwData = (Data_40004128.dTargetPositionRaAxis - 0.6 * Data_40004128.dData_176 / 3600.0) *
 					256 / Data_40004128.dData_24;
+#endif
 			}
 			//6818
 			Data_400033cc.dwData = sp40 * 1.0 / Data_40004128.dData_8;
@@ -2154,9 +2120,11 @@ void func_65d4(double sp40, double sp48)
 			}
 			else
 			{
+#if 0
 				//6970
 				Data_400033c8.dwData = (Data_40004128.dTargetPositionRaAxis + 0.6 * Data_40004128.dData_176 / 3600.0) *
 					256 / Data_40004128.dData_24;
+#endif
 			}
 			//6a00
 			Data_400033cc.dwData = sp40 * 1.0 / Data_40004128.dData_8;
@@ -2164,12 +2132,14 @@ void func_65d4(double sp40, double sp48)
 		//6a44
 		if (bData_40002c1a == 2)
 		{
+#if 0
 			//6a54
 			if (Data_400033cc.dwData > 980)
 			{
 				Data_400033cc.dwData = 980;
 			}
 			//->6a90
+#endif
 		}
 		else
 		{
@@ -2196,9 +2166,9 @@ void func_65d4(double sp40, double sp48)
 					Data_400033cc.dwData = 5;
 				}
 				//6af4
-				if ((iMountAutoguideRa != 0) || (Data_40003488 != 0))
+				if ((iMountAutoguideRa != 0) || (g_iAscomGuideValueRa != 0))
 				{
-					Data_400033cc.dwData = abs(2*((iMountAutoguideRa + 6 * Data_40003488)) + 6);
+					Data_400033cc.dwData = abs(2*((iMountAutoguideRa + 6 * g_iAscomGuideValueRa)) + 6);
 					
 					if (iMountAutoguideRa == 1)
 					{
@@ -2307,6 +2277,7 @@ void func_65d4(double sp40, double sp48)
 		} //if (bData_40002c1a == 1)
 		else
 		{
+#if 0
 			//6dec
 			if (g_iSlewStepRaAxis != 0)
 			{
@@ -2377,6 +2348,7 @@ void func_65d4(double sp40, double sp48)
 			uart1_write_byte(Data_400033c8.bData[3]);
 			uart1_write_byte(Data_400033c8.bData[2]);
 			uart1_write_byte(Data_400033c8.bData[1]);
+#endif
 		}
 		//6f6c
 		if (bData_40002c1a == 1)
@@ -2387,19 +2359,23 @@ void func_65d4(double sp40, double sp48)
 		}		
 		else
 		{
+#if 0
 			//7010
 			Data_400033c8.dwData = (1.0 * Data_40004128.dData_184 / 3600.0 + Data_40004128.dTargetPositionDecAxis) *
 				256 / Data_40004128.dData_32;
+#endif
 		}
 		//70a0
 		Data_400033cc.dwData = 1.0 * sp48 / Data_40004128.dData_16;
 		
 		if (bData_40002c1a == 2)
 		{
+#if 0
 			if (Data_400033cc.dwData > 980)
 			{
 				Data_400033cc.dwData = 980;
 			}
+#endif
 		}
 		else
 		{
@@ -2420,7 +2396,7 @@ void func_65d4(double sp40, double sp48)
 		if (bData_40002c1a == 1)
 		{
 			//7164
-			if ((Data_40004128.dData_312 == 2) && (Data_4000348c != 0))
+			if ((Data_40004128.dData_312 == 2) && (g_iAscomGuideValueDec != 0))
 			{
 				Data_400033cc.dwData = 32;
 			}
@@ -2523,6 +2499,7 @@ void func_65d4(double sp40, double sp48)
 		} //if (bData_40002c1a == 1)
 		else
 		{
+#if 0
 			//73f8
 			if (g_iSlewStepDecAxis != 0)
 			{
@@ -2593,6 +2570,7 @@ void func_65d4(double sp40, double sp48)
 			uart1_write_byte(Data_400033c8.bData[3]);
 			uart1_write_byte(Data_400033c8.bData[2]);
 			uart1_write_byte(Data_400033c8.bData[1]);
+#endif
 		}
 		//757c
 		func_659c(10);
@@ -2714,8 +2692,10 @@ double func_7654(int a, int b, double sp64, double sp88, double sp96)
 /* 7950 - todo */
 void beep1(int a)
 {
+#if 0
 	bData_40002c08 = a << 5;
 	bData_40002c09 = bData_40002c08 - 1;
+#endif
 }
 
 /* 7978 - todo */
@@ -3215,7 +3195,7 @@ void func_9178(void)
 			theta = get_local_sidereal_time(Data_40004128.Data_40, Data_40004128.bData_44, 
 				Data_40004128.geographicLongitude);
 			
-			fData_400034c8 = theta;
+			g_fLocalSiderealTimerDuringTracking = theta;
 
 			convert_equatorial_to_horizontal(geoCoord/*sp256*/, 
 				equCoord/*sp224*/, 
@@ -3316,6 +3296,7 @@ void func_9178(void)
 			//97dc
 			if (bData_40002c1a == 2)
 			{
+#if 0
 				//97ec
 				if (/*sp264*/geoCoord.dLatitude >= 0)
 				{
@@ -3346,6 +3327,7 @@ void func_9178(void)
 				//9934
 				Data_40004128.dData_176 = 3.6;
 				Data_40004128.dData_184 = 3.0;
+#endif
 			} //if (bData_40002c1a == 2)
 			//9958
 			Data_40004128.dObjPositionRaAxis = Data_40004128.dData_112;
@@ -4060,8 +4042,9 @@ void func_b7c8(double a, double b)
 }
 
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "alignment.c"
-
+#endif
 
 typedef struct
 {
@@ -4162,8 +4145,8 @@ void func_d2cc(void)
 	Data_40004128.dAutoguideRa = 0.0;
 	Data_40004128.dAutoguideDec = 0.0;
 	
-	Data_40003488 = 0;
-	Data_4000348c = 0;
+	g_iAscomGuideValueRa = 0;
+	g_iAscomGuideValueDec = 0;
 }
 
 /* d784 - todo */
@@ -4503,6 +4486,7 @@ void lcd_display_lunar_phase_screen(int year, int month)
 	}
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "earth.c"
 #include "mercury.c"
 #include "venus.c"
@@ -4512,6 +4496,7 @@ void lcd_display_lunar_phase_screen(int year, int month)
 #include "uranus.c"
 #include "neptun.c"
 #include "pluto.c"
+#endif
 
 /* 1af1c - todo */
 double func_1af1c(double a)
@@ -5067,411 +5052,10 @@ void get_all_solar_system_object_equatorial_coordinates(void)
 	calculate_solar_system_object_equatorial_coordinates(10, &dData_400032c0_MoonRightAscension, &dData_400032c8_MoonDeclination); //Moon
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "HelpScreen.c"
-
-/* 20b94 - todo */
-void DisplayMainScreen(void)
-{
-	lcd_display_string(0, 1, 1, strlen(Data_40003360), (unsigned char*)Data_40003360);
-	lcd_display_string(0, 1, 14, strlen(Data_40003364), (unsigned char*)Data_40003364);
-	
-	if (g_bTargetSyncOpen == TRUE)
-	{
-		if (bData_400031eb == 0)
-		{
-			//20c18
-			lcd_display_string(0, 2, 1, 22, ">>>>synchronizing<<<<");
-			
-			bData_400031eb = 1;
-		}
-		else
-		{
-			//0x20c44
-			lcd_display_string(0, 2, 1, 22, "                      ");
-			
-			bData_400031eb = 0;
-		}
-	}
-	else
-	{
-		//0x20c70
-			lcd_display_string(0, 2, 1, 22, "                      ");		
-	}
-	//0x20c8c
-	lcd_display_string(0, 3, 1, strlen(Data_40003370), Data_40003370);
-	lcd_display_string(0, 3, 6, 9, Data_40003374);
-	lcd_display_string(0, 3, 16, 2, Data_40003374 + 10);
-	lcd_display_string(0, 3, 19, 2, Data_40003374 + 13);
-	
-	lcd_display_bitmap(0, 3, 15, (unsigned char*)cBitmapDegree);
-	lcd_display_bitmap(0, 3, 18, (unsigned char*)cBitmapMinute);
-	lcd_display_bitmap(0, 3, 21, (unsigned char*)cBitmapSecond);
-	
-	if (abs(Data_40002e18_SiteLongitudeDegrees) < 100)
-	{
-		lcd_display_string(0, 3, 12, 1, " ");
-	}
-	
-	if (abs(Data_40002e18_SiteLongitudeDegrees) < 10)
-	{
-		lcd_display_string(0, 3, 13, 1, " ");
-	}
-	
-	if (abs(Data_40002e1c_SiteLongitudeMinutes) < 10)
-	{
-		lcd_display_string(0, 3, 16, 1, " ");
-	}
-	
-	if (abs(fData_40002e20_SiteLongitudeSeconds) < 10)
-	{
-		lcd_display_string(0, 3, 19, 1, " ");
-	}
-	
-	lcd_display_string(0, 4, 1, strlen(Data_40003378), Data_40003378);
-	lcd_display_string(0, 4, 6, 9, Data_4000337c);
-	lcd_display_string(0, 4, 16, 2, Data_4000337c + 10);
-	lcd_display_string(0, 4, 19, 2, Data_4000337c + 13);
-	
-	lcd_display_bitmap(0, 4, 15, (unsigned char*)cBitmapDegree);
-	lcd_display_bitmap(0, 4, 18, (unsigned char*)cBitmapMinute);
-	lcd_display_bitmap(0, 4, 21, (unsigned char*)cBitmapSecond);
-	
-	if (abs(Data_40002e38_SiteLatitudeDegrees) < 100)
-	{
-		lcd_display_string(0, 4, 12, 1, " ");
-	}
-	
-	if (abs(Data_40002e38_SiteLatitudeDegrees) < 10)
-	{
-		lcd_display_string(0, 4, 13, 1, " ");
-	}
-	
-	if (abs(Data_40002e3c_SiteLatitudeMinutes) < 10)
-	{
-		lcd_display_string(0, 4, 16, 1, " ");
-	}
-	
-	if (abs(fData_40002e40_SiteLatitudeSeconds) < 10)
-	{
-		lcd_display_string(0, 4, 19, 1, " ");
-	}
-	
-	lcd_display_string(0, 5, 1, strlen(Data_40003380), Data_40003380);
-	lcd_display_string(0, 5, 6, 9, Data_40003384);
-	lcd_display_string(0, 5, 16, 2, Data_40003384 + 10);
-	lcd_display_string(0, 5, 19, 2, Data_40003384 + 13);
-	
-	if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
-	{
-		//21138
-		lcd_display_bitmap(0, 5, 15, (unsigned char*)cBitmapDegree);
-		lcd_display_bitmap(0, 5, 18, (unsigned char*)cBitmapMinute);
-		lcd_display_bitmap(0, 5, 21, (unsigned char*)cBitmapSecond);
-		
-		if (abs(Data_40002d20) < 100)
-		{
-			lcd_display_string(0, 5, 12, 1, " ");
-		}
-		
-		if (abs(Data_40002d20) < 10)
-		{
-			lcd_display_string(0, 5, 13, 1, " ");
-		}
-
-		if (abs(Data_40002d24) < 10)
-		{
-			lcd_display_string(0, 5, 16, 1, " ");
-		}
-		
-		if (abs(fData_40002d28) < 10)
-		{
-			lcd_display_string(0, 5, 19, 1, " ");
-		}
-	} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
-	else
-	{
-		//0x2127c
-		lcd_display_string(0, 5, 15, 1, "h");
-		lcd_display_string(0, 5, 18, 1, "m");
-		lcd_display_string(0, 5, 21, 1, "s");
-
-		if (Data_40002cd8_ObjectRightAscensionHours < 100)
-		{
-			lcd_display_string(0, 5, 12, 1, " ");
-		}
-		
-		if (Data_40002cd8_ObjectRightAscensionHours < 10)
-		{
-			lcd_display_string(0, 5, 13, 1, " ");
-		}
-		
-		if (Data_40002cdc_ObjectRightAscensionMinutes < 10)
-		{
-			lcd_display_string(0, 5, 16, 1, " ");
-		}
-		
-		if (fData_40002ce0_ObjectRightAscensionSeconds < 10)
-		{
-			lcd_display_string(0, 5, 19, 1, " ");
-		}
-	}
-	//0x213c8
-	lcd_display_string(0, 6, 1, strlen(Data_40003388), Data_40003388);
-	lcd_display_string(0, 6, 6, 9, Data_4000338c);
-	lcd_display_string(0, 6, 16, 2, Data_4000338c + 10);
-	lcd_display_string(0, 6, 19, 2, Data_4000338c + 13);
-	
-	lcd_display_bitmap(0, 6, 15, (unsigned char*)cBitmapDegree);
-	lcd_display_bitmap(0, 6, 18, (unsigned char*)cBitmapMinute);
-	lcd_display_bitmap(0, 6, 21, (unsigned char*)cBitmapSecond);
-	
-	if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
-	{
-		//214ac
-		if (abs(Data_40002d48) < 10)
-		{
-			lcd_display_string(0, 6, 13, 1, " ");
-		}
-		
-		if (abs(Data_40002d4c) < 10)
-		{
-			lcd_display_string(0, 6, 16, 1, " ");
-		}
-		
-		if (abs(fData_40002d50) < 10)
-		{
-			lcd_display_string(0, 6, 19, 1, " ");
-		}
-	} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
-	else
-	{
-		//0x21574
-		if (abs(Data_40002d00_ObjectDeclinationDegrees) < 10)
-		{
-			lcd_display_string(0, 6, 13, 1, " ");
-		}
-		
-		if (abs(Data_40002d04_ObjectDeclinationMinutes) < 10)
-		{
-			lcd_display_string(0, 6, 16, 1, " ");
-		}
-
-		if (abs(fData_40002d08_ObjectDeclinationSeconds) < 10)
-		{
-			lcd_display_string(0, 6, 19, 1, " ");
-		}
-	}
-	//0x21638
-	lcd_display_string(0, 7, 1, strlen(Data_40003390), Data_40003390);
-	lcd_display_string(0, 7, 6, 9, Data_40003394);
-	lcd_display_string(0, 7, 16, 2, Data_40003394 + 10);
-	lcd_display_string(0, 7, 19, 2, Data_40003394 + 13);
-	
-	if ((bData_400034b4 == 1) &&
-		(bTrackingMode == MENU_TRACKING_MODE_TRACKING)) //2))
-	{
-		//216f0
-		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
-		{
-			lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
-			lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
-			lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapSecond);
-			
-			if (abs(Data_40002d20) < 100)
-			{
-				lcd_display_string(0, 7, 12, 1, " ");
-			}
-			
-			if (abs(Data_40002d20) < 10)
-			{
-				lcd_display_string(0, 7, 13, 1, " ");
-			}
-			
-			if (abs(Data_40002d24) < 10)
-			{
-				lcd_display_string(0, 7, 16, 1, " ");
-			}
-			
-			if (abs(fData_40002d28) < 10)
-			{
-				lcd_display_string(0, 7, 19, 1, " ");
-			}
-		} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
-		else
-		{
-			//0x21844
-			lcd_display_string(0, 7, 15, 1, "h");
-			lcd_display_string(0, 7, 18, 1, "m");
-			lcd_display_string(0, 7, 21, 1, "s");
-			
-			if (Data_40002cd8_ObjectRightAscensionHours < 100)
-			{
-				lcd_display_string(0, 7, 12, 1, " ");
-			}
-			
-			if (Data_40002cd8_ObjectRightAscensionHours < 10)
-			{
-				lcd_display_string(0, 7, 13, 1, " ");
-			}
-			
-			if (Data_40002cdc_ObjectRightAscensionMinutes < 10)
-			{
-				lcd_display_string(0, 7, 16, 1, " ");
-			}
-						
-			if (fData_40002ce0_ObjectRightAscensionSeconds < 10)
-			{
-				lcd_display_string(0, 7, 19, 1, " ");
-			}
-		}
-	}
-	else
-	{
-		//0x21950
-		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
-		{
-			//21960
-			lcd_display_bitmap(0, 7, 15, (unsigned char*)cBitmapDegree);
-			lcd_display_bitmap(0, 7, 18, (unsigned char*)cBitmapMinute);
-			lcd_display_bitmap(0, 7, 21, (unsigned char*)cBitmapSecond);
-			
-			if (abs(Data_40002dac) < 100)
-			{
-				lcd_display_string(0, 7, 12, 1, " ");
-			}
-			
-			if (abs(Data_40002dac) < 10)
-			{
-				lcd_display_string(0, 7, 13, 1, " ");
-			}
-			
-			if (abs(Data_40002db0) < 10)
-			{
-				lcd_display_string(0, 7, 16, 1, " ");
-			}
-			
-			if (abs(fData_40002db4) < 10)
-			{
-				lcd_display_string(0, 7, 19, 1, " ");
-			}
-		} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
-		else
-		{
-			//0x21aec
-			lcd_display_string(0, 7, 15, 1, "h");
-			lcd_display_string(0, 7, 18, 1, "m");
-			lcd_display_string(0, 7, 21, 1, "s");
-			
-			if (Data_40002d68_OTARightAscensionHours < 100)
-			{
-				lcd_display_string(0, 7, 12, 1, " ");
-			}
-			
-			if (Data_40002d68_OTARightAscensionHours < 10)
-			{
-				lcd_display_string(0, 7, 13, 1, " ");
-			}
-			
-			if (Data_40002d6c_OTARightAscensionMinutes < 10)
-			{
-				lcd_display_string(0, 7, 16, 1, " ");
-			}
-			
-			if (fData_40002d70_OTARightAscensionSeconds < 10)
-			{
-				lcd_display_string(0, 7, 19, 1, " ");
-			}
-		}
-	}
-	//0x21bf4
-	lcd_display_string(0, 8, 1, strlen(Data_40003398), Data_40003398);
-	lcd_display_string(0, 8, 6, 9, Data_4000339c);
-	lcd_display_string(0, 8, 16, 2, Data_4000339c + 10);
-	lcd_display_string(0, 8, 19, 2, Data_4000339c + 13);
-	
-	lcd_display_bitmap(0, 8, 15, (unsigned char*)cBitmapDegree);
-	lcd_display_bitmap(0, 8, 18, (unsigned char*)cBitmapMinute);
-	lcd_display_bitmap(0, 8, 21, (unsigned char*)cBitmapSecond);
-	
-	if ((bData_400034b4 == 1) &&
-		(bTrackingMode == MENU_TRACKING_MODE_TRACKING)) //2))
-	{
-		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
-		{
-			if (abs(Data_40002d48) < 10)
-			{
-				lcd_display_string(0, 8, 13, 1, " ");
-			}
-			
-			if (abs(Data_40002d4c) < 10)
-			{
-				lcd_display_string(0, 8, 16, 1, " ");
-			}
-			
-			if (abs(fData_40002d50) < 10)
-			{
-				lcd_display_string(0, 8, 19, 1, " ");
-			}
-		} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
-		else
-		{
-			//0x21dc0
-			if (abs(Data_40002d00_ObjectDeclinationDegrees) < 10)
-			{
-				lcd_display_string(0, 8, 13, 1, " ");
-			}
-			
-			if (abs(Data_40002d04_ObjectDeclinationMinutes) < 10)
-			{
-				lcd_display_string(0, 8, 16, 1, " ");
-			}
-			
-			if (abs(fData_40002d08_ObjectDeclinationSeconds) < 10)
-			{
-				lcd_display_string(0, 8, 19, 1, " ");
-			}
-		}
-	}
-	else
-	{
-		//0x21e88
-		if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
-		{
-			if (abs(Data_40002de0) < 10)
-			{
-				lcd_display_string(0, 8, 13, 1, " ");
-			}
-			
-			if (abs(Data_40002de4) < 10)
-			{
-				lcd_display_string(0, 8, 16, 1, " ");
-			}
-			
-			if (abs(fData_40002de8) < 10)
-			{
-				lcd_display_string(0, 8, 19, 1, " ");
-			}
-		} //if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
-		else
-		{
-			//0x21f60
-			if (abs(Data_40002d8c_OTADeclinationDegrees) < 10)
-			{
-				lcd_display_string(0, 8, 13, 1, " ");
-			}
-			
-			if (abs(Data_40002d90_OTADeclinationMinutes) < 10)
-			{
-				lcd_display_string(0, 8, 16, 1, " ");
-			}
-			
-			if (abs(fData_40002d94_OTADeclinationSeconds) < 10)
-			{
-				lcd_display_string(0, 8, 19, 1, " ");
-			}
-		}	
-	}
-}
+#include "DisplayMainScreen.c"
+#endif
 
 char Data_40000380[10] = "         "; //40000380, size???
 char Data_4000038a[10] = "         "; //4000038a, size???
@@ -5585,7 +5169,9 @@ void get_solar_system_object_data(int a, float* pRightAscension, float* pDeclina
 	}
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "func_23130.c"
+#endif
 
 /* 24574 - todo */
 void PrepareMainScreenItems(void)
@@ -5602,24 +5188,24 @@ void PrepareMainScreenItems(void)
 	Data_40002e3c_SiteLatitudeMinutes = (dData_40002e48_SiteLatitude - Data_40002e38_SiteLatitudeDegrees) * 60.0;
 	fData_40002e40_SiteLatitudeSeconds = (dData_40002e48_SiteLatitude * 60.0 - Data_40002e38_SiteLatitudeDegrees * 60.0 - Data_40002e3c_SiteLatitudeMinutes) * 60.0;
 	
-	sprintf(Data_40003fa9, "%04d-%02d-%02d", 
+	sprintf(g_MenuStringBuffer1, "%04d-%02d-%02d",
 		Data_40002e5c_Year, bData_40002e60_Month, bData_40002e61_Day);
-	Data_40003360 = Data_40003fa9;
+	g_pcstrMenuLine1 = g_MenuStringBuffer1;
 	
-	sprintf(Data_40003fbe, "%02d:%02d:%02d", 
+	sprintf(g_MenuStringBuffer2, "%02d:%02d:%02d",
 		bData_40002e62_Hours, bData_40002e63_Minutes, bData_40002e64_Seconds);
-	Data_40003364 = Data_40003fbe;
+	g_pcstrMenuLine2 = g_MenuStringBuffer2;
 	
 	switch (bData_40002e79_SkyLandTargetSeletion)
 	{
 		case 0:
 			//0x24950
-			Data_40003370 = "Sky ";
+			g_pcstrMenuLine5 = "Sky ";
 			break;
 		
 		case 1:
 			//0x24964
-			Data_40003370 = "Land";
+			g_pcstrMenuLine5 = "Land";
 			break;
 		
 		default:
@@ -5630,7 +5216,7 @@ void PrepareMainScreenItems(void)
 	if (dData_40002e28_SiteLongitude < 0)
 	{
 		//2499c
-		sprintf(Data_40004012, "Site:W%03d?%02d'%02d^", 
+		sprintf(g_MenuStringBuffer6, "Site:W%03d?%02d'%02d^",
 			abs(Data_40002e18_SiteLongitudeDegrees), 
 			abs(Data_40002e1c_SiteLongitudeMinutes), 
 			abs(fData_40002e20_SiteLongitudeSeconds) & 0xff);
@@ -5638,24 +5224,24 @@ void PrepareMainScreenItems(void)
 	else
 	{
 		//0x24a14
-		sprintf(Data_40004012, "Site:E%03d?%02d'%02d^", 
+		sprintf(g_MenuStringBuffer6, "Site:E%03d?%02d'%02d^",
 			abs(Data_40002e18_SiteLongitudeDegrees), 
 			abs(Data_40002e1c_SiteLongitudeMinutes), 
 			abs(fData_40002e20_SiteLongitudeSeconds) & 0xff);
 	}
 	//0x24a88
-	Data_40003374 = Data_40004012;
+	g_pcstrMenuLine6 = g_MenuStringBuffer6;
 	
 	switch (bData_40002e7a_MountType)
 	{
 		case MENU_MOUNT_TYPE_AZ: //0:
 			//0x24ab0
-			Data_40003378 = "AZ";
+			g_pcstrMenuLine7 = "AZ";
 			break;
 		
 		case MENU_MOUNT_TYPE_EQU: //1:
 			//0x24ac4
-			Data_40003378 = "EQ";
+			g_pcstrMenuLine7 = "EQ";
 			break;
 		
 		default:
@@ -5666,7 +5252,7 @@ void PrepareMainScreenItems(void)
 	if (dData_40002e48_SiteLatitude < 0)
 	{
 		//24afc
-		sprintf(Data_4000403c, "     S%03d?%02d'%02d^", 
+		sprintf(g_MenuStringBuffer8, "     S%03d?%02d'%02d^",
 			abs(Data_40002e38_SiteLatitudeDegrees), 
 			abs(Data_40002e3c_SiteLatitudeMinutes), 
 			abs(fData_40002e40_SiteLatitudeSeconds) & 0xff);
@@ -5674,24 +5260,24 @@ void PrepareMainScreenItems(void)
 	else
 	{
 		//0x24b74
-		sprintf(Data_4000403c, "     N%03d?%02d'%02d^", 
+		sprintf(g_MenuStringBuffer8, "     N%03d?%02d'%02d^",
 			abs(Data_40002e38_SiteLatitudeDegrees), 
 			abs(Data_40002e3c_SiteLatitudeMinutes), 
 			abs(fData_40002e40_SiteLatitudeSeconds) & 0xff);
 	}
 	//0x24be8
-	Data_4000337c = Data_4000403c;
+	g_pcstrMenuLine8 = g_MenuStringBuffer8;
 	
 	switch (bData_40002e7b_GpsAvailable)
 	{
 		case 0:
 			//0x24c10
-			Data_40003380 = "    ";
+			g_pcstrMenuLine9 = "    ";
 			break;
 		
 		case 1:
 			//0x24c24
-			Data_40003380 = "GPS!";
+			g_pcstrMenuLine9 = "GPS!";
 			break;
 		
 		default:
@@ -5702,14 +5288,16 @@ void PrepareMainScreenItems(void)
 	switch (bData_40002e7a_MountType)
 	{
 		case MENU_MOUNT_TYPE_AZ: //0:
+#if 0
 			//0x24d0c
-			sprintf(Data_40004066, " OBJ: %03d?%02d'%02.0f^", 
+			sprintf(g_MenuStringBuffer9, " OBJ: %03d?%02d'%02.0f^",
 				abs(Data_40002d20), abs(Data_40002d24), fabs(fData_40002d28));
+#endif
 			break;
 		
 		case MENU_MOUNT_TYPE_EQU: //1:
 			//0x24d88
-			sprintf(Data_40004066, " OBJ: %03dh%02dm%02ds",
+			sprintf(g_MenuStringBuffer9, " OBJ: %03dh%02dm%02ds",
 				Data_40002cd8_ObjectRightAscensionHours, 
 				Data_40002cdc_ObjectRightAscensionMinutes, 
 				(unsigned int)fData_40002ce0_ObjectRightAscensionSeconds & 0xFF);
@@ -5720,28 +5308,28 @@ void PrepareMainScreenItems(void)
 			break;
 	}
 	//24dcc
-	Data_40003384 = Data_40004066;
+	g_pcstrMenuLine10 = g_MenuStringBuffer9;
 	
 	switch (bData_40002e7c_TrackingRateType)
 	{
 		case MENU_TRACKING_RATE_STAR_SPEED: //0:
 			//0x24e04
-			Data_40003388 = "Cel";
+			g_pcstrMenuLine11 = "Cel";
 			break;
 			
 		case MENU_TRACKING_RATE_SOLAR_SPEED: //1:
 			//0x24e18
-			Data_40003388 = "Sun";
+			g_pcstrMenuLine11 = "Sun";
 			break;
 		
 		case MENU_TRACKING_RATE_MOON_SPEED: //2:
 			//0x24e2c
-			Data_40003388 = "Lun";
+			g_pcstrMenuLine11 = "Lun";
 			break;
 		
 		case MENU_TRACKING_RATE_CUST_SPEED: //3:
 			//0x24e40
-			Data_40003388 = "Def";
+			g_pcstrMenuLine11 = "Def";
 			break;
 		
 		default:
@@ -5752,20 +5340,22 @@ void PrepareMainScreenItems(void)
 	switch (bData_40002e7a_MountType)
 	{
 		case MENU_MOUNT_TYPE_AZ: //0:
+#if 0
 			//0x24e7c
 			if (Data_40004128.dData_120 > 90)
 			{
 				//24e9c
-				sprintf(Data_40004090, "      -%02d?%02d'%02d^", 
+				sprintf(g_MenuStringBuffer10, "      -%02d?%02d'%02d^",
 					abs(Data_40002d48), abs(Data_40002d4c), abs(fData_40002d50));
 			}
 			else
 			{
 				//0x24f10
-				sprintf(Data_40004090, "      +%02d?%02d'%02d^", 
+				sprintf(g_MenuStringBuffer10, "      +%02d?%02d'%02d^",
 					abs(Data_40002d48), abs(Data_40002d4c), abs(fData_40002d50));
 			}
 			//->0x25048
+#endif
 			break;
 		
 		case MENU_MOUNT_TYPE_EQU: //1:
@@ -5773,7 +5363,7 @@ void PrepareMainScreenItems(void)
 			if (g_iObjectDeclinationSign == -1)
 			{
 				//24f98
-				sprintf(Data_40004090, "      -%02d?%02d'%02d^",
+				sprintf(g_MenuStringBuffer10, "      -%02d?%02d'%02d^",
 					abs(Data_40002d00_ObjectDeclinationDegrees), 
 					abs(Data_40002d04_ObjectDeclinationMinutes), 
 					abs(fData_40002d08_ObjectDeclinationSeconds));
@@ -5781,7 +5371,7 @@ void PrepareMainScreenItems(void)
 			else
 			{
 				//0x2500c
-				sprintf(Data_40004090, "      +%02d?%02d'%02d^",
+				sprintf(g_MenuStringBuffer10, "      +%02d?%02d'%02d^",
 					Data_40002d00_ObjectDeclinationDegrees,
 					Data_40002d04_ObjectDeclinationMinutes,
 					((unsigned int)fData_40002d08_ObjectDeclinationSeconds) & 0xff);
@@ -5793,53 +5383,53 @@ void PrepareMainScreenItems(void)
 			break;
 	}
 	//2504c
-	Data_4000338c = Data_40004090;
+	g_pcstrMenuLine12 = g_MenuStringBuffer10;
 	//25058
 	switch (g_eSlewRateIndex)
 	{
 		case SLEW_RATE_1X: //1:
 			//0x25158
-			Data_40003390 = "1X   ";
+			g_pcstrMenuLine13 = "1X   ";
 			break;
 		
 		case SLEW_RATE_2X: //2:
 			//0x2516c
-			Data_40003390 = "2X   ";
+			g_pcstrMenuLine13 = "2X   ";
 			break;
 		
 		case SLEW_RATE_8X: //3:
 			//0x25180
-			Data_40003390 = "8X   ";
+			g_pcstrMenuLine13 = "8X   ";
 			break;
 		
 		case SLEW_RATE_16X: //4:
 			//0x25194
-			Data_40003390 = "16X  ";
+			g_pcstrMenuLine13 = "16X  ";
 			break;
 		
 		case SLEW_RATE_64X: //5:
 			//0x251a8
-			Data_40003390 = "64X  ";
+			g_pcstrMenuLine13 = "64X  ";
 			break;
 		
 		case SLEW_RATE_128X: //6:
 			//0x251bc
-			Data_40003390 = "128X";
+			g_pcstrMenuLine13 = "128X";
 			break;
 		
 		case SLEW_RATE_256X: //7:
 			//0x251d0
-			Data_40003390 = "256X";
+			g_pcstrMenuLine13 = "256X";
 			break;
 		
 		case SLEW_RATE_512X: //8:
 			//0x251e4
-			Data_40003390 = "512X";
+			g_pcstrMenuLine13 = "512X";
 			break;
 		
 		case SLEW_RATE_MAX: //9:
 			//0x251f8
-			Data_40003390 = "Max ";
+			g_pcstrMenuLine13 = "Max ";
 			break;
 		
 		default:
@@ -5851,13 +5441,13 @@ void PrepareMainScreenItems(void)
 	{
 		case MENU_MOUNT_TYPE_AZ: //0:
 			//0x25234
-			sprintf(Data_400040ba, " OTA: %03d?%02d'%02d^", 
+			sprintf(g_MenuStringBuffer11, " OTA: %03d?%02d'%02d^",
 				abs(Data_40002dac), abs(Data_40002db0), abs(fData_40002db4) & 0xff);
 			break;
 		
 		case MENU_MOUNT_TYPE_EQU: //1:
 			//0x252b0
-			sprintf(Data_400040ba, " OTA: %03dh%02dm%02ds", 
+			sprintf(g_MenuStringBuffer11, " OTA: %03dh%02dm%02ds",
 				Data_40002d68_OTARightAscensionHours, 
 				Data_40002d6c_OTARightAscensionMinutes, 
 				abs(fData_40002d70_OTARightAscensionSeconds) & 0xff);
@@ -5868,7 +5458,7 @@ void PrepareMainScreenItems(void)
 			break;
 	}
 	//0x25304
-	Data_40003394 = Data_400040ba;
+	g_pcstrMenuLine14 = g_MenuStringBuffer11;
 	
 	switch (bData_40002e7a_MountType)
 	{
@@ -5878,13 +5468,13 @@ void PrepareMainScreenItems(void)
 				(dData_40002df8 < 0))
 			{
 				//0x25378
-				sprintf(Data_400040e4, "      -%02d?%02d'%02d^", 
+				sprintf(g_MenuStringBuffer12, "      -%02d?%02d'%02d^",
 					abs(Data_40002de0), abs(Data_40002de4), abs(fData_40002de8) & 0xFF);
 			}
 			else
 			{
 				//0x253f0
-				sprintf(Data_400040e4, "      +%02d?%02d'%02d^", 
+				sprintf(g_MenuStringBuffer12, "      +%02d?%02d'%02d^",
 					abs(Data_40002de0), abs(Data_40002de4), abs(fData_40002de8) & 0xFF);
 			}
 			break;
@@ -5894,7 +5484,7 @@ void PrepareMainScreenItems(void)
 			if (dData_40002d98 < 0)
 			{
 				//25534
-				sprintf(Data_400040e4, "      -%02d?%02d'%02d      ",
+				sprintf(g_MenuStringBuffer12, "      -%02d?%02d'%02d      ",
 					abs(Data_40002d8c_OTADeclinationDegrees), 
 					abs(Data_40002d90_OTADeclinationMinutes), 
 					abs(fData_40002d94_OTADeclinationSeconds) & 0xFF);
@@ -5902,7 +5492,7 @@ void PrepareMainScreenItems(void)
 			else
 			{
 				//0x255ac
-				sprintf(Data_400040e4, "      +%02d?%02d'%02d      ",
+				sprintf(g_MenuStringBuffer12, "      +%02d?%02d'%02d      ",
 					abs(Data_40002d8c_OTADeclinationDegrees), 
 					abs(Data_40002d90_OTADeclinationMinutes), 
 					abs(fData_40002d94_OTADeclinationSeconds) & 0xFF);
@@ -5914,7 +5504,7 @@ void PrepareMainScreenItems(void)
 			break;
 	}
 	//0x2562c
-	Data_4000339c = Data_400040e4;
+	g_pcstrMenuLine16 = g_MenuStringBuffer12;
 	
 	switch (bTrackingMode)
 	{
@@ -5922,45 +5512,45 @@ void PrepareMainScreenItems(void)
 			//0x25678
 		case 100:
 			//0x25680
-			Data_40003398 = "Stop";
+			g_pcstrMenuLine15 = "Stop";
 			break;
 		
 		case MENU_TRACKING_MODE_POINTING: //1:
 			//0x25690
-			Data_40003398 = "Poin";
+			g_pcstrMenuLine15 = "Poin";
 			break;
 		
 		case MENU_TRACKING_MODE_TRACKING: //2:
 			//0x256a4
-			Data_40003398 = "Trac";
+			g_pcstrMenuLine15 = "Trac";
 			break;
 		
 		case MENU_TRACKING_MODE_UNDER_HORIZON: //3:
 			//0x256b8
-			Data_40003398 = "UdHn";
+			g_pcstrMenuLine15 = "UdHn";
 			break;
 		
 		default:
 			//0x256cc
-			Data_40003398 = "Slew";
+			g_pcstrMenuLine15 = "Slew";
 			break;
 	}
 	
 	if ((bData_400034b4 == 1) &&
 		(bTrackingMode == MENU_TRACKING_MODE_TRACKING)) //2))
 	{
-		Data_40003394 = Data_40004066;
-		Data_4000339c = Data_40004090;
-		Data_400040ba[1] = 'O';
-		Data_400040ba[2] = 'T';
-		Data_400040ba[3] = 'A';
-		Data_40003394 = Data_400040ba;
-		Data_4000339c = Data_400040e4;
+		g_pcstrMenuLine14 = g_MenuStringBuffer9;
+		g_pcstrMenuLine16 = g_MenuStringBuffer10;
+		g_MenuStringBuffer11[1] = 'O';
+		g_MenuStringBuffer11[2] = 'T';
+		g_MenuStringBuffer11[3] = 'A';
+		g_pcstrMenuLine14 = g_MenuStringBuffer11;
+		g_pcstrMenuLine16 = g_MenuStringBuffer12;
 	}
 }
 
+#ifdef INCLUDE_ALL_C_FILES
 #include "language.c"
 #include "func_27844.c"
 #include "func_3d72c.c"
-
-
+#endif

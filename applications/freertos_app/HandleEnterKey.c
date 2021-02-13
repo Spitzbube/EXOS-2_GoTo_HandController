@@ -295,10 +295,10 @@ void HandleEnterKey(void)
 		
 		case MENU_CONTEXT_ALIGNMENT: //1000:
 			//0x53698
-			bData_40003173 = 1;
-			bData_40003171 = 1;
-			bData_40003172 = 1;
-			bData_40003170 = 1;
+			g_bAlignmentFourLineMenuFocusItem = 1;
+			g_bAlignmentFourLineMenuTopItem = 1;
+			g_bAlignmentEightLineMenuFocusItem = 1;
+			g_bAlignmentEightLineMenuTopItem = 1;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_ONE_STAR_ALIGN; //1100;
 			break;
 		
@@ -324,8 +324,8 @@ void HandleEnterKey(void)
 			//0x53740
 			bData_4000317f = 1;
 			bData_4000317d = 1;
-			bData_4000317e = 1;
-			bData_4000317c = 1;
+			g_bSetupEightLineMenuFocusItem = 1;
+			g_bSetupEightLineMenuTopItem = 1;
 			Data_40002c64_MenuContextId = MENU_CONTEXT_TIME_DATE; //4100;
 			break;
 		
@@ -359,12 +359,12 @@ void HandleEnterKey(void)
 			bCharacterInputPosition = 5;
 			bData_400032a4_OTAZeroDataErrorCount = 0;
 		
-			flash_get_ota_zero_data(&fData_4000329c, &fData_400032a0);
+			flash_get_ota_zero_data(&g_fOtaZeroAzimuth, &g_fOtaZeroAltitude);
 		
-			sprintf(Data_400028d7, "Azi:%03d", (unsigned short)fData_4000329c);
-			sprintf(Data_400028e1, "Alt: %02d", (unsigned short)fData_400032a0);
-			sprintf(Data_40002789, "Azi:%03d", (unsigned short)fData_4000329c);
-			sprintf(Data_40002792, "Alt: %02d", (unsigned short)fData_400032a0);
+			sprintf(Data_400028d7, "Azi:%03d", (unsigned short)g_fOtaZeroAzimuth);
+			sprintf(Data_400028e1, "Alt: %02d", (unsigned short)g_fOtaZeroAltitude);
+			sprintf(Data_40002789, "Azi:%03d", (unsigned short)g_fOtaZeroAzimuth);
+			sprintf(Data_40002792, "Alt: %02d", (unsigned short)g_fOtaZeroAltitude);
 			break;
 		
 		case MENU_CONTEXT_TRACKING_RATE: //4700:
@@ -1123,6 +1123,7 @@ void HandleEnterKey(void)
 			Data_40002c64_MenuContextId = MENU_CONTEXT_LANGUAGE; //4800;
 			break;
 		
+#if 0
 		case MENU_CONTEXT_GERMAN: //49002:
 			//0x55084
 			bData_40003196_CurrentLanguage = MENU_LANGUAGE_GERMAN; //2;
@@ -1158,6 +1159,7 @@ void HandleEnterKey(void)
 			flash_write(0xdcb, 0, 528, Data_400035bc);
 			Data_40002c64_MenuContextId = MENU_CONTEXT_LANGUAGE; //4800;
 			break;
+#endif
 		
 		case MENU_CONTEXT_TRACKING_RATE_STAR_SPEED: //4801:
 			//0x551e4: Tracking Rate -> "Star Speed"

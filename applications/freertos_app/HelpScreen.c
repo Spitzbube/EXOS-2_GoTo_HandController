@@ -2,9 +2,9 @@
 /* 1e228 - todo */
 void DisplayHelpScreen(void)
 {
-	if (Data_4000318c != Data_40003190)
+	if (g_iMenuContextIdNew != g_iMenuContextIdOld)
 	{
-		Data_40003190 = Data_4000318c;
+		g_iMenuContextIdOld = g_iMenuContextIdNew;
 	}
 
 	switch (Data_40002c64_MenuContextId - 500)

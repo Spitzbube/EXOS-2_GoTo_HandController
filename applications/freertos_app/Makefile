@@ -20,6 +20,25 @@ include $(TOPDIR)/env/make/Makefile.config
 # source files
 ################################################################################
 
+#SOURCES += file_1f30.c
+#SOURCES += object_database.c
+#SOURCES += align_stars.c
+#SOURCES += alignment.c
+#SOURCES += earth.c
+#SOURCES += mercury.c
+#SOURCES += venus.c
+#SOURCES += mars.c
+#SOURCES += jupiter.c
+#SOURCES += saturn.c
+#SOURCES += uranus.c
+#SOURCES += neptun.c
+#SOURCES += pluto.c
+#SOURCES += HelpScreen.c
+#SOURCES += func_23130.c
+#SOURCES += language.c
+#SOURCES += func_27844.c
+#SOURCES += func_3d72c.c
+SOURCES += led.c
 SOURCES += main.c
 SOURCES += uart.c
 SOURCES += data.c
@@ -29,7 +48,7 @@ SOURCES += Startup.s
 # define define user cc flags
 ################################################################################
 
-
+CCFLAGS += -DINCLUDE_ALL_C_FILES
 
 ################################################################################
 # define define user ld flags
