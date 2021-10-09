@@ -250,14 +250,14 @@ extern char bData_40002c13_uart1ReceiveComplete; //40002c13
 extern unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
 extern unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
 extern unsigned char uart1_bRxData; //40002c19
-extern unsigned char bData_40002c1a; //40002c1a // V2.2: 40002c1e
+extern unsigned char g_bMountType; //40002c1a // V2.2: 40002c1e
 extern int g_iUart0GuideValueRa; //40002c1c
 extern int g_iUart0GuideValueDec; //40002c20
 extern Union_40002c24 Data_40002c24; //40002c24
 extern Union_40002c28 Data_40002c28; //40002c28
 extern char bHelpActive; //40002c58
 extern unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
-extern char bData_40002c5a; //40002c5a
+extern char g_bKeyBeepEnabled; //40002c5a
 extern int Data_40002c5c_AlignmentStarCount; //40002c5c
 extern unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
 extern unsigned char bData_40002c61; //40002c61

@@ -162,12 +162,12 @@ void ProcessAscomCommands(void)
 
 		case 33:
 			//6ccac: Get AlignmentMode
-			if (bData_40002c1a == 1)
+			if (g_bMountType == 1)
 			{
 				//Alignment Mode Polar
 				sp40[4] = 0x50;
 			}
-			else if (bData_40002c1a == 2)
+			else if (g_bMountType == 2)
 			{
 				//Alignment Mode AltAz
 				sp40[4] = 0x41;
@@ -246,7 +246,7 @@ void ProcessAscomCommands(void)
 			if (bData_4000352e > 2)
 			{
 				//6cf0c
-				if (bData_40002c1a == 2)
+				if (g_bMountType == 2)
 				{
 					//6cf1c
 					double sp32, sp24;

@@ -133,7 +133,7 @@ void SlewAxis(int axis, int direction, int speed)
 				break;
 		}
 
-		if (bData_40002c1a == 1)
+		if (g_bMountType == 1)
 		{
 			//57674
 			switch (speed)
@@ -216,9 +216,9 @@ void SlewAxis(int axis, int direction, int speed)
 					break;
 				#endif
 			}
-		} //if (bData_40002c1a == 1)
+		} //if (g_bMountType == 1)
 		//0x57874
-		if (bData_40002c1a == 2)
+		if (g_bMountType == 2)
 		{
 			//57884
 			switch (speed)
@@ -298,7 +298,7 @@ void SlewAxis(int axis, int direction, int speed)
 					break;
 				#endif
 			}
-		} //if (bData_40002c1a == 2)
+		} //if (g_bMountType == 2)
 		//0x57a1c
 		for (i = 0; i < 8; i++)
 		{

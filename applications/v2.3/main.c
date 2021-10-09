@@ -225,122 +225,8 @@ void HandleOTAZeroData(void)
 }
 
 
-#include "file_5099c.c"
+#include "HandleReset.c"
 
-
-/* 50b40 - todo */
-void HandleReset(void)
-{
-	char sp40[528];
-	unsigned char customSiteName[20];
-	float lon;
-	float lat;
-	int zone;
-	unsigned short i;
-	
-	lcd_display_clear();
-	lcd_display_string(0, 4, 1, 21, "System resetting...    ");
-	
-	i = 0;
-	for (i = 0; i < 16; i++)
-	{
-		//0x50b74
-		flash_read((unsigned short)(0xddd + i), 0, sizeof(sp40), sp40);		
-		flash_write((unsigned short)(0xdc9 + i), 0, sizeof(sp40), sp40);
-	}
-	
-	func_d2cc();
-	func_5099c();
-	
-	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x44);
-	
-	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x64);
-
-	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x04);
-	
-	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x24);
-	
-	func_659c(10);
-	
-	if (bData_40002c1a == 1)
-	{
-		bData_40002e7a_MountType = MENU_MOUNT_TYPE_EQU; //1;
-	}
-	else
-	{
-		bData_40002e7a_MountType = MENU_MOUNT_TYPE_AZ; //0;
-	}
-	//50c98
-	Data_400034d0 = 0.05;
-	Data_400034d8 = 0.045;
-	
-	flash_get_ota_zero_data(&fData_4000329c, &fData_400032a0);
-	
-	Data_40004128.dData_192 = fData_4000329c;
-	Data_40004128.dData_200 = fData_400032a0;
-	
-	flash_get_custom_site_data(customSiteName, &lon, &lat, &zone);
-	
-	Data_40004128.geographicLongitude = lon;
-	Data_40004128.geographicLatitude = lat;
-	
-	Data_40002e54_Zone = zone;
-	
-	strCustomSiteName[6] = customSiteName[0];
-	strCustomSiteName[7] = customSiteName[1];
-	strCustomSiteName[8] = customSiteName[2];
-	strCustomSiteName[9] = customSiteName[3];
-	strCustomSiteName[10] = customSiteName[4];
-	strCustomSiteName[11] = customSiteName[5];
-	strCustomSiteName[12] = customSiteName[6];
-	strCustomSiteName[13] = customSiteName[7];
-	
-	if (lon > 0) //BUG? East is negative!
-	{
-		//50d90
-		sprintf(strCustomSiteLongitude, "  Lon:E%03dd%02df ",
-			DEGREES_MINUTES(lon));
-	}
-	else
-	{
-		//0x50edc
-		sprintf(strCustomSiteLongitude, "  Lon:W%03dd%02df ",
-			DEGREES_MINUTES(lon)); //Bug: abs()?
-	}
-	//0x50f30
-	if (lat > 0)
-	{
-		//50f40
-		sprintf(strCustomSiteLatitude, "  Lat:N%02dd%02df ",
-			DEGREES_MINUTES(lat));
-	}
-	else
-	{
-		//0x50f98
-		sprintf(strCustomSiteLatitude, "  Lat:S%02dd%02df ",
-			DEGREES_MINUTES(lat)); //Bug: abs()
-	}
-	//0x50fec
-	if (zone > 0)
-	{
-		sprintf(strCustomSiteTimezone, " Zone:E%02d", zone);
-	}
-	else
-	{
-		//0x5100c
-		sprintf(strCustomSiteTimezone, " Zone:W%02d", zone);
-	}
-	
-	func_659c(2000);
-	beep1(2);
-	func_659c(100);
-	
-	Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;
-}
 
 /* 5104c - todo */
 void HandleCustomSiteData(void)
@@ -411,7 +297,7 @@ void HandleCustomSiteData(void)
 		
 		if (bData_40002f1e_SetupLocalData == 1)
 		{
-			if (bData_40002c1a == 1)
+			if (g_bMountType == MOUNT_TYPE_EQU)
 			{
 				//51290
 				lcd_display_clear();
@@ -1528,7 +1414,7 @@ void SlewStop(void)
 		//0x5f128
 		if (g_bSingleSlewActive == 1)
 		{
-			if (bData_40002c1a == 2)
+			if (g_bMountType == MOUNT_TYPE_HOR)
 			{
 				UART1_WRITE_HEADER(1);
 				uart1_write_byte(0);
@@ -2681,9 +2567,9 @@ void UserInterfaceCycle(void)
 	if (bData_40002c68 == 0)
 	{
 		//6a330
-		if (bData_40002c5a == 1)
+		if (g_bKeyBeepEnabled == 1)
 		{
-			func_d784(1);
+			key_beep(1);
 		}
 		//6a348
 		switch (bData_40002c69_KeyCode)
@@ -3100,6 +2986,12 @@ double func_6ab74(int a)
 	return d;
 }
 
+#define MotorDataBigToLittleEndian(dValue) \
+	Data_400031a0.bData[3] = Data_40003592_uart1ReceiveDataBuffer[2]; \
+	Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3]; \
+	Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4]; \
+	dValue = Data_400031a0.Data;
+
 /* 6ae24 - complete */
 double InquireMotorData(int a)
 {
@@ -3143,7 +3035,7 @@ double InquireMotorData(int a)
 	
 	wait = 20;
 	
-	if (bData_40002c1a != 0)
+	if (g_bMountType != MOUNT_TYPE_UNKNOWN)
 	{
 		while ((bData_40002c13_uart1ReceiveComplete == 0) && (wait > 2))
 		{
@@ -3162,12 +3054,8 @@ double InquireMotorData(int a)
 				//0x6af50
 				if (Data_40003592_uart1ReceiveDataBuffer[0] == 0x04)
 				{
-					//6af64
-					Data_400031a0.bData[3] = Data_40003592_uart1ReceiveDataBuffer[2];
-					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
-					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
-					
-					dValue = Data_400031a0.Data;
+					//6af64: RA Inquire response?
+					MotorDataBigToLittleEndian(dValue);
 					g_dMotorPositionRaAxis = dValue * 360.0 / 841763108.524032;
 				}
 				//0x6afcc -> 0x6b15c
@@ -3178,11 +3066,7 @@ double InquireMotorData(int a)
 				if (Data_40003592_uart1ReceiveDataBuffer[0] == 0x24)
 				{
 					//6af64: DEC Inquire response?
-					Data_400031a0.bData[3] = Data_40003592_uart1ReceiveDataBuffer[2];
-					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
-					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
-					
-					dValue = Data_400031a0.Data;
+					MotorDataBigToLittleEndian(dValue);
 					g_dMotorPositionDecAxis = dValue * 360.0 / 841763108.524032;
 				}
 				//0x6b04c -> 0x6b15c
@@ -3193,11 +3077,7 @@ double InquireMotorData(int a)
 				if (Data_40003592_uart1ReceiveDataBuffer[0] == 0x44)
 				{
 					//6b064
-					Data_400031a0.bData[3] = Data_40003592_uart1ReceiveDataBuffer[2];
-					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
-					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
-					
-					dValue = Data_400031a0.Data;
+					MotorDataBigToLittleEndian(dValue);
 					g_dMotorPositionAziAxis = dValue * 360.0 / 278879846.40000004;
 					#if 1
 					if (Data_400031a0.Data == 0)
@@ -3213,11 +3093,7 @@ double InquireMotorData(int a)
 				if (Data_40003592_uart1ReceiveDataBuffer[0] == 0x64)
 				{
 					//6b0e8
-					Data_400031a0.bData[3] = Data_40003592_uart1ReceiveDataBuffer[2];
-					Data_400031a0.bData[2] = Data_40003592_uart1ReceiveDataBuffer[3];
-					Data_400031a0.bData[1] = Data_40003592_uart1ReceiveDataBuffer[4];
-					
-					dValue = Data_400031a0.Data;
+					MotorDataBigToLittleEndian(dValue);
 					g_dMotorPositionAltAxis = dValue * 360.0 / 383201280.0;
 				}
 				//0x6b150 -> 0x6b15c
@@ -3865,28 +3741,29 @@ int main(void)
 	ShowStartupScreen();
 	
 	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x44);
+	uart1_write_byte(0x44); //Az Inquire?
 
 	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x64);
+	uart1_write_byte(0x64); //Alt Inquire?
 	
 	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x04);
+	uart1_write_byte(0x04); //RA Inquire?
 
 	UART1_WRITE_HEADER(1);
-	uart1_write_byte(0x24);
+	uart1_write_byte(0x24); //DEC Inquire?
 	
 	func_659c(10);
 	
-	fData_40002e98 = func_6ab74(1);
+	fData_40002e98 = func_6ab74(1); //receive data for Cmd=0x10
 
 	func_659c(50);
 	
-	fData_40002ea8 = func_6ab74(2);
+	fData_40002ea8 = func_6ab74(2); //receive data for Cmd=0x30
 
 	func_659c(50);
 
-	if (bData_40002c1a == 1)
+	//g_bMountType is set after receiving responses for Cmd 0x04/0x24/0x44/0x64
+	if (g_bMountType == MOUNT_TYPE_EQU)
 	{
 		bData_40002e7a_MountType = MENU_MOUNT_TYPE_EQU; //1;
 	}
@@ -4025,7 +3902,7 @@ int main(void)
 			snprintf(buf, sizeof(buf)-1, "dData_40002df8: %f\n\r", dData_40002df8);
 			uart0_send(buf, strlen(buf));
 			
-			snprintf(buf, sizeof(buf)-1, "bData_40002c1a: %d\n\r", bData_40002c1a);
+			snprintf(buf, sizeof(buf)-1, "g_bMountType: %d\n\r", g_bMountType);
 			uart0_send(buf, strlen(buf));
 		}
 		#endif 
@@ -4036,7 +3913,7 @@ int main(void)
 		
 		ProcessAscomCommands();
 		
-		if (bData_40002c1a == 1)
+		if (g_bMountType == MOUNT_TYPE_EQU)
 		{
 			//6d8d4
 			bData_40002e7a_MountType = MENU_MOUNT_TYPE_EQU; //1;
@@ -4091,7 +3968,7 @@ int main(void)
 			//6dcb4
 			if (Data_40004128.geographicLatitude >= 0)
 			{
-				//6dcd0
+				//6dcd0: Northern Hemisphere
 				if (dData_40002d98 > 180)
 				{
 					//6dce8
@@ -4132,7 +4009,7 @@ int main(void)
 			} //if (Data_40004128.geographicLatitude >= 0)
 			else
 			{
-				//0x6de4c
+				//0x6de4c: Southern Hemisphere
 				if (dData_40002d98 > 180)
 				{
 					//6dce8
@@ -4227,9 +4104,9 @@ int main(void)
 				fData_40002d94_OTADeclinationSeconds = fData_40002d08_ObjectDeclinationSeconds;
 			}
 			//6e554 -> 0x6f8d0
-		} //if (bData_40002c1a == 1)
+		} //if (g_bMountType == MOUNT_TYPE_EQU)
 		//6e558
-		else if (bData_40002c1a == 2)
+		else if (g_bMountType == MOUNT_TYPE_HOR)
 		{
 			//6e568
 			if (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ) //0)
@@ -4459,7 +4336,7 @@ int main(void)
 				}
 				//0x6f8d0
 			}
-		} //else if (bData_40002c1a == 2)
+		} //else if (g_bMountType == MOUNT_TYPE_HOR)
 		//6f8d0
 		if (bSystemInitialized == 0)
 		{
@@ -4609,7 +4486,7 @@ int main(void)
 			StopSlewing();
 		}
 		//6fe64
-		if (bData_40002c1a == 1)
+		if (g_bMountType == MOUNT_TYPE_EQU)
 		{
 			//6fe74
 			if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
@@ -4841,7 +4718,7 @@ int main(void)
 				}
 			} //if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
 			//->0x72040
-		} //if (bData_40002c1a == 1)
+		} //if (g_bMountType == MOUNT_TYPE_EQU)
 		else
 		{
 			//70f38
@@ -5065,7 +4942,7 @@ int main(void)
 					} //switch (g_eSlewRateIndex)
 				}
 			} //if ((Data_40004128.bTrackingActive != 0) && (g_bSlewingStop != 1))
-		} //if (bData_40002c1a != 1)
+		} //if (g_bMountType != MOUNT_TYPE_EQU)
 		//72040
 		if ((g_iSlewStepDecAxis != 0) || (g_iSlewStepRaAxis != 0))
 		{
@@ -5076,9 +4953,9 @@ int main(void)
 		if (Data_40004128.bTrackingRequest != 0)
 		{
 			//7207c
-			if (bData_40002c1a == 0)
+			if (g_bMountType == MOUNT_TYPE_UNKNOWN)
 			{
-				//7208c
+				//7208c: Handle Connection Lost
 				Data_40002c64_MenuContextId = MENU_CONTEXT_NO_TELESCOPE; //2;
 				Data_40004128.bTrackingRequest = 0;
 				Data_40004128.bAlignmentComplete = 1;
@@ -5363,7 +5240,7 @@ int main(void)
 		
 		func_659c(2);
 		//729bc
-		if (bData_40002c1a == 0)
+		if (g_bMountType == MOUNT_TYPE_UNKNOWN)
 		{
 			func_659c(50);
 		}

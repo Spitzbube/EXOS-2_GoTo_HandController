@@ -10,9 +10,10 @@ void uart1_isr(void) __irq
 {
 	uart1_bRxData = U1RBR;
 	
-	if (bData_40002c1a == 0)
+	if (g_bMountType == MOUNT_TYPE_UNKNOWN)
 	{
-		bData_40002c1a = 3;
+		//First Response from Mount
+		g_bMountType = MOUNT_TYPE_INVALID;
 	}
 	
 	if (bData_40002c13_uart1ReceiveComplete == 0)
@@ -76,18 +77,18 @@ void uart1_isr(void) __irq
 						bData_40002c14_uart1ReceiveStep = 0;
 						bData_40002c12_uart1ReceiveDataCount = 0;
 						
-						if (!((bData_40002c1a == 1) && (bData_40002c1a == 2)))
+						if (!((g_bMountType == MOUNT_TYPE_EQU) && (g_bMountType == MOUNT_TYPE_HOR)))
 						{
 							switch (Data_40003592_uart1ReceiveDataBuffer[0])
 							{
-								case 0x04:
-								case 0x24:
-									bData_40002c1a = 1;
+								case 0x04: //RA Inquire response?
+								case 0x24: //DEC Inquire response?
+									g_bMountType = MOUNT_TYPE_EQU; //EQU mount
 									break;
 								
-								case 0x44:
-								case 0x64:
-									bData_40002c1a = 2;
+								case 0x44: //Az Inquire response?
+								case 0x64: //Alt Inquire response?
+									g_bMountType = MOUNT_TYPE_HOR; //Hor Mount
 									break;
 								
 								default:

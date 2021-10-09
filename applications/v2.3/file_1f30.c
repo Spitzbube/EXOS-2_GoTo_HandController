@@ -1964,7 +1964,7 @@ void initialize_variables(void)
 {
 	bData_40002f1e_SetupLocalData = 1;
 	bHelpActive = 0;
-	bData_40002c5a = 0;
+	g_bKeyBeepEnabled = 0;
 	bData_40002c68 = 0;
 	bDaylightSavingTime = 0;
 	dTrackingRate = 0.0;
@@ -2107,7 +2107,7 @@ void func_65d4(double sp40, double sp48)
 //	double sp48;
 //	double sp40;
 	
-	if (bData_40002c1a == 1)
+	if (g_bMountType == 1)
 	{
 		#if 0
 		Data_40004128.dData_8 = 0.0754242657290017382010205437837;
@@ -2128,7 +2128,7 @@ void func_65d4(double sp40, double sp48)
 			((Data_40004128.dMotorPositionRaAxis - Data_40004128.dTargetPositionRaAxis) < -0.005)))
 		{
 			//66e4
-			if (bData_40002c1a == 1)
+			if (g_bMountType == 1)
 			{
 				//66f4
 				Data_400033c8.dwData = (Data_40004128.dTargetPositionRaAxis - 0.0 * Data_40004128.dData_176 / 3600.0) *
@@ -2148,7 +2148,7 @@ void func_65d4(double sp40, double sp48)
 		else
 		{
 			//6860
-			if (bData_40002c1a == 1)
+			if (g_bMountType == 1)
 			{
 				//6870
 				Data_400033c8.dwData = (Data_40004128.dTargetPositionRaAxis + 0.0 * Data_40004128.dData_176 / 3600.0) *
@@ -2165,7 +2165,7 @@ void func_65d4(double sp40, double sp48)
 			Data_400033cc.dwData = sp40 * 1.0 / Data_40004128.dData_8;
 		}
 		//6a44
-		if (bData_40002c1a == 2)
+		if (g_bMountType == 2)
 		{
 			//6a54
 			if (Data_400033cc.dwData > 980)
@@ -2188,7 +2188,7 @@ void func_65d4(double sp40, double sp48)
 			Data_400033cc.dwData = 0;
 		}
 		//6aac
-		if (bData_40002c1a == 1)
+		if (g_bMountType == 1)
 		{
 			//6abc
 			if (Data_40004128.dData_304 == 2)
@@ -2307,7 +2307,7 @@ void func_65d4(double sp40, double sp48)
 			uart1_write_byte(Data_400033c8.bData[2]);
 			uart1_write_byte(Data_400033c8.bData[1]);
 			//->6f6c
-		} //if (bData_40002c1a == 1)
+		} //if (g_bMountType == 1)
 		else
 		{
 			//6dec
@@ -2382,7 +2382,7 @@ void func_65d4(double sp40, double sp48)
 			uart1_write_byte(Data_400033c8.bData[1]);
 		}
 		//6f6c
-		if (bData_40002c1a == 1)
+		if (g_bMountType == 1)
 		{
 			Data_400033c8.dwData = (0.0 * Data_40004128.dData_184 / 3600.0 + Data_40004128.dTargetPositionDecAxis) *
 				256 / Data_40004128.dData_32;
@@ -2397,7 +2397,7 @@ void func_65d4(double sp40, double sp48)
 		//70a0
 		Data_400033cc.dwData = 1.0 * sp48 / Data_40004128.dData_16;
 		
-		if (bData_40002c1a == 2)
+		if (g_bMountType == 2)
 		{
 			if (Data_400033cc.dwData > 980)
 			{
@@ -2420,7 +2420,7 @@ void func_65d4(double sp40, double sp48)
 		
 		func_659c(20);
 		//7154
-		if (bData_40002c1a == 1)
+		if (g_bMountType == 1)
 		{
 			//7164
 			if ((Data_40004128.dData_312 == 2) && (g_iAscomGuideValueDec != 0))
@@ -2523,7 +2523,7 @@ void func_65d4(double sp40, double sp48)
 			uart1_write_byte(Data_400033c8.bData[2]);
 			uart1_write_byte(Data_400033c8.bData[1]);
 			//->757c
-		} //if (bData_40002c1a == 1)
+		} //if (g_bMountType == 1)
 		else
 		{
 			//73f8
@@ -3271,7 +3271,7 @@ void func_9178(void)
 			Data_40004128.dObjHourAngleDisplay = H;
 			Data_40004128.dObjDeclinationDisplay = Data_40004128.dObjDeclination;
 			
-			if (bData_40002c1a == 1)
+			if (g_bMountType == 1)
 			{
 				//9608
 				if (/*sp264*/geoCoord.dLatitude >= 0)
@@ -3315,9 +3315,9 @@ void func_9178(void)
 				//97b4
 				Data_40004128.dData_176 = 3.6;
 				Data_40004128.dData_184 = 2.1;
-			} //if (bData_40002c1a == 1)
+			} //if (g_bMountType == 1)
 			//97dc
-			if (bData_40002c1a == 2)
+			if (g_bMountType == 2)
 			{
 				//97ec
 				if (/*sp264*/geoCoord.dLatitude >= 0)
@@ -3349,7 +3349,7 @@ void func_9178(void)
 				//9934
 				Data_40004128.dData_176 = 3.6;
 				Data_40004128.dData_184 = 3.0;
-			} //if (bData_40002c1a == 2)
+			} //if (g_bMountType == 2)
 			//9958
 			Data_40004128.dObjPositionRaAxis = Data_40004128.dData_112;
 			Data_40004128.dObjPositionDecAxis = Data_40004128.dData_120;
@@ -4170,7 +4170,7 @@ void func_d2cc(void)
 }
 
 /* d784 - todo */
-void func_d784(int a)
+void key_beep(int a)
 {
 	bData_40002c08 = a << 1;
 	bData_40002c09 = bData_40002c08 - 1;

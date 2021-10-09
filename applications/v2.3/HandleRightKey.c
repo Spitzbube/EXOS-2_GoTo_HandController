@@ -1010,7 +1010,7 @@ void HandleRightKey(void)
 				else
 				{
 					//0x57f1c
-					if (bData_40002c1a == 1)
+					if (g_bMountType == 1)
 					{
 						//57f2c
 						SlewAxis(1, 4, g_eSlewRateIndex);
@@ -1025,7 +1025,7 @@ void HandleRightKey(void)
 			else
 			{
 				//0x57f5c
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					//57f6c
 					SlewAxis(1, 4, g_eSlewRateIndex);
@@ -1052,7 +1052,7 @@ void HandleRightKey(void)
 		case MENU_CONTEXT_RA_BKBLASH_CORR_2ND_STEP_START_LEFT_RIGHT: //11101:
 			//0x57fcc
 			dRaBklashCorrStartAzimuth = dData_40002dc0_Azimuth;
-			if (bData_40002c1a == 1)
+			if (g_bMountType == 1)
 			{
 				//57ff0
 				SlewAxis(1, 4, SLEW_RATE_8X); //3);
@@ -1077,7 +1077,7 @@ void HandleRightKey(void)
 			if (bRaBacklashCorrectionDirection == 2)
 			{
 				//58064: Slewing Right when started Left
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					//58074
 					SlewAxis(1, 4, g_eSlewRateIndex);

@@ -23,7 +23,7 @@ void func_5099c(void)
 	g_bCombinedSlewActive = 0;
 	bCapsLock = 0;
 	bMapKeyToCharIndex = 0;
-	bData_40002c1a = 0;
+	g_bMountType = MOUNT_TYPE_UNKNOWN;
 	bGotoParkPosition = 0;
 	bData_40003210 = 0;
 	bData_40003211 = 0;
@@ -97,7 +97,7 @@ void HandleReset(void)
 
 	func_659c(10);
 
-	if (bData_40002c1a == 1)
+	if (g_bMountType == MOUNT_TYPE_EQU)
 	{
 		bData_40002e7a_MountType = MENU_MOUNT_TYPE_EQU; //1;
 	}

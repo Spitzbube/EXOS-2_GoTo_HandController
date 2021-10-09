@@ -230,3 +230,13 @@ typedef enum
 } eSlewRate;
 
 
+typedef enum
+{
+	MOUNT_TYPE_UNKNOWN = 0,
+	MOUNT_TYPE_EQU = 1,
+	MOUNT_TYPE_HOR = 2,
+	MOUNT_TYPE_INVALID = 3
+
+} eMountType;
+
+

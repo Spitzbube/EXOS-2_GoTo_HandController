@@ -545,7 +545,7 @@ void HandleDownKey(void)
 				else
 				{
 					//0x5bd68
-					if (bData_40002c1a == 1)
+					if (g_bMountType == 1)
 					{
 						//5bd78
 						SlewAxis(2, 2, g_eSlewRateIndex);
@@ -562,7 +562,7 @@ void HandleDownKey(void)
 			else
 			{
 				//0x5bda8
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					//5bdb8
 					SlewAxis(2, 2, g_eSlewRateIndex);
@@ -581,7 +581,7 @@ void HandleDownKey(void)
 		case MENU_CONTEXT_DEC_BKBLASH_CORR_2ND_STEP_START_UP_DOWN: //11201:
 			//0x5bde8
 			dData_40002e00 = dData_40002df8;
-			if (bData_40002c1a == 1)
+			if (g_bMountType == 1)
 			{
 				//5be0c
 				SlewAxis(2, 2, SLEW_RATE_8X);
@@ -604,7 +604,7 @@ void HandleDownKey(void)
 			//0x5be6c
 			if (bDecBacklashCorrectionDirection == 2)
 			{
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					//5be90
 					SlewAxis(2, 2, SLEW_RATE_8X);

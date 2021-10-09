@@ -249,14 +249,14 @@ extern char bData_40002c13_uart1ReceiveComplete; //40002c13
 extern unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
 extern unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
 extern unsigned char uart1_bRxData; //40002c19
-extern unsigned char bData_40002c1a; //40002c1a // V2.2: 40002c1e
+extern unsigned char g_bMountType; //40002c1a // V2.2: 40002c1e
 extern int g_iUart0GuideValueRa; //40002c1c
 extern int g_iUart0GuideValueDec; //40002c20
 extern Union_40002c24 Data_40002c24; //40002c24
 extern Union_40002c28 Data_40002c28; //40002c28
 extern char bHelpActive; //40002c58
 extern unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
-extern char bData_40002c5a; //40002c5a
+extern char g_bKeyBeepEnabled; //40002c5a
 extern int Data_40002c5c_AlignmentStarCount; //40002c5c
 extern unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
 extern unsigned char bData_40002c61; //40002c61
@@ -292,7 +292,7 @@ extern float fData_40002d08_ObjectDeclinationSeconds; //40002d08
 extern double dData_40002d10; //40002d10
 extern float fData_40002d18_ObjectDeclination; //40002d18
 
-#if 0 //(bData_40002c1a == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
+#if 0 //(g_bMountType == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 extern int Data_40002d20; //40002d20
 extern int Data_40002d24; //40002d24
 extern float fData_40002d28; //40002d28
@@ -302,7 +302,7 @@ extern double dData_40002d30; //40002d30
 extern int Data_40002d40; //40002d40
 extern int g_iObjectDeclinationSign; //40002d44
 
-#if 0 //(bData_40002c1a == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
+#if 0 //(g_bMountType == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 extern int Data_40002d48; //40002d48
 extern int Data_40002d4c; //40002d4c
 extern float fData_40002d50; //40002d50
@@ -401,6 +401,8 @@ extern unsigned char bData_40002edc; //40002edc
 extern unsigned char bData_40002edd; //40002edd
 extern char bData_40002ede; //40002ede
 extern char bData_40002edf; //40002edf
+
+#if 0 //Without any function
 extern char bData_40002ef6; //40002ef6
 extern char bData_40002ef7; //40002ef7
 extern int Data_40002ef8; //40002ef8
@@ -409,6 +411,8 @@ extern float fData_40002f00; //40002f00
 extern int Data_40002f04; //40002f04
 extern int Data_40002f08; //40002f08
 extern char bData_40002f0c; //40002f0c
+#endif
+
 extern unsigned char bData_40002f0d_RecentTargetType; //40002f0d
 extern int bData_40002f10_RecentTargetId; //40002f10
 extern unsigned char bData_40002f14_RecentTargetCount; //40002f14

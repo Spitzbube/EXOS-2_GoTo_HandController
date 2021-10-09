@@ -837,7 +837,7 @@ void HandleUpKey(void)
 				else
 				{
 					//0x5e3c4
-					if (bData_40002c1a == 1)
+					if (g_bMountType == 1)
 					{
 						//5e3d4
 						SlewAxis(2, 1, g_eSlewRateIndex);
@@ -854,7 +854,7 @@ void HandleUpKey(void)
 			else
 			{
 				//0x5e404
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					//5e414
 					SlewAxis(2, 1, g_eSlewRateIndex);
@@ -874,7 +874,7 @@ void HandleUpKey(void)
 			//0x5e444
 			dData_40002e00 = dData_40002df8;
 		
-			if (bData_40002c1a == 1)
+			if (g_bMountType == 1)
 			{
 				//5e468
 				SlewAxis(2, 1, SLEW_RATE_8X);
@@ -901,7 +901,7 @@ void HandleUpKey(void)
 			if (bDecBacklashCorrectionDirection == 1)
 			{
 				//5e4e0
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					//5e414
 					SlewAxis(2, 1, SLEW_RATE_8X);

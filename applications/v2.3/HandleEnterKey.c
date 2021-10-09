@@ -1380,7 +1380,7 @@ void HandleEnterKey(void)
 			if (bData_40002f1e_SetupLocalData == 1)
 			{
 				//559b8
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					bSystemInitialized = 0;
 					Data_40002c64_MenuContextId = MENU_CONTEXT_MAIN; //0;

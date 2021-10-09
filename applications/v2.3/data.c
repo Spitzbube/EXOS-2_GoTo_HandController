@@ -24,7 +24,7 @@ char bData_40002c13_uart1ReceiveComplete; //40002c13
 unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
 unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
 unsigned char uart1_bRxData; //40002c19
-unsigned char bData_40002c1a; //40002c1a // V2.2: 40002c1e
+unsigned char g_bMountType; //40002c1a // V2.2: 40002c1e
 int g_iUart0GuideValueRa; //40002c1c
 int g_iUart0GuideValueDec; //40002c20
 Union_40002c24 Data_40002c24; //40002c24
@@ -42,7 +42,7 @@ int fill_40002c50; //40002c50
 int fill_40002c54; //40002c54
 char bHelpActive; //40002c58
 unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
-char bData_40002c5a; //40002c5a
+char g_bKeyBeepEnabled; //40002c5a
 int Data_40002c5c_AlignmentStarCount; //40002c5c
 unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
 unsigned char bData_40002c61; //40002c61

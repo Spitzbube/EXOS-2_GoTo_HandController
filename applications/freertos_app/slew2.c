@@ -66,7 +66,7 @@ void SlewBothAxes(int a, int b, int speed1, int d, int e, int speed2)
 				break;
 		}
 
-		if (bData_40002c1a == 1)
+		if (g_bMountType == 1)
 		{
 			//4efcc
 			switch (speed1)
@@ -136,9 +136,9 @@ void SlewBothAxes(int a, int b, int speed1, int d, int e, int speed2)
 					break;
 				#endif
 			} //switch (c)
-		} //if (bData_40002c1a == 1)
+		} //if (g_bMountType == 1)
 		//0x4f1b0
-		if (bData_40002c1a == 2)
+		if (g_bMountType == 2)
 		{
 			//4f1c0
 			switch (speed1)
@@ -264,7 +264,7 @@ void SlewBothAxes(int a, int b, int speed1, int d, int e, int speed2)
 				break;
 		}
 		//0x4f440
-		if (bData_40002c1a == 1)
+		if (g_bMountType == 1)
 		{
 			//4f454
 			switch (speed2)
@@ -336,7 +336,7 @@ void SlewBothAxes(int a, int b, int speed1, int d, int e, int speed2)
 			} //switch (f)
 		}
 		//0x4f5e8
-		if (bData_40002c1a == 2)
+		if (g_bMountType == 2)
 		{
 			//4f5f8
 			switch (speed2)
@@ -406,7 +406,7 @@ void SlewBothAxes(int a, int b, int speed1, int d, int e, int speed2)
 					break;
 				#endif
 			} //switch (f)
-		} //if (bData_40002c1a == 2)
+		} //if (g_bMountType == 2)
 		//0x4f790
 		for (i = 0; i < 8; i++)
 		{
@@ -466,7 +466,7 @@ void func_4f804(void)
 					//->4f9cc
 				}
 				//4f910
-				else if (bData_40002c1a == 1)
+				else if (g_bMountType == 1)
 				{
 					//4f920
 					//40002e7d
@@ -483,7 +483,7 @@ void func_4f804(void)
 			else
 			{
 				//0x4f970
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					//4f980
 					SlewBothAxes(1, 4, g_eSlewRateIndex, 2, 1, g_eSlewRateIndex);
@@ -531,7 +531,7 @@ void func_4f9e4(void)
 					bData_40003200 = 0;
 				}
 				//0x4faf4
-				else if (bData_40002c1a == 1)
+				else if (g_bMountType == 1)
 				{
 					SlewBothAxes(1, 4, g_eSlewRateIndex, 2, 2, g_eSlewRateIndex);
 				}
@@ -544,7 +544,7 @@ void func_4f9e4(void)
 			else
 			{
 				//0x4fb54
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					SlewBothAxes(1, 4, g_eSlewRateIndex, 2, 2, g_eSlewRateIndex);
 				}
@@ -587,7 +587,7 @@ void func_4fbc8(void)
 					bData_40003200 = 0;
 				}
 				//0x4fcd4
-				else if (bData_40002c1a == 1)
+				else if (g_bMountType == 1)
 				{
 					SlewBothAxes(1, 3, g_eSlewRateIndex, 2, 2, g_eSlewRateIndex);
 				}
@@ -600,7 +600,7 @@ void func_4fbc8(void)
 			else
 			{
 				//0x4fd34
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					SlewBothAxes(1, 3, g_eSlewRateIndex, 2, 2, g_eSlewRateIndex);
 				}
@@ -643,7 +643,7 @@ void func_4fda8(void)
 					//bData_40003200 = 0; //Bug??
 				}
 				//0x4feb0
-				else if (bData_40002c1a == 1)
+				else if (g_bMountType == 1)
 				{
 					SlewBothAxes(1, 3, g_eSlewRateIndex, 2, 1, g_eSlewRateIndex);
 				}
@@ -656,7 +656,7 @@ void func_4fda8(void)
 			else
 			{
 				//0x4ff10
-				if (bData_40002c1a == 1)
+				if (g_bMountType == 1)
 				{
 					SlewBothAxes(1, 3, g_eSlewRateIndex, 2, 1, g_eSlewRateIndex);
 				}

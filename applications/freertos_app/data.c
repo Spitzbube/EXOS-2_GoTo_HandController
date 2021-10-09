@@ -24,7 +24,7 @@ char bData_40002c13_uart1ReceiveComplete; //40002c13
 unsigned char bData_40002c14_uart1ReceiveStep; //40002c14
 unsigned char bData_40002c15_uart1ReceiveHeader[4]; //40002c15
 unsigned char uart1_bRxData; //40002c19
-unsigned char bData_40002c1a; //40002c1a // V2.2: 40002c1e
+unsigned char g_bMountType; //40002c1a // V2.2: 40002c1e
 int g_iUart0GuideValueRa; //40002c1c
 int g_iUart0GuideValueDec; //40002c20
 Union_40002c24 Data_40002c24; //40002c24
@@ -44,7 +44,7 @@ int fill_40002c54; //40002c54
 #endif
 char bHelpActive; //40002c58
 unsigned char bData_40002c59_MainScreenHelpPage; //40002c59
-char bData_40002c5a; //40002c5a
+char g_bKeyBeepEnabled; //40002c5a
 int Data_40002c5c_AlignmentStarCount; //40002c5c
 unsigned char bData_40002c60_CurrentAlignStarIndex; //40002c60
 unsigned char bData_40002c61; //40002c61
@@ -86,7 +86,7 @@ float fData_40002d18_ObjectDeclination; //40002d18
 int fill_40002d1c; //40002d1c
 #endif
 
-#if 0 //(bData_40002c1a == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
+#if 0 //(g_bMountType == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 int Data_40002d20; //40002d20
 int Data_40002d24; //40002d24
 float fData_40002d28; //40002d28
@@ -101,7 +101,7 @@ int fill_40002d3c; //40002d3c
 int Data_40002d40; //40002d40
 int g_iObjectDeclinationSign; //40002d44
 
-#if 0 //(bData_40002c1a == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
+#if 0 //(g_bMountType == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 int Data_40002d48; //40002d48
 int Data_40002d4c; //40002d4c
 float fData_40002d50; //40002d50
@@ -223,6 +223,8 @@ int fill_40002eec; //40002eec
 int fill_40002ef0; //40002ef0
 unsigned short fill_40002ef4; //40002ef4
 #endif
+
+#if 0 //Without any function
 char bData_40002ef6; //40002ef6
 char bData_40002ef7; //40002ef7
 int Data_40002ef8; //40002ef8
@@ -231,6 +233,8 @@ float fData_40002f00; //40002f00
 int Data_40002f04; //40002f04
 int Data_40002f08; //40002f08
 char bData_40002f0c; //40002f0c
+#endif
+
 unsigned char bData_40002f0d_RecentTargetType; //40002f0d
 int bData_40002f10_RecentTargetId; //40002f10
 unsigned char bData_40002f14_RecentTargetCount; //40002f14

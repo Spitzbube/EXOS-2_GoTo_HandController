@@ -1923,7 +1923,7 @@ void initialize_variables(void)
 {
 	bData_40002f1e_SetupLocalData = 1;
 	bHelpActive = 0;
-	bData_40002c5a = 0;
+	g_bKeyBeepEnabled = 0;
 	bData_40002c68 = 0;
 	bDaylightSavingTime = 0;
 	dTrackingRate = 0.0;
@@ -1945,7 +1945,7 @@ void initialize_variables(void)
 	Data_40002cf8 = 11;
 	fData_40002cfc = 1.9;
 	
-#if 0 //(bData_40002c1a == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
+#if 0 //(g_bMountType == 2) && (bData_40002e7a_MountType == MENU_MOUNT_TYPE_AZ)
 	Data_40002d20 = 1;
 	Data_40002d24 = 3;
 	fData_40002d28 = 5.9;
@@ -2019,10 +2019,12 @@ void initialize_variables(void)
 	wData_40002eda = 1;
 	bData_40002ede = 1;
 	bData_40002edf = 1;
+#if 0 //Without any function
 	bData_40002ef7 = 0;
 	Data_40002f04 = 0;
 	Data_40002f08 = 0;
 	bData_40002f0c = 0;
+#endif
 	bData_40002f0d_RecentTargetType = 0;
 	bData_40002f10_RecentTargetId = 0;
 }
@@ -2068,7 +2070,7 @@ void func_65d4(double sp40, double sp48)
 //	double sp48;
 //	double sp40;
 	
-	if (bData_40002c1a == 1)
+	if (g_bMountType == 1)
 	{
 		#if 0
 		Data_40004128.dData_8 = 0.0754242657290017382010205437837;
@@ -2089,7 +2091,7 @@ void func_65d4(double sp40, double sp48)
 			((Data_40004128.dMotorPositionRaAxis - Data_40004128.dTargetPositionRaAxis) < -0.005)))
 		{
 			//66e4
-			if (bData_40002c1a == 1)
+			if (g_bMountType == 1)
 			{
 				//66f4
 				Data_400033c8.dwData = (Data_40004128.dTargetPositionRaAxis - 0.0 * Data_40004128.dData_176 / 3600.0) *
@@ -2111,7 +2113,7 @@ void func_65d4(double sp40, double sp48)
 		else
 		{
 			//6860
-			if (bData_40002c1a == 1)
+			if (g_bMountType == 1)
 			{
 				//6870
 				Data_400033c8.dwData = (Data_40004128.dTargetPositionRaAxis + 0.0 * Data_40004128.dData_176 / 3600.0) *
@@ -2130,7 +2132,7 @@ void func_65d4(double sp40, double sp48)
 			Data_400033cc.dwData = sp40 * 1.0 / Data_40004128.dData_8;
 		}
 		//6a44
-		if (bData_40002c1a == 2)
+		if (g_bMountType == 2)
 		{
 #if 0
 			//6a54
@@ -2155,7 +2157,7 @@ void func_65d4(double sp40, double sp48)
 			Data_400033cc.dwData = 0;
 		}
 		//6aac
-		if (bData_40002c1a == 1)
+		if (g_bMountType == 1)
 		{
 			//6abc
 			if (Data_40004128.dData_304 == 2)
@@ -2274,7 +2276,7 @@ void func_65d4(double sp40, double sp48)
 			uart1_write_byte(Data_400033c8.bData[2]);
 			uart1_write_byte(Data_400033c8.bData[1]);
 			//->6f6c
-		} //if (bData_40002c1a == 1)
+		} //if (g_bMountType == 1)
 		else
 		{
 #if 0
@@ -2351,7 +2353,7 @@ void func_65d4(double sp40, double sp48)
 #endif
 		}
 		//6f6c
-		if (bData_40002c1a == 1)
+		if (g_bMountType == 1)
 		{
 			Data_400033c8.dwData = (0.0 * Data_40004128.dData_184 / 3600.0 + Data_40004128.dTargetPositionDecAxis) *
 				256 / Data_40004128.dData_32;
@@ -2368,7 +2370,7 @@ void func_65d4(double sp40, double sp48)
 		//70a0
 		Data_400033cc.dwData = 1.0 * sp48 / Data_40004128.dData_16;
 		
-		if (bData_40002c1a == 2)
+		if (g_bMountType == 2)
 		{
 #if 0
 			if (Data_400033cc.dwData > 980)
@@ -2393,7 +2395,7 @@ void func_65d4(double sp40, double sp48)
 		
 		func_659c(20);
 		//7154
-		if (bData_40002c1a == 1)
+		if (g_bMountType == 1)
 		{
 			//7164
 			if ((Data_40004128.dData_312 == 2) && (g_iAscomGuideValueDec != 0))
@@ -2496,7 +2498,7 @@ void func_65d4(double sp40, double sp48)
 			uart1_write_byte(Data_400033c8.bData[2]);
 			uart1_write_byte(Data_400033c8.bData[1]);
 			//->757c
-		} //if (bData_40002c1a == 1)
+		} //if (g_bMountType == 1)
 		else
 		{
 #if 0
@@ -3248,7 +3250,7 @@ void func_9178(void)
 			Data_40004128.dObjHourAngleDisplay = H;
 			Data_40004128.dObjDeclinationDisplay = Data_40004128.dObjDeclination;
 			
-			if (bData_40002c1a == 1)
+			if (g_bMountType == 1)
 			{
 				//9608
 				if (/*sp264*/geoCoord.dLatitude >= 0)
@@ -3292,9 +3294,9 @@ void func_9178(void)
 				//97b4
 				Data_40004128.dData_176 = 3.6;
 				Data_40004128.dData_184 = 2.1;
-			} //if (bData_40002c1a == 1)
+			} //if (g_bMountType == 1)
 			//97dc
-			if (bData_40002c1a == 2)
+			if (g_bMountType == 2)
 			{
 #if 0
 				//97ec
@@ -3328,7 +3330,7 @@ void func_9178(void)
 				Data_40004128.dData_176 = 3.6;
 				Data_40004128.dData_184 = 3.0;
 #endif
-			} //if (bData_40002c1a == 2)
+			} //if (g_bMountType == 2)
 			//9958
 			Data_40004128.dObjPositionRaAxis = Data_40004128.dData_112;
 			Data_40004128.dObjPositionDecAxis = Data_40004128.dData_120;
@@ -4046,6 +4048,8 @@ void func_b7c8(double a, double b)
 #include "alignment.c"
 #endif
 
+#if 0 //Unused
+
 typedef struct
 {
 	double fill_0[13]; 
@@ -4055,6 +4059,8 @@ typedef struct
 void func_d2bc(Struct_d2bc a, int b)
 {
 }
+
+#endif
 
 /* d2cc - todo */
 void func_d2cc(void)
@@ -4150,7 +4156,7 @@ void func_d2cc(void)
 }
 
 /* d784 - todo */
-void func_d784(int a)
+void key_beep(int a)
 {
 	bData_40002c08 = a << 1;
 	bData_40002c09 = bData_40002c08 - 1;

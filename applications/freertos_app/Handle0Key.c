@@ -115,13 +115,13 @@ void Handle0Key(void)
 		
 		case 101:
 			//0x69800
-			if (bData_40002c5a == 0)
+			if (g_bKeyBeepEnabled == 0)
 			{
-				bData_40002c5a = 1;
+				g_bKeyBeepEnabled = 1;
 			}
 			else
 			{
-				bData_40002c5a = 0;
+				g_bKeyBeepEnabled = 0;
 			}
 			break;
 		
